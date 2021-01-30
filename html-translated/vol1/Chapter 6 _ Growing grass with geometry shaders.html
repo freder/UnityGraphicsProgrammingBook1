@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0075)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/aoyama.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 6 _ Growing grass with geometry shaders_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 6 _ Growing grass with geometry shaders_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Growing grass with geometry shaders_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Growing grass with geometry shaders_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Growing grass with geometry shaders_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 6 _ Growing grass with geometry shaders_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Growing grass with geometry shaders_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Growing grass with geometry shaders_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Growing grass with geometry shaders_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 6 _ Growing grass with geometry shaders_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Growing grass with geometry shaders</font></font></h1>
 
 <h2><a id="h6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -88,17 +81,17 @@ Figure 6.1: Quad mesh
 <h3><a id="h6-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Output from Geometry Shader</font></font></h3>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The output of Geometry Shader is a set of vertex information for user-defined output primitive types. </font><font style="vertical-align: inherit;">In Vertex Shader, it was 1 input and 1 output, but Geometry Shader will output multiple information, and there is no problem even if there is one or more primitives generated by the output information.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, if the output primitive type is defined as triangle and a total of 9 vertices newly calculated are output, 3 triangles are generated by Geometry Shader. </font><font style="vertical-align: inherit;">Since this process is performed in primitive units as described above, it is possible that the number of triangles that were originally one has increased to three.</font></font></p>
-<p>また、Geometry ShaderにはMaxVertexCountという、一回の処理で最大何点の頂点を出力するかを事前に設定しておく必要があります。例えばMaxVertexCountを9と設定した場合は、Geometry Shaderは0点 ~ 9点までの頂点数を出力することが出来るようになります。この数値は後述する『Geometry Shaderの制限』によって、一般的には1024が一応の最大値となります。</p>
-<p>なお、頂点情報を出力する上で気を付けなければならない点として、元々のメッシュの形状を維持した状態で新しく頂点を追加する場合は、Vertex Shaderから送られてきた頂点情報についてもGeometry Shaderにて出力する必要があります。Geometry ShaderはVertex Shaderの出力に追加していくという挙動ではなく、Geometry Shaderの出力がラスタライズ処理が行われ、Fragment Shaderに渡されます。逆説的に言えば、Geometry Shaderの出力を0にすることによって、動的に頂点数を減らすことも出来ます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, it is necessary to set in advance the maximum number of vertices to be output in one process called MaxVertexCount in Geometry Shader. </font><font style="vertical-align: inherit;">For example, if MaxVertexCount is set to 9, Geometry Shader will be able to output the number of vertices from 0 to 9 points. </font><font style="vertical-align: inherit;">Due to the "Geometry Shader Limits" described later, 1024 is generally the maximum value for this value.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, as a point to be careful when outputting vertex information, when adding a new vertex while maintaining the original mesh shape, the vertex information sent from Vertex Shader is also sent to Geometry Shader. Must be output. </font><font style="vertical-align: inherit;">The Geometry Shader does not have the behavior of adding to the output of the Vertex Shader, but the output of the Geometry Shader is rasterized and passed to the Fragment Shader. </font><font style="vertical-align: inherit;">Paradoxically, you can also dynamically reduce the number of vertices by setting the output of the Geometry Shader to 0.</font></font></p>
 
-<h3><a id="h6-3-4"></a><span class="secno">6.3.4　</span>Geometry Shaderの制限</h3>
-<p>Geometry Shaderには1回の出力に関して、最大出力頂点数と最大出力要素数という制限があります。最大出力頂点数は文字通り頂点数の限界値であり、GPUに依存した数値ではありますが1024などが一般的なので、1つの三角形から最大で1024点までしか頂点を増やすことが出来ます。最大出力要素数における要素とは座標や色などの頂点が持っている情報の事であり、一般的には(x, y, z, w)の位置要素と(r, g, b, a)の色要素の計8要素となります。この要素の最大出力数もGPUに依存しますが同じく1024が一般的なので、出力は最大でも128(1024/8)に制限される事になります。</p>
-<p>この二つの制限は両方を満たす必要があるため、頂点数的には1024点の出力が可能でも、要素数側の制約によって、実際のGeometry Shaderの出力は128点までは限界となります。ですので、例えばプリミティブ数が2のメッシュ(Quadメッシュなど)に対してGeometry Shaderを利用した場合は、最大でも256点(128点 * 2プリミティブ)の頂点数までしか頂点を扱うことは出来ません。</p>
-<p>この128点という数字が、前項のMaxVertexCountに設定できる数値の限界値となります。</p>
+<h3><a id="h6-3-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Geometry Shader Limits</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Geometry Shader has a maximum number of output vertices and a maximum number of output elements for one output. </font><font style="vertical-align: inherit;">The maximum number of output vertices is literally the limit value of the number of vertices, and although it depends on the GPU, 1024 is common, so you can increase the number of vertices from one triangle to a maximum of 1024 points. </font><font style="vertical-align: inherit;">The elements in the maximum number of output elements are the information that the vertices have, such as coordinates and colors. Generally, the position elements of (x, y, z, w) and (r, g, b, a) There are a total of 8 color elements. </font><font style="vertical-align: inherit;">The maximum number of outputs of this element also depends on the GPU, but since 1024 is also common, the output will be limited to 128 (1024/8) at the maximum.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since both of these restrictions must be met, even if the number of vertices can be output at 1024 points, the actual output of the Geometry Shader is limited to 128 points due to restrictions on the number of elements. </font><font style="vertical-align: inherit;">So, for example, if you use Geometry Shader for a mesh with 2 primitives (Quad mesh, etc.), you can handle only up to 256 vertices (128 points * 2 primitives). ..</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This number of 128 points is the limit value of the value that can be set in MaxVertexCount in the previous section.</font></font></p>
 
-<h2><a id="h6-4"></a><span class="secno">6.4　</span>簡単なGeometry Shader</h2>
-<p>以下にシンプルな挙動のGeometry Shaderのプログラムが記載してあります。前項までの説明について実際のプログラムと照らし合わせながら改めて説明していきます。</p>
-<p>なお、Geometry Shader以外について、Unityでシェーダーを記述する際に必要なShaderLabのシンタックスなどに関する説明は本章では省略しますので、もし分からない部分がありましたら下記の公式ドキュメントを参照してみてください。</p>
+<h2><a id="h6-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Simple Geometry Shader</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Below is a Geometry Shader program with simple behavior. </font><font style="vertical-align: inherit;">I will explain the explanation up to the previous section again by comparing it with the actual program.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition to Geometry Shader, the explanation about ShaderLab syntax etc. required when writing shaders in Unity is omitted in this chapter, so if you have any questions, please refer to the official document below.</font></font></p>
 <p><a href="https://docs.unity3d.com/ja/current/Manual/SL-Reference.html" class="link">https://docs.unity3d.com/ja/current/Manual/SL-Reference.html</a></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">Shader "Custom/SimpleGeometryShader"<font></font>
@@ -109,10 +102,10 @@ Figure 6.1: Quad mesh
         _TopColor("Top Color", Color) = (0.0, 0.0, 1.0, 1.0)<font></font>
         _BottomColor("Bottom Color", Color) = (1.0, 0.0, 0.0, 1.0)<font></font>
     }<font></font>
-    SubShader<font></font>
-    {<font></font>
-        Tags { "RenderType" = "Opaque"}<font></font>
-        LOD 100<font></font>
+    SubShader<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        Tags { "RenderType" = "Opaque"}<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        LOD 100</font></font></font></font><font></font>
 <font></font>
         Cull Off<font></font>
         Lighting Off<font></font>
@@ -134,14 +127,14 @@ Figure 6.1: Quad mesh
                 float4 pos : SV_POSITION;<font></font>
             };<font></font>
 <font></font>
-            struct g2f<font></font>
-            {<font></font>
-                float4 pos : SV_POSITION;<font></font>
-                float4 col : COLOR;<font></font>
-            };<font></font>
+            struct g2f<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                float4 pos : SV_POSITION;</font></font></font></font><font></font>
+                float4 col : COLOR;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            };</font></font></font></font><font></font>
 <font></font>
-            v2g vert(appdata_full v)<font></font>
-            {<font></font>
+            v2g vert(appdata_full v)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            {</font></font></font></font><font></font>
                 v2g o;<font></font>
                 o.pos = v.vertex;<font></font>
 <font></font>
@@ -150,14 +143,14 @@ Figure 6.1: Quad mesh
 <font></font>
             [maxvertexcount(12)]<font></font>
             void geom(triangle v2g input[3],<font></font>
-                      inout TriangleStream&lt;g2f&gt; outStream)<font></font>
-            {<font></font>
+                      inout TriangleStream&lt;g2f&gt; outStream)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            {</font></font></font></font><font></font>
                 float4 p0 = input[0].pos;<font></font>
                 float4 p1 = input[1].pos;<font></font>
                 float4 p2 = input[2].pos;<font></font>
 <font></font>
-                float4 c = float4(0.0f, 0.0f, -_Height, 1.0f)<font></font>
-                            + (p0 + p1 + p2) * 0.33333f;<font></font>
+                float4 c = float4(0.0f, 0.0f, -_Height, 1.0f)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            + (p0 + p1 + p2) * 0.33333f;</font></font></font></font><font></font>
 <font></font>
                 g2f out0;<font></font>
                 out0.pos = UnityObjectToClipPos(p0);<font></font>
@@ -171,8 +164,8 @@ Figure 6.1: Quad mesh
                 out2.pos = UnityObjectToClipPos(p2);<font></font>
                 out2.col = _BottomColor;<font></font>
 <font></font>
-                g2f o;<font></font>
-                o.pos = UnityObjectToClipPos(c);<font></font>
+                g2f o;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                o.pos = UnityObjectToClipPos (c);</font></font></font></font><font></font>
                 o.col = _TopColor;<font></font>
 <font></font>
                 // bottom<font></font>
@@ -184,82 +177,82 @@ Figure 6.1: Quad mesh
                 // sides<font></font>
                 outStream.Append(out0);<font></font>
                 outStream.Append(out1);<font></font>
-                outStream.Append(o);<font></font>
-                outStream.RestartStrip();<font></font>
-<font></font>
-                outStream.Append(out1);<font></font>
-                outStream.Append(out2);<font></font>
-                outStream.Append(o);<font></font>
-                outStream.RestartStrip();<font></font>
-<font></font>
-                outStream.Append(out2);<font></font>
-                outStream.Append(out0);<font></font>
-                outStream.Append(o);<font></font>
-                outStream.RestartStrip();<font></font>
+                outStream.Append(o);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                outStream.RestartStrip();</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                outStream.Append(out1);</font></font></font></font><font></font>
+                outStream.Append(out2);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                outStream.Append(o);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                outStream.RestartStrip();</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                outStream.Append(out2);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                outStream.Append(out0);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                outStream.Append(o);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                outStream.RestartStrip();</font></font></font></font><font></font>
             }<font></font>
 <font></font>
             float4 frag(g2f i) : COLOR<font></font>
             {<font></font>
-                return i.col;<font></font>
-            }<font></font>
+                return i.col;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            }</font></font></font></font><font></font>
             ENDCG<font></font>
         }<font></font>
     }<font></font>
 }<font></font>
 </pre>
 </div>
-<p>このシェーダーでは、渡された三角形の中心座標を計算してさらに上方向に移動させ、渡されてきた三角形の各頂点と計算して求めた新しい座標を接続させています。つまり、平面的な三角形から簡単な三角錐を生成していることになります。</p>
-<p>なので、このシェーダーをQuadメッシュ(2つの三角形から構成されている)に適用すると、図6.2から図6.3のようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this shader, the center coordinates of the passed triangle are calculated and moved further upward, and each vertex of the passed triangle is connected to the calculated new coordinates. </font><font style="vertical-align: inherit;">In other words, we are generating a simple triangular pyramid from a flat triangle.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">So if you apply this shader to a Quad mesh (consisting of two triangles), it will look like Figures 6.2 through 6.3.</font></font></p>
 <div id="id_aoyama_2Fimg1" class="image">
 <img src="./Chapter 6 _ Growing grass with geometry shaders_files/img1.png" alt="From a flat plate like this" class="width-040per">
-<p class="caption">
-図6.2: この様な平たい板から
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.2: From a flat plate like this
+</font></font></p>
 </div>
 <div id="id_aoyama_2Fimg2" class="image">
 <img src="./Chapter 6 _ Growing grass with geometry shaders_files/img2.png" alt="Two three-dimensional triangular pyramids will be displayed" class="width-040per">
-<p class="caption">
-図6.3: 立体的な二つの三角錐が表示されるようになります
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.3: Two three-dimensional triangular pyramids are now displayed
+</font></font></p>
 </div>
-<p>このシェーダーの中で、特にGeometry Shaderに関する部分だけを抜き出して説明していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this shader, I will extract and explain only the part related to Geometry Shader in particular.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">#pragma target 5.0<font></font>
 #pragma vertex vert<font></font>
-<font></font>
-// Geometry Shaderの利用を宣言<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Declare the use of Geometry Shader</font></font><font></font>
 #pragma geometry geom<font></font>
 <font></font>
 #pragma fragment frag<font></font>
 #include "UnityCG.cginc"<font></font>
 </pre>
 </div>
-<p>上記の宣言部分にて、<code class="tt">geom</code>という名前の関数がGeometry Shader用関数であることを宣言しています。これによってGeometry Shaderステージになった時に<code class="tt">geom</code>関数が呼び出されるようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the above declaration part, </font></font><code class="tt">geom</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">we declare that the function named is a function for Geometry Shader. </font><font style="vertical-align: inherit;">This </font></font><code class="tt">geom</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">will cause the function to be called </font><font style="vertical-align: inherit;">when the Geometry Shader stage is reached </font><font style="vertical-align: inherit;">.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">[maxvertexcount(12)]<font></font>
 void geom(triangle v2g input[3], inout TriangleStream&lt;g2f&gt; outStream)<font></font>
 </pre>
 </div>
-<p>これがGeometry Shader用の関数宣言です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here is the function declaration for the Geometry Shader.</font></font></p>
 
-<h3><a id="h6-4-1"></a><span class="secno">6.4.1　</span>入力</h3>
+<h3><a id="h6-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Input</font></font></h3>
 <div class="emlist-code">
 <pre class="emlist language-cs">triangle v2f input[3]
 </pre>
 </div>
-<p>ここが入力に関する部分です。</p>
-<p>今回は三角形を元に三角錐を生成したいので、入力は<code class="tt">triangle</code>としています。これにより、単位プリミティブである三角形の各頂点情報が入力されるうになり、三角形は3点の頂点から構成されますので、受け取っている仮引数は長さ3の配列となります。なので、もし入力を<code class="tt">triangle</code>ではなく<code class="tt">point</code>にした場合は構成する頂点は1点のみなので、<code class="tt">geom(point v2f input[1])</code>の様に長さ1の配列で受け取ることになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the part related to input.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, I want to generate a triangular pyramid based on the triangle, so I input </font></font><code class="tt">triangle</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it. </font><font style="vertical-align: inherit;">As a result, the information of each vertex of the triangle, which is the unit primitive, is input, and since the triangle is composed of three vertices, the received formal argument is an array of length 3. </font><font style="vertical-align: inherit;">So, if the input </font></font><code class="tt">triangle</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is not </font><font style="vertical-align: inherit;">input </font><font style="vertical-align: inherit;">, </font></font><code class="tt">point</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">only one vertex will be composed, so </font></font><code class="tt">geom(point v2f input[1])</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it will be received as an array of length 1 like.</font></font></p>
 
-<h3><a id="h6-4-2"></a><span class="secno">6.4.2　</span>出力</h3>
+<h3><a id="h6-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Output</font></font></h3>
 <div class="emlist-code">
 <pre class="emlist language-cs">inout TriangleStream&lt;g2f&gt; outStream
 </pre>
 </div>
-<p>ここが出力に関する部分です。</p>
-<p>今回生成するメッシュのプリミティブは三角形としたいため、<code class="tt">TriangleStream</code>型で宣言しています。<code class="tt">TriangleStrema</code>型は出力が三角形ストリップである事を意味しているため、出力した各頂点情報を元に三角形を生成してくれるようになります。他にも<code class="tt">PointStream</code>型や<code class="tt">LineStream</code>型などがありますので、目的に応じて出力のプリミティブ型を選択する必要があります。</p>
-<p>また、<code class="tt">[maxvertexcount(12)]</code>の部分にて最大出力数を12に設定してあります。これは三角錐を構成する三角形の数は底辺の1つと側面の3つで計4つであり、一つの三角形に付き頂点数が3点必要なので、3 * 4で12点の頂点を出力することになるため12と設定してあります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the part related to output.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since we want to make the primitive of the mesh generated this time a triangle, </font></font><code class="tt">TriangleStream</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">we declare it with </font><font style="vertical-align: inherit;">a </font><font style="vertical-align: inherit;">type. </font></font><code class="tt">TriangleStrema</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the type means that the output is a triangle strip, it will generate a triangle based on each output vertex information. </font><font style="vertical-align: inherit;">There are other </font></font><code class="tt">PointStream</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">types and </font></font><code class="tt">LineStream</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">types, so you need to select the output primitive type according to your purpose.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, </font></font><code class="tt">[maxvertexcount(12)]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the maximum number of outputs is set to 12 in the part. </font><font style="vertical-align: inherit;">This is because the number of triangles that make up the triangular pyramid is one at the base and three at the side, for a total of four, and three vertices are required for each triangle, so 12 vertices are output with 3 * 4. It is set to 12 because it will be different.</font></font></p>
 
-<h3><a id="h6-4-3"></a><span class="secno">6.4.3　</span>処理</h3>
+<h3><a id="h6-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Processing</font></font></h3>
 <div class="emlist-code">
 <pre class="emlist language-cs">g2f out0;<font></font>
 out0.pos = UnityObjectToClipPos(p0);<font></font>
@@ -273,8 +266,8 @@ g2f out2;<font></font>
 out2.pos = UnityObjectToClipPos(p2);<font></font>
 out2.col = _BottomColor;<font></font>
 <font></font>
-g2f o;<font></font>
-o.pos = UnityObjectToClipPos(c);<font></font>
+g2f o;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+o.pos = UnityObjectToClipPos (c);</font></font></font></font><font></font>
 o.col = _TopColor;<font></font>
 <font></font>
 // bottom<font></font>
@@ -283,81 +276,81 @@ outStream.Append(out1);<font></font>
 outStream.Append(out2);<font></font>
 outStream.RestartStrip();<font></font>
 <font></font>
-// sides<font></font>
-outStream.Append(out0);<font></font>
-outStream.Append(out1);<font></font>
-outStream.Append(o);<font></font>
-outStream.RestartStrip();<font></font>
-<font></font>
-outStream.Append(out1);<font></font>
-outStream.Append(out2);<font></font>
-outStream.Append(o);<font></font>
-outStream.RestartStrip();<font></font>
-<font></font>
-outStream.Append(out2);<font></font>
-outStream.Append(out0);<font></font>
-outStream.Append(o);<font></font>
-outStream.RestartStrip();<font></font>
+// sides<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.Append(out0);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.Append(out1);</font></font></font></font><font></font>
+outStream.Append(o);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.RestartStrip();</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.Append(out1);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.Append(out2);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.Append(o);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.RestartStrip();</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.Append(out2);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.Append(out0);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.Append(o);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+outStream.RestartStrip();</font></font></font></font><font></font>
 </pre>
 </div>
-<p>ここが実際の頂点を出力している処理の部分です。</p>
-<p>まず最初に出力用のg2f型の変数を宣言し、頂点座標と色情報を格納しています。この時Vertex Shaderと同じようにオブジェクト空間からカメラのクリップ空間への変換をしておく必要があります。</p>
-<p>その後に、メッシュを構成する頂点の順序を意識しながら、頂点情報を出力しています。<code class="tt">outStream</code>変数の<code class="tt">Append</code>関数に出力用変数を渡すことで現在のストリームに追加されていき、<code class="tt">RestartStrip</code>関数を呼び出す事によって現在のプリミティブストリップを終了し、新しいストリームを開始しています。</p>
-<p>これは、<code class="tt">TriangleStream</code>は三角形ストリップなので、<code class="tt">Append</code>関数で頂点を追加していくほどそのストリームに追加されている全ての頂点を元に、接続された複数の三角形を生成していくことになります。なので、今回の様に三角形同士が<code class="tt">Append</code>された順序を元に接続されると困る時は、一旦<code class="tt">RestartStrip</code>を呼び出して新しいストリームを開始する必要があります。もちろん<code class="tt">Append</code>順を工夫することで<code class="tt">RestartStrip</code>関数の呼び出しを減らすことは可能です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the part of the process that outputs the actual vertices.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First of all, a g2f type variable for output is declared, and vertex coordinates and color information are stored. </font><font style="vertical-align: inherit;">At this time, it is necessary to convert from the object space to the clip space of the camera in the same way as Vertex Shader.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">After that, the vertex information is output while being aware of the order of the vertices that make up the mesh. </font></font><code class="tt">outStream</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Of the variable </font></font><code class="tt">Append</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">will be added to the current stream by passing the output variable to the function, </font></font><code class="tt">RestartStrip</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to end the current primitive strip by calling the function, you have to start a new stream.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since this is a </font></font><code class="tt">TriangleStream</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">triangle strip, the more </font></font><code class="tt">Append</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">vertices you add in the function, the more connected triangles will be generated based on all the vertices added to the stream. </font><font style="vertical-align: inherit;">So, </font></font><code class="tt">Append</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">if </font></font><code class="tt">RestartStrip</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you don't want </font><font style="vertical-align: inherit;">to be connected based on the order in which the </font><font style="vertical-align: inherit;">triangles are </font><font style="vertical-align: inherit;">connected </font><font style="vertical-align: inherit;">like this time, </font><font style="vertical-align: inherit;">you need to call </font><font style="vertical-align: inherit;">once </font><font style="vertical-align: inherit;">to start a new stream. </font><font style="vertical-align: inherit;">Of course, </font><font style="vertical-align: inherit;">it is possible to reduce the number </font></font><code class="tt">Append</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">of </font></font><code class="tt">RestartStrip</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">function calls </font><font style="vertical-align: inherit;">by devising the order </font><font style="vertical-align: inherit;">.</font></font></p>
 
 <h2><a id="h6-5"></a><span class="secno">6.5　</span>Grass Shader</h2>
-<p>本項では、前項の『簡単なGeometry Shader』から少し発展させて、Geometry Shaderを使ってリアルタイムに草を生成するGrass Shaderについて説明します。</p>
-<p>以下は説明するGrass Shaderのプログラムです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this section, we will explain Grass Shader, which is a little development from the previous section "Simple Geometry Shader", and uses Geometry Shader to generate grass in real time.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following is the Grass Shader program described.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">Shader "Custom/Grass" {<font></font>
     Properties<font></font>
-    {<font></font>
-        // 草の高さ<font></font>
-        _Height("Height", float) = 80<font></font>
-        // 草の幅<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Grass height</font></font><font></font>
+        _Height("Height", float) = 80<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Grass width</font></font><font></font>
         _Width("Width", float) = 2.5<font></font>
-<font></font>
-        // 草の下部の高さ<font></font>
-        _BottomHeight("Bottom Height", float) = 0.3<font></font>
-        // 草の中間部の高さ<font></font>
-        _MiddleHeight("Middle Height", float) = 0.4<font></font>
-        // 草の上部の高さ<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // The height of the bottom of the grass</font></font><font></font>
+        _BottomHeight("Bottom Height", float) = 0.3<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Height of the middle part of the grass</font></font><font></font>
+        _MiddleHeight("Middle Height", float) = 0.4<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Height of the top of the grass</font></font><font></font>
         _TopHeight("Top Height", float) = 0.5<font></font>
-<font></font>
-        // 草の下部の幅<font></font>
-        _BottomWidth("Bottom Width", float) = 0.5<font></font>
-        // 草の中間部の幅<font></font>
-        _MiddleWidth("Middle Width", float) = 0.4<font></font>
-        // 草の上部の幅<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // The width of the bottom of the grass</font></font><font></font>
+        _BottomWidth("Bottom Width", float) = 0.5<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Width of the middle part of the grass</font></font><font></font>
+        _MiddleWidth("Middle Width", float) = 0.4<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // The width of the top of the grass</font></font><font></font>
         _TopWidth("Top Width", float) = 0.2<font></font>
-<font></font>
-        // 草の下部の曲がり具合<font></font>
-        _BottomBend("Bottom Bend", float) = 1.0<font></font>
-        // 草の中間部の曲がり具合<font></font>
-        _MiddleBend("Middle Bend", float) = 1.0<font></font>
-        // 草の上部の曲がり具合<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // How the bottom of the grass bends</font></font><font></font>
+        _BottomBend("Bottom Bend", float) = 1.0<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // How the middle part of the grass bends</font></font><font></font>
+        _MiddleBend("Middle Bend", float) = 1.0<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // How the top of the grass bends</font></font><font></font>
         _TopBend("Top Bend", float) = 2.0<font></font>
-<font></font>
-        // 風の強さ<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Wind strength</font></font><font></font>
         _WindPower("Wind Power", float) = 1.0<font></font>
-<font></font>
-        // 草の上部の色<font></font>
-        _TopColor("Top Color", Color) = (1.0, 1.0, 1.0, 1.0)<font></font>
-        // 草の下部の色<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // The color of the top of the grass</font></font><font></font>
+        _TopColor("Top Color", Color) = (1.0, 1.0, 1.0, 1.0)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // The color of the bottom of the grass</font></font><font></font>
         _BottomColor("Bottom Color", Color) = (0.0, 0.0, 0.0, 1.0)<font></font>
-<font></font>
-        // 草の高さにランダム性を与えるノイズテクスチャ<font></font>
-        _HeightMap("Height Map", 2D) = "white"<font></font>
-        // 草の向きにランダム性を与えるノイズテクスチャ<font></font>
-        _RotationMap("Rotation Map", 2D) = "black"<font></font>
-        // 風の強さにランダム性を与えるノイズテクスチャ<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Noise texture that gives randomness to grass height</font></font><font></font>
+        _HeightMap("Height Map", 2D) = "white"<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Noise texture that gives randomness to the orientation of the grass</font></font><font></font>
+        _RotationMap("Rotation Map", 2D) = "black"<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Noise texture that gives randomness to wind strength</font></font><font></font>
         _WindMap("Wind Map", 2D) = "black"<font></font>
     }<font></font>
     SubShader<font></font>
     {<font></font>
         Tags{ "RenderType" = "Opaque" }<font></font>
-<font></font>
-        LOD 100<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        LOD 100</font></font></font></font><font></font>
         Cull Off<font></font>
 <font></font>
         Pass<font></font>
@@ -382,20 +375,20 @@ outStream.RestartStrip();<font></font>
             struct v2g<font></font>
             {<font></font>
                 float4 pos : SV_POSITION;<font></font>
-                float3 nor : NORMAL;<font></font>
-                float4 hei : TEXCOORD0;<font></font>
+                float3 nor : NORMAL;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                float4 hey: TEXCOORD0;</font></font><font></font>
                 float4 rot : TEXCOORD1;<font></font>
                 float4 wind : TEXCOORD2;<font></font>
             };<font></font>
 <font></font>
-            struct g2f<font></font>
-            {<font></font>
-                float4 pos : SV_POSITION;<font></font>
-                float4 color : COLOR;<font></font>
-            };<font></font>
+            struct g2f<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                float4 pos : SV_POSITION;</font></font></font></font><font></font>
+                float4 color : COLOR;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            };</font></font></font></font><font></font>
 <font></font>
-            v2g vert(appdata_full v)<font></font>
-            {<font></font>
+            v2g vert(appdata_full v)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            {</font></font></font></font><font></font>
                 v2g o;<font></font>
                 float4 uv = float4(v.texcoord.xy, 0.0f, 0.0f);<font></font>
 <font></font>
@@ -418,8 +411,8 @@ outStream.RestartStrip();<font></font>
                 float3 n0 = i[0].nor;<font></font>
                 float3 n1 = i[1].nor;<font></font>
                 float3 n2 = i[2].nor;<font></font>
-<font></font>
-                float height = (i[0].hei.r + i[1].hei.r + i[2].hei.r) / 3.0f;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                float height = (i [0] .hei.r + i [1] .hei.r + i [2] .hei.r) / 3.0f;</font></font></font></font><font></font>
                 float rot = (i[0].rot.r + i[1].rot.r + i[2].rot.r) / 3.0f;<font></font>
                 float wind = (i[0].wind.r + i[1].wind.r + i[2].wind.r) / 3.0f;<font></font>
 <font></font>
@@ -433,8 +426,8 @@ outStream.RestartStrip();<font></font>
                 float bottomWidth = _Width * _BottomWidth;<font></font>
                 float middleWidth = _Width * _MiddleWidth;<font></font>
                 float topWidth = _Width * _TopWidth;<font></font>
-<font></font>
-                rot = rot - 0.5f;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                rot = rot - 0.5f;</font></font></font></font><font></font>
                 float4 dir = float4(normalize((p2 - p0) * rot).xyz, 1.0f);<font></font>
 <font></font>
                 g2f o[7];<font></font>
@@ -461,27 +454,27 @@ outStream.RestartStrip();<font></font>
                 o[5].color = lerp(_BottomColor, _TopColor, 0.66666f);<font></font>
 <font></font>
                 // Top.<font></font>
-                o[6].pos = o[5].pos + dir * topWidth + normal * topHeight;<font></font>
-                o[6].color = _TopColor;<font></font>
+                o[6].pos = o[5].pos + dir * topWidth + normal * topHeight;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                or [6] .color = _TopColor;</font></font><font></font>
 <font></font>
-                // Bend.<font></font>
-                dir = float4(1.0f, 0.0f, 0.0f, 1.0f);<font></font>
-<font></font>
-                o[2].pos += dir<font></font>
+                // Bend.<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                dir = float4 (1.0f, 0.0f, 0.0f, 1.0f);</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                o [2] .pos + =</font></font></font></font><font></font>
                             * (_WindPower * wind * _BottomBend)<font></font>
-                            * sin(_Time);<font></font>
-                o[3].pos += dir<font></font>
-                            * (_WindPower * wind * _BottomBend)<font></font>
-                            * sin(_Time);<font></font>
-                o[4].pos += dir<font></font>
+                            * sin(_Time);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                o [3] .pos + =</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            * (_WindPower * wind * _BottomBend)</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            * sin(_Time);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                o [4] .pos + =</font></font></font></font><font></font>
                             * (_WindPower * wind * _MiddleBend)<font></font>
-                            * sin(_Time);<font></font>
-                o[5].pos += dir<font></font>
-                            * (_WindPower * wind * _MiddleBend)<font></font>
-                            * sin(_Time);<font></font>
-                o[6].pos += dir<font></font>
-                            * (_WindPower * wind * _TopBend)<font></font>
-                            * sin(_Time);<font></font>
+                            * sin(_Time);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                o [5] .pos + =</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            * (_WindPower * wind * _MiddleBend)</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            * sin(_Time);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                o [6] .pos + =</font></font></font></font><font></font>
+                            * (_WindPower * wind * _TopBend)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            * sin(_Time);</font></font></font></font><font></font>
 <font></font>
                 [unroll]<font></font>
                 for (int i = 0; i &lt; 7; i++) {<font></font>
@@ -492,38 +485,38 @@ outStream.RestartStrip();<font></font>
 <font></font>
             float4 frag(g2f i) : COLOR<font></font>
             {<font></font>
-                return i.color;<font></font>
-            }<font></font>
+                return i.color;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            }</font></font></font></font><font></font>
             ENDCG<font></font>
         }<font></font>
     }<font></font>
 }<font></font>
 </pre>
 </div>
-<p>このシェーダーを縦横に複数並べたPlaneメッシュに適用すると、図6.4のようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you apply this shader to a Plane mesh with multiple vertical and horizontal arrangements, it will look like Figure 6.4.</font></font></p>
 <div id="id_aoyama_2Fimg3" class="image">
 <img src="./Chapter 6 _ Growing grass with geometry shaders_files/img3.png" alt="Grass Shader results" class="width-060per">
-<p class="caption">
-図6.4: Grass Shaderの結果
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.4: Grass Shader results
+</font></font></p>
 </div>
-<p>この中から草を生成する処理についての説明をします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will explain the process of growing grass from this.</font></font></p>
 
-<h3><a id="h6-5-1"></a><span class="secno">6.5.1　</span>基本方針</h3>
-<p>今回は一つのプリミティブにつき1本の草を生成することにします。草の形状の生成については図6.5のように下部・中間部・上部に分けて頂点を合計7点生成し、上に行くほど斜めにしていくことで、草の斜め具合を簡易的に表現します。</p>
+<h3><a id="h6-5-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.5.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Basic policy</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, we will generate one grass for each primitive. </font><font style="vertical-align: inherit;">As shown in Fig. 6.5, the shape of the grass is divided into the lower part, the middle part, and the upper part, and a total of 7 vertices are generated. I will.</font></font></p>
 <div id="id_aoyama_2Fimg4" class="image">
 <img src="./Chapter 6 _ Growing grass with geometry shaders_files/img4.png" alt="How to make a grass shape" class="width-040per">
-<p class="caption">
-図6.5: 草の形の作り方
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.5: How to make a grass shape
+</font></font></p>
 </div>
 
-<h3><a id="h6-5-2"></a><span class="secno">6.5.2　</span>パラメーター</h3>
-<p>詳細はコメントにて記載してありますが、一本の草の中の各部分(下部・中間部・上部)の横幅と高さをコントロールする係数、草全体の横幅と高さをコントロールする係数を主なパラメーターとして用意しています。また一本一本の草が同じ形になるのは見栄えが悪いので、ランダム性を持たせるためのノイズテクスチャを使います。</p>
+<h3><a id="h6-5-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.5.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Parameters</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Details are described in the comments, but the coefficient that controls the width and height of each part (lower part, middle part, upper part) in one grass, and the coefficient that controls the width and height of the whole grass It is prepared as the main parameter. </font><font style="vertical-align: inherit;">Also, it doesn't look good if each grass has the same shape, so we use a noise texture to give it randomness.</font></font></p>
 
-<h3><a id="h6-5-3"></a><span class="secno">6.5.3　</span>処理</h3>
+<h3><a id="h6-5-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.5.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Processing</font></font></h3>
 <div class="emlist-code">
-<pre class="emlist language-cs">float height = (i[0].hei.r + i[1].hei.r + i[2].hei.r) / 3.0f;<font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">float height = (i [0] .hei.r + i [1] .hei.r + i [2] .hei.r) / 3.0f;</font></font><font></font>
 float rot = (i[0].rot.r + i[1].rot.r + i[2].rot.r) / 3.0f;<font></font>
 float wind = (i[0].wind.r + i[1].wind.r + i[2].wind.r) / 3.0f;<font></font>
 <font></font>
@@ -531,13 +524,13 @@ float4 center = ((p0 + p1 + p2) / 3.0f);<font></font>
 float4 normal = float4(((n0 + n1 + n2) / 3.0f).xyz, 1.0f);<font></font>
 </pre>
 </div>
-<p>この部分では草の高さと向き、風の強弱の基準となる数値を計算しています。Geometry Shader内で計算しても良いのですが、頂点に対してメタ情報的に持たせた方がGeometry Shader上で計算を行なう上での初期値の様な扱いが出来るのでVertex Shaderで計算しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this part, the height and direction of the grass and the numerical values ​​that are the standard of the strength of the wind are calculated. </font><font style="vertical-align: inherit;">You can calculate in Geometry Shader, but if you give the vertices meta information, you can treat it like the initial value when performing calculation on Geometry Shader, so calculate with Vertex Shader. I am.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist language-cs">float4 center = ((p0 + p1 + p2) / 3.0f);<font></font>
-float4 normal = float4(((n0 + n1 + n2) / 3.0f).xyz, 1.0f);<font></font>
+<pre class="emlist language-cs">float4 center = ((p0 + p1 + p2) / 3.0f);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float4 normal = float4(((n0 + n1 + n2) / 3.0f).xyz, 1.0f);</font></font><font></font>
 </pre>
 </div>
-<p>ここでは草の中心部分と、草を生やしていく方向を計算しています。ここの部分をノイズテクスチャなどで決定するようにすると、草が生える方向にランダム性を持たせることが出来ます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, the central part of the grass and the direction in which the grass grows are calculated. </font><font style="vertical-align: inherit;">If you decide this part by noise texture etc., you can give randomness in the direction of grass growth.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">float bottomHeight = height * _Height * _BottomHeight;<font></font>
 <font></font>
@@ -546,7 +539,7 @@ float4 normal = float4(((n0 + n1 + n2) / 3.0f).xyz, 1.0f);<font></font>
 o[6].pos += dir * (_WindPower * wind * _TopBend) * sin(_Time);<font></font>
 </pre>
 </div>
-<p>長いのでプログラムは略記してあります。この部分では下部・中間部・上部についての高さと幅をそれぞれ計算し、それを元に座標を求めています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The program is abbreviated because it is long. </font><font style="vertical-align: inherit;">In this part, the height and width of the lower part, middle part, and upper part are calculated respectively, and the coordinates are calculated based on that.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">[unroll]<font></font>
 for (int i = 0; i &lt; 7; i++) {<font></font>
@@ -555,12 +548,12 @@ for (int i = 0; i &lt; 7; i++) {<font></font>
 }<font></font>
 </pre>
 </div>
-<p>この部分にて計算した7点の頂点を<code class="tt">Append</code>しています。今回は三角形が繋がりながら生成されていっても問題ないため、<code class="tt">RestartStrip</code>はしていません。</p>
-<p>なお、<code class="tt">for</code>ステートメントに対して<code class="tt">[unroll]</code>というアトリビュートを適用しています。これはコンパイル時に、ループの回数分ループ内の処理を展開するというアトリビュートで、メモリサイズが大きくなるというデメリットはあるのですが、高速に動作するという利点があります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are 7 vertices calculated in this part </font></font><code class="tt">Append</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">This time, there is no problem even if the triangles are generated while being connected, so I have not done so </font></font><code class="tt">RestartStrip</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, </font><font style="vertical-align: inherit;">the attribute called is applied to </font><font style="vertical-align: inherit;">the </font></font><code class="tt">for</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">statement </font></font><code class="tt">[unroll]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">This is an attribute that expands the processing in the loop as many times as the number of loops at compile time, and although it has the disadvantage of increasing the memory size, it has the advantage of operating at high speed.</font></font></p>
 
-<h2><a id="h6-6"></a><span class="secno">6.6　</span>まとめ</h2>
-<p>ここまでGeometry Shaderについての説明から、基本と応用のプログラムまでを説明してきました。CPU上で動くプログラムを書くのとは多少なりとも特徴が異なる所がありますが、基本的な部分を抑えさせすれば活用できるはずです。</p>
-<p>実は通説としてGeometry Shaderは遅いと言われているそうです。筆者自身はあまり感じたことはないのですが、利用範囲が大規模になると大変なのかもしれません。もしGeometry Shaderを大規模に使うということになりそうでしたら、ぜひ一度ベンチマークなどを取ってみてください。</p>
+<h2><a id="h6-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">So far, we have explained from the explanation of Geometry Shader to the basic and applied programs. </font><font style="vertical-align: inherit;">There are some features that are slightly different from writing a program that runs on the CPU, but you should be able to utilize it if you suppress the basic part.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In fact, it is generally said that Geometry Shader is slow. </font><font style="vertical-align: inherit;">I haven't really felt it, but it may be difficult when the range of use is large. </font><font style="vertical-align: inherit;">If you are going to use Geometry Shader on a large scale, please take a benchmark etc. once.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Still, being able to dynamically and freely create and delete new meshes on the GPU will greatly expand the range of ideas. </font><font style="vertical-align: inherit;">Personally, I think the most important thing is not what technology was used, but what is created and expressed by it. </font><font style="vertical-align: inherit;">We hope that you will learn about and learn about one tool called Geometry Shader in this chapter, and feel some new possibilities.</font></font></p>
 
 <h2><a id="h6-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
@@ -571,4 +564,4 @@ for (int i = 0; i &lt; 7; i++) {<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 6 _ Growing grass with geometry shaders_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Growing grass with geometry shaders_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Growing grass with geometry shaders_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Growing grass with geometry shaders_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Growing grass with geometry shaders_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

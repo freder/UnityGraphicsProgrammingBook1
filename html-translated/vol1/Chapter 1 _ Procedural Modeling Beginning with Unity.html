@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<!-- saved from url=(0077)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/style.scss">
   <meta name="generator" content="Re:VIEW">
-  <title>Unityではじめるプロシージャルモデリング</title>
+  <title>Procedural modeling starting with Unity</title>
 
 			<style>
 				img {
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Procedural Modeling Beginning with Unity</font></font></h1>
 
 <h2><a id="h1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -106,14 +99,14 @@ Figure 1.1: Quad model structure Black circles represent the vertices of the mod
 <h4><a id="h1-2-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sample program Quad.cs</font></font></h4>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, create an instance of the Mesh class.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Create an instance of Mesh</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-var mesh = new Mesh ();</font></font><font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Create an instance of Mesh</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var mesh = new Mesh ();</font></font></font></font></font></font></font></font><font></font>
 </pre>
 </div>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, generate a Vector3 array that represents the four vertices located at the four corners of the Quad. </font><font style="vertical-align: inherit;">Also, prepare the uv coordinate and normal data so that they correspond to each of the four vertices.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Find half the length so that the width and height of the Quad are the length of size respectively.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-var hsize = size * 0.5f;</font></font><font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Find half the length so that the width and height of the Quad are the length of size respectively.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var hsize = size * 0.5f;</font></font></font></font></font></font><font></font>
 <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
 // Quad vertex data</font></font><font></font>
 var vertices = new Vector3[] {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -124,39 +117,39 @@ var vertices = new Vector3[] {<font></font><font style="vertical-align: inherit;
 };<font></font>
 <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
 // Quad uv coordinate data</font></font><font></font>
-var uv = new Vector2[] {<font></font>
-    new Vector2(0f, 0f), // 1つ目の頂点のuv座標<font></font>
-    new Vector2(1f, 0f), // 2つ目の頂点のuv座標<font></font>
-    new Vector2(1f, 1f), // 3つ目の頂点のuv座標<font></font>
-    new Vector2(0f, 1f)  // 4つ目の頂点のuv座標<font></font>
+var uv = new Vector2[] {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    new Vector2 (0f, 0f), // uv coordinates of the first vertex</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    new Vector2 (1f, 0f), // uv coordinates of the second vertex</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    new Vector2 (1f, 1f), // uv coordinates of the third vertex</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    new Vector2 (0f, 1f) // uv coordinates of the 4th vertex</font></font><font></font>
 };<font></font>
-<font></font>
-// Quadの法線データ<font></font>
-var normals = new Vector3[] {<font></font>
-    new Vector3(0f, 0f, -1f), // 1つ目の頂点の法線<font></font>
-    new Vector3(0f, 0f, -1f), // 2つ目の頂点の法線<font></font>
-    new Vector3(0f, 0f, -1f), // 3つ目の頂点の法線<font></font>
-    new Vector3(0f, 0f, -1f)  // 4つ目の頂点の法線<font></font>
-};<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Quad normal data</font></font><font></font>
+var normals = new Vector3[] {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    new Vector3 (0f, 0f, -1f), // normal of the first vertex</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    new Vector3 (0f, 0f, -1f), // Normal of the second vertex</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    new Vector3 (0f, 0f, -1f), // normal of the third vertex</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    new Vector3 (0f, 0f, -1f) // Normal of the 4th vertex</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+};</font></font></font></font><font></font>
 </pre>
 </div>
-<p>次に、モデルの面を表す三角形データを生成します。三角形データは整数配列によって指定され、それぞれの整数は頂点配列のindexに対応しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, generate triangular data that represents the faces of the model. </font><font style="vertical-align: inherit;">The triangle data is specified by an array of integers, and each integer corresponds to the index of the vertex array.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist language-cs">// Quadの面データ 頂点のindexを3つ並べて1つの面(三角形)として認識する<font></font>
-var triangles = new int[] {<font></font>
-    0, 1, 2, // 1つ目の三角形<font></font>
-    2, 3, 0  // 2つ目の三角形<font></font>
-};<font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Quad face data Recognize as one face (triangle) by arranging three indexes of vertices</font></font><font></font>
+var triangles = new int[] {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    0, 1, 2, // 1st triangle</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    2, 3, 0 // Second triangle</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+};</font></font></font></font><font></font>
 </pre>
 </div>
-<p>最後に生成したデータをMeshのインスタンスに設定していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Set the last generated data to the Mesh instance.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">mesh.vertices = vertices;<font></font>
 mesh.uv = uv;<font></font>
 mesh.normals = normals;<font></font>
 mesh.triangles = triangles;<font></font>
-<font></font>
-// Meshが占める境界領域を計算する（cullingに必要）<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Calculate the boundary area occupied by Mesh (required for culling)</font></font><font></font>
 mesh.RecalculateBounds();<font></font>
 <font></font>
 return mesh;<font></font>
@@ -164,52 +157,52 @@ return mesh;<font></font>
 </div>
 
 <h3><a id="h1-2-2"></a><span class="secno">1.2.2　</span>ProceduralModelingBase</h3>
-<p>本章で利用するサンプルコードでは、ProceduralModelingBaseという基底クラスを利用しています。このクラスの継承クラスでは、モデルのパラメータ（例えば、Quadでは横幅と縦幅を表すsize）を変更するたびに新たなMeshインスタンスを生成し、MeshFilterに適用することで、変更結果をすぐさま確認することができます。（Editorスクリプトを利用してこの機能を実現しています。ProceduralModelingEditor.cs）</p>
-<p>また、ProceduralModelingMaterialというenum型のパラメータを変更することで、モデルのUV座標や法線方向を可視化することができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample code used in this chapter uses a base class called ProceduralModelingBase. </font><font style="vertical-align: inherit;">In the inherited class of this class, every time you change a model parameter (for example, size that represents width and height in Quad), a new Mesh instance is created and applied to MeshFilter to check the change result immediately. I can. </font><font style="vertical-align: inherit;">(This function is realized by using the Editor script. ProceduralModelingEditor.cs)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can also visualize the UV coordinates and normal direction of the model by changing the enum type parameter called ProceduralModelingMaterial.</font></font></p>
 <div id="ProceduralModeling_materials" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_materials.png" alt="左から、ProceduralModelingMaterial.Standard、ProceduralModelingMaterial.UV、ProceduralModelingMaterial.Normalが適用されたモデル">
-<p class="caption">
-図1.2: 左から、ProceduralModelingMaterial.Standard、ProceduralModelingMaterial.UV、ProceduralModelingMaterial.Normalが適用されたモデル
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_materials.png" alt="From the left, the model to which ProceduralModelingMaterial.Standard, ProceduralModelingMaterial.UV, and ProceduralModelingMaterial.Normal are applied.">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.2: From the left, the model to which ProcedureModelingMaterial.Standard, ProcedureModelingMaterial.UV, and ProcedureModelingMaterial.Normal are applied.
+</font></font></p>
 </div>
 
-<h2><a id="h1-3"></a><span class="secno">1.3　</span>プリミティブな形状</h2>
-<p>モデルの構造を理解できたところで、いくつかプリミティブな形状を作っていきましょう。</p>
+<h2><a id="h1-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Primitive shape</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now that you understand the structure of your model, let's create some primitive shapes.</font></font></p>
 
 <h3><a id="h1-3-1"></a><span class="secno">1.3.1　</span>Plane</h3>
-<p>PlaneはQuadをグリッド上に並べたような形をしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Plane is shaped like a grid of Quads.</font></font></p>
 <div id="ProceduralModeling_plane" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_plane.png" alt="Planeモデル">
-<p class="caption">
-図1.3: Planeモデル
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_plane.png" alt="Plane model">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.3: Plane model
+</font></font></p>
 </div>
-<p>グリッドの行数と列数を決め、それぞれのグリッドの交点に頂点を配置し、グリッドの各マスを埋めるようにQuadを構築し、それらをまとめることで1つのPlaneモデルを生成します。</p>
-<p>サンプルプログラムPlane.csでは、Planeの縦に並べる頂点の数heightSegments、横に並べる頂点の数widthSegmentsと、縦の長さheight、横の長さwidthのパラメータを用意しています。それぞれのパラメータは次の図のようにPlaneの形状に影響します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Determine the number of rows and columns of the grid, place vertices at the intersections of each grid, build a Quad to fill each cell of the grid, and combine them to generate one Plane model.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample program Plane.cs, the number of vertices arranged vertically in the Plane, heightSegments, the number of vertices arranged horizontally widthSegments, and the parameters of vertical length height and horizontal length width are prepared. </font><font style="vertical-align: inherit;">Each parameter affects the shape of the Plane as shown in the following figure.</font></font></p>
 <div id="ProceduralModeling_plane_parameters" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_plane_parameters.png" alt="Planeパラメータ">
-<p class="caption">
-図1.4: Planeパラメータ
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_plane_parameters.png" alt="Plane parameters">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.4: Plane parameters
+</font></font></p>
 </div>
 
-<h4><a id="h1-3-1-1"></a>サンプルプログラム Plane.cs</h4>
-<p>まずはグリッドの交点に配置する頂点データを生成していきます。</p>
+<h4><a id="h1-3-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sample program Plane.cs</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, we will generate vertex data to be placed at the intersections of the grid.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">var vertices = new List&lt;Vector3&gt;();<font></font>
 var uv = new List&lt;Vector2&gt;();<font></font>
 var normals = new List&lt;Vector3&gt;();<font></font>
-<font></font>
-// 頂点のグリッド上での位置の割合(0.0 ~ 1.0)を算出するための行列数の逆数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// The reciprocal of the number of matrices to calculate the percentage of vertices on the grid (0.0 to 1.0)</font></font><font></font>
 var winv = 1f / (widthSegments - 1);<font></font>
 var hinv = 1f / (heightSegments - 1);<font></font>
 <font></font>
-for(int y = 0; y &lt; heightSegments; y++) {<font></font>
-    // 行の位置の割合(0.0 ~ 1.0)<font></font>
-    var ry = y * hinv;<font></font>
+for(int y = 0; y &lt; heightSegments; y++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Row position percentage (0.0 ~ 1.0)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var ry = y * hinv;</font></font></font></font></font></font><font></font>
 <font></font>
-    for(int x = 0; x &lt; widthSegments; x++) {<font></font>
-        // 列の位置の割合(0.0 ~ 1.0)<font></font>
+    for(int x = 0; x &lt; widthSegments; x++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Percentage of column positions (0.0 ~ 1.0)</font></font><font></font>
         var rx = x * winv;<font></font>
 <font></font>
         vertices.Add(new Vector3(<font></font>
@@ -223,7 +216,7 @@ for(int y = 0; y &lt; heightSegments; y++) {<font></font>
 }<font></font>
 </pre>
 </div>
-<p>次に三角形データですが、各三角形に設定する頂点indexは行と列を辿るループの中で、下記のように参照します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, regarding triangle data, the vertex index set for each triangle is referenced as shown below in the loop that follows the rows and columns.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">var triangles = new List&lt;int&gt;();<font></font>
 <font></font>
@@ -238,126 +231,126 @@ for(int y = 0; y &lt; heightSegments - 1; y++) {<font></font>
         triangles.Add(a);<font></font>
         triangles.Add(b);<font></font>
         triangles.Add(c);<font></font>
-<font></font>
-        triangles.Add(c);<font></font>
-        triangles.Add(d);<font></font>
-        triangles.Add(a);<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        triangles.Add(c);</font></font></font></font></font></font><font></font>
+        triangles.Add(d);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        triangles.Add(a);</font></font></font></font></font></font><font></font>
     }<font></font>
 }<font></font>
 </pre>
 </div>
 
-<h4><a id="h1-3-1-2"></a>ParametricPlaneBase</h4>
-<p>Planeの各頂点の高さ（y座標）の値は0に設定していましたが、この高さを操作することで、単なる水平な面だけではなく、凸凹した地形や小高い山のような形を得ることができます。</p>
-<p>ParametricPlaneBaseクラスはPlaneクラスを継承しており、Meshを生成するBuild関数をoverrideしています。まずは元のPlaneモデルを生成し、各頂点のuv座標をインプットにして高さを求めるDepth(float u, float v)関数を、全ての頂点について呼び出し、高さを設定し直すことで柔軟に形を変形します。</p>
-<p>このParametricPlaneBaseクラスを継承したクラスを実装することで、頂点によって高さが変化するPlaneモデルを生成できます。</p>
+<h4><a id="h1-3-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ParametricPlaneBase</font></font></font></font></font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The height (y coordinate) value of each vertex of Plane was set to 0, but by manipulating this height, it is not just a horizontal surface, but an uneven terrain or a shape like a small mountain. Can be obtained.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The ParametricPlaneBase class inherits from the Plane class and overrides the Build function that creates the mesh. </font><font style="vertical-align: inherit;">First, generate the original Plane model, call the Depth (float u, float v) function to find the height by inputting the uv coordinates of each vertex, and reset the height to flexibly shape it. Transforms.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By implementing a class that inherits this ParametricPlaneBase class, you can generate a Plane model whose height changes depending on the vertices.</font></font></p>
 
-<h4><a id="h1-3-1-3"></a>サンプルプログラム ParametricPlaneBase.cs</h4>
+<h4><a id="h1-3-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sample program ParametricPlaneBase.cs</font></font></h4>
 <div class="emlist-code">
-<pre class="emlist language-cs">protected override Mesh Build() {<font></font>
-    // 元のPlaneモデルを生成<font></font>
-    var mesh = base.Build();<font></font>
-<font></font>
-    // Planeモデルが持つ頂点の高さを再設定する<font></font>
+<pre class="emlist language-cs">protected override Mesh Build() {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Generate the original Plane model</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var mesh = base.Build ();</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Reset the height of the vertices of the Plane model</font></font><font></font>
     var vertices = mesh.vertices;<font></font>
-<font></font>
-    // 頂点のグリッド上での位置の割合(0.0 ~ 1.0)を算出するための行列数の逆数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // The reciprocal of the number of matrices to calculate the percentage of vertices on the grid (0.0 to 1.0)</font></font><font></font>
     var winv = 1f / (widthSegments - 1);<font></font>
     var hinv = 1f / (heightSegments - 1);<font></font>
 <font></font>
-    for(int y = 0; y &lt; heightSegments; y++) {<font></font>
-        // 行の位置の割合(0.0 ~ 1.0)<font></font>
-        var ry = y * hinv;<font></font>
-        for(int x = 0; x &lt; widthSegments; x++) {<font></font>
-            // 列の位置の割合(0.0 ~ 1.0)<font></font>
+    for(int y = 0; y &lt; heightSegments; y++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Row position percentage (0.0 ~ 1.0)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        var ry = y * hinv;</font></font></font></font><font></font>
+        for(int x = 0; x &lt; widthSegments; x++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Percentage of column positions (0.0 ~ 1.0)</font></font><font></font>
             var rx = x * winv;<font></font>
 <font></font>
             int index = y * widthSegments + x;<font></font>
             vertices[index].y = Depth(rx, ry);<font></font>
         }<font></font>
     }<font></font>
-<font></font>
-    // 頂点位置の再設定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Reset the vertex position</font></font><font></font>
     mesh.vertices = vertices;<font></font>
     mesh.RecalculateBounds();<font></font>
-<font></font>
-    // 法線方向を自動算出<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Automatically calculate normal direction</font></font><font></font>
     mesh.RecalculateNormals();<font></font>
 <font></font>
     return mesh;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>サンプルシーンParametricPlane.sceneでは、このParametricPlaneBaseを継承したクラス（MountainPlane、TerrainPlaneクラス）を利用したGameObjectが配置してあります。それぞれのパラメータを変えながら、形が変化していく様子を確認してみてください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample scene ParametricPlane.scene, GameObject using the class (MountainPlane, TerrainPlane class) that inherits this ParametricPlaneBase is placed. </font><font style="vertical-align: inherit;">Try changing each parameter and see how the shape changes.</font></font></p>
 <div id="ProceduralModeling_parametric_planes" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_parametric_planes.png" alt="ParametricPlane.scene　左がMountainPlaneクラス、右がTerrainPlaneクラスによって生成されたモデル">
-<p class="caption">
-図1.5: ParametricPlane.scene　左がMountainPlaneクラス、右がTerrainPlaneクラスによって生成されたモデル
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_parametric_planes.png" alt="ParametricPlane.scene The model generated by the MountainPlane class on the left and the TerrainPlane class on the right">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.5: ParametricPlane.scene Model generated by the MountainPlane class on the left and the TerrainPlane class on the right
+</font></font></p>
 </div>
 
 <h3><a id="h1-3-2"></a><span class="secno">1.3.2　</span>Cylinder</h3>
-<p>Cylinderは円筒型のモデルで、次の図のような形をしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Cylinder is a cylindrical model that looks like the following figure.</font></font></p>
 <div id="ProceduralModeling_cylinder" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder.png" alt="Cylinderの構造">
-<p class="caption">
-図1.6: Cylinderの構造
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder.png" alt="Structure of Cylinder">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.6: Structure of Cylinder
+</font></font></p>
 </div>
-<p>円筒型の円のなめらかさはsegments、縦の長さと太さはそれぞれheightとradiusパラメータで制御することができます。上図の例のように、segmentsに7を指定するとCylinderは正7角形を縦に引き伸ばしたような形になり、segmentsの数値を大きくするほど円形に近づいていきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The smoothness of the cylindrical circle can be controlled by the segments, and the vertical length and thickness can be controlled by the height and radius parameters, respectively. </font><font style="vertical-align: inherit;">As shown in the example above, if you specify 7 for segments, the cylinder will look like a regular heptagon stretched vertically, and the larger the value of segments, the closer it will be to a circle.</font></font></p>
 
-<h4><a id="h1-3-2-1"></a>円周に沿って均等に並ぶ頂点</h4>
-<p>Cylinderの頂点は、筒の端に位置する円の周りに沿って均等に並べる必要があります。</p>
-<p>円周に沿って均等に並ぶ頂点を配置するには、三角関数（Mathf.Sin, Mathf.Cos）を利用します。ここでは三角関数の詳細については割愛しますが、これらの関数を利用すると角度を元に円周上の位置を得ることができます。</p>
+<h4><a id="h1-3-2-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vertices evenly aligned along the circumference</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The vertices of the Cylinder should be evenly aligned around the circle located at the end of the cylinder.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Use trigonometric functions (Mathf.Sin, Mathf.Cos) to place evenly aligned vertices along the circumference. </font><font style="vertical-align: inherit;">The details of trigonometric functions are omitted here, but these functions can be used to obtain the position on the circumference based on the angle.</font></font></p>
 <div id="ProceduralModeling_cylinder_trigonometry" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder_trigonometry.png" alt="三角関数から円周上の点の位置を得る">
-<p class="caption">
-図1.7: 三角関数から円周上の点の位置を得る
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder_trigonometry.png" alt="Get the position of a point on the circumference from a trigonometric function">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.7: Obtaining the position of a point on the circumference from a trigonometric function
+</font></font></p>
 </div>
-<p>この図のように角度θ(シータ)から半径radiusの円上に位置する点は、(x, y) = (Mathf.Cos(θ) * radius, Mathf.Sin(θ) * radius)で取得することができます。</p>
-<p>これを元に、半径radiusの円周上に均等に並べられたsegments個の頂点位置を得るには以下のような処理を行います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As shown in this figure, the points located on the circle of radius radius from the angle θ (theta) are acquired by (x, y) = (Mathf.Cos (θ) * radius, Mathf.Sin (θ) * radius). can do.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Based on this, perform the following processing to obtain the vertex positions of segments evenly arranged on the circumference of the radius radius.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">for (int i = 0; i &lt; segments; i++) {<font></font>
     // 0.0 ~ 1.0<font></font>
     float ratio = (float)i / (segments - 1);<font></font>
-<font></font>
-    // [0.0 ~ 1.0]を[0.0 ~ 2π]に変換<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Convert [0.0 ~ 1.0] to [0.0 ~ 2π]</font></font><font></font>
     float rad = ratio * PI2;<font></font>
-<font></font>
-    // 円周上の位置を得る<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Get a position on the circumference</font></font><font></font>
     float cos = Mathf.Cos(rad), sin = Mathf.Sin(rad);<font></font>
     float x = cos * radius, y = sin * radius;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>Cylinderのモデリングでは、円筒の端に位置する円周に沿って均等に頂点を配置し、それらの頂点をつなぎ合わせて側面を形作ります。側面の1つ1つはQuadを構築するのと同じように、上端と下端から対応する頂点を2つずつ取り出して三角形を向かい合わせて配置し、1つの側面、つまり四角形を構築します。Cylinderの側面は、Quadが円形に沿って配置されているものだとイメージできます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In Cylinder modeling, vertices are evenly placed along the circumference of the end of the cylinder, and the vertices are joined together to form a side surface. </font><font style="vertical-align: inherit;">For each side, just as you would build a Quad, take two corresponding vertices from the top and bottom and place the triangles facing each other to build one side, a rectangle. </font><font style="vertical-align: inherit;">The sides of the Cylinder can be imagined as the Quads arranged along a circle.</font></font></p>
 <div id="ProceduralModeling_cylinder_sides" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder_sides.png" alt="Cylinderの側面のモデリング　黒丸は端に位置する円周に沿って均等に配置された頂点　頂点内のa〜dはCylinder.csプログラム内で三角形を構築する際に頂点に割り振られるindex変数">
-<p class="caption">
-図1.8: Cylinderの側面のモデリング　黒丸は端に位置する円周に沿って均等に配置された頂点　頂点内のa〜dはCylinder.csプログラム内で三角形を構築する際に頂点に割り振られるindex変数
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder_sides.png" alt="Modeling the sides of a cylinder Black circles are vertices evenly distributed along the circumference at the edge a to d in the vertices are index variables assigned to the vertices when constructing a triangle in the Cylinder.cs program.">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.8: Modeling the sides of a cylinder Black circles are evenly distributed vertices along the circumference at the edges a to d in the vertices are index variables assigned to the vertices when constructing a triangle in the Cylinder.cs program.
+</font></font></p>
 </div>
 
-<h4><a id="h1-3-2-2"></a>サンプルプログラム Cylinder.cs</h4>
-<p>まずは側面を構築していきますが、Cylinderクラスでは上端と下端に位置する円周に並べられた頂点のデータを生成するための関数GenerateCapを用意しています。</p>
+<h4><a id="h1-3-2-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sample program Cylinder.cs</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First of all, we will build the side, but in the Cylinder class, we have prepared a function GenerateCap to generate the data of the vertices arranged around the circumference located at the upper end and the lower end.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">var vertices = new List&lt;Vector3&gt;();<font></font>
 var normals = new List&lt;Vector3&gt;();<font></font>
 var uvs = new List&lt;Vector2&gt;();<font></font>
 var triangles = new List&lt;int&gt;();<font></font>
-<font></font>
-// 上端の高さと、下端の高さ<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Top height and bottom height</font></font><font></font>
 float top = height * 0.5f, bottom = -height * 0.5f;<font></font>
-<font></font>
-// 側面を構成する頂点データを生成<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Generate vertex data that makes up the side</font></font><font></font>
 GenerateCap(segments + 1, top, bottom, radius, vertices, uvs, normals, true);<font></font>
-<font></font>
-// 側面の三角形を構築する際、円上の頂点を参照するために、<font></font>
-// indexが円を一周するための除数<font></font>
-var len = (segments + 1) * 2;<font></font>
-<font></font>
-// 上端と下端をつなぎ合わせて側面を構築<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// To refer to the vertices on the circle when constructing the side triangles</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Divine for index to go around the circle</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var len = (segments + 1) * 2;</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Build the sides by connecting the top and bottom</font></font><font></font>
 for (int i = 0; i &lt; segments + 1; i++) {<font></font>
     int idx = i * 2;<font></font>
     int a = idx, b = idx + 1, c = (idx + 2) % len, d = (idx + 3) % len;<font></font>
@@ -365,13 +358,13 @@ for (int i = 0; i &lt; segments + 1; i++) {<font></font>
     triangles.Add(c);<font></font>
     triangles.Add(b);<font></font>
 <font></font>
-    triangles.Add(d);<font></font>
-    triangles.Add(b);<font></font>
-    triangles.Add(c);<font></font>
+    triangles.Add(d);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    triangles.Add(b);</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    triangles.Add(c);</font></font></font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>GenerateCap関数では、List型で渡された変数に頂点や法線データを設定します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the GenerateCap function, the vertex and normal data are set in the variable passed as List type.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">void GenerateCap(<font></font>
     int segments,<font></font>
@@ -386,56 +379,56 @@ for (int i = 0; i &lt; segments + 1; i++) {<font></font>
     for (int i = 0; i &lt; segments; i++) {<font></font>
         // 0.0 ~ 1.0<font></font>
         float ratio = (float)i / (segments - 1);<font></font>
-<font></font>
-        // 0.0 ~ 2π<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // 0.0 ~ 2π</font></font></font></font></font></font><font></font>
         float rad = ratio * PI2;<font></font>
-<font></font>
-        // 円周に沿って上端と下端に均等に頂点を配置する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Place vertices evenly at the top and bottom along the circumference</font></font><font></font>
         float cos = Mathf.Cos(rad), sin = Mathf.Sin(rad);<font></font>
         float x = cos * radius, z = sin * radius;<font></font>
         Vector3 tp = new Vector3(x, top, z), bp = new Vector3(x, bottom, z);<font></font>
-<font></font>
-        // 上端<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // upper end</font></font><font></font>
         vertices.Add(tp);<font></font>
         uvs.Add(new Vector2(ratio, 1f));<font></font>
-<font></font>
-        // 下端<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Bottom edge</font></font><font></font>
         vertices.Add(bp);<font></font>
         uvs.Add(new Vector2(ratio, 0f));<font></font>
 <font></font>
-        if(side) {<font></font>
-            // 側面の外側を向く法線<font></font>
+        if(side) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Normal to the outside of the side</font></font><font></font>
             var normal = new Vector3(cos, 0f, sin);<font></font>
-            normals.Add(normal);<font></font>
-            normals.Add(normal);<font></font>
-        } else {<font></font>
-            normals.Add(new Vector3(0f, 1f, 0f)); // 蓋の上を向く法線<font></font>
-            normals.Add(new Vector3(0f, -1f, 0f)); // 蓋の下を向く法線<font></font>
+            normals.Add(normal);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            normals.Add(normal);</font></font></font></font></font></font><font></font>
+        } else {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            normals.Add (new Vector3 (0f, 1f, 0f)); // Normals pointing up the lid</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            normals.Add (new Vector3 (0f, -1f, 0f)); // Normals pointing down the lid</font></font><font></font>
         }<font></font>
     }<font></font>
 }<font></font>
 </pre>
 </div>
-<p>Cylinderクラスでは、上端と下端を閉じたモデルにするかどうかをopenEndedフラグで設定することができます。上端と下端を閉じる場合は、円形の「蓋」を形作り、端に栓をします。</p>
-<p>蓋の面を構成する頂点は、側面を構成している頂点を利用せずに、側面と同じ位置に別途新しく頂点を生成します。これは、側面と蓋の部分とで法線を分け、自然なライティングを施すためです。（側面の頂点データを構築する場合はGenerateCapの引数のside変数にtrueを、蓋を構築する場合はfalseを指定し、適切な法線方向が設定されるようにしています。）</p>
-<p>もし、側面と蓋の部分で同じ頂点を共有してしまうと、側面と蓋面で同じ法線を参照することになってしまうので、ライティングが不自然になってしまいます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the Cylinder class, you can set with the openEnded flag whether to make the model with the top and bottom closed. </font><font style="vertical-align: inherit;">If you want to close the top and bottom, form a circular "lid" and plug the ends.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The vertices that make up the surface of the lid do not use the vertices that make up the side, but create a new vertex at the same position as the side. </font><font style="vertical-align: inherit;">This is to separate the normals on the sides and the lid for natural lighting. </font><font style="vertical-align: inherit;">(When constructing the vertex data of the side, specify true in the side variable of the argument of GenerateCap, and when constructing the lid, specify false so that the appropriate normal direction is set.)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the side and lid share the same vertex, the side and lid will refer to the same normal, which makes lighting unnatural.</font></font></p>
 <div id="ProceduralModeling_cylinder_lighting" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder_lighting.png" alt="Cylinderの側面と蓋の頂点を共有した場合（左:BadCylinder.cs）と、サンプルプログラムのように別の頂点を用意した場合（右:Cylinder.cs）　左はライティングが不自然になっている">
-<p class="caption">
-図1.9: Cylinderの側面と蓋の頂点を共有した場合（左:BadCylinder.cs）と、サンプルプログラムのように別の頂点を用意した場合（右:Cylinder.cs）　左はライティングが不自然になっている
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder_lighting.png" alt="When the side of the Cylinder and the apex of the lid are shared (left: BadCylinder.cs) and when another apex is prepared like the sample program (right: Cylinder.cs) The lighting is unnatural on the left.">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.9: When the side of Cylinder and the top of the lid are shared (left: BadCylinder.cs) and when another vertex is prepared as in the sample program (right: Cylinder.cs) The lighting on the left becomes unnatural. ing
+</font></font></p>
 </div>
-<p>円形の蓋をモデリングするには、（GenerateCap関数から生成される）円周上に均等に並べられた頂点と、円の真ん中に位置する頂点を用意し、真ん中の頂点から円周に沿った頂点をつなぎ合わせて、均等に分けられたピザのように三角形を構築することで円形の蓋を形作ります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To model a circular lid, prepare vertices that are evenly arranged on the circumference (generated from the GenerateCap function) and vertices that are located in the middle of the circle, and the vertices along the circumference from the middle vertex. Join together to form a circular lid by building a triangle that resembles an evenly divided pizza.</font></font></p>
 <div id="ProceduralModeling_cylinder_end" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder_end.png" alt="Cylinderの蓋のモデリング　segmentsパラメータが6の場合の例">
-<p class="caption">
-図1.10: Cylinderの蓋のモデリング　segmentsパラメータが6の場合の例
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_cylinder_end.png" alt="Cylinder lid modeling example with segments parameter of 6">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.10: Cylinder lid modeling example with segments parameter of 6.
+</font></font></p>
 </div>
 <div class="emlist-code">
-<pre class="emlist language-cs">// 上端と下端の蓋を生成<font></font>
-if(openEnded) {<font></font>
-    // 蓋のモデルのための頂点は、ライティング時に異なった法線を利用するために、側面とは共有せずに新しく追加する<font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Generate top and bottom lids</font></font><font></font>
+if(openEnded) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Add new vertices for lid model, not shared with sides, to use different normals when lighting</font></font><font></font>
     GenerateCap(<font></font>
         segments + 1,<font></font>
         top,<font></font>
@@ -446,103 +439,103 @@ if(openEnded) {<font></font>
         normals,<font></font>
         false<font></font>
     );<font></font>
-<font></font>
-    // 上端の蓋の真ん中の頂点<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // The apex in the middle of the top lid</font></font><font></font>
     vertices.Add(new Vector3(0f, top, 0f));<font></font>
     uvs.Add(new Vector2(0.5f, 1f));<font></font>
     normals.Add(new Vector3(0f, 1f, 0f));<font></font>
-<font></font>
-    // 下端の蓋の真ん中の頂点<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // The apex in the middle of the bottom lid</font></font><font></font>
     vertices.Add(new Vector3(0f, bottom, 0f)); // bottom<font></font>
     uvs.Add(new Vector2(0.5f, 0f));<font></font>
     normals.Add(new Vector3(0f, -1f, 0f));<font></font>
 <font></font>
     var it = vertices.Count - 2;<font></font>
     var ib = vertices.Count - 1;<font></font>
-<font></font>
-    // 側面の分の頂点indexを参照しないようにするためのoffset<font></font>
-    var offset = len;<font></font>
-<font></font>
-    // 上端の蓋の面<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // offset to avoid referencing the vertex index for the side</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var offset = len;</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Top lid surface</font></font><font></font>
     for (int i = 0; i &lt; len; i += 2) {<font></font>
         triangles.Add(it);<font></font>
         triangles.Add((i + 2) % len + offset);<font></font>
         triangles.Add(i + offset);<font></font>
     }<font></font>
-<font></font>
-    // 下端の蓋の面<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Bottom lid surface</font></font><font></font>
     for (int i = 1; i &lt; len; i += 2) {<font></font>
-        triangles.Add(ib);<font></font>
-        triangles.Add(i + offset);<font></font>
-        triangles.Add((i + 2) % len + offset);<font></font>
-    }<font></font>
+        triangles.Add(ib);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        triangles.Add(i + offset);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        triangles.Add((i + 2) % len + offset);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
 
 <h3><a id="h1-3-3"></a><span class="secno">1.3.3　</span>Tubular</h3>
-<p>Tubularは筒型のモデルで、次の図のような形をしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tubular is a tubular model that looks like the following figure.</font></font></p>
 <div id="ProceduralModeling_tubular" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tubular.png" alt="Tubularモデル">
-<p class="caption">
-図1.11: Tubularモデル
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tubular.png" alt="Tubular model">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.11: Tubular model
+</font></font></p>
 </div>
-<p>Cylinderモデルはまっすぐに伸びる円筒形状ですが、Tubularは曲線に沿ったねじれのない筒型をしています。後述する樹木モデルの例では、一本の枝をTubularで表現し、その組み合わせで一本の木を構築する手法を採用しているのですが、滑らかに曲がる筒型が必要な場面でTubularは活躍します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Cylinder model has a straight cylindrical shape, while the Tubular has a curved, untwisted cylinder. </font><font style="vertical-align: inherit;">In the example of the tree model described later, one branch is represented by Tubular, and a method of constructing one tree by combining them is adopted, but Tubular is used in situations where a tubular shape that bends smoothly is required. I will play an active part.</font></font></p>
 
-<h4><a id="h1-3-3-1"></a>筒型の構造</h4>
-<p>筒型モデルの構造は次の図のようになっています。</p>
+<h4><a id="h1-3-3-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cylindrical structure</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The structure of the tubular model is as shown in the following figure.</font></font></p>
 <div id="ProceduralModeling_tubular_structure" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tubular_structure.png" alt="筒型の構造　Tubularが沿う曲線を分割する点を球で、側面を構成する節を六角形で可視化している">
-<p class="caption">
-図1.12: 筒型の構造　Tubularが沿う曲線を分割する点を球で、側面を構成する節を六角形で可視化している
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tubular_structure.png" alt="Cylindrical structure Tubular visualizes the points that divide the curve along with a sphere, and the nodes that make up the sides with a hexagon.">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.12: Cylindrical structure Tubular visualizes the points that divide the curve along with a sphere and the nodes that make up the sides with a hexagon.
+</font></font></p>
 </div>
-<p>曲線を分割し、分割点によって区切られた節ごとに側面を構築していき、それらを組み合わせることで1つのTubularモデルを生成します。</p>
-<p>1つ1つの節の側面はCylinderの側面と同じように、側面の上端と下端の頂点を円形に沿って均等に配置し、それらをつなぎ合わせて構築するため、Cylinderを曲線に沿って連結したものがTubular型だと考えることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Divide the curve, build sides for each node separated by the division points, and combine them to generate one Tubular model.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sides of each node are similar to the sides of a cylinder, with the top and bottom vertices of the sides evenly arranged along a circle, and the cylinders are connected along a curve to build them together. You can think of things as Tubular types.</font></font></p>
 
-<h4><a id="h1-3-3-2"></a>曲線について</h4>
-<p>サンプルプログラムでは、曲線を表す基底クラスCurveBaseを用意しています。3次元空間上の曲線の描き方については、様々なアルゴリズムが考案されており、用途に応じて使いやすい手法を選択する必要があります。サンプルプログラムでは、CurveBaseクラスを継承したクラスCatmullRomCurveを利用しています。</p>
-<p>ここでは詳細は割愛しますが、CatmullRomCurveは渡された制御点全てを通るように点と点の間を補間しつつ曲線を形作るという特徴があり、曲線に経由させたい点を指定できるため、使い勝手の良さに定評があります。</p>
-<p>曲線を表すCurveBaseクラスでは、曲線上の点の位置と傾き（tangentベクトル）を得るためにGetPointAt(float)・GetTangentAt(float)関数を用意しており、引数に[0.0 ~ 1.0]の値を指定することで、始点（0.0）から終点（1.0）の間にある点の位置と傾きを取得できます。</p>
+<h4><a id="h1-3-3-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">About curves</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample program, the base class CurveBase that represents a curve is prepared. </font><font style="vertical-align: inherit;">Various algorithms have been devised for drawing curves in three-dimensional space, and it is necessary to select an easy-to-use method according to the application. </font><font style="vertical-align: inherit;">In the sample program, the class CatmullRomCurve, which inherits the CurveBase class, is used.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will omit the details here, but CatmullRomCurve has the feature of forming a curve while interpolating between points so that it passes through all the passed control points, and it is easy to use because you can specify the points you want to pass through the curve. Has a good reputation for its goodness.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The CurveBase class that represents a curve provides GetPointAt (float) and GetTangentAt (float) functions to obtain the position and slope (tangent vector) of a point on the curve, and specify a value of [0.0 to 1.0] as an argument. By doing so, you can get the position and slope of the point between the start point (0.0) and the end point (1.0).</font></font></p>
 
 <h4><a id="h1-3-3-3"></a>Frenet frame</h4>
-<p>曲線に沿ったねじれのない筒型を作るには、曲線に沿ってなめらかに変化する3つの直交するベクトル「接線（tangent）ベクトル、法線（normal）ベクトル、従法線（binormal）ベクトル」の配列が必要となります。接線ベクトルは、曲線上の一点における傾きを表す単位ベクトルのことで、法線ベクトルと従法線ベクトルはお互いに直交するベクトルとして求めます。</p>
-<p>これらの直交するベクトルによって、曲線上のある一点において「曲線に直交する円周上の座標」を得ることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To create a twist-free cylinder along a curve, three orthogonal vectors "tangent vector, normal vector, binormal vector" that change smoothly along the curve You will need an array. </font><font style="vertical-align: inherit;">The tangent vector is a unit vector that represents the slope at one point on the curve, and the normal vector and the normal vector are obtained as vectors that are orthogonal to each other.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With these orthogonal vectors, you can get "coordinates on the circumference orthogonal to the curve" at a point on the curve.</font></font></p>
 <div id="ProceduralModeling_tubular_trigonometry" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tubular_trigonometry.png" alt="法線（normal）と従法線（binormal）から、円周上の座標を指す単位ベクトル（v）を求める　この単位ベクトル（v）に半径radiusを乗算することで、曲線に直交する半径radiusの円周上の座標を得ることができる">
-<p class="caption">
-図1.13: 法線（normal）と従法線（binormal）から、円周上の座標を指す単位ベクトル（v）を求める　この単位ベクトル（v）に半径radiusを乗算することで、曲線に直交する半径radiusの円周上の座標を得ることができる
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tubular_trigonometry.png" alt="Find the unit vector (v) that points to the coordinates on the circumference from the normal and binormal. By multiplying this unit vector (v) by the radius radius, the radius radius orthogonal to the curve You can get the coordinates on the circumference">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.13: Find the unit vector (v) that points to the coordinates on the circumference from the normal and binormal. Multiply this unit vector (v) by the radius radius to make it orthogonal to the curve. You can get the coordinates on the circumference of the radius radius
+</font></font></p>
 </div>
-<p>この曲線上のある一点における3つの直交するベクトルの組のことをFrenet frame（フレネフレーム）と呼びます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A set of three orthogonal vectors at a point on this curve is called a Frenet frame.</font></font></p>
 <div id="ProceduralModeling_tubular_frenet_frame" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tubular_frenet_frame.png" alt="Tubularを構成するFrenet frame配列の可視化　枠が1つのFrenet frameを表し、3つの矢印は接線（tangent）ベクトル、法線（normal）ベクトル、従法線（binormal）ベクトルを示している">
-<p class="caption">
-図1.14: Tubularを構成するFrenet frame配列の可視化　枠が1つのFrenet frameを表し、3つの矢印は接線（tangent）ベクトル、法線（normal）ベクトル、従法線（binormal）ベクトルを示している
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tubular_frenet_frame.png" alt="Visualization of the Frenet frame array that makes up Tubular The frame represents one Frenet frame, and the three arrows indicate the tangent vector, the normal vector, and the binormal vector.">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.14: Visualization of the Frenet frame array that makes up Tubular The frame represents one Frenet frame, and the three arrows indicate the tangent vector, the normal vector, and the binormal vector.
+</font></font></p>
 </div>
-<p>Tubularのモデリングは、このFrenet frameから得られた法線と従法線を元に節ごとの頂点データを求め、それらをつなぎ合わせていくという手順で行います。</p>
-<p>サンプルプログラムでは、CurveBaseクラスがこのFrenet frame配列を生成するための関数ComputeFrenetFramesを持っています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tubular modeling is performed by finding the vertex data for each clause based on the normals and binormals obtained from this Frenet frame, and connecting them together.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample program, the CurveBase class has a function ComputeFrenetFrames to generate this Frenet frame array.</font></font></p>
 
-<h4><a id="h1-3-3-4"></a>サンプルプログラム Tubular.cs</h4>
-<p>Tubularクラスは曲線を表すCatmullRomCurveクラスを持ち、このCatmullRomCurveが描く曲線に沿って筒型を形成します。</p>
-<p>CatmullRomCurveクラスは4つ以上の制御点が必要で、制御点を操作すると曲線の形状が変化し、それに伴ってTubularモデルの形状も変化していきます。</p>
+<h4><a id="h1-3-3-4"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sample program Tubular.cs</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Tubular class has a CatmullRomCurve class that represents a curve, and forms a cylinder along the curve drawn by this CatmullRomCurve.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The CatmullRomCurve class requires four or more control points, and when you manipulate the control points, the shape of the curve changes, and the shape of the Tubular model changes accordingly.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">var vertices = new List&lt;Vector3&gt;();<font></font>
 var normals = new List&lt;Vector3&gt;();<font></font>
 var tangents = new List&lt;Vector4&gt;();<font></font>
 var uvs = new List&lt;Vector2&gt;();<font></font>
 var triangles = new List&lt;int&gt;();<font></font>
-<font></font>
-// 曲線からFrenet frameを取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Get the Frenet frame from the curve</font></font><font></font>
 var frames = curve.ComputeFrenetFrames(tubularSegments, closed);<font></font>
-<font></font>
-// Tubularの頂点データを生成<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Generate Tubular vertex data</font></font><font></font>
 for(int i = 0; i &lt; tubularSegments; i++) {<font></font>
     GenerateSegment(curve, frames, vertices, normals, tangents, i);<font></font>
-}<font></font>
-// 閉じた筒型を生成する場合は曲線の始点に最後の頂点を配置し、閉じない場合は曲線の終点に配置する<font></font>
+}<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Place the last vertex at the start of the curve if you want to generate a closed cylinder, or at the end of the curve if it is not closed</font></font><font></font>
 GenerateSegment(<font></font>
     curve,<font></font>
     frames,<font></font>
@@ -551,17 +544,17 @@ GenerateSegment(<font></font>
     tangents,<font></font>
     (!closed) ? tubularSegments : 0<font></font>
 );<font></font>
-<font></font>
-// 曲線の始点から終点に向かってuv座標を設定していく<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Set the uv coordinates from the start point of the curve to the end point</font></font><font></font>
 for (int i = 0; i &lt;= tubularSegments; i++) {<font></font>
     for (int j = 0; j &lt;= radialSegments; j++) {<font></font>
-        float u = 1f * j / radialSegments;<font></font>
-        float v = 1f * i / tubularSegments;<font></font>
+        float u = 1f * j / radialSegments;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        float v = 1f * i / tubularSegments;</font></font></font></font></font></font><font></font>
         uvs.Add(new Vector2(u, v));<font></font>
-    }<font></font>
-}<font></font>
-<font></font>
-// 側面を構築<font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Build the side</font></font><font></font>
 for (int j = 1; j &lt;= tubularSegments; j++) {<font></font>
     for (int i = 1; i &lt;= radialSegments; i++) {<font></font>
         int a = (radialSegments + 1) * (j - 1) + (i - 1);<font></font>
@@ -573,8 +566,8 @@ for (int j = 1; j &lt;= tubularSegments; j++) {<font></font>
         triangles.Add(b); triangles.Add(d); triangles.Add(c);<font></font>
     }<font></font>
 }<font></font>
-<font></font>
-var mesh = new Mesh();<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var mesh = new Mesh ();</font></font></font></font></font></font><font></font>
 mesh.vertices = vertices.ToArray();<font></font>
 mesh.normals = normals.ToArray();<font></font>
 mesh.tangents = tangents.ToArray();<font></font>
@@ -582,7 +575,7 @@ mesh.uv = uvs.ToArray();<font></font>
 mesh.triangles = triangles.ToArray();<font></font>
 </pre>
 </div>
-<p>関数GenerateSegmentは先述したFrenet frameから取り出した法線と従法線を元に、指定された節の頂点データを計算し、List型で渡された変数に設定します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The function GenerateSegment calculates the vertex data of the specified clause based on the normal and binormal extracted from the Frenet frame mentioned above, and sets it in the variable passed in List type.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">void GenerateSegment(<font></font>
     CurveBase curve,<font></font>
@@ -601,11 +594,11 @@ mesh.triangles = triangles.ToArray();<font></font>
     var N = fr.Normal;<font></font>
     var B = fr.Binormal;<font></font>
 <font></font>
-    for(int j = 0; j &lt;= radialSegments; j++) {<font></font>
-        // 0.0 ~ 2π<font></font>
+    for(int j = 0; j &lt;= radialSegments; j++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // 0.0 ~ 2π</font></font></font></font></font></font><font></font>
         float rad = 1f * j / radialSegments * PI2;<font></font>
-<font></font>
-        // 円周に沿って均等に頂点を配置する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Arrange the vertices evenly along the circumference</font></font><font></font>
         float cos = Mathf.Cos(rad), sin = Mathf.Sin(rad);<font></font>
         var v = (cos * N + sin * B).normalized;<font></font>
         vertices.Add(p + radius * v);<font></font>
@@ -618,62 +611,62 @@ mesh.triangles = triangles.ToArray();<font></font>
 </pre>
 </div>
 
-<h2><a id="h1-4"></a><span class="secno">1.4　</span>複雑な形状</h2>
-<p>この節では、これまで説明したProceduralModelingのテクニックを使って、より複雑なモデルを生成する手法について紹介します。</p>
+<h2><a id="h1-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Complex shape</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This section introduces techniques for generating more complex models using the Procedural Modeling techniques described so far.</font></font></p>
 
-<h3><a id="h1-4-1"></a><span class="secno">1.4.1　</span>植物</h3>
-<p>植物のモデリングは、ProceduralModelingのテクニックの応用例としてよく取り上げられています。Unity内でも樹木をEditor内でモデリングするためのTree API<a id="fnb-tree" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-tree" class="noteref" epub:type="noteref">*4</a>が用意されていますし、Speed Tree<a id="fnb-speedtree" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-speedtree" class="noteref" epub:type="noteref">*5</a>という植物のモデリング専用のソフトが存在します。</p>
+<h3><a id="h1-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Plants</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Plant modeling is often mentioned as an application of the Procedural Modeling technique. </font><font style="vertical-align: inherit;">The Tree API </font></font><a id="fnb-tree" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-tree" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 4</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> for modeling trees in the Editor is also provided in Unity, </font><font style="vertical-align: inherit;">and there is </font><font style="vertical-align: inherit;">software dedicated to plant modeling called </font><font style="vertical-align: inherit;">Speed ​​Tree </font></font><a id="fnb-speedtree" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-speedtree" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 5</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-tree"><p class="footnote">[*4] https://docs.unity3d.com/ja/540/Manual/tree-FirstTree.html</p></div>
 <div class="footnote" epub:type="footnote" id="fn-speedtree"><p class="footnote">[*5] http://www.speedtree.com/</p></div>
-<p>この節では、植物の中でも比較的モデリング手法が単純な樹木のモデリングについて取り上げます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this section, we will focus on modeling trees, which are relatively simple modeling methods among plants.</font></font></p>
 
 <h3><a id="h1-4-2"></a><span class="secno">1.4.2　</span>L-System</h3>
-<p>植物の構造を記述・表現できるアルゴリズムとしてL-Systemがあります。L-Systemは植物学者であるAristid Lindenmayerによって1968年に提唱されたもので、L-SystemのLは彼の名前から来ています。</p>
-<p>L-Systemを用いると、植物の形状に見られる自己相似性を表現することができます。</p>
-<p>自己相似性とは、物体の細部の形を拡大してみると、大きなスケールで見たその物体の形と一致することで、例えば樹木の枝分かれを観察すると、幹に近い部分の枝の分かれ方と、先端に近い部分の枝の分かれ方に相似性があります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There is L-System as an algorithm that can describe and express the structure of plants. </font><font style="vertical-align: inherit;">The L-System was proposed by botanist Aristid Lindenmayer in 1968, and the L-System L comes from his name.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">L-System can be used to express the self-similarity found in the shape of plants.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Self-similarity means that when you magnify the shape of the details of an object, it matches the shape of the object as seen on a large scale. For example, when observing the branching of a tree, the branching of the part near the trunk And, there is a similarity in the way the branches are divided near the tip.</font></font></p>
 <div id="ProceduralModeling_tree_lsystem" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tree_lsystem.png" alt="それぞれの枝が30度ずつの変化で枝分かれした図形 根元の部分と枝先の部分で相似になっていることがわかるが、このようなシンプルな図形でも樹木のような形に見える（サンプルプログラム LSystem.scene）">
-<p class="caption">
-図1.15: それぞれの枝が30度ずつの変化で枝分かれした図形 根元の部分と枝先の部分で相似になっていることがわかるが、このようなシンプルな図形でも樹木のような形に見える（サンプルプログラム LSystem.scene）
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tree_lsystem.png" alt="A figure in which each branch is branched by changing by 30 degrees It can be seen that the root part and the branch tip part are similar, but even such a simple figure looks like a tree (sample program LSystem). .scene)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.15: A figure in which each branch is branched by changing by 30 degrees. It can be seen that the root part and the branch tip part are similar, but even such a simple figure looks like a tree ( Sample program LSystem.scene)
+</font></font></p>
 </div>
-<p>L-Systemは、要素を記号で表し、記号を置き換える規則を定め、記号に対して規則を繰り返し適用していくことで、記号の列を複雑に発展させていくメカニズムを提供します。</p>
-<p>例えば簡単な例をあげると、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The L-System provides a mechanism for developing complex sequences of symbols by representing elements with symbols, defining rules to replace the symbols, and repeatedly applying the rules to the symbols.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, to give a simple example</font></font></p>
 <ul>
-<li>初期文字列:a</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initial character string: a</font></font></li>
 </ul>
-<p>を</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To</font></font></p>
 <ul>
-<li>書き換え規則1: a -&gt; ab</li>
-<li>書き換え規則2: b -&gt; a</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rewrite Rule 1: a-&gt; ab</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rewrite Rule 2: b-&gt; a</font></font></li>
 </ul>
-<p>に従って書き換えていくと、</p>
-<p>a -&gt; ab -&gt; aba -&gt; abaab -&gt; abaababa -&gt; ...</p>
-<p>という風にステップを経るごとに複雑な結果を生み出します。</p>
-<p>このL-Systemをグラフィック生成に利用した例がサンプルプログラムのLSystemクラスです。</p>
-<p>LSystemクラスでは、以下の操作</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you rewrite according to</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">a -&gt; ab -&gt; aba -&gt; organize -&gt; organize -&gt; ...</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Each step produces complex results.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">An example of using this L-System for graphic generation is the LSystem class of the sample program.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the LSystem class, the following operations</font></font></p>
 <ul>
-<li>Draw: 向いている方向に向かって線を引きつつ進む</li>
-<li>Turn Left: 左にθ度回転する</li>
-<li>Turn Right: 右にθ度回転する</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Draw: Draw a line in the direction you are facing</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Turn Left: Turn left by θ degrees</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Turn Right: Turn right by θ degrees</font></font></li>
 </ul>
-<p>を用意しており、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is available,</font></font></p>
 <ul>
-<li>初期操作: Draw</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initial operation: Draw</font></font></li>
 </ul>
-<p>を</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To</font></font></p>
 <ul>
-<li>書き換え規則1: Draw -&gt; Turn Left | Turn Right</li>
-<li>書き換え規則2: Turn Left -&gt; Draw</li>
-<li>書き換え規則3: Turn Right -&gt; Draw</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rewrite Rule 1: Draw-&gt; Turn Left | Turn Right</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rewrite Rule 2: Turn Left-&gt; Draw</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rewrite Rule 3: Turn Right-&gt; Draw</font></font></li>
 </ul>
-<p>に従って、決まられた回数だけ規則の適用を繰り返しています。</p>
-<p>その結果、サンプルのLSystem.sceneに示すような、自己相似性を持つ図を描くことができます。このL-Systemの持つ「状態を再帰的に書き換えていく」という性質が自己相似性を生み出すのです。自己相似性はFractal（フラクタル）とも呼ばれ、1つの研究分野にもなっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">According to this, the rule is applied repeatedly a fixed number of times.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As a result, you can draw a self-similar figure, as shown in the sample LSystem.scene. </font><font style="vertical-align: inherit;">The property of "recursively rewriting the state" of this L-System creates self-similarity. </font><font style="vertical-align: inherit;">Self-similarity is also called Fractal and is also a research area.</font></font></p>
 
-<h3><a id="h1-4-3"></a><span class="secno">1.4.3　</span>サンプルプログラム ProceduralTree.cs</h3>
-<p>実際にL-Systemを樹木のモデルを生成するプログラムに応用した例として、ProceduralTreeというクラスを用意しました。</p>
-<p>ProceduralTreeでは、前項で解説したLSystemクラスと同様に「枝を進めては分岐し、さらに枝を進める」というルーチンを再帰的に呼び出すことで木の形を生成していきます。</p>
-<p>前項のLSystemクラスでは、枝の分岐に関しては「一定角度、左と右の二方向に分岐する」という単純なルールでしたが、ProceduralTreeでは乱数を用い、分岐する数や分岐方向にランダム性を持たせ、枝が複雑に分岐するようなルールを設定しています。</p>
+<h3><a id="h1-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sample program ProceduralTree.cs</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As an example of actually applying L-System to a program that generates a tree model, we prepared a class called ProceduralTree.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In ProceduralTree, like the LSystem class explained in the previous section, the tree shape is generated by recursively calling the routine "advance branches, branch, and advance branches".</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the LSystem class in the previous section, the simple rule for branching was "branch in two directions, left and right at a fixed angle", but in ProceduralTree, random numbers are used, and the number of branches and the branching direction have randomness. However, we have set rules so that the branches branch in a complicated manner.</font></font></p>
 <div id="ProceduralModeling_tree_ProceduralTree" class="image">
 <img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tree_ProceduralTree.png" alt="ProceduralTree.scene">
 <p class="caption">
@@ -681,68 +674,68 @@ mesh.triangles = triangles.ToArray();<font></font>
 </p>
 </div>
 
-<h4><a id="h1-4-3-1"></a>TreeDataクラス</h4>
-<p>TreeDataクラスは枝の分岐具合を定めるパラメータや、木のサイズ感やモデルのメッシュの細かさを決めるパラメータを内包したクラスです。このクラスのインスタンスのパラメータを調整することで、木の形をデザインすることができます。</p>
+<h4><a id="h1-4-3-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TreeData class</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The TreeData class is a class that includes parameters that determine the degree of branching of branches and parameters that determine the size of the tree and the fineness of the mesh of the model. </font><font style="vertical-align: inherit;">You can design a tree shape by adjusting the parameters of an instance of this class.</font></font></p>
 
-<h4><a id="h1-4-3-2"></a>枝分かれ</h4>
-<p>TreeDataクラス内のいくつかのパラメータを用いて枝の分かれ具合を調整します。</p>
+<h4><a id="h1-4-3-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Branching</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Use some parameters in the TreeData class to adjust the degree of branching.</font></font></p>
 
 <h5><a id="h1-4-3-2-1"></a>branchesMin, branchesMax</h5>
-<p>1つの枝から分岐する枝の数はbranchesMin・branchesMaxパラメータで調整します。branchesMinが分岐する枝の最小数、branchesMaxが分岐する枝の最大数を表しており、branchesMinからbranchesMaxの間の数をランダムに選び、分岐する数を決めます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The number of branches branching from one branch is adjusted by the branchesMin / branchesMax parameters. </font><font style="vertical-align: inherit;">branchesMin represents the minimum number of branches, branchesMax represents the maximum number of branches, and the number between branchesMin and branchesMax is randomly selected to determine the number of branches.</font></font></p>
 
 <h5><a id="h1-4-3-2-2"></a>growthAngleMin, growthAngleMax, growthAngleScale</h5>
-<p>分岐する枝が生える方向はgrowthAngleMin・growthAngleMaxパラメータで調整します。growthAngleMinは分岐する方向の最小角度、growthAngleMaxが最大角度を表しており、growthAngleMinからgrowthAngleMaxの間の数をランダムに選び、分岐する方向を決めます。</p>
-<p>それぞれの枝は伸びる方向を表すtangentベクトルと、それと直交するベクトルとしてnormalベクトルとbinormalベクトルを持ちます。</p>
-<p>growthAngleMin・growAngleMaxパラメータからランダムに得られた値は、分岐点から伸びる方向のtangentベクトルに対して、normalベクトルの方向とbinormalベクトルの方向に回転が加えられます。</p>
-<p>分岐点から伸びる方向tangentベクトルに対してランダムな回転を加えることで、分岐先の枝が生える方向を変化させ、枝分かれを複雑に変化させます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The direction in which the branching branches grow is adjusted with the growthAngleMin and growthAngleMax parameters. </font><font style="vertical-align: inherit;">GrowthAngleMin represents the minimum angle in the branching direction, and growthAngleMax represents the maximum angle. The number between growthAngleMin and growthAngleMax is randomly selected to determine the branching direction.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Each branch has a tangent vector that represents the direction of extension, and a normal vector and a binormal vector as vectors that are orthogonal to it.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The value randomly obtained from the growthAngleMin / growAngleMax parameters is rotated in the direction of the normal vector and the direction of the binormal vector with respect to the tangent vector in the direction extending from the branch point.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By applying a random rotation to the tangent vector in the direction extending from the branch point, the direction in which the branch at the branch destination grows is changed, and the branching is changed in a complicated manner.</font></font></p>
 <div id="ProceduralModeling_tree_branches" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tree_branches.png" alt="分岐点から伸びる方向に対してかけられるランダムな回転　分岐点でのTの矢印は伸びる方向（tangentベクトル）、Nの矢印は法線（normalベクトル）、Bの矢印は従法線（binormalベクトル）を表し、伸びる方向に対して法線と従法線の方向にランダムな回転がかけられる">
-<p class="caption">
-図1.17: 分岐点から伸びる方向に対してかけられるランダムな回転　分岐点でのTの矢印は伸びる方向（tangentベクトル）、Nの矢印は法線（normalベクトル）、Bの矢印は従法線（binormalベクトル）を表し、伸びる方向に対して法線と従法線の方向にランダムな回転がかけられる
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_tree_branches.png" alt="Random rotation applied in the direction extending from the branch point The T arrow at the branch point is the extending direction (tangent vector), the N arrow is the normal vector, and the B arrow is the binormal vector. Is expressed, and random rotation is applied in the direction of the normal and the normal with respect to the extending direction.">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.17: Random rotation applied in the direction extending from the branch point The T arrow at the branch point is the extending direction (tangent vector), the N arrow is the normal vector, and the B arrow is the normal line (normal vector). Binormal vector), and random rotation is applied in the direction of the normal and the normal with respect to the extending direction.
+</font></font></p>
 </div>
-<p>枝が生える方向にランダムにかけられる回転の角度が枝先にいくほど大きくなるようにgrowthAngleScaleパラメータを用意しています。このgrowthAngleScaleパラメータは、枝のインスタンスが持つ世代を表すgenerationパラメータが0に近づくほど、つまり枝先に近づくほど、回転する角度に強く影響し、回転の角度を大きくします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The growthAngleScale parameter is provided so that the angle of rotation randomly applied in the direction in which the branch grows increases toward the tip of the branch. </font><font style="vertical-align: inherit;">This growthAngleScale parameter has a stronger effect on the rotation angle and increases the rotation angle as the generation parameter representing the generation of the branch instance approaches 0, that is, as it approaches the tip of the branch.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist language-cs">// 枝先ほど分岐する角度が大きくなる<font></font>
-var scale = Mathf.Lerp(<font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// The branching angle increases as the branch tip increases</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var scale = Mathf.Lerp (</font></font></font></font></font></font><font></font>
     1f,<font></font>
     data.growthAngleScale,<font></font>
     1f - 1f * generation / generations<font></font>
 );<font></font>
-<font></font>
-// normal方向の回転<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Rotation in the normal direction</font></font><font></font>
 var qn = Quaternion.AngleAxis(scale * data.GetRandomGrowthAngle(), normal);<font></font>
-<font></font>
-// binormal方向の回転<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Rotation in the binormal direction</font></font><font></font>
 var qb = Quaternion.AngleAxis(scale * data.GetRandomGrowthAngle(), binormal);<font></font>
-<font></font>
-// 枝先が向いているtangent方向にqn * qbの回転をかけつつ、枝先の位置を決める<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Determine the position of the branch tip while rotating qn * qb in the tangent direction where the branch tip is facing</font></font><font></font>
 this.to = from + (qn * qb) * tangent * length;<font></font>
 </pre>
 </div>
 
-<h4><a id="h1-4-3-3"></a>TreeBranchクラス</h4>
-<p>枝はTreeBranchクラスで表現されます。</p>
-<p>世代数（generations）と基本となる長さ（length）と太さ（radius）のパラメータに加えて、分岐パターンを設定するためのTreeDataを引数に指定してコンストラクタを呼び出すと、内部で再帰的にTreeBranchのインスタンスが生成されていきます。</p>
-<p>1つのTreeBranchから分岐したTreeBranchは、元のTreeBranch内にあるList&lt;TreeBranch&gt;型であるchildren変数に格納され、根元のTreeBranchから全ての枝に辿れるようにしています。</p>
+<h4><a id="h1-4-3-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TreeBranch class</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Branches are represented by the TreeBranch class.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you call the constructor with TreeData for setting the branch pattern as an argument in addition to the parameters of the number of generations (generations) and the basic length (length) and thickness (radius), it will recursively internally. An instance of TreeBranch will be created.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A TreeBranch that branches from one TreeBranch is stored in a children variable of type List &lt;TreeBranch&gt; in the original TreeBranch so that all branches can be traced from the root TreeBranch.</font></font></p>
 
-<h4><a id="h1-4-3-4"></a>TreeSegmentクラス</h4>
-<p>一本の枝のモデルは、Tubular同様、一本の曲線を分割し、分割された節を1つのCylinderとしてモデル化し、それらをつなぎ合わせていくように構築していきます。</p>
-<p>TreeSegmentクラスは一本の曲線を分割する節（Segment）を表現するクラスです。</p>
+<h4><a id="h1-4-3-4"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TreeSegment class</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Like Tubular, the model of one branch divides one curve, models the divided nodes as one Cylinder, and builds them so that they are connected.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The TreeSegment class is a class that expresses a clause that divides a single curve.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist language-cs">public class TreeSegment {<font></font>
     public FrenetFrame Frame { get { return frame; } }<font></font>
     public Vector3 Position { get { return position; } }<font></font>
     public float Radius { get { return radius; } }<font></font>
-<font></font>
-    // TreeSegmentが向いている方向ベクトルtangent、<font></font>
-    // それと直交するベクトルnormal、binormalを持つFrenetFrame<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Direction vector tangent, which Tree Segment is facing,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // FrenetFrame with vectors normal and binormal orthogonal to it</font></font><font></font>
     FrenetFrame frame;<font></font>
-<font></font>
-    // TreeSegmentの位置<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Position of Tree Segment</font></font><font></font>
     Vector3 position;<font></font>
-<font></font>
-    // TreeSegmentの幅(半径)<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Tree Segment width (radius)</font></font><font></font>
     float radius;<font></font>
 <font></font>
     public TreeSegment(FrenetFrame frame, Vector3 position, float radius) {<font></font>
@@ -753,12 +746,12 @@ this.to = from + (qn * qb) * tangent * length;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>1つのTreeSegmentは節が向いている方向のベクトルと直交ベクトルがセットになったFrenetFrame、位置と幅を表す変数を持ち、Cylinderを構築する際の上端と下端に必要な情報を保持します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">One TreeSegment has a FrenetFrame, which is a set of a vector in the direction in which the node is facing and an orthogonal vector, and variables that represent the position and width, and holds the necessary information at the top and bottom when building a Cylinder.</font></font></p>
 
-<h4><a id="h1-4-3-5"></a>ProceduralTreeモデル生成</h4>
-<p>ProceduralTreeのモデル生成ロジックはTubularを応用したもので、一本の枝TreeBranchが持つTreeSegmentの配列からTubularモデルを生成し、それらを1つのモデルに集約することで全体の一本の木を形作る、というアプローチでモデリングしています。</p>
+<h4><a id="h1-4-3-5"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Procedural Tree model generation</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The model generation logic of Procedural Tree is an application of Tubular, which generates a Tubular model from the array of Tree Segments of one branch Tree Branch and aggregates them into one model to form the whole tree. Modeling with an approach.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist language-cs">var root = new TreeBranch(<font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">var root = new TreeBranch (</font></font></font></font></font></font><font></font>
     generations,<font></font>
     length,<font></font>
     radius,<font></font>
@@ -770,29 +763,29 @@ var normals = new List&lt;Vector3&gt;();<font></font>
 var tangents = new List&lt;Vector4&gt;();<font></font>
 var uvs = new List&lt;Vector2&gt;();<font></font>
 var triangles = new List&lt;int&gt;();<font></font>
-<font></font>
-// 木の全長を取得<font></font>
-// 枝の長さを全長で割ることで、uv座標の高さ(uv.y)が<font></font>
-// 根元から枝先に至るまで[0.0 ~ 1.0]で変化するように設定する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Get the total length of the tree</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Divide the length of the branch by the total length to get the height of the uv coordinates (uv.y)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Set to change from the root to the tip of the branch with [0.0 ~ 1.0]</font></font><font></font>
 float maxLength = TraverseMaxLength(root);<font></font>
-<font></font>
-// 再帰的に全ての枝を辿り、1つ1つの枝に対応するMeshを生成する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Recursively follow all branches and generate a mesh corresponding to each branch</font></font><font></font>
 Traverse(root, (branch) =&gt; {<font></font>
     var offset = vertices.Count;<font></font>
 <font></font>
     var vOffset = branch.Offset / maxLength;<font></font>
     var vLength = branch.Length / maxLength;<font></font>
-<font></font>
-    // 一本の枝から頂点データを生成する<font></font>
-    for(int i = 0, n = branch.Segments.Count; i &lt; n; i++) {<font></font>
-        var t = 1f * i / (n - 1);<font></font>
-        var v = vOffset + vLength * t;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Generate vertex data from a single branch</font></font><font></font>
+    for(int i = 0, n = branch.Segments.Count; i &lt; n; i++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        var t = 1f * i / (n - 1);</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        var v = vOffset + vLength * t;</font></font></font></font></font></font><font></font>
 <font></font>
         var segment = branch.Segments[i];<font></font>
         var N = segment.Frame.Normal;<font></font>
         var B = segment.Frame.Binormal;<font></font>
-        for(int j = 0; j &lt;= data.radialSegments; j++) {<font></font>
-            // 0.0 ~ 2π<font></font>
+        for(int j = 0; j &lt;= data.radialSegments; j++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // 0.0 ~ 2π</font></font></font></font></font></font><font></font>
             var u = 1f * j / data.radialSegments;<font></font>
             float rad = u * PI2;<font></font>
 <font></font>
@@ -807,8 +800,8 @@ Traverse(root, (branch) =&gt; {<font></font>
             uvs.Add(new Vector2(u, v));<font></font>
         }<font></font>
     }<font></font>
-<font></font>
-    // 一本の枝の三角形を構築する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Build a one-branch triangle</font></font><font></font>
     for (int j = 1; j &lt;= data.heightSegments; j++) {<font></font>
         for (int i = 1; i &lt;= data.radialSegments; i++) {<font></font>
             int a = (data.radialSegments + 1) * (j - 1) + (i - 1);<font></font>
@@ -826,8 +819,8 @@ Traverse(root, (branch) =&gt; {<font></font>
         }<font></font>
     }<font></font>
 });<font></font>
-<font></font>
-var mesh = new Mesh();<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var mesh = new Mesh ();</font></font></font></font></font></font><font></font>
 mesh.vertices = vertices.ToArray();<font></font>
 mesh.normals = normals.ToArray();<font></font>
 mesh.tangents = tangents.ToArray();<font></font>
@@ -836,37 +829,37 @@ mesh.triangles = triangles.ToArray();<font></font>
 mesh.RecalculateBounds();<font></font>
 </pre>
 </div>
-<p>植物のプロシージャルモデリングは樹木だけでも奥深く、日光の照射率が高くなるように枝分かれすることで自然な木のモデルを得るようにする、といった手法などが考案されています。</p>
-<p>こうした植物のモデリングに興味がある方はL-Systemを考案したAristid Lindenmayerにより執筆されたThe Algorithmic Beauty of Plants<a id="fnb-abop" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-abop" class="noteref" epub:type="noteref">*6</a>に様々な手法が紹介されていますので、参考にしてみてください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Procedural modeling of plants is deep even with trees alone, and methods such as obtaining a model of a natural tree by branching so that the irradiation rate of sunlight is high have been devised.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you are interested in modeling such plants, please refer to The Algorithmic Beauty of Plants </font></font><a id="fnb-abop" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-abop" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 6</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font><font style="vertical-align: inherit;">which was written by Aristid Lindenmayer, who invented the L-System, </font><font style="vertical-align: inherit;">for various methods.</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-abop"><p class="footnote">[*6] http://algorithmicbotany.org/papers/#abop</p></div>
 
-<h2><a id="h1-5"></a><span class="secno">1.5　</span>プロシージャルモデリングの応用例</h2>
-<p>これまで紹介したプロシージャルモデリングの例から、「モデルをパラメータによって変化させながら動的に生成できる」というテクニックの利点を知ることができました。効率的に様々なバリエーションのモデルを作成できるため、コンテンツ開発の効率化のための技術という印象を受けるかもしれません。</p>
-<p>しかし、世の中にあるモデリングツールやスカルプトツールのように、プロシージャルモデリングのテクニックは「ユーザの入力に応じて、インタラクティブにモデルを生成する」という応用も可能です。</p>
-<p>応用例として、東京大学大学院情報工学科の五十嵐健夫氏により考案された、手書きスケッチによる輪郭線から立体モデルを生成する技術「Teddy」についてご紹介します。</p>
+<h2><a id="h1-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Application example of procedural modeling</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From the procedural modeling examples introduced so far, we have learned the advantages of the technique of "dynamically generating a model while changing it according to parameters". </font><font style="vertical-align: inherit;">You may get the impression that it is a technology for improving the efficiency of content development because you can efficiently create models of various variations.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, like modeling tools and sculpting tools out there, procedural modeling techniques can also be applied to "interactively generate models in response to user input."</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As an application example, we will introduce "Teddy," a technology that generates a three-dimensional model from contour lines created by handwritten sketches, devised by Takeo Igarashi of the Department of Computer Science, the University of Tokyo.</font></font></p>
 <div id="ProceduralModeling_teddy" class="image">
-<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_teddy.png" alt="手書きスケッチによる3次元モデリングを行う技術「Teddy」のUnityアセット　http://uniteddy.info/ja">
-<p class="caption">
-図1.18: 手書きスケッチによる3次元モデリングを行う技術「Teddy」のUnityアセット　http://uniteddy.info/ja
-</p>
+<img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/ProceduralModeling_teddy.png" alt="Unity assets of &quot;Teddy&quot;, a technology for 3D modeling by hand-drawn sketches http://uniteddy.info/ja">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.18: Unity assets of "Teddy", a technology for 3D modeling by hand-drawn sketches http://uniteddy.info/ja
+</font></font></p>
 </div>
-<p>2002年にプレイステーション2用のソフトとして発売された「ガラクタ名作劇場 ラクガキ王国」<a id="fnb-rakugaki" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-rakugaki" class="noteref" epub:type="noteref">*7</a>というゲームでは実際にこの技術が用いられ、「自分の描いた絵を3D化してゲーム内のキャラクターとして動かす」という応用が実現されています。</p>
-<div class="footnote" epub:type="footnote" id="fn-rakugaki"><p class="footnote">[*7] https://ja.wikipedia.org/wiki/ラクガキ王国</p></div>
-<p>この技術では、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This technology was actually used in the game </font><font style="vertical-align: inherit;">"Junk Masterpiece Theater Rakugaki Kingdom" </font></font><a id="fnb-rakugaki" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-rakugaki" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 7,</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> which was released as software for PlayStation 2 in 2002, and </font><font style="vertical-align: inherit;">it is said that "the picture you drew is converted to 3D and moved as an in-game character". The application has been realized.</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-rakugaki"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 7] https://ja.wikipedia.org/wiki/Kingdom of Rakugaki</font></font></font></font></p></div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With this technology</font></font></p>
 <ul>
-<li>2次元平面上に描かれた線を輪郭として定義する</li>
-<li>輪郭線を構成する点配列に対してドロネー三角形分割（Delaunay Triangulation）<a id="fnb-delaunay" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-delaunay" class="noteref" epub:type="noteref">*8</a>と呼ばれるメッシュ化処理を施す</li>
-<li>得られた2次元平面上のメッシュに対して、立体に膨らませるアルゴリズムを適用する</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Define a line drawn on a two-dimensional plane as an outline</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A meshing process called </font><font style="vertical-align: inherit;">Delaunay Triangulation </font></font><a id="fnb-delaunay" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-delaunay" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 8</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is applied </font><font style="vertical-align: inherit;">to the point array that constitutes the contour line.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Apply the algorithm to inflate the mesh on the obtained 2D plane into a solid.</font></font></li>
 </ul>
 <div class="footnote" epub:type="footnote" id="fn-delaunay"><p class="footnote">[*8] https://en.wikipedia.org/wiki/Delaunay_triangulation</p></div>
-<p>という手順で3次元モデルを生成しています。アルゴリズムの詳細に関してはコンピュータグラフィクスを扱う国際会議SIGGRAPHにて発表された論文が公開されています。<a id="fnb-teddy" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-teddy" class="noteref" epub:type="noteref">*9</a></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The 3D model is generated by the procedure. </font><font style="vertical-align: inherit;">Regarding the details of the algorithm, a paper presented at SIGGRAPH, an international conference dealing with computer graphics, has been published. </font></font><a id="fnb-teddy" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-teddy" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 9</font></font></a></p>
 <div class="footnote" epub:type="footnote" id="fn-teddy"><p class="footnote">[*9] http://www-ui.is.s.u-tokyo.ac.jp/~takeo/papers/siggraph99.pdf</p></div>
-<p>TeddyはUnityに移植されたバージョンがAsset Storeに公開されているので、誰でもコンテンツにこの技術を組み込むことができます。<a id="fnb-uniteddy" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-uniteddy" class="noteref" epub:type="noteref">*10</a></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The version of Teddy ported to Unity is published in the Asset Store, so anyone can incorporate this technology into their content. </font></font><a id="fnb-uniteddy" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/Nakamura.html#fn-uniteddy" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*Ten</font></font></a></p>
 <div class="footnote" epub:type="footnote" id="fn-uniteddy"><p class="footnote">[*10] http://uniteddy.info/ja/</p></div>
-<p>このようにプロシージャルモデリングのテクニックを用いれば、独自のモデリングツールを開発することができ、ユーザの創作によって発展していくようなコンテンツを作ることも可能になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By using procedural modeling techniques in this way, it is possible to develop unique modeling tools and create content that develops according to the user's creation.</font></font></p>
 
-<h2><a id="h1-6"></a><span class="secno">1.6　</span>まとめ</h2>
-<p>プロシージャルモデリングのテクニックを使えば、</p>
+<h2><a id="h1-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With procedural modeling techniques</font></font></p>
 <ul>
 <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Streamlining model generation (under certain conditions)</font></font></li>
 <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Development of tools and contents that interactively generate models according to user operations</font></font></li>
@@ -884,4 +877,4 @@ mesh.RecalculateBounds();<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 1 _ Procedural Modeling Beginning with Unity_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

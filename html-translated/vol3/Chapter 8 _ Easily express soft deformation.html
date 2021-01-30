@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0041)https://freder.io/files/unity3/xjine.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 8 _ Easily express soft deformation_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 8 _ Easily express soft deformation_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 8 _ Easily express soft deformation_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ Easily express soft deformation_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ Easily express soft deformation_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 8 _ Easily express soft deformation_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 8 _ Easily express soft deformation_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ Easily express soft deformation_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ Easily express soft deformation_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 8 _ Easily express soft deformation_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Easily express soft deformation</font></font></h1>
 <div id="id_xjine_2F01" class="image">
 <img src="./Chapter 8 _ Easily express soft deformation_files/01.png" alt="How the sphere deforms">
@@ -115,13 +108,13 @@ Figure 8.1: Sphere deforms
 }<font></font>
 </pre>
 </div>
-<p>運動エネルギーは X, Y, Z 方向のそれぞれの成分に分解して算出します。以降に <code class="inline-code tt">UpdateMoveEnergy</code> の処理を順に追って解説していきます。</p>
-<p>まずは現在の動きがない場合を考えます。動きがないとき、現存する運動エネルギーは減衰していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kinetic energy is calculated by decomposing into each component in the X, Y, and Z directions. </font><font style="vertical-align: inherit;">The following </font></font><code class="inline-code tt">UpdateMoveEnergy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">processes will be explained step by step.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, consider the case where there is no current movement. </font><font style="vertical-align: inherit;">When there is no movement, the existing kinetic energy decays.</font></font></p>
 <div class="emlist-code">
-<p class="caption">OverReaction.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OverReaction.cs</font></font></font></font></p>
 <pre class="emlist">protected float UpdateMoveEnergy<font></font>
-(float crntMove, float prevMove, float moveEnergy)<font></font>
-{<font></font>
+(float crntMove, float prevMove, float moveEnergy)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     int crntMoveSign = Sign(crntMove);<font></font>
     int prevMoveSign = Sign(prevMove);<font></font>
     int moveEnergySign = Sign(moveEnergy);<font></font>
@@ -135,50 +128,50 @@ Figure 8.1: Sphere deforms
 <font></font>
 public static int Sign(float value)<font></font>
 {<font></font>
-    return value == 0 ? 0 : (value &gt; 0 ? 1 : -1);<font></font>
-}<font></font>
+    return value == 0 ? 0 : (value &gt; 0 ? 1 : -1);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>現在の動きと直前の動きとが反転しているときは、運動エネルギーを反転します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the current movement and the previous movement are reversed, the kinetic energy is reversed.</font></font></p>
 <div class="emlist-code">
 <p class="caption">OverReaction.cs</p>
-<pre class="emlist">if (crntMoveSign != prevMoveSign)<font></font>
-{<font></font>
-    return moveEnergy - crntMove;<font></font>
-}<font></font>
+<pre class="emlist">if (crntMoveSign != prevMoveSign)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
+    return moveEnergy - crntMove;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>現在の動きと運動エネルギーとが反転しているときは、運動エネルギーを小さくします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the current movement and the kinetic energy are reversed, reduce the kinetic energy.</font></font></p>
 <div class="emlist-code">
-<p class="caption">OverReaction.cs</p>
-<pre class="emlist">if (crntMoveSign != moveEnergySign)<font></font>
-{<font></font>
-    return moveEnergy + crntMove;<font></font>
-}<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OverReaction.cs</font></font></font></font></p>
+<pre class="emlist">if (crntMoveSign != moveEnergySign)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
+    return moveEnergy + crntMove;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>上記以外のケース、現在の動きと運動エネルギーが同じ方向のときは、現在の動きと現存する運動エネルギーとを比較して、大きい方を採用します。</p>
-<p>ただし運動エネルギーは減衰して小さくなっていきます。また、現在の動きが発生させる新たな運動エネルギーは、変形を演出しやすいように、任意のパラメータを乗算して増強します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In cases other than the above, when the current movement and the kinetic energy are in the same direction, the current movement and the existing kinetic energy are compared and the larger one is adopted.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, the kinetic energy decays and becomes smaller. </font><font style="vertical-align: inherit;">In addition, the new kinetic energy generated by the current movement is increased by multiplying it by any parameter so that it can easily produce deformation.</font></font></p>
 <div class="emlist-code">
-<p class="caption">OverReaction.cs</p>
-<pre class="emlist">if (crntMoveSign &lt; 0)<font></font>
-{<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OverReaction.cs</font></font></font></font></p>
+<pre class="emlist">if (crntMoveSign &lt; 0)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     return Mathf.Min(crntMove * this.deformPower,<font></font>
-                     moveEnergy * this.undeformPower);<font></font>
-}<font></font>
-else<font></font>
-{<font></font>
-    return Mathf.Max(crntMove * this.deformPower,<font></font>
-                     moveEnergy * this.undeformPower);<font></font>
-}<font></font>
+                     moveEnergy * this.undeformPower);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
+else<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
+    return Mathf.Max(crntMove * this.deformPower,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                     moveEnergy * this.undeformPower);</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>これで変形に利用するための運動エネルギーは算出することができました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With this, the kinetic energy to be used for deformation could be calculated.</font></font></p>
 
-<h2><a id="h8-3"></a><span class="secno">8.3　</span>変形エネルギーの算出</h2>
-<p>次に、算出された運動エネルギーを変形を決定するパラメータに変換します。便宜上、このパラメータを「変形エネルギー」<code class="inline-code tt">deformEnergy</code> と呼びます。変形エネルギーは <code class="inline-code tt">UpdateDeformEnergy</code> メソッドで更新されます。</p>
-<p>変形エネルギーの大きさは、そのまま運動エネルギーの大きさと定義することもできますが、変形エネルギーの方向と、オブジェクトが動いている方向とにズレが生じている場合、変形エネルギーは完全にはオブジェクトに伝わりません。また変形エネルギーの方向と、オブジェクトが動いている方向とが反転してしまっているケースも考えられます。</p>
-<p>そこで変形エネルギーと現在の動きとの内積から、変形エネルギーがどの程度伝わるのかを求めます。もし完全に方向が一致していれば単位ベクトル同士の内積は 1 となり、ズレの大きさによって徐々に 0 に近づいていきます。さらに反転するときは負の値となります。</p>
+<h2><a id="h8-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Calculation of deformation energy</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It then converts the calculated kinetic energy into parameters that determine the deformation. </font><font style="vertical-align: inherit;">For convenience, this parameter </font></font><code class="inline-code tt">deformEnergy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is called </font><font style="vertical-align: inherit;">"deformation energy" </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">The deformation energy is </font></font><code class="inline-code tt">UpdateDeformEnergy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">updated by the method.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The magnitude of deformation energy can be defined as the magnitude of kinetic energy as it is, but if there is a discrepancy between the direction of deformation energy and the direction in which the object is moving, the deformation energy is completely in the object. I can't tell. </font><font style="vertical-align: inherit;">It is also possible that the direction of deformation energy and the direction in which the object is moving are reversed.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, the amount of deformation energy transmitted is calculated from the inner product of the deformation energy and the current movement. </font><font style="vertical-align: inherit;">If the directions are exactly the same, the inner product of the unit vectors will be 1, and will gradually approach 0 depending on the magnitude of the deviation. </font><font style="vertical-align: inherit;">When it is further inverted, it becomes a negative value.</font></font></p>
 <div class="emlist-code">
 <p class="caption">OverReaction.cs</p>
 <pre class="emlist">protected void UpdateDeformEnergy()<font></font>
@@ -190,9 +183,9 @@ else<font></font>
     …<font></font>
 </pre>
 </div>
-<p>オブジェクトを垂直方向に変形する力が算出できたので、垂直方向へ変化した分だけ、水平方向を変形します。つまり垂直方向にオブジェクトが伸びたなら水平方向に縮ませようということです。逆に、垂直方向に縮むときは水平方向に伸びるようにします。</p>
-<p>垂直方向へどれだけ変形したのかは「垂直方向への変形の大きさ / 最大の変形の大きさ」で算出されます。あとは垂直方向へ変形したのと同じだけ、水平方向にも変形するように算出します。</p>
-<p>仮に垂直方向に +0.8 変形したとして、水平方向へは -0.8 変形すればよいので、水平方向の変形エネルギーは 1 - 0.8 = 0.2 となります。また、実際に変形するときの係数として * 0.8 では小さくなりますから、1 を足して * 1.8 となるようにします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now that we have calculated the force that deforms the object in the vertical direction, it deforms in the horizontal direction by the amount of change in the vertical direction. </font><font style="vertical-align: inherit;">In other words, if the object stretches vertically, it will shrink horizontally. </font><font style="vertical-align: inherit;">On the contrary, when it shrinks in the vertical direction, it should stretch in the horizontal direction.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The amount of deformation in the vertical direction is calculated by "the magnitude of the deformation in the vertical direction / the maximum magnitude of the deformation". </font><font style="vertical-align: inherit;">After that, it is calculated so that it deforms in the horizontal direction as much as it deforms in the vertical direction.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Assuming that the deformation is +0.8 in the vertical direction, the deformation should be -0.8 in the horizontal direction, so the deformation energy in the horizontal direction is 1-0.8 = 0.2. </font><font style="vertical-align: inherit;">Also, as the coefficient for actual deformation, * 0.8 is small, so add 1 to make it * 1.8.</font></font></p>
 <div class="emlist-code">
 <p class="caption">OverReaction.cs</p>
 <pre class="emlist">protected void UpdateDeformEnergy()<font></font>
@@ -201,20 +194,20 @@ else<font></font>
     float deformEnergyHorizontalRatio<font></font>
     = deformEnergyVertical / this.maxDeformScale;<font></font>
 <font></font>
-    float deformEnergyHorizontal<font></font>
-    = 1 - deformEnergyHorizontalRatio;<font></font>
-…<font></font>
+    float deformEnergyHorizontal<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    = 1 - deformEnergyHorizontalRatio;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+…</font></font></font></font><font></font>
     deformEnergyVertical = 1 + deformEnergyVertical;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>最後にオブジェクトが進行方向に潰れるケースも考慮しましょう。オブジェクトが進行方向に潰れるケースとは、運動エネルギーと現在の動きが反転しているときで、つまり先の「運動エネルギーと現在の動きの内積」が負のときです。</p>
-<p>内積の値が負のとき、垂直方向への変形エネルギーと、水平方向への変形エネルギーを逆転します。</p>
-<p>場合分けを考えながら理解するために、次のコードはこれまでの手順を一続きにしました。内積の値が負のとき、<code class="inline-code tt">deformEnergyHorizontal</code> は 1 より大きい正の値になります。また <code class="inline-code tt">deformEnergyVertical</code> は、<code class="inline-code tt">deformEnergyHorizontal</code> の値と逆転して、1 より小さい正の値になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, consider the case where the object collapses in the direction of travel. </font><font style="vertical-align: inherit;">The case where the object collapses in the direction of travel is when the kinetic energy and the current movement are reversed, that is, when the previous "inner product of the kinetic energy and the current movement" is negative.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the value of the inner product is negative, the deformation energy in the vertical direction and the deformation energy in the horizontal direction are reversed.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To help you understand the case, the following code is a continuation of the previous steps. </font><font style="vertical-align: inherit;">When the dot product value is negative, </font></font><code class="inline-code tt">deformEnergyHorizontal</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is a positive value greater than 1. </font><font style="vertical-align: inherit;">Or </font></font><code class="inline-code tt">deformEnergyVertical</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is </font></font><code class="inline-code tt">deformEnergyHorizontal</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">of value reversed with, it will be one less than the positive value.</font></font></p>
 <div class="emlist-code">
-<p class="caption">OverReaction.cs</p>
-<pre class="emlist">protected void UpdateDeformEnergy()<font></font>
-{<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OverReaction.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">protected void UpdateDeformEnergy()</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     float deformEnergyVertical<font></font>
     = this.moveEnergy.magnitude<font></font>
     * Vector3.Dot(this.moveEnergy.normalized,<font></font>
@@ -223,19 +216,19 @@ else<font></font>
     float deformEnergyHorizontalRatio<font></font>
     = deformEnergyVertical / this.maxDeformScale;<font></font>
 <font></font>
-    float deformEnergyHorizontal<font></font>
-    = 1 - deformEnergyHorizontalRatio;<font></font>
+    float deformEnergyHorizontal<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    = 1 - deformEnergyHorizontalRatio;</font></font></font></font><font></font>
 <font></font>
     if (deformEnergyVertical &lt; 0)<font></font>
-    {<font></font>
-        deformEnergyVertical = deformEnergyHorizontalRatio;<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        deformEnergyVertical = deformEnergyHorizontalRatio;</font></font></font></font><font></font>
     }<font></font>
 <font></font>
     deformEnergyVertical = 1 + deformEnergyVertical;<font></font>
 …<font></font>
 </pre>
 </div>
-<p>最後に変形エネルギーが任意に設定される範囲に収まるように値を修正して、変形エネルギーの算出を完了します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, correct the value so that the deformation energy falls within the arbitrarily set range, and complete the calculation of the deformation energy.</font></font></p>
 <div class="emlist-code">
 <p class="caption">OverReaction.cs</p>
 <pre class="emlist">deformEnergyVertical = Mathf.Clamp(deformEnergyVertical,<font></font>
@@ -247,15 +240,15 @@ deformEnergyHorizontal = Mathf.Clamp(deformEnergyHorizontal,<font></font>
                                         this.maxDeformScale);<font></font>
 <font></font>
 this.deformEnergy = new Vector3(deformEnergyHorizontal,<font></font>
-                                deformEnergyVertical,<font></font>
-                                deformEnergyHorizontal);<font></font>
+                                deformEnergyVertical,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                deformEnergyHorizontal);</font></font></font></font><font></font>
 </pre>
 </div>
 
-<h2><a id="h8-4"></a><span class="secno">8.4　</span>メッシュを変形する</h2>
-<p>ここでは説明と汎用化のためにスクリプトでメッシュを変形しています。メッシュの変形は <code class="inline-code tt">DeformMesh</code> メソッドに実装されます。</p>
-<p>※行列演算ですから、実用的にはシェーダを使って GPU で処理する方が良いケースが多いでしょう。</p>
-<p>得られた変形エネルギー <code class="inline-code tt">deformEnergy</code> は、運動エネルギー <code class="inline-code tt">moveEnergy</code> の方向を向くときの伸縮を表すベクトルです。したがって、変形するときは座標を合わせてから変形する必要があります。そのために必要となるパラメータを先に抑えておきます。現在のオブジェクトの回転行列とその逆行列、運動エネルギー <code class="inline-code tt">moveEnergy</code> の回転行列とその逆行列です。</p>
+<h2><a id="h8-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Transform the mesh</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, the mesh is transformed with a script for explanation and generalization. </font><font style="vertical-align: inherit;">The transformation of the mesh is </font></font><code class="inline-code tt">DeformMesh</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">implemented in the method.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* Since it is a matrix operation, it is often better to process it on the GPU using a shader for practical purposes.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The obtained deformation energy </font></font><code class="inline-code tt">deformEnergy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is </font></font><code class="inline-code tt">moveEnergy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">a vector representing expansion and contraction when facing the direction of </font><font style="vertical-align: inherit;">kinetic energy </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Therefore, when transforming, it is necessary to match the coordinates before transforming. </font><font style="vertical-align: inherit;">First, suppress the parameters required for that purpose. </font><font style="vertical-align: inherit;">The rotation matrix of the current object and its inverse matrix, the kinetic energy </font></font><code class="inline-code tt">moveEnergy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">rotation matrix and its inverse matrix.</font></font></p>
 <div class="emlist-code">
 <p class="caption">OverReaction.cs</p>
 <pre class="emlist">protected void DeformMesh()<font></font>
@@ -272,13 +265,13 @@ Quaternion moveEnergyRotationI = Quaternion.Inverse(moveEnergyRotation);<font></
 </pre>
 </div>
 <ol>
-<li>現在の回転行列を、回転していないメッシュの頂点に乗算して回転します。</li>
-<li>移動方向を示す回転行列の逆行列を、頂点に乗算して回転します。</li>
-<li>頂点を <code class="inline-code tt">deformEnergy</code> にしたがってスケーリングします。</li>
-<li>移動方向を示す回転行列を、頂点に乗算して回転を元に戻します。</li>
-<li>現在の回転行列の逆行列を、頂点に乗算して回転を元に戻します。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Multiplies the current rotation matrix by the vertices of the unrotated mesh to rotate.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Multiply the vertices by the inverse matrix of the rotation matrix that indicates the direction of movement and rotate.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Scales </font></font><code class="inline-code tt">deformEnergy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">according to the </font><font style="vertical-align: inherit;">vertices </font><font style="vertical-align: inherit;">.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Multiplies the vertices by the rotation matrix that indicates the direction of movement to restore the rotation.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Multiplies the vertices by the inverse of the current rotation matrix to restore the rotation.</font></font></li>
 </ol>
-<p>分かりやすく適当な変形エネルギー <code class="inline-code tt">deformEnergy</code> を仮に与え、順次ソースコードをコメントアウトすると、処理手順が分かりやすくなると思います。</p>
+<p><font style="vertical-align: inherit;"></font><code class="inline-code tt">deformEnergy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you give an </font><font style="vertical-align: inherit;">appropriate deformation energy </font><font style="vertical-align: inherit;">in </font><font style="vertical-align: inherit;">an easy-to-understand manner </font><font style="vertical-align: inherit;">and comment out the source code in sequence, the processing procedure will be easier to understand.</font></font></p>
 <div class="emlist-code">
 <p class="caption">OverReaction.cs</p>
 <pre class="emlist">for (int i = 0; i &lt; this.baseVertices.Length; i++)<font></font>
@@ -303,4 +296,4 @@ this.baseMesh.vertices = deformedVertices;<font></font>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Although the calculation cost is higher, it is possible to support the rotation and enlargement / reduction of the object, move the center of gravity of the deformation, and support the skin mesh animation as an advanced form.</font></font></p><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 8 _ Easily express soft deformation_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 8 _ Easily express soft deformation_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 8 _ Easily express soft deformation_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 8 _ Easily express soft deformation_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 8 _ Easily express soft deformation_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

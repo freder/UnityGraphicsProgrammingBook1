@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0042)https://freder.io/files/unity2/sakota.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids</font></font></h1>
 
 <h2><a id="h6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -79,31 +72,31 @@ Figure 6.1: Two-dimensional velocity field observations
 <pre>\overrightarrow{u} = \nabla \times \psi
 </pre>
 </div>
-<p>上記はCurl Noiseのアルゴリズムになります。<br>左辺<span class="equation">\overrightarrow{u}</span>は導出された速度ベクトル、右辺<span class="equation">\nabla</span>はベクトル微分演算子（ナブラと読み、偏微分の作用素として働きます）、<span class="equation">\psi</span>はポテンシャル場です。（本章では3次元Simplex Noise）<br>Curl Noiseはこの右辺二項の外積を取ったものとして表せます。<br></p>
-<p>つまり、Curl NoiseはSimplex Noiseとベクトル各要素の偏微分<span class="equation"> \left( \dfrac {\partial } {\partial x}_, \dfrac {\partial } {\partial y}_, \dfrac {\partial } {\partial z} \right) </span>の外積をとったものであり、過去にベクトル解析を学ばれた事がある方にとっては、rotA（回転）の形そのものである事が見て取れるかと思います。<br>それでは、3D Simplex Noiseと偏微分の外積を計算してみましょう</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The above is the Curl Noise algorithm. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The left side </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ overright</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> arrow </font><span class="equation"><font style="vertical-align: inherit;">{u}</font></span><font style="vertical-align: inherit;"> is the derived velocity vector, the right side </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nabla</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the vector differential operator (read as nabla, which acts as an operator of partial differential), and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ psi</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the potential field. </font><font style="vertical-align: inherit;">(3D Simplex Noise in this chapter) </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Curl Noise can be expressed as the cross product of the two terms on the right side.</font></font><br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In other words, Curl Noise is Simple </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">x</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Noise and partial differential of each vector element </font><span class="equation"><font style="vertical-align: inherit;">\ left (\ dfrac {\ partial} {\ partial x} _, \ dfrac {\ partial} {\ partial y} _, \ dfrac {\ partial} {</font></span><font style="vertical-align: inherit;"> It is the outer product of </font><span class="equation"><font style="vertical-align: inherit;">\ partial z} \ right)</font></span><font style="vertical-align: inherit;"> , and for those who have learned vector analysis in the past, you can see that it is the shape of rotA itself. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now let's calculate the outer product of 3D Simplex Noise and partial derivative</font></font></p>
 <div class="equation">
 <pre>\overrightarrow{u} = \left( \dfrac {\partial \psi _3} {\partial y} - \dfrac {\partial \psi _2} {\partial z}_, \dfrac {\partial \psi _1} {\partial z} - \dfrac {\partial \psi _3} {\partial x}_,  \dfrac {\partial \psi _2} {\partial x} - \dfrac {\partial \psi _1} {\partial y} \right)
 </pre>
 </div>
-<p>一般的に外積は、二つのベクトルのお互いにとっての垂直方向を向き、その長さは両ベクトルで張られる面の面積と同じになるという特徴を持ったものですが、ベクトル解析でのrotA（回転）での外積演算のイメージの掴み方は、「ねじれた各偏微分要素方向のポテンシャル場のベクトルをルックアップし、その項同士を引いているから回転が起きる」と、上記の計算式からシンプルに捉えた方がイメージを掴みやすいかもしれません。<br>実装自体はとても単純で、偏微分の各要素方向に微小にルックアップポイントをずらしながら、上記<span class="equation">\psi</span>の各点、つまり3次元SimplexNoiseからベクトルをルックアップし、上記の数式の様に、外積演算をするだけです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In general, the outer product is characterized by the fact that the two vectors are oriented vertically to each other and their length is the same as the area of ​​the surface stretched by both vectors, but rotA (rotation) in vector analysis. ) Is a simple way to grasp the image of the cross product operation from the above formula, saying, "Look up the vector of the potential field in each twisted partial differential element direction, and pull the terms together, so rotation occurs." It may be easier to grasp the image if you capture it in. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The implementation itself is very simple, looking up the </font><font style="vertical-align: inherit;">vector from each point of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ psi</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> above </font><font style="vertical-align: inherit;">, that is, 3D SimplexNoise, </font><font style="vertical-align: inherit;">while </font><font style="vertical-align: inherit;">slightly </font><font style="vertical-align: inherit;">shifting the lookup point in the direction of each element of partial differentiation, and performing </font><font style="vertical-align: inherit;">the outer product operation like the above formula. Just do.</font></font></p>
 
-<h3><a id="h6-2-1"></a><span class="secno">6.2.1　</span>質量保存則について</h3>
-<p>もし前作の「Unity Graphics Programming vol.1」の流体シミュレーションの章をお読みになられた方は、質量保存則はどうなっているのかと気になられた方もいらっしゃるかもしれません。<br>質量保存則とは、流体は速度場での各ポイントにおいて、必ず、流入と流出の均衡がとれ、流入した分流出し、流出した分は流入してきており、最終的には発散ゼロ（ダイバージェンスフリー）というルールでした。</p>
+<h3><a id="h6-2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Conservation of mass</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you have read the fluid simulation chapter of the previous work "Unity Graphics Programming vol.1", you may be wondering what the law of conservation of mass is. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The law of conservation of mass is that at each point in the velocity field, the inflow and outflow are always balanced, the inflow is outflowed, the outflow is inflowed, and finally the divergence is zero (divergence free). It was a rule.</font></font></p>
 <div class="equation">
 <pre>\nabla \cdot \overrightarrow{u} = 0
 </pre>
 </div>
-<p>この事については、論文でも述べられているのですが、そもそも勾配ノイズ自体がなだらかに変化している物ですので（2次元グラデーションでイメージするなら、左側のピクセルが薄ければ、右側は濃くなっている様に）、ダイバージェンスフリーはポテンシャル場の時点で保証されているという物でした。パーリンノイズの特徴から考えてみれば至極当然な事ですね。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is also mentioned in the paper, but since the gradient noise itself changes gently in the first place (when imagining with a two-dimensional gradation, if the pixel on the left side is thin, the pixel on the right side is dark (As you can see), divergence-free was guaranteed at the time of the potential field. </font><font style="vertical-align: inherit;">Considering the characteristics of Perlin noise, it is quite natural.</font></font></p>
 
-<h3><a id="h6-2-2"></a><span class="secno">6.2.2　</span>Curl Noiseの実装</h3>
-<p>それでは、数式に基づいて、Compute shader、若しくはShaderでCurlNoise関数をGPU実装してみましょう。</p>
+<h3><a id="h6-2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation of Curl Noise</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, let's implement the CurlNoise function on the GPU with Compute shader or Shader based on the formula.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">#define EPSILON 1e-3<font></font>
-<font></font>
-float3 CurlNoise(float3 coord)<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float3 CurlNoise (float3 coord)</font></font></font></font><font></font>
 {<font></font>
-    float3 dx = float3(EPSILON, 0.0, 0.0);<font></font>
-    float3 dy = float3(0.0, EPSILON, 0.0);<font></font>
+    float3 dx = float3(EPSILON, 0.0, 0.0);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 dy = float3 (0.0, EPSILON, 0.0);</font></font></font></font><font></font>
     float3 dz = float3(0.0, 0.0, EPSILON);<font></font>
 <font></font>
     float3 dpdx0 = snoise(coord - dx);<font></font>
@@ -114,8 +107,8 @@ float3 CurlNoise(float3 coord)<font></font>
     float3 dpdz1 = snoise(coord + dz);<font></font>
 <font></font>
     float x = dpdy1.z - dpdy0.z + dpdz1.y - dpdz0.y;<font></font>
-    float y = dpdz1.x - dpdz0.x + dpdx1.z - dpdx0.z;<font></font>
-    float z = dpdx1.y - dpdx0.y + dpdy1.x - dpdy0.x;<font></font>
+    float y = dpdz1.x - dpdz0.x + dpdx1.z - dpdx0.z;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float z = dpdx1.y - dpdx0.y + dpdy1.x - dpdy0.x;</font></font></font></font><font></font>
 <font></font>
     return float3(x, y, z) / EPSILON * 2.0;<font></font>
 }<font></font>
@@ -151,4 +144,4 @@ Figure 6.4:
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

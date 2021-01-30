@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0044)https://freder.io/files/unity3/fuqunaga.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 7 _ Portal in Unity_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 7 _ Portal in Unity_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 7 _ Portal in Unity_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Portal in Unity_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Portal in Unity_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 7 _ Portal in Unity_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 7 _ Portal in Unity_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Portal in Unity_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Portal in Unity_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 7 _ Portal in Unity_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h7"></a><span class="secno"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;">I tried to implement </font><span class="secno"><font class="" style="vertical-align: inherit;">Chapter 7　</font></span><font class="" style="vertical-align: inherit;"> Portal in Unity</font></font></h1>
 
 <h2><a id="h7-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -99,7 +92,7 @@ Figure 7.1: Gate coordinate system
 </div>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The outbreak follows the original portal, so that when you click the mouse, the gate will appear on the plane of the viewpoint, and left-click and right-click will connect each other as a pair. </font><font style="vertical-align: inherit;">If there is already a gate, the old gate will disappear on the spot and a new gate will open. </font><font style="vertical-align: inherit;">Internally, the old gate has been moved to a new location and is the earliest.</font></font></p>
 <div class="emlist-code">
-<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalGun.cs</font></font></p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalGun.cs</font></font></font></font></font></font></p>
 <pre class="emlist">void Shot(int idx)<font></font>
 {<font></font>
     RaycastHit hit;<font></font>
@@ -108,8 +101,8 @@ Figure 7.1: Gate coordinate system
         out hit,<font></font>
         float.MaxValue,<font></font>
         LayerMask.GetMask(new[] { "StageColl" })))<font></font>
-    {<font></font>
-        var gate = gatePair[idx];<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        var gate = gatePair [idx];</font></font></font></font><font></font>
         if (gate == null)<font></font>
         {<font></font>
             var go = Instantiate(gatePrefab);<font></font>
@@ -137,37 +130,37 @@ Figure 7.1: Gate coordinate system
 }<font></font>
 </pre>
 </div>
-<p><b>StageColl</b>レイヤーのみの指定で、<code class="inline-code tt">transform.forward</code>方向にレイを飛ばしてヒット確認しています。ヒットがあればゲート操作の処理を行います。まずは既存のゲートがあるのか確認し、なければ生成します。ペアリングもここで行います。あとで使用するためにレイがぶつかったコライダーを<code class="inline-code tt">PortalGate.hitColl</code>にセットし、位置と向きを求めます。位置はぶつかった平面から少し法線方向に浮かせてZファイティング対策をしています。向きの求め方が少し変なのにお気づきでしょうか？Quaternion.LookRotation()のアップベクトルの指定をnormal.yの正負で変えています。通常はtransform.upでよいのですが、天井にゲートを出したときこのままだと前後（PortalGateのY方向）が反転して違和感があるのでこのようにしました。たしかオリジナルのPortalでもこのような挙動だったと思います。</p>
+<p><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By specifying</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> only the </font><b><font style="vertical-align: inherit;">StageColl</font></b><font style="vertical-align: inherit;"> layer </font></font><code class="inline-code tt">transform.forward</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, the ray is skipped </font><font style="vertical-align: inherit;">in the </font><font style="vertical-align: inherit;">direction and the hit is confirmed. </font><font style="vertical-align: inherit;">If there is a hit, the gate operation is processed. </font><font style="vertical-align: inherit;">First, check if there is an existing gate, and if not, generate it. </font><font style="vertical-align: inherit;">Pairing is also done here. </font></font><code class="inline-code tt">PortalGate.hitColl</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Set </font><font style="vertical-align: inherit;">the collider that Ray collided with for later use </font><font style="vertical-align: inherit;">, and ask for the position and orientation. </font><font style="vertical-align: inherit;">The position is slightly lifted in the normal direction from the plane where it collided, and Z-fighting measures are taken. </font><font style="vertical-align: inherit;">Did you notice that the way to find the orientation is a little strange? </font><font style="vertical-align: inherit;">The specification of the up vector of Quaternion.LookRotation () is changed by the positive or negative of normal.y. </font><font style="vertical-align: inherit;">Normally, transform.up is fine, but when the gate is put out on the ceiling, the front and back (Y direction of PortalGate) will be reversed and it will feel strange, so I did it like this. </font><font style="vertical-align: inherit;">I think the original Portal also behaved like this.</font></font></p>
 <div id="id_fuqunaga_2Fceil__fall__bad" class="image">
 <img src="./Chapter 7 _ Portal in Unity_files/ceil_fall_bad.png" alt="When not up-vector processing">
-<p class="caption">
-図7.2: アップベクトル処理をしない場合
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.2: Without up-vector processing
+</font></font></p>
 </div>
 <div id="id_fuqunaga_2Fceil__fall__good" class="image">
 <img src="./Chapter 7 _ Portal in Unity_files/ceil_fall_good.png" alt="When up-vector processing is performed">
-<p class="caption">
-図7.3: アップベクトル処理をした場合
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.3: Up-vector processing
+</font></font></p>
 </div>
 
-<h2><a id="h7-4"></a><span class="secno">7.4　</span>VirtualCamera</h2>
+<h2><a id="h7-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4　</font></font></font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> VirtualCamera</font></font></font></font></h2>
 
-<h3><a id="h7-4-1"></a><span class="secno">7.4.1　</span>初期化</h3>
-<p>ゲートが開くとペアになった別のゲート（以降ペアゲートと呼びます）の向こう側が見えるのでこの描画をなんとか実装する必要があります。「向こう側」を描画するための<b>「別のカメラ(VirtualCamera)を用意しRenderTextureにキャプチャ、それをPortalGateに貼り付けてメインカメラで描画」</b>というアプローチにしました。</p>
-<p>VirtualCameraはゲートの向こう側の絵をキャプチャするカメラです。</p>
+<h3><a id="h7-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Initialization</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the gate opens, you can see the other side of another paired gate (hereinafter referred to as pair gate), so you need to implement this drawing somehow. </font><font style="vertical-align: inherit;">I took the approach of </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"preparing another camera (Virtual Camera), capturing it on the Render Texture, pasting it on the Portal Gate, and drawing with the main camera</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> " to draw the "other side" </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Virtual Camera is a camera that captures pictures on the other side of the gate.</font></font></p>
 <div id="id_fuqunaga_2Fvirtual__camera" class="image">
 <img src="./Chapter 7 _ Portal in Unity_files/virtual_camera.png" alt="VirtualCamera">
 <p class="caption">
 図7.4: VirtualCamera
 </p>
 </div>
-<p><code class="inline-code tt">PortalGate.OnWillRenderObject()</code>が各カメラごとに呼ばれるのでそのタイミングでVirtualCameraが必要であれば生成します。</p>
+<p><code class="inline-code tt">PortalGate.OnWillRenderObject()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is called for each camera, so if Virtual Camera is required at that timing, it will be generated.</font></font></p>
 <div class="emlist-code">
 <p class="caption">PortalGate.cs</p>
-<pre class="emlist">private void OnWillRenderObject()<font></font>
-{<font></font>
-～省略～<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">private void OnWillRenderObject ()</font></font><font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+~ Omitted ~</font></font><font></font>
     VirtualCamera pairVC;<font></font>
     if (!pairVCTable.TryGetValue(cam, out pairVC))<font></font>
     {<font></font>
@@ -177,30 +170,30 @@ Figure 7.1: Gate coordinate system
             return;<font></font>
         }<font></font>
     }<font></font>
-<font></font>
-～省略～<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+~ Omitted ~</font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>ゲート同士を向かい合わせにすると向こう側の景色にもまたゲートが映り、そのゲートの向こう側にもまたゲートが・・・と、あわせ鏡のように無限に続きます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the gates face each other, the gate is reflected in the scenery on the other side, and the gate is also on the other side of the gate.</font></font></p>
 <div id="id_fuqunaga_2Fgate__inf" class="image">
 <img src="./Chapter 7 _ Portal in Unity_files/gate_inf.png" alt="Facing gate" class="width-050per">
-<p class="caption">
-図7.5: 向かい合わせのゲート
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.5: Facing gates
+</font></font></p>
 </div>
-<p>この場合、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">in this case,</font></font></p>
 <ol>
-<li>メインカメラに映るゲートの向こう側の絵を用意するVirtualCamera</li>
-<li>そのVirtualCameraに映るゲートの用の第二世代VirtualCamera</li>
-<li>さらにそのVirtualCameraに映るゲート用の第三世代VirtualCamera</li>
-<li>さらに・・・</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Prepare a picture of the other side of the gate reflected in the main camera Virtual Camera</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Second generation Virtual Camera for the gate reflected in that Virtual Camera</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Furthermore, the third generation Virtual Camera for the gate reflected in the Virtual Camera</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">further···</font></font></li>
 </ol>
-<p>と愚直に実装するとVirtualCameraも無限に必要になってしまいます。さすがにそうはいかないので<code class="inline-code tt">PortalGate.maxGeneration</code>で世代数を制限し、それ以上は正確な絵ではないものの１フレーム前のテクスチャをゲートに貼り付けることで代用します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you implement it honestly, you will need an infinite number of Virtual Cameras. </font><font style="vertical-align: inherit;">This is not the case, so </font></font><code class="inline-code tt">PortalGate.maxGeneration</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will limit the number of generations, and although it is not an accurate picture, I will substitute it by pasting the texture one frame before to the gate.</font></font></p>
 <div class="emlist-code">
 <p class="caption">PortalGate.cs</p>
-<pre class="emlist">VirtualCamera CreateVirtualCamera(Camera parentCam, VirtualCamera parentVC)<font></font>
-{<font></font>
+<pre class="emlist">VirtualCamera CreateVirtualCamera(Camera parentCam, VirtualCamera parentVC)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font><font></font>
     var rootCam = parentVC?.rootCamera ?? parentCam;<font></font>
     var generation = parentVC?.generation + 1 ?? 1;<font></font>
 <font></font>
@@ -208,24 +201,24 @@ Figure 7.1: Gate coordinate system
     go.name = rootCam.name + "_virtual" + generation;<font></font>
     go.transform.SetParent(transform);<font></font>
 <font></font>
-    var vc = go.GetComponent&lt;VirtualCamera&gt;();<font></font>
-    vc.rootCamera = rootCam;<font></font>
+    var vc = go.GetComponent&lt;VirtualCamera&gt;();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    vc.rootCamera = rootCam;</font></font></font></font><font></font>
     vc.parentCamera = parentCam;<font></font>
     vc.parentGate = this;<font></font>
     vc.generation = generation;<font></font>
-<font></font>
-    vc.Init();<font></font>
-<font></font>
-    return vc;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    vc.Init ();</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return you;</font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">VirtualCamera.rootCamera</code>はVirtualCameraの世代をさかのぼって大元になるメインカメラです。他に、親のカメラ、対象のゲート、世代などを設定しています。</p>
+<p><code class="inline-code tt">VirtualCamera.rootCamera</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is the main camera that dates back to the generation of Virtual Camera. </font><font style="vertical-align: inherit;">In addition, the parent camera, target gate, generation, etc. are set.</font></font></p>
 <div class="emlist-code">
 <p class="caption">VirtualCamera.cs</p>
 <pre class="emlist">public void Init()<font></font>
-{<font></font>
-    camera_.aspect = rootCamera.aspect;<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    camera_.aspect = rootCamera.aspect;</font></font></font></font><font></font>
     camera_.fieldOfView = rootCamera.fieldOfView;<font></font>
     camera_.nearClipPlane = rootCamera.nearClipPlane;<font></font>
     camera_.farClipPlane = rootCamera.farClipPlane;<font></font>
@@ -233,21 +226,21 @@ Figure 7.1: Gate coordinate system
     camera_.depth = parentCamera.depth - 1;<font></font>
 <font></font>
     camera_.targetTexture = tex0;<font></font>
-    currentTex0 = true;<font></font>
-}<font></font>
+    currentTex0 = true;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">VirtualCamera.Init()</code>で親のカメラからパラメータを引き継いでいます。VirtualCameraには自キャラを映すのでCullingMaskから<b>Player</b>レイヤーを削除しています。また親のカメラより先に絵をキャプチャしたいので<code class="inline-code tt">parentCamera.depth - 1</code>しています。</p>
-<p>当初<code class="inline-code tt">Camera.CopyFrom()</code>を使っていたのですがどうもCommandBufferもコピーしてしまうようで、ポストエフェクトに使っているPostProcessingStack<a id="fnb-pp" href="https://freder.io/files/unity3/fuqunaga.html#fn-pp" class="noteref" epub:type="noteref">*5</a>との併用でエラーが出てしまったので各プロパティごとにコピーするようにしました。</p>
+<p><code class="inline-code tt">VirtualCamera.Init()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The parameters are inherited from the parent camera. </font><font style="vertical-align: inherit;">Since my character is reflected in Virtual Camera, the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Player</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> layer is deleted </font><font style="vertical-align: inherit;">from Culling Mask </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Also, because you want to capture a picture earlier than the parent of the camera </font></font><code class="inline-code tt">parentCamera.depth - 1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">has been.</font></font></p>
+<p><font style="vertical-align: inherit;"></font><code class="inline-code tt">Camera.CopyFrom()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I used it at the </font><font style="vertical-align: inherit;">beginning </font><font style="vertical-align: inherit;">, but it seems that CommandBuffer is also copied, and an </font><font style="vertical-align: inherit;">error occurred when using it together with </font><font style="vertical-align: inherit;">PostProcessingStack </font></font><a id="fnb-pp" href="https://freder.io/files/unity3/fuqunaga.html#fn-pp" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 5</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> used for post effect, </font><font style="vertical-align: inherit;">so I copied it for each property.</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-pp"><p class="footnote">[*5] https://github.com/Unity-Technologies/PostProcessing</p></div>
 
-<h3><a id="h7-4-2"></a><span class="secno">7.4.2　</span>更新</h3>
-<p>VirtualCameraは処理が軽いほど<code class="inline-code tt">PortalGate.maxGeneration</code>を多くできるのでできるだ無駄な処理をしないよう少しパフォーマンスに気を使っています。</p>
+<h3><a id="h7-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> update</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">VirtualCamera </font></font><code class="inline-code tt">PortalGate.maxGeneration</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">can do </font><font style="vertical-align: inherit;">more </font><font style="vertical-align: inherit;">as the </font><font style="vertical-align: inherit;">processing is lighter, so </font><font style="vertical-align: inherit;">I pay a little attention to performance so as not to waste processing.</font></font></p>
 <div class="emlist-code">
 <p class="caption">VirtualCamera.cs</p>
 <pre class="emlist">private void LateUpdate()<font></font>
-{<font></font>
-    // PreviewCameraなどはこのタイミングでnullになっているようなのでチェック<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // PreviewCamera etc. seems to be null at this timing, so check</font></font><font></font>
     if (parentCamera == null)<font></font>
     {<font></font>
         Destroy(gameObject);<font></font>
@@ -255,8 +248,8 @@ Figure 7.1: Gate coordinate system
     }<font></font>
 <font></font>
     camera_.enabled = parentGate.IsVisible(parentCamera);<font></font>
-    if (camera_.enabled)<font></font>
-    {<font></font>
+    if (camera_.enabled)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         var parentCamTrans = parentCamera.transform;<font></font>
         var parentGateTrans = parentGate.transform;<font></font>
 <font></font>
@@ -272,15 +265,15 @@ Figure 7.1: Gate coordinate system
 }<font></font>
 </pre>
 </div>
-<p>こちらのコードを詳しく追っていきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will follow this code in detail.</font></font></p>
 
-<h4><a id="h7-4-2-1"></a>カメラの無効化</h4>
-<p>親のカメラにゲート映っていなければ向こう側の絵を用意する必要がないのでVirtualCameraのカメラを無効にします。</p>
+<h4><a id="h7-4-2-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Disable camera</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the parent camera does not show the gate, you do not need to prepare the picture on the other side, so disable the camera of Virtual Camera.</font></font></p>
 <div class="emlist-code">
 <p class="caption">PortalGate.cs</p>
 <pre class="emlist">public bool IsVisible(Camera camera)<font></font>
-{<font></font>
-    var ret = false;<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var ret = false;</font></font></font></font><font></font>
 <font></font>
     var pos = transform.position;<font></font>
     var camPos = camera.transform.position;<font></font>
@@ -290,21 +283,21 @@ Figure 7.1: Gate coordinate system
     if (dot &gt; 0f)<font></font>
     {<font></font>
         var planes = GeometryUtility.CalculateFrustumPlanes(camera);<font></font>
-        ret = GeometryUtility.TestPlanesAABB(planes, coll.bounds);<font></font>
-    }<font></font>
-<font></font>
-    return ret;<font></font>
-}<font></font>
+        ret = GeometryUtility.TestPlanesAABB(planes, coll.bounds);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return ret;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>可視判定は次のようになっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The visibility judgment is as follows.</font></font></p>
 <ol>
-<li>向きの判定。ゲートがカメラの方を向いているかをチェックしています。カメラ→ゲート方向とゲートのZ+方向の内積の符号で判定しています。</li>
-<li>視錐台とバウンディングボックスの可視判定。Unityにはまさのこのための関数が用意されておりそのまま使えます。ありがたや。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Judgment of orientation. </font><font style="vertical-align: inherit;">I'm checking if the gate is facing the camera. </font><font style="vertical-align: inherit;">It is judged by the sign of the inner product of the camera → gate direction and the Z + direction of the gate.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Visibility judgment of the frustum and bounding box. </font><font style="vertical-align: inherit;">Unity has a function for this, and you can use it as it is. </font><font style="vertical-align: inherit;">Thank you.</font></font></li>
 </ol>
 
-<h4><a id="h7-4-2-2"></a>位置と向きの更新</h4>
-<p><code class="inline-code tt">parentGate.UpdateTransformOnPair()</code> で「親ゲートに対する親カメラの位置と向きから、親のペアのゲートに対する位置と向きを求めてtransformを更新する」処理をしています。</p>
+<h4><a id="h7-4-2-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Position and orientation updates</font></font></h4>
+<p><code class="inline-code tt">parentGate.UpdateTransformOnPair()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> In, "From the position and orientation of the parent camera with respect to the parent gate, find the position and orientation of the parent pair with respect to the gate and update the transform".</font></font></p>
 <div class="emlist-code">
 <p class="caption">PortalGate.cs</p>
 <pre class="emlist">public void UpdateTransformOnPair(<font></font>
@@ -325,26 +318,26 @@ Figure 7.1: Gate coordinate system
 }<font></font>
 </pre>
 </div>
-<p>実装はこのようになっており、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The implementation looks like this,</font></font></p>
 <ol>
-<li>ゲートのローカル座標系に直す</li>
-<li>gateRotでゲートの手前→奥の向き変換</li>
-<li>ペアのゲートのローカル座標として扱い</li>
-<li>ワールド座標系に変換する</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Change to the local coordinate system of the gate</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Change the direction from the front to the back of the gate with gateRot</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Treated as local coordinates of paired gates</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Convert to world coordinate system</font></font></li>
 </ol>
-<p>という手順になっています。gateRotは</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is the procedure. </font><font style="vertical-align: inherit;">gateRot</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">public Quaternion gateRot { get; } = Quaternion.Euler(0f, 180f, 0f);
 </pre>
 </div>
-<p>と、Y軸で180度回転にしてますが、Z値が反転すればいいので</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">And, I rotate it 180 degrees on the Y axis, but since the Z value should be inverted</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">public Quaternion gateRot { get; } =  Quaterion.Euler(180f, 0f, 0f);
 </pre>
 </div>
-<p>のような実装でも一応破綻はしないはずです。ただゲートの手前と奥で上方向が反転するのでゲートを通過すると自キャラの頭が地面側になるなど、やはり違和感が出てしまうのでY軸回転がよさそうです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Even an implementation like this should not break down. </font><font style="vertical-align: inherit;">However, since the upward direction is reversed between the front and the back of the gate, when you pass through the gate, your character's head will be on the ground side, which makes you feel uncomfortable, so Y-axis rotation seems to be good.</font></font></p>
 
-<h4><a id="h7-4-2-3"></a>カメラパラメータの更新</h4>
+<h4><a id="h7-4-2-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Update camera parameters</font></font></h4>
 <div class="emlist-code">
 <p class="caption">VirtualCamera.cs</p>
 <pre class="emlist">void UpdateCamera()<font></font>
@@ -357,8 +350,8 @@ Figure 7.1: Gate coordinate system
 <font></font>
     TargetCameraUtility.Update(camera_, vtxList);<font></font>
 <font></font>
-    // Oblique<font></font>
-    // pairGateの奥しか描画しない = nearClipPlane を pairGateと一致させる<font></font>
+    // Oblique<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Draw only the back of pairGate = match nearClipPlane with pairGate</font></font><font></font>
     var pairGateTrans = parentGate.pair.transform;<font></font>
     var clipPlane = CalcPlane(camera_,<font></font>
                               pairGateTrans.position,<font></font>
@@ -367,39 +360,39 @@ Figure 7.1: Gate coordinate system
     camera_.projectionMatrix = camera_.CalculateObliqueMatrix(clipPlane);<font></font>
 }<font></font>
 <font></font>
-Vector4 CalcPlane(Camera cam, Vector3 pos, Vector3 normal)<font></font>
-{<font></font>
+Vector4 CalcPlane(Camera cam, Vector3 pos, Vector3 normal)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     var viewMat = cam.worldToCameraMatrix;<font></font>
 <font></font>
-    var normalOnView = viewMat.MultiplyVector(normal).normalized;<font></font>
-    var posOnView = viewMat.MultiplyPoint(pos);<font></font>
+    var normalOnView = viewMat.MultiplyVector(normal).normalized;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var posOnView = viewMat.MultiplyPoint (pos);</font></font><font></font>
 <font></font>
-    return new Vector4(<font></font>
-        normalOnView.x,<font></font>
-        normalOnView.y,<font></font>
-        normalOnView.z,<font></font>
+    return new Vector4(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        normalOnView.x,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        normalOnView.y,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        normalOnView.z,</font></font><font></font>
         -Vector3.Dot(normalOnView, posOnView)<font></font>
         );<font></font>
 }<font></font>
 </pre>
 </div>
-<p>VirtualCameraはできるだけ処理を軽くしたいので視錐台もできるだけ狭くします。VirtualCamera越しに見たペアゲートの範囲だけ描画できればいいので、ペアゲートのメッシュの頂点をワールド座標にし、<code class="inline-code tt">TargetCameraUtility.Update()</code>でその頂点群が収まるように視錐台と<code class="inline-code tt">Camera.rect</code>を変更しています。</p>
-<p>またVirtualCameraとペアゲートの間のオブジェクトは描画しないのでカメラのニアクリップ面をペアゲートと同じ平面にします。この操作は<code class="inline-code tt">Camera.CalculateObliqueMatrix()</code>で行えます。あまりドキュメントがないのでサンプルコードなどからの判断になりますがニアクリップ面をビュー座標系でxyzに法線、wに距離をいれたVector4で渡すようです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Virtual Camera wants to be as light as possible, so make the view frustum as narrow as possible. </font><font style="vertical-align: inherit;">Since it is only necessary to draw the range of the pair gate seen through VirtualCamera, the vertices of the pair gate mesh are set to world coordinates, and the </font></font><code class="inline-code tt">TargetCameraUtility.Update()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">view frustum is </font></font><code class="inline-code tt">Camera.rect</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">changed </font><font style="vertical-align: inherit;">so that the vertices fit in </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, since the object between the Virtual Camera and the pair gate is not drawn, make the near clip surface of the camera the same plane as the pair gate. </font></font><code class="inline-code tt">Camera.CalculateObliqueMatrix()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can do </font><font style="vertical-align: inherit;">this with </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Since there is not much documentation, it will be judged from the sample code etc., but it seems that the near clip plane is passed by Vector4 with the normal to xyz and the distance to w in the view coordinate system.</font></font></p>
 
-<h2><a id="h7-5"></a><span class="secno">7.5　</span>ゲートの描画</h2>
-<p>状態に合わせて描画するものが違うのですが単一のシェーダーでやりきっています。</p>
+<h2><a id="h7-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Gate drawing</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">What is drawn is different according to the state, but it is done with a single shader.</font></font></p>
 <ul>
-<li>枠と中身の表示がある</li>
-<li>ゲートが生成、移動された直後は円が広がるアニメーションをする</li>
-<li>まだペアゲートが無いときは背景（既存の壁や床）をモヤモヤさせる（<span class="imgref"><a href="https://freder.io/files/unity3/fuqunaga.html#id_fuqunaga_2Fgate__no__pair">図7.6</a></span>）</li>
-<li>ペアゲートができたらモヤモヤからVirtualCameraの絵にフェードインする</li>
-<li><code class="inline-code tt">PortalGate.maxGeneration</code>に達してVirtualCameraが無い場合は１フレーム前の絵をPortalGateに貼り付ける</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There is a frame and a display of the contents</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Immediately after the gate is created and moved, the circle will expand.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If there is no pair gate yet, the background (existing walls and floors) will be moody ( </font></font><span class="imgref"><a href="https://freder.io/files/unity3/fuqunaga.html#id_fuqunaga_2Fgate__no__pair"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fig. 7.6</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ).</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the pair gate is completed, fade in to the picture of Virtual Camera from Moyamoya</font></font></li>
+<li><code class="inline-code tt">PortalGate.maxGeneration</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you reach and there is no Virtual Camera, paste the picture one frame before to PortalGate.</font></font></li>
 </ul>
 <div id="id_fuqunaga_2Fgate__no__pair" class="image">
 <img src="./Chapter 7 _ Portal in Unity_files/gate_no_pair.png" alt="When there is no pair gate, the background is moody" class="width-050per">
-<p class="caption">
-図7.6: ペアゲートが無いときは背景をモヤモヤ
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.6: The background is moody when there is no pair gate
+</font></font></p>
 </div>
 <div class="emlist-code">
 <p class="caption">PortalGate.shader</p>
@@ -409,31 +402,31 @@ Vector4 CalcPlane(Camera cam, Vector3 pos, Vector3 normal)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>まずはGrabPass<a id="fnb-grabpass" href="https://freder.io/files/unity3/fuqunaga.html#fn-grabpass" class="noteref" epub:type="noteref">*6</a>で背景をキャプチャしときます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First </font><font style="vertical-align: inherit;">, capture the background with </font><font style="vertical-align: inherit;">GrabPass </font></font><a id="fnb-grabpass" href="https://freder.io/files/unity3/fuqunaga.html#fn-grabpass" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 6</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-grabpass"><p class="footnote">[*6] https://docs.unity3d.com/ja/current/Manual/SL-GrabPass.html</p></div>
 
-<h3><a id="h7-5-1"></a><span class="secno">7.5.1　</span>頂点シェーダー</h3>
+<h3><a id="h7-5-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.5.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Vertex shader</font></font></h3>
 <div class="emlist-code">
-<p class="caption">PortalGate.shader</p>
-<pre class="emlist">v2f vert(appdata_img In)<font></font>
-{<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalGate.shader</font></font></font></font></p>
+<pre class="emlist">v2f vert(appdata_img In)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     v2f o;<font></font>
 <font></font>
     float3 posWorld = mul(unity_ObjectToWorld, float4(In.vertex.xyz, 1)).xyz;<font></font>
     float4 clipPos = mul(UNITY_MATRIX_VP, float4(posWorld, 1));<font></font>
     float4 clipPosOnMain = mul(_MainCameraViewProj, float4(posWorld, 1));<font></font>
-<font></font>
-    o.pos = clipPos;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.pos = clipPos;</font></font></font></font><font></font>
     o.uv = In.texcoord;<font></font>
-    o.sposOnMain = ComputeScreenPos(clipPosOnMain);<font></font>
-    o.grabPos = ComputeGrabScreenPos(o.pos);<font></font>
-    return o;<font></font>
-}<font></font>
+    o.sposOnMain = ComputeScreenPos(clipPosOnMain);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.grabPos = ComputeGrabScreenPos (o.pos);</font></font></font></font><font></font>
+    return o;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>頂点シェーダーはこんな感じです。スクリーン座標系の位置を2つ求めていて、現在のカメラでの位置<code class="inline-code tt">clipPos</code>と、メインカメラのもの<code class="inline-code tt">clipPosOnMain</code>があります。前者は通常のレンダリングに用い、後者はVirtualCameraでキャプチャしたRenderTextureを参照する際に使用します。またGrabPassを用いるときは専用のポジション計算関数がありますのでこれを使います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The vertex shader looks like this. </font><font style="vertical-align: inherit;">We are looking for two positions in the screen coordinate system, one for the current camera and one for </font></font><code class="inline-code tt">clipPos</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the main camera </font></font><code class="inline-code tt">clipPosOnMain</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">The former is used for normal rendering, and the latter is used for referencing RenderTexture captured by Virtual Camera. </font><font style="vertical-align: inherit;">Also, when using GrabPass, there is a dedicated position calculation function, so use this.</font></font></p>
 
-<h3><a id="h7-5-2"></a><span class="secno">7.5.2　</span>フラグメントシェーダー</h3>
+<h3><a id="h7-5-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.5.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Fragment shader</font></font></h3>
 <div class="emlist-code">
 <p class="caption">PortalGate.shader</p>
 <pre class="emlist">float2 uv = In.uv.xy;<font></font>
@@ -441,9 +434,9 @@ uv = (uv - 0.5) * 2; // map 0~1 to -1~1<font></font>
 float insideRate = (1 - length(uv)) * _OpenRate;<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">insideRate</code>（円の内側率）を求めています。円の中心が1、円周上が0、それより外はマイナスになります。<code class="inline-code tt">_OpenRate</code>で円の開き具合を変えれます。<b>PortalGate.Open()</b>で制御しています。</p>
+<p><code class="inline-code tt">insideRate</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(Inside ratio of the circle) is calculated. </font><font style="vertical-align: inherit;">The center of the circle is 1, the circumference is 0, and the outside is negative. </font></font><code class="inline-code tt">_OpenRate</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can change the opening degree of the circle with. </font><font style="vertical-align: inherit;">It is controlled by </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalGate.Open ()</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="emlist-code">
-<p class="caption">PortalGate.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalGate.shader</font></font></font></font></p>
 <pre class="emlist">// background<font></font>
 float4 grabUV = In.grabPos;<font></font>
 float2 grabOffset = float2(<font></font>
@@ -454,7 +447,7 @@ grabUV.xy += grabOffset * 0.3 * insideRate;<font></font>
 float4 bgColor = tex2Dproj(_BackgroundTexture, grabUV);<font></font>
 </pre>
 </div>
-<p>モヤモヤした背景を生成しています。<code class="inline-code tt">snoise</code>はincludeしているNoise.cgincで定義されている関数でSimplexNoiseです。uv値と時間でgrabUVを揺らしています。insideRateも乗算することで中心付近ほど揺らぎを大きくしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is generating a moody background. </font></font><code class="inline-code tt">snoise</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is a function defined in the included Noise.cginc and is SimplexNoise. </font><font style="vertical-align: inherit;">The grab UV is rocking with the uv value and time. </font><font style="vertical-align: inherit;">By multiplying the insideRate, the fluctuation becomes larger toward the center.</font></font></p>
 <div class="emlist-code">
 <p class="caption">PortalGate.shader</p>
 <pre class="emlist">// portal other side<font></font>
@@ -462,16 +455,16 @@ float2 sUV = In.sposOnMain.xy / In.sposOnMain.w;<font></font>
 float4 sideColor = tex2D(_MainTex, sUV);<font></font>
 </pre>
 </div>
-<p>ゲートの向こう側の絵です。<code class="inline-code tt">_MainTex</code>にはVirutualCameraがキャプチャしたテクスチャが入っており、メインカメラのUV値で参照しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is a picture of the other side of the gate. </font></font><code class="inline-code tt">_MainTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Contains the texture captured by the Virutual Camera and is referenced by the UV value of the main camera.</font></font></p>
 <div class="emlist-code">
-<p class="caption">PortalGate.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalGate.shader</font></font></font></font></p>
 <pre class="emlist">// color<font></font>
 float4 col = lerp(bgColor, sideColor, _ConnectRate);<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">bgColor</code>（壁や床）と<code class="inline-code tt">sideColor</code>（ゲートの向こう側）をミックスしています。<code class="inline-code tt">_ConnectRate</code>はペアゲートができると0から1に遷移して、その後はずっと1のままです。</p>
+<p><code class="inline-code tt">bgColor</code><font style="vertical-align: inherit;"></font><code class="inline-code tt">sideColor</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I mix </font><font style="vertical-align: inherit;">(walls and floors) and </font><font style="vertical-align: inherit;">(beyond the gate). </font></font><code class="inline-code tt">_ConnectRate</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Transitions from 0 to 1 when a pair gate is created and remains at 1 thereafter.</font></font></p>
 <div class="emlist-code">
-<p class="caption">PortalGate.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalGate.shader</font></font></font></font></p>
 <pre class="emlist">// frame<font></font>
 float frame = smoothstep(0, 0.1, insideRate);<font></font>
 float frameColorRate = 1 - abs(frame - 0.5) * 2;<font></font>
@@ -482,22 +475,22 @@ col.xyz = lerp(col.xyz, frameColor, frameColorRate);<font></font>
 col.a = frame;<font></font>
 </pre>
 </div>
-<p>最後に枠を計算しています。<code class="inline-code tt">insideRate</code>の端っこを、<code class="inline-code tt">_FrameColor0,_FrameColor1</code>を適当にミックスして表示しています。</p>
-<p>ここまでで見た目は完成しました。次は物理的な挙動のほうに焦点をあわせてみます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, the frame is calculated. </font></font><code class="inline-code tt">insideRate</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The edges of are </font></font><code class="inline-code tt">_FrameColor0,_FrameColor1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">displayed by mixing them appropriately.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The appearance is completed so far. </font><font style="vertical-align: inherit;">Next, let's focus on the physical behavior.</font></font></p>
 
-<h2><a id="h7-6"></a><span class="secno">7.6　</span>オブジェクトのワープ</h2>
-<p><b>PortalObjコンポーネント</b>でワープまわりの処理を行うようにしました。これがついているGameObjectはワープできるようになります。</p>
+<h2><a id="h7-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Object Warp</font></font></h2>
+<p><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Changed to</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> process around warp in </font><b><font style="vertical-align: inherit;">PortalObj component</font></b><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">GameObjects with this will be able to warp.</font></font></p>
 
-<h3><a id="h7-6-1"></a><span class="secno">7.6.1　</span>既存コリジョンの無効化</h3>
-<p>ゲートが設置された平面はもともととおり抜けできない、つまりコリジョンがあります。ゲートを通るときはこれを無効化しなくてはなりません。実はゲートには前後にわりと大きめに飛び出たコライダーをトリガーとして付けています。PortalObjはこのコライダーをトリガーとして平面とのコリジョン無効化を行っています。</p>
+<h3><a id="h7-6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Disable existing collisions</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The plane on which the gate is installed cannot pass through, that is, there is a collision. </font><font style="vertical-align: inherit;">This must be disabled when passing through the gate. </font><font style="vertical-align: inherit;">Actually, the gate is equipped with a collider that pops out rather large in the front and back as a trigger. </font><font style="vertical-align: inherit;">PortalObj uses this collider as a trigger to invalidate the collision with the plane.</font></font></p>
 <div id="id_fuqunaga_2Fgate__collision" class="image">
 <img src="./Chapter 7 _ Portal in Unity_files/gate_collision.png" alt="Gate collider" class="width-050per">
-<p class="caption">
-図7.7: ゲートのコライダー
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.7: Gate Collider
+</font></font></p>
 </div>
 <div class="emlist-code">
-<p class="caption">PortalObj.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalObj.cs</font></font></font></font></p>
 <pre class="emlist">private void OnTriggerStay(Collider other)<font></font>
 {<font></font>
     var gate = other.GetComponent&lt;PortalGate&gt;();<font></font>
@@ -508,23 +501,23 @@ col.a = frame;<font></font>
     }<font></font>
 }<font></font>
 <font></font>
-private void OnTriggerExit(Collider other)<font></font>
-{<font></font>
-    var gate = other.GetComponent&lt;PortalGate&gt;();<font></font>
-    if (gate != null)<font></font>
-    {<font></font>
+private void OnTriggerExit(Collider other)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var gate = other.GetComponent&lt;PortalGate&gt;();</font></font><font></font>
+    if (gate != null)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         touchingGates.Remove(gate);<font></font>
         Physics.IgnoreCollision(gate.hitColl, collider_, false);<font></font>
     }<font></font>
 }<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">OnTriggerEnder()</code>ではなく<code class="inline-code tt">OnTriggerStay()</code>なのは、まだゲートがひとつでペアがない状態のときにEnterしその後ペアができたときにも対応するためです。まずはトリガーとなったゲートを<code class="inline-code tt">tougingGates</code>に登録しておきます。前述の<code class="inline-code tt">PortalGate.hitColl</code>がやっと出てきました。これと自身のコライダーを<code class="inline-code tt">Physics.IgnoreCollision()</code>で衝突無視するようにセットしておきます。</p>
-<p><code class="inline-code tt">OnTriggerExit()</code>で衝突を有効に戻しています。お気づきの方も多いかと思いますが、<code class="inline-code tt">PortalGate.hitColl</code>は平面全体のコライダーなので実はPortalGateの枠外でも通り抜けできてしまいます。「OnTriggerStay()をキープしている限り」という条件はつくのであまり目立ちませんがちゃんとしたゲートの形でのコリジョンするにはもうちょっと複雑な処理が必要そうです。</p>
+<p><code class="inline-code tt">OnTriggerEnder()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The </font></font><code class="inline-code tt">OnTriggerStay()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">reason for this is that if there is only one gate and there is no pair, Enter will be performed and then a pair will be created. </font><font style="vertical-align: inherit;">First </font></font><code class="inline-code tt">tougingGates</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, register </font><font style="vertical-align: inherit;">the gate that triggered it in </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">The above </font></font><code class="inline-code tt">PortalGate.hitColl</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is finally coming out. </font></font><code class="inline-code tt">Physics.IgnoreCollision()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Set </font><font style="vertical-align: inherit;">this and your collider to </font><font style="vertical-align: inherit;">ignore the collision with.</font></font></p>
+<p><code class="inline-code tt">OnTriggerExit()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The collision is enabled again with. </font><font style="vertical-align: inherit;">As many of you may have noticed, since </font></font><code class="inline-code tt">PortalGate.hitColl</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is a collider on the entire plane, it can actually pass through even outside the frame of the Portal Gate. </font><font style="vertical-align: inherit;">The condition "as long as you keep OnTriggerStay ()" is attached, so it is not very noticeable, but it seems that a little more complicated processing is required to collide in the form of a proper gate.</font></font></p>
 
-<h3><a id="h7-6-2"></a><span class="secno">7.6.2　</span>ワープ処理</h3>
+<h3><a id="h7-6-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.6.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Warp processing</font></font></h3>
 <div class="emlist-code">
-<p class="caption">PortalObj.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalObj.cs</font></font></p>
 <pre class="emlist">private void Update()<font></font>
 {<font></font>
     var passedGate = touchingGates.FirstOrDefault(gate =&gt;<font></font>
@@ -534,13 +527,13 @@ private void OnTriggerExit(Collider other)<font></font>
     });<font></font>
 <font></font>
 <font></font>
-    if (passedGate != null)<font></font>
-    {<font></font>
-        PassGate(passedGate);<font></font>
-    }<font></font>
+    if (passedGate != null)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font><font></font>
+        PassGate(passedGate);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font><font></font>
 <font></font>
-    if ((rigidbody_ != null) &amp;&amp; !rigidbody_.useGravity)<font></font>
-    {<font></font>
+    if ((rigidbody_ != null) &amp;&amp; !rigidbody_.useGravity)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font><font></font>
         if ((Time.time - ignoreGravityStartTime)  &gt; ignoreGravityTime)<font></font>
         {<font></font>
             rigidbody_.useGravity = true;<font></font>
@@ -549,10 +542,10 @@ private void OnTriggerExit(Collider other)<font></font>
 }<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">center</code>はゲートを通過したかどうかの判定に使うTransformです。基本的にはPortalObjコンポーネントのついているGameObjectのものでいいのですが、自キャラはキャラの中心ではなくカメラが通過した時点でワープしたいので手動で設定できるようにしています。<code class="inline-code tt">center.position</code>が<code class="inline-code tt">z &gt; 0f</code>（ゲートの裏）になっているゲートがないか<code class="inline-code tt">touchingGates</code>をチェックしています。もしそのようなゲートが見つかれば<code class="inline-code tt">PassGate()</code>（ワープ処理）を行います。</p>
-<p>また、後述しますがゲート通過直後にPortalObjは重力を無効化しています。これは地面に落ちているオブジェクトの下に別の床に繋がるゲートを開くと、オブジェクトがゲート間を行き来して振動してしまうので通過後は少し慣性をもったような挙動にするために行っています。</p>
+<p><code class="inline-code tt">center</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is a Transform used to determine if it has passed the gate. </font><font style="vertical-align: inherit;">Basically, the GameObject with PortalObj component is fine, but I want to warp my character when the camera passes, not the center of the character, so I can set it manually. </font></font><code class="inline-code tt">center.position</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We are </font><font style="vertical-align: inherit;">checking </font></font><code class="inline-code tt">z &gt; 0f</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">if there is a gate </font><font style="vertical-align: inherit;">with </font><font style="vertical-align: inherit;">(behind the gate) </font></font><code class="inline-code tt">touchingGates</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">If such a gate is found </font></font><code class="inline-code tt">PassGate()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(warp processing).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, as will be described later, Portal Obj disables gravity immediately after passing through the gate. </font><font style="vertical-align: inherit;">This is done to make the object behave with a little inertia after passing because if you open a gate that connects to another floor under the object that is falling on the ground, the object will vibrate back and forth between the gates. I have.</font></font></p>
 <div class="emlist-code">
-<p class="caption">PortalObj.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalObj.cs</font></font></font></font></p>
 <pre class="emlist">void PassGate(PortalGate gate)<font></font>
 {<font></font>
     gate.UpdateTransformOnPair(transform);<font></font>
@@ -561,32 +554,32 @@ private void OnTriggerExit(Collider other)<font></font>
     {<font></font>
         rigidbody_.velocity = gate.UpdateDirOnPair(rigidbody_.velocity);<font></font>
         rigidbody_.useGravity = false;<font></font>
-        ignoreGravityStartTime = Time.time;<font></font>
-    }<font></font>
+        ignoreGravityStartTime = Time.time;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    if (fpController != null)<font></font>
-    {<font></font>
+    if (fpController != null)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         fpController.m_MoveDir = gate.UpdateDirOnPair(fpController.m_MoveDir);<font></font>
         fpController.InitMouseLook();<font></font>
     }<font></font>
 }<font></font>
 </pre>
 </div>
-<p>ワープ処理はこんな感じになっています。VirtualCameraの位置を求めるときにも使用した<code class="inline-code tt">PortalGate.UpdateTransformOnPair()</code>でTransformをワープさせます。<code class="inline-code tt">RigidBody</code>を持っている場合は速度の向きも変えてやります。<code class="inline-code tt">fpController</code>（自キャラ操作のスクリプト）も同様です。この辺は大規模化するともっと対応が必要なオブジェクトが出てくるので各スクリプトコールバックを用意して通知するほうがいいかもしれません。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The warp process looks like this. </font><font style="vertical-align: inherit;">I also used it to find the position of the Virtual </font></font><code class="inline-code tt">PortalGate.UpdateTransformOnPair()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Camera and warp the Transform. </font></font><code class="inline-code tt">RigidBody</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you have, change the direction of speed as well. </font></font><code class="inline-code tt">fpController</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The same applies to (script for own character operation). </font><font style="vertical-align: inherit;">As this area becomes larger, there will be objects that need more support, so it may be better to prepare each script callback and notify it.</font></font></p>
 
-<h3><a id="h7-6-3"></a><span class="secno">7.6.3　</span>ワープの問題点</h3>
-<p>今回ワープを実装してみていくつかもうちょっと詰めていかないとなという点がありました。</p>
+<h3><a id="h7-6-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.6.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Warp issues</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There was a point that I had to implement a warp this time and pack some more.</font></font></p>
 
-<h4><a id="h7-6-3-1"></a>PortalObjの速度がはやいと一度壁にぶつかる</h4>
-<p>物理エンジンが衝突判定をしたあと押出処理をする前になんらかの方法でコリジョンを無効化したかったのですがうまい方法が見つかりませんでした。<code class="inline-code tt">OnTriggerEnter()</code>,<code class="inline-code tt">OnCollisionEnter()</code>内で<code class="inline-code tt">Physics.IgnoreCollision()</code>を呼んでも一度衝突したあとから無効化されるようです。おそらく<code class="inline-code tt">On~Enter()</code>が押出処理後に呼ばれているか<code class="inline-code tt">Physics.IgnoreCollision()</code>の反映されるタイミングが少し遅いのだと思います。このためトリガーへEnterするフレームと壁に衝突するフレームが別になるようにトリガーの範囲をかなり大きく飛び出させています。しかしこの方法では限界があり、より高速で移動するPortalObjには対応できていません。もし「こういう方法あるよ！」という方がいましたらぜひご連絡いただきたいです！</p>
+<h4><a id="h7-6-3-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PortalObj hits the wall once when the speed is fast</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I wanted to somehow nullify the collision after the physics engine made a collision detection and before extrusion, but I couldn't find a good way. </font></font><code class="inline-code tt">OnTriggerEnter()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">OnCollisionEnter()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The inner </font></font><code class="inline-code tt">Physics.IgnoreCollision()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">seems to be referred to are disabled from after a collision once. </font><font style="vertical-align: inherit;">I think </font></font><code class="inline-code tt">On~Enter()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it </font></font><code class="inline-code tt">Physics.IgnoreCollision()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'s </font><font style="vertical-align: inherit;">probably a </font><font style="vertical-align: inherit;">little late to reflect </font><font style="vertical-align: inherit;">what is called after extrusion </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">For this reason, the range of the trigger is made to protrude considerably so that the frame that enters the trigger and the frame that collides with the wall are different. </font><font style="vertical-align: inherit;">However, this method has its limitations and is not compatible with Portal Obj, which moves at a higher speed. </font><font style="vertical-align: inherit;">If anyone says "There is such a way!", Please contact me!</font></font></p>
 
-<h4><a id="h7-6-3-2"></a>本当は途中にコピーを挟んだほうがよい</h4>
-<p>ワープを<b>「オブジェクトの位置を書き換える」</b>ことで実装しましたが厳密に考えればゲートをくぐってる最中は半分手前で半分向こう側という状態があるはずです。大きいオブジェクトなどを出す場合は目立つのでこのあたりも考える必要がありそうです。さらに手前と向こう両方の衝突物の影響も受ける必要があり、より厳密には物理エンジン内のソルバに介入しないといけなそうな気がします。Unityだと厳しそうなのでうまくごまかす方向が現実的かなーという気がしています。</p>
+<h4><a id="h7-6-3-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actually it is better to put a copy in the middle</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I </font><font style="vertical-align: inherit;">implemented the </font><font style="vertical-align: inherit;">warp by </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"rewriting the position of the object"</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , but strictly speaking, there should be a state where it is half in front and half behind while passing through the gate. </font><font style="vertical-align: inherit;">If you want to put out a large object, it will be noticeable, so you need to think about this as well. </font><font style="vertical-align: inherit;">In addition, it needs to be affected by collisions both in front and behind, and more strictly, I feel that we have to intervene in the solver in the physics engine. </font><font style="vertical-align: inherit;">It seems to be strict with Unity, so I feel that it is realistic to cheat well.</font></font></p>
 
-<h2><a id="h7-7"></a><span class="secno">7.7　</span>まとめ</h2>
-<p>以前からやってみたかったPortalの再現をUnityで挑戦してみました。カメラ重ねればいけるっしょーと気楽にはじめてみたものの思いのほか細かいところで大変なことがわかりました。CGやゲーム技術のなかでもリアル寄りにするものは需要が高く定型化してどんどん手軽になっていっています。現実感が簡単に出せるようになると、どこでもドアのような「いままでありがちだったけど現実味がなく眠っていたアイデア」が今後は意外と新しい体験として活きてきたりするかもしれません。</p>
+<h2><a id="h7-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I tried to reproduce Portal that I wanted to try from before with Unity. </font><font style="vertical-align: inherit;">I tried it comfortably for the first time by stacking the cameras, but I found that it was more difficult than I expected. </font><font style="vertical-align: inherit;">Among CG and game technologies, those that are closer to the real world are in high demand and are becoming more and more standardized. </font><font style="vertical-align: inherit;">When it becomes easier to create a sense of reality, Anywhere Door-like "ideas that used to be common but unrealistic and slept" may come to life as a new experience.</font></font></p>
 
-<h2><a id="h7-8"></a><span class="secno">7.8　</span>参考</h2>
+<h2><a id="h7-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
 <ul>
 <li>Portal <a href="http://www.thinkwithportals.com/" class="link">http://www.thinkwithportals.com/</a></li>
 <li>Adam Character Pack <a href="https://assetstore.unity.com/packages/essentials/tutorial-projects/adam-character-pack-adam-guard-lu-74842" class="link">https://assetstore.unity.com/packages/essentials/tutorial-projects/adam-character-pack-adam-guard-lu-74842</a></li>
@@ -595,4 +588,4 @@ private void OnTriggerExit(Collider other)<font></font>
 </ul><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 19px; top: 26.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 7 _ Portal in Unity_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第7章　PortalをUnityで実装してみた</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 7 _ Portal in Unity_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 7 _ Portal in Unity_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 7 _ Portal in Unity_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 7 _ Portal in Unity_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

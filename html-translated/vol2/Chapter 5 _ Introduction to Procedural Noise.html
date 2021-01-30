@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<!-- saved from url=(0041)https://freder.io/files/unity2/oishi.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 5 _ Introduction to Procedural Noise_files/style.scss">
   <meta name="generator" content="Re:VIEW">
-  <title>プロシージャルノイズ入門</title>
+  <title>Introduction to procedural noise</title>
 
 			<style>
 				img {
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 5 _ Introduction to Procedural Noise_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 5 _ Introduction to Procedural Noise_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Introduction to Procedural Noise_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Introduction to Procedural Noise_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 5 _ Introduction to Procedural Noise_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 5 _ Introduction to Procedural Noise_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Introduction to Procedural Noise_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Introduction to Procedural Noise_files/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 5 _ Introduction to Procedural Noise_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction to Procedural Noise</font></font></h1>
 
 <h2><a id="h5-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -97,94 +90,94 @@ Figure 5.2: Noise application
 <p><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We will explain the algorithms for </font><strong><font style="vertical-align: inherit;">Value Noise</font></strong><font style="vertical-align: inherit;"> , </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Improved Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , and </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 
 <h3><a id="h5-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Value Noise</font></font></h3>
-<p>ノイズ関数としての条件や精度を厳密には満たしていませんが、最も実装が容易でノイズについての理解を助けるものとして、<strong>Value Noise</strong>というノイズアルゴリズムを紹介します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Although it does not strictly meet the conditions and accuracy of a noise function, </font><font style="vertical-align: inherit;">we will introduce a noise algorithm called </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Value Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , which is the easiest to implement and helps you understand </font><font style="vertical-align: inherit;">noise.</font></font></p>
 
-<h4><a id="h5-3-1-1"></a>アルゴリズム</h4>
+<h4><a id="h5-3-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">algorithm</font></font></h4>
 <ol>
-<li>空間上のそれぞれの軸に一定の間隔で配置された格子点を定義する</li>
-<li>それぞれの格子点について、疑似乱数の値を求める</li>
-<li>それぞれの格子点と格子点の間の点の値を、補間によって求める</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Define grid points at regular intervals on each axis in space</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Find the value of a pseudo-random number for each grid point</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Find the value of the point between each grid point by interpolation</font></font></li>
 </ol>
 
-<h5><a id="h5-3-1-1-1"></a>格子を定義</h5>
-<p>2次元の場合、x、y軸それぞれに等間隔な格子を定義します。格子は正方形の形状をしており、このそれぞれの格子点において、格子点の座標値を参照した疑似乱数の値を計算します。3次元の場合は、x、y、z軸それぞれに等間隔な格子を定義し、格子の形状は立方体になります。</p>
+<h5><a id="h5-3-1-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Define grid</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For two dimensions, define an evenly spaced grid on each of the x and y axes. </font><font style="vertical-align: inherit;">The grid has a square shape, and at each of these grid points, the value of the pseudo-random number is calculated with reference to the coordinate values ​​of the grid points. </font><font style="vertical-align: inherit;">In the case of 3D, a grid is defined at equal intervals on each of the x, y, and z axes, and the shape of the grid is a cube.</font></font></p>
 <div id="pn_2d_3d_grid" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_3d_grid.png" alt="格子（2次元）, 格子（3次元）">
-<p class="caption">
-図5.3: 格子（2次元）, 格子（3次元）
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_3d_grid.png" alt="Lattice (2D), Lattice (3D)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.3: Lattice (2D), Lattice (3D)
+</font></font></p>
 </div>
 
-<h5><a id="h5-3-1-1-2"></a>疑似乱数（Pseudo Random）の生成</h5>
-<p>乱数というのは、無秩序に、出現の確率が同じになるように並べられた数字の列を言います。乱数にも真の乱数と疑似乱数と呼ばれるものがあり、例えば、サイコロを振るとき、今まで出た目から次に出る目を予測することは不可能であり、このようなものを真の乱数と呼びます。これに対して、規則性と再現性があるものを、<strong>疑似乱数（Pseudo Random）</strong>と呼びます。（コンピュータで乱数列を生成する場合、確定的な計算で求めるので、生成された乱数はほとんどは疑似乱数ということができます。）ノイズの計算を行う場合、共通のパラメータさえ用いれば、同じ結果が得られる疑似乱数を使用します。</p>
+<h5><a id="h5-3-1-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Generation of pseudo-random numbers (Pseudo Random)</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A random number is a sequence of numbers that are randomly arranged so that they have the same probability of appearing. </font><font style="vertical-align: inherit;">There are also random numbers called true random numbers and pseudo-random numbers. For example, when rolling a dice, it is impossible to predict the next roll from the previous roll, and such a random number is a true random number. Is called. </font><font style="vertical-align: inherit;">On the other hand, those with regularity and reproducibility are </font><font style="vertical-align: inherit;">called </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">pseudo-random numbers (Pseudo Random)</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">(When a computer generates a random number sequence, it is calculated by a deterministic calculation, so most of the generated random numbers can be said to be pseudo-random numbers.) When calculating noise, the same result can be obtained by using common parameters. Use the pseudo-random number that gives.</font></font></p>
 <div id="pn_pseudo_random_2d" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_pseudo_random_2d.png" alt="擬似乱数">
-<p class="caption">
-図5.4: 擬似乱数
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_pseudo_random_2d.png" alt="Pseudo-random number">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.4: Pseudo-random numbers
+</font></font></p>
 </div>
-<p>この擬似乱数を生成する関数の引数に、それぞれの格子点の座標値を与えることで、格子点ごとに固有の擬似乱数の値を得ることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By giving the coordinate values ​​of each grid point to the argument of the function that generates this pseudo-random number, the value of the pseudo-random number unique to each grid point can be obtained.</font></font></p>
 <div id="pn_2d_3d_prand" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_3d_prand.png" alt="各格子点上の擬似乱数">
-<p class="caption">
-図5.5: 各格子点上の擬似乱数
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_3d_prand.png" alt="Pseudo-random numbers on each grid point">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.5: Pseudo-random numbers on each grid point
+</font></font></p>
 </div>
 
-<h5><a id="h5-3-1-1-3"></a>補間（Interpolation）</h5>
-<p>AとBという値があり、その間のPの値が、AからBに直線的に変化するとして、その値を近似的に求めることを<strong>線形補間（Linear Interpolation）</strong>と言います。もっとも単純な補間方法ですが、これを使って、格子点の間の値を求めるとすると、補間の始点と終点（格子点付近）で、値の変化が鋭利になってしまいます。</p>
-<p>そこで、スムーズに値が変化するように、<strong>3次エルミート曲線</strong>を補間係数に使用します。</p>
+<h5><a id="h5-3-1-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Interpolation</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are values ​​A and B, and the value of P between them changes linearly from A to B, and finding that value approximately </font><font style="vertical-align: inherit;">is called </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">linear interpolation</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">This is the simplest interpolation method, but if you use it to find the value between the grid points, the change in the value will be sharp at the start and end points of the interpolation (near the grid point).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, </font><font style="vertical-align: inherit;">we use a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">cubic Hermitian curve</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> as the interpolation factor </font><font style="vertical-align: inherit;">so that the values ​​change smoothly </font><font style="vertical-align: inherit;">.</font></font></p>
 <div class="equation">
 <pre>f\left( t\right) =3t^{2}-2t^{3}
 </pre>
 </div>
-<p>これを<code class="tt">t=0</code>から<code class="tt">t=1</code>へ変化させたとき、値は右下図のようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When this is </font><font style="vertical-align: inherit;">changed </font></font><code class="tt">t=0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">from </font></font><code class="tt">t=1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to, the value will be as shown in the lower right figure.</font></font></p>
 <div id="pn_lerp_and_3hermite" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_lerp_and_3hermite.png" alt="2次元平面での線形補間（左）, 3次エルミート曲線">
-<p class="caption">
-図5.6: 2次元平面での線形補間（左）, 3次エルミート曲線
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_lerp_and_3hermite.png" alt="Linear interpolation in a two-dimensional plane (left), cubic Hermitian curve">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.6: Linear interpolation in a two-dimensional plane (left), cubic Hermitian curve
+</font></font></p>
 </div>
-<p>※ 3次エルミート曲線は、GLSL、HLSLでは、<strong>smoothstep</strong>関数として実装されています。</p>
-<p>この補間関数を使って、それぞれの格子点で求めた値をそれぞれの軸で補間します。2次元の場合、まず格子の両端でxについての補間を行い、次にそれらの値をy軸についての補間し、合計3回の計算を行います。3次元の場合は、下の図のように、z軸について4つ、y軸について2つ、x軸について1つ、合計7回の補間を行います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* The cubic Hermitian curve is </font><font style="vertical-align: inherit;">implemented as </font><font style="vertical-align: inherit;">a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">smoothstep</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> function in </font><font style="vertical-align: inherit;">GLSL and HLSL </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This interpolation function is used to interpolate the values ​​obtained at each grid point on each axis. </font><font style="vertical-align: inherit;">In the case of 2D, first interpolate for x at both ends of the grid, then interpolate those values ​​for the y-axis, and perform a total of 3 calculations. </font><font style="vertical-align: inherit;">In the case of 3D, as shown in the figure below, 4 interpolations are performed for the z-axis, 2 for the y-axis, and 1 for the x-axis, for a total of 7 interpolations.</font></font></p>
 <div id="pn_2d_3d_interpolate" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_3d_interpolate.png" alt="補間（2次元空間）, 補間（3次元空間）">
-<p class="caption">
-図5.7: 補間（2次元空間）, 補間（3次元空間）
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_3d_interpolate.png" alt="Interpolation (2D space), Interpolation (3D space)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.7: Interpolation (2D space), Interpolation (3D space)
+</font></font></p>
 </div>
 
-<h4><a id="h5-3-1-2"></a>実装</h4>
-<p>2次元について説明いたします。各格子点の座標を求めます。</p>
+<h4><a id="h5-3-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Implementation</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will explain about 2D. </font><font style="vertical-align: inherit;">Find the coordinates of each grid point.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">floor()
 </pre>
 </div>
-<p>整数部については、<code class="tt">floor()</code>関数を使って求めます。<code class="tt">floor()</code>は、入力された実数に対してそれ以下の最小の整数を返す関数です。1.0以上の実数を入力値に与えた場合、1,2,3…という値が得られ等間隔に同じ値が得られるため、これを格子の座標値として用いることができます。</p>
-<p>小数部については、<code class="tt">frac()</code>関数を使って求めます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The integer part is </font></font><code class="tt">floor()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">calculated using a function. </font></font><code class="tt">floor()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is a function that returns the smallest integer less than or equal to the input real number. </font><font style="vertical-align: inherit;">When a real number of 1.0 or more is given to the input value, the values ​​1, 2, 3 ... are obtained and the same values ​​are obtained at equal intervals, so this can be used as the coordinate value of the grid.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Use a </font></font><code class="tt">frac()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">function to find the </font><font style="vertical-align: inherit;">decimal part </font><font style="vertical-align: inherit;">.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">frac()
 </pre>
 </div>
-<p><code class="tt">frac()</code>は、与えられた実数値の、小数部の値を返し、0以上1未満の値をとります。これにより、それぞれの格子内部の座標値を得ることができます。</p>
+<p><code class="tt">frac()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Returns the decimal value of the given real number and takes a value greater than or equal to 0 and less than 1. </font><font style="vertical-align: inherit;">This allows you to get the coordinate values ​​inside each grid.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist">// 格子点の座標値<font></font>
-float2 i00 = i;<font></font>
-float2 i10 = i + float2(1.0, 0.0);<font></font>
-float2 i01 = i + float2(0.0, 1.0);<font></font>
-float2 i11 = i + float2(1.0, 1.0);<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Coordinate values ​​of grid points</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float2 i00 = i;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float2 i10 = i + float2 (1.0, 0.0);</font></font></font></font><font></font>
+float2 i01 = i + float2(0.0, 1.0);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float2 i11 = i + float2 (1.0, 1.0);</font></font></font></font><font></font>
 </pre>
 </div>
-<p>上で求めた座標値を、フラグメントカラーのRとGに割り当てると以下のような画像が得られます。（整数部については、1以上の値を取り得るため、視覚化のため結果が1を超えないようにスケーリングを施しています）</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you assign the coordinate values ​​obtained above to the fragment colors R and G, you will get the following image. </font><font style="vertical-align: inherit;">(For the integer part, since it can take a value of 1 or more, it is scaled so that the result does not exceed 1 for visualization.)</font></font></p>
 <div id="pn_uv_floor_frac" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_uv_floor_frac.png" alt="整数部と少数部をRGとして描画したもの">
-<p class="caption">
-図5.8: 整数部と少数部をRGとして描画したもの
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_uv_floor_frac.png" alt="The integer part and the minor part drawn as RG">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.8: Integer and minority parts drawn as RG
+</font></font></p>
 </div>
 
-<h5><a id="h5-3-1-2-1"></a>疑似乱数生成関数</h5>
-<p>random関数をインターネットで検索すると、よくこの関数が結果として返されます。</p>
+<h5><a id="h5-3-1-2-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pseudo-random number generator</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Searching the internet for the random function often returns this function as a result.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">float rand(float2 co)<font></font>
 {<font></font>
@@ -192,24 +185,24 @@ float2 i11 = i + float2(1.0, 1.0);<font></font>
 }<font></font>
 </pre>
 </div>
-<p>1つ1つ処理を見ていくと、まず入力された2次元のベクトルを内積で1次元に丸め扱いやすくし、それをsin関数の引数として与え、大きな数を掛け合わせ、その小数部を求めるというもので、これにより、規則性と再現性はあるが、無秩序に連続した値を得ることができます。</p>
-<p>この関数については、出自が定かではなく、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Looking at the processing one by one, first, the input two-dimensional vector is rounded to one dimension by the inner product to make it easier to handle, and it is given as an argument of the sin function, multiplied by a large number, and the decimal part is obtained. So, this gives us regular and reproducible, but chaotically continuous values.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The origin of this function is uncertain,</font></font></p>
 <p><a href="https://stackoverflow.com/questions/12964279/whats-the-origin-of-this-glsl-rand-one-liner" class="link">https://stackoverflow.com/questions/12964279/whats-the-origin-of-this-glsl-rand-one-liner</a></p>
-<p>によると、1998年に発表された <strong>"On generating random numbers, with help of y= [(a+x)sin(bx)] mod 1"</strong> という論文という論文が起源であると書かれています。</p>
-<p>シンプルで扱いやすい反面、同じ乱数列が出てきてしまう周期が短く、大きな解像度のテクスチャであると、視覚的に確認できてしまうパターンが発生し、あまり良い疑似乱数とは言えません。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">According to the report, it </font><font style="vertical-align: inherit;">originated from a treatise called </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"On generating random numbers, with help of y = [(a + x) sin (bx)] mod 1"</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> published in 1998 </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Although it is simple and easy to handle, the cycle in which the same random number sequence appears is short, and if the texture has a large resolution, a pattern that can be visually confirmed occurs, so it is not a very good pseudo-random number.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist">// 格子点の座標上での疑似乱数の値<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Pseudo-random value on the coordinates of the grid points</font></font><font></font>
 float n00 = pseudoRandom(i00);<font></font>
 float n10 = pseudoRandom(i10);<font></font>
 float n01 = pseudoRandom(i01);<font></font>
 float n11 = pseudoRandom(i11);<font></font>
 </pre>
 </div>
-<p>それぞれの格子点の座標値（整数）を、疑似乱数の引数に与えることで、各格子点上でのノイズの値を求めます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By giving the coordinate value (integer) of each grid point to the argument of the pseudo-random number, the noise value on each grid point is obtained.</font></font></p>
 
-<h5><a id="h5-3-1-2-2"></a>補間（Interpolation）</h5>
+<h5><a id="h5-3-1-2-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Interpolation</font></font></h5>
 <div class="emlist-code">
-<pre class="emlist">// 補間関数（3次エルミート曲線）= smoothstep<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Interpolation function (3rd order Hermitian curve) = smoothstep</font></font><font></font>
 float2 interpolate(float2 t)<font></font>
 {<font></font>
     return t * t * (3.0 - 2.0 * t);<font></font>
@@ -218,130 +211,130 @@ float2 interpolate(float2 t)<font></font>
 </pre>
 </div>
 <div class="emlist-code">
-<pre class="emlist">// 補間係数を求める<font></font>
-float2 u = interpolate(f);<font></font>
-// 2次元格子の補間<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Find the interpolation factor</font></font><font></font>
+float2 u = interpolate(f);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Interpolation of 2D grid</font></font><font></font>
 return  lerp(lerp(n00, n10, u.x), lerp(n01, n11, u.x), u.y);<font></font>
 <font></font>
 </pre>
 </div>
-<p>事前に定義した<code class="tt">interpolate()</code>関数で補間係数を算出します。格子の小数部を引数とすることで、格子の始点と終点付近で滑らかに変化する曲線が得られます。</p>
-<p><code class="tt">lerp()</code>は 線形補間を行う関数で、<strong>Linear Interpolate</strong>の略です。第1引数と第2引数に与えた値の線形補間された値を計算することができ、第3引数に補間係数として求めた<strong>u</strong>を代入することで、格子間の値を滑らかにつなげます。</p>
+<p><font style="vertical-align: inherit;"></font><code class="tt">interpolate()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Calculate the interpolation factor </font><font style="vertical-align: inherit;">with a predefined </font><font style="vertical-align: inherit;">function. </font><font style="vertical-align: inherit;">By using the decimal part of the grid as an argument, you can obtain a curve that changes smoothly near the start and end points of the grid.</font></font></p>
+<p><code class="tt">lerp()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is a function that performs linear interpolation and </font><font style="vertical-align: inherit;">stands for </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Linear Interpolate</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">It is possible to calculate the linearly interpolated value of the values ​​given to the first and second arguments, and </font><font style="vertical-align: inherit;">by substituting </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">u</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> obtained as the interpolation coefficient into the third argument, </font><font style="vertical-align: inherit;">the values ​​between the grids can be connected smoothly.</font></font></p>
 <div id="pn_2d_interpolate_prand" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_interpolate_prand.png" alt="格子点の補間（2次元空間）">
-<p class="caption">
-図5.9: 格子点の補間（2次元空間）
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_interpolate_prand.png" alt="Interpolation of grid points (two-dimensional space)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.9: Interpolation of grid points (two-dimensional space)
+</font></font></p>
 </div>
 
-<h4><a id="h5-3-1-3"></a>結果</h4>
-<p>サンプルプロジェクト内の</p>
+<h4><a id="h5-3-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">result</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample project</font></font></p>
 <p>TheStudyOfProceduralNoise/Scenes/<strong>ShaderExampleList</strong></p>
-<p>シーンを開くと、<strong>Value Noise</strong>の実装結果を見ることができます。コードについては、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When you open the scene, </font><font style="vertical-align: inherit;">you can see the implementation result of </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Value Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">For the code,</font></font></p>
 <ul>
 <li>Shaders/ProceduralNoise/<strong>ValueNoise2D.cginc</strong></li>
 <li>Shaders/ProceduralNoise/<strong>ValueNoise3D.cginc</strong></li>
 <li>Shaders/ProceduralNoise/<strong>ValueNoise4D.cginc</strong></li>
 </ul>
-<p>に実装をしたものがあります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There is an implementation in.</font></font></p>
 <div id="pn_result_value_noise" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_value_noise.png" alt="Value Noise（2D, 3D, 4D） 描画結果">
-<p class="caption">
-図5.10: Value Noise（2D, 3D, 4D） 描画結果
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_value_noise.png" alt="Value Noise (2D, 3D, 4D) drawing result">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.10: Value Noise (2D, 3D, 4D) Drawing result
+</font></font></p>
 </div>
-<p>結果画像を見てみると、ある程度格子の形状が見えてしまうことがわかります。このように<strong>Value Noise</strong>は、実装は容易ですが、ある領域を回転させたときに特徴が不変であるという等方性が保証されておらず、ノイズというには不十分です。しかし、<strong>Value Noise</strong>の実装で行った、<strong>「規則的に配置された格子点で求められた疑似乱数の値を補間して空間上のすべての点の連続的でスムースな値を求める」</strong>というプロセスは、ノイズ関数の基本的なアルゴリズムの構造をしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you look at the result image, you can see that the shape of the grid can be seen to some extent. </font><font style="vertical-align: inherit;">As you can see, </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Value Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is easy to implement, but its isotropic property that its characteristics are invariant when a certain area is rotated is not guaranteed, and it is not enough to be called noise. </font><font style="vertical-align: inherit;">However, </font><font style="vertical-align: inherit;">the process of </font><strong><font style="vertical-align: inherit;">"interpolating the values ​​of pseudo-random numbers obtained from regularly arranged grid points to obtain continuous and smooth values ​​of all points in space"</font></strong><font style="vertical-align: inherit;"> performed in the implementation of </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Value Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is , Has the basic algorithmic structure of the noise function.</font></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font></p>
 
-<h3><a id="h5-3-2"></a><span class="secno">5.3.2　</span>Perlin Noise (パーリンノイズ)</h3>
-<p><strong>Perlin Noise</strong> は、プロシージャルノイズの伝統的、代表的手法であり、その名の主である<strong>Ken Perlin</strong>によって開発されました。もともとは、世界で初めて全面的にコンピュータグラフィックスを導入した映画として知られる、1982年に製作されたアメリカのSF映画「Tron」の視覚表現ためのテクスチャ生成の実験の中で生み出され、その成果は、1985年のSIGGRAPHに <strong>"An Image Synthesizer"</strong> というタイトルの論文にまとめられ発表されました。</p>
+<h3><a id="h5-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Perlin Noise</font></font></h3>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is a traditional and representative method of procedural noise and </font><font style="vertical-align: inherit;">was developed by </font><font style="vertical-align: inherit;">its name, </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ken Perlin</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Originally, it was produced in the experiment of texture generation for visual expression of the American science fiction movie "Tron" produced in 1982, which is known as the world's first movie that fully introduced computer graphics, and the result. Was published in a 1985 SIGGRAPH </font><font style="vertical-align: inherit;">paper entitled </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"An Image Synthesizer"</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 
-<h4><a id="h5-3-2-1"></a>アルゴリズム</h4>
+<h4><a id="h5-3-2-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">algorithm</font></font></h4>
 <ol>
-<li>格子（Lattice）の座標を求める</li>
-<li>格子点上の勾配（Gradient）を求める</li>
-<li>各格子点から、格子の中の点Pへのベクトルを求める</li>
-<li>2で求めた勾配と、3で求めたベクトルの内積を計算し、各格子点上のノイズの値を計算する</li>
-<li>3次エルミート曲線で、4で求めた各格子点のノイズの値を補間する</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Find the coordinates of the lattice</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Find the Gradient on the grid points</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Find the vector from each grid point to the point P in the grid</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Calculate the inner product of the gradient obtained in 2 and the vector obtained in 3, and calculate the noise value on each grid point.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Interpolate the noise value of each grid point obtained in 4 with a cubic Hermitian curve.</font></font></li>
 </ol>
 
-<h5><a id="h5-3-2-1-1"></a>勾配（Gradient）</h5>
-<p>Value Noiseと異なる点は、格子点のノイズの値を1次元の値で定義するのではなく、傾きを持った<strong>勾配（Gradient）</strong>として定義するところです。2次元であれば2次元の勾配、3次元であれば3次元の勾配を定義します。</p>
+<h5><a id="h5-3-2-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gradient</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The difference from Value Noise is that the value of the grid point noise is not defined as a one-dimensional value, but as a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">gradient</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> with a </font><strong><font style="vertical-align: inherit;">slope (Gradient)</font></strong><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Define a 2D gradient for 2D and a 3D gradient for 3D.</font></font></p>
 <div id="pn_2d_gradient" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_gradient.png" alt="Perlin Noise 勾配ベクトル">
-<p class="caption">
-図5.11: Perlin Noise 勾配ベクトル
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_gradient.png" alt="Perlin Noise Gradient Vector">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.11: Perlin Noise Gradient Vector
+</font></font></p>
 </div>
 
-<h5><a id="h5-3-2-1-2"></a>内積（Dot Product）</h5>
-<p>内積は、</p>
+<h5><a id="h5-3-2-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dot Product</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Inner product is</font></font></p>
 <div class="equation">
 <pre>\overrightarrow {a}\cdot \overrightarrow {b}=\left| a\right| \left| b\right| \cos \theta<font></font>
 = \left( a.x\ast b.x\right) +\left( a.y\ast b.y\right)<font></font>
 </pre>
 </div>
-<p>で定義されるベクトルの演算で、幾何学的な意味は、2つのベクトルがどれぐらい同じ方向を向いているかを示す比であり、内積のとる値は、<strong>同じ方向→1</strong>、<strong>直交→0</strong>、<strong>逆向き→-1</strong>となります。つまり、勾配と、各格子点から格子内のノイズの値を求めたい点Pへ向かうベクトルの内積を求めるということは、それらのベクトルが同じ方向を向いていれば、高いノイズの値が、異なる方向を向いていれば小さい値が返されることになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the vector operation defined in, the geometric meaning is the ratio of how much the two vectors are oriented in the same direction, and the values ​​taken by the inner product are the </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">same direction → 1</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">orthogonal → 0</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , and </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">vice versa. Orientation → -1</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">In other words, finding the inner product of the gradient and the vector from each grid point toward the point P where you want to find the noise value in the grid means that if those vectors point in the same direction, the high noise value will be different. If you are facing the direction, a small value will be returned.</font></font></p>
 <div id="pn_dot_and_gradient" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_dot_and_gradient.png" alt="内積（左） Perlin Noise 勾配と内挿ベクトル（右）">
-<p class="caption">
-図5.12: 内積（左） Perlin Noise 勾配と内挿ベクトル（右）
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_dot_and_gradient.png" alt="Dot product (left) Perlin Noise gradient and interpolation vector (right)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.12: Dot Product (Left) Perlin Noise Gradient and Interpolation Vector (Right)
+</font></font></p>
 </div>
 
-<h5><a id="h5-3-2-1-3"></a>補間（Interpolation）</h5>
-<p>ここでは、3次エルミート曲線を補間のための関数として用いていますが、後に、Ken Perlinは、5次エルミート曲線に修正しています。それについては、<strong>Improved Perlin Noise（改良パーリンノイズ）</strong>の項で説明いたします。</p>
+<h5><a id="h5-3-2-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Interpolation</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, the cubic Hermitian curve is used as a function for interpolation, but Ken Perlin later modified it to a cubic Hermitian curve. </font><font style="vertical-align: inherit;">We </font><font style="vertical-align: inherit;">'ll </font><font style="vertical-align: inherit;">talk about that in the </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Improved Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> section.</font></font></p>
 
-<h4><a id="h5-3-2-2"></a>実装</h4>
-<p>サンプルプロジェクト内の</p>
+<h4><a id="h5-3-2-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Implementation</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample project</font></font></p>
 <p>TheStudyOfProceduralNoise/Scenes/<strong>ShaderExampleList</strong></p>
-<p>シーンを開くと、<strong>Perlin Noise</strong>の実装結果を見ることができます。コードについては、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you open the scene, </font><font style="vertical-align: inherit;">you can see the implementation result of </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">For the code,</font></font></p>
 <ul>
 <li>Shaders/ProceduralNoise/<strong>OriginalPerlinNoise2D.cginc</strong></li>
 <li>Shaders/ProceduralNoise/<strong>OriginalPerlinNoise3D.cginc</strong></li>
 <li>Shaders/ProceduralNoise/<strong>OriginalPerlinNoise4D.cginc</strong></li>
 </ul>
-<p>に実装をしたものがあります。</p>
-<p>2次元についての実装を掲載します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There is an implementation in.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will post the implementation for 2D.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">// Original Perlin Noise 2D<font></font>
 float originalPerlinNoise(float2 v)<font></font>
-{<font></font>
-    // 格子の整数部の座標<font></font>
-    float2 i = floor(v);<font></font>
-    // 格子の小数部の座標<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Coordinates of the integer part of the grid</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float2 i = floor (v);</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Coordinates of the decimal part of the grid</font></font><font></font>
     float2 f = frac(v);<font></font>
-<font></font>
-    // 格子の4つの角の座標値<font></font>
-    float2 i00 = i;<font></font>
-    float2 i10 = i + float2(1.0, 0.0);<font></font>
-    float2 i01 = i + float2(0.0, 1.0);<font></font>
-    float2 i11 = i + float2(1.0, 1.0);<font></font>
-<font></font>
-    // 格子内部のそれぞれの格子点からのベクトル<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Coordinate values ​​of the four corners of the grid</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float2 i00 = i;</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float2 i10 = i + float2 (1.0, 0.0);</font></font></font></font></font></font><font></font>
+    float2 i01 = i + float2(0.0, 1.0);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float2 i11 = i + float2 (1.0, 1.0);</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Vectors from each grid point inside the grid</font></font><font></font>
     float2 p00 = f;<font></font>
     float2 p10 = f - float2(1.0, 0.0);<font></font>
     float2 p01 = f - float2(0.0, 1.0);<font></font>
     float2 p11 = f - float2(1.0, 1.0);<font></font>
-<font></font>
-    // 格子点それぞれの勾配<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Gradient of each grid point</font></font><font></font>
     float2 g00 = pseudoRandom(i00);<font></font>
     float2 g10 = pseudoRandom(i10);<font></font>
     float2 g01 = pseudoRandom(i01);<font></font>
     float2 g11 = pseudoRandom(i11);<font></font>
-<font></font>
-    // 正規化（ベクトルの大きさを1にそろえる）<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Normalization (set the magnitude of the vector to 1)</font></font><font></font>
     g00 = normalize(g00);<font></font>
     g10 = normalize(g10);<font></font>
     g01 = normalize(g01);<font></font>
     g11 = normalize(g11);<font></font>
-<font></font>
-    // 各格子点のノイズの値を計算<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Calculate the noise value at each grid point</font></font><font></font>
     float n00 = dot(g00, p00);<font></font>
     float n10 = dot(g10, p10);<font></font>
     float n01 = dot(g01, p01);<font></font>
     float n11 = dot(g11, p11);<font></font>
-<font></font>
-    // 補間<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Interpolation</font></font><font></font>
     float2 u_xy = interpolate(f.xy);<font></font>
     float2 n_x  = lerp(float2(n00, n01), float2(n10, n11), u_xy.x);<font></font>
     float n_xy = lerp(n_x.x, n_x.y, u_xy.y);<font></font>
@@ -350,53 +343,53 @@ float originalPerlinNoise(float2 v)<font></font>
 </pre>
 </div>
 
-<h4><a id="h5-3-2-3"></a>結果</h4>
-<p><strong>Value Noise</strong>で見られたような不自然な格子の形状はなく、等方性のあるノイズが得られます。<strong>Perlin Noise</strong>は、<strong>Value Noise</strong>に対して、勾配を用いることから<strong>Gradient Noise</strong>とも呼ばれます。</p>
+<h4><a id="h5-3-2-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">result</font></font></h4>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is no unnatural grid shape as seen in </font><strong><font style="vertical-align: inherit;">Value Noise</font></strong><font style="vertical-align: inherit;"> , and isotropic noise is obtained. </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is </font><font style="vertical-align: inherit;">also called </font><strong><font style="vertical-align: inherit;">Gradient Noise</font></strong><font style="vertical-align: inherit;"> because it uses a gradient as </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">opposed</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> to </font><strong><font style="vertical-align: inherit;">Value Noise</font></strong><font style="vertical-align: inherit;"> .</font></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font></p>
 <div id="pn_result_original_perlin_noise" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_original_perlin_noise.png" alt="Perlin Noise（2D, 3D, 4D） 結果">
-<p class="caption">
-図5.13: Perlin Noise（2D, 3D, 4D） 結果
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_original_perlin_noise.png" alt="Perlin Noise (2D, 3D, 4D) results">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.13: Perlin Noise (2D, 3D, 4D) results
+</font></font></p>
 </div>
 
-<h3><a id="h5-3-3"></a><span class="secno">5.3.3　</span>Improved Perlin Noise (改良パーリンノイズ)</h3>
-<p><strong>Improved Perlin Noise（改良パーリンノイズ）</strong>は、Ken Perlin氏によって、<strong>Perlin Noise</strong>の欠点を改良するものとして2001年に発表されました。詳細については、ここで確認することができます。</p>
+<h3><a id="h5-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Improved Perlin Noise</font></font></h3>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Improved Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> was announced in 2001 </font><font style="vertical-align: inherit;">by Ken Perlin </font><font style="vertical-align: inherit;">as an improvement over the shortcomings of </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">More details can be found here.</font></font></p>
 <p><a href="http://mrl.nyu.edu/~perlin/paper445.pdf" class="link">http://mrl.nyu.edu/~perlin/paper445.pdf</a></p>
-<p>現在、<strong>Perlin Noise</strong>というと、この<strong>Improved Perlin Noise</strong>に基づいて実装されたものがほとんどです。</p>
-<p>Ken Perlinが行った改良とは、主に次の2点です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Currently, most </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is </font><font style="vertical-align: inherit;">implemented based on </font><font style="vertical-align: inherit;">this </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Improved Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are two main improvements Ken Perlin has made:</font></font></p>
 <ol>
-<li>格子間の勾配の補間のための補間関数</li>
-<li>勾配の計算法</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Interpolation function for interpolating gradients between grids</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gradient calculation method</font></font></li>
 </ol>
 
-<h5><a id="h5-3-3-0-1"></a>格子間の勾配の補間のための補間関数</h5>
-<p>補間のエルミート曲線について、オリジナルの<strong>Perlin Noise</strong>では<strong>3次エルミート曲線</strong>を用いました。しかし、この3次の式であると、2階微分（微分して得られた結果がさらに微分可能なとき、これを微分する事）<code class="tt">6-12t</code>が<code class="tt">t=0</code>, <code class="tt">t=1</code>の時に<code class="tt">0</code>になりません。曲線を微分すると、接線の傾きが得られます。もう1回微分すると、その曲率が得られ、これがゼロでないということはわずかな変化があるということです。このため、バンプマッピングのための法線として用いる場合、隣接する格子と値が厳密に連続にならなず、視覚的なアーティファクトが発生します。</p>
-<p>比較した図です。</p>
+<h5><a id="h5-3-3-0-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Interpolation function for interpolating gradients between grids</font></font></font></font></font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For Hermite curve interpolation, the original of the </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">cubic Hermite curve</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> was used. </font><font style="vertical-align: inherit;">However, if there is in this third-order equation, (when the differential to a result obtained can be further differentiated, that differentiates this) second-order differential </font></font><code class="tt">6-12t</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is </font></font><code class="tt">t=0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="tt">t=1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">when </font></font><code class="tt">0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you do not take. </font><font style="vertical-align: inherit;">Differentiating the curve gives the slope of the tangent. </font><font style="vertical-align: inherit;">Another derivative gives that curvature, which is non-zero means there is a slight change. </font><font style="vertical-align: inherit;">As a result, when used as a normal for bump mapping, adjacent grids and values ​​are not exactly continuous, resulting in visual artifacts.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is a comparison figure.</font></font></p>
 <div id="pn_compare_bumpmap" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_compare_bumpmap.png" alt="3次エルミート曲線による補間（左） 5次エルミート曲線による補間（右）">
-<p class="caption">
-図5.14: 3次エルミート曲線による補間（左） 5次エルミート曲線による補間（右）
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_compare_bumpmap.png" alt="Interpolation with a cubic Hermitian curve (left) Interpolation with a fifth-order Hermitian curve (right)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.14: Interpolation with a cubic Hermitian curve (left) Interpolation with a fifth-order Hermitian curve (right)
+</font></font></p>
 </div>
-<p>サンプルプロジェクト</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sample project</font></font></p>
 <p>TheStudyOfProceduralNoise/Scenes/<strong>CompareBumpmap</strong></p>
-<p>シーンを開くと、これを確認することができます。</p>
-<p>図を見てみると、左の<strong>3次エルミート曲線</strong>によって補間を行った方は、格子の境界で視覚的に不自然な法線の不連続が認められます。これを回避するために、次の<strong>5次エルミート曲線</strong>を用います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can see this by opening the scene.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Looking at the figure, the person who </font><font style="vertical-align: inherit;">interpolated by the </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">cubic Hermitian curve on the</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> left </font><font style="vertical-align: inherit;">shows a visually unnatural normal discontinuity at the boundary of the lattice. </font><font style="vertical-align: inherit;">To avoid this, use the following </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fifth-order Hermitian curve</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="equation">
 <pre>f\left( t\right) =6t^{5}-15t^{4}+10t^{3}
 </pre>
 </div>
-<p>それぞれの曲線図を示します。①は<strong>3次エルミート曲線</strong>、②は<strong>5次エルミート曲線</strong>です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Each curve diagram is shown. </font><font style="vertical-align: inherit;">① is a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">cubic Hermitian curve</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and ② is a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5th order Hermitian curve</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div id="pn_3hermite_and_5hermite" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3hermite_and_5hermite.png" alt="3次と5次のエルミート曲線">
-<p class="caption">
-図5.15: 3次と5次のエルミート曲線
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3hermite_and_5hermite.png" alt="Hermitian curves of 3rd and 5th order">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.15: 3rd and 5th order Hermitian curves
+</font></font></p>
 </div>
-<p><code class="tt">t=0</code>, <code class="tt">t=1</code>あたりでなめらな変化をしていることがわかります。1階微分、2階微分ともに<code class="tt">t=0</code>または<code class="tt">t=1</code>の時に<code class="tt">0</code>となるので、連続性が保たれます。</p>
+<p><code class="tt">t=0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="tt">t=1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can see that you have a smooth change around. </font><font style="vertical-align: inherit;">Since both the 1st derivative and the 2nd derivative are at </font></font><code class="tt">t=0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">or </font></font><code class="tt">t=1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">at times </font></font><code class="tt">0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, continuity is maintained.</font></font></p>
 
-<h5><a id="h5-3-3-0-2"></a>勾配の計算</h5>
-<p>3次元について考えます。勾配Gは球状に均一に分布していますが、立方体格子はその軸に対しては短く、その対角線については長く、それ自体方向的な偏りを持っています。勾配が軸と平行に近い場合、それが近接するものと整列すると、距離が近いためそれらの領域では異常に高い値をとなり、斑点に見えるようなノイズの分布を生じさせることがあります。この勾配の偏りを取り除くために、座標軸に平行なものと、対角線上にあるものを取り除いた以下の12のベクトルに限定することを行います。</p>
+<h5><a id="h5-3-3-0-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gradient calculation</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Think about 3D. </font><font style="vertical-align: inherit;">The gradient G is evenly distributed in a spherical shape, but the cubic lattice is short about its axis, long about its diagonal, and has a directional bias in itself. </font><font style="vertical-align: inherit;">If the gradient is close to parallel to the axis, aligning it with the ones in close proximity can result in unusually high values ​​in those areas due to the close distance, which can result in a spotty noise distribution. </font><font style="vertical-align: inherit;">In order to remove this gradient bias, we will limit it to the following 12 vectors, with those parallel to the axes and those on the diagonal removed.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">(1,1,0),(-1,1,0),(1,-1,0),(-1,-1,0),<font></font>
 (1,0,1),(-1,0,1),(1,0,-1),(-1,0,-1),<font></font>
@@ -404,24 +397,24 @@ float originalPerlinNoise(float2 v)<font></font>
 </pre>
 </div>
 <div id="pn_3d_improved_gradient" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3d_improved_gradient.png" alt="改良パーリンノイズの勾配（3次元）">
-<p class="caption">
-図5.16: 改良パーリンノイズの勾配（3次元）
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3d_improved_gradient.png" alt="Improved Perlin noise gradient (3D)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.16: Improved Perlin Noise Gradient (3D)
+</font></font></p>
 </div>
-<p>認知心理学的な見地から、実際には、格子の中の点Pが十分なランダム性を与えてくれるのもあり、勾配Gが全方位にランダムである必要はないとKen Perlinは述べています。また、たとえば、<code class="tt">(1, 1, 0)</code>と<code class="tt">(x, y, z)</code>の内積は、単純に<code class="tt">x + y</code>として計算することができ、後に行う内積計算を単純化し、多くの乗算を避けることができます。これによって24個の乗算が計算から取り除かれ、計算コストを抑えることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From a cognitive psychological point of view, Ken Perlin states that in reality, the point P in the grid gives enough randomness, and the gradient G does not have to be random in all directions. .. </font><font style="vertical-align: inherit;">In addition, for example, </font></font><code class="tt">(1, 1, 0)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the </font></font><code class="tt">(x, y, z)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">inner product of, simply </font></font><code class="tt">x + y</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">can be calculated as, to simplify the inner product calculation to be performed later, you can avoid a lot of multiplication. </font><font style="vertical-align: inherit;">This removes 24 multiplications from the calculation and keeps the calculation cost down.</font></font></p>
 
-<h4><a id="h5-3-3-1"></a>実装と結果</h4>
-<p>サンプルプロジェクト内の</p>
+<h4><a id="h5-3-3-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Implementation and results</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample project</font></font></p>
 <p>TheStudyOfProceduralNoise/Scenes/<strong>ShaderExampleList</strong></p>
-<p>シーンを開くと、<strong>Improved Perlin Noise</strong>の実装結果を見ることができます。コードについては、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you open the scene, </font><font style="vertical-align: inherit;">you can see the implementation result of </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Improved Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">For the code,</font></font></p>
 <ul>
 <li>Shaders/ProceduralNoise/<strong>ClassicPerlinNoise2D.cginc</strong></li>
 <li>Shaders/ProceduralNoise/<strong>ClassicPerlinNoise3D.cginc</strong></li>
 <li>Shaders/ProceduralNoise/<strong>ClassicPerlinNoise4D.cginc</strong></li>
 </ul>
-<p>この<strong>Improved Perlin Noise</strong>の実装は、次の<strong>Simplex Noise</strong>でも紹介する、論文<strong>"Effecient computational noise in GLSL"</strong> において発表されたものに基づいています。（ここでは、<strong>Classic Perlin Noise</strong>という名称で扱われています。そのため、少しややこしいですが、その名前を使用しています。）。この実装は、勾配計算について、Ken Perlinが論文で説明したものとは異なりますが、十分に類似した結果を得ることができます。</p>
-<p>下記のURLからKen Perlin のオリジナルの実装を確認することができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">improved Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> implementation is </font><font style="vertical-align: inherit;">based on the one published </font><strong><font style="vertical-align: inherit;">in the</font></strong><font style="vertical-align: inherit;"> paper </font><strong><font style="vertical-align: inherit;">"Effecient computational noise in GLSL"</font></strong><font style="vertical-align: inherit;"> , which will </font><font style="vertical-align: inherit;">also be introduced in </font><font style="vertical-align: inherit;">the next </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">(Here it's called </font><strong><font style="vertical-align: inherit;">Classic Perlin Noise</font></strong><font style="vertical-align: inherit;"> , so it's a bit confusing, but I'm using that name.) </font><font style="vertical-align: inherit;">This implementation is different from what Ken Perlin described in the paper for gradient calculations, but it gives quite similar results.</font></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can check the original implementation of Ken Perlin from the URL below.</font></font></p>
 <p><a href="http://mrl.nyu.edu/~perlin/noise/" class="link">http://mrl.nyu.edu/~perlin/noise/</a></p>
 <div id="pn_result_classic_perlin_noise" class="image">
 <img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_classic_perlin_noise.png" alt="Improved Perlin Noise（2D, 3D, 4D） ">
@@ -429,162 +422,162 @@ float originalPerlinNoise(float2 v)<font></font>
 図5.17: Improved Perlin Noise（2D, 3D, 4D） 
 </p>
 </div>
-<p>下の図は、ノイズの勾配と結果を比較したものです。左がオリジナルの<strong>Perlin Noise</strong>、右が<strong>Improved Perlin Noise</strong>です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The figure below compares the noise gradient with the results. </font><font style="vertical-align: inherit;">The left is the original </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and the right is the </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Improved Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div id="pn_result_perlin_and_improvedperlin" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_perlin_and_improvedperlin.png" alt="Perlin Noise, Improved Perlin Noise の勾配と結果の比較">
-<p class="caption">
-図5.18: Perlin Noise, Improved Perlin Noise の勾配と結果の比較
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_perlin_and_improvedperlin.png" alt="Perlin Noise, Improved Perlin Noise Gradient and Result Comparison">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.18: Perlin Noise, Improved Perlin Noise Gradients and Results Comparison
+</font></font></p>
 </div>
 
-<h3><a id="h5-3-4"></a><span class="secno">5.3.4　</span>Simplex Noise (シンプレックスノイズ)</h3>
-<p><strong>Simplex Noise</strong>は、Ken Perlinによって、従来の<strong>Perlin Noise</strong>よりも優れたアルゴリズムとして2001年に発表されました。</p>
-<p><strong>Simplex Noise</strong>は従来の<strong>Perlin Noise</strong>と比較して、以下のような優位性があります。</p>
+<h3><a id="h5-3-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Simplex Noise</font></font></h3>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> was introduced by Ken Perlin in </font><font style="vertical-align: inherit;">2001 as a better algorithm than </font><font style="vertical-align: inherit;">traditional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> has the following advantages over </font><font style="vertical-align: inherit;">traditional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <ul>
-<li>計算の複雑性が低く、乗算の回数が少ない。</li>
-<li>ノイズの次元を4次元、5次元またはそれ以上と上げていったとき、計算負荷の増加が少なく、<strong>Perlin Noise</strong>が<span class="equation">O(2^{N})</span>の計算オーダーであるところ、<strong>Simplex Noise</strong>は<span class="equation">O(N^{2})</span>で済む</li>
-<li>勾配ベクトルの方向的な偏りが引き起こす視覚的なアーティファクトがない</li>
-<li>少ない計算負荷で、連続的な勾配がある</li>
-<li>ハードウェア（シェーダ）で実装しやすい</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The calculation complexity is low and the number of multiplications is small.</font></font></li>
+<li><font style="vertical-align: inherit;"><strong><font style="vertical-align: inherit;">Simplex Noise</font></strong><font style="vertical-align: inherit;"> is </font><span class="equation"><font style="vertical-align: inherit;">O (N </font></span><span class="equation"><font style="vertical-align: inherit;">)</font></span><font style="vertical-align: inherit;"> where the </font><font style="vertical-align: inherit;">computational load increases less and </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is in </font><font style="vertical-align: inherit;">the computational order of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">O (2 ^ {N})</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> when the noise dimension is increased to 4D, 5D or higher. </font><span class="equation"><font style="vertical-align: inherit;">^ {2})</font></span><font style="vertical-align: inherit;"> is enough</font></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font><span class="equation"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">No visual artifacts caused by directional bias of the gradient vector</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There is a continuous gradient with less computational load</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Easy to implement with hardware (shader)</font></font></li>
 </ul>
-<p>ここでは、<strong>"Simplex Noise Demystify"</strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"Simplex Noise Demystify"</font></font></strong></p>
 <p><a href="http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf" class="link">http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf</a></p>
-<p>の内容をもとに解説いたします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will explain based on the contents of.</font></font></p>
 
-<h4><a id="h5-3-4-1"></a>アルゴリズム</h4>
+<h4><a id="h5-3-4-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">algorithm</font></font></h4>
 <ol>
-<li>単体（Simplex）による格子を定義する</li>
-<li>ノイズの値を求める点Pがどの単体にあるかを計算</li>
-<li>単体の角における勾配を計算</li>
-<li>それぞれの単体の周囲の角における勾配の値から、点Pにおけるノイズの値を計算</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Define a grid by simplex</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Calculate which unit has the point P for which the noise value is to be calculated.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Calculate the gradient at a single corner</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Calculate the noise value at point P from the gradient values ​​at the corners around each unit</font></font></li>
 </ol>
 
-<h5><a id="h5-3-4-1-1"></a>単体(Simplex)による格子</h5>
-<p>シンプレックスとは、数学の位相幾何学においては、単体と呼ばれます。単体とは、図形を作る一番小さな単位のことです。0次元単体は<strong>点</strong>、1次元単体は<strong>線分</strong>、2次元単体は<strong>三角形</strong>、3次元単体は<strong>四面体</strong>、4次元単体は<strong>五胞体</strong>です。</p>
+<h5><a id="h5-3-4-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex grid</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex is called a simple substance in the topology of mathematics. </font><font style="vertical-align: inherit;">A simple substance is the smallest unit that makes a figure. </font><font style="vertical-align: inherit;">A 0-dimensional simplex is a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">point</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , a 1-dimensional simplex is a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">line segment</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , a 2-dimensional simplex is a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">triangle</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , a 3-dimensional simplex is a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tetrahedron</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , and a 4-dimensional simplex is a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5-cell</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div id="pn_simplices" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_simplices.png" alt="それぞれの次元での単体">
-<p class="caption">
-図5.19: それぞれの次元での単体
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_simplices.png" alt="Simple substance in each dimension">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.19: Simple substance in each dimension
+</font></font></p>
 </div>
-<p><strong>Perlin Noise</strong>では、2次元の時は正方形の格子、3次元の時は立方体の格子を用いていましたが、<strong>Simplex Noise</strong>ではこの単体を格子に使います。</p>
-<p>1次元の場合、空間を充てんする最も単純な形状は、等間隔に配置された線です。2次元の場合、空間を充てんする最も単純な形状は三角形となります。</p>
-<p>これらの三角形で構成されたタイルのうち二つは、その主対角線に沿って押しつぶされた正方形と考えることができます。</p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> used a square grid for 2D and a cubic grid for 3D, but </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> uses this simple substance for the grid.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In one dimension, the simplest shape that fills the space is evenly spaced lines. </font><font style="vertical-align: inherit;">In two dimensions, the simplest shape that fills the space is a triangle.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Two of the tiles made up of these triangles can be thought of as crushed squares along their main diagonal.</font></font></p>
 <div id="pn_2d_simplex_grid" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_simplex_grid.png" alt="2次元の単体格子">
-<p class="caption">
-図5.20: 2次元の単体格子
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_simplex_grid.png" alt="Two-dimensional simple substance grid">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.20: Two-dimensional simple substance grid
+</font></font></p>
 </div>
-<p>3次元では、単体形状はわずかに歪んだ四面体です。それら6つの四面体は主対角線に沿って押しつぶされた立方体を作ります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In three dimensions, the single shape is a slightly distorted tetrahedron. </font><font style="vertical-align: inherit;">These six tetrahedra form a cube that is crushed along the main diagonal.</font></font></p>
 <div id="pn_3d_simplex_skew" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3d_simplex_skew.png" alt="3次元の単体格子">
-<p class="caption">
-図5.21: 3次元の単体格子
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3d_simplex_skew.png" alt="3D single grid">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.21: Three-dimensional simple substance grid
+</font></font></p>
 </div>
-<p>4次元では、単体形状は非常に視覚化が困難です。その単体形状は5つの角を持っており、24個のこれらの形状が、主対角線に沿ってつぶれた4次元の超立方体を形成します。</p>
-<p>N次元の単体形状は、<strong>N+1</strong>個の角を持ち、<strong>N!（3!は3×2×1=6)</strong>個のそれらの形状は、主対角線に沿ってつぶれたN次元超立方体を満たす、と言えます。</p>
-<p>格子に単体形状を用いる利点は、次元に対して可能な限り少ない角をもつ格子を定義できるので、格子の内部の点の値を求めるとき、周囲の格子点の値から補間を行いますが、その計算回数を抑えることができるところにあります。N次元の超立方体は<span class="equation">2^{N}</span>個の角を持ちますが、N次元の単体形状は<span class="equation">N+1</span>個だけの角しか持ちません。</p>
-<p>より高い次元のノイズの値を求めようとするとき、従来の<strong>Perlin Noise</strong>では、超立方体のそれぞれの角における計算の複雑性や、それぞれの主軸についての補間の計算量は<span class="equation">O(2^{N})</span>問題であり、すぐに扱いにくいものになります。一方、<strong>Simplex Noise</strong>では、次元に対する単体形状の頂点数が少ないため、その計算量は<span class="equation">O(N^{2})</span>に抑えられます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In 4D, single shapes are very difficult to visualize. </font><font style="vertical-align: inherit;">Its single shape has five corners, and these 24 shapes form a four-dimensional hypercube that collapses along the main diagonal.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">N-dimensional elemental shapes have </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">N + 1</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> corners, and </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">N! (3! Is 3 × 2 × 1 = 6)</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> shapes fill the N-dimensional hypercube collapsed along the main diagonal. It can be said that.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The advantage of using a simple substance shape for a grid is that you can define a grid with as few angles as possible with respect to the dimension, so when finding the values ​​of points inside the grid, you will interpolate from the values ​​of the surrounding grid points. It is in a place where the number of calculations can be suppressed. </font><font style="vertical-align: inherit;">The N-dimensional hypercube has </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 ^ {N}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> corners, while the N-dimensional elemental shape has </font><font style="vertical-align: inherit;">only </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">N + 1</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> corners.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When trying to find higher dimensional noise values, traditional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> requires </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">O (2 ^ {N})</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> the complexity of the calculations at each corner of the hypercube and the amount of interpolation for each principal axis </font><span class="equation"><font style="vertical-align: inherit;">. ) It's a</font></span><font style="vertical-align: inherit;"> problem and quickly becomes awkward. </font><font style="vertical-align: inherit;">On the other hand, with </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the number of vertices of the simplex shape with respect to the dimension is small, so the amount of calculation is limited to </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">O (N ^ {2})</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 
-<h5><a id="h5-3-4-1-2"></a>ノイズの値を求める点Pが、どの単体にあるかの決定</h5>
-<p>Perlin Noiseでは、求めたい点Pが、どの格子にあるかの計算は、座標の整数部を<code class="tt">floor()</code>で求めることができました。Simplex Noiseでは、以下に示す2つの手順で行います。</p>
+<h5><a id="h5-3-4-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Determining which unit has the point P for which the noise value is to be calculated.</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With Perlin Noise, the integer part of the coordinates </font></font><code class="tt">floor()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">could be used </font><font style="vertical-align: inherit;">to calculate which grid the point P you want to </font><font style="vertical-align: inherit;">find is in. </font><font style="vertical-align: inherit;">For Simplex Noise, follow the two steps below.</font></font></p>
 <ol>
-<li>主対角線に沿って入力座標空間を歪曲させ、それぞれの軸の座標の整数部を見ることで、どの単体のユニットに属するかを判断する</li>
-<li>単体のユニットの原点から、点Pへのそれぞれの次元での距離の大きさを比較することで、単体のユニットのどの単体に属するかを判断する</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By distorting the input coordinate space along the main diagonal and looking at the integer part of the coordinates of each axis, it is possible to determine which single unit it belongs to.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By comparing the magnitude of the distance from the origin of a single unit to the point P in each dimension, it is possible to determine which single unit belongs to.</font></font></li>
 </ol>
-<p>視覚的な理解のために、2次元の場合についての図を見ていきましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For a visual understanding, let's look at a diagram of the two-dimensional case.</font></font></p>
 <div id="pn_2d_simpex_grid_skew" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_simpex_grid_skew.png" alt="2次元の場合の単体格子の変形の様子">
-<p class="caption">
-図5.22: 2次元の場合の単体格子の変形の様子
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_simpex_grid_skew.png" alt="Deformation of a single lattice in two dimensions">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.22: Deformation of a single grid in two dimensions
+</font></font></p>
 </div>
-<p>2次元の三角形の単体格子は、スケーリングによって二等辺三角形の格子にゆがめることができます。二等辺三角形は2つで辺の長さが1の四角形（単体のユニットというのはこの四角形を指します）を形成します。移動後の座標<code class="tt">(x, y)</code>の整数部を見ることによって、ノイズの値を求めたい点Pがどの単体のユニットの四角形にあるかを判断することができます。また、単体のユニットの原点からのx、yの大きさを比較することによって、点Pを含む単体がユニットのどちらであるかがわかり、点Pを囲む単体の3点の座標が決まります。</p>
-<p>3次元の場合、2次元の正三角形の単体格子を二等辺三角形の格子へと変形させることができるように、3次元の単体格子は、その主対角線に沿ってスケーリングすることで、規則正しく並んだ立方体の格子に変形させることができます。2次元の場合と同様、移動した点Pの座標の整数部を見ることで、どの6個からなる単体のユニットに属するかを判定できます。そしてさらに、そのユニットのどの単体に属するかは、ユニットの原点からの各軸の相対的な大きさ比較で判定することができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A single grid of two-dimensional triangles can be distorted into a grid of isosceles triangles by scaling. </font><font style="vertical-align: inherit;">Two isosceles triangles form a quadrangle with one side length (a single unit refers to this quadrangle). </font></font><code class="tt">(x, y)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By looking at the integer part </font><font style="vertical-align: inherit;">of the coordinates after moving </font><font style="vertical-align: inherit;">, you can determine which single unit square the point P for which you want to find the noise value is. </font><font style="vertical-align: inherit;">Also, by comparing the sizes of x and y from the origin of a single unit, it is possible to know which of the units is the single unit including the point P, and the coordinates of the three single points surrounding the point P are determined.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the case of 3D, the 3D single lattice is regularly arranged by scaling along its main diagonal so that the 2D equilateral triangle single lattice can be transformed into an isosceles triangular lattice. It can be transformed into a cubic grid. </font><font style="vertical-align: inherit;">As in the case of two dimensions, you can determine which six units belong to a single unit by looking at the integer part of the coordinates of the moved point P. </font><font style="vertical-align: inherit;">Furthermore, which unit of the unit belongs to can be determined by comparing the relative size of each axis from the origin of the unit.</font></font></p>
 <div id="pn_3d_simplex_rankorder" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3d_simplex_rankorder.png" alt="3次元の場合の単体のユニットのうちどの単体に点Pが属するかを決定するルール">
-<p class="caption">
-図5.23: 3次元の場合の単体のユニットのうちどの単体に点Pが属するかを決定するルール
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3d_simplex_rankorder.png" alt="Rule to determine which single unit the point P belongs to in the case of 3D">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.23: Rules for determining which single unit the point P belongs to in the 3D case
+</font></font></p>
 </div>
-<p>この上の図は、3次元の単体のユニットが作る立方体を主対角線に沿って見たものであり、点Pの座標値のx、y、z軸についてのそれぞれの大きさによってどの単体に属するのかのルールを示したものです。</p>
-<p>4次元の場合、視覚化は困難ですが、2次元と3次元の規則と同様に考えることができます。空間を満たす4次元の超立方体の座標<code class="tt">(x, y, z, w)</code>それぞれの軸についての大きさの組み合わせは、4!=24通りとなり、超立方体内の24個の単体それぞれに固有のものとなり、点Pがどの単体に属するかを判定することができます。</p>
-<p>下の図は、2次元における単体格子をフラグメントカラーで可視化したものです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The figure above shows a cube formed by a three-dimensional unit along the main diagonal, and belongs to which unit depending on the size of the coordinate values ​​of point P on the x, y, and z axes. It shows the rules of.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the case of 4D, it is difficult to visualize, but it can be thought of as a rule in 2D and 3D. </font><font style="vertical-align: inherit;">Coordinates of a four-dimensional hypercube that fills space There are </font></font><code class="tt">(x, y, z, w)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4! = 24 combinations of sizes for each axis, which are unique to each of the 24 units in the hypercube, and the point P belongs to which unit. Can be determined.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The figure below is a two-dimensional single grid visualized in fragment color.</font></font></p>
 <div id="pn_uv_simplex_2d" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_uv_simplex_2d.png" alt="単体（2D）の整数部と少数部">
-<p class="caption">
-図5.24: 単体（2D）の整数部と少数部
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_uv_simplex_2d.png" alt="Single (2D) integer and minority parts">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.24: Single (2D) integer and minority parts
+</font></font></p>
 </div>
 
-<h5><a id="h5-3-4-1-3"></a>補間から総和への移行</h5>
-<p>従来の<strong>Perlin Noise</strong>では、格子内部の点の値を周囲の格子点の値から補間によって求めていました。しかし、<strong>Simplex Noise</strong>では、代わりに、それぞれの単体形状の頂点の値の影響度合いを、単純な総和計算で求めます。具体的には、単体それぞれの角の<strong>勾配の外挿</strong>と、<strong>各頂点からの距離によって放射円状に減衰する関数</strong>の積の足しあわせを行います。</p>
-<p>2次元について考えます。</p>
+<h5><a id="h5-3-4-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Transition from interpolation to sum</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In conventional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the values ​​of points inside the grid </font><font style="vertical-align: inherit;">are </font><strong><font style="vertical-align: inherit;">calculated from</font></strong><font style="vertical-align: inherit;"> the values ​​of the surrounding grid points by interpolation. </font><font style="vertical-align: inherit;">However, with </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , instead, the degree of influence of the values ​​of the vertices of each simple substance is calculated by a simple sum calculation. </font><font style="vertical-align: inherit;">Specifically, the </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">extrapolation</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> of the </font><strong><font style="vertical-align: inherit;">slope of</font></strong><font style="vertical-align: inherit;"> each corner of a single unit </font><font style="vertical-align: inherit;">and </font><font style="vertical-align: inherit;">the product of </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the functions that decay in a radial circle depending on the distance from each vertex</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are added.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Think about two dimensions.</font></font></p>
 <div id="pn_2d_sum_simplex_corners" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_sum_simplex_corners.png" alt="放射円状減衰関数とその影響範囲">
-<p class="caption">
-図5.25: 放射円状減衰関数とその影響範囲
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_sum_simplex_corners.png" alt="Radial circular decay function and its range of influence">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.25: Radial circular decay function and its range of influence
+</font></font></p>
 </div>
-<p>単体の内部の点Pの値は、それを囲んでいる単体の3つの各頂点からの値のみ影響します。離れた位置にある頂点の値は、点Pを含んだ単体の境界を越える前に0に減衰するので、影響を及ぼしません。このように、点Pのノイズの値は、3つの頂点の値とその影響度合いの合計として計算することができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The value of the point P inside a single unit only affects the values ​​from each of the three vertices of the single unit that surrounds it. </font><font style="vertical-align: inherit;">The values ​​of the distant vertices have no effect because they decay to 0 before crossing the single boundary containing the point P. </font><font style="vertical-align: inherit;">In this way, the noise value at point P can be calculated as the sum of the values ​​of the three vertices and their degree of influence.</font></font></p>
 <div id="pn_sum_simplex_corner_contribution" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_sum_simplex_corner_contribution.png" alt="各頂点の寄与率と総和">
-<p class="caption">
-図5.26: 各頂点の寄与率と総和
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_sum_simplex_corner_contribution.png" alt="Contribution rate and sum of each vertex">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.26: Contribution rate and sum of each vertex
+</font></font></p>
 </div>
 
-<h4><a id="h5-3-4-2"></a>実装</h4>
-<p>実装については、2012年に、Ian McEwan、David Sheets、 Stefan Gustavson、Mark Richardsonによって発表された <strong>"Effecient computational noise in GLSL"</strong></p>
+<h4><a id="h5-3-4-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Implementation</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The implementation is </font><strong><font style="vertical-align: inherit;">"Effecient computational noise in GLSL"</font></strong><font style="vertical-align: inherit;"> published by Ian McEwan, David Sheets, Stefan Gustavson and Mark Richardson in 2012.</font></font><strong><font style="vertical-align: inherit;"></font></strong></p>
 <p><a href="https://pdfs.semanticscholar.org/8e58/ad9f2cc98d87d978f2bd85713d6c909c8a85.pdf" class="link">https://pdfs.semanticscholar.org/8e58/ad9f2cc98d87d978f2bd85713d6c909c8a85.pdf</a></p>
-<p>に従った方法で示します。</p>
-<p>現状、シェーダによるノイズの実装を行いたい場合、ハードウェア依存が少なく、計算も効率的で、テクスチャを参照するなどの必要がなく扱いやすいアルゴリズムです。（おそらく）</p>
-<p>ソースコードは2018年4月現在、<a href="https://github.com/stegu/webgl-noise/" class="link">https://github.com/stegu/webgl-noise/</a>で管理されています。オリジナルはこちら(<a href="https://github.com/ashima/webgl-noise" class="link">https://github.com/ashima/webgl-noise</a>)でしたが、現在これを管理していた Ashima Arts は会社として機能していないようなので、Stefan Gustavsonによってクローンされました。</p>
-<p>実装の特徴としては、以下の3つが挙げられます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is shown in the manner according to.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Currently, if you want to implement noise with a shader, it is an easy-to-use algorithm that is less hardware-dependent, efficient in calculation, and does not require reference to textures. </font><font style="vertical-align: inherit;">(Probably)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As of April 2018, the source code is </font><font style="vertical-align: inherit;">managed at </font></font><a href="https://github.com/stegu/webgl-noise/" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/stegu/webgl-noise/</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">The original was here ( </font></font><a href="https://github.com/ashima/webgl-noise" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/ashima/webgl-noise</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ), but Ashima Arts, which currently manages it, doesn't seem to be functioning as a company, so it was cloned by Stefan Gustavson.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are three features of the implementation:</font></font></p>
 <ul>
-<li>勾配ベクトル計算のためのランダムに並んだインデックスを、テーブルを参照するのではなく、多項式による計算で求める</li>
-<li>正軸体（Cross Polytope）の幾何学形状を勾配ベクトル計算に用いる</li>
-<li>単体選択の条件を順序付け（Rank Ordering）と置き換える</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Randomly arranged indexes for gradient vector calculation are calculated by polynomial instead of referring to the table.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Use the cross-polytope geometry for gradient vector calculations</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Replace the single selection condition with Rank Ordering</font></font></li>
 </ul>
 
-<h5><a id="h5-3-4-2-1"></a>勾配のインデックス並べ換えのための多項式</h5>
-<p>過去に発表されたノイズの実装では、勾配計算時のインデックス生成のために、事前に計算されたインデックスの値を格納したテーブルやビット入れ替えによるハッシュを使っていたりしましたが、どちらのアプローチもシェーダによる実装には向いているとは言えません。そこで、インデックス並べ替えのために、</p>
+<h5><a id="h5-3-4-2-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Polynomial for index sorting of gradients</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Previously announced noise implementations used tables containing pre-computed index values ​​or bit-swapped hashes for index generation during gradient calculations, but both approaches are shaders. It cannot be said that it is suitable for implementation by. </font><font style="vertical-align: inherit;">So, for index sorting,</font></font></p>
 <div class="equation">
 <pre>\left( Ax^{2}+Bx\right) mod\ M
 </pre>
 </div>
-<p>というシンプルな形をした多項式を使用する方法を提案しています。（mod=modulo ある数を割った時の余りの数（剰余））例えば、<span class="equation">\left(6x^{2}+x\right)mod\ 9</span>は <code class="tt">（0 1 2 3 4 5 6 7 8)</code> を <code class="tt">(0 7 8 3 1 2 6 4 5)</code> というように、0~8の入力に対して重複のない0~8の9つの数字を返します。</p>
-<p>勾配を十分に良く分散するためのインデックス生成には、少なくとも数百の数字を並べ替える必要があり、<span class="equation">\left(34x^{2}+x\right)mod\ 289</span>を選択することとします。</p>
-<p>この置換多項式は、シェーダ言語の変数の精度の問題で、整数領域で、<span class="equation">34x^{2}+x &gt; 2^{24}</span>, または、<span class="equation">|x| &gt; 702</span> の時に、切り捨てが発生してしまいます。そこで、オーバーフローのリスクなしに並べ替えのための多項式を計算するために、多項式の計算を行う前に、xの289の剰余計算を行って、xを0~288の範囲に制限します。</p>
-<p>具体的には、以下のように実装されます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We are proposing a method to use a polynomial with a simple form. </font><font style="vertical-align: inherit;">(Mod = modulo The number of remainders when a certain number is divided (remainder)) For example, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ left (6x ^ {2} + x \ right) mod \ 9</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is </font></font><code class="tt">（0 1 2 3 4 5 6 7 8)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">for </font></font><code class="tt">(0 7 8 3 1 2 6 4 5)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0 to 8 inputs. Returns 9 unique numbers from 0 to 8.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To generate an index to distribute the gradient well enough, we need to sort at least hundreds of numbers, so we </font><font style="vertical-align: inherit;">will choose </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ left (34x ^ {2} + x \ right) mod \ 289</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This permutation polynomial is a problem of the precision of variables in the shader language </font><font style="vertical-align: inherit;">, and truncation occurs when </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">34x ^ {2} + x&gt; 2 ^ {24}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , or </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">| x |&gt; 702</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in the integer region </font><font style="vertical-align: inherit;">. .. </font><font style="vertical-align: inherit;">So, in order to calculate the polynomial for sorting without the risk of overflow, we do a modulo 289 of x before doing the polynomial calculation to limit x to the range 0-288.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Specifically, it is implemented as follows.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist">// 289の剰余を求める<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Find the remainder of 289</font></font><font></font>
 float3 mod289(float3 x)<font></font>
 {<font></font>
     return x - floor(x * (1.0 / 289.0)) * 289.0;<font></font>
 }<font></font>
-<font></font>
-// 置換多項式による並べ替え<font></font>
-float3 permute(float3 x)<font></font>
-{<font></font>
-    return fmod(((x * 34.0) + 1.0) * x, 289.0);<font></font>
-}<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Sort by permutation polynomial</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float3 trade-ins (float3 x)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font><font></font>
+    return fmod(((x * 34.0) + 1.0) * x, 289.0);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
 </pre>
 </div>
-<p>論文では、2、3次元のときは問題ないが、4次元の場合は、この多項式では視覚的なアーティファクトが発生してしまっていることを認めています。4次元の場合、289のインデックスでは不十分であるようです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The treatise admits that in 2D and 3D, there is no problem, but in 4D, this polynomial has generated visual artifacts. </font><font style="vertical-align: inherit;">For 4 dimensions, an index of 289 seems to be inadequate.</font></font></p>
 
-<h5><a id="h5-3-4-2-2"></a>正軸体（Cross Polytope）の幾何学形状を勾配ベクトル計算に用いる</h5>
-<p>従来の実装では、勾配計算に疑似乱数を使用し、事前に計算した勾配のインデックスの計算のために、インデックスを格納したテーブルを参照したり、ビット操作を行ったりしました。ここでは、よりシェーダによる実装に最適で、さまざまな次元で効率よく分散した勾配を得るために、<strong>正軸体（Cross Polytope)</strong>を勾配計算に使用します。正軸体とは、2次元の<strong>正方形</strong>、3次元の<strong>正八面体</strong>、4次元の<strong>正十六胞体</strong>を各次元に一般化した形状の事を指します。各次元下図のような幾何学的形状をとります。</p>
+<h5><a id="h5-3-4-2-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Use the cross-polytope geometry for gradient vector calculations</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Traditional implementations used pseudo-random numbers for gradient calculations, referencing the table containing the indexes and performing bit operations to calculate the pre-calculated gradient indexes. </font><font style="vertical-align: inherit;">Here, </font><font style="vertical-align: inherit;">we use a </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">cross-polytope</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> for gradient calculations </font><font style="vertical-align: inherit;">to get a more efficiently distributed gradient in different dimensions, which is more suitable for shader implementation </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">A cross-polytope is a </font><font style="vertical-align: inherit;">generalized shape of </font><font style="vertical-align: inherit;">a two-dimensional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">square</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , a three-dimensional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">regular octahedron</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , and a four-dimensional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">regular six-cell body</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in each dimension. </font><font style="vertical-align: inherit;">Each dimension takes a geometric shape as shown in the figure below.</font></font></p>
 <div id="pn_cross-polytopes" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_cross-polytopes.png" alt="各次元における正軸体">
-<p class="caption">
-図5.27: 各次元における正軸体
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_cross-polytopes.png" alt="Cross-polytope in each dimension">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.27: Cross-polytope in each dimension
+</font></font></p>
 </div>
-<p>勾配ベクトルは、それぞれの次元で、2次元であれば<strong>正方形</strong>、3次元であれば<strong>正八面体</strong>、4次元であれば（一部切り詰められた）<strong>正十六胞体</strong>の<strong>表面上</strong>に分散します。</p>
-<p>各次元、方程式は以下の通りです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gradient vector at each dimension, if the two-dimensional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">square</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , if a three-dimensional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">regular octahedral</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , if four-dimensional (truncated portion) </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">16-cell</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> of </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the surface</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and distributed.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Each dimension and equation are as follows.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">2-D: x0 ∈ [−2, 2], y = 1 − |x0|<font></font>
 if y &gt; 0 then x = x0 else x = x0 − sign(x0)<font></font>
@@ -592,20 +585,20 @@ if y &gt; 0 then x = x0 else x = x0 − sign(x0)<font></font>
 3-D: x0, y0 ∈ [−1, 1], z = 1 − |x0| − |y0|<font></font>
 if z &gt; 0 then x = x0, y = y0<font></font>
 else x = x0 − sign(x0), y = y0 − sign(y0)<font></font>
-<font></font>
-4-D: x0, y0, z0 ∈ [−1, 1], w = 1.5 − |x0| − |y0| − |z0|<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+4-D: x0, y0, z0 ∈ [−1, 1], w = 1.5 - | x0 | </font><font style="vertical-align: inherit;">- | y0 | </font><font style="vertical-align: inherit;">- | z0 |</font></font><font></font>
 if w &gt; 0 then x = x0, y = y0, z = z0<font></font>
 else x = x0 − sign(x0), y = y0 − sign(y0), z = z0 − sign(z0)<font></font>
 </pre>
 </div>
 
-<h5><a id="h5-3-4-2-3"></a>勾配の正規化</h5>
-<p>ほとんどの<strong>Perlin Noise</strong>の実装では大きさが等しい勾配ベクトルを使っていました。しかし、N次元の正軸体の表面のベクトルの最短のものと最長のものでは、<span class="equation">\sqrt {N}</span>の因数分、長さに差があります。これは強いアーティファクトを引き起こしませんが、次元が高くなると、このベクトルを明示的に正規化しなければノイズパターンの等方性が低くなってしまいます。正規化とは、ベクトルをそのベクトルの大きさで割ることにより、大きさを1にそろえる処理です。勾配ベクトルの大きさをrとすると、勾配ベクトルにrの逆平方根 <span class="equation">\dfrac {1}{\sqrt {r}}</span> を掛け合わせることで、正規化が実現できます。ここでは、パフォーマンス向上のため、この逆平方根をテイラー展開を用いて近似的に計算しています。テイラー展開とは、無限に微分可能な関数において、xがaの近辺であるなら、以下の式で近似的に計算できる、というものです。</p>
+<h5><a id="h5-3-4-2-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gradient normalization</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Most </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> implementations used gradient vectors of equal magnitude. </font><font style="vertical-align: inherit;">However, there is a </font><font style="vertical-align: inherit;">difference in length between </font><font style="vertical-align: inherit;">the shortest and longest vectors on the surface of the N-dimensional </font><font style="vertical-align: inherit;">cross-polytope by the factor of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ sqrt {N}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">This does not cause strong artifacts, but at higher dimensions the noise pattern becomes less isotropic without explicit normalization of this vector. </font><font style="vertical-align: inherit;">Normalization is the process of aligning a vector to 1 by dividing the vector by the size of the vector. </font><font style="vertical-align: inherit;">Assuming that the magnitude of the gradient vector is r </font><font style="vertical-align: inherit;">, normalization can be achieved by multiplying </font><font style="vertical-align: inherit;">the gradient vector by the inverse square root of r </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ dfrac {1} {\ sqrt {r}}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Here, to improve performance, this inverse square root is approximately calculated using the Taylor expansion. </font><font style="vertical-align: inherit;">The Taylor expansion is that in an infinitely differentiable function, if x is in the vicinity of a, it can be approximately calculated by the following formula.</font></font></p>
 <div class="equation">
 <pre>\sum ^{\infty }_{n=0}\dfrac {f^{\left( n\right) }\left( a\right) }{n!}\left( x-a\right) ^{n}
 </pre>
 </div>
-<p><span class="equation">\dfrac {1}{\sqrt {a}}</span> の1階微分を求めると、</p>
+<p><span class="equation"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finding the first derivative of </font><span class="equation"><font style="vertical-align: inherit;">\ dfrac {1} {\ sqrt {a}}</font></span></font></p>
 <div class="equation">
 <pre>\begin{array}{l}<font></font>
 f\left( a\right) =\dfrac {1}{\sqrt {a}}=a^{-\frac{1}{2}}\\<font></font>
@@ -613,7 +606,7 @@ f'\left( a\right) =-\dfrac {1}{2}a^{-\frac{3}{2}}\\<font></font>
 \end{array}<font></font>
 </pre>
 </div>
-<p>となり、テイラー展開によるa近辺での近似式は以下のようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, the approximate expression in the vicinity of a by Taylor expansion is as follows.</font></font></p>
 <div class="equation">
 <pre>\sum ^{\infty }_{n=0}\dfrac {f^{\left( n\right) }\left( a\right) }{n!}\left( x-a\right) ^{n}
 </pre>
@@ -625,8 +618,8 @@ f'\left( a\right) =-\dfrac {1}{2}a^{-\frac{3}{2}}\\<font></font>
 \end{array}<font></font>
 </pre>
 </div>
-<p>ここで、a=0.7(勾配ベクトルの長さの範囲が0.5～1.0であるからなんだろうと思います)とすると、<span class="equation">1.79284291400159 - 0.85373472095314 * x</span> が得られます。</p>
-<p>実装ではこのようになっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, if a = 0.7 (I think it is because the length range of the gradient vector is 0.5 to 1.0), </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.79284291400159 --0.85373472095314 * x</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is obtained.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is what the implementation looks like.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">float3 taylorInvSqrt(float3 r)<font></font>
 {<font></font>
@@ -635,28 +628,28 @@ f'\left( a\right) =-\dfrac {1}{2}a^{-\frac{3}{2}}\\<font></font>
 </pre>
 </div>
 
-<h3><a id="h5-3-5"></a><span class="secno">5.3.5　</span>実装と結果</h3>
-<p>サンプルプロジェクト内の</p>
+<h3><a id="h5-3-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation and results</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample project</font></font></p>
 <p>TheStudyOfProceduralNoise/Scenes/<strong>ShaderExampleList</strong></p>
-<p>シーンを開くと、<strong>Simplex Noise</strong>の実装結果を見ることができます。実装したコードは、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When you open the scene, </font><font style="vertical-align: inherit;">you can see the implementation result of </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">The implemented code is</font></font></p>
 <ul>
 <li>Shaders/ProceduralNoise/<strong>SimplexNoise2D.cginc</strong></li>
 <li>Shaders/ProceduralNoise/<strong>SimplexNoise3D.cginc</strong></li>
 <li>Shaders/ProceduralNoise/<strong>SimplexNoise4D.cginc</strong></li>
 </ul>
-<p>にあります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is in.</font></font></p>
 <div id="pn_result_simplex_noise" class="image">
-<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_simplex_noise.png" alt="Simplex Noise（2D, 3D, 4D）結果">
-<p class="caption">
-図5.28: Simplex Noise（2D, 3D, 4D）結果
-</p>
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_simplex_noise.png" alt="Simplex Noise (2D, 3D, 4D) results">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.28: Simplex Noise (2D, 3D, 4D) results
+</font></font></p>
 </div>
-<p><strong>Simplex Noise</strong>は、<strong>Perlin Noise</strong>と比較すると、少し粒感のある結果が得られます。</p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> gives a </font><font style="vertical-align: inherit;">slightly </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">grainier</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> result when compared to </font><strong><font style="vertical-align: inherit;">Perlin Noise</font></strong><font style="vertical-align: inherit;"> .</font></font></p>
 
-<h2><a id="h5-4"></a><span class="secno">5.4　</span>まとめ</h2>
-<p>プロシージャルノイズの代表的手法のアルゴリズムと実装について詳細に見てきましたが、それぞれ得られるノイズパターンの特徴や、計算コストに違いがあることが確認できたと思います。リアルタイムアプリケーションにおいてノイズを用いる場合、それが高解像度となるときは、画素一つ一つに対して計算を行うため、この計算負荷については無視することはできず、どのような計算がなされているかは、ある程度留意しておく必要があります。最近では、ノイズ関数がはじめから開発環境に組み込まれているものも多いですが、それを十分に使いこなすためにも、ノイズのアルゴリズムを理解しておくことは重要です。ここではその応用については解説できませんでしたが、グラフィックス生成において、ノイズの応用は極めて多岐にわたり多大な効果をもたらします。（次章ではその例の一つを示します。）この記事が、数え切れないほどの応用への足がかりとなれば幸いです。最後に、先人たちが積み上げてきた知恵と、主にKen Perlinの素晴らしい業績について敬意を表したいと思います。</p>
+<h2><a id="h5-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We have looked at the algorithms and implementations of typical procedural noise methods in detail, but you can see that there are differences in the characteristics of the noise patterns obtained and the calculation costs. </font><font style="vertical-align: inherit;">When noise is used in a real-time application, when it becomes high resolution, the calculation is performed for each pixel, so this calculation load cannot be ignored, and what kind of calculation is performed. Should be kept in mind to some extent. </font><font style="vertical-align: inherit;">Nowadays, many noise functions are built into the development environment from the beginning, but it is important to understand the noise algorithm in order to make full use of it. </font><font style="vertical-align: inherit;">I couldn't explain its application here, but in graphics generation, the application of noise is extremely diverse and has a great effect. </font><font style="vertical-align: inherit;">(The next chapter will show one example.) We hope this article provides a foothold for countless applications. </font><font style="vertical-align: inherit;">Finally, I would like to pay tribute to the wisdom that our predecessors have accumulated and primarily to Ken Perlin's outstanding achievements.</font></font></p>
 
-<h2><a id="h5-5"></a><span class="secno">5.5　</span>参照</h2>
+<h2><a id="h5-5"></a><span class="secno"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See </font><span class="secno"><font style="vertical-align: inherit;">5.5　</font></span></font></h2>
 <ul>
 <li>[1] An Image Synthesizer, Ken Perlin, SIGGRAPH 1985</li>
 <li>[2] Improving Noise, Ken Perlin ―<a href="http://mrl.nyu.edu/~perlin/paper445.pdf" class="link">http://mrl.nyu.edu/~perlin/paper445.pdf</a></li>
@@ -673,4 +666,4 @@ f'\left( a\right) =-\dfrac {1}{2}a^{-\frac{3}{2}}\\<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 5 _ Introduction to Procedural Noise_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 5 _ Introduction to Procedural Noise_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 5 _ Introduction to Procedural Noise_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 5 _ Introduction to Procedural Noise_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 5 _ Introduction to Procedural Noise_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

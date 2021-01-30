@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0046)https://freder.io/files/unity3/kaiware007.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 5 _ Reaction Diffusion_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 5 _ Reaction Diffusion_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 5 _ Reaction Diffusion_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Reaction Diffusion_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Reaction Diffusion_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 5 _ Reaction Diffusion_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 5 _ Reaction Diffusion_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Reaction Diffusion_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Reaction Diffusion_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 5 _ Reaction Diffusion_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reaction Diffusion</font></font></h1>
 
 <h2><a id="h5-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -92,51 +85,51 @@ Figure 5.2: Schematic diagram of "Diffusion" in the Gray-Scott model
 <pre>\frac{\partial v}{\partial t} = Dv \Delta v + uv^2 - (f_{}+k)
 </pre>
 </div>
-<p>この式では、Uは<span class="equation">u</span>、Vは<span class="equation">v</span>で表しています。式は大きく３つに分かれています。 <br>最初の<span class="equation">Du \Delta u</span>と<span class="equation">Dv \Delta v</span>は拡散項といい、前半の<span class="equation">Du</span>と<span class="equation">Dv</span>は、<span class="equation">u</span>と<span class="equation">v</span>の拡散の速度の定数です。後半の<span class="equation">\Delta u</span>と<span class="equation">\Delta v</span>はラプラシアンといって、UとVの周囲との濃度差を無くす方向に拡散（Diffusion）する過程を表しています。 <br>２番目は反応項といい、<span class="equation">uv^2</span>はU１つとV２つで反応（Reaction）することで、Uが減り、Vが増えることを表しています。 <br>３番目の<span class="equation">+f_{(1-u)}</span>は流入項といい、Uが減った場合に補充（Feed）される量を表しており、０に近いほど多く補充され、１に近いほど補充されなくなります。<span class="equation">-(f_{}+k)</span>は流出項といい、増えたVを一定数減らす（Kill）ことを表しています。</p>
-<p>もうちょっと簡単にまとめると、U１つとV２つで反応してUは減り、Vは増えていきます。このままではUは減り続け、Vは増え続ける一方なので、Uは<span class="equation">+f_{(1-u)}</span>の分だけ補充され、Vは<span class="equation">-(f_{}+k)</span>の分だけ強制的に減るようになっています。そして、UとVは<span class="equation">Du \Delta u</span>と<span class="equation">Dv \Delta v</span>によって周囲に拡散していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this formula, U is </font><font style="vertical-align: inherit;">represented by </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">u</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and V is </font><font style="vertical-align: inherit;">represented by </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">v</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">The formula is roughly divided into three. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The first </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Du \ Delta u</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dv \ Delta v</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are called the diffusion terms, and the first </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Du</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dv</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are </font><font style="vertical-align: inherit;">constants of the diffusion rate of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">u</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">v</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">The latter half, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta u</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta v,</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are called Laplacian, and represent the process of diffusion in the direction of eliminating the concentration difference between the surroundings of U and V. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The second is called the reaction term, and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">uv ^ 2</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> indicates that U decreases and V increases by reacting with one U and two V. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The third </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">+ f_ {(1-u)}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is called the inflow term and represents the amount to be replenished (Feed) when U decreases. The closer it is to 0, the more it is replenished, and the closer it is to 1, the more it is replenished. lose. </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-(f_ {} + k)</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is called the outflow term, which means that the increased V is reduced by a certain number (Kill).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To summarize a little more simply, U decreases and V increases in response to one U and two Vs. </font><font style="vertical-align: inherit;">At this rate, U will continue to decrease and V will continue to increase, so U </font><font style="vertical-align: inherit;">will be replenished by </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">+ f_ {(1-u)}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and V will be </font><font style="vertical-align: inherit;">forcibly decreased by- </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(f_ {} + k).</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> It has become. </font><font style="vertical-align: inherit;">Then, U and V are </font><font style="vertical-align: inherit;">diffused to the surroundings by </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Du \ Delta u</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dv \ Delta v</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 
-<h2><a id="h5-3"></a><span class="secno">5.3　</span>Unityでの実装</h2>
-<p>なんとなく方程式の雰囲気がわかったところでUnityでの実装の説明に移ります。動作確認できるサンプルシーンは、<b>ReactionDiffusion2D_1</b>です。</p>
+<h2><a id="h5-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation in Unity</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now that I have somehow understood the atmosphere of the equation, I will move on to the explanation of the implementation in Unity. </font><font style="vertical-align: inherit;">The sample scene </font><font style="vertical-align: inherit;">whose </font><font style="vertical-align: inherit;">operation can be confirmed is </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ReactionDiffusion2D_1</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 
-<h3><a id="h5-3-1"></a><span class="secno">5.3.1　</span>グリッド構造体の定義</h3>
-<p>２次元の平面空間のグリッドの中に、UとVのそれぞれの濃度の値が入っていると仮定します。今回はComputeShaderを使って並列に処理するため、ComputeBufferでグリッドを管理します。まず、１グリッドの中の構造体を定義します。</p>
+<h3><a id="h5-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Definition of grid structure</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Suppose you have U and V density values ​​in a two-dimensional planar grid. </font><font style="vertical-align: inherit;">This time, we will use Compute Shader to process in parallel, so we will manage the grid with Compute Buffer. </font><font style="vertical-align: inherit;">First, define the structure in one grid.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.cs</p>
 <pre class="emlist">public struct RDData<font></font>
-{<font></font>
-    public float u; // Uの濃度<font></font>
-    public float v; // Vの濃度<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public float u; // U concentration</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public float v; // V concentration</font></font><font></font>
 }<font></font>
 </pre>
 </div>
 
-<h3><a id="h5-3-2"></a><span class="secno">5.3.2　</span>初期化</h3>
+<h3><a id="h5-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Initialization</font></font></h3>
 <div class="emlist-code">
-<p class="caption">ReactionDiffusion2D.cs</p>
-<pre class="emlist">/// &lt;summary&gt;<font></font>
-/// 初期化<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ReactionDiffusion2D.cs</font></font></font></font></p>
+<pre class="emlist">/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Initialization</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
-void Initialize()<font></font>
-{<font></font>
+void Initialize()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     ...<font></font>
-<font></font>
-    int wh = texWidth * texHeight;  // バッファのサイズ<font></font>
-    buffers = new ComputeBuffer[2]; // ダブルバッファリング用のComputeBufferの配列初期化<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int wh = texWidth * texHeight; // Buffer size</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    buffers = new ComputeBuffer [2]; // Array initialization of ComputeBuffer for double buffering</font></font><font></font>
 <font></font>
     for (int i = 0; i &lt; buffers.Length; i++)<font></font>
-    {<font></font>
-        // グリッドの初期化<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Grid initialization</font></font><font></font>
         buffers[i] = new ComputeBuffer(wh, Marshal.SizeOf(typeof(RDData)));<font></font>
     }<font></font>
-<font></font>
-    // リセット用のグリッド配列<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Grid array for reset</font></font><font></font>
     bufData = new RDData[wh];<font></font>
     bufData2 = new RDData[wh];<font></font>
-<font></font>
-    // バッファの初期化<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Buffer initialization</font></font><font></font>
     ResetBuffer();<font></font>
-<font></font>
-    // Seed追加用バッファの初期化<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Initialize the Seed addition buffer</font></font><font></font>
     inputData = new Vector2[inputMax];<font></font>
     inputIndex = 0;<font></font>
     inputBuffer = new ComputeBuffer(<font></font>
@@ -145,12 +138,12 @@ void Initialize()<font></font>
 }<font></font>
 </pre>
 </div>
-<p>更新用であるComputeBufferの<b>buffers</b>は２次元配列ですが、これは読み込み用と書き込み用に分けるために２つ用意しています。というのも、ComputeShaderはマルチスレッドで並列に処理されています。今回のように周囲のグリッドを参照して計算結果が変わる処理をする場合、１つのバッファだと、処理するスレッドの順番によって先に計算し終わったグリッドの値を参照したりして計算結果がかわってきてしまいます。それを防ぐために、読み込み用と書き込み用の２つに分けています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">buffers</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> of </font><font style="vertical-align: inherit;">ComputeBuffer for updating </font><font style="vertical-align: inherit;">are two-dimensional arrays, but there are two for reading and writing. </font><font style="vertical-align: inherit;">Because the Compute Shader is multi-threaded and processed in parallel. </font><font style="vertical-align: inherit;">When processing that changes the calculation result by referring to the surrounding grid like this time, if it is one buffer, the calculation result will be referred to the value of the grid that has been calculated earlier depending on the order of the threads to be processed. It will change. </font><font style="vertical-align: inherit;">In order to prevent it, it is divided into two parts, one for reading and the other for writing.</font></font></p>
 
-<h3><a id="h5-3-3"></a><span class="secno">5.3.3　</span>更新処理</h3>
+<h3><a id="h5-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Update process</font></font></h3>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.cs</p>
-<pre class="emlist">// 更新処理<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Update process</font></font><font></font>
 void UpdateBuffer()<font></font>
 {<font></font>
     cs.SetInt("_TexWidth", texWidth);<font></font>
@@ -172,18 +165,18 @@ void UpdateBuffer()<font></font>
 }<font></font>
 </pre>
 </div>
-<p>C#側のソースでは、前述の方程式にもあったパラメータをComputeShaderに渡して更新処理を行っています。次に、ComputeShader内の更新処理について説明します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the source on the C # side, the parameters that were also in the above equation are passed to the Compute Shader for update processing. </font><font style="vertical-align: inherit;">Next, the update process in Compute Shader is explained.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.compute</p>
-<pre class="emlist">// 更新処理<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Update process</font></font><font></font>
 [numthreads(THREAD_NUM_X, THREAD_NUM_X, 1)]<font></font>
-void Update(uint3 id : SV_DispatchThreadID)<font></font>
-{<font></font>
+void Update(uint3 id : SV_DispatchThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
 <font></font>
   int idx = GetIndex(id.x, id.y);<font></font>
   float u = _BufferRead[idx].u;<font></font>
-  float v = _BufferRead[idx].v;<font></font>
-  float uvv = u * v * v;<font></font>
+  float v = _BufferRead[idx].v;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float uvv = u * v * v;</font></font><font></font>
   float f, k;<font></font>
 <font></font>
   f = _Feed;<font></font>
@@ -192,31 +185,31 @@ void Update(uint3 id : SV_DispatchThreadID)<font></font>
   _BufferWrite[idx].u = saturate(<font></font>
       u + (_DU * LaplaceU(id.x, id.y) - uvv + f * (1.0 - u))<font></font>
     );<font></font>
-  _BufferWrite[idx].v = saturate(<font></font>
-      v + (_DV * LaplaceV(id.x, id.y) + uvv - (k + f) * v)<font></font>
-    );<font></font>
+  _BufferWrite[idx].v = saturate(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      v + (_DV * LaplaceV (id.x, id.y) + uvv - (k + f) * v)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>まさに前述の方程式と同様の計算を行っています。GetIndex()は、２次元のグリッド座標と１次元のComputeBufferのインデックスを紐付けるための関数です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The calculation is exactly the same as the above equation. </font><font style="vertical-align: inherit;">GetIndex () is a function for associating 2D grid coordinates with 1D ComputeBuffer index.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.compute</p>
-<pre class="emlist">// バッファのインデックス計算<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Buffer index calculation</font></font><font></font>
 int GetIndex(int x, int y) {<font></font>
   x = (x &lt; 0) ? x + _TexWidth : x;<font></font>
   x = (x &gt;= _TexWidth) ? x - _TexWidth : x;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  y = (y &lt;0)? </font><font style="vertical-align: inherit;">y + _TexHeight: y;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  y = (y&gt; = _TexHeight)? </font><font style="vertical-align: inherit;">y - _TexHeight: y;</font></font><font></font>
 <font></font>
-  y = (y &lt; 0) ? y + _TexHeight : y;<font></font>
-  y = (y &gt;= _TexHeight) ? y - _TexHeight : y;<font></font>
-<font></font>
-  return y * _TexWidth + x;<font></font>
-}<font></font>
+  return y * _TexWidth + x;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
 </pre>
 </div>
-<p>_BufferReadには１フレーム前の計算結果が入っています。そこからuとvを取り出します。LaplaceUとLaplaceVは、自分のグリッドの周囲８マスのUとVの濃度を集めるラプラシアン関数です。これによって周囲のグリッドと濃度が平均化されていきます。斜めのグリッドは影響度は低くなるように調整しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">_BufferRead contains the calculation result one frame before. </font><font style="vertical-align: inherit;">Extract u and v from there. </font><font style="vertical-align: inherit;">LaplaceU and LaplaceV are Laplacian functions that collect the U and V concentrations of 8 squares around your grid. </font><font style="vertical-align: inherit;">This will average the surrounding grid and density. </font><font style="vertical-align: inherit;">The diagonal grid is adjusted to have a low degree of influence.</font></font></p>
 <div class="emlist-code">
-<p class="caption">ReactionDiffusion2D.compute</p>
-<pre class="emlist">// Uのラプラシアン関数<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ReactionDiffusion2D.compute</font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Laplacian function of U</font></font><font></font>
 float LaplaceU(int x, int y) {<font></font>
   float sumU = 0;<font></font>
 <font></font>
@@ -228,29 +221,29 @@ float LaplaceU(int x, int y) {<font></font>
 <font></font>
   return sumU;<font></font>
 }<font></font>
-<font></font>
-// Vのラプラシアン関数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Laplacian function of V</font></font><font></font>
 float LaplaceV(int x, int y) {<font></font>
   float sumV = 0;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  for (int i = 0; i &lt; 9; i++) {</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int2 pos = laplaceIndex[i];</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int idx = GetIndex(x + pos.x, y + pos.y);</font></font><font></font>
+    sumV += _BufferRead[idx].v * laplacePower[i];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  }</font></font><font></font>
 <font></font>
-  for (int i = 0; i &lt; 9; i++) {<font></font>
-    int2 pos = laplaceIndex[i];<font></font>
-    int idx = GetIndex(x + pos.x, y + pos.y);<font></font>
-    sumV += _BufferRead[idx].v * laplacePower[i];<font></font>
-  }<font></font>
-<font></font>
-  return sumV;<font></font>
-}<font></font>
+  return sumV;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
 </pre>
 </div>
-<p>uとvを計算したら、_BufferWriteに書き込みます。saturateは0～1の間でクリップするための保険です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">After calculating u and v, write to _BufferWrite. </font><font style="vertical-align: inherit;">saturate is insurance for clipping between 0 and 1.</font></font></p>
 
-<h3><a id="h5-3-4"></a><span class="secno">5.3.4　</span>入力処理</h3>
-<p>AキーやCキーを押すことで、グリッドに意図的にUとVの濃度差を追加する機能を用意しています。Aキーを押すことでランダムな位置にSeedNum個の点（Seed）を配置します。Cキーを押すことで中心に１つ点を配置します。</p>
+<h3><a id="h5-3-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Input processing</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By pressing the A key and C key, the function to intentionally add the density difference between U and V to the grid is provided. </font><font style="vertical-align: inherit;">Press the A key to place SeedNum points (Seeds) at random positions. </font><font style="vertical-align: inherit;">Press the C key to place one point in the center.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.cs</p>
-<pre class="emlist">/// &lt;summary&gt;<font></font>
-/// Seedの追加<font></font>
+<pre class="emlist">/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Add Seed</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
 /// &lt;param name="x"&gt;&lt;/param&gt;<font></font>
 /// &lt;param name="y"&gt;&lt;/param&gt;<font></font>
@@ -258,18 +251,18 @@ void AddSeed(int x, int y)<font></font>
 {<font></font>
   if (inputIndex &lt; inputMax)<font></font>
   {<font></font>
-    inputData[inputIndex].x = x;<font></font>
-    inputData[inputIndex].y = y;<font></font>
+    inputData[inputIndex].x = x;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    inputData [inputIndex] .y = y;</font></font><font></font>
     inputIndex++;<font></font>
   }<font></font>
 }<font></font>
 </pre>
 </div>
-<p>inputData配列にグリッド上の点の座標を格納しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The inputData array stores the coordinates of the points on the grid.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.cs</p>
-<pre class="emlist">/// &lt;summary&gt;<font></font>
-/// Seed配列をComputeShaderにわたす<font></font>
+<pre class="emlist">/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Pass the Seed array to the Compute Shader</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
 void AddSeedBuffer()<font></font>
 {<font></font>
@@ -286,15 +279,15 @@ void AddSeedBuffer()<font></font>
       Mathf.CeilToInt((float)inputIndex / (float)THREAD_NUM_X),<font></font>
       1,<font></font>
       1);<font></font>
-    inputIndex = 0;<font></font>
-  }<font></font>
-}<font></font>
+    inputIndex = 0;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  }</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
 </pre>
 </div>
-<p><b>inputBuffer</b>に、さきほどの点の座標が入ったinputeData配列をセットして、ComputeShaderに渡しています。</p>
+<p><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">inputBuffer</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in, set the inputeData array coordinates entered in the previous point, you pass to ComputeShader.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.compute</p>
-<pre class="emlist">// シードの追加<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Add seed</font></font><font></font>
 [numthreads(THREAD_NUM_X, 1, 1)]<font></font>
 void AddSeed(uint id : SV_DispatchThreadID)<font></font>
 {<font></font>
@@ -324,14 +317,14 @@ void AddSeed(uint id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>C#から渡されたinputBufferの座標を中心に円形になるようにvの値を1にしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The value of v is set to 1 so that it becomes a circle around the coordinates of the inputBuffer passed from C #.</font></font></p>
 
-<h3><a id="h5-3-5"></a><span class="secno">5.3.5　</span>RenderTextureに結果を書き込み</h3>
-<p>更新したグリッドはただの配列なので、可視化のためにRenderTextureに書き込んで画像にします。RenderTextureにはuとvの濃度差を書き込みます。 <br>まずはRenderTextureを作成します。1ピクセルに書き込む情報は濃度差だけなので、RenderTextureFormatはRFloatにしておきます。RenderTextureFormat.RFloatは1ピクセルに付きfloat１つ分の情報が書き込めるRenderTextureの形式です。</p>
+<h3><a id="h5-3-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Write the result to RenderTexture</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the updated grid is just an array, write it to RenderTexture for visualization and make it an image. </font><font style="vertical-align: inherit;">Write the density difference between u and v in RenderTexture. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, create a Render Texture. </font><font style="vertical-align: inherit;">Since the only information to be written to one pixel is the density difference, set RenderTextureFormat to RFloat. </font><font style="vertical-align: inherit;">RenderTextureFormat.RFloat is a RenderTexture format that can write information for one float per pixel.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.cs</p>
-<pre class="emlist">/// &lt;summary&gt;<font></font>
-/// RenderTexture作成<font></font>
+<pre class="emlist">/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Create Render Texture</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
 /// &lt;param name="width"&gt;&lt;/param&gt;<font></font>
 /// &lt;param name="height"&gt;&lt;/param&gt;<font></font>
@@ -350,11 +343,11 @@ RenderTexture CreateRenderTexture(int width, int height)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>続いてComputeShaderにRenderTextureを渡して書き込むC#側の処理です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, it is the process on the C # side that passes RenderTexture to ComputeShader and writes it.</font></font></p>
 <div class="emlist-code">
-<p class="caption">ReactionDiffusion2D.cs</p>
-<pre class="emlist">/// &lt;summary&gt;<font></font>
-/// ReactionDiffusionの結果をテクスチャに書き込み<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ReactionDiffusion2D.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">/// &lt;summary&gt;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Write the result of Reaction Diffusion to the texture</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
 void DrawTexture()<font></font>
 {<font></font>
@@ -369,23 +362,23 @@ void DrawTexture()<font></font>
 }<font></font>
 </pre>
 </div>
-<p>こちらは、ComputeShader側の処理です、グリッドのバッファからuとvの濃度差を求めて、テクスチャに書き込んでいます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the processing on the Compute Shader side, the density difference between u and v is obtained from the buffer of the grid and written to the texture.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.compute</p>
-<pre class="emlist">// テクスチャ書き込み用の値計算<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Value calculation for texture writing</font></font><font></font>
 float GetValue(int x, int y) {<font></font>
   int idx = GetIndex(x, y);<font></font>
   float u = _BufferRead[idx].u;<font></font>
   float v = _BufferRead[idx].v;<font></font>
-  return 1 - clamp(u - v, 0, 1);<font></font>
-}<font></font>
+  return 1 - clamp(u - v, 0, 1);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 <font></font>
 ...<font></font>
-<font></font>
-// テクスチャに描画<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Draw on texture</font></font><font></font>
 [numthreads(THREAD_NUM_X, THREAD_NUM_X, 1)]<font></font>
-void Draw(uint3 id : SV_DispatchThreadID)<font></font>
-{<font></font>
+void Draw(uint3 id : SV_DispatchThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
   float c = GetValue(id.x, id.y);<font></font>
 <font></font>
   // height map<font></font>
@@ -395,129 +388,129 @@ void Draw(uint3 id : SV_DispatchThreadID)<font></font>
 </pre>
 </div>
 
-<h3><a id="h5-3-6"></a><span class="secno">5.3.6　</span>描画</h3>
-<p>通常のUnlit Shaderを改修して、前項で作ったテクスチャの明度をもとに、２色を間を補間しています。</p>
+<h3><a id="h5-3-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Drawing</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The normal Unlit Shader is modified and the two colors are interpolated based on the brightness of the texture created in the previous section.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.cs</p>
-<pre class="emlist">/// &lt;summary&gt;<font></font>
-/// マテリアルの更新<font></font>
+<pre class="emlist">/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Material update</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
 void UpdateMaterial()<font></font>
 {<font></font>
   material.SetTexture("_MainTex", resultTexture);<font></font>
 <font></font>
   material.SetColor("_Color0", bottomColor);<font></font>
-  material.SetColor("_Color1", topColor);<font></font>
-}<font></font>
+  material.SetColor("_Color1", topColor);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2D.shader</p>
-<pre class="emlist">fixed4 frag (v2f i) : SV_Target<font></font>
-{<font></font>
+<pre class="emlist">fixed4 frag (v2f i) : SV_Target<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
   // sample the texture<font></font>
   fixed4 col = lerp(_Color0, _Color1, tex2D(_MainTex, i.uv).r);<font></font>
-  return col;<font></font>
-}<font></font>
+  return col;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>実行すると画面上に生物のような模様が広がっていくはずです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When executed, a creature-like pattern should spread on the screen.</font></font></p>
 <div id="id_kaiware_2Frd2d__1" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/rd2d_1.png" alt="State of simulation" class="width-050per">
-<p class="caption">
-図5.3: シミュレーションの様子
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.3: Simulation
+</font></font></p>
 </div>
 
-<h2><a id="h5-4"></a><span class="secno">5.4　</span>パラメータを変えてみる</h2>
-<p>FeedとKillのパラメータを少し変えてみるだけで、さまざまな模様が浮かび上がります。ここでいくつかパラメータの組み合わせを紹介します。</p>
+<h2><a id="h5-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Try changing the parameters</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Just by changing the Feed and Kill parameters a little, various patterns emerge. </font><font style="vertical-align: inherit;">Here are some parameter combinations.</font></font></p>
 <br class="pagebreak">
 
-<h3><a id="h5-4-1"></a><span class="secno">5.4.1　</span>サンゴのような模様</h3>
+<h3><a id="h5-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Coral-like pattern</font></font></h3>
 <p>Feed:0.037 / Kill:0.06</p>
 <div id="id_kaiware_2Fcoral" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/coral.png" alt="Coral-like pattern" class="width-040per">
-<p class="caption">
-図5.4: サンゴのような模様
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.4: Coral-like pattern
+</font></font></p>
 </div>
 
-<h3><a id="h5-4-2"></a><span class="secno">5.4.2　</span>つぶつぶ模様</h3>
+<h3><a id="h5-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Crushed pattern</font></font></h3>
 <p>Feed:0.03 / Kill:0.062</p>
 <div id="id_kaiware_2Fpoints001" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/points001.png" alt="Crushed pattern" class="width-040per">
-<p class="caption">
-図5.5: つぶつぶ模様
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.5: Crushed pattern
+</font></font></p>
 </div>
 <br class="pagebreak">
 
-<h3><a id="h5-4-3"></a><span class="secno">5.4.3　</span>つぶつぶが消滅と分裂を繰り返す模様</h3>
+<h3><a id="h5-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.3 Crushing　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> seems to repeat disappearance and division</font></font></h3>
 <p>Feed:0.0263 / Kill:0.06</p>
 <div id="id_kaiware_2Fpoints002" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/points002.png" alt="It seems that crushing repeats disappearance and division" class="width-040per">
-<p class="caption">
-図5.6: つぶつぶが消滅と分裂を繰り返す模様
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.6: Crushing seems to repeat disappearance and division
+</font></font></p>
 </div>
 
-<h3><a id="h5-4-4"></a><span class="secno">5.4.4　</span>まっすぐ伸びて、ぶつからないように避ける模様</h3>
+<h3><a id="h5-4-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.4 It　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> seems to stretch straight and avoid hitting</font></font></h3>
 <p>Feed:0.077 / Kill:0.0615</p>
 <div id="id_kaiware_2Fworm" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/worm.png" alt="It seems that it stretches straight and avoids hitting" class="width-040per">
-<p class="caption">
-図5.7: まっすぐ伸びて、ぶつからないように避ける模様
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.7: A pattern that stretches straight and avoids collision
+</font></font></p>
 </div>
 <br class="pagebreak">
 
-<h3><a id="h5-4-5"></a><span class="secno">5.4.5　</span>ぷつぷつ穴模様</h3>
+<h3><a id="h5-4-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Plump hole pattern</font></font></h3>
 <p>Feed:0.039 / Kill:0.058</p>
 <div id="id_kaiware_2Fhole" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/hole.png" alt="Plump hole pattern" class="width-040per">
-<p class="caption">
-図5.8: ぷつぷつ穴模様
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.8: Plump hole pattern
+</font></font></p>
 </div>
 
-<h3><a id="h5-4-6"></a><span class="secno">5.4.6　</span>常にうねうねして安定しない模様</h3>
+<h3><a id="h5-4-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.6 It　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> seems that it is always undulating and unstable</font></font></h3>
 <p>Feed:0.026 / Kill:0.051</p>
 <div id="id_kaiware_2Fchaos" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/chaos.png" alt="It seems that it is always undulating and unstable" class="width-040per">
-<p class="caption">
-図5.9: 常にうねうねして安定しない模様
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.9: It seems that it is always undulating and unstable
+</font></font></p>
 </div>
 <br class="pagebreak">
 
-<h3><a id="h5-4-7"></a><span class="secno">5.4.7　</span>波紋のように広がり続ける模様</h3>
+<h3><a id="h5-4-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.7 A　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> pattern that continues to spread like ripples</font></font></h3>
 <p>Feed:0.014 / Kill:0.0477</p>
 <div id="id_kaiware_2Fwave" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/wave.png" alt="A pattern that continues to spread like ripples" class="width-040per">
-<p class="caption">
-図5.10: 波紋のように広がり続ける模様
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.10: Pattern that continues to spread like ripples
+</font></font></p>
 </div>
 
-<h2><a id="h5-5"></a><span class="secno">5.5　</span>おまけ：Surface Shader対応版</h2>
-<p>ここで、Surface Shaderを利用したUnityならではのきれいな質感表現をしたサンプルを紹介します。動作確認できるサンプルシーンは、<b>ReactionDiffusion2D_2</b>です。</p>
+<h2><a id="h5-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Bonus: Surface Shader compatible version</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, I will introduce a sample that expresses the beautiful texture unique to Unity using Surface Shader. </font><font style="vertical-align: inherit;">The sample scene </font><font style="vertical-align: inherit;">whose </font><font style="vertical-align: inherit;">operation can be confirmed is </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ReactionDiffusion2D_2</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 
-<h3><a id="h5-5-1"></a><span class="secno">5.5.1　</span>通常版との変更点</h3>
-<p>ReactionDiffusionの処理自体は通常版と同じですが、描画用のテクスチャの作成時に、立体感を出すためのノーマルマップも作成しています。また、結果のテクスチャはRenderTextureFormat.RFloatでしたが、ノーマルマップはXYZ方向のノーマルベクトルを格納するため、RenderTextureFormat.ARGBFloatで作成しています。</p>
+<h3><a id="h5-5-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.5.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Changes from the regular version</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The process of ReactionDiffusion itself is the same as the normal version, but when creating the texture for drawing, a normal map is also created to give a three-dimensional effect. </font><font style="vertical-align: inherit;">Also, the resulting texture was RenderTextureFormat.RFloat, but since the normal map stores the normal vector in the XYZ directions, it is created with RenderTextureFormat.ARGBFloat.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2DForStandard.cs</p>
 <pre class="emlist">void Initialize()<font></font>
 {<font></font>
   ...<font></font>
-  heightMapTexture = CreateRenderTexture(texWidth, texHeight,<font></font>
-    RenderTextureFormat.RFloat);        // 高さマップ用テクスチャ作成<font></font>
-  normalMapTexture = CreateRenderTexture(texWidth, texHeight,<font></font>
-    RenderTextureFormat.ARGBFloat);     // ノーマルマップマップ用テクスチャ作成<font></font>
-  ...<font></font>
+  heightMapTexture = CreateRenderTexture(texWidth, texHeight,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    RenderTextureFormat.RFloat); // Create texture for height map</font></font><font></font>
+  normalMapTexture = CreateRenderTexture(texWidth, texHeight,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    RenderTextureFormat.ARGBFloat); // Create texture for normal map map</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  ...</font></font><font></font>
 }<font></font>
 <font></font>
-/// &lt;summary&gt;<font></font>
-/// RenderTexture作成<font></font>
+/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Create RenderTexture</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
 /// &lt;param name="width"&gt;&lt;/param&gt;<font></font>
 /// &lt;param name="height"&gt;&lt;/param&gt;<font></font>
@@ -526,8 +519,8 @@ void UpdateMaterial()<font></font>
 RenderTexture CreateRenderTexture(<font></font>
   int width,<font></font>
   int height,<font></font>
-  RenderTextureFormat texFormat)<font></font>
-{<font></font>
+  RenderTextureFormat texFormat)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     RenderTexture tex = new RenderTexture(width, height, 0,<font></font>
       texFormat, RenderTextureReadWrite.Linear);<font></font>
     tex.enableRandomWrite = true;<font></font>
@@ -543,31 +536,31 @@ RenderTexture CreateRenderTexture(<font></font>
 void DrawTexture()<font></font>
 {<font></font>
   ...<font></font>
-  cs.SetTexture(kernelDraw, "_HeightMap", heightMapTexture);<font></font>
-  cs.SetTexture(kernelDraw, "_NormalMap", normalMapTexture);  // ノーマルマップ用テクスチャセット<font></font>
+  cs.SetTexture(kernelDraw, "_HeightMap", heightMapTexture);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  cs.SetTexture (kernelDraw, "_NormalMap", normalMapTexture); // Texture set for normal map</font></font><font></font>
   cs.Dispatch(kernelDraw,<font></font>
     Mathf.CeilToInt((float)texWidth / THREAD_NUM_X),<font></font>
     Mathf.CeilToInt((float)texHeight / THREAD_NUM_X),<font></font>
-    1);<font></font>
-}<font></font>
+    1);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>ComputeShader内では、周囲のグリッドとの濃度差から傾きを求めてノーマルマップ用のテクスチャに書き込んでいます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In ComputeShader, the slope is calculated from the density difference with the surrounding grid and written to the texture for the normal map.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion2DStandard.compute</p>
 <pre class="emlist">float3 GetNormal(int x, int y) {<font></font>
   float3 normal = float3(0, 0, 0);<font></font>
   float c = GetValue(x, y);<font></font>
   normal.x = ((GetValue(x - 1, y) - c) - (GetValue(x + 1, y) - c));<font></font>
-  normal.y = ((GetValue(x, y - 1) - c) - (GetValue(x, y + 1) - c));<font></font>
-  normal.z = 1;<font></font>
+  normal.y = ((GetValue(x, y - 1) - c) - (GetValue(x, y + 1) - c));<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  normal.z = 1;</font></font></font></font><font></font>
   normal = normalize(normal) * 0.5 + 0.5;<font></font>
-  return normal;<font></font>
-}<font></font>
-<font></font>
-...<font></font>
-<font></font>
-// テクスチャに描画<font></font>
+  return normal;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+...</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Draw on texture</font></font><font></font>
 [numthreads(THREAD_NUM_X, THREAD_NUM_X, 1)]<font></font>
 void Draw(uint3 id : SV_DispatchThreadID)<font></font>
 {<font></font>
@@ -581,18 +574,18 @@ void Draw(uint3 id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>作成した２枚のテクスチャをSurface Shaderに渡して模様を描画します。Surface Shaderは、Unityの物理ベースレンダリングを簡単に使えるようにラッピングされたシェーダーで、surf関数の中で<b>SurfaceOutputStandard</b>構造体に必要なデータを代入して出力するだけで、自動的にライティングしてくれます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pass the two created textures to the Surface Shader and draw the pattern. </font><font style="vertical-align: inherit;">Surface Shader is a shader wrapped for easy use of Unity's physics-based rendering, </font><font style="vertical-align: inherit;">just assign the necessary data to the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SurfaceOutputStandard</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> structure </font><font style="vertical-align: inherit;">in the surf function </font><font style="vertical-align: inherit;">and output it, and it will automatically </font><b><font style="vertical-align: inherit;">light</font></b><font style="vertical-align: inherit;"> it. ..</font></font></p>
 <div class="emlist-code">
-<p class="caption">SurfaceOutputStandard構造体の定義</p>
-<pre class="emlist">struct SurfaceOutputStandard<font></font>
-{<font></font>
-    fixed3 Albedo;      // ベース (ディフューズかスペキュラー) カラー<font></font>
-    fixed3 Normal;      // 法線<font></font>
-    half3 Emission;     // 発光色<font></font>
-    half Metallic;      // 0=非メタル, 1=メタル<font></font>
-    half Smoothness;    // 0=粗い, 1=滑らか<font></font>
-    half Occlusion;     // オクルージョン (デフォルト 1)<font></font>
-    fixed Alpha;        // 透明度のアルファ<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Definition of SurfaceOutputStandard structure</font></font></p>
+<pre class="emlist">struct SurfaceOutputStandard<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    fixed3 Albedo; // Base (diffuse or specular) color</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    fixed3 Normal; // normal</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    half3 Emission; // Emission color</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    half Metallic; // 0 = non-metal, 1 = metal</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    half Smoothness; // 0 = coarse, 1 = smooth</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    half Occlusion; // Occlusion (default 1)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    fixed Alpha; // Transparency alpha</font></font><font></font>
 };<font></font>
 </pre>
 </div>
@@ -601,41 +594,41 @@ void Draw(uint3 id : SV_DispatchThreadID)<font></font>
 <pre class="emlist">void surf(Input IN, inout SurfaceOutputStandard o) {<font></font>
 <font></font>
   float2 uv = IN.uv_MainTex;<font></font>
-<font></font>
-  // 濃度取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Get concentration</font></font><font></font>
   half v0 = tex2D(_MainTex, uv).x;<font></font>
-<font></font>
-  // 法線取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Normal acquisition</font></font><font></font>
   float3 norm = UnpackNormal(tex2D(_NormalTex, uv));<font></font>
-<font></font>
-  // AとBの境界の値を出す<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Get the value of the boundary between A and B</font></font><font></font>
   half p = smoothstep(_Threshold, _Threshold + _Fading, v0);<font></font>
-<font></font>
-  o.Albedo = lerp(_Color0.rgb, _Color1.rgb, p);         // ベース色<font></font>
-  o.Alpha = lerp(_Color0.a, _Color1.a, p);              // アルファ値<font></font>
-  o.Smoothness = lerp(_Smoothness0, _Smoothness1, p);   // スムースネス<font></font>
-  o.Metallic = lerp(_Metallic0, _Metallic1, p);         // メタリック<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  o.Albedo = lerp (_Color0.rgb, _Color1.rgb, p); // Base color</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  o.Alpha = lerp (_Color0.a, _Color1.a, p); // Alpha value</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  o.Smoothness = lerp (_Smoothness0, _Smoothness1, p); // Smoothness</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  o.Metallic = lerp (_Metallic0, _Metallic1, p); // Metallic</font></font><font></font>
   o.Normal = normalize(float3(norm.x, norm.y, 1 - _NormalStrength));  // 法線<font></font>
-<font></font>
-  o.Emission = lerp(_Emit0 * _EmitInt0, _Emit1 * _EmitInt1, p).rgb;   // 発光<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  o.Emission = lerp (_Emit0 * _EmitInt0, _Emit1 * _EmitInt1, p) .rgb; </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//⁇</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>Unityのビルトイン関数の<b>unpackNormal関数</b>を使ってノーマルマップから法線を取得します。また、濃度差の割合から<b>SurfaceOutputStandard</b>の各種色や質感を設定しています。</p>
-<p>実行すると次のような模様ができ上がるはずです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Use Unity's built-in function </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">unpackNormal</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> to get the normals from the normal map. </font><font style="vertical-align: inherit;">In addition, </font><font style="vertical-align: inherit;">various colors and textures of </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Surface Output Standard</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are set </font><font style="vertical-align: inherit;">from the ratio of density difference </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When you run it, you should see something like the following.</font></font></p>
 <div id="id_kaiware_2Frd__surface__shader" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/rd_surface_shader.png" alt="SurfaceShader版">
-<p class="caption">
-図5.11: SurfaceShader版
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.11: Surface Shader version
+</font></font></p>
 </div>
-<p>ノーマルマップによって、立体感が生まれています。また、モノクロではわかりませんが、シーン上のRGB３色のポイントライトの光沢も表現されています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The normal map creates a three-dimensional effect. </font><font style="vertical-align: inherit;">In addition, although it is not known in monochrome, the gloss of the RGB 3-color point light in the scene is also expressed.</font></font></p>
 
-<h2><a id="h5-6"></a><span class="secno">5.6　</span>３次元への拡張</h2>
-<p>今まで２次元の平面上でのシミュレーションだったReaction Diffusionを３次元に拡張してみましょう。基本的な流れは２次元のときと同じですが、次元が１つ増えているのでRenderTextureやComputeBufferの作り方、ラプラス演算の仕方が少し変わっています。動作確認できるサンプルシーンは、<b>ReactionDiffusion3D</b>です。</p>
+<h2><a id="h5-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Extension to 3D</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's extend Reaction Diffusion, which used to be a simulation on a two-dimensional plane, to three dimensions. </font><font style="vertical-align: inherit;">The basic flow is the same as for 2D, but since the dimension is increased by 1, the method of creating RenderTexture and ComputeBuffer and the method of Laplace operation are slightly different. </font><font style="vertical-align: inherit;">The sample scene </font><font style="vertical-align: inherit;">whose </font><font style="vertical-align: inherit;">operation can be confirmed is </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ReactionDiffusion3D</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 
-<h3><a id="h5-6-1"></a><span class="secno">5.6.1　</span>バッファの初期化部分</h3>
-<p>濃度差の書き込み先のRenderTextureを２次元から３次元にするため、初期化処理をいくつか追加しています。</p>
+<h3><a id="h5-6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Buffer initialization part</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Some initialization processing is added to change the Render Texture to which the density difference is written from 2D to 3D.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion3D.cs</p>
 <pre class="emlist">RenderTexture CreateTexture(int width, int height, int depth)<font></font>
@@ -653,79 +646,79 @@ void Draw(uint3 id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>まず、tex.volumeDepthにＺ方向の深さを入れています。それから、tex.dimensionにUnityEngine.Rendering.TextureDimension.Tex3Dを入れています。これは、RenderTextureが３次元のボリュームテクスチャであることを指定するための設定です。これでRenderTextureが３次元のボリュームテクスチャになりました。同様にReaction Diffusionのシミュレーション結果を格納するComputeBufferも３次元化します。こちらは単純に幅×高さ×深さのサイズを確保するだけです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, put the depth in the Z direction in tex.volumeDepth. </font><font style="vertical-align: inherit;">Then I put UnityEngine.Rendering.TextureDimension.Tex3D in tex.dimension. </font><font style="vertical-align: inherit;">This is a setting to specify that RenderTexture is a 3D volume texture. </font><font style="vertical-align: inherit;">The Render Texture is now a 3D volume texture. </font><font style="vertical-align: inherit;">Similarly, the Compute Buffer that stores the Reaction Diffusion simulation results is also made three-dimensional. </font><font style="vertical-align: inherit;">This simply secures the size of width x height x depth.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion3D.cs</p>
 <pre class="emlist">void Initialize()<font></font>
 {<font></font>
-  ...<font></font>
-  int whd = texWidth * texHeight * texDepth;<font></font>
-  buffers = new ComputeBuffer[2];<font></font>
-  ...<font></font>
+  ...<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int whd = texWidth * texHeight * texDepth;</font></font></font></font><font></font>
+  buffers = new ComputeBuffer[2];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  ...</font></font></font></font><font></font>
   for (int i = 0; i &lt; buffers.Length; i++)<font></font>
   {<font></font>
      buffers[i] = new ComputeBuffer(whd, Marshal.SizeOf(typeof(RDData)));<font></font>
-  }<font></font>
-  ...<font></font>
+  }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  ...</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
 
-<h3><a id="h5-6-2"></a><span class="secno">5.6.2　</span>シミュレーションの３次元化</h3>
-<p>続いてComputeShader側の変更点です。まず、結果の書き込み用のRenderTextureが３次元になったため、ComputeShader側のテクスチャの定義が<b>RWTexture2D&lt;float&gt;</b>から<b>RWTexture3D&lt;float&gt;</b>に変わります。</p>
+<h3><a id="h5-6-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.6.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Three-dimensional simulation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next is the change on the Compute Shader side. </font><font style="vertical-align: inherit;">First, in order to RenderTexture for the writing of the result is a three-dimensional, ComputeShader of the side of the texture definition </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">RWTexture2D &lt;float&gt;</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> from </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">RWTexture3D &lt;float&gt;</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> will change to.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion3D.compute</p>
-<pre class="emlist">  RWTexture3D&lt;float&gt; _HeightMap;  // ハイトマップ
-</pre>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">  RWTexture3D &lt;float&gt; _HeightMap; // Heightmap
+</font></font></pre>
 </div>
-<p>次にラプラシアン関数の３次元化です。３×３×３の合計２７マスを参照するように変更しています。ちなみにlaplacePowerの影響度はなんとなくで割り出した値です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next is the three-dimensionalization of the Laplacian function. </font><font style="vertical-align: inherit;">It has been changed to refer to a total of 27 squares of 3x3x3. </font><font style="vertical-align: inherit;">By the way, the degree of influence of laplacePower is a value that was somehow calculated.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ReactionDiffusion3D.compute</p>
-<pre class="emlist">// ラプラシアン関数で参照する周囲のインデックス計算用テーブル<font></font>
-static const int3 laplaceIndex[27] = {<font></font>
-  int3(-1,-1,-1), int3(0,-1,-1), int3( 1,-1,-1),<font></font>
-  int3(-1, 0,-1), int3(0, 0,-1), int3(1, 0,-1),<font></font>
-  int3(-1, 1,-1), int3(0, 1,-1), int3(1, 1,-1),<font></font>
-<font></font>
-  int3(-1,-1, 0), int3(0,-1, 0), int3(1,-1, 0),<font></font>
-  int3(-1, 0, 0), int3(0, 0, 0), int3(1, 0, 0),<font></font>
-  int3(-1, 1, 0), int3(0, 1, 0), int3(1, 1, 0),<font></font>
-<font></font>
-  int3(-1,-1, 1), int3(0,-1, 1), int3(1,-1, 1),<font></font>
-  int3(-1, 0, 1), int3(0, 0, 1), int3(1, 0, 1),<font></font>
-  int3(-1, 1, 1), int3(0, 1, 1), int3(1, 1, 1),<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Surrounding index calculation table referenced by the Laplacian function</font></font><font></font>
+static const int3 laplaceIndex[27] = {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int3 (-1, -1, -1), int3 (0, -1, -1), int3 (1, -1, -1),</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int3 (-1, 0, -1), int3 (0, 0, -1), int3 (1, 0, -1),</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int3 (-1, 1, -1), int3 (0, 1, -1), int3 (1, 1, -1),</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int3 (-1, -1, 0), int3 (0, -1, 0), int3 (1, -1, 0),</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int3 (-1, 0, 0), int3 (0, 0, 0), int3 (1, 0, 0),</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int3 (-1, 1, 0), int3 (0, 1, 0), int3 (1, 1, 0),</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int3 (-1, -1, 1), int3 (0, -1, 1), int3 (1, -1, 1),</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int3 (-1, 0, 1), int3 (0, 0, 1), int3 (1, 0, 1),</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int3 (-1, 1, 1), int3 (0, 1, 1), int3 (1, 1, 1),</font></font></font></font><font></font>
 };<font></font>
-<font></font>
-// ラプラシアンの周囲のグリッドの影響度<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Impact of the grid around the Laplacian</font></font><font></font>
 static const float laplacePower[27] = {<font></font>
   0.02, 0.02, 0.02,<font></font>
-  0.02, 0.1,  0.02,<font></font>
-  0.02, 0.02, 0.02,<font></font>
-<font></font>
-  0.02, 0.1,  0.02,<font></font>
-  0.1, -1.0,  0.1,<font></font>
-  0.02, 0.1,  0.02,<font></font>
-<font></font>
-  0.02, 0.02, 0.02,<font></font>
-  0.02, 0.1,  0.02,<font></font>
-  0.02, 0.02, 0.02<font></font>
-};<font></font>
-<font></font>
-// バッファのインデックス計算<font></font>
+  0.02, 0.1,  0.02,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  0.02, 0.02, 0.02,</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  0.02, 0.1,  0.02,</font></font></font></font><font></font>
+  0.1, -1.0,  0.1,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  0.02, 0.1,  0.02,</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  0.02, 0.02, 0.02,</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  0.02, 0.1,  0.02,</font></font></font></font><font></font>
+  0.02, 0.02, 0.02<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+};</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Buffer index calculation</font></font><font></font>
 int GetIndex(int x, int y, int z) {<font></font>
   x = (x &lt; 0) ? x + _TexWidth : x;<font></font>
   x = (x &gt;= _TexWidth) ? x - _TexWidth : x;<font></font>
-<font></font>
-  y = (y &lt; 0) ? y + _TexHeight : y;<font></font>
-  y = (y &gt;= _TexHeight) ? y - _TexHeight : y;<font></font>
-<font></font>
-  z = (z &lt; 0) ? z + _TexDepth : z;<font></font>
-  z = (z &gt;= _TexDepth) ? z - _TexDepth : z;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  y = (y &lt;0)? </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">y + _TexHeight: y;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  y = (y&gt; = _TexHeight)? </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">y - _TexHeight: y;</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  z = (z &lt;0)? </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">z + _TexDepth: z;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  z = (z&gt; = _TexDepth)? </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">z - _TexDepth: z;</font></font></font></font><font></font>
 <font></font>
   return z * _TexWidth * _TexHeight + y * _TexWidth + x;<font></font>
 }<font></font>
-<font></font>
-// Uのラプラシアン関数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Laplacian function of U</font></font><font></font>
 float LaplaceU(int x, int y, int z) {<font></font>
   float sumU = 0;<font></font>
 <font></font>
@@ -735,35 +728,35 @@ float LaplaceU(int x, int y, int z) {<font></font>
     int idx = GetIndex(x + pos.x, y + pos.y, z + pos.z);<font></font>
     sumU += _BufferRead[idx].u * laplacePower[i];<font></font>
   }<font></font>
-  return sumU;<font></font>
-}<font></font>
-<font></font>
-// Vのラプラシアン関数<font></font>
+  return sumU;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Laplacian function of V</font></font><font></font>
 float LaplaceV(int x, int y, int z) {<font></font>
   float sumV = 0;<font></font>
-<font></font>
-  for (int i = 0; i &lt; 27; i++) {<font></font>
-    int3 pos = laplaceIndex[i];<font></font>
-    int idx = GetIndex(x + pos.x, y + pos.y, z + pos.z);<font></font>
-    sumV += _BufferRead[idx].v * laplacePower[i];<font></font>
-  }<font></font>
-  return sumV;<font></font>
-}<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  for (int i = 0; i &lt; 27; i++) {</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int3 pos = laplaceIndex[i];</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int idx = GetIndex(x + pos.x, y + pos.y, z + pos.z);</font></font><font></font>
+    sumV += _BufferRead[idx].v * laplacePower[i];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  }</font></font></font></font><font></font>
+  return sumV;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
 
-<h3><a id="h5-6-3"></a><span class="secno">5.6.3　</span>描画処理</h3>
-<p>シミュレーション結果のRenderTextureが３次元のボリュームテクスチャになっているので、今までのようにUnlit ShaderやSurface Shaderにテクスチャを貼り付けても正常に表示されません。サンプルではマーチングキューブス法という手法を使ってポリゴンを生成して描画していますが、紙面の都合上、実装についての説明は省略させていただきます。マーチングキューブス法の解説については、申し訳ありませんがUnity Graphics Programming Vol.1の「第７章 雰囲気で始めるマーチングキューブス法入門」を参照してください。他にも、レイマーチングを使ったボリュームレンダリングで描画する方法もあります。凹さんのブログに非常にわかりやすい実装<a id="fnb-kw_hecomi" href="https://freder.io/files/unity3/kaiware007.html#fn-kw_hecomi" class="noteref" epub:type="noteref">*1</a>が紹介されているので、ぜひとも参考にしてください。</p>
-<div class="footnote" epub:type="footnote" id="fn-kw_hecomi"><p class="footnote">[*1] 凹みTips http://tips.hecomi.com/entry/2018/01/05/192332</p></div>
+<h3><a id="h5-6-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.6.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Drawing process</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the Render Texture of the simulation result is a 3D volume texture, even if you paste the texture on the Unlit Shader or Surface Shader as before, it will not be displayed normally. </font><font style="vertical-align: inherit;">In the sample, polygons are generated and drawn using a method called the Marching cubes method, but due to space limitations, the explanation of implementation will be omitted. </font><font style="vertical-align: inherit;">For an explanation of the Marching Cubes method, please refer to "Chapter 7 Introduction to the Marching Cubes Method in an Atmosphere" in Unity Graphics Programming Vol.1. </font><font style="vertical-align: inherit;">Another method is to draw with volume rendering using ray marching. </font><font style="vertical-align: inherit;">A very easy-to-understand implementation </font></font><a id="fnb-kw_hecomi" href="https://freder.io/files/unity3/kaiware007.html#fn-kw_hecomi" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is introduced on </font><font style="vertical-align: inherit;">Mr. Utsu's blog, </font><font style="vertical-align: inherit;">so please refer to it.</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-kw_hecomi"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 1] Dent Tips http://tips.hecomi.com/entry/2018/01/05/192332</font></font></p></div>
 <div id="id_kaiware_2Frd3d" class="image">
 <img src="./Chapter 5 _ Reaction Diffusion_files/rd3d.png" alt="3D version Reaction Diffusion">
-<p class="caption">
-図5.12: ３次元版Reaction Diffusion
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.12: 3D Reaction Diffusion
+</font></font></p>
 </div>
 
-<h2><a id="h5-7"></a><span class="secno">5.7　</span>まとめ</h2>
-<p>Gray-Scottモデルを使って生物のような模様を作る方法を紹介しました。FeedとKillのパラメータを少し変えるだけで全然違う模様ができるので、夢中になるとあっという間に時間が過ぎてしまうので注意しましょう（※個人差があります） <br>また、Reaction Diffusionを使った作品には、Nakama Kouheiさんの「DIFFUSION」<a id="fnb-kw_diffusion" href="https://freder.io/files/unity3/kaiware007.html#fn-kw_diffusion" class="noteref" epub:type="noteref">*2</a>やKitahara Nobutakaさんの「Reaction-Diffusion」<a id="fnb-kw_reaction_diffusion" href="https://freder.io/files/unity3/kaiware007.html#fn-kw_reaction_diffusion" class="noteref" epub:type="noteref">*3</a>があります。みなさんもReaction Diffusionの不思議な魅力に取り憑かれてみませんか？</p>
+<h2><a id="h5-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I introduced how to make a creature-like pattern using the Gray-Scott model. </font><font style="vertical-align: inherit;">You can create a completely different pattern by just changing the parameters of Feed and Kill, so be careful as the time will pass quickly if you get absorbed in it (* There are individual differences) </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, for works using Reaction Diffusion , Nakama Kouhei's "DIFFUSION" </font></font><a id="fnb-kw_diffusion" href="https://freder.io/files/unity3/kaiware007.html#fn-kw_diffusion" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and Kitahara Nobutaka's "Reaction-Diffusion" </font></font><a id="fnb-kw_reaction_diffusion" href="https://freder.io/files/unity3/kaiware007.html#fn-kw_reaction_diffusion" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 3</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Would you like to be obsessed with the mysterious charm of Reaction Diffusion?</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-kw_diffusion"><p class="footnote">[*2] DIFFUSION https://vimeo.com/145251635</p></div>
 <div class="footnote" epub:type="footnote" id="fn-kw_reaction_diffusion"><p class="footnote">[*3] Reaction-Diffusion https://vimeo.com/176261480</p></div>
 
@@ -774,4 +767,4 @@ float LaplaceV(int x, int y, int z) {<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 5 _ Reaction Diffusion_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 5 _ Reaction Diffusion_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 5 _ Reaction Diffusion_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 5 _ Reaction Diffusion_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 5 _ Reaction Diffusion_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

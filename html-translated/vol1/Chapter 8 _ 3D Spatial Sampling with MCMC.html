@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0077)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/komietty.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h8"></a><span class="secno"><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;">Chapter 8　</font></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;"> 3D Spatial Sampling with MCMC</font></font></h1>
 
 <h2><a id="h8-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -118,19 +111,19 @@ pi = 4 * count / trial;<font></font>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In short, the ratio of the number of trials in a fan-shaped circle in a 1 x 1 square to the total number of trials is the area ratio, so the pi can be calculated from that. </font><font style="vertical-align: inherit;">As a simple example, this is also the Monte Carlo method.</font></font></p>
 
 <h3><a id="h8-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Markov chain</font></font></h3>
-<p>マルコフ連鎖は、マルコフ性を満たす確率過程のうち、状態が離散的に記述できるものを指します。<br>マルコフ性とは、ある確率過程の将来状態の確率分布が現在状態のみに依存し、過去の状態に依存しない性質のことです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A Markov chain is a stochastic process that satisfies Markov properties, in which states can be described discretely. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Markov property is the property that the probability distribution of the future state of a stochastic process depends only on the current state and not on the past state.</font></font></p>
 <div id="komiettyfig01" class="image">
 <img src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/komiettyfig01.png" alt="MarkovChain">
-<p class="caption">
-図8.2: MarkovChain
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.2: Markov Chain
+</font></font></p>
 </div>
-<p>上図のようにマルコフ連鎖では将来の状態は現在の状態のみに依存して、過去の状態には直接的には影響しません。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As shown in the above figure, in the Markov chain, the future state depends only on the current state and does not directly affect the past state.</font></font></p>
 
-<h3><a id="h8-4-3"></a><span class="secno">8.4.3　</span>定常分布</h3>
-<p>MCMCでは擬似乱数を使ってある任意の分布から与えられた定常分布へと収束していく必要があります。というのも、与えられた分布に収束しないと毎回違う分布からサンプリングしてしまうし、定常分布でないと上手く連鎖的にサンプリングできません。任意の分布が与えられた分布へと収束するには、以下の二つの条件を満たす必要があります。</p>
+<h3><a id="h8-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Stationary distribution</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">MCMC needs to use pseudo-random numbers to converge from an arbitrary distribution to a given stationary distribution. </font><font style="vertical-align: inherit;">This is because if you do not converge to a given distribution, you will sample from a different distribution each time, and if you do not have a stationary distribution, you will not be able to sample well in a chain. </font><font style="vertical-align: inherit;">In order for an arbitrary distribution to converge to a given distribution, the following two conditions must be met.</font></font></p>
 <ul>
-<li>既約性・・・分布が複数の部分に別れていてはいけないという条件。確率分布上のある点から遷移を繰り返していく際に、到達できない点が存在してはならない</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Irreducibility: A condition that the distribution must not be divided into multiple parts. </font><font style="vertical-align: inherit;">When repeating the transition from a certain point on the probability distribution, there must be no unreachable point</font></font></li>
 </ul>
 <div id="komiettyfig02" class="image">
 <img src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/komiettyfig02.png" alt="Irreducibility">
@@ -139,29 +132,29 @@ pi = 4 * count / trial;<font></font>
 </p>
 </div>
 <ul>
-<li>非周期性・・・どんなｎに対してもｎ回で元いた場所に戻ってこれるという条件。例えば円周上に並んだ分布の中で、一つ飛ばしにしか遷移できないとった条件が存在してはならない。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Aperiodicity: The condition that any n can be returned to the original place in n times. </font><font style="vertical-align: inherit;">For example, in the distribution arranged on the circumference, there must be no condition that the transition can be made only by skipping one.</font></font></li>
 </ul>
 <div id="komiettyfig03" class="image">
 <img src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/komiettyfig03.png" alt="Aperiodicity">
-<p class="caption">
-図8.4: Aperiodicity
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.4: Aperiodicity
+</font></font></p>
 </div>
-<p>この２つの条件を満たしていればある任意の分布は与えられた定常分布に収束することができます。これをマルコフ過程のエルゴード性といいます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Any distribution that meets these two conditions can converge to a given stationary distribution. </font><font style="vertical-align: inherit;">This is called the ergodic nature of the Markov process.</font></font></p>
 
-<h3><a id="h8-4-4"></a><span class="secno">8.4.4　</span>メトロポリス法</h3>
-<p>さて与えられた分布が先程のエルゴート性を満たす分布かどうかをいちいち調べるのは骨が折れることなので、多くの場合には条件を強めにとって「詳細釣り合い」という条件を満たす範囲で調べていきます。詳細釣り合いをみたすマルコフ連鎖の手法の一つがメトロポリス法と呼ばれるものです。</p>
-<p>メトロポリス法は以下の２ステップを踏むことでサンプリングを行います</p>
+<h3><a id="h8-4-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Metropolis method</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, it is difficult to check whether the given distribution satisfies the ergonomics mentioned earlier, so in many cases, we will strengthen the conditions and investigate within the range that satisfies the condition of "detailed balance". </font><font style="vertical-align: inherit;">One of the Markov chain methods that achieves detailed balance is called the metropolis method.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The metropolis method samples by taking the following two steps.</font></font></p>
 <ol>
-<li>擬似乱数で遷移先の候補 x を選ぶ。x は Q(x|x') = Q(x'|x) を満たすような分布 Q に従って生成され、この分布 Q を提案分布と呼ぶ。提案分布としてガウス分布が選ばれることが多い。</li>
-<li>1 と独立な乱数を発生させて、その乱数を使ってある基準が満たされれば遷移先候補を採用する。  具体的には、一様乱数 0 &lt;= r &lt; 1 に対して目標分布上の確率値 P(x) と遷移候補先の確率値 P(x') の比P(x')/P(x) が、 P(x')/P(x) &gt; r を満たせば遷移候補先へ遷移する。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Select the transition destination candidate x with a pseudo-random number. </font><font style="vertical-align: inherit;">x is generated according to a distribution Q that satisfies Q (x | x') = Q (x' | x), and this distribution Q is called the proposed distribution. </font><font style="vertical-align: inherit;">The Gaussian distribution is often chosen as the proposed distribution.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A random number independent of 1 is generated, and if a certain criterion is satisfied using the random number, the transition destination candidate is adopted. </font><font style="vertical-align: inherit;">Specifically, for a uniform random number 0 &lt;= r &lt;1, ​​the ratio P (x') / P (x) of the probability value P (x) on the target distribution and the probability value P (x') of the transition candidate destination ) Transitions to the transition candidate destination if P (x') / P (x)&gt; r is satisfied.</font></font></li>
 </ol>
-<p>メトロポリス法のメリットは、確率分布の極大値に遷移しきった後も r の値が小さければ確率値の小さい方に遷移するので、極大値周辺で確率値に比例したサンプリングができることです。</p>
-<p>ちなみにメトロポリス法はメトロポリス・ヘイスティング法（MH法）の一種です。メトロポリス法は提案分布に左右対称な分布を使いますが、MH法ではこの限りではありません。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The merit of the metropolis method is that even after the transition to the maximum value of the probability distribution is completed, if the value of r is small, the probability value transitions to the smaller one, so sampling proportional to the probability value can be performed around the maximum value.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By the way, the Metropolis method is a kind of Metropolis-Hastings method (MH method). </font><font style="vertical-align: inherit;">The Metropolis method uses a symmetrical distribution for the proposed distribution, but the MH method does not.</font></font></p>
 
-<h2><a id="h8-5"></a><span class="secno">8.5　</span>３次元サンプリング</h2>
-<p>では実際にコードの抜粋を見ながら、どのようにMCMCを実装するかを見ていきましょう。</p>
-<p>先ず３次元の確率分布を用意します。これを目標分布と呼びます。実際にサンプリングしたい分布なので「目標」分布です。</p>
+<h2><a id="h8-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 3D sampling</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's take a look at the actual code excerpt and see how to implement MCMC.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, prepare a three-dimensional probability distribution. </font><font style="vertical-align: inherit;">This is called the target distribution. </font><font style="vertical-align: inherit;">This is the "target" distribution because it is the distribution you actually want to sample.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">void Prepare()<font></font>
 {<font></font>
@@ -169,30 +162,30 @@ pi = 4 * count / trial;<font></font>
     for (int x = 0; x &lt; lEdge; x++)<font></font>
         for (int y = 0; y &lt; lEdge; y++)<font></font>
             for (int z = 0; z &lt; lEdge; z++)<font></font>
-            {<font></font>
-                var i = x + lEdge * y + lEdge * lEdge * z;<font></font>
+            {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                var i = x + lEdge * y + lEdge * lEdge * z;</font></font></font></font><font></font>
                 var val = sn.noise(x, y, z);<font></font>
                 data[i] = new Vector4(x, y, z, val);<font></font>
             }<font></font>
 }<font></font>
 </pre>
 </div>
-<p>今回はシンプレックスノイズを目標分布として採用しました。</p>
-<p>次に実際にMCMCを走らせます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, we adopted simplex noise as the target distribution.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, actually run MCMC.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist">public IEnumerable&lt;Vector3&gt; Sequence(int nInit, int limit, float th)<font></font>
-{<font></font>
+<pre class="emlist">public IEnumerable&lt;Vector3&gt; Sequence(int nInit, int limit, float th)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     Reset();<font></font>
 <font></font>
     for (var i = 0; i &lt; nInit; i++)<font></font>
         Next(th);<font></font>
-<font></font>
-    for (var i = 0; i &lt; limit; i++)<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    for (var i = 0; i &lt;limit; i ++)</font></font></font></font><font></font>
     {<font></font>
-        yield return _curr;<font></font>
-        Next(th);<font></font>
-    }<font></font>
-}<font></font>
+        yield return _curr;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Next(th);</font></font></font></font><font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
 <div class="emlist-code">
@@ -210,12 +203,12 @@ pi = 4 * count / trial;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>コルーチンを使って処理を走らせます。MCMCは一つのマルコフ連鎖が終わると全く別のところから処理が始まるため、概念的には並列処理と考えることができます。今回はReset関数を使って、一連の処理が終わった後に別の処理を走らせるようにしています。この作業を行うことで、確率分布の極大値が多数存在する場合にも上手くサンプリングができるようになります。</p>
-<p>遷移を始めて最初の方は目標分布から離れた点である可能性が高いので、この区間はサンプリングを行わず捨ててしまします（burn-in）。十分目標分布に近づいたらサンプリングと遷移のセットを一定回数行い、終わったらまた別の一連の処理に入ります。</p>
-<p>最後に遷移を決定する処理です。<br>３次元ですので、提案分布は以下のように三変量の標準正規分布を用います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Run the process using a coroutine. </font><font style="vertical-align: inherit;">Since MCMC starts processing from a completely different place when one Markov chain ends, it can be conceptually considered as parallel processing. </font><font style="vertical-align: inherit;">This time, I use the Reset function to run another process after a series of processes. </font><font style="vertical-align: inherit;">By doing this, you will be able to sample well even if there are many maxima of the probability distribution.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the first part of the transition is likely to be a point away from the target distribution, this section is burn-in without sampling. </font><font style="vertical-align: inherit;">When the target distribution is sufficiently approached, sampling and transition set are performed a certain number of times, and when finished, another series of processing is started.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, it is the process of determining the transition. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since it is three-dimensional, the proposed distribution uses a trivariate standard normal distribution as follows.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist">public static Vector3 GenerateRandomPointStandard()<font></font>
-{<font></font>
+<pre class="emlist">public static Vector3 GenerateRandomPointStandard()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
         var x = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
         var y = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
         var z = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
@@ -227,32 +220,32 @@ pi = 4 * count / trial;<font></font>
 <pre class="emlist">public static float rand_gaussian(float mu, float sigma)<font></font>
 {<font></font>
      float z = Mathf.Sqrt(-2.0f * Mathf.Log(Random.value))<font></font>
-              * Mathf.Sin(2.0f * Mathf.PI * Random.value);<font></font>
-     return mu + sigma * z;<font></font>
-}<font></font>
+              * Mathf.Sin(2.0f * Mathf.PI * Random.value);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+     return mu + sigma * z;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>メトロポリス法では左右対称な分布である必要があるので、平均値を０以外に設定することは無いですが、分散を１以外にする場合は、コレスキー分解を使って以下のように導出します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the Metropolis method, the distribution must be symmetrical, so the mean value is not set to anything other than 0, but if the variance is set to something other than 1, it is derived as follows using the Cholesky decomposition. I will.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist">public static Vector3 GenerateRandomPoint(Matrix4x4 sigma)<font></font>
-{<font></font>
+<pre class="emlist">public static Vector3 GenerateRandomPoint(Matrix4x4 sigma)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     var c00 = sigma.m00 / Mathf.Sqrt(sigma.m00);<font></font>
     var c10 = sigma.m10 / Mathf.Sqrt(sigma.m00);<font></font>
-    var c20 = sigma.m21 / Mathf.Sqrt(sigma.m00);<font></font>
-    var c11 = Mathf.Sqrt(sigma.m11 - c10 * c10);<font></font>
-    var c21 = (sigma.m21 - c20 * c10) / c11;<font></font>
+    var c20 = sigma.m21 / Mathf.Sqrt(sigma.m00);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var c11 = Mathf.Sqrt (sigma.m11 - c10 * c10);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var c21 = (sigma.m21 - c20 * c10) / c11;</font></font></font></font><font></font>
     var c22 = Mathf.Sqrt(sigma.m22 - (c20 * c20 + c21 * c21));<font></font>
     var r1 = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
     var r2 = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
     var r3 = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
-    var x = c00 * r1;<font></font>
-    var y = c10 * r1 + c11 * r2;<font></font>
-    var z = c20 * r1 + c21 * r2 + c22 * r3;<font></font>
+    var x = c00 * r1;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var y = c10 * r1 + c11 * r2;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var z = c20 * r1 + c21 * r2 + c22 * r3;</font></font></font></font><font></font>
     return new Vector3(x, y, z);<font></font>
 }<font></font>
 </pre>
 </div>
-<p>遷移先の決定は、提案分布（上の一点である）nextと直前の点_currそれぞれの、目標分布上における確率の比を取り一様乱数より大きければ遷移、そうでなければ遷移しない、とします。<br>確率値は、遷移先の座標に対応する確立値を見つける処理が重いため(O(n^3)の処理量)、近似計算を行っています。今回は目標分布が連続的に変化する分布を用いているので、距離に反比例する加重平均を行うことで近似的に確立値を導出しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To determine the transition destination, take the ratio of the probabilities of the proposed distribution (one point above) next and the immediately preceding point_curr on the target distribution, and if it is larger than a uniform random number, it will transition, otherwise it will not transition. I will. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the process of finding the probability value corresponding to the coordinates of the transition destination is heavy (the amount of processing of O (n ^ 3)), the probability value is approximated. </font><font style="vertical-align: inherit;">Since we are using a distribution in which the target distribution changes continuously this time, the established value is approximately derived by performing a weighted average that is inversely proportional to the distance.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">void Next(float threshold)<font></font>
 {<font></font>
@@ -280,10 +273,10 @@ float Density(Vector3 pos)<font></font>
                 int id = (int)Mathf.Floor(Random.value * (Data.Length - 1));<font></font>
                 Vector3 posi = Data[id];<font></font>
                 float mag = Vector3.SqrMagnitude(pos - posi);<font></font>
-                weight += Mathf.Exp(-mag) * Data[id].w;<font></font>
-        }<font></font>
-        return weight;<font></font>
-}<font></font>
+                weight += Mathf.Exp(-mag) * Data[id].w;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font><font></font>
+        return weight;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
 
@@ -293,8 +286,8 @@ float Density(Vector3 pos)<font></font>
 <h2><a id="h8-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> References</font></font></h2>
 <ul>
 <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Takuya Kubo (2012) Introduction to Statistical Modeling for Data Analysis: Generalized Linear Model, Hierarchical Bayes Model, MCMC (Science of Probability and Information) Iwanami Shoten</font></font></li>
-<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Olle Haggstrom, Kentaro Nomaguchi (2017) Introduction to Easy MCMC: Limited Markov Chain and Algorithm Kyoritsu Shuppan</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Olle Haggstrom, Kentaro Nomaguchi (2017) Introduction to Easy MCMC: Limited Markov Chain and Algorithm Kyoritsu Shuppan</font></font></font></font></font></font></li>
 </ul><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 53px; top: 30.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第8章　MCMCで行う３次元空間サンプリング</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

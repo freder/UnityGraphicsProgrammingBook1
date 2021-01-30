@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0042)https://freder.io/files/unity2/sugino.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 4 _ Projection Spray_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 4 _ Projection Spray_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 4 _ Projection Spray_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ Projection Spray_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ Projection Spray_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 4 _ Projection Spray_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 4 _ Projection Spray_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ Projection Spray_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ Projection Spray_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 4 _ Projection Spray_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Projection Spray</font></font></h1>
 
 <h2><a id="h4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -82,7 +75,7 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The writing-related files that may be relevant in this chapter are:</font></font></p>
 <ul>
 <li>CGIncludes/UnityCG.cginc</li>
-<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CGIncludes / AutoLight.cginc</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CGIncludes / AutoLight.cginc</font></font></font></font></font></font></li>
 <li>CGIncludes/Lighting.cginc</li>
 <li>CGIncludes/UnityLightingCommon.cginc</li>
 </ul>
@@ -109,15 +102,15 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 18: }<font></font>
 </pre>
 </div>
-<p>実際のライティング計算ですが、ライトからメッシュまでの方向とメッシュの法線方向との内積から、ディフューズの値を計算しています。<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#LightingLambert">リスト4.1</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the actual lighting calculation, the diffuse value is calculated from the inner product of the direction from the light to the mesh and the normal direction of the mesh. </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#LightingLambert"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.1</font></font></a></span></p>
 <p><code class="inline-code tt">fixed diff = max (0, dot (s.Normal, light.dir));</code></p>
-<p>Lighting.cginc内で未定義のUnityLightについては、UnityLightingCommon.cginc内で定義していて、ライトの色と方向の情報が格納されています。<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#UnityLight">リスト4.2</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For Unity Lights that are undefined in Lighting.cginc, they are defined in UnityLightingCommon.cginc and contain information about the color and direction of the lights. </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#UnityLight"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.2</font></font></a></span></p>
 <div id="UnityLight" class="code">
-<p class="caption">リスト4.2: UnityLightingCommon.cginc</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.2: UnityLightingCommon.cginc</font></font></p>
 <pre class="list"> 1: struct UnityLight<font></font>
  2: {<font></font>
- 3:     half3 color;<font></font>
- 4:     half3 dir;<font></font>
+ 3:     half3 color;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 4: half3 you;</font></font><font></font>
  5: <font></font>
  6:     // Deprecated: Ndotl is now calculated on the fly<font></font>
  7:     // and is no longer stored. Do not used it.<font></font>
@@ -126,16 +119,16 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 </pre>
 </div>
 
-<h3><a id="h4-2-2"></a><span class="secno">4.2.2　</span>メッシュの法線の表示</h3>
-<p>実際のライティングの処理を見てみて、ライティングの計算にはメッシュの法線（Normal）情報が必要だということが分かったので、Shaderでメッシュの法線情報を表示する方法を軽く見ていきます。</p>
-<p>サンプルプロジェクト内の<b>00_viewNormal.unity</b>のシーンを参照してください。</p>
-<p>オブジェクトに、法線情報をカラーとして出力するマテリアルが設定してあり、そのシェーダーは<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#showNormal">リスト4.3</a></span>のようになっています。</p>
+<h3><a id="h4-2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Displaying mesh normals</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Looking at the actual lighting process, I found that the calculation of lighting requires mesh normal information, so let's take a quick look at how to display mesh normal information in Shader. ..</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See the scene in </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">00_viewNormal.unity</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in the sample project </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The object has a material that outputs normal information as a color, and its shader is shown in </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#showNormal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.3</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div id="showNormal" class="code">
-<p class="caption">リスト4.3: simple-showNormal.shader</p>
-<pre class="list"> 1: struct appdata<font></font>
- 2: {<font></font>
- 3:     float4 vertex : POSITION;<font></font>
- 4:     float3 normal : NORMAL;<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.3: simple-showNormal.shader</font></font></p>
+<pre class="list"> 1: struct appdata<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 2: {</font></font></font></font><font></font>
+ 3:     float4 vertex : POSITION;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 4: float3 normal: NORMAL;</font></font></font></font><font></font>
  5: };<font></font>
  6: <font></font>
  7: struct v2f<font></font>
@@ -160,34 +153,34 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 26: }<font></font>
 </pre>
 </div>
-<p>頂点シェーダ（v2f vert）で、メッシュのワールド座標系における法線方向を算出しフラグメントシェーダ（half4 frag）に渡します。フラグメントシェーダでは渡された法線情報を、x成分をR、y成分をG, z成分をBとして、カラーに変換してそのまま出力しています。<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#showNormal">リスト4.3</a></span></p>
-<p>イメージ上は黒に見える部分でも、実際は法線ｘに負の値が入っている場合もあります。<span class="imgref"><a href="https://freder.io/files/unity2/sugino.html#buddha_normal">図4.2</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The vertex shader (v2f vert) calculates the normal direction of the mesh in the world coordinate system and passes it to the fragment shader (half4 frag). </font><font style="vertical-align: inherit;">In the fragment shader, the passed normal information is converted to color with the x component as R, the y component as G, and the z component as B, and output as it is. </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#showNormal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.3</font></font></a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Even if the part looks black on the image, the normal x may actually have a negative value. </font></font><span class="imgref"><a href="https://freder.io/files/unity2/sugino.html#buddha_normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 4.2</font></font></a></span></p>
 <div id="buddha_normal" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/buddha_normal.png" alt="00_viewNormal.unity">
 <p class="caption">
 図4.2: 00_viewNormal.unity
 </p>
 </div>
-<p>これで、メッシュにライティングを施す準備ができました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The mesh is now ready for lighting.</font></font></p>
 <div class="column">
 
-<h3><a id="column-1"></a>ビルトインシェーダーヘルパー機能</h3>
-<p>UnityCG.cginc内にはシェーダーを簡単に書くためのビルトインユーティリティ関数があります。たとえば、<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#showNormal">リスト4.3</a></span>で使われている<code class="inline-code tt">UnityObjectToClipPos</code>は頂点の位置をオブジェクト（ローカル）座標系からクリップ座標系に変換します。また、<code class="inline-code tt">UnityObjectToWorldNormal</code>の関数は法線方向をオブジェクト座標系からワールド座標系に変換しています。</p>
-<p>シェーダーの記述に便利なので、その他の関数に関しては、UnityCG.cgincを参照するか、公式マニュアルをご参照下さい。<a href="https://docs.unity3d.com/ja/current/Manual/SL-BuiltinFunctions.html" class="link">https://docs.unity3d.com/ja/current/Manual/SL-BuiltinFunctions.html</a></p>
-<p>また、座標変換や各座標系について詳しく知りたい場合は、Unity Graphics Programming vol.1、福永さんの『第9章 Multi Plane Perspective Projection』をご参照いただけると、詳しくなれるかもしれません。</p>
+<h3><a id="column-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Built-in shader helper function</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There is a built-in utility function in UnityCG.cginc that makes it easy to write shaders. </font><font style="vertical-align: inherit;">For example, the </font><font style="vertical-align: inherit;">vertex position </font><font style="vertical-align: inherit;">used in </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#showNormal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.3</font></font></a></span><font style="vertical-align: inherit;"></font><code class="inline-code tt">UnityObjectToClipPos</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> transforms from the object (local) coordinate system to the clip coordinate system. </font><font style="vertical-align: inherit;">Also, </font></font><code class="inline-code tt">UnityObjectToWorldNormal</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the function of is converting the normal direction from the object coordinate system to the world coordinate system.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For other functions, please refer to UnityCG.cginc or the official manual as it is convenient for writing shaders. </font></font><a href="https://docs.unity3d.com/ja/current/Manual/SL-BuiltinFunctions.html" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://docs.unity3d.com/ja/current/Manual/SL-BuiltinFunctions.html</font></font></a></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, if you want to know more about coordinate transformation and each coordinate system, you may be able to learn more by referring to Unity Graphics Programming vol.1 and Mr. Fukunaga's "Chapter 9 Multi Plane Perspective Projection".</font></font></p>
 </div>
 
-<h3><a id="h4-2-3"></a><span class="secno">4.2.3　</span>点光源（PointLight）</h3>
-<p>サンプルプロジェクト内の<b>01_pointLight.unity</b>のシーンを参照してください。</p>
+<h3><a id="h4-2-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.2.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Point Light</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See the scene at </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">01_pointLight.unity</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in the sample project </font><font style="vertical-align: inherit;">.</font></font></p>
 <div id="scene-pointLight" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/scene-pointLight.png" alt="01_pointLight.unity">
 <p class="caption">
 図4.3: 01_pointLight.unity
 </p>
 </div>
-<p>点光源は、ある一点から全方向を照らす光源です。シーンには、BuddhaのメッシュオブジェクトとPointLightのオブジェクトがあります。PointLightオブジェクトには、メッシュにライトの情報を送るためのスクリプト（<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#pointLight-cs">リスト4.4</a></span>）が付いていて、そのライトの情報をもとに、ライティングした結果をマテリアル（<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#pointLight-shader">リスト4.5</a></span>）で表示しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A point light source is a light source that illuminates all directions from a certain point. </font><font style="vertical-align: inherit;">The scene has a Buddha mesh object and a PointLight object. </font><font style="vertical-align: inherit;">The PointLight object has a script ( </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#pointLight-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.4</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) </font><font style="vertical-align: inherit;">for sending light information to the mesh, </font><font style="vertical-align: inherit;">and based on that light information, the lighting result is </font><font style="vertical-align: inherit;">displayed as a </font><font style="vertical-align: inherit;">material ( </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#pointLight-shader"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.5</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ).</font></font></p>
 <div id="pointLight-cs" class="code">
-<p class="caption">リスト4.4: PointLightComponent.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.4: PointLightComponent.cs</font></font></p>
 <pre class="list"> 1: using UnityEngine;<font></font>
  2: <font></font>
  3: [ExecuteInEditMode]<font></font>
@@ -221,10 +214,10 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 31: }<font></font>
 </pre>
 </div>
-<p>このコンポーネントは、ライトの位置と強さと色を対象のメッシュに受け渡しています。そして、受け取った情報をもとにライティング処理をするマテリアルが設定してあります。</p>
-<p>マテリアルの <code class="inline-code tt">"_LitPos"</code>, <code class="inline-code tt">"_LitCol"</code>, <code class="inline-code tt">"_Intensity"</code>の各プロパティに、CSharpから値が設定されています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This component passes the position, intensity and color of the light to the target mesh. </font><font style="vertical-align: inherit;">And, the material to perform the writing process is set based on the received information.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Values ​​are set from CSharp for each property </font><font style="vertical-align: inherit;">of </font></font><code class="inline-code tt">"_LitPos"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">"_LitCol"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and </font></font><code class="inline-code tt">"_Intensity"</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">of the </font><font style="vertical-align: inherit;">material </font><font style="vertical-align: inherit;">.</font></font></p>
 <div id="pointLight-shader" class="code">
-<p class="caption">リスト4.5: simple-pointLight.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.5: simple-pointLight.shader</font></font></p>
 <pre class="list"> 1: Shader "Unlit/Simple/PointLight-Reciever"<font></font>
  2: {<font></font>
  3:     Properties<font></font>
@@ -235,8 +228,8 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
  8:     }<font></font>
  9:     SubShader<font></font>
 10:     {<font></font>
-11:         Tags { "RenderType"="Opaque" }<font></font>
-12:         LOD 100<font></font>
+11:         Tags { "RenderType"="Opaque" }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+12: LOD 100</font></font></font></font><font></font>
 13: <font></font>
 14:         Pass<font></font>
 15:         {<font></font>
@@ -248,8 +241,8 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 21: <font></font>
 22:             struct appdata<font></font>
 23:             {<font></font>
-24:                 float4 vertex : POSITION;<font></font>
-25:                 float3 normal : NORMAL;<font></font>
+24:                 float4 vertex : POSITION;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+25: float3 normal: NORMAL;</font></font></font></font><font></font>
 26:             };<font></font>
 27: <font></font>
 28:             struct v2f<font></font>
@@ -266,16 +259,16 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 39:             {<font></font>
 40:                 v2f o;<font></font>
 41:                 o.vertex = UnityObjectToClipPos(v.vertex);<font></font>
-42:                 o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;<font></font>
-43:                 //ワールド座標系におけるメッシュの位置をフラグメントシェーダに渡す<font></font>
+42:                 o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+43: // Pass the position of the mesh in the world coordinate system to the fragment shader</font></font><font></font>
 44:                 o.normal = UnityObjectToWorldNormal(v.normal);<font></font>
 45:                 return o;<font></font>
 46:             }<font></font>
 47: <font></font>
 48:             fixed4 frag (v2f i) : SV_Target<font></font>
 49:             {<font></font>
-50:                 half3 to = i.worldPos - _LitPos;<font></font>
-51:                 //ライトの位置からメッシュ位置へのベクトル<font></font>
+50:                 half3 to = i.worldPos - _LitPos;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+51: // Vector from light position to mesh position</font></font><font></font>
 52:                 half3 lightDir = normalize(to);<font></font>
 53:                 half dist = length(to);<font></font>
 54:                 half atten =<font></font>
@@ -290,9 +283,9 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 63: }<font></font>
 </pre>
 </div>
-<p>ライティングの計算は、基本のLambertLighting（<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#LightingLambert">リスト4.1</a></span>）の計算をもとに拡散光を計算し、強さは距離の二乗に反比例して減衰するようにしている。<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#pointLight-shader">リスト4.5</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The lighting calculation is based on the basic Lambert Lighting ( </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#LightingLambert"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.1</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) calculation, and the intensity is attenuated in inverse proportion to the square of the distance. </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#pointLight-shader"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.5</font></font></a></span></p>
 <p><code class="inline-code tt">half atten = _Intensity * dot(-lightDir, i.normal) / (dist * dist);</code></p>
-<p>１つのモデルに対して１つのライトの簡単なシステムですが、ライティング処理を実装できました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It's a simple system of one light for one model, but I was able to implement the lighting process.</font></font></p>
 <div id="buddha_pointLight" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/buddha_pointLight.png" alt="01_pointLight.unity">
 <p class="caption">
@@ -300,19 +293,19 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 </p>
 </div>
 
-<h3><a id="h4-2-4"></a><span class="secno">4.2.4　</span>スポットライト（SpotLight）</h3>
-<p>次に、スポットライトの実装をしてみます。スポットライトは、ポイントライトと違い、方向を持ったライトで、一方方向に向けて光を出しています。</p>
+<h3><a id="h4-2-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.2.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> SpotLight</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, let's implement the spotlight. </font><font style="vertical-align: inherit;">Unlike point lights, spotlights are directional lights that emit light in one direction.</font></font></p>
 <div id="scene-spotLight" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/scene-spotLight.png" alt="02_spotLight.unity">
 <p class="caption">
 図4.5: 02_spotLight.unity
 </p>
 </div>
-<p>ここでは、スポットライトのGizmo表示のためだけにUnity標準のライトを使用しています。<span class="imgref"><a href="https://freder.io/files/unity2/sugino.html#scene-spotLight">図4.5</a></span></p>
-<p>スポットライトは方向性があるため、位置情報の他にライトの向き、スポットアングル（角度）の情報がポイントライトのときに加えて増えます。これらの情報はライトの<code class="inline-code tt">worldToLightMatrix</code>、<code class="inline-code tt">projectionMatrix</code>としてそれぞれ<code class="inline-code tt">Matrix4x4</code>（Shaderだと<code class="inline-code tt">float4x4</code>）のプロパティで受け渡します。</p>
-<p>さらに、スポットライトはLightCookieを設定することもできます。（UnityにはデフォルトのLightCookieがあるのですが、エディタから選択できなかったので、Default-Particleのテクスチャを使用しています）</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We are using standard Unity lights here just for the Gizmo display of the spotlights. </font></font><span class="imgref"><a href="https://freder.io/files/unity2/sugino.html#scene-spotLight"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 4.5</font></font></a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the spotlight is directional, the direction of the light and the spot angle (angle) information will be added to the point light in addition to the position information. </font><font style="vertical-align: inherit;">This information is of light </font></font><code class="inline-code tt">worldToLightMatrix</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">projectionMatrix</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">respectively, as </font></font><code class="inline-code tt">Matrix4x4</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(that's Shader </font></font><code class="inline-code tt">float4x4</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Passes in the properties of).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, the spotlight can also set a Light Cookie. </font><font style="vertical-align: inherit;">(Unity has a default LightCookie, but I couldn't select it from the editor, so I'm using the Default-Particle texture)</font></font></p>
 <div id="spotLight-csharp" class="code">
-<p class="caption">リスト4.6: SpotLightComponent.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.6: SpotLightComponent.cs</font></font></p>
 <pre class="list"> 1: using UnityEngine;<font></font>
  2: <font></font>
  3: [ExecuteInEditMode]<font></font>
@@ -333,8 +326,8 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 18:             return;<font></font>
 19:         if (mpb == null)<font></font>
 20:             mpb = new MaterialPropertyBlock();<font></font>
-21: <font></font>
-22:         //projectionMatrixを計算している<font></font>
+21: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+22: // Calculating projectionMatrix</font></font><font></font>
 23:         var projMatrix = Matrix4x4.Perspective(angle, 1f, 0f, range);<font></font>
 24:         var worldToLightMatrix = transform.worldToLocalMatrix;<font></font>
 25: <font></font>
@@ -350,10 +343,10 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 35: }<font></font>
 </pre>
 </div>
-<p>projectionMatrixは、<code class="inline-code tt">Matrix4x4.Perspective(angle, 1f, 0f, range)</code>で、算出しています。</p>
-<p>スポットライトから受け取ったパラメータ情報をもとにShaderでライティング処理を計算し、表示します。<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#spotLight-shader">リスト4.7</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">projectionMatrix is </font></font><code class="inline-code tt">Matrix4x4.Perspective(angle, 1f, 0f, range)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">calculated by.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Shader calculates and displays the lighting process based on the parameter information received from the spotlight. </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#spotLight-shader"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.7</font></font></a></span></p>
 <div id="spotLight-shader" class="code">
-<p class="caption">リスト4.7: simple-spotLight.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.7: simple-spotLight.shader</font></font></p>
 <pre class="list"> 1: uniform float4x4 _ProjMatrix, _WorldToLitMatrix;<font></font>
  2: <font></font>
  3: sampler2D _Cookie;<font></font>
@@ -370,10 +363,10 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 14:     half atten = _Intensity * dot(-lightDir, i.normal) / (dist * dist);<font></font>
 15: <font></font>
 16:     half4 lightSpacePos = mul(_WorldToLitMatrix, half4(i.worldPos, 1.0));<font></font>
-17:     half4 projPos = mul(_ProjMatrix, lightSpacePos);<font></font>
-18:     projPos.z *= -1;<font></font>
-19:     half2 litUv = projPos.xy / projPos.z;<font></font>
-20:     litUv = litUv * 0.5 + 0.5;<font></font>
+17:     half4 projPos = mul(_ProjMatrix, lightSpacePos);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+18: projPos.z * = -1;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+19: half2 litUv = projPos.xy / projPos.z;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+20: litUv = litUv * 0.5 + 0.5;</font></font></font></font><font></font>
 21:     half lightCookie = tex2D(_Cookie, litUv);<font></font>
 22:     lightCookie *=<font></font>
 23:         0&lt;litUv.x &amp;&amp; litUv.x&lt;1 &amp;&amp; 0&lt;litUv.y &amp;&amp; litUv.y&lt;1 &amp;&amp; 0&lt;projPos.z;<font></font>
@@ -384,8 +377,8 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 28: <font></font>
 </pre>
 </div>
-<p>基本的に、フラグメントシェーダー以外はポイントライトと同じだということが分かるかと思います。<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#spotLight-shader">リスト4.7</a></span></p>
-<p>16行目から22行目にかけてが、スポットライトの各地点における強度を計算しています。ライトの位置から見たとき、その地点がライトの範囲に入っているかと、その地点におけるライトCookieをサンプリングしてライトの強度を求めます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can see that it's basically the same as a point light except for the fragment shader. </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#spotLight-shader"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.7</font></font></a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From the 16th line to the 22nd line, the intensity at each point of the spotlight is calculated. </font><font style="vertical-align: inherit;">When viewed from the position of the light, the light cookie at that point is sampled to determine whether the point is within the range of the light and the intensity of the light.</font></font></p>
 <div id="buddha_spotLight" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/buddha_spotLight.png" alt="02_spotLight.unity">
 <p class="caption">
@@ -394,10 +387,10 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 </div>
 <div class="column">
 
-<h3><a id="column-2"></a>ビルトインのCookieの処理</h3>
-<p>スポットライトのCookieの処理については、ビルトインCGINC、AutoLight.cginc内の<code class="inline-code tt">UnitySpotCookie()</code>の部分が参考になります。</p>
+<h3><a id="column-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Handling of built-in cookies</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For the spotlight cookie processing, </font></font><code class="inline-code tt">UnitySpotCookie()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the part </font><font style="vertical-align: inherit;">in the built-in CGINC, AutoLight.cginc </font><font style="vertical-align: inherit;">will be helpful.</font></font></p>
 <div id="UnitySpotCookie" class="code">
-<p class="caption">リスト4.8: AutoLight.cginc</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.8: AutoLight.cginc</font></font></p>
 <pre class="list"> 1: #ifdef SPOT<font></font>
  2: sampler2D _LightTexture0;<font></font>
  3: unityShadowCoord4x4 unity_WorldToLight;<font></font>
@@ -431,24 +424,24 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 </div>
 </div>
 
-<h3><a id="h4-2-5"></a><span class="secno">4.2.5　</span>Shadow 影の実装</h3>
-<p>ライティングの実装として最後に、影を実装してみます。</p>
-<p>ライトから光が出て、直接光が当たったメッシュは明るくなり、ライトとメッシュの間に別の何かがあり、光が遮られたメッシュは暗くなります。これが影です。</p>
-<p>手順としては、ざっくりと</p>
+<h3><a id="h4-2-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.2.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Shadow Shadow implementation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, as a lighting implementation, let's implement a shadow.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Light comes out of the light, the mesh that is directly exposed to light becomes brighter, there is something else between the light and the mesh, and the mesh that is blocked by light becomes darker. </font><font style="vertical-align: inherit;">This is the shadow.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As a procedure, roughly</font></font></p>
 <ul>
-<li>ライトから見た深度テクスチャを作成する。</li>
-<li>オブジェクトレンダリング時、その地点のライトからの深度が深度テクスチャよりも大きかったらその地点は他のオブジェクトに遮られているので影になる。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Create a depth texture as seen from the light.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When rendering an object, if the depth from the light at that point is greater than the depth texture, the point will be shadowed because it is blocked by other objects.</font></font></li>
 </ul>
-<p>という形になります。今回はライトの位置からの深度テクスチャが必要になるので、SpotLightにCameraコンポーネントを付けて、ライトから見た深度テクスチャを作成します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It will be in the form of. </font><font style="vertical-align: inherit;">This time we need a depth texture from the position of the light, so we'll add a Camera component to SpotLight to create the depth texture as seen from the light.</font></font></p>
 <div id="scene-spotShadow" class="image">
 <pre class="dummyimage"></pre>
 <p class="caption">
 図4.7: 03_spotLight-withShadow.unity
 </p>
 </div>
-<p>SpotLightComponent（自作）にCamera（ビルトイン）が付いています。<span class="imgref"><a href="https://freder.io/files/unity2/sugino.html#scene-spotShadow">図4.7</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Camera (built-in) is attached to SpotLightComponent (self-made). </font></font><span class="imgref"><a href="https://freder.io/files/unity2/sugino.html#scene-spotShadow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 4.7</font></font></a></span></p>
 <div id="spotShadow-csharp" class="code">
-<p class="caption">リスト4.9: SpotLightWithShadow.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.9: SpotLightWithShadow.cs</font></font></p>
 <pre class="list"> 1: Shader depthRenderShader {<font></font>
  2:     get { return Shader.Find("Unlit/depthRender"); }<font></font>
  3: }<font></font>
@@ -478,8 +471,8 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 27:         }<font></font>
 28:         return _c;<font></font>
 29:     }<font></font>
-30: }<font></font>
-31: Camera _c;<font></font>
+30: }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+31: Room _c;</font></font><font></font>
 32: RenderTexture depthOutput;<font></font>
 33: <font></font>
 34: void Update()<font></font>
@@ -493,22 +486,22 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 42:     camera.fieldOfView = angle;<font></font>
 43:     camera.nearClipPlane = 0.01f;<font></font>
 44:     camera.farClipPlane = range;<font></font>
-45:     camera.Render();<font></font>
-46:     //カメラのレンダリングはスクリプト上、マニュアルで行う<font></font>
+45:     camera.Render();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+46: // Camera rendering is done manually in the script</font></font><font></font>
 47:     RenderTexture.active = currentRt;<font></font>
 48: <font></font>
-49:     var projMatrix = camera.projectionMatrix;<font></font>
-50:     //プロジェクション行列は、カメラのものを使う<font></font>
+49:     var projMatrix = camera.projectionMatrix;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+50: // Use the camera's projection matrix</font></font><font></font>
 51:     var worldToLightMatrix = transform.worldToLocalMatrix;<font></font>
 52: <font></font>
 53:     ~~<font></font>
 54: }<font></font>
 </pre>
 </div>
-<p>C#スクリプトはほとんど影なしバージョンと同じなのですが、深度テクスチャをレンダリングするカメラと深度をレンダリングするReplacementShaderの設定をしています。また、今回はカメラがあるので、プロジェクション行列は、<code class="inline-code tt">Matrix4x4.Perspective</code>ではなく、<code class="inline-code tt">Camera.projectionMatrix</code>を使用します。</p>
-<p>深度テクスチャ生成用シェーダは、次のコードになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The C # script is almost the same as the shadowless version, but with the camera set to render the depth texture and the ReplacementShader to render the depth. </font><font style="vertical-align: inherit;">Also, since we have a camera this time </font></font><code class="inline-code tt">Matrix4x4.Perspective</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">Camera.projectionMatrix</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">we will use the </font><font style="vertical-align: inherit;">projection matrix </font><font style="vertical-align: inherit;">instead of </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The shader for depth texture generation looks like this:</font></font></p>
 <div id="depthRender" class="code">
-<p class="caption">リスト4.10: depthRender.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.10: depthRender.shader</font></font></p>
 <pre class="list"> 1:     v2f vert (float4 pos : POSITION)<font></font>
  2:     {<font></font>
  3:         v2f o;<font></font>
@@ -523,16 +516,16 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 12:     }<font></font>
 </pre>
 </div>
-<p>生成した深度テクスチャ（<span class="imgref"><a href="https://freder.io/files/unity2/sugino.html#depth">図4.8</a></span>）ライト座標系（カメラ座標系）におけるオブジェクトの位置のz座標の値が出力されています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The generated depth texture ( </font></font><span class="imgref"><a href="https://freder.io/files/unity2/sugino.html#depth"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fig. 4.8</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) outputs the z-coordinate value of the position of the object in the light coordinate system (camera coordinate system).</font></font></p>
 <div id="depth" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/depth.png" alt="light depthTexture">
 <p class="caption">
 図4.8: light depthTexture
 </p>
 </div>
-<p>生成した深度テクスチャ（<code class="inline-code tt">depthOutput</code>）をメッシュオブジェクトに渡し、オブジェクトをレンダリングします。オブジェクトの影の計算部分は、次のようになります。</p>
+<p><font style="vertical-align: inherit;"></font><code class="inline-code tt">depthOutput</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pass the </font><font style="vertical-align: inherit;">generated depth texture ( </font><font style="vertical-align: inherit;">) to the mesh object and render the object. </font><font style="vertical-align: inherit;">The calculated part of the shadow of the object looks like this:</font></font></p>
 <div id="spotShadow-shader" class="code">
-<p class="caption">リスト4.11: simple-spotLight-withShadow.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.11: simple-spotLight-withShadow.shader</font></font></p>
 <pre class="list"> 1: fixed4 frag (v2f i) : SV_Target<font></font>
  2: {<font></font>
  3:     ///diffuse lighting<font></font>
@@ -543,17 +536,17 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
  8: <font></font>
  9:     ///spot-light cookie<font></font>
 10:     half4 lightSpacePos = mul(_WorldToLitMatrix, half4(i.worldPos, 1.0));<font></font>
-11:     half4 projPos = mul(_ProjMatrix, lightSpacePos);<font></font>
-12:     projPos.z *= -1;<font></font>
-13:     half2 litUv = projPos.xy / projPos.z;<font></font>
-14:     litUv = litUv * 0.5 + 0.5;<font></font>
+11:     half4 projPos = mul(_ProjMatrix, lightSpacePos);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+12: projPos.z * = -1;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+13: half2 litUv = projPos.xy / projPos.z;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+14: litUv = litUv * 0.5 + 0.5;</font></font></font></font><font></font>
 15:     half lightCookie = tex2D(_Cookie, litUv);<font></font>
 16:     lightCookie *=<font></font>
 17:         0&lt;litUv.x &amp;&amp; litUv.x&lt;1 &amp;&amp; 0&lt;litUv.y &amp;&amp; litUv.y&lt;1 &amp;&amp; 0&lt;projPos.z;<font></font>
 18: <font></font>
 19:     ///shadow<font></font>
-20:     half lightDepth = tex2D(_LitDepth, litUv).r;<font></font>
-21:     //_LitDepthにライトから見た深度テクスチャが渡されている<font></font>
+20:     half lightDepth = tex2D(_LitDepth, litUv).r;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+21: // _LitDepth is passed the depth texture seen from the light</font></font><font></font>
 22:     atten *= 1.0 - saturate(10*abs(lightSpacePos.z) - 10*lightDepth);<font></font>
 23: <font></font>
 24:     half4 col = max(0.0, atten) * _LitCol * lightCookie;<font></font>
@@ -561,23 +554,23 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 26: }<font></font>
 </pre>
 </div>
-<p>カメラによって作られた深度テクスチャ<code class="inline-code tt">tex2D(_LitTexture, litUv).r</code>と<code class="inline-code tt">lightSpacePos.z</code>は、どちらもライトから見たオブジェクトの頂点位置のz値が格納されています。テクスチャである<code class="inline-code tt">_LitTexture</code>はライトから見えている面＝光が当たっている面の情報なので、深度テクスチャからサンプルした値（<code class="inline-code tt">lightDepth</code>）と<code class="inline-code tt">lightSpacePos.z</code>を比較して、影かどうかの判定をしている。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Made the depth texture by the camera </font></font><code class="inline-code tt">tex2D(_LitTexture, litUv).r</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and </font></font><code class="inline-code tt">lightSpacePos.z</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is, z value of the vertex position of both viewed from the light object is stored. </font><font style="vertical-align: inherit;">Since the texture is </font></font><code class="inline-code tt">_LitTexture</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the information of the surface seen from the light = the surface exposed to the light, it is </font><font style="vertical-align: inherit;">judged whether it is a shadow or not by comparing it </font><font style="vertical-align: inherit;">with the value ( </font></font><code class="inline-code tt">lightDepth</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) </font><font style="vertical-align: inherit;">sampled from the depth texture </font></font><code class="inline-code tt">lightSpacePos.z</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
 <p><code class="inline-code tt">atten *= 1.0 - saturate(10*abs(lightSpacePos.z) - 10*lightDepth);</code></p>
-<p>ここのコードで、<code class="inline-code tt">lightDepth</code>より<code class="inline-code tt">lightSpacePos.z</code>の値が大きかったら、サーフェイスは暗くなります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the code here, the </font></font><code class="inline-code tt">lightDepth</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">higher </font></font><code class="inline-code tt">lightSpacePos.z</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the value, the darker the surface.</font></font></p>
 <div id="buddha_spotShadow" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/buddha_spotShadow.png" alt="03_spotLight-withShadow.unity">
 <p class="caption">
 図4.9: 03_spotLight-withShadow.unity
 </p>
 </div>
-<p>これで、スポットライトでオブジェクトの影を表示できました。</p>
-<p>このスポットライトと影の実装を使って、オブジェクトにリアルタイムで色を塗る、スプレーの機能を実装していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can now see the shadow of the object in the spotlight.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Using this spotlight and shadow implementation, we will implement a spray function that colors objects in real time.</font></font></p>
 <div class="column">
 
-<h3><a id="column-3"></a>Camera.projectionMatrixとMatrix4x4.Perspectiveは同じ行列</h3>
-<p>Unityシーン：Example内、<b>compareMatrix.unity</b></p>
+<h3><a id="column-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Camera.projectionMatrix and Matrix4x4.Perspective are the same matrix</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Unity scene: in Example, </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">compareMatrix.unity</font></font></b></p>
 <div id="matrix" class="code">
-<p class="caption">リスト4.12: CompareMatrix.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.12: CompareMatrix.cs</font></font></p>
 <pre class="list language-csharp"> 1:     float fov = 30f;<font></font>
  2:     float near = 0.01f;<font></font>
  3:     float far = 1000f;<font></font>
@@ -597,42 +590,42 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 </div>
 </div>
 
-<h2><a id="h4-3"></a><span class="secno">4.3　</span>ProjectionSprayの実装</h2>
-<p>ここからは、自作したSpotLightComponentを応用して、オブジェクトに色を塗れるスプレーの機能を実装していきます。</p>
-<p>基本的には、ライティングの強度の値をもとに、オブジェクトのテクスチャに描き込みを行います。今回使用している、Buddhaのオブジェクトはuvデータが存在しないので、そのままではテクスチャを貼ることができないのですが、UnityにはLightMap用のUVを生成する機能があります。</p>
+<h2><a id="h4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation of Projection Spray</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From here, we will apply our own SpotLightComponent to implement the spray function that allows you to paint objects.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Basically, it draws on the texture of the object based on the value of the lighting intensity. </font><font style="vertical-align: inherit;">Since the Buddha object used this time does not have uv data, it is not possible to paste the texture as it is, but Unity has a function to generate UV for LightMap.</font></font></p>
 <div id="buddha-importSetting" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/buddha-importSetting.png" alt="buddha Import Setting">
 <p class="caption">
 図4.10: buddha Import Setting
 </p>
 </div>
-<p>モデルのImportSettingにおいて、"Generate Lightmap UVs"の項目にチェックを入れると、ライトマップ用のUVが生成されます。（<code class="inline-code tt">v.uv2 : TEXCOORD1</code>）このUv2用に描き込み可能なRenderTextureを作成し、描き込みを行います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you check the "Generate Lightmap UVs" item in the model Import Setting, UVs for the lightmap will be generated. </font><font style="vertical-align: inherit;">( </font></font><code class="inline-code tt">v.uv2 : TEXCOORD1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) Create a drawable RenderTexture for this Uv2 and draw it.</font></font></p>
 
 <h3><a id="h4-3-1"></a><span class="secno">4.3.1　</span>showUv2</h3>
-<p>サンプルシーンは、<b>00_showUv2.unity</b>を参照してください。</p>
-<p>mesh.uv2にマッピングするテクスチャに書き込むためには、メッシュからUV2に展開したテクスチャを生成する必要があります。まずは、メッシュの頂点をUV2の座標に展開するシェーダーを作ってみます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">00_showUv2.unity</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> for a </font><font style="vertical-align: inherit;">sample scene </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In order to write to the texture that maps to mesh.uv2, we need to generate a texture that is expanded from the mesh to UV2. </font><font style="vertical-align: inherit;">First, let's create a shader that expands the vertices of the mesh to the coordinates of UV2.</font></font></p>
 <div id="scene-showUv2" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/scene-showUv2.png" alt="00_showUv2.unity">
-<p class="caption">
-図4.11: 00_showUv2.unity
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.11: 00_showUv2.unity
+</font></font></p>
 </div>
-<p>シーン内でBuddhaオブジェクトを選択し、マテリアルの"slider"のパラメータを操作すると、オブジェクトが元の形状からUv2に展開された形状に変化します。色付けは、<code class="inline-code tt">uv2.xy</code>を<code class="inline-code tt">color.rg</code>に割り当てています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Selecting a Buddha object in the scene and manipulating the material's "slider" parameter will change the object from its original shape to its Uv2 expanded shape. </font><font style="vertical-align: inherit;">Coloring is, </font></font><code class="inline-code tt">uv2.xy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">wo </font></font><code class="inline-code tt">color.rg</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">has been assigned to.</font></font></p>
 <div id="showUv2-shader" class="code">
-<p class="caption">リスト4.13: showUv2.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.13: showUv2.shader</font></font></p>
 <pre class="list"> 1: float _T;<font></font>
  2: <font></font>
  3: v2f vert(appdata v)<font></font>
  4: {<font></font>
- 5: #if UNITY_UV_STARTS_AT_TOP<font></font>
- 6:     v.uv2.y = 1.0 - v.uv2.y;<font></font>
+ 5: #if UNITY_UV_STARTS_AT_TOP<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 6: v.uv2.y = 1.0 - v.uv2.y;</font></font></font></font><font></font>
  7: #endif<font></font>
- 8:     float4 pos0 = UnityObjectToClipPos(v.vertex);<font></font>
- 9:     float4 pos1 = float4(v.uv2*2.0 - 1.0, 0.0, 1.0);<font></font>
+ 8:     float4 pos0 = UnityObjectToClipPos(v.vertex);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 9: float4 pos1 = float4 (v.uv2 * 2.0 - 1.0, 0.0, 1.0);</font></font></font></font><font></font>
 10: <font></font>
 11:     v2f o;<font></font>
-12:     o.vertex = lerp(pos0, pos1, _T);<font></font>
-13:     o.uv2 = v.uv2;<font></font>
+12:     o.vertex = lerp(pos0, pos1, _T);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+13: o.uv2 = v.uv2;</font></font></font></font><font></font>
 14:     o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;<font></font>
 15:     o.normal = UnityObjectToWorldNormal(v.normal);<font></font>
 16:     return o;<font></font>
@@ -644,36 +637,36 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 22: }<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">float4 pos1 = float4(v.uv2*2.0 - 1.0, 0.0, 1.0);</code> の値が、クリップ座標系におけるUv2に展開された位置になります。<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#showUv2-shader">リスト4.13</a></span></p>
-<p>フラグメントシェーダに<code class="inline-code tt">worldPos</code>と<code class="inline-code tt">normal</code>の値を渡しているので、この値を使用してスポットライトの計算におけるライティングの処理を行います。</p>
+<p><code class="inline-code tt">float4 pos1 = float4(v.uv2*2.0 - 1.0, 0.0, 1.0);</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The value of is the position expanded to Uv2 in the clip coordinate system. </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#showUv2-shader"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.13</font></font></a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since we are passing the value </font><font style="vertical-align: inherit;">of </font></font><code class="inline-code tt">worldPos</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and to </font></font><code class="inline-code tt">normal</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the </font><font style="vertical-align: inherit;">fragment shader, </font><font style="vertical-align: inherit;">we </font><font style="vertical-align: inherit;">will use this value to handle the lighting in the spotlight calculation.</font></font></p>
 <div id="buddha-uv2" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/buddha-uv2.png" alt="00_showUv2.unity">
-<p class="caption">
-図4.12: 00_showUv2.unity
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.12: 00_showUv2.unity
+</font></font></p>
 </div>
-<p>メッシュからUv2に展開したテクスチャを生成できる！</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can generate textures expanded from mesh to Uv2!</font></font></p>
 
 <h3><a id="h4-3-2"></a><span class="secno">4.3.2　</span>ProjectionSpray</h3>
-<p>それでは、準備が整ったので、スプレーの機能を実装します。<b>01_projectionSpray.unity</b>のシーンを参照してください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now that we're ready, we'll implement the spray functionality. </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> the scene at </font><b><font style="vertical-align: inherit;">01_projectionSpray.unity</font></b><font style="vertical-align: inherit;"> .</font></font></p>
 <div id="scene-spray" class="image">
 <img src="./Chapter 4 _ Projection Spray_files/scene-spray.png" alt="01_projectionSpray.unity">
 <p class="caption">
 図4.13: 01_projectionSpray.unity
 </p>
 </div>
-<p>このシーンを実行すると、黒いBuddhaのオブジェクトにだんだん、色が付いていきます。そして、画面をクリックすると、その部分にスプレーでカラフルな色が塗られます。</p>
-<p>実装の内容的には、今まで実装してきた自作スポットライトの応用になります。スポットライトのライティングの計算をそのままライティングに使用せず、<code class="inline-code tt">RenderTexture</code>の更新に使用しています。この例では、書き込んだテクスチャをライトマップ用に生成された<code class="inline-code tt">mesh.uv2</code>にマッピングしています。</p>
-<p><code class="inline-code tt">Drawable</code>はスプレーで書き込まれる対象のオブジェクトに付いているコンポーネントで、テクスチャに描き込む処理を行なっています。<code class="inline-code tt">ProjectionSpray</code>コンポーネントは、スプレーの位置などのテクスチャに描き込みを行う<code class="inline-code tt">Material</code>のプロパティの設定を行なっています。処理の流れとしては、<code class="inline-code tt">DrawableController</code>の<code class="inline-code tt">Update</code>関数内で、<code class="inline-code tt">projectionSpray.Draw(drawable)</code>を呼び、テクスチャに描き込みを行なっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As you run this scene, the black Buddha objects will gradually become colored. </font><font style="vertical-align: inherit;">Then, when you click on the screen, that part will be sprayed with a colorful color.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In terms of implementation content, it is an application of the self-made spotlight that has been implemented so far. </font><font style="vertical-align: inherit;">The spotlight lighting calculation is not used for lighting </font></font><code class="inline-code tt">RenderTexture</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">as it is, but is used for updating. </font><font style="vertical-align: inherit;">In this example, the texture you wrote is mapped to the one generated for the lightmap </font></font><code class="inline-code tt">mesh.uv2</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<p><code class="inline-code tt">Drawable</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is a component attached to the object to be sprayed and is being drawn into the texture. </font></font><code class="inline-code tt">ProjectionSpray</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The component </font></font><code class="inline-code tt">Material</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">sets properties </font><font style="vertical-align: inherit;">for drawing on the texture, such as the position of the spray </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">As the processing flow </font><font style="vertical-align: inherit;">, </font><font style="vertical-align: inherit;">we call </font><font style="vertical-align: inherit;">in </font></font><code class="inline-code tt">DrawableController</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the </font></font><code class="inline-code tt">Update</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">function of </font></font><code class="inline-code tt">projectionSpray.Draw(drawable)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and draw on the texture.</font></font></p>
 
 <h4><a id="h4-3-2-1"></a>ProjectionSpray.cs</h4>
 <ul>
-<li><code class="inline-code tt">Material drawMat</code>: 描き込みを行うためのマテリアル</li>
-<li><code class="inline-code tt">UpdateDrawingMat()</code>: 描き込み前にマテリアルの設定を更新する</li>
-<li><code class="inline-code tt">Draw(Drawable drawable)</code>: <code class="inline-code tt">drawMat</code>を<code class="inline-code tt">drawable.Draw(Material mat)</code>に渡して、描き込みを行う。</li>
+<li><code class="inline-code tt">Material drawMat</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Material for drawing</font></font></li>
+<li><code class="inline-code tt">UpdateDrawingMat()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">: Update material settings before drawing</font></font></li>
+<li><code class="inline-code tt">Draw(Drawable drawable)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pass </font><font style="vertical-align: inherit;">: </font></font><code class="inline-code tt">drawMat</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to </font></font><code class="inline-code tt">drawable.Draw(Material mat)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and draw.</font></font></li>
 </ul>
 <div id="spray-projectionSpray" class="code">
-<p class="caption">リスト4.14: projectionSpray.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.14: projectionSpray.cs</font></font></p>
 <pre class="list"> 1: public class ProjectionSpray : MonoBehaviour {<font></font>
  2: <font></font>
  3:     public Material drawingMat;<font></font>
@@ -689,8 +682,8 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 13:         get { return Shader.Find("Unlit/depthRender"); }<font></font>
 14:     }<font></font>
 15: <font></font>
-16:     new Camera camera{get{~~}}<font></font>
-17:     Camera _c;<font></font>
+16:     new Camera camera{get{~~}}<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+17: Room _c;</font></font><font></font>
 18:     RenderTexture depthOutput;<font></font>
 19: <font></font>
 20:     public void UpdateDrawingMat()<font></font>
@@ -701,8 +694,8 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 25:         camera.fieldOfView = angle;<font></font>
 26:         camera.nearClipPlane = 0.01f;<font></font>
 27:         camera.farClipPlane = range;<font></font>
-28:         camera.Render();<font></font>
-29:         //深度テクスチャの更新<font></font>
+28:         camera.Render();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+29: // Update depth texture</font></font><font></font>
 30:         RenderTexture.active = currentRt;<font></font>
 31: <font></font>
 32:         var projMatrix = camera.projectionMatrix;<font></font>
@@ -714,66 +707,66 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 38:         drawingMat.SetMatrix("_WorldToDrawerMatrix", worldToDrawerMatrix);<font></font>
 39:         drawingMat.SetMatrix("_ProjMatrix", projMatrix);<font></font>
 40:         drawingMat.SetTexture("_Cookie", cookie);<font></font>
-41:         drawingMat.SetTexture("_DrawerDepth", depthOutput);<font></font>
-42:         //プロパティ名は違うけど、渡す情報は、スポットライトと同じ。<font></font>
+41:         drawingMat.SetTexture("_DrawerDepth", depthOutput);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+42: // The property name is different, but the information passed is the same as the spotlight.</font></font><font></font>
 43:     }<font></font>
 44: <font></font>
 45:     public void Draw(Drawable drawable)<font></font>
 46:     {<font></font>
-47:         drawable.Draw(drawingMat);<font></font>
-48:         //描き込みの処理自体は、Drawableで行う。<font></font>
-49:         //描き込むためのMaterialはProjectionSprayが持っている。<font></font>
+47:         drawable.Draw(drawingMat);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+48: // The drawing process itself is done with Drawable.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+49: // Projection Spray has the Material to draw.</font></font><font></font>
 50:     }<font></font>
 51: }<font></font>
 </pre>
 </div>
 
 <h4><a id="h4-3-2-2"></a>Drawable.cs</h4>
-<p>スプレーで描き込まれる対象のオブジェクト。描き込むためのテクスチャを持っています。<code class="inline-code tt">Start()</code>関数内で<code class="inline-code tt">RenderTexture</code>を作成しています。クラシックなPing-pong Bufferを使用しています。</p>
-<p>テクスチャに描き込みを行う部分の処理を見ていきましょう</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The object to be drawn by spraying. </font><font style="vertical-align: inherit;">It has a texture for drawing. </font></font><code class="inline-code tt">Start()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the function </font></font><code class="inline-code tt">RenderTexture</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">creates a. </font><font style="vertical-align: inherit;">It uses the classic Ping-pong Buffer.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's see the processing of the part that draws on the texture</font></font></p>
 <div id="spray-drawable" class="code">
-<p class="caption">リスト4.15: Drawable.cs</p>
-<pre class="list"> 1:     //この関数は、projectionSpray.Draw(Drawable drawable)から呼ばれる<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.15: Drawable.cs</font></font></p>
+<pre class="list"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 1: // This function is called from projectionSpray.Draw (Drawable drawable)</font></font><font></font>
  2:     public void Draw(Material drawingMat)<font></font>
  3:     {<font></font>
- 4:         drawingMat.SetTexture("_MainTex", pingPongRts[0]);<font></font>
- 5:         //描き込む対象のテクスチャの現状をマテリアルに設定。<font></font>
+ 4:         drawingMat.SetTexture("_MainTex", pingPongRts[0]);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 5: // Set the current state of the texture to be drawn as the material.</font></font><font></font>
  6: <font></font>
  7:         var currentActive = RenderTexture.active;<font></font>
- 8:         RenderTexture.active = pingPongRts[1];<font></font>
- 9:         //描き込む対象のテクスチャを設定。<font></font>
-10:         GL.Clear(true, true, Color.clear);<font></font>
-11:         //描き込む対象のテクスチャをクリアする。<font></font>
+ 8:         RenderTexture.active = pingPongRts[1];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 9: // Set the texture to be drawn.</font></font><font></font>
+10:         GL.Clear(true, true, Color.clear);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+11: // Clear the texture to be drawn.</font></font><font></font>
 12:         drawingMat.SetPass(0);<font></font>
-13:         Graphics.DrawMeshNow(mesh, transform.localToWorldMatrix);<font></font>
-14:         //描き込む対象のメッシュとトランスフォーム値を使用してテクスチャを更新。<font></font>
+13:         Graphics.DrawMeshNow(mesh, transform.localToWorldMatrix);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+14: // Updated texture with target mesh and transform values ​​to draw.</font></font><font></font>
 15:         RenderTexture.active = currentActive;<font></font>
 16: <font></font>
 17:         Swap(pingPongRts);<font></font>
 18: <font></font>
 19:         if(fillCrack!=null)<font></font>
-20:         {<font></font>
-21:             //Uvのつなぎ目にヒビができてしまうのを防ぐ処理です。<font></font>
+20:         {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+21: // This is a process to prevent cracks from forming at the joints of Uv.</font></font><font></font>
 22:             Graphics.Blit(pingPongRts[0], pingPongRts[1], fillCrack);<font></font>
 23:             Swap(pingPongRts);<font></font>
 24:         }<font></font>
 25: <font></font>
-26:         Graphics.CopyTexture(pingPongRts[0], output);<font></font>
-27:         //更新した後のテクスチャをoutputにコピー<font></font>
+26:         Graphics.CopyTexture(pingPongRts[0], output);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+27: // Copy the updated texture to output</font></font><font></font>
 28:     }<font></font>
 </pre>
 </div>
-<p>ここでのポイントは、<code class="inline-code tt">Graphics.DrawMeshNow(mesh, matrix)</code>を使って<code class="inline-code tt">RenderTexture</code>の更新を行なっているところです。（<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#spray-drawable">リスト4.15</a></span>）<code class="inline-code tt">drawingMat</code>の頂点シェーダでメッシュの頂点を<code class="inline-code tt">mesh.uv2</code>の形状に展開しているので、メッシュの頂点位置や法線、トランスフォーム情報をフラグメントシェーダに渡した上で、テクスチャの更新が可能になっています。（<span class="listref"><a href="https://freder.io/files/unity2/sugino.html#sprayProjection-shader">リスト4.16</a></span>）</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The point here is </font><font style="vertical-align: inherit;">that we are updating </font></font><code class="inline-code tt">Graphics.DrawMeshNow(mesh, matrix)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">using </font></font><code class="inline-code tt">RenderTexture</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Since </font><font style="vertical-align: inherit;">the vertex shader of </font><font style="vertical-align: inherit;">( </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#spray-drawable"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.15</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) </font><font style="vertical-align: inherit;">expands </font></font><code class="inline-code tt">drawingMat</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the vertices of </font></font><code class="inline-code tt">mesh.uv2</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the </font><font style="vertical-align: inherit;">mesh into </font><font style="vertical-align: inherit;">the shape of, it is possible to update the texture after passing the vertex position, normal, and transform information of the mesh to the fragment shader. .. </font><font style="vertical-align: inherit;">( </font></font><span class="listref"><a href="https://freder.io/files/unity2/sugino.html#sprayProjection-shader"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.16</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></p>
 <div id="sprayProjection-shader" class="code">
-<p class="caption">リスト4.16: ProjectionSpray.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 4.16: ProjectionSpray.shader</font></font></p>
 <pre class="list"> 1: v2f vert (appdata v)<font></font>
- 2: {<font></font>
- 3:     v.uv2.y = 1.0 - v.uv2.y;<font></font>
- 4:     //yを反転しています！<font></font>
+ 2: {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 3: v.uv2.y = 1.0 - v.uv2.y;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 4: // Invert and!</font></font></font></font><font></font>
  5: <font></font>
  6:     v2f o;<font></font>
- 7:     o.vertex = float4(v.uv2*2.0 - 1.0, 0.0, 1.0);<font></font>
- 8:     //showUv2と同じ処理です！<font></font>
+ 7:     o.vertex = float4(v.uv2*2.0 - 1.0, 0.0, 1.0);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 8: // Same process as showUv2!</font></font><font></font>
  9:     o.uv = v.uv2;<font></font>
 10:     o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;<font></font>
 11:     o.normal = UnityObjectToWorldNormal(v.normal);<font></font>
@@ -801,8 +794,8 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 33:         _WorldToDrawerMatrix,<font></font>
 34:         half4(i.worldPos, 1.0)<font></font>
 35:     );<font></font>
-36:     half4 projPos = mul(_ProjMatrix, drawerSpacePos);<font></font>
-37:     projPos.z *= -1;<font></font>
+36:     half4 projPos = mul(_ProjMatrix, drawerSpacePos);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+37: projPos.z * = -1;</font></font><font></font>
 38:     half2 drawerUv = projPos.xy / projPos.z;<font></font>
 39:     drawerUv = drawerUv * 0.5 + 0.5;<font></font>
 40:     half cookie = tex2D(_Cookie, drawerUv);<font></font>
@@ -844,4 +837,4 @@ Figure 4.1: https://unity3d.com/jp/get-unity/download/archive
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you look at UnityCG.cginc, Lighting.cginc, etc., the built-in processing is written, and it will be a reference to implement various processing, so it is good to see it!</font></font></p><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 4 _ Projection Spray_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 4 _ Projection Spray_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 4 _ Projection Spray_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 4 _ Projection Spray_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 4 _ Projection Spray_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

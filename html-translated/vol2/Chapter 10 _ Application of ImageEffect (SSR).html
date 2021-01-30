@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0044)https://freder.io/files/unity2/komietty.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 10 _ Application of ImageEffect (SSR)_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 10 _ Application of ImageEffect (SSR)_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 10 _ Application of ImageEffect (SSR)_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 10 _ Application of ImageEffect (SSR)_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 10 _ Application of ImageEffect (SSR)_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 10 _ Application of ImageEffect (SSR)_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 10 _ Application of ImageEffect (SSR)_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 10 _ Application of ImageEffect (SSR)_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 10 _ Application of ImageEffect (SSR)_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 10 _ Application of ImageEffect (SSR)_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h10"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 10 Application of　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ImageEffect (SSR)</font></font></h1>
 
 <h2><a id="h10-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -101,7 +94,7 @@ Figure 10.1: Confirmation that Blur composition in each direction correctly blur
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">On the script side, </font></font><code class="inline-code tt">OnRenderImage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Blit alternately between src and temporary RenderTexture in each direction of xy, and finally Blit from src to dst and output. </font><font style="vertical-align: inherit;">On MacOS, Blitt was possible only with src, but on Windows, the result was not output, so </font></font><code class="inline-code tt">RenderTexture.GetTemporary</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I am using. </font><font style="vertical-align: inherit;">(For OnRenderImage and Blit, refer to the introduction to ImageEffect in the previous chapter.)</font></font></p>
 <div class="emlist-code">
 <p class="caption">GaussianBlur.cs</p>
-<pre class="emlist">void OnRenderImage(RenderTexture src, RenderTexture dst)<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">void OnRenderImage (RenderTexture src, RenderTexture dst)</font></font></font></font><font></font>
 {<font></font>
   var rt = RenderTexture.GetTemporary(src.width, src.height, 0, src.format);<font></font>
 <font></font>
@@ -116,48 +109,48 @@ Figure 10.1: Confirmation that Blur composition in each direction correctly blur
 }<font></font>
 </pre>
 </div>
-<p>以上でガウシアンブラーの解説は終わりです。ポストエフェクトがどのように行われるかの感覚が掴めてきたかと思いますので、次節からSSRの解説を行います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the end of the explanation of Gaussian blur. </font><font style="vertical-align: inherit;">Now that you have a sense of how post-effects are performed, I will explain SSR from the next section.</font></font></p>
 
 <h2><a id="h10-3"></a><span class="secno">10.3　</span>SSR</h2>
-<p>SSRはポストエフェクトの範囲内で反射・映り込みを再現しようとするテクニックです。SSRに必要なのはカメラで撮られた画そのものと、深度情報が書き込まれたデプスバッファ、あとは法線情報が書き込まれたノーマルバッファです。デプスバッファやノーマルバッファなどはG-bufferと総称されるもので、SSRのようなDeferredレンダリングにとっては必要不可欠なものとなります。（Deferredレンダリングについては前章のImageEffect入門に素晴らしい解説がありますので、ぜひそちらを参照してください。）</p>
-<p>本節を読む際の前提ですが、本節ではレイトレーシングについての基本的な知識を前提にして解説を進めていきます。レイトレーシングについては、入門レベルでも別にもう一章書けるくらい大きなテーマなので、残念ながらここでは説明は割愛させていただきます。ただ、レイトレーシングが何か分からないと以下の内容も理解できないので、分からないという方はPeterShirleyの良入門書 "Ray Tracing in One Weekend"<a id="fnb-shirley" href="https://freder.io/files/unity2/komietty.html#fn-shirley" class="noteref" epub:type="noteref">*3</a>がありますので、先ずそちらを読まれることをおすすめします。</p>
-<p>また、SSRのUnity実装での解説テキストとしてはkode80の「Screen Space Reflections in Unity 5 <a id="fnb-kode80" href="https://freder.io/files/unity2/komietty.html#fn-kode80" class="noteref" epub:type="noteref">*6</a>」が有名です。また日本語のテキストでは「Unity で Screen Space Reflection の実装をしてみた <a id="fnb-hecomi" href="https://freder.io/files/unity2/komietty.html#fn-hecomi" class="noteref" epub:type="noteref">*8</a>」があります。本節では上記のテキストで解説されていることは、極力解説を簡略化したり、枝葉のテクニックについては解説を省略しています。ソースコードを読んで不明点が合った場合は、これらを当たるようにしてみて下さい。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SSR is a technique that attempts to reproduce reflections and reflections within the range of post effects. </font><font style="vertical-align: inherit;">All that is required for SSR is the image itself taken by the camera, the depth buffer in which the depth information is written, and the normal buffer in which the normal information is written. </font><font style="vertical-align: inherit;">Depth buffer and normal buffer are collectively called G-buffer and are indispensable for Deferred rendering such as SSR. </font><font style="vertical-align: inherit;">(For Deferred Rendering, there is a great explanation in the introduction to ImageEffect in the previous chapter, so please refer to that.)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is a premise when reading this section, but in this section, we will proceed with the explanation on the premise of basic knowledge about ray tracing. </font><font style="vertical-align: inherit;">Ray tracing is a big theme that I can write another chapter even at the introductory level, so unfortunately I will omit the explanation here. </font><font style="vertical-align: inherit;">However, if you do not understand what ray tracing is, you can not understand the following contents, so if you do not understand it, there is a good introduction book "Ray Tracing in One Weekend" </font></font><a id="fnb-shirley" href="https://freder.io/files/unity2/komietty.html#fn-shirley" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 3</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> by </font><font style="vertical-align: inherit;">Peter Shirley, </font><font style="vertical-align: inherit;">so it is recommended that you read that first. I will.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, kode80's "Screen Space Reflections in Unity 5 </font></font><a id="fnb-kode80" href="https://freder.io/files/unity2/komietty.html#fn-kode80" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 6</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> " is famous </font><font style="vertical-align: inherit;">as a commentary text for the Unity implementation of SSR </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Also, in Japanese text, there is "I tried to implement Screen Space Reflection in Unity </font></font><a id="fnb-hecomi" href="https://freder.io/files/unity2/komietty.html#fn-hecomi" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 8</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ". </font><font style="vertical-align: inherit;">In this section, what is explained in the above text is simplified as much as possible, and explanation of branch and leaf techniques is omitted. </font><font style="vertical-align: inherit;">If you read the source code and find any questions, try to hit them.</font></font></p>
 
-<h3><a id="h10-3-1"></a><span class="secno">10.3.1　</span>理論概観</h3>
-<p>SSRの基本的な考え方は、レイトレーシングのテクニックを使い、カメラ、反射表面、オブジェクト（光源）、の関係をシミュレートするものです。</p>
-<p>SSRでは通常の光学と異なり、カメラに入射する光の道筋から逆算することで、光源を特定した後、反射面にその色をフェッチしてくることで、反射面に反射が再現されます。</p>
+<h3><a id="h10-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Overview of Theory</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The basic idea of ​​SSR is to use ray tracing techniques to simulate the relationship between a camera, a reflective surface, and an object (light source).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Unlike ordinary optics, SSR reproduces reflections on the reflecting surface by fetching the color on the reflecting surface after identifying the light source by calculating back from the path of light incident on the camera.</font></font></p>
 <div id="id_komietty_2Fssr__idea" class="image">
 <img src="./Chapter 10 _ Application of ImageEffect (SSR)_files/ssr_idea.png" alt="Difference between real optics and SSR light thinking">
-<p class="caption">
-図10.2: 現実の光学とSSRの光の考え方の違い
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.2: Differences between real-life optics and SSR light thinking
+</font></font></p>
 </div>
-<p>SSRではカメラの各ピクセルに対して、これを行います。</p>
-<p>処理の大筋は以下のようにまとめることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SSR does this for each pixel of the camera.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The outline of the process can be summarized as follows.</font></font></p>
 <ol>
-<li>スクリーン座標系を、深度情報を用いることでワールド座標系に戻す</li>
-<li>視線ベクトルと法線情報から、反射ベクトルを求める</li>
-<li>反射ベクトルを少しだけ伸ばし、その先端（＝レイ）の位置を再度スクリーン座標系に戻す</li>
-<li>スクリーン座標系のレイの位置について、レイの深度とデプスバッファに書き込まれている深度を比較する</li>
-<li>レイの方が深度が小さい場合、レイはまだ空中をさまよっている状態。３に戻りレイをもう少し進める</li>
-<li>レイの方が深度が大きい場合、レイがなんらか物体を通過したということなので、反射される色を取得できる</li>
-<li>もとのピクセルに戻り、取得した色を反映する</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Return the screen coordinate system to the world coordinate system by using depth information</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Find the reflection vector from the line-of-sight vector and normal information</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Extend the reflection vector a little and return the position of its tip (= ray) to the screen coordinate system again.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Compare the depth of the ray with the depth written in the depth buffer for the position of the ray in the screen coordinate system.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the ray is less deep, the ray is still wandering in the air. </font><font style="vertical-align: inherit;">Go back to 3 and move Ray a little further</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the ray is deeper, it means that the ray has passed some object and you can get the reflected color.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Return to the original pixel and reflect the acquired color</font></font></li>
 </ol>
-<p>図では説明しにくい手続きですが、言葉で説明してもややこしいですね。分解して見ていきましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The procedure is difficult to explain in the figure, but it is complicated to explain in words. </font><font style="vertical-align: inherit;">Let's disassemble it.</font></font></p>
 
-<h3><a id="h10-3-2"></a><span class="secno">10.3.2　</span>座標変換</h3>
-<p>先ずはスクリーン座標系とワールド座標系とを変換するための行列をシェーダーに渡してあげます。<code class="inline-code tt">_ViewProj</code> がワールド座標系からスクリーン座標系への変換行列、<code class="inline-code tt">_InvViewProj</code> はその逆行列になります。</p>
+<h3><a id="h10-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Coordinate transformation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, pass the matrix for converting the screen coordinate system and the world coordinate system to the shader. </font></font><code class="inline-code tt">_ViewProj</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is the transformation matrix from the world coordinate system to the screen coordinate system, and </font></font><code class="inline-code tt">_InvViewProj</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is the inverse matrix.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SSR.cs</p>
-<pre class="emlist">void OnRenderImage(RenderTexture src, RenderTexture dst)<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">void OnRenderImage (RenderTexture src, RenderTexture dst)</font></font></font></font><font></font>
 {<font></font>
 <font></font>
   ....<font></font>
 <font></font>
   // world &lt;-&gt; screen matrix<font></font>
   var view = cam.worldToCameraMatrix;<font></font>
-  var proj = GL.GetGPUProjectionMatrix(cam.projectionMatrix, false);<font></font>
-  var viewProj = proj * view;<font></font>
+  var proj = GL.GetGPUProjectionMatrix(cam.projectionMatrix, false);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  var viewProj = proj * view;</font></font></font></font><font></font>
   mat.SetMatrix("_ViewProj", viewProj);<font></font>
   mat.SetMatrix("_InvViewProj", viewProj.inverse);<font></font>
 <font></font>
@@ -166,7 +159,7 @@ Figure 10.1: Confirmation that Blur composition in each direction correctly blur
 }<font></font>
 </pre>
 </div>
-<p>さて渡された変換行列を用いて、法線ベクトルと反射ベクトルが求まります。該当するシェーダーの処理を見てみましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, using the transformation matrix passed, the normal vector and the reflection vector can be obtained. </font><font style="vertical-align: inherit;">Let's take a look at the processing of the corresponding shader.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SSR.shader</p>
 <pre class="emlist">float4 reflection (v2f i) : SV_Target<font></font>
@@ -182,23 +175,23 @@ Figure 10.1: Confirmation that Blur composition in each direction correctly blur
   float3 camDir = normalize(pos - _WorldSpaceCameraPos);<font></font>
   float3 normal = tex2D(_CameraGBufferTexture2, uv) * 2.0 - 1.0;<font></font>
   float3 refDir = reflect(camDir, normal);<font></font>
-<font></font>
-  ....<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  ....</font></font></font></font><font></font>
 <font></font>
   if (_ViewMode == 1) col = float4((normal.xyz * 0.5 + 0.5), 1);<font></font>
   if (_ViewMode == 2) col = float4((refDir.xyz * 0.5 + 0.5), 1);<font></font>
-<font></font>
-  ....<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  ....</font></font></font></font><font></font>
 <font></font>
   return col;<font></font>
   }<font></font>
 </pre>
 </div>
-<p>まず該当ピクセルの深度は <code class="inline-code tt">_CameraDepthTexture</code> に書き込まれており、これ利用します。つぎにスクリーン上の位置情報と震度情報から、該当ピクセルに写っているポリゴンのワールド座標系での位置が分かるので、これを <code class="inline-code tt">pos</code> に保持します。<code class="inline-code tt">pos</code> と <code class="inline-code tt">_WorldSpaceCameraPos</code> から、カメラへ向かうベクトルが分かるので、これと法線情報から、反射ベクトルが分かるようになります。</p>
-<p>メインカメラにアタッチされたスクリプトから、法線ベクトルと反射ベクトルがどこを向いているかを確認できるようになってます。各ベクトルとも -1 ~ 1 の間に規格化されているため、0以下の値の色情報は表示されません。ベクトルがｘ軸成分が大きいときは赤っぽく、ｙ軸成分が大きいときは緑っぽく、ｚ軸成分が大きいときは青っぽく表示されます。ViewMode を <code class="inline-code tt">Normal</code> もしくは　<code class="inline-code tt">Reflection</code> にして確認してみて下さい。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, the depth of the corresponding pixel is </font></font><code class="inline-code tt">_CameraDepthTexture</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">written in, and this is used. </font><font style="vertical-align: inherit;">Next, from the position information and seismic intensity information on the screen, the position of the polygon in the corresponding pixel in the world coordinate system can be found, so </font></font><code class="inline-code tt">pos</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">hold it in. </font></font><code class="inline-code tt">pos</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then, </font></font><code class="inline-code tt">_WorldSpaceCameraPos</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">since the vector toward the camera is known, the reflection vector can be known from this and the normal information.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From the script attached to the main camera, you can see where the normal and reflection vectors are facing. </font><font style="vertical-align: inherit;">Since each vector is standardized between -1 and 1, color information with a value less than or equal to 0 is not displayed. </font><font style="vertical-align: inherit;">When the x-axis component is large, the vector is displayed in reddish, when the y-axis component is large, it is displayed in greenish, and when the z-axis component is large, it is displayed in bluish. </font><font style="vertical-align: inherit;">Please set </font><font style="vertical-align: inherit;">ViewMode to </font></font><code class="inline-code tt">Normal</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">or　</font></font><code class="inline-code tt">Reflection</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and check.</font></font></p>
 
-<h3><a id="h10-3-3"></a><span class="secno">10.3.3　</span>レイトレーシング</h3>
-<p>では次にレイトレーシングを行う処理を見ていきましょう。</p>
+<h3><a id="h10-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ray tracing</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now let's look at the process of performing ray tracing.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SSR.shader</p>
 <pre class="emlist">float4 reflection(v2f i) : SV_Target<font></font>
@@ -211,14 +204,14 @@ Figure 10.1: Confirmation that Blur composition in each direction correctly blur
   {<font></font>
     float3 step = refDir * _RayLenCoeff * (lod + 1);<font></font>
     ray += step * (1 + rand(uv + _Time.x) * (1 - smooth));<font></font>
-<font></font>
-    float4 rayScreen  = mul(_ViewProj, float4(ray, 1.0));<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float4 rayScreen = mul (_ViewProj, float4 (ray, 1.0));</font></font></font></font><font></font>
     float2 rayUV      = rayScreen.xy / rayScreen.w * 0.5 + 0.5;<font></font>
     float  rayDepth   = ComputeDepth(rayScreen);<font></font>
     float  worldDepth = (lod == 0)?<font></font>
-           SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, rayUV) :<font></font>
-           tex2Dlod(_CameraDepthMipmap, float4(rayUV, 0, lod))<font></font>
-           + _BaseRaise * lod;<font></font>
+           SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, rayUV) :<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+           tex2Dlod (_CameraDepthMipmap, float4 (rayUV, 0, lod))</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+           + _BaseRaise * lod;</font></font></font></font><font></font>
 <font></font>
     ...<font></font>
 <font></font>
@@ -233,20 +226,20 @@ Figure 10.1: Confirmation that Blur composition in each direction correctly blur
 }<font></font>
 </pre>
 </div>
-<p>後に説明する処理に関係する変数も混じっていますが、気にせず読み進めて下さい。ループ内では、まずレイをステップ分だけ伸ばしてあげ、それを再度スクリーン座標系に戻します。スクリーン座標系でのレイの深度と、デプスバッファに書き込まれた深度を比較して、レイの方が奥にある場合、その色を返すことにします。（デプスは最も近い時1.0で、遠くなるほど小さくなるので、<code class="inline-code tt">rayDepth</code> が <code class="inline-code tt">worldDepth</code> よりも小さい時、レイが奥にあるという判定になります。）</p>
-<p>またループ回数が未定の場合はHLSLはエラーを吐くので、スクリプトからループの回数を渡したい場合は <code class="inline-code tt">[loop]</code> アトリビュートを先頭に書いておく必要があります。</p>
-<p>レイトレーシングの骨組みの部分は以上で完成です。基本的な処理はイメージさえできてしまえばそんなに難しくありません。ただし、きれいな反射を再現するためには、これからいくつか処理を追加していく必要があります。重要な改善すべきポイントとしては以下の４つが挙げられるでしょうか。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Variables related to the processing explained later are also mixed, but please read it without worrying about it. </font><font style="vertical-align: inherit;">Inside the loop, first stretch the ray by a step and then put it back in the screen coordinate system. </font><font style="vertical-align: inherit;">We will compare the depth of the ray in the screen coordinate system with the depth written to the depth buffer and return the color if the ray is deeper. </font><font style="vertical-align: inherit;">(1.0 when the depth is the closest, because the smaller the further away, </font></font><code class="inline-code tt">rayDepth</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">but </font></font><code class="inline-code tt">worldDepth</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is smaller than the will to a determination that Ray is in the back.)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, if the number of loops is undecided, HLSL will throw an error, so if you want to pass the number of loops from the script </font></font><code class="inline-code tt">[loop]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, you need to write the attribute at the beginning.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The skeleton of ray tracing is now complete. </font><font style="vertical-align: inherit;">The basic processing is not so difficult once you have an image. </font><font style="vertical-align: inherit;">However, in order to reproduce beautiful reflections, it is necessary to add some processing from now on. </font><font style="vertical-align: inherit;">Are the following four points that need to be improved?</font></font></p>
 <ol>
-<li>ループ数に制限があるため、レイが進める距離が十分大きくならなず、遠くの物体の映り込みが再現できない</li>
-<li>レイのステップ数が大きくなると、映り込むオブジェクトを通過してしまい、間違った色をサンプリングしてしまう</li>
-<li>ループを多数回行うので、単純に処理が重い</li>
-<li>マテリアルの差異を考慮できていない</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Due to the limited number of loops, the distance traveled by the ray is not large enough to reproduce the reflection of distant objects.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the number of steps of the ray is large, it will pass through the reflected object and sample the wrong color.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the loop is performed many times, the processing is simply heavy.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Not taking into account material differences</font></font></li>
 </ol>
-<p>アンチエイリアスを含むポストエフェクトでは、処理の効率化のためのテクニックがむしろ本質的です。処理の骨子の理解が済んだところで、SSRを映像として成立させるテクニックを見ていきましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For post-effects, including antialiasing, techniques for efficient processing are rather essential. </font><font style="vertical-align: inherit;">Now that you understand the gist of the process, let's look at the technique for establishing SSR as a video.</font></font></p>
 
 <h3><a id="h10-3-4"></a><span class="secno">10.3.4　</span>Mipmap</h3>
-<p>以下では Chalmers University of Technologyの記事 <a id="fnb-chalmers" href="https://freder.io/files/unity2/komietty.html#fn-chalmers" class="noteref" epub:type="noteref">*7</a> を参考に、Mipmap使うことで処理効率をあげる方法について解説します。(Mipmapが何かについては脚注参照 <a id="fnb-mipmap" href="https://freder.io/files/unity2/komietty.html#fn-mipmap" class="noteref" epub:type="noteref">*9</a>)レイトレーシングはレイのステップ幅を決めてレイを徐々に進めていくのが基本ですが、Mipmapを使うことでオブジェクトとの交差判定までのレイのステップ幅を可変にすることができます。こうすることで、限られたループ回数の中でも遠くまでレイを飛ばすことができるようになり、また処理効率も上がります。</p>
-<p>RenderTextureからMipmapを使うデモシーンを用意してますのでそちらから確認していきましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Below, </font><font style="vertical-align: inherit;">we will explain how to improve processing efficiency by using Mipmap, referring to </font><font style="vertical-align: inherit;">the article </font></font><a id="fnb-chalmers" href="https://freder.io/files/unity2/komietty.html#fn-chalmers" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 7</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> of Chalmers University of Technology </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">(See footnote for what Mipmap is </font></font><a id="fnb-mipmap" href="https://freder.io/files/unity2/komietty.html#fn-mipmap" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 9</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) Ray tracing basically determines the step width of the ray and gradually advances the ray, but by using Mipmap, the step of the ray until the intersection with the object is judged. The width can be variable. </font><font style="vertical-align: inherit;">By doing this, you will be able to fly rays far away even with a limited number of loops, and processing efficiency will also increase.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We have prepared a demoscene that uses Mipmap from RenderTexture, so let's check it from there.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Mipmap.cs</p>
 <pre class="emlist">public class Mipmap : MonoBehaviour<font></font>
@@ -266,54 +259,54 @@ Figure 10.1: Confirmation that Blur composition in each direction correctly blur
   void OnDisable()<font></font>
   {<font></font>
     Destroy(mat);<font></font>
-    rt.Release();<font></font>
-  }<font></font>
-<font></font>
-  void OnRenderImage(RenderTexture src, RenderTexture dst)<font></font>
-  {<font></font>
+    rt.Release();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  void OnRenderImage (RenderTexture src, RenderTexture dst)</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  {</font></font></font></font><font></font>
     mat.SetInt("_LOD", lod);<font></font>
     Graphics.Blit(src, rt);<font></font>
-    Graphics.Blit(rt, dst, mat);<font></font>
-  }<font></font>
+    Graphics.Blit(rt, dst, mat);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  }</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>既製のRenderTextureに対してはmipmapは設定できないようになっているので、ここでは新しくRenderTextureを生成し <code class="inline-code tt">src</code> をコピーしたあと、処理を加えています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since mipmap cannot be set for ready-made RenderTexture, here, </font></font><code class="inline-code tt">src</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">after </font><font style="vertical-align: inherit;">creating a new RenderTexture </font><font style="vertical-align: inherit;">and copying it, processing is added.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Mipmap.shader</p>
 <pre class="emlist">sampler2D _MainTex;<font></font>
-float4 _MainTex_ST;<font></font>
-int _LOD;<font></font>
+float4 _MainTex_ST;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+int _LOD;</font></font></font></font><font></font>
 <font></font>
 ....<font></font>
 <font></font>
 fixed4 frag (v2f i) : SV_Target<font></font>
 {<font></font>
-        return tex2Dlod(_MainTex, float4(i.uv, 0, _LOD));<font></font>
-}<font></font>
+        return tex2Dlod(_MainTex, float4(i.uv, 0, _LOD));<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">tex2Dlod(_MainTex, float4(i.uv, 0, _LOD))</code>でLODに応じたMipmapが取得できるようになってます。</p>
-<p>シーン上でカメラにアタッチされたスクリプトからLODを上げていくと、画像が粗くなっていくのが確認できるかと思います。</p>
+<p><code class="inline-code tt">tex2Dlod(_MainTex, float4(i.uv, 0, _LOD))</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can get the Mipmap according to the LOD with.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you raise the LOD from the script attached to the camera on the scene, you can see that the image becomes grainy.</font></font></p>
 <div id="id_komietty_2Fssr__mipmap__demo" class="image">
 <img src="./Chapter 10 _ Application of ImageEffect (SSR)_files/ssr_mipmap_demo.png" alt="Comparison of LOD rise and Mipmap image quality">
-<p class="caption">
-図10.3: LODの上昇とMipmapの画質の比較
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.3: Comparison of increased LOD and Mipmap image quality
+</font></font></p>
 </div>
-<p>Mipmapの使い方が確認できたところで、SSRシーンのなかでMipmapがどのように利用されているか見ていきましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now that you have confirmed how to use Mipmap, let's see how Mipmap is used in the SSR scene.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SSR.shader</p>
 <pre class="emlist">[loop]<font></font>
-for (int n = 1; n &lt;= _MaxLoop; n++)<font></font>
-{<font></font>
+for (int n = 1; n &lt;= _MaxLoop; n++)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
   float3 step = refDir * _RayLenCoeff * (lod + 1);<font></font>
   ray += step;<font></font>
 <font></font>
   ....<font></font>
 <font></font>
-  if(rayDepth &lt; worldDepth)<font></font>
-  {<font></font>
+  if(rayDepth &lt; worldDepth)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  {</font></font></font></font><font></font>
     if(lod == 0)<font></font>
     {<font></font>
       if (rayDepth + _Thickness &gt; worldDepth)<font></font>
@@ -321,8 +314,8 @@ for (int n = 1; n &lt;= _MaxLoop; n++)<font></font>
         float sign = -1.0;<font></font>
         for (int m = 1; m &lt;= 8; ++m)<font></font>
         {<font></font>
-          ray += sign * pow(0.5, m) * step;<font></font>
-          rayScreen = mul(_ViewProj, float4(ray, 1.0));<font></font>
+          ray += sign * pow(0.5, m) * step;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+          rayScreen = mul (_ViewProj, float4 (ray, 1.0));</font></font></font></font><font></font>
           rayUV = rayScreen.xy / rayScreen.w * 0.5 + 0.5;<font></font>
           rayDepth = ComputeDepth(rayScreen);<font></font>
           worldDepth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, rayUV);<font></font>
@@ -334,14 +327,14 @@ for (int n = 1; n &lt;= _MaxLoop; n++)<font></font>
     }<font></font>
     else<font></font>
     {<font></font>
-      ray -= step;<font></font>
-      lod--;<font></font>
-    }<font></font>
+      ray -= step;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      lod--;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
   }<font></font>
   else if(n &lt;= _MaxLOD)<font></font>
-  {<font></font>
-    lod++;<font></font>
-  }<font></font>
+  {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    lod ++;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  }</font></font></font></font><font></font>
   calcTimes = n;<font></font>
 }<font></font>
 if (_ViewMode == 3) return float4(1, 1, 1, 1) * calc / _MaxLoop;<font></font>
@@ -350,24 +343,24 @@ if (_ViewMode == 3) return float4(1, 1, 1, 1) * calc / _MaxLoop;<font></font>
 <font></font>
 </pre>
 </div>
-<p>Chalmersの記事にある図を用いて解説を進めていきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will proceed with the explanation using the figure in the article of Chalmers.</font></font></p>
 <div id="id_komietty_2Fssr__mipmap__logic" class="image">
 <img src="./Chapter 10 _ Application of ImageEffect (SSR)_files/ssr_mipmap_logic.png" alt="Calculation method using Mipmap">
-<p class="caption">
-図10.4: Mipmapを用いた計算方法
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.4: Calculation method using Mipmap
+</font></font></p>
 </div>
-<p>図のように、最初の数回は慎重に交差判定を行いながらLODを上げてきます。他メッシュとの交差が無いうちは、大きなステップのまま進めていきます。交差があった場合、UnityのMipMapは平均値を取りながら画素を荒くしていくので、記事の場合とは異なり、レイが行き過ぎてしまう場合があります。そのため一旦単位ステップ分後退し、再度一つ小さなLODでレイを進めます。最終的にLOD=0で画像で交差判定を行うことで、レイの移動距離を伸ばし、処理を効率化することができます。</p>
-<p>メインカメラにアタッチされたスクリプトから、LODを上げた場合どのくらい計算量が変化するかが確認できるようになっています。計算量が多いほど白っぽく、少ないほど黒っぽく見えるようにしています。ViewMode を <code class="inline-code tt">CalcCount</code> にしてLODを変更しながら計算量の変化を確認してみて下さい。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As shown in the figure, the LOD is raised while carefully judging the intersection for the first few times. </font><font style="vertical-align: inherit;">As long as there is no intersection with other meshes, we will proceed with large steps. </font><font style="vertical-align: inherit;">If there is an intersection, Unity's MipMap will roughen the pixels while taking the average value, so unlike the case of the article, the ray may go too far. </font><font style="vertical-align: inherit;">Therefore, move back by one unit step and advance the ray again with one smaller LOD. </font><font style="vertical-align: inherit;">Finally, by making an intersection judgment on the image with LOD = 0, the moving distance of the ray can be extended and the processing can be made more efficient.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From the script attached to the main camera, you can see how much the amount of calculation changes when you raise the LOD. </font><font style="vertical-align: inherit;">The larger the amount of calculation, the whiter it looks, and the smaller the amount of calculation, the darker it looks. </font><font style="vertical-align: inherit;">Set ViewMode and </font></font><code class="inline-code tt">CalcCount</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">change the LOD to check the change in the amount of calculation.</font></font></p>
 <div id="id_komietty_2Fssr__lod" class="image">
 <img src="./Chapter 10 _ Application of ImageEffect (SSR)_files/ssr_lod.png" alt="Difference in calculation amount due to change in LOD (the closer to black, the smaller the amount of calculation)">
-<p class="caption">
-図10.5: LODの変化による計算量の違い（黒に近いほど計算量が少ない）
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.5: Difference in computational complexity due to changes in LOD (closer to black, smaller computational complexity)
+</font></font></p>
 </div>
 
-<h3><a id="h10-3-5"></a><span class="secno">10.3.5　</span>二分木探索</h3>
-<p>二分木探索で交差近傍の精度を上げていく方法を見ていきましょう。早速コードから確認します。</p>
+<h3><a id="h10-3-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.3.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Dichotomous exploration</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's see how to improve the accuracy near the intersection by binary tree search. </font><font style="vertical-align: inherit;">Check from the code immediately.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SSR.shader</p>
 <pre class="emlist">if (lod == 0)<font></font>
@@ -377,8 +370,8 @@ if (_ViewMode == 3) return float4(1, 1, 1, 1) * calc / _MaxLoop;<font></font>
     float sign = -1.0;<font></font>
     for (int m = 1; m &lt;= 8; ++m)<font></font>
     {<font></font>
-      ray += sign * pow(0.5, m) * step;<font></font>
-      rayScreen = mul(_ViewProj, float4(ray, 1.0));<font></font>
+      ray += sign * pow(0.5, m) * step;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      rayScreen = mul (_ViewProj, float4 (ray, 1.0));</font></font></font></font><font></font>
       rayUV = rayScreen.xy / rayScreen.w * 0.5 + 0.5;<font></font>
       rayDepth = ComputeDepth(rayScreen);<font></font>
       worldDepth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, rayUV);<font></font>
@@ -390,10 +383,10 @@ if (_ViewMode == 3) return float4(1, 1, 1, 1) * calc / _MaxLoop;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>交差の直後は交差したオブジェクトよりも奥にあるので、まずレイを後退させます。その後レイとメッシュとの前後関係を確認しながら、レイの進行方向を前後どちらか変更していきます。同時にレイのステップ幅を短くすることで、より少ない誤差でメッシュとの交差位置を特定することができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Immediately after the intersection, it is behind the intersected object, so first retract the ray. </font><font style="vertical-align: inherit;">After that, while checking the context of the ray and the mesh, change the direction of travel of the ray either forward or backward. </font><font style="vertical-align: inherit;">At the same time, by shortening the step width of the ray, it is possible to identify the intersection with the mesh with less error.</font></font></p>
 
-<h3><a id="h10-3-6"></a><span class="secno">10.3.6　</span>マテリアルの違いを反映</h3>
-<p>ここまでの方法ではスクリーン内のオブジェクトのマテリアルの違いは考慮していませんでした。そのため、全てのオブジェクトが同程度に反射してしまうという問題があります。そこで、再度G-bufferを使います。 <code class="inline-code tt">_CameraGBufferTexture1.w</code> にはマテリアルのsmoothnessが格納されているので、これを使います。</p>
+<h3><a id="h10-3-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.3.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reflects material differences</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The methods so far have not taken into account the differences in the materials of the objects in the screen. </font><font style="vertical-align: inherit;">Therefore, there is a problem that all objects are reflected to the same extent. </font><font style="vertical-align: inherit;">Therefore, use G-buffer again. </font></font><code class="inline-code tt">_CameraGBufferTexture1.w</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the smoothness of the material is stored in, use this.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SSR.shader</p>
 <pre class="emlist">if (_ViewMode == 8)<font></font>
@@ -406,10 +399,10 @@ return<font></font>
 　+ col * (1 - _ReflectionRate);<font></font>
 </pre>
 </div>
-<p>シーン内のオブジェクトに付帯しているマテリアルのsmoothnessの値を変更すると、そのオブジェクトだけ反射の程度が変更しているのが見て取れます。またメインカメラにアタッチされたスクリプトのViewMode を <code class="inline-code tt">Smoothness</code> にすることで、シーン内のsmoothnessを一覧できます。白っぽいほどsmoothnessが大きくなっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you change the smoothness value of the material attached to an object in the scene, you can see that only that object changes the degree of reflection. </font></font><code class="inline-code tt">Smoothness</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can also list the smoothness in the scene by </font><font style="vertical-align: inherit;">setting the ViewMode of the script attached to the main camera </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">The whitish, the greater the smoothness.</font></font></p>
 
-<h3><a id="h10-3-7"></a><span class="secno">10.3.7　</span>Blur処理</h3>
-<p>第一節で解説したガウシアンブラー使用している部分です。レイのステップ幅が十分小さくない場合、二分木探索を行っても反射をうまく取得できないことがあります。レイのステップ幅を小さくするとレイの全長が短くなってしまい、また計算量も増えるので、ステップ幅はただ小さくすれば良いというものではなく、適当な小ささにとどめておく必要があります。反射を上手く取得できなかった部分はブラー処理を掛けて、それらしく見せていきます。</p>
+<h3><a id="h10-3-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.3.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Blur processing</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the part using the Gaussian blur explained in the first section. </font><font style="vertical-align: inherit;">If the step width of the ray is not small enough, you may not be able to get the reflection well even if you perform a binary tree search. </font><font style="vertical-align: inherit;">If the step width of the ray is reduced, the total length of the ray will be shortened and the amount of calculation will increase, so it is not enough to just reduce the step width, but it should be kept to an appropriate size. </font><font style="vertical-align: inherit;">The part where the reflection could not be obtained well is blurred to make it look like it.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SSR.shader</p>
 <pre class="emlist">float4 xblur(v2f i) : SV_Target<font></font>
@@ -438,10 +431,10 @@ return<font></font>
     blurredColor<font></font>
         += tex2D(_ReflectionTexture, uv + float2(offset[j], 0) * size)<font></font>
            * weight[j];<font></font>
-<font></font>
-    blurredColor<font></font>
-        += tex2D(_ReflectionTexture, uv - float2(offset[j], 0) * size)<font></font>
-           * weight[j];<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    blurredColor</font></font></font></font><font></font>
+        += tex2D(_ReflectionTexture, uv - float2(offset[j], 0) * size)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+           * weight[j];</font></font></font></font><font></font>
   }<font></font>
 <font></font>
   float4 o = (abs(depthR - depthL) &gt; _BlurThreshold) ? originalColor<font></font>
@@ -450,17 +443,17 @@ return<font></font>
 }<font></font>
 </pre>
 </div>
-<p>ここでも前述の理由から <code class="inline-code tt">xblur</code> と <code class="inline-code tt">yblur</code> で処理を分けています。またブラー処理を掛けたいのは同一の反射面内のみなので、輪郭部分にはブラー処理が行われないようにしています。左右のデプスの差分が大きい場合、輪郭部分と判定しています。（ <code class="inline-code tt">yblur</code> では上下の差分を評価しています。）</p>
-<p>ここまでの処理を追加した結果が以下になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Again, from the reason described above </font></font><code class="inline-code tt">xblur</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and </font></font><code class="inline-code tt">yblur</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">have divided the processing out. </font><font style="vertical-align: inherit;">Also, since we only want to blur the contours within the same reflective surface, we try not to blur the contours. </font><font style="vertical-align: inherit;">If the difference between the left and right depths is large, it is judged to be the contour part. </font><font style="vertical-align: inherit;">(Then </font></font><code class="inline-code tt">yblur</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">evaluates the difference between the top and bottom.)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The result of adding the processing up to this point is as follows.</font></font></p>
 <div id="id_komietty_2Fssr__result" class="image">
 <img src="./Chapter 10 _ Application of ImageEffect (SSR)_files/ssr_result.png" alt="result">
-<p class="caption">
-図10.6: 結果
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.6: Results
+</font></font></p>
 </div>
 
-<h3><a id="h10-3-8"></a><span class="secno">10.3.8　</span>おまけ</h3>
-<p>おまけ程度ですが、メインカメラとサブカメラの２台を使って、存在しないオブジェクトが写り込んでいるかのようなテクニックを紹介します。</p>
+<h3><a id="h10-3-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.3.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Bonus</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As a bonus, I will introduce a technique that makes it look as if a non-existent object is reflected using two cameras, a main camera and a sub camera.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SSRMainCamera.shader</p>
 <pre class="emlist">float4 reflection(v2f i) : SV_Target<font></font>
@@ -471,8 +464,8 @@ return<font></font>
   for (int n = 1; n &lt;= 100; ++n)<font></font>
   {<font></font>
     float3 ray = n * step;<font></font>
-    float3 rayPos = pos + ray;<font></font>
-    float4 vpPos = mul(_ViewProj, float4(rayPos, 1.0));<font></font>
+    float3 rayPos = pos + ray;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float4 vpPos = mul (_ViewProj, float4 (rayPos, 1.0));</font></font></font></font><font></font>
     float2 rayUv = vpPos.xy / vpPos.w * 0.5 + 0.5;<font></font>
     float rayDepth = vpPos.z / vpPos.w;<font></font>
     float subCameraDepth = SAMPLE_DEPTH_TEXTURE(_SubCameraDepthTex, rayUv);<font></font>
@@ -482,33 +475,33 @@ return<font></font>
       float sign = -1.0;<font></font>
       for (int m = 1; m &lt;= 4; ++m)<font></font>
       {<font></font>
-        rayPos += sign * pow(0.5, m) * step;<font></font>
-        vpPos = mul(_ViewProj, float4(rayPos, 1.0));<font></font>
-        rayUv = vpPos.xy / vpPos.w * 0.5 + 0.5;<font></font>
-        rayDepth = vpPos.z / vpPos.w;<font></font>
+        rayPos += sign * pow(0.5, m) * step;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vpPos = mul (_ViewProj, float4 (rayPos, 1.0));</font></font></font></font><font></font>
+        rayUv = vpPos.xy / vpPos.w * 0.5 + 0.5;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        rayDepth = vpPos.z / vpPos.w;</font></font></font></font><font></font>
         subCameraDepth = SAMPLE_DEPTH_TEXTURE(_SubCameraDepthTex, rayUv);<font></font>
         sign = rayDepth - subCameraDepth &lt; 0 ? -1 : 1;<font></font>
-      }<font></font>
-      col = tex2D(_SubCameraMainTex, rayUv);<font></font>
+      }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      col = tex2D (_SubCameraMainTex, rayUv);</font></font></font></font><font></font>
     }<font></font>
   }<font></font>
   return col * smooth + tex2D(_MainTex, uv) * (1 - smooth);<font></font>
 }<font></font>
 </pre>
 </div>
-<p>極力余分な処理を省いたシンプルな作りにしています。ポイントはデプス評価のために <code class="inline-code tt">SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv)</code> の代わりに <code class="inline-code tt">SAMPLE_DEPTH_TEXTURE(_SubCameraDepthTex, rayUv)</code> を使い、参照するオブジェクト情報も <code class="inline-code tt">_SubCameraMainTex</code> から取得している点です。<code class="inline-code tt">_CameraDepthTexture</code>, <code class="inline-code tt">_SubCameraDepthTex</code> はサブカメラからグローバルテクチャとしてセットしています。</p>
-<p>欠点は、お互いのカメラが影になって映るべきでないオブジェクトも写してしまう点です。実用性はそれほどないかもしれませんが、ちょっとしたおもしろエフェクトということで。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is made simple with as little extra processing as possible. </font><font style="vertical-align: inherit;">The point is that </font></font><code class="inline-code tt">SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it </font></font><code class="inline-code tt">SAMPLE_DEPTH_TEXTURE(_SubCameraDepthTex, rayUv)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is used </font><font style="vertical-align: inherit;">instead </font><font style="vertical-align: inherit;">of for depth evaluation, and </font><font style="vertical-align: inherit;">the </font><font style="vertical-align: inherit;">object information to be referenced </font></font><code class="inline-code tt">_SubCameraMainTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is </font><font style="vertical-align: inherit;">also </font><font style="vertical-align: inherit;">obtained from. </font></font><code class="inline-code tt">_CameraDepthTexture</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">_SubCameraDepthTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is set as a global texture from the sub camera.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The downside is that each camera casts shadows on objects that shouldn't be visible. </font><font style="vertical-align: inherit;">It may not be very practical, but it's a little interesting effect.</font></font></p>
 <div id="id_komietty_2Fssr__twocam" class="image">
 <img src="./Chapter 10 _ Application of ImageEffect (SSR)_files/ssr_twocam.png" alt="Method using two cameras">
-<p class="caption">
-図10.7: カメラ２台を用いた方法
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.7: Method using two cameras
+</font></font></p>
 </div>
 
-<h2><a id="h10-4"></a><span class="secno">10.4　</span>まとめ</h2>
-<p>以上でSSRの解説は終わりです。</p>
-<p>SSRは大きな処理容量が必要になってくる手法のため、全ての位置にあるオブジェクトをきれいに反射させることは現実的ではありません。そこで、注目するオブジェクトの反射の見映えを良くしながら、些末な反射をいかに少ない処理でそれらしく見せるかがポイントになってきます。またレンダリングされるスクリーンサイズがそのまま計算量に直結するので、想定されるスクリーンサイズと、GPUの性能を加味しながら、映像として成立するポイントを探っていくことが重要です。シーン内のオブジェクトを動かしながら、パラメータを調整することで、各パラメータの役割とトレードオフを確認してみて下さい。</p>
-<p>また、ここまでに挙げた、Mipmapや二分木探索、カメラバッファの使い方、その他数々の細かいテクニックはSSRに限らず様々なところで応用が利きます。読者の方々にとって部分的にでも参考になる内容があれば幸いです。</p>
+<h2><a id="h10-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the end of the explanation of SSR.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since SSR is a technique that requires a large amount of processing capacity, it is not realistic to reflect objects in all positions cleanly. </font><font style="vertical-align: inherit;">Therefore, the point is to improve the appearance of the reflection of the object of interest and to make the trivial reflection look like it with less processing. </font><font style="vertical-align: inherit;">In addition, the screen size to be rendered is directly linked to the amount of calculation, so it is important to search for the points that will be established as an image while considering the expected screen size and GPU performance. </font><font style="vertical-align: inherit;">Check the role and trade-offs of each parameter by adjusting the parameters while moving the objects in the scene.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, the Mipmap, binary tree search, how to use the camera buffer, and many other detailed techniques mentioned above can be applied not only to SSR but also to various places. </font><font style="vertical-align: inherit;">I would be happy if there is some content that is helpful to the readers.</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-gaussian"><p class="footnote">[*1] http://rastergrid.com/blog/2010/09/efficient-gaussian-blur-with-linear-sampling/</p></div>
 <div class="footnote" epub:type="footnote" id="fn-binomial"><p class="footnote">[*2] https://ja.wikipedia.org/wiki/%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83</p></div>
 <div class="footnote" epub:type="footnote" id="fn-shirley"><p class="footnote">[*3] https://www.amazon.co.jp/gp/product/B01B5AODD8</p></div>
@@ -521,4 +514,4 @@ return<font></font>
 <div class="footnote" epub:type="footnote" id="fn-gbuffer"><p class="footnote">[*10] https://docs.unity3d.com/Manual/RenderTech-DeferredShading.html</p></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 10 _ Application of ImageEffect (SSR)_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 10 _ Application of ImageEffect (SSR)_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 10 _ Application of ImageEffect (SSR)_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 10 _ Application of ImageEffect (SSR)_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 10 _ Application of ImageEffect (SSR)_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

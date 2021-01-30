@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0041)https://freder.io/files/unity4/xjine.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 4 _ StarGlow_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 4 _ StarGlow_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 4 _ StarGlow_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ StarGlow_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ StarGlow_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 4 _ StarGlow_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 4 _ StarGlow_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ StarGlow_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ StarGlow_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 4 _ StarGlow_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">Chapter 4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class=""> StarGlow</font></font></h1>
 <div id="id_xjine_2FStarGlow01" class="image">
 <pre class="dummyimage"></pre>
@@ -88,8 +81,8 @@ Figure 4.3: Image of detecting only high-brightness pixels
                              source.height / this.divide,<font></font>
                              source.depth,<font></font>
                              source.format);<font></font>
-…<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-base.material.SetVector</font></font><font></font>
+…<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+base.material.SetVector</font></font></font></font><font></font>
 (this.idParameter, new Vector3(threshold, intensity, attenuation));<font></font>
 <font></font>
 Graphics.Blit(source, brightnessTex, base.material, 1);<font></font>
@@ -99,8 +92,8 @@ Graphics.Blit(source, brightnessTex, base.material, 1);<font></font>
 <p class="caption">StarGlow.shader</p>
 <pre class="emlist">#define BRIGHTNESS_THRESHOLD _Parameter.x<font></font>
 #define INTENSITY            _Parameter.y<font></font>
-#define ATTENUATION          _Parameter.z<font></font>
-…<font></font>
+#define ATTENUATION          _Parameter.z<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+…</font></font><font></font>
 fixed4 frag(v2f_img input) : SV_Target<font></font>
 {<font></font>
     float4 color = tex2D(_MainTex, input.uv);<font></font>
@@ -108,26 +101,26 @@ fixed4 frag(v2f_img input) : SV_Target<font></font>
 }<font></font>
 </pre>
 </div>
-<p>輝度の算出方法についてはさまざまな方法がありますが、古典的なグローの実装などでも使われている算出方式をそのまま活用しました。他に一度グレースケールにしてから輝度を比較するなどの処理を行っているシェーダも見かけます。</p>
-<p><code class="inline-code tt">BRIGHTNESS_THRESHOLD</code> は、輝度と判定する閾値、<code class="inline-code tt">INTENSITY</code> は輝度に乗算するバイアスです。<code class="inline-code tt">color</code> に与えられる値が大きいほど、つまり明るい色ほど、大きな値が返りやすいことを確認してください。閾値が大きいほど、0 より大きな値が返る確率は減りますね。またバイアスが大きいほど、より強い輝度画像が得られるようになっています。</p>
-<p><code class="inline-code tt">ATTENUATION</code> についてはこの時点では使いません。一度にパラメータとして渡した方が CPU → GPU 間での値のやり取りにかかるオーバーヘッドが小さくなるために、ここでは <code class="inline-code tt">Vector3</code> としてまとめて渡しています。</p>
-<p>この時点でもっとも重要なのは、輝度画像をサイズの小さい RenderTexture として取得している点です。</p>
-<p>一般に、ポストエフェクトは解像度が大きくなればなるほど、Fragment シェーダの呼び出し数、その算出回数が増えて負荷が大きくなります。さらにグロー効果については繰り返し処理が発生するために処理負荷はさらに大きくなるのです。スターグローもこの例に漏れません。したがって、効果の解像度を必要な分まで下げることによって、かかる負荷を軽減します。</p>
-<p>繰り返し処理については後述します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are various methods for calculating the brightness, but the calculation method used in the classical glow implementation was used as it is. </font><font style="vertical-align: inherit;">I also see shaders that perform processing such as grayscale once and then comparing the brightness.</font></font></p>
+<p><code class="inline-code tt">BRIGHTNESS_THRESHOLD</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is the threshold for determining brightness, and </font></font><code class="inline-code tt">INTENSITY</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is the bias to multiply brightness. </font></font><code class="inline-code tt">color</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Make sure that the larger the value given to, that is, the brighter the color, the easier it is to return a large value. </font><font style="vertical-align: inherit;">The higher the threshold, the less likely it is that a value greater than 0 will be returned. </font><font style="vertical-align: inherit;">Also, the larger the bias, the stronger the brightness image can be obtained.</font></font></p>
+<p><code class="inline-code tt">ATTENUATION</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is not used at this point. </font><font style="vertical-align: inherit;">Since the overhead required for exchanging values ​​between CPU and GPU is smaller if they are passed as parameters at once, </font></font><code class="inline-code tt">Vector3</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">they are passed together </font><font style="vertical-align: inherit;">here </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The most important thing at this point is that we are getting the luminance image as a small RenderTexture.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In general, the higher the resolution of a post effect, the greater the load on the Fragment shader, which increases the number of calls and calculations. </font><font style="vertical-align: inherit;">Furthermore, with regard to the glow effect, the processing load becomes even greater due to repeated processing. </font><font style="vertical-align: inherit;">Star Glow is no exception to this example. </font><font style="vertical-align: inherit;">Therefore, the load is reduced by reducing the resolution of the effect to the required level.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The iterative process will be described later.</font></font></p>
 
-<h2><a id="h4-2"></a><span class="secno">4.2　</span>STEP 2 : 輝度画像に指向性ブラーをかける</h2>
+<h2><a id="h4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> STEP 2: Apply directional blur to the luminance image</font></font></h2>
 <div id="id_xjine_2FStarGlow04" class="image">
 <img src="./Chapter 4 _ StarGlow_files/StarGlow04.png" alt="Luminance image stretched diagonally">
-<p class="caption">
-図4.4: 斜めに引き伸ばされた輝度画像
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.4: Diagonally stretched luminance image
+</font></font></p>
 </div>
-<p>STEP1 で得られた輝度画像にブラーをかけて引き伸ばします。この引き伸ばし方を工夫することによって、一般的なグローとは異なる鋭く伸びる光線を表現します。</p>
-<p>一般的なグローの場合は全方向に向かってガウス関数による引き伸ばしをしますが、スターグローの場合は指向性のある引き伸ばしをする、ということです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Blur the brightness image obtained in STEP1 and stretch it. </font><font style="vertical-align: inherit;">By devising this stretching method, it expresses a sharply extending ray that is different from general glow.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the case of general glow, it is stretched by the Gaussian function in all directions, but in the case of star glow, it is stretched in a directional manner.</font></font></p>
 <div class="emlist-code">
 <p class="caption">StarGlow.cs</p>
-<pre class="emlist">Vector2 offset = new Vector2(-1, -1);<font></font>
-// (Quaternion.AngleAxis(angle * x + this.angleOfStreak,<font></font>
+<pre class="emlist">Vector2 offset = new Vector2(-1, -1);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// (Quaternion.AngleAxis (angle * x + this.angleOfStreak,</font></font></font></font><font></font>
 //                       Vector3.forward) * Vector2.down).normalized;<font></font>
 <font></font>
 base.material.SetVector(this.idOffset, offset);<font></font>
@@ -136,36 +129,36 @@ base.material.SetInt   (this.idIteration, 1);<font></font>
 Graphics.Blit(brightnessTex, blurredTex1, base.material, 2);<font></font>
 <font></font>
 for (int i = 2; i &lt;= this.iteration; i++)<font></font>
-{<font></font>
-    繰り返し描画<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    Repeated drawing</font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>実際の処理とは異なりますが、ここでは説明のために <code class="inline-code tt">offset = (1, 1)</code> としましょう。さらに、<code class="inline-code tt">offset</code> と <code class="inline-code tt">iteration</code> をシェーダに渡していることに注目してください。</p>
-<p>続いてスクリプト側ではシェーダパス 2 で繰り返し描画を実行していますが、簡単に考えるために、ここで一度シェーダの方に移りましょう。シェーダパス 2 で描画していることに注意してください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is different from the actual processing, but </font></font><code class="inline-code tt">offset = (1, 1)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">let's just </font><font style="vertical-align: inherit;">explain it here </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Also </font><font style="vertical-align: inherit;">note that we are passing </font></font><code class="inline-code tt">offset</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and </font></font><code class="inline-code tt">iteration</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to the shader.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, on the script side, drawing is repeated with shader path 2, but for the sake of simplicity, let's move on to the shader once. </font><font style="vertical-align: inherit;">Notice that we are drawing in shader path 2.</font></font></p>
 <div class="emlist-code">
 <p class="caption">StarGlow.shader</p>
 <pre class="emlist">int    _Iteration;<font></font>
 float2 _Offset;<font></font>
 <font></font>
-struct v2f_starglow<font></font>
-{<font></font>
+struct v2f_starglow<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     …<font></font>
     half   power  : TEXCOORD1;<font></font>
     half2  offset : TEXCOORD2;<font></font>
 };<font></font>
 <font></font>
 v2f_starglow vert(appdata_img v)<font></font>
-{<font></font>
-    v2f_starglow o;<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    v2f_starglow or;</font></font><font></font>
     …<font></font>
     o.power  = pow(4, _Iteration - 1);<font></font>
     o.offset = _MainTex_TexelSize.xy * _Offset * o.power;<font></font>
     return o;<font></font>
 }<font></font>
 <font></font>
-float4 frag(v2f_starglow input) : SV_Target<font></font>
-{<font></font>
+float4 frag(v2f_starglow input) : SV_Target<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     half4 color = half4(0, 0, 0, 0);<font></font>
     half2 uv    = input.uv;<font></font>
 <font></font>
@@ -176,35 +169,35 @@ float4 frag(v2f_starglow input) : SV_Target<font></font>
         uv += input.offset;<font></font>
     }<font></font>
 <font></font>
-    return color;<font></font>
-}<font></font>
+    return color;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>まずは Vertex シェーダから確認します。<code class="inline-code tt">power</code> は引き伸ばされるときに輝度が減衰する力、<code class="inline-code tt">offset</code> はブラーによって輝度を引き伸ばす方向を示します。後述する Fragment シェーダで参照します。</p>
-<p>Vertex シェーダ内でこれらを算出しているのは、Fragment シェーダ内において共通の値を参照するためです。Fragment シェーダ内で逐次算出するのは演算回数が増えるので良くありませんね。</p>
-<p>ここで <code class="inline-code tt">_Iteration = 1</code> です。したがって <code class="inline-code tt">power = 4^0 = 1</code> になります。そうると <code class="inline-code tt">offset = 画素の大きさ * (1, 1)</code> が得られます。</p>
-<p>これで、ちょうど 1 画素分だけオフセット方向にズレた画素をサンプリングするための準備が整いました。</p>
-<p>次に Fragment シェーダです。参照する <code class="inline-code tt">uv</code> を <code class="inline-code tt">offset</code> の分だけ 1 つずつ移動しながら 4 回参照し、その画素の値を合算しています。ただし画素の値には <code class="inline-code tt">pow(ATTENUATION, input.power * j)</code> が乗算されていますね。</p>
-<p><code class="inline-code tt">ATTENUATION</code> はその画素の値をどれくらい減衰するかを表す値です。引き伸ばしたときのボケ、減衰具合に影響します。</p>
-<p>仮に <code class="inline-code tt">ATTENUATION = 0.7</code> とすれば、最初にサンプリングする画素は * 0.7,次にサンプリングする画素は 0.7 ^ 2 = * 0.49 となりますね。図で見るとイメージが付きやすいです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, check from the Vertex shader. </font><font style="vertical-align: inherit;">Indicates </font></font><code class="inline-code tt">power</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the force with which the brightness attenuates when stretched, </font></font><code class="inline-code tt">offset</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and indicates the direction in which the brightness is stretched by the blur. </font><font style="vertical-align: inherit;">It will be referenced in the Fragment shader described later.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">These are calculated within the Vertex shader to refer to common values ​​within the Fragment shader. </font><font style="vertical-align: inherit;">It is not good to calculate sequentially in the Fragment shader because it increases the number of operations.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here it </font></font><code class="inline-code tt">_Iteration = 1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is. </font><font style="vertical-align: inherit;">Therefore </font></font><code class="inline-code tt">power = 4^0 = 1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Then </font></font><code class="inline-code tt">offset = 画素の大きさ * (1, 1)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you will get.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now you are ready to sample pixels that are offset by exactly one pixel.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next is the Fragment shader. </font><font style="vertical-align: inherit;">To see </font></font><code class="inline-code tt">uv</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">wo </font></font><code class="inline-code tt">offset</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">one by only one minute to move the reference 4 times while, we are adding up the value of the pixel. </font><font style="vertical-align: inherit;">However, the pixel value is </font></font><code class="inline-code tt">pow(ATTENUATION, input.power * j)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">multiplied by.</font></font></p>
+<p><code class="inline-code tt">ATTENUATION</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is a value that indicates how much the value of that pixel is attenuated. </font><font style="vertical-align: inherit;">It affects the degree of blurring and attenuation when stretched.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If </font></font><code class="inline-code tt">ATTENUATION = 0.7</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">so, the first pixel to be sampled would be * 0.7, and the second pixel to be sampled would be 0.7 ^ 2 = * 0.49. </font><font style="vertical-align: inherit;">It is easy to get an image when you look at the figure.</font></font></p>
 <div id="id_xjine_2FStarGlowBlur" class="image">
 <img src="./Chapter 4 _ StarGlow_files/StarGlowBlur.png" alt="Diagram showing the process of blurring">
-<p class="caption">
-図4.5: ブラーがかかる過程を表した図
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.5: A diagram showing the process of blurring
+</font></font></p>
 </div>
-<p>左の図が減衰前のオリジナルの輝度画像です。<code class="inline-code tt">_MainTex</code> に相当します。今 Fragment シェーダに与えられる <code class="inline-code tt">uv</code> が参照する画素を左下の START としましょう。<code class="inline-code tt">offset = (1, 1)</code> ですから、4 回のイテレーションで参照する画素は右上の END までです。</p>
-<p>画素の中の値は、その画素のもつ輝度の値です。START から 3 つが 0 で、END だけが 1 です。先のソースコードはイテレーションするたびに減衰率が上がりますから、ちょうど真ん中の図のようなイメージになります。これを合算すると、START の画素が最終的に得られる値は <code class="inline-code tt">color = 0.34</code> になります。</p>
-<p>同じようにして Fragment シェーダが各画素を処理していけば、右の図のような結果が得られることが分かると思います。ブラーのようなグラデーションが得られていますね。また <code class="inline-code tt">offset</code> が引き伸ばす方向を示すパラメータであると先に説明していますが、見た目上の効果としては、指定した値と反対方向に伸びることになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The figure on the left is the original brightness image before attenuation. </font></font><code class="inline-code tt">_MainTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Corresponds to. </font></font><code class="inline-code tt">uv</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's say the pixel </font><font style="vertical-align: inherit;">now given to the Fragment shader </font><font style="vertical-align: inherit;">but referenced is START at the bottom left. </font></font><code class="inline-code tt">offset = (1, 1)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, the pixels referenced in the four iterations are up to END in the upper right.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The value in a pixel is the brightness value of that pixel. </font><font style="vertical-align: inherit;">Three from START are 0s and only END is 1. </font><font style="vertical-align: inherit;">The attenuation factor of the above source code increases with each iteration, so the image looks exactly like the one in the middle. </font><font style="vertical-align: inherit;">When this is added up, the final value obtained for the START pixel is </font></font><code class="inline-code tt">color = 0.34</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the Fragment shader processes each pixel in the same way, you will see the result shown on the right. </font><font style="vertical-align: inherit;">You get a gradation like a blur. </font><font style="vertical-align: inherit;">Also </font></font><code class="inline-code tt">offset</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it is described in a certain and earlier in the parameter that indicates the direction to stretch. However, as the effect on the appearance, it will extend in the opposite direction to the specified value.</font></font></p>
 
-<h3><a id="h4-2-1"></a><span class="secno">4.2.1　</span>繰り返してさらに引き伸ばす</h3>
+<h3><a id="h4-2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Repeat and stretch further</font></font></h3>
 <div id="id_xjine_2FStarGlow05" class="image">
 <img src="./Chapter 4 _ StarGlow_files/StarGlow05.png" alt="Further stretched brightness image">
-<p class="caption">
-図4.6: さらに引き伸ばされた輝度画像
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.6: Further stretched luminance image
+</font></font></p>
 </div>
-<p>少しだけスクリプト側に話を戻しましょう。先までの説明は <code class="inline-code tt">this.iteration</code> ないし <code class="inline-code tt">_Iteration</code> が 1 であるとしていました。実際には RenderTexture を入れ替えながら、任意の回数だけ同じ処理を繰り返しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's get back to the script a little bit. </font><font style="vertical-align: inherit;">There is </font></font><code class="inline-code tt">this.iteration</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">no </font><font style="vertical-align: inherit;">explanation so far, </font></font><code class="inline-code tt">_Iteration</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">but it </font><font style="vertical-align: inherit;">was </font><font style="vertical-align: inherit;">said to </font><font style="vertical-align: inherit;">be 1. </font><font style="vertical-align: inherit;">Actually, the same process is repeated any number of times while replacing the RenderTexture.</font></font></p>
 <div class="emlist-code">
 <p class="caption">StarGlow.cs</p>
 <pre class="emlist">Vector2 offset = new Vector2(-1, -1);<font></font>
@@ -213,8 +206,8 @@ base.material.SetVector(this.idOffset, offset);<font></font>
 base.material.SetInt   (this.idIteration, 1);<font></font>
 <font></font>
 Graphics.Blit(brightnessTex, blurredTex1, base.material, 2);<font></font>
-<font></font>
-== ここから上が先までの解説に相当する ==<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+== The explanation from here to above corresponds to the explanation ==</font></font><font></font>
 <font></font>
 for (int i = 2; i &lt;= this.iteration; i++)<font></font>
 {<font></font>
@@ -228,19 +221,19 @@ for (int i = 2; i &lt;= this.iteration; i++)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>同じパスを使って同じ処理を繰り返していますから、得られる効果は変わりません。ただし、シェーダパラメータの <code class="inline-code tt">_Iteration</code> の値が大きくなりますね、そうすると、先に説明したシェーダ内の減衰率が上がります。また、入力される画像はすでに引き伸ばされているブラー画像になります。</p>
-<p>端的にいえば、この繰り返し処理によって、1 回目よりもさらに伸びたブラー画像が <code class="inline-code tt">blurredTex1</code> に得られます。</p>
-<p>この処理はコストがかかるので、現実的には繰り返し回数は精々 3 回くらいとは思います。また、シェーダ内のイテレーションは 4 回ですが、この値は Kawase 氏の発表で提案されているものです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the same process is repeated using the same path, the effect obtained does not change. </font><font style="vertical-align: inherit;">However, </font></font><code class="inline-code tt">_Iteration</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the value of </font><font style="vertical-align: inherit;">the shader parameter </font><font style="vertical-align: inherit;">will be higher, which will increase the attenuation in the shader described earlier. </font><font style="vertical-align: inherit;">Also, the input image will be a blurred image that has already been stretched.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simply put, this iteration </font></font><code class="inline-code tt">blurredTex1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">results in </font><font style="vertical-align: inherit;">a blurry image that is even more stretched than the first </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This process is costly, so in reality I think it will be repeated at most 3 times. </font><font style="vertical-align: inherit;">Also, there are four iterations in the shader, but this value was suggested in Kawase's announcement.</font></font></p>
 
-<h2><a id="h4-3"></a><span class="secno">4.3　</span>STEP 2.5 : 複数方向に伸びるブラー画像を合成する</h2>
+<h2><a id="h4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> STEP 2.5: Combine blur images that extend in multiple directions</font></font></h2>
 <div id="id_xjine_2FStarGlow06" class="image">
 <img src="./Chapter 4 _ StarGlow_files/StarGlow06.png" alt="Luminance image stretched in another direction">
-<p class="caption">
-図4.7: 別の方向に引き伸ばされた輝度画像
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.7: Luminance image stretched in another direction
+</font></font></p>
 </div>
-<p>ソースコード上では STEP2.5 はコメントしていないのですが、説明のために 2.5 としました。先の説明では <code class="inline-code tt">offset = (1, 1)</code> としていましたが、複数方向に伸びる光線を作るために、<code class="inline-code tt">offset</code> を回転してもう一度ブラーをかけましょう。</p>
-<p>仮に <code class="inline-code tt">offset = (1, 1)</code> と反対方向に伸びる光線を定義するとすれば、<code class="inline-code tt">offset = (-1, -1)</code> ですね。実際のソースコードでは光線の数だけ <code class="inline-code tt">offset</code> を回転していますが、説明の上では <code class="inline-code tt">offset = (-1, -1)</code> とします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I didn't comment on STEP2.5 in the source code, but I chose 2.5 for the sake of explanation. </font><font style="vertical-align: inherit;">As mentioned earlier, </font><font style="vertical-align: inherit;">let's rotate and blur again </font></font><code class="inline-code tt">offset = (1, 1)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to create a ray that extends in multiple directions </font></font><code class="inline-code tt">offset</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Suppose </font></font><code class="inline-code tt">offset = (1, 1)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">we define a ray that extends in the opposite direction </font></font><code class="inline-code tt">offset = (-1, -1)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">In the actual source code, only the number of rays </font></font><code class="inline-code tt">offset</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is rotated, </font><font style="vertical-align: inherit;">but </font><font style="vertical-align: inherit;">for the </font><font style="vertical-align: inherit;">sake of </font><font style="vertical-align: inherit;">explanation </font></font><code class="inline-code tt">offset = (-1, -1)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
 <div class="emlist-code">
 <p class="caption">StarGlow.cs</p>
 <pre class="emlist">for (int x = 1; x &lt;= this.numOfStreak; x++)<font></font>
@@ -249,36 +242,36 @@ for (int i = 2; i &lt;= this.iteration; i++)<font></font>
                                           Vector3.forward) * Vector2.down;<font></font>
     offset = offset.normalized;<font></font>
 <font></font>
-    for (int i = 2; i &lt;= this.iteration; i++) {<font></font>
-        bluuredTex1 が繰り返し処理で伸ばされる<font></font>
+    for (int i = 2; i &lt;= this.iteration; i++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        bluuredTex1 is stretched by iterative processing</font></font><font></font>
     }<font></font>
 <font></font>
     Graphics.Blit(blurredTex1, compositeTex, base.material, 3);<font></font>
 }<font></font>
 </pre>
 </div>
-<p>最終的に得られたブラー画像 <code class="inline-code tt">blurredTex1</code> を、合成用の画像 <code class="inline-code tt">compositeTex</code> に出力しています。<code class="inline-code tt">compositeTex</code> は複数方向に伸びるブラー画像がすべて合成された画像になりますね。</p>
-<p>このとき、ブラー画像を合成するために使うシェーダーパスは 3 です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The finally obtained blur image </font></font><code class="inline-code tt">blurredTex1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is </font></font><code class="inline-code tt">compositeTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">output to </font><font style="vertical-align: inherit;">the image for compositing </font><font style="vertical-align: inherit;">. </font></font><code class="inline-code tt">compositeTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is a composite image of all blur images that extend in multiple directions.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">At this time, the shader path used to combine the blur images is 3.</font></font></p>
 <div class="emlist-code">
 <p class="caption">StarGlow.shader</p>
 <pre class="emlist">Blend OneMinusDstColor One<font></font>
 …<font></font>
 fixed4 frag(v2f_img input) : SV_Target<font></font>
 {<font></font>
-    return tex2D(_MainTex, input.uv);<font></font>
-}<font></font>
+    return tex2D(_MainTex, input.uv);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>このパスでは特別な処理は一切していませんが、<code class="inline-code tt">Blend</code> 構文を使って画像を合成しています。合成方法は演出によって作り替えてしまってよいと思いますが、ここでは <code class="inline-code tt">OneMinusDstColor One</code> としました。ソフトな合成方法です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">No special processing is done in this path, but the </font></font><code class="inline-code tt">Blend</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">syntax is used to synthesize the images. </font><font style="vertical-align: inherit;">I think that the composition method may be remade depending on the production, but I decided here </font></font><code class="inline-code tt">OneMinusDstColor One</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">This is a soft composition method.</font></font></p>
 
-<h2><a id="h4-4"></a><span class="secno">4.4　</span>STEP 3 : ブラー画像を元画像に合成する</h2>
+<h2><a id="h4-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> STEP 3: Combine the blur image with the original image</font></font></h2>
 <div id="id_xjine_2FStarGlow07" class="image">
 <img src="./Chapter 4 _ StarGlow_files/StarGlow07.png" alt="Blur image finally obtained">
-<p class="caption">
-図4.8: 最終的に得られたブラー画像
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.8: Final Blur image
+</font></font></p>
 </div>
-<p>複数方向に延びるブラー画像が得られたら、あとは一般的なグローと同じように元画像にブラー画像を合成して出力します。先の STEP 2.5 と同じように <code class="inline-code tt">Blend</code> 構文を使って合成して出力する方法でもよいですが、ここでは <code class="inline-code tt">Blit</code> 回数の軽減と、合成方法の柔軟性のために合成用の <code class="inline-code tt">Pass 4</code> を使って合成するようにしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">After obtaining a blur image that extends in multiple directions, the blur image is combined with the original image and output in the same way as a general glow. </font><font style="vertical-align: inherit;">You </font></font><code class="inline-code tt">Blend</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">can use the </font><font style="vertical-align: inherit;">same </font><font style="vertical-align: inherit;">syntax </font><font style="vertical-align: inherit;">as in STEP 2.5 above </font><font style="vertical-align: inherit;">to synthesize and output, but here, </font></font><code class="inline-code tt">Blit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to reduce the number of times and to make the synthesis method flexible, </font></font><code class="inline-code tt">Pass 4</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">we use the one for synthesis. ..</font></font></p>
 <div class="emlist-code">
 <p class="caption">StarGlow.cs</p>
 <pre class="emlist">base.material.EnableKeyword(StarGlow.CompositeTypes[this.compositeType]);<font></font>
@@ -320,15 +313,15 @@ fixed4 frag(v2f_img input) : SV_Target<font></font>
     #else<font></font>
 <font></font>
     return compositeColor;<font></font>
-<font></font>
-    #endif<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endif</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">Blend</code> 構文は使っていないものの、スクリーン合成、加算合成をそのまま再現しています。さらにここでは任意に乗算する色を追加することによって、色の強く付いたスターグローを表現できるようにしています。</p>
+<p><code class="inline-code tt">Blend</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Although the syntax is not used, the screen composition and additive composition are reproduced as they are. </font><font style="vertical-align: inherit;">Furthermore, here, by adding a color that is arbitrarily multiplied, it is possible to express a star glow with a strong color.</font></font></p>
 
-<h2><a id="h4-5"></a><span class="secno">4.5　</span>STEP 4 : リソースの開放</h2>
-<p>使ったリソースはすべて開放しましょう。特別解説することもありませんが、ソースコード上のサンプルにも記載してるので念のため。実装環境などが限定的な場合は確保済みのリソースを使い回すなどの対応も可能でしょうが、ここではシンプルに Release します。</p>
+<h2><a id="h4-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> STEP 4: Release resources</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Release all the resources you have used. </font><font style="vertical-align: inherit;">There is no special explanation, but just in case it is described in the sample on the source code. </font><font style="vertical-align: inherit;">If the implementation environment is limited, it may be possible to reuse the reserved resources, but here we will simply release it.</font></font></p>
 <div class="emlist-code">
 <p class="caption">StarGlow.cs</p>
 <pre class="emlist">base.material.DisableKeyword(StarGlow.CompositeTypes[this.compositeType]);<font></font>
@@ -355,4 +348,4 @@ RenderTexture.ReleaseTemporary(compositeTex);<font></font>
 </ul><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 321px; top: 26.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 4 _ StarGlow_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第4章　StarGlow</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 4 _ StarGlow_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 4 _ StarGlow_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 4 _ StarGlow_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 4 _ StarGlow_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

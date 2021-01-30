@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0083)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 9 _ MultiPlane Perspective Projection_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 9 _ MultiPlane Perspective Projection_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 9 _ MultiPlane Perspective Projection_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ MultiPlane Perspective Projection_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ MultiPlane Perspective Projection_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 9 _ MultiPlane Perspective Projection_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 9 _ MultiPlane Perspective Projection_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ MultiPlane Perspective Projection_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ MultiPlane Perspective Projection_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 9 _ MultiPlane Perspective Projection_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h9"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 9　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> MultiPlane Perspective Projection</font></font></h1>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will introduce a video projection method that allows you to experience the experience of being in the CG world by projecting images on multiple surfaces such as the walls and floor of a rectangular parallelepiped room. </font><font style="vertical-align: inherit;">In addition, as the background, we will explain camera processing in CG and its application examples. </font><font style="vertical-align: inherit;">The sample project can be found </font><font style="vertical-align: inherit;">in Assets / Room </font><font style="vertical-align: inherit;">Projection in Unity Project </font></font><a id="fnb-project" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-project" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> of Unity </font><font style="vertical-align: inherit;">Graphics Programming, so please have a look. </font><font style="vertical-align: inherit;">In addition, this content has </font><font style="vertical-align: inherit;">been significantly revised and revised based on the content contributed to the </font><font style="vertical-align: inherit;">"Mathematics Seminar December 2016" </font></font><a id="fnb-susemi" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-susemi" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-project"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 1] Sample project https://github.com/IndieVisualLab/UnityGraphicsProgramming</font></font></p></div>
@@ -99,71 +92,71 @@ Figure 9.4: Five viewing frustums corresponding to the room
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The projection matrix (hereinafter referred to as </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) is a matrix that transforms from the view coordinate system to the clip coordinate system.</font></font></p>
 <ul>
 <li><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : Position vector in the clip coordinate system</font></font></li>
-<li><span class="equation">V</span>: をビュー座標系における位置ベクトル</li>
+<li><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">V</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : is the position vector in the view coordinate system</font></font></li>
 </ul>
-<p>として式で表すと以下のようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is expressed as follows by the formula.</font></font></p>
 <div class="equation">
-<pre>C = Proj * V
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C = Proj * V
+</font></font></pre>
 </div>
-<p>さらに<span class="equation">C</span>の各要素を<span class="equation">C_{w}</span>で除算することでNDCでの位置座標となります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Furthermore </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> each element of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C_ {w}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> will position coordinates in NDC by dividing.</font></font></p>
 <div class="equation">
 <pre>NDC = (\frac{C_{x}}{C_{w}},\frac{C_{y}}{C_{w}},\frac{C_{z}}{C_{w}})
 </pre>
 </div>
-<p>なお、<span class="equation">C_{w}=-V_{z}</span>とな（るように<span class="equation">Proj</span>を作）ります。ビュー座標系の正面方向がZマイナス方向なのでマイナスがかかっています。NDCでは表示範囲を<span class="equation">-1\leq x,y,z\leq 1</span>とし、この変換で<span class="equation">V_{z}</span>に応じて<span class="equation">V_{x,y}</span>が拡大縮小することにより遠近法の表現が得られます。</p>
-<p>それでは、<span class="equation">Proj</span>をどのように作ればよいか考えてみましょう。ビュー座標系におけるnearClipPlaneの右上の点の座標を<span class="equation">N</span>、farClipPlaneの右上の点の座標を<span class="equation">F</span>としておきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C_ {w} = -V_ {z}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (make </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj so</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> that). </font><font style="vertical-align: inherit;">Since the front direction of the view coordinate system is the Z minus direction, it is minus. </font><font style="vertical-align: inherit;">In NDC, the display range is </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-1 \ leq x, y, z \ leq 1,</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and this conversion </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">scales </font></font></span><font style="vertical-align: inherit;"></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">V_ {x, y}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> according to </font><span class="equation"><font style="vertical-align: inherit;">V_ { </font></span><span class="equation"><font style="vertical-align: inherit;">z}</font></span><font style="vertical-align: inherit;"> to </font><font style="vertical-align: inherit;">obtain a perspective expression.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now </font><font style="vertical-align: inherit;">let's think about how to make </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Let </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">N be</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> the coordinate of </font><font style="vertical-align: inherit;">the upper right point of nearClipPlane and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">F</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> be </font><font style="vertical-align: inherit;">the coordinate of the upper </font><font style="vertical-align: inherit;">right point of farClipPlane in the view coordinate system </font><font style="vertical-align: inherit;">.</font></font></p>
 <div id="NF" class="image">
 <img src="./Chapter 9 _ MultiPlane Perspective Projection_files/NF.png" alt="N,F" class="width-050per">
-<p class="caption">
-図9.5: N,F
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.5: N, F
+</font></font></p>
 </div>
-<p>まずは<span class="equation">x</span>に注目してみると、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First of all, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">if</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> you pay attention to </font><span class="equation"><font style="vertical-align: inherit;">x</font></span><font style="vertical-align: inherit;"> ,</font></font></p>
 <ul>
-<li>投影範囲が<span class="equation">-1\leq x\leq 1</span>になること</li>
-<li>あとで<span class="equation">C_{w}(=-V_{z})</span>で除算されること</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Projection range of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-1 \ leq x \ leq 1</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> to become a</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Later </font><font style="vertical-align: inherit;">divided by </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C_ {w} (= -V_ {z})</font></font></span><font style="vertical-align: inherit;"></font></li>
 </ul>
-<p>を考慮すると</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Considering</font></font></p>
 <div class="equation">
-<pre>Proj[0,0] = \frac{N_{z}}{N_{x}}
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj [0,0] = \ frac {N_ {z}} {N_ {x}}
+</font></font></pre>
 </div>
-<p>とすれば良さそうです。x,zの比率は変わらないので<span class="equation">Proj[0][0] = \frac{F_{z}}{F_{x}}</span>など視錐台の右端ならどのx,zでも構いません。</p>
-<p>同様に</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If so, it looks good. </font><font style="vertical-align: inherit;">Since the ratio of x and z does not change, any x, z such as </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj [0] [0] = \ frac {F_ {z}} {F_ {x}}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> can be used at the right end of the view frustum.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Similarly</font></font></p>
 <div class="equation">
-<pre>Proj[1,1] = \frac{N_{z}}{N_{y}}
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj [1,1] = \ frac {N_ {z}} {N_ {y}}
+</font></font></pre>
 </div>
-<p>も求まります。</p>
-<p><span class="equation">z</span>については少し工夫が必要です。<span class="equation">Proj * V</span>でｚに関わる計算は以下ようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Can also be obtained.</font></font></p>
+<p><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> little ingenuity is required for </font><span class="equation"><font style="vertical-align: inherit;">z</font></span><font style="vertical-align: inherit;"> . </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> calculation related to z in </font><span class="equation"><font style="vertical-align: inherit;">Proj * V</font></span><font style="vertical-align: inherit;"> is as follows.</font></font></p>
 <div class="equation">
-<pre>C_{z} = Proj[2,2]*V_{z} + Proj[2,3]*V_{w}　(ただし、V_{w} = 1)
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C_ {z} = Proj [2,2] * V_ {z} + Proj [2,3] * V_ {w} (however, V_ {w} = 1)
+</font></font></pre>
 </div>
 <div class="equation">
-<pre>NDC_{z} = \frac{C_{z}}{C_{w}}（ただし、C_{w} = -V_{z}）
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">NDC_ {z} = \ frac {C_ {z}} {C_ {w}} (however, C_ {w} = -V_ {z})
+</font></font></pre>
 </div>
-<p>ここで、<span class="equation">N_{z} → -1, F_{z} → 1</span>と変換したいので、<span class="equation">a = Proj[2,2], b = Proj[2,3]</span> と置いて</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, </font><font style="vertical-align: inherit;">I want to convert </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">N_ {z} → -1, F_ {z} → 1</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , so </font><font style="vertical-align: inherit;">I put </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">a = Proj [2,2], b = Proj [2,3].</font></font></span><font style="vertical-align: inherit;"></font></p>
 <div class="equation">
 <pre>-1 = \frac{1}{N_{z}} (aN_{z} +b),　<font></font>
 1 = \frac{1}{F_{z}} (aF_{z} +b)<font></font>
 </pre>
 </div>
-<p>この連立方程式から解が得られます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A solution can be obtained from this system of equations.</font></font></p>
 <div class="equation">
-<pre>Proj[2,2] = a = \frac{F_{z}+N_{z}}{F_{z}-N_{z}},　<font></font>
-Proj[2,3] = b = \frac{-2F_{z}N_{z}}{F_{z}-N_{z}}<font></font>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj [2,2] = a = \ frac {F_ {z} + N_ {z}} {F_ {z} -N_ {z}},　</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Proj [2,3] = b = \ frac {-2F_ {z} N_ {z}} {F_ {z} -N_ {z}}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>また、<span class="equation">C_{w} = -V_{w}</span>となるようにしたいので</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, </font><font style="vertical-align: inherit;">I want </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C_ {w} = -V_ {w}</font></font></span><font style="vertical-align: inherit;"></font></p>
 <div class="equation">
 <pre>Proj[3,2] = -1
 </pre>
 </div>
-<p>とします。</p>
-<p>したがって求める<span class="equation">Proj</span>は以下の形になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">will do.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, the required </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> has the following form.</font></font></p>
 <div class="equation">
 <pre>Proj = \left(<font></font>
 \begin{array}{cccc}<font></font>
@@ -176,34 +169,34 @@ Proj[2,3] = b = \frac{-2F_{z}N_{z}}{F_{z}-N_{z}}<font></font>
 </pre>
 </div>
 
-<h3><a id="h9-3-1"></a><span class="secno">9.3.1　</span>Camera.projectionMatrix の罠</h3>
-<p>シェーダー内などでプロジェクション行列を扱ったことがある方の中にはもしかしたらここまでの内容に違和感を持つ方もいらっしゃるかもしれません。実はUnityのプロジェクション行列の扱いはややこしく、ここまでの内容はCamera.projectionMatrixについての解説になります。この値はプラットフォームによらずOpenGLに準拠しています<a id="fnb-opengl_projection" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-opengl_projection" class="noteref" epub:type="noteref">*3</a>。<span class="equation">-1\leq NDC_{z}\leq 1</span>や <span class="equation">C_{w} = -V_{w}</span>となるのもこのためです。</p>
+<h3><a id="h9-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Camera.projectionMatrix trap</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Some of the people who have dealt with projection matrices in shaders may feel uncomfortable with the contents so far. </font><font style="vertical-align: inherit;">Actually, the handling of the projection matrix of Unity is complicated, and the contents so far are the explanation about Camera.projectionMatrix. </font><font style="vertical-align: inherit;">This value is OpenGL compliant regardless of platform </font></font><a id="fnb-opengl_projection" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-opengl_projection" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 3</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is why -1 \ leq NDC_ {z} \ leq 1</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C_ {w} = -V_ {w}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-opengl_projection"><p class="footnote">[*3] https://docs.unity3d.com/ScriptReference/GL.GetGPUProjectionMatrix.html</p></div>
-<p>しかしUnity内でシェーダーに渡す際にプラットフォームに依存した形に変換するため、Camera.projectionMatrixをそのまま透視投影変換に使っているとは限りません。とくに<span class="equation">NDC_{z}</span>の範囲や向き（つまりZバッファの扱い）は多様でひっかかりやすいポイントになっています<a id="fnb-zbuff" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-zbuff" class="noteref" epub:type="noteref">*4</a>。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, Camera.projectionMatrix is ​​not always used for perspective projection conversion as it is converted to a platform-dependent form when it is passed to the shader in Unity. </font><font style="vertical-align: inherit;">In particular, </font><font style="vertical-align: inherit;">the range and orientation of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">NDC_ {z}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (that is, the handling of the Z buffer) are diverse and easy to get caught </font></font><a id="fnb-zbuff" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-zbuff" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 4</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-zbuff"><p class="footnote">[*4] https://docs.unity3d.com/Manual/SL-PlatformDifferences.html</p></div>
 
-<h2><a id="h9-4"></a><span class="secno">9.4　</span>視錐台の操作</h2>
+<h2><a id="h9-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Operation of the viewing frustum</font></font></h2>
 
-<h3><a id="h9-4-1"></a><span class="secno">9.4.1　</span>投影面のサイズ合わせ</h3>
-<p>視錐台の底面つまり投影面の形はカメラの<b class="kw">fov (fieldOfView,画角)</b><!-- IDX:fov -->と<b class="kw">aspect (アスペクト比)</b><!-- IDX:aspect -->に依存しています。Unityのカメラでは画角はInspectorで公開されているものの、アスペクト比は公開されていないのでコードから編集する必要があります。<b class="kw">faceSize (部屋の面のサイズ)</b><!-- IDX:faceSize -->、<b class="kw">distance (視点から面までの距離)</b><!-- IDX:distance -->から画角とアスペクト比を求めるコードは以下のようになります。</p>
+<h3><a id="h9-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Projection surface size adjustment</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The shape of the bottom of the view frustum, or projection plane, depends on the camera's </font></font><b class="kw"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fov (fieldOfView)</font></font></b><!-- IDX:fov --><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><b class="kw"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">aspect (aspect ratio)</font></font></b><!-- IDX:aspect --><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">In Unity's camera, the angle of view is published in the Inspector, but the aspect ratio is not published, so you need to edit it from the code. </font></font><b class="kw"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The</font></font></b><!-- IDX:faceSize --><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> code to calculate the angle of view and aspect ratio from </font><b class="kw"><font style="vertical-align: inherit;">faceSize (the size of the surface of the room)</font></b><font style="vertical-align: inherit;"> and </font></font><b class="kw"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">distance (distance from the viewpoint to the surface)</font></font></b><!-- IDX:distance --><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is as follows.</font></font></p>
 <div id="fov_aspect" class="caption-code">
-<p class="caption">リスト9.1: 画角とアスペクト比を求める</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 9.1: Finding the angle of view and aspect ratio</font></font></p>
 <pre class="list language-csharp">camera.aspect = faceSize.x / faceSize.y;<font></font>
-camera.fieldOfView = 2f * Mathf.Atan2(faceSize.y * 0.5f, distance)<font></font>
-                     * Mathf.Rad2Deg;<font></font>
+camera.fieldOfView = 2f * Mathf.Atan2(faceSize.y * 0.5f, distance)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                     * Mathf.Rad2Deg;</font></font></font></font><font></font>
 </pre>
 </div>
-<p>Mathf.Atan2() でfovの半分の角度をradianで求め、２倍し、Camera.fieldOfViewに代入するためdegreeに直している点に注意して下さい。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Note that Mathf.Atan2 () is used to find half the angle of fov with radian, doubled, and corrected to degree for substitution in Camera.fieldOfView.</font></font></p>
 
-<h3><a id="h9-4-2"></a><span class="secno">9.4.2　</span>投影面の移動（レンズシフト）</h3>
-<p>視点が部屋の中心にない場合も考慮してみましょう。視点に対して投影面が上下左右に平行移動することができれば、投影面に対して視点が移動したことと同じ効果が得られます。これは現実世界ではプロジェクターなどで映像の投影位置を調整する<b class="kw">レンズシフト</b><!-- IDX:レンズシフト -->という機能に相当します。</p>
+<h3><a id="h9-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Movement of projection plane (lens shift)</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Consider the case where the viewpoint is not in the center of the room. </font><font style="vertical-align: inherit;">If the projection plane can be translated vertically and horizontally with respect to the viewpoint, the same effect as moving the viewpoint with respect to the projection plane can be obtained. </font><font style="vertical-align: inherit;">In the real world, this </font><font style="vertical-align: inherit;">corresponds to a function called </font></font><b class="kw"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">lens shift</font></font></b><!-- IDX:レンズシフト --><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> that </font><font style="vertical-align: inherit;">adjusts the projection position of the image with a projector or the like </font><font style="vertical-align: inherit;">.</font></font></p>
 <div id="lensshift" class="image">
 <img src="./Chapter 9 _ MultiPlane Perspective Projection_files/lensshift.png" alt="Lens shift">
-<p class="caption">
-図9.6: レンズシフト
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.6: Lens shift
+</font></font></p>
 </div>
-<p>あらためてカメラが透視投影する仕組みに立ち返ってみるとレンズシフトはどの部分で行う処理になるでしょうか？プロジェクション行列でNDCに射影する際に、x,yをずらせば良さそうですもう一度Projection行列を見てみましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Looking back at the mechanism by which the camera performs perspective projection, what part of the lens shift is the process? </font><font style="vertical-align: inherit;">When projecting to NDC with a projection matrix, it seems good to shift x and y. Let's look at the Projection matrix again.</font></font></p>
 <div class="equation">
 <pre>Proj = \left(<font></font>
 \begin{array}{cccc}<font></font>
@@ -215,53 +208,53 @@ camera.fieldOfView = 2f * Mathf.Atan2(faceSize.y * 0.5f, distance)<font></font>
 \right)<font></font>
 </pre>
 </div>
-<p><span class="equation">C_{x},C_{y}</span>がずれればいいので、行列の平行移動成分である<span class="equation">Proj[0,3],Pro[1,3]</span>になにか入れたくなりますが、あとで<span class="equation">C_{w}</span>で除算されることを考慮すると、<span class="equation">Proj[0,2],Pro[1,2]</span>に入れるのが正解です。</p>
+<p><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As long as C_ {x} and C_ {y}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are out of alignment </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">,</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> I want to put something in </font><font style="vertical-align: inherit;">the translation components of the matrix, </font><span class="equation"><font style="vertical-align: inherit;">Proj [0,3] and Pro [1,3]</font></span><font style="vertical-align: inherit;"> , but later </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C_ {w}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Considering that it is divided by, the </font><font style="vertical-align: inherit;">correct answer is to put </font><font style="vertical-align: inherit;">it in </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj [0,2], Pro [1,2]</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="equation">
-<pre>Proj = \left(<font></font>
-\begin{array}{cccc}<font></font>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj = \left(</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\begin{array}{cccc}</font></font></font></font><font></font>
     \frac{N_{z}}{N_{x}} &amp;   0 &amp; LensShift_{x} &amp; 0\\<font></font>
-    0   &amp; \frac{N_{z}}{N_{y}} &amp; LensShift_{y} &amp; 0\\<font></font>
-    0   &amp;   0 &amp; \frac{F_{z}+N_{z}}{F_{z}-N_{z}} &amp; \frac{-2F_{z}N_{z}}{F_{z}-N_{z}} \\<font></font>
-    0   &amp;   0 &amp; -1 &amp; 0<font></font>
-\end{array}<font></font>
-\right)<font></font>
+    0   &amp; \frac{N_{z}}{N_{y}} &amp; LensShift_{y} &amp; 0\\<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    0   &amp;   0 &amp; \frac{F_{z}+N_{z}}{F_{z}-N_{z}} &amp; \frac{-2F_{z}N_{z}}{F_{z}-N_{z}} \\</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    0   &amp;   0 &amp; -1 &amp; 0</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\end{array}</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\right)</font></font></font></font><font></font>
 </pre>
 </div>
-<p>LensShiftの単位はNDCですので投影面のサイズを-1〜1に正規化したものになります。コードにすると以下のようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the unit of LensShift is NDC, the size of the projection plane is normalized to -1 to 1. </font><font style="vertical-align: inherit;">The code looks like this:</font></font></p>
 <div id="Lensshift" class="caption-code">
-<p class="caption">リスト9.2: レンズシフトをプロジェクション行列に反映</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 9.2: Reflect lens shift in projection matrix</font></font></p>
 <pre class="list language-csharp">var shift = new Vector2(<font></font>
     positionOffset.x / faceSize.x,<font></font>
-    positionOffset.y / faceSize.y<font></font>
-) * 2f;<font></font>
+    positionOffset.y / faceSize.y<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+) * 2f;</font></font></font></font><font></font>
 var projectionMatrix = camera.projectionMatrix;<font></font>
 projectionMatrix[0,2] = shift.x;<font></font>
 projectionMatrix[1,2] = shift.y;<font></font>
 camera.projectionMatrix = projectionMatrix;<font></font>
 </pre>
 </div>
-<p>一度Camera.projectionMatrixにsetするとCamera.ResetProjectionMatrix()を呼ばない限りその後のCamera.fieldOfViewの変更が反映されなくなる点に注意が必要です。<a id="fnb-resetProjectionMatrix" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-resetProjectionMatrix" class="noteref" epub:type="noteref">*5</a></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Note that once set to Camera.projectionMatrix, subsequent changes to Camera.fieldOfView will not be reflected unless Camera.ResetProjectionMatrix () is called. </font></font><a id="fnb-resetProjectionMatrix" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-resetProjectionMatrix" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*Five</font></font></a></p>
 <div class="footnote" epub:type="footnote" id="fn-resetProjectionMatrix"><p class="footnote">[*5] https://docs.unity3d.com/ScriptReference/Camera-projectionMatrix.html</p></div>
 
-<h2><a id="h9-5"></a><span class="secno">9.5　</span>部屋プロジェクション</h2>
-<p>直方体の部屋で、鑑賞者の視点位置をトラッキングできているものとします。前節の方法で視錐台の投影面のサイズと平行移動ができるので、視点位置を視錐台の頭頂点、壁面や床面を投影面としたときその形状に合うような視錐台を動的に求める事ができます。各カメラをこのような視錐台にすることによって各投影面用の映像を作ることができます。この映像を実際の部屋に投影すれは鑑賞者からはパースのあったCG世界が見えるようになります。</p>
+<h2><a id="h9-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> room projection</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is assumed that the viewer's viewpoint position can be tracked in a rectangular parallelepiped room. </font><font style="vertical-align: inherit;">Since the size of the projection surface of the viewing frustum can be translated by the method in the previous section, the viewing frustum is moved so that the viewpoint position is the apex of the viewing frustum and the wall surface or floor surface is the projection surface. You can ask for it. </font><font style="vertical-align: inherit;">By making each camera such a viewing frustum, it is possible to create an image for each projection plane. </font><font style="vertical-align: inherit;">By projecting this image into an actual room, the viewer will be able to see the CG world with perspective.</font></font></p>
 <div id="projection_room" class="image">
 <img src="./Chapter 9 _ MultiPlane Perspective Projection_files/projection_room.png" alt="Room simulation (overhead view)">
-<p class="caption">
-図9.7: 部屋のシミュレーション（俯瞰視点）
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.7: Room simulation (overhead view)
+</font></font></p>
 </div>
 <div id="projection_firstperson" class="image">
 <img src="./Chapter 9 _ MultiPlane Perspective Projection_files/projection_firstperson.png" alt="Room simulation (first person view)">
-<p class="caption">
-図9.8: 部屋のシミュレーション（一人称視点）
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.8: Room simulation (first person view)
+</font></font></p>
 </div>
 
-<h2><a id="h9-6"></a><span class="secno">9.6　</span>まとめ</h2>
-<p>本章ではプロジェクション行列を応用することで複数の投影面でパースを合わせる投影方法を紹介しました。目の前にディスプレイを置くのではなく視界の広い範囲を動的に反応する映像にしてしまう点で、昨今のHMD型と似て非なるアプローチのVRと言えるのではないかと思います。また、この方法では両眼視差や目のフォーカスを騙せるわけではないのでそのままでは立体視できずに「壁に投影された動く絵」に見えてしまう可能性があります。没入感を高めるためにはもう少し工夫する必要がありそうです。</p>
+<h2><a id="h9-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we introduced a projection method that matches perspectives on multiple projection planes by applying a projection matrix. </font><font style="vertical-align: inherit;">I think that it can be said that it is a VR with a non-approach similar to the recent HMD type in that it makes a wide range of the field of view a dynamically responsive image instead of placing the display in front of you. </font><font style="vertical-align: inherit;">In addition, this method does not deceive binocular parallax or eye focus, so it may not be possible to see stereoscopically as it is, and it may look like a "moving picture projected on the wall". </font><font style="vertical-align: inherit;">It seems that we need to devise a little more to increase the immersive feeling.</font></font></p>
 <ul>
-<li>両眼視差が小さくなるように部屋を大きくして鑑賞者から投影面までの距離を遠くする</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enlarge the room so that the binocular parallax is small, and increase the distance from the viewer to the projection surface.</font></font></li>
 <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Prevents the plane of the projection surface from being conscious of reflected light as much as possible</font></font><ul>
 <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Make a dark image</font></font></li>
 <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Make walls and floors as non-specular as possible</font></font></li>
@@ -272,4 +265,4 @@ camera.projectionMatrix = projectionMatrix;<font></font>
 <div class="footnote" epub:type="footnote" id="fn-cave"><p class="footnote">[*6] https://en.wikipedia.org/wiki/Cave_automatic_virtual_environment</p></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 9 _ MultiPlane Perspective Projection_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 9 _ MultiPlane Perspective Projection_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 9 _ MultiPlane Perspective Projection_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 9 _ MultiPlane Perspective Projection_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 9 _ MultiPlane Perspective Projection_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

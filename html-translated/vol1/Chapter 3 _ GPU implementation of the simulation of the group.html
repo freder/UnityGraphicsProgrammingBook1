@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0074)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/oishi.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 3 _ GPU implementation of the simulation of the group_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 3 _ GPU implementation of the simulation of the group_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 3 _ GPU implementation of the simulation of the group_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 3 _ GPU implementation of the simulation of the group_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 3 _ GPU implementation of the simulation of the group_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 3 _ GPU implementation of the simulation of the group_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 3 _ GPU implementation of the simulation of the group_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 3 _ GPU implementation of the simulation of the group_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 3 _ GPU implementation of the simulation of the group_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 3 _ GPU implementation of the simulation of the group_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> GPU implementation of the simulation of the group</font></font></h1>
 
 <h2><a id="h3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -90,173 +83,173 @@ Figure 3.1: Basic rules for Boids
 
 <h3><a id="h3-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Execution conditions</font></font></h3>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The programs introduced in this chapter use Compute Shader and GPU instancing.</font></font></p>
-<p>ComputeShaderは、以下のプラットフォームまたはAPIで動作します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ComputeShader runs on the following platforms or APIs:</font></font></p>
 <ul>
-<li>DirectX11、またはDirectX12グラフィックスAPIおよびシェーダモデル5.0GPUを搭載したWindowsおよびWindowsストアアプリ</li>
-<li>MacOSとMetalグラフィックスAPIを使用したiOS</li>
-<li>Vulkan APIを搭載したAndroid、Linux、Windowsプラットフォーム</li>
-<li>最新のOpenGLプラットフォーム（LinuxまたはWindowsではOpenGL 4.3、AndroidではOpenGL ES 3.1）。（MacOSXはOpenGL4.3をサポートしていないので注意してください）</li>
-<li>現段階で一般的に使用されているコンソール機（Sony PS4、Microsoft Xbox One）</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Windows and Windows Store apps with DirectX 11 or DirectX 12 graphics API and shader model 5.0 GPUs</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">IOS with Mac OS and Metal Graphics API</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Android, Linux and Windows platforms with Vulkan API</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The latest OpenGL platform (OpenGL 4.3 on Linux or Windows, OpenGL ES 3.1 on Android). </font><font style="vertical-align: inherit;">(Note that MacOSX does not support OpenGL 4.3)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Console machines commonly used at this stage (Sony PS4, Microsoft Xbox One)</font></font></li>
 </ul>
-<p>GPUインスタンシングは以下のプラットフォームまたはAPIで利用可能です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPU instancing is available on the following platforms or APIs:</font></font></p>
 <ul>
-<li>Windows上のDirectX 11およびDirectX 12</li>
-<li>Windows、MacOS、Linux、iOS、Android上のOpenGLコア4.1 + / ES3.0 +</li>
-<li>MacOSとiOS上のMetal</li>
-<li>WindowsとAndroidのVulkan</li>
-<li>プレイステーション4とXbox One</li>
-<li>WebGL（WebGL 2.0 APIが必要）</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">DirectX 11 and DirectX 12 on Windows</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OpenGL core 4.1 + / ES3.0 + on Windows, MacOS, Linux, iOS, Android</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Metal on Mac OS and iOS</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vulkan for Windows and Android</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Playstation 4 and Xbox One</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">WebGL (requires WebGL 2.0 API)</font></font></li>
 </ul>
-<p>本サンプルプログラムでは、Graphics.DrawMeshInstacedIndirectメソッドを使用しています。そのため、Unityのバージョンは5.6以降である必要があります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this sample program, Graphics.DrawMeshInstacedIndirect method is used. </font><font style="vertical-align: inherit;">Therefore, the Unity version must be 5.6 or later.</font></font></p>
 
-<h2><a id="h3-4"></a><span class="secno">3.4　</span>実装コードの解説</h2>
-<p>本サンプルプログラムは以下のコードで構成されます。</p>
+<h2><a id="h3-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Explanation of implementation code</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This sample program consists of the following code.</font></font></p>
 <ul>
-<li>GPUBoids.cs - Boidsのシミュレーションを行うComputeShaderを制御するスクリプト</li>
-<li>Boids.compute - Boidsのシミュレーションを行うComputeShader</li>
-<li>BoidsRender.cs - Boidsを描画するシェーダを制御するC#スクリプト</li>
-<li>BoidsRender.shader - GPUインスタンシングによってオブジェクトを描画するためのシェーダ</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUBoids.cs --Script that controls the Compute Shader that simulates Boids</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Boids.compute --ComputeShader that simulates Boids</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">BoidsRender.cs --C # script that controls the shader that draws Boids</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">BoidsRender.shader-Shader for drawing objects with GPU instancing</font></font></li>
 </ul>
-<p>スクリプトやマテリアルリソースなどはこのようにセットします</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Scripts, material resources, etc. are set like this</font></font></p>
 <div id="editor-boids" class="image">
 <img src="./Chapter 3 _ GPU implementation of the simulation of the group_files/editor-boids.png" alt="Settings on Unity Editor">
-<p class="caption">
-図3.2: UnityEditor上での設定
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.2: Settings on Unity Editor
+</font></font></p>
 </div>
 
-<h3><a id="h3-4-1"></a><span class="secno">3.4.1　</span>GPUBoids.cs</h3>
-<p>このコードでは、Boidsシミュレーションのパラメータや、GPU上での計算のために必要なバッファや計算命令を記述したComputeShaderの管理などを行います。</p>
+<h3><a id="h3-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.4.1　</font></font></font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> GPUBoids.cs</font></font></font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This code manages Boids simulation parameters, Compute Shader that describes buffers and calculation instructions required for calculations on the GPU, and so on.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUBoids.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUBoids.cs</font></font></font></font></p>
 <pre class="emlist language-csharp">using UnityEngine;<font></font>
 using System.Collections;<font></font>
 using System.Collections.Generic;<font></font>
 using System.Runtime.InteropServices;<font></font>
 <font></font>
 public class GPUBoids : MonoBehaviour<font></font>
-{<font></font>
-    // Boidデータの構造体<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Boid data structure</font></font><font></font>
     [System.Serializable]<font></font>
     struct BoidData<font></font>
-    {<font></font>
-        public Vector3 Velocity; // 速度<font></font>
-        public Vector3 Position; // 位置<font></font>
-    }<font></font>
-    // スレッドグループのスレッドのサイズ<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        public Vector3 Velocity; // Velocity</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        public Vector3 Position; // position</font></font><font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Thread size of thread group</font></font><font></font>
     const int SIMULATION_BLOCK_SIZE = 256;<font></font>
 <font></font>
-    #region Boids Parameters<font></font>
-    // 最大オブジェクト数<font></font>
+    #region Boids Parameters<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Maximum number of objects</font></font><font></font>
     [Range(256, 32768)]<font></font>
     public int MaxObjectNum = 16384;<font></font>
-<font></font>
-    // 結合を適用する他の個体との半径<font></font>
-    public float CohesionNeighborhoodRadius  = 2.0f;<font></font>
-    // 整列を適用する他の個体との半径<font></font>
-    public float AlignmentNeighborhoodRadius = 2.0f;<font></font>
-    // 分離を適用する他の個体との半径<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Radius with other individuals to which the bond applies</font></font><font></font>
+    public float CohesionNeighborhoodRadius  = 2.0f;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Radius with other individuals to which alignment is applied</font></font><font></font>
+    public float AlignmentNeighborhoodRadius = 2.0f;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Radius with other individuals to which separation is applied</font></font><font></font>
     public float SeparateNeighborhoodRadius  = 1.0f;<font></font>
-<font></font>
-    // 速度の最大値<font></font>
-    public float MaxSpeed        = 5.0f;<font></font>
-    // 操舵力の最大値<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Maximum speed</font></font><font></font>
+    public float MaxSpeed        = 5.0f;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Maximum steering force</font></font><font></font>
     public float MaxSteerForce   = 0.5f;<font></font>
-<font></font>
-    // 結合する力の重み<font></font>
-    public float CohesionWeight  = 1.0f;<font></font>
-    // 整列する力の重み<font></font>
-    public float AlignmentWeight = 1.0f;<font></font>
-    // 分離する力の重み<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Weight of binding force</font></font><font></font>
+    public float CohesionWeight  = 1.0f;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Weight of aligning force</font></font><font></font>
+    public float AlignmentWeight = 1.0f;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Weight of separating force</font></font><font></font>
     public float SeparateWeight  = 3.0f;<font></font>
-<font></font>
-    // 壁を避ける力の重み<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Weight of force to avoid walls</font></font><font></font>
     public float AvoidWallWeight = 10.0f;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Center coordinates of the wall</font></font><font></font>
+    public Vector3 WallCenter = Vector3.zero;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // wall size</font></font><font></font>
+    public Vector3 WallSize = new Vector3(32.0f, 32.0f, 32.0f);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
-    // 壁の中心座標<font></font>
-    public Vector3 WallCenter = Vector3.zero;<font></font>
-    // 壁のサイズ<font></font>
-    public Vector3 WallSize = new Vector3(32.0f, 32.0f, 32.0f);<font></font>
-    #endregion<font></font>
+    #region Built-in Resources<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Reference to Compute Shader for Boids simulation</font></font><font></font>
+    public ComputeShader BoidsCS;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
-    #region Built-in Resources<font></font>
-    // Boidsシミュレーションを行うComputeShaderの参照<font></font>
-    public ComputeShader BoidsCS;<font></font>
-    #endregion<font></font>
+    #region Private Resources<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Buffer that stores the steering force (Force) of the Boid</font></font><font></font>
+    ComputeBuffer _boidForceBuffer;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Buffer containing basic Boid data (speed, position)</font></font><font></font>
+    ComputeBuffer _boidDataBuffer;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
-    #region Private Resources<font></font>
-    // Boidの操舵力（Force）を格納したバッファ<font></font>
-    ComputeBuffer _boidForceBuffer;<font></font>
-    // Boidの基本データ（速度, 位置）を格納したバッファ<font></font>
-    ComputeBuffer _boidDataBuffer;<font></font>
-    #endregion<font></font>
-<font></font>
-    #region Accessors<font></font>
-    // Boidの基本データを格納したバッファを取得<font></font>
+    #region Accessors<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Get the buffer that stores the basic data of Boid</font></font><font></font>
     public ComputeBuffer GetBoidDataBuffer()<font></font>
     {<font></font>
         return this._boidDataBuffer != null ? this._boidDataBuffer : null;<font></font>
     }<font></font>
-<font></font>
-    // オブジェクト数を取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Get the number of objects</font></font><font></font>
     public int GetMaxObjectNum()<font></font>
     {<font></font>
-        return this.MaxObjectNum;<font></font>
-    }<font></font>
-<font></font>
-    // シミュレーション領域の中心座標を返す<font></font>
-    public Vector3 GetSimulationAreaCenter()<font></font>
-    {<font></font>
-        return this.WallCenter;<font></font>
-    }<font></font>
-<font></font>
-    // シミュレーション領域のボックスのサイズを返す<font></font>
-    public Vector3 GetSimulationAreaSize()<font></font>
-    {<font></font>
-        return this.WallSize;<font></font>
-    }<font></font>
-    #endregion<font></font>
+        return this.MaxObjectNum;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Returns the center coordinates of the simulation area</font></font><font></font>
+    public Vector3 GetSimulationAreaCenter()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        return this.WallCenter;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Returns the size of the box in the simulation area</font></font><font></font>
+    public Vector3 GetSimulationAreaSize()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        return this.WallSize;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
     #region MonoBehaviour Functions<font></font>
-    void Start()<font></font>
-    {<font></font>
-        // バッファを初期化<font></font>
-        InitBuffer();<font></font>
-    }<font></font>
+    void Start()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Initialize the buffer</font></font><font></font>
+        InitBuffer();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    void Update()<font></font>
-    {<font></font>
-        // シミュレーション<font></font>
-        Simulation();<font></font>
-    }<font></font>
+    void Update()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // simulation</font></font><font></font>
+        Simulation();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    void OnDestroy()<font></font>
-    {<font></font>
-        // バッファを破棄<font></font>
-        ReleaseBuffer();<font></font>
-    }<font></font>
+    void OnDestroy()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Discard the buffer</font></font><font></font>
+        ReleaseBuffer();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    void OnDrawGizmos()<font></font>
-    {<font></font>
-        // デバッグとしてシミュレーション領域をワイヤーフレームで描画<font></font>
-        Gizmos.color = Color.cyan;<font></font>
-        Gizmos.DrawWireCube(WallCenter, WallSize);<font></font>
-    }<font></font>
-    #endregion<font></font>
+    void OnDrawGizmos()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Draw the simulation area in wireframe as a debug</font></font><font></font>
+        Gizmos.color = Color.cyan;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Gizmos.DrawWireCube (WallCenter, WallSize);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
-    #region Private Functions<font></font>
-    // バッファを初期化<font></font>
-    void InitBuffer()<font></font>
-    {<font></font>
-        // バッファを初期化<font></font>
+    #region Private Functions<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Initialize the buffer</font></font><font></font>
+    void InitBuffer()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Initialize the buffer</font></font><font></font>
         _boidDataBuffer  = new ComputeBuffer(MaxObjectNum,<font></font>
             Marshal.SizeOf(typeof(BoidData)));<font></font>
         _boidForceBuffer = new ComputeBuffer(MaxObjectNum,<font></font>
             Marshal.SizeOf(typeof(Vector3)));<font></font>
-<font></font>
-        // Boidデータ, Forceバッファを初期化<font></font>
-        var forceArr = new Vector3[MaxObjectNum];<font></font>
-        var boidDataArr = new BoidData[MaxObjectNum];<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Initialize Boid data, Force buffer</font></font><font></font>
+        var forceArr = new Vector3[MaxObjectNum];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        var boidDataArr = new BoidData [MaxObjectNum];</font></font></font></font><font></font>
         for (var i = 0; i &lt; MaxObjectNum; i++)<font></font>
         {<font></font>
             forceArr[i] = Vector3.zero;<font></font>
@@ -265,30 +258,30 @@ public class GPUBoids : MonoBehaviour<font></font>
         }<font></font>
         _boidForceBuffer.SetData(forceArr);<font></font>
         _boidDataBuffer.SetData(boidDataArr);<font></font>
-        forceArr    = null;<font></font>
-        boidDataArr = null;<font></font>
+        forceArr    = null;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        boidDataArr = null;</font></font></font></font><font></font>
     }<font></font>
-<font></font>
-    // シミュレーション<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // simulation</font></font><font></font>
     void Simulation()<font></font>
     {<font></font>
         ComputeShader cs = BoidsCS;<font></font>
         int id = -1;<font></font>
-<font></font>
-        // スレッドグループの数を求める<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Find the number of thread groups</font></font><font></font>
         int threadGroupSize = Mathf.CeilToInt(MaxObjectNum<font></font>
             / SIMULATION_BLOCK_SIZE);<font></font>
-<font></font>
-        // 操舵力を計算<font></font>
-        id = cs.FindKernel("ForceCS"); // カーネルIDを取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Calculate steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        id = cs.FindKernel ("ForceCS"); // Get the kernel ID</font></font><font></font>
         cs.SetInt("_MaxBoidObjectNum", MaxObjectNum);<font></font>
         cs.SetFloat("_CohesionNeighborhoodRadius",<font></font>
             CohesionNeighborhoodRadius);<font></font>
         cs.SetFloat("_AlignmentNeighborhoodRadius",<font></font>
             AlignmentNeighborhoodRadius);<font></font>
         cs.SetFloat("_SeparateNeighborhoodRadius",<font></font>
-            SeparateNeighborhoodRadius);<font></font>
-        cs.SetFloat("_MaxSpeed", MaxSpeed);<font></font>
+            SeparateNeighborhoodRadius);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        cs.SetFloat ("_ MaxSpeed", MaxSpeed);</font></font></font></font><font></font>
         cs.SetFloat("_MaxSteerForce", MaxSteerForce);<font></font>
         cs.SetFloat("_SeparateWeight", SeparateWeight);<font></font>
         cs.SetFloat("_CohesionWeight", CohesionWeight);<font></font>
@@ -297,415 +290,415 @@ public class GPUBoids : MonoBehaviour<font></font>
         cs.SetVector("_WallSize", WallSize);<font></font>
         cs.SetFloat("_AvoidWallWeight", AvoidWallWeight);<font></font>
         cs.SetBuffer(id, "_BoidDataBufferRead", _boidDataBuffer);<font></font>
-        cs.SetBuffer(id, "_BoidForceBufferWrite", _boidForceBuffer);<font></font>
-        cs.Dispatch(id, threadGroupSize, 1, 1); // ComputeShaderを実行<font></font>
-<font></font>
-        // 操舵力から、速度と位置を計算<font></font>
-        id = cs.FindKernel("IntegrateCS"); // カーネルIDを取得<font></font>
+        cs.SetBuffer(id, "_BoidForceBufferWrite", _boidForceBuffer);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        cs.Dispatch (id, threadGroupSize, 1, 1); // Run Compute Shader</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Calculate speed and position from steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        id = cs.FindKernel ("IntegrateCS"); // Get the kernel ID</font></font><font></font>
         cs.SetFloat("_DeltaTime", Time.deltaTime);<font></font>
         cs.SetBuffer(id, "_BoidForceBufferRead", _boidForceBuffer);<font></font>
-        cs.SetBuffer(id, "_BoidDataBufferWrite", _boidDataBuffer);<font></font>
-        cs.Dispatch(id, threadGroupSize, 1, 1); // ComputeShaderを実行<font></font>
+        cs.SetBuffer(id, "_BoidDataBufferWrite", _boidDataBuffer);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        cs.Dispatch (id, threadGroupSize, 1, 1); // Run Compute Shader</font></font></font></font><font></font>
     }<font></font>
-<font></font>
-    // バッファを解放<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Free the buffer</font></font><font></font>
     void ReleaseBuffer()<font></font>
     {<font></font>
         if (_boidDataBuffer != null)<font></font>
         {<font></font>
-            _boidDataBuffer.Release();<font></font>
-            _boidDataBuffer = null;<font></font>
+            _boidDataBuffer.Release();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            _boidDataBuffer = null;</font></font></font></font><font></font>
         }<font></font>
 <font></font>
-        if (_boidForceBuffer != null)<font></font>
-        {<font></font>
-            _boidForceBuffer.Release();<font></font>
-            _boidForceBuffer = null;<font></font>
-        }<font></font>
-    }<font></font>
-    #endregion<font></font>
+        if (_boidForceBuffer != null)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
+            _boidForceBuffer.Release();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            _boidForceBuffer = null;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 }<font></font>
 <font></font>
 </pre>
 </div>
 
-<h5><a id="h3-4-1-0-1"></a>ComputeBufferの初期化</h5>
-<p>InitBuffer関数では、GPU上で計算を行う際に使用するバッファを宣言しています。GPU上で計算するためのデータを格納するバッファとして、ComputeBufferというクラスを使用します。ComputeBufferはComputeShaderのためにデータを格納するデータバッファです。C#スクリプトからGPU上のメモリバッファに対して読み込みや書き込みができるようになります。初期化時の引数には、バッファの要素の数と、要素1つのサイズ（バイト数）を渡します。Marshal.SizeOf()メソッドを使用することで、型のサイズ（バイト数）を取得することができます。ComputeBufferでは、SetData()を用いて、任意の構造体の配列の値をセットすることができます。</p>
+<h5><a id="h3-4-1-0-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initialization of Compute Buffer</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The InitBuffer function declares the buffer to use when performing calculations on the GPU. </font><font style="vertical-align: inherit;">We use a class called ComputeBuffer as a buffer to store the data to be calculated on the GPU. </font><font style="vertical-align: inherit;">Compute Buffer is a data buffer that stores data for the Compute Shader. </font><font style="vertical-align: inherit;">You will be able to read and write to the memory buffer on the GPU from a C # script. </font><font style="vertical-align: inherit;">Pass the number of elements in the buffer and the size (number of bytes) of one element as arguments at initialization. </font><font style="vertical-align: inherit;">You can get the size (in bytes) of the type by using the Marshal.SizeOf () method. </font><font style="vertical-align: inherit;">In ComputeBuffer, you can use SetData () to set the value of an array of any structure.</font></font></p>
 
-<h5><a id="h3-4-1-0-2"></a>ComputeShaderに記述した関数の実行</h5>
-<p>Simulation関数では、ComputeShaderに必要なパラメータを渡し、計算命令を発行します。</p>
-<p>ComputeShaderに記述された、実際にGPUに計算をさせる関数はカーネルと呼ばれます。このカーネルの実行単位をスレッドと言い、GPUアーキテクチャに即した並列計算処理を行うために、任意の数まとめてグループとして扱い、それらはスレッドグループと呼ばれます。このスレッドの数とスレッドグループ数の積が、Boidオブジェクトの個体数と同じかそれを超えるように設定します。</p>
-<p>カーネルは、ComputeShaderスクリプト内で #pragma kernelディレクティブを用いて指定されます。これにはそれぞれIDが割り当てられており、C#スクリプトからはFindKernelメソッドを用いることで、このIDを取得することができます。</p>
-<p>SetFloatメソッド、SetVectorメソッド、SetBufferメソッドなどを使用し、シミュレーションに必要なパラメータやバッファをComputeShaderに渡します。バッファやテクスチャをセットするときにはカーネルIDが必要になります。</p>
-<p>Dispatchメソッドを実行することで、ComputeShaderに定義したカーネルをGPUで計算処理を行うように命令を発行します。引数には、カーネルIDとスレッドグループの数を指定します。</p>
+<h5><a id="h3-4-1-0-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Execution of the function described in ComputeShader</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Simulation function passes the required parameters to ComputeShader and issues a calculation instruction.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The function written in ComputeShader that actually causes the GPU to perform calculations is called the kernel. </font><font style="vertical-align: inherit;">The execution unit of this kernel is called a thread, and in order to perform parallel computing processing according to the GPU architecture, any number is treated as a group, and they are called a thread group. </font><font style="vertical-align: inherit;">Set the product of the number of threads and the number of thread groups to be equal to or greater than the number of Boid objects.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The kernel is specified in the ComputeShader script using the #pragma kernel directive. </font><font style="vertical-align: inherit;">An ID is assigned to each of them, and you can get this ID from the C # script by using the FindKernel method.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Use the SetFloat method, SetVector method, SetBuffer method, etc. to pass the parameters and buffers required for simulation to the Compute Shader. </font><font style="vertical-align: inherit;">You will need the kernel ID when setting buffers and textures.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By executing the Dispatch method, an instruction is issued to calculate the kernel defined in Compute Shader on the GPU. </font><font style="vertical-align: inherit;">In the arguments, specify the kernel ID and the number of thread groups.</font></font></p>
 
 <h3><a id="h3-4-2"></a><span class="secno">3.4.2　</span>Boids.compute</h3>
-<p>GPUへの計算命令を記述します。カーネルは2つで、1つは操舵力を計算するもの、もう1つは、その力を適用させ速度や位置を更新するものです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Describe the calculation instruction to GPU. </font><font style="vertical-align: inherit;">There are two kernels, one that calculates the steering force and the other that applies that force to update speed and position.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Boids.compute</p>
-<pre class="emlist language-computeshader">// カーネル関数を指定<font></font>
-#pragma kernel ForceCS      // 操舵力を計算<font></font>
-#pragma kernel IntegrateCS  // 速度, 位置を計算<font></font>
-<font></font>
-// Boidデータの構造体<font></font>
+<pre class="emlist language-computeshader"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Specify kernel function</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+#pragma kernel ForceCS // Calculate steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+#pragma kernel IntegrateCS // Calculate speed and position</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Boid data structure</font></font><font></font>
 struct BoidData<font></font>
-{<font></font>
-    float3 velocity; // 速度<font></font>
-    float3 position; // 位置<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 velocity; // velocity</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 position; // position</font></font><font></font>
 };<font></font>
-<font></font>
-// スレッドグループのスレッドのサイズ<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Thread size of thread group</font></font><font></font>
 #define SIMULATION_BLOCK_SIZE 256<font></font>
-<font></font>
-// Boidデータのバッファ（読み取り用）<font></font>
-StructuredBuffer&lt;BoidData&gt;   _BoidDataBufferRead;<font></font>
-// Boidデータのバッファ（読み取り, 書き込み用）<font></font>
-RWStructuredBuffer&lt;BoidData&gt; _BoidDataBufferWrite;<font></font>
-// Boidの操舵力のバッファ（読み取り用）<font></font>
-StructuredBuffer&lt;float3&gt;     _BoidForceBufferRead;<font></font>
-// Boidの操舵力のバッファ（読み取り, 書き込み用）<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Boid data buffer (for reading)</font></font><font></font>
+StructuredBuffer&lt;BoidData&gt;   _BoidDataBufferRead;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Boid data buffer (for reading and writing)</font></font><font></font>
+RWStructuredBuffer&lt;BoidData&gt; _BoidDataBufferWrite;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Boid steering force buffer (for reading)</font></font><font></font>
+StructuredBuffer&lt;float3&gt;     _BoidForceBufferRead;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Boid steering force buffer (for reading and writing)</font></font><font></font>
 RWStructuredBuffer&lt;float3&gt;   _BoidForceBufferWrite;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+int _MaxBoidObjectNum; // Number of Boid objects</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _DeltaTime; // Time elapsed from the previous frame</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _SeparateNeighborhoodRadius; // Distance to other individuals to which separation is applied</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _AlignmentNeighborhoodRadius; // Distance to other individuals to which alignment is applied</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _CohesionNeighborhoodRadius; // Distance to other individuals to which the bond applies</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _MaxSpeed; // Maximum speed</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _MaxSteerForce; // Maximum steering force</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _SeparateWeight; // Weight when applying separation</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _AlignmentWeight; // Weight when applying alignment</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _CohesionWeight; // Weight when applying join</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float4 _WallCenter; // Wall center coordinates</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float4 _WallSize; // Wall size</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _AvoidWallWeight; // Weight of strength to avoid walls</font></font><font></font>
 <font></font>
-int _MaxBoidObjectNum; // Boidオブジェクト数<font></font>
-<font></font>
-float _DeltaTime;      // 前フレームから経過した時間<font></font>
-<font></font>
-float _SeparateNeighborhoodRadius;  // 分離を適用する他の個体との距離<font></font>
-float _AlignmentNeighborhoodRadius; // 整列を適用する他の個体との距離<font></font>
-float _CohesionNeighborhoodRadius;  // 結合を適用する他の個体との距離<font></font>
-<font></font>
-float _MaxSpeed;        // 速度の最大値<font></font>
-float _MaxSteerForce;   // 操舵する力の最大値<font></font>
-<font></font>
-float _SeparateWeight;  // 分離適用時の重み<font></font>
-float _AlignmentWeight; // 整列適用時の重み<font></font>
-float _CohesionWeight;  // 結合適用時の重み<font></font>
-<font></font>
-float4 _WallCenter;      // 壁の中心座標<font></font>
-float4 _WallSize;        // 壁のサイズ<font></font>
-float  _AvoidWallWeight; // 壁を避ける強さの重み<font></font>
-<font></font>
-<font></font>
-// ベクトルの大きさを制限する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Limit the magnitude of the vector</font></font><font></font>
 float3 limit(float3 vec, float max)<font></font>
-{<font></font>
-    float length = sqrt(dot(vec, vec)); // 大きさ<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float length = sqrt (dot (vec, vec)); // size</font></font><font></font>
     return (length &gt; max &amp;&amp; length &gt; 0) ? vec.xyz * (max / length) : vec.xyz;<font></font>
 }<font></font>
-<font></font>
-// 壁に当たった時に逆向きの力を返す<font></font>
-float3 avoidWall(float3 position)<font></font>
-{<font></font>
-    float3 wc = _WallCenter.xyz;<font></font>
-    float3 ws = _WallSize.xyz;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Return the opposite force when hitting the wall</font></font><font></font>
+float3 avoidWall(float3 position)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 wc = _WallCenter.xyz;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 ws = _WallSize.xyz;</font></font></font></font><font></font>
     float3 acc = float3(0, 0, 0);<font></font>
     // x<font></font>
     acc.x = (position.x &lt; wc.x - ws.x * 0.5) ? acc.x + 1.0 : acc.x;<font></font>
     acc.x = (position.x &gt; wc.x + ws.x * 0.5) ? acc.x - 1.0 : acc.x;<font></font>
-<font></font>
-    // y<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Y</font></font></font></font><font></font>
     acc.y = (position.y &lt; wc.y - ws.y * 0.5) ? acc.y + 1.0 : acc.y;<font></font>
     acc.y = (position.y &gt; wc.y + ws.y * 0.5) ? acc.y - 1.0 : acc.y;<font></font>
-<font></font>
-    // z<font></font>
-    acc.z = (position.z &lt; wc.z - ws.z * 0.5) ? acc.z + 1.0 : acc.z;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // with</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    acc.z = (position.z &lt;wc.z - ws.z * 0.5)? </font></font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">acc.z + 1.0: acc.z;</font></font></font></font><font></font>
     acc.z = (position.z &gt; wc.z + ws.z * 0.5) ? acc.z - 1.0 : acc.z;<font></font>
 <font></font>
-    return acc;<font></font>
-}<font></font>
-<font></font>
-// シェアードメモリ Boidデータ格納用<font></font>
+    return acc;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Shared memory for Boid data storage</font></font><font></font>
 groupshared BoidData boid_data[SIMULATION_BLOCK_SIZE];<font></font>
-<font></font>
-// 操舵力の計算用カーネル関数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Kernel function for calculating steering force</font></font><font></font>
 [numthreads(SIMULATION_BLOCK_SIZE, 1, 1)]<font></font>
 void ForceCS<font></font>
-(<font></font>
-    uint3 DTid : SV_DispatchThreadID, // スレッド全体で固有のID<font></font>
-    uint3 Gid : SV_GroupID, // グループのID<font></font>
-    uint3 GTid : SV_GroupThreadID, // グループ内のスレッドID<font></font>
-    uint  GI : SV_GroupIndex // SV_GroupThreadIDを一次元にしたもの 0-255<font></font>
+(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint3 DTid: SV_DispatchThreadID, // ID unique to the entire thread</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint3 Gid: SV_GroupID, // Group ID</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint3 GTid: SV_GroupThreadID, // Thread ID in the group</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint GI: SV_GroupIndex // SV_GroupThreadID in one dimension 0-255</font></font><font></font>
 )<font></font>
-{<font></font>
-    const unsigned int P_ID = DTid.x; // 自身のID<font></font>
-    float3 P_position = _BoidDataBufferRead[P_ID].position; // 自身の位置<font></font>
-    float3 P_velocity = _BoidDataBufferRead[P_ID].velocity; // 自身の速度<font></font>
-<font></font>
-    float3 force = float3(0, 0, 0); // 操舵力を初期化<font></font>
-<font></font>
-    float3 sepPosSum = float3(0, 0, 0); // 分離計算用 位置加算変数<font></font>
-    int sepCount = 0; // 分離のために計算した他の個体の数のカウント用変数<font></font>
-<font></font>
-    float3 aliVelSum = float3(0, 0, 0); // 整列計算用 速度加算変数<font></font>
-    int aliCount = 0; // 整列のために計算した他の個体の数のカウント用変数<font></font>
-<font></font>
-    float3 cohPosSum = float3(0, 0, 0); // 結合計算用 位置加算変数<font></font>
-    int cohCount = 0; // 結合のために計算した他の個体の数のカウント用変数<font></font>
-<font></font>
-    // SIMULATION_BLOCK_SIZE（グループスレッド数）ごとの実行 (グループ数分実行)<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    const unsigned int P_ID = DTid.x; // own ID</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 P_position = _BoidDataBufferRead [P_ID] .position; // own position</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 P_velocity = _BoidDataBufferRead [P_ID] .velocity; // own speed</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 force = float3 (0, 0, 0); // Initialize steering force</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 sepPosSum = float3 (0, 0, 0); // Position addition variable for separation calculation</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int sepCount = 0; // Variable for counting the number of other individuals calculated for separation</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 aliVelSum = float3 (0, 0, 0); // Velocity addition variable for alignment calculation</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int aliCount = 0; // Variable for counting the number of other individuals calculated for alignment</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 cohPosSum = float3 (0, 0, 0); // Position addition variable for join calculation</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int cohCount = 0; // Variable for counting the number of other individuals calculated for binding</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Execution for each SIMULATION_BLOCK_SIZE (number of group threads) (execution for the number of groups)</font></font><font></font>
     [loop]<font></font>
     for (uint N_block_ID = 0; N_block_ID &lt; (uint)_MaxBoidObjectNum;<font></font>
         N_block_ID += SIMULATION_BLOCK_SIZE)<font></font>
-    {<font></font>
-        // SIMULATION_BLOCK_SIZE分のBoidデータを、シェアードメモリに格納<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Store Boid data for SIMULATION_BLOCK_SIZE in shared memory</font></font><font></font>
         boid_data[GI] = _BoidDataBufferRead[N_block_ID + GI];<font></font>
-<font></font>
-        // すべてのグループ共有アクセスが完了し、<font></font>
-        // グループ内のすべてのスレッドがこの呼び出しに到達するまで、<font></font>
-        // グループ内のすべてのスレッドの実行をブロックする<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // All group sharing access is complete</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Until all threads in the group reach this call</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Block the execution of all threads in the group</font></font><font></font>
         GroupMemoryBarrierWithGroupSync();<font></font>
-<font></font>
-        // 他の個体との計算<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Calculation with other individuals</font></font><font></font>
         for (int N_tile_ID = 0; N_tile_ID &lt; SIMULATION_BLOCK_SIZE;<font></font>
             N_tile_ID++)<font></font>
-        {<font></font>
-            // 他の個体の位置<font></font>
-            float3 N_position = boid_data[N_tile_ID].position;<font></font>
-            // 他の個体の速度<font></font>
+        {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Position of other individuals</font></font><font></font>
+            float3 N_position = boid_data[N_tile_ID].position;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Speed ​​of other individuals</font></font><font></font>
             float3 N_velocity = boid_data[N_tile_ID].velocity;<font></font>
-<font></font>
-            // 自身と他の個体の位置の差<font></font>
-            float3 diff = P_position - N_position;<font></font>
-            // 自身と他の個体の位置の距離<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Difference in position between yourself and other individuals</font></font><font></font>
+            float3 diff = P_position - N_position;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Distance between yourself and the position of other individuals</font></font><font></font>
             float  dist = sqrt(dot(diff, diff));<font></font>
-<font></font>
-            // --- 分離（Separation） ---<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // --- Separation ---</font></font><font></font>
             if (dist &gt; 0.0 &amp;&amp; dist &lt;= _SeparateNeighborhoodRadius)<font></font>
-            {<font></font>
-                // 他の個体の位置から自身へ向かうベクトル<font></font>
-                float3 repulse = normalize(P_position - N_position);<font></font>
-                // 自身と他の個体の位置の距離で割る（距離が遠ければ影響を小さく）<font></font>
-                repulse /= dist;<font></font>
-                sepPosSum += repulse; // 加算<font></font>
-                sepCount++;           // 個体数カウント<font></font>
+            {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // Vector from the position of another individual to itself</font></font><font></font>
+                float3 repulse = normalize(P_position - N_position);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // Divide by the distance between yourself and the position of another individual (the longer the distance, the smaller the effect)</font></font><font></font>
+                repulse /= dist;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                sepPosSum + = repulse; // Add</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                sepCount ++; // Population count</font></font><font></font>
             }<font></font>
-<font></font>
-            // --- 整列（Alignment） ---<font></font>
-            if (dist &gt; 0.0 &amp;&amp; dist &lt;= _AlignmentNeighborhoodRadius)<font></font>
-            {<font></font>
-                aliVelSum += N_velocity; // 加算<font></font>
-                aliCount++;              // 個体数カウント<font></font>
-            }<font></font>
-<font></font>
-            // --- 結合（Cohesion） ---<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // --- Alignment ---</font></font><font></font>
+            if (dist &gt; 0.0 &amp;&amp; dist &lt;= _AlignmentNeighborhoodRadius)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                aliVelSum + = N_velocity; // Add</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                aliCount ++; // Population count</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // --- Cohesion ---</font></font><font></font>
             if (dist &gt; 0.0 &amp;&amp; dist &lt;= _CohesionNeighborhoodRadius)<font></font>
-            {<font></font>
-                cohPosSum += N_position; // 加算<font></font>
-                cohCount++;              // 個体数カウント<font></font>
+            {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                cohPosSum + = N_position; // Add</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                cohCount ++; // Population count</font></font><font></font>
             }<font></font>
         }<font></font>
         GroupMemoryBarrierWithGroupSync();<font></font>
     }<font></font>
-<font></font>
-    // 操舵力（分離）<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // steering force (separated)</font></font><font></font>
     float3 sepSteer = (float3)0.0;<font></font>
     if (sepCount &gt; 0)<font></font>
-    {<font></font>
-        sepSteer = sepPosSum / (float)sepCount;     // 平均を求める<font></font>
-        sepSteer = normalize(sepSteer) * _MaxSpeed; // 最大速度に調整<font></font>
-        sepSteer = sepSteer - P_velocity;           // 操舵力を計算<font></font>
-        sepSteer = limit(sepSteer, _MaxSteerForce); // 操舵力を制限<font></font>
-    }<font></font>
-<font></font>
-    // 操舵力（整列）<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        sepSteer = sepPosSum / (float) sepCount; // Calculate the average</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        sepSteer = normalize (sepSteer) * _MaxSpeed; // Adjust to maximum speed</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        sepSteer = sepSteer --P_velocity; // Calculate steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        sepSteer = limit (sepSteer, _MaxSteerForce); // Limit steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Steering force (alignment)</font></font><font></font>
     float3 aliSteer = (float3)0.0;<font></font>
-    if (aliCount &gt; 0)<font></font>
-    {<font></font>
-        aliSteer = aliVelSum / (float)aliCount; // 近い個体の速度の平均を求める<font></font>
-        aliSteer = normalize(aliSteer) * _MaxSpeed; // 最大速度に調整<font></font>
-        aliSteer = aliSteer - P_velocity;           // 操舵力を計算<font></font>
-        aliSteer = limit(aliSteer, _MaxSteerForce); // 操舵力を制限<font></font>
-    }<font></font>
-    // 操舵力（結合）<font></font>
+    if (aliCount &gt; 0)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        aliSteer = aliVelSum / (float) aliCount; // Calculate the average velocity of close individuals</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        aliSteer = normalize (aliSteer) * _MaxSpeed; // Adjust to maximum speed</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        aliSteer = aliSteer --P_velocity; // Calculate steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        aliSteer = limit (aliSteer, _MaxSteerForce); // Limit steering force</font></font><font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // steering force (combined)</font></font><font></font>
     float3 cohSteer = (float3)0.0;<font></font>
     if (cohCount &gt; 0)<font></font>
-    {<font></font>
-        // / 近い個体の位置の平均を求める<font></font>
-        cohPosSum = cohPosSum / (float)cohCount;<font></font>
-        cohSteer = cohPosSum - P_position; // 平均位置方向へのベクトルを求める<font></font>
-        cohSteer = normalize(cohSteer) * _MaxSpeed; // 最大速度に調整<font></font>
-        cohSteer = cohSteer - P_velocity;           // 操舵力を計算<font></font>
-        cohSteer = limit(cohSteer, _MaxSteerForce); // 操舵力を制限<font></font>
-    }<font></font>
-    force += aliSteer * _AlignmentWeight; // 操舵力に整列する力を加える<font></font>
-    force += cohSteer * _CohesionWeight;  // 操舵力に結合する力を加える<font></font>
-    force += sepSteer * _SeparateWeight;  // 操舵力に分離する力を加える<font></font>
-<font></font>
-    _BoidForceBufferWrite[P_ID] = force; // 書き込み<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // / Calculate the average of the positions of close individuals</font></font><font></font>
+        cohPosSum = cohPosSum / (float)cohCount;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        cohSteer = cohPosSum --P_position; // Find the vector in the average position direction</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        cohSteer = normalize (cohSteer) * _MaxSpeed; // Adjust to maximum speed</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        cohSteer = cohSteer --P_velocity; // Calculate steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        cohSteer = limit (cohSteer, _MaxSteerForce); // Limit steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    force + = aliSteer * _AlignmentWeight; // Add a force to align with the steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    force + = cohSteer * _CohesionWeight; // Add force to combine with steering force</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    force + = sepSteer * _SeparateWeight; // Add a separating force to the steering force</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    _BoidForceBufferWrite [P_ID] = force; // Write</font></font><font></font>
 }<font></font>
-<font></font>
-// 速度, 位置計算用カーネル関数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Kernel function for speed and position calculation</font></font><font></font>
 [numthreads(SIMULATION_BLOCK_SIZE, 1, 1)]<font></font>
 void IntegrateCS<font></font>
-(<font></font>
-    uint3 DTid : SV_DispatchThreadID // スレッド全体で固有のID<font></font>
+(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint3 DTid: SV_DispatchThreadID // Unique ID for the entire thread</font></font><font></font>
 )<font></font>
-{<font></font>
-    const unsigned int P_ID = DTid.x; // インデックスを取得<font></font>
-<font></font>
-    BoidData b = _BoidDataBufferWrite[P_ID]; // 現在のBoidデータを読み込む<font></font>
-    float3 force = _BoidForceBufferRead[P_ID]; // 操舵力を読み込む<font></font>
-<font></font>
-    // 壁に近づいたら反発する力を与える<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    const unsigned int P_ID = DTid.x; // Get index</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    BoidData b = _BoidDataBufferWrite [P_ID]; // Read the current Boid data</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 force = _BoidForceBufferRead [P_ID]; // Read the steering force</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Give repulsive force when approaching the wall</font></font><font></font>
     force += avoidWall(b.position) * _AvoidWallWeight;<font></font>
-<font></font>
-    b.velocity += force * _DeltaTime; // 操舵力を速度に適用<font></font>
-    b.velocity = limit(b.velocity, _MaxSpeed); // 速度を制限<font></font>
-    b.position += b.velocity * _DeltaTime; // 位置を更新<font></font>
-<font></font>
-    _BoidDataBufferWrite[P_ID] = b; // 計算結果を書き込む<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    b.velocity + = force * _DeltaTime; // Apply steering force to speed</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    b.velocity = limit (b.velocity, _MaxSpeed); // Limit speed</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    b.position + = b.velocity * _DeltaTime; // Update position</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    _BoidDataBufferWrite [P_ID] = b; // Write the calculation result</font></font><font></font>
 }<font></font>
 <font></font>
 </pre>
 </div>
 
-<h4><a id="h3-4-2-1"></a>操舵力の計算</h4>
-<p>ForceCSカーネルでは、操舵力の計算を行います。</p>
+<h4><a id="h3-4-2-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Calculation of steering force</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The ForceCS kernel calculates the steering force.</font></font></p>
 
-<h5><a id="h3-4-2-1-1"></a>共有メモリの活用</h5>
-<p>groupshared という記憶域修飾子をつけられた変数は共有メモリ（shared memory）に書き込まれるようになります。共有メモリは多くのデータ量を書き込むことはできませんが、レジスタに近く配置されており非常に高速にアクセスができます。この共有メモリはスレッドグループ内で共有することができます。SIMULATION_BLOCK_SIZE分の他の個体の情報をまとめて共有メモリに書き込んでおいて、同一スレッドグループ内で高速に読みこむことができるようにすることで、他の個体との位置関係を考慮した計算を効率的に行っていきます。</p>
+<h5><a id="h3-4-2-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Utilization of shared memory</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Variables with the storage qualifier groupshared will now be written to shared memory. </font><font style="vertical-align: inherit;">Shared memory cannot write large amounts of data, but it is located close to registers and can be accessed very quickly. </font><font style="vertical-align: inherit;">This shared memory can be shared within the thread group. </font><font style="vertical-align: inherit;">By writing the information of other individuals for SIMULATION_BLOCK_SIZE together in the shared memory so that it can be read at high speed within the same thread group, the calculation considering the positional relationship with other individuals is efficient. I will go to the target.</font></font></p>
 <div id="gpu-architecture" class="image">
 <img src="./Chapter 3 _ GPU implementation of the simulation of the group_files/gpu-architecture.png" alt="GPU basic architecture">
-<p class="caption">
-図3.3: GPUの基本的なアーキテクチャ
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.3: Basic GPU architecture
+</font></font></p>
 </div>
 
 <h6><a id="h3-4-2-1-1-1"></a>GroupMemoryBarrierWithGroupSync()</h6>
-<p>共有メモリに書き込まれたデータにアクセスする時は、GroupMemoryBarrierWithGroupSync()メソッドを記述し、スレッドグループ内のすべてのスレッドの処理の同期をとっておく必要があります。GroupMemoryBarrierWithGroupSync()は、スレッドグループ内のすべてのスレッドが、この呼び出しに到達するまで、グループ内のすべてのスレッドの実行をブロックします。これにより、スレッドグループ内のすべてのスレッドでboid_data配列の初期化が適切に終わっていることが保証されるようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When accessing the data written to the shared memory, it is necessary to describe the GroupMemoryBarrierWithGroupSync () method to synchronize the processing of all threads in the thread group. </font><font style="vertical-align: inherit;">GroupMemoryBarrierWithGroupSync () blocks the execution of all threads in the group until all threads in the thread group reach this call. </font><font style="vertical-align: inherit;">This ensures that all threads in the thread group have properly initialized the boid_data array.</font></font></p>
 
-<h5><a id="h3-4-2-1-2"></a>他の個体との距離によって操舵力を計算</h5>
+<h5><a id="h3-4-2-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Steering force is calculated based on the distance to other individuals</font></font></h5>
 
-<h6><a id="h3-4-2-1-2-1"></a>分離（Separation）</h6>
-<p>指定した距離より近い個体があった場合、その個体の位置から自身の位置へ向かうベクトルを求め、正規化します。そのベクトルを、距離の値で割ることで、近ければより避けるように、遠ければ小さく避けるように重みをつけ他の個体と衝突しないようにする力として加算していきます。全ての個体との計算が終わったら、その値を用いて、現在の速度との関係から操舵力を求めます。</p>
+<h6><a id="h3-4-2-1-2-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Separation</font></font></h6>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If there is an individual closer than the specified distance, the vector from the position of the individual to its own position is calculated and normalized. </font><font style="vertical-align: inherit;">By dividing the vector by the value of the distance, it is weighted so that it avoids more when it is closer and avoids it smaller when it is far, and it is added as a force to prevent collision with other individuals. </font><font style="vertical-align: inherit;">After the calculation with all the individuals is completed, the steering force is calculated from the relationship with the current speed using the value.</font></font></p>
 
-<h6><a id="h3-4-2-1-2-2"></a>整列（Alignment）</h6>
-<p>指定した距離より近い個体があった場合、その個体の速度（Velocity）を足し合わせていき、同時にその個体数をカウントしていき、それらの値で、近い個体の速度（つまり向いている方向）の平均を求めます。全ての個体との計算が終わったら、その値を用いて、現在の速度との関係から操舵力を求めます。</p>
+<h6><a id="h3-4-2-1-2-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Alignment</font></font></h6>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If there is an individual closer than the specified distance, the velocity (Velocity) of that individual is added up, the number of the individual is counted at the same time, and the velocity of the close individual (that is, the direction in which it is facing) is calculated by those values. Calculate the average of. </font><font style="vertical-align: inherit;">After the calculation with all the individuals is completed, the steering force is calculated from the relationship with the current speed using the value.</font></font></p>
 
-<h6><a id="h3-4-2-1-2-3"></a>結合（Cohesion）</h6>
-<p>指定した距離より近い個体があった場合、その個体の位置を加算していき、同時にその個体数をカウントしていき、それらの値で、近い個体の位置の平均（重心）を求めます。さらに、そこへ向かうベクトルを求め、現在の速度との関係から操舵力を求めます。</p>
+<h6><a id="h3-4-2-1-2-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cohesion</font></font></h6>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If there is an individual closer than the specified distance, the position of that individual is added, the number of the individual is counted at the same time, and the average (center of gravity) of the position of the close individual is calculated from those values. </font><font style="vertical-align: inherit;">Furthermore, the vector toward that point is found, and the steering force is found in relation to the current speed.</font></font></p>
 
-<h5><a id="h3-4-2-1-3"></a>個々のBoidの速度と位置の更新</h5>
-<p>IntegrateCSカーネルでは、ForceCS()で求めた操舵力を元に、Boidの速度と位置を更新します。AvoidWallでは、指定したエリアの外に出ようとした場合、逆向きの力を与え領域の内部に留まるようにしています。</p>
+<h5><a id="h3-4-2-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Update the speed and position of individual Boids</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The IntegrateCS kernel updates the speed and position of the Boid based on the steering force obtained by ForceCS (). </font><font style="vertical-align: inherit;">In AvoidWall, when you try to go out of the specified area, it applies a reverse force to stay inside the area.</font></font></p>
 
-<h3><a id="h3-4-3"></a><span class="secno">3.4.3　</span>BoidsRender.cs</h3>
-<p>このスクリプトでは、Boidsシミュレーションで得られた結果を、指定したメッシュで描画することを行います。</p>
+<h3><a id="h3-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.4.3　</font></font></font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> BoidsRender.cs</font></font></font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This script draws the results obtained from the Boids simulation on the specified mesh.</font></font></p>
 <div class="emlist-code">
-<p class="caption">BoidsRender.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">BoidsRender.cs</font></font></font></font></p>
 <pre class="emlist language-csharp">using System.Collections;<font></font>
 using System.Collections.Generic;<font></font>
 using UnityEngine;<font></font>
-<font></font>
-// 同GameObjectに、GPUBoidsコンポーネントがアタッチされていることを保証<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Guarantee that the GPU Boids component is attached to the GameObject</font></font><font></font>
 [RequireComponent(typeof(GPUBoids))]<font></font>
 public class BoidsRender : MonoBehaviour<font></font>
 {<font></font>
-    #region Paremeters<font></font>
-    // 描画するBoidsオブジェクトのスケール<font></font>
-    public Vector3 ObjectScale = new Vector3(0.1f, 0.2f, 0.5f);<font></font>
-    #endregion<font></font>
+    #region Paremeters<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Scale of the Boids object to draw</font></font><font></font>
+    public Vector3 ObjectScale = new Vector3(0.1f, 0.2f, 0.5f);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
-    #region Script References<font></font>
-    // GPUBoidsスクリプトの参照<font></font>
-    public GPUBoids GPUBoidsScript;<font></font>
-    #endregion<font></font>
+    #region Script References<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Reference GPUBoids script</font></font><font></font>
+    public GPUBoids GPUBoidsScript;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
-    #region Built-in Resources<font></font>
-    // 描画するメッシュの参照<font></font>
-    public Mesh InstanceMesh;<font></font>
-    // 描画のためのマテリアルの参照<font></font>
-    public Material InstanceRenderMaterial;<font></font>
-    #endregion<font></font>
+    #region Built-in Resources<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Reference to the mesh to draw</font></font><font></font>
+    public Mesh InstanceMesh;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Reference material for drawing</font></font><font></font>
+    public Material InstanceRenderMaterial;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
-    #region Private Variables<font></font>
-    // GPUインスタンシングのための引数（ComputeBufferへの転送用）<font></font>
-    // インスタンスあたりのインデックス数, インスタンス数,<font></font>
-    // 開始インデックス位置, ベース頂点位置, インスタンスの開始位置<font></font>
-    uint[] args = new uint[5] { 0, 0, 0, 0, 0 };<font></font>
-    // GPUインスタンシングのための引数バッファ<font></font>
-    ComputeBuffer argsBuffer;<font></font>
-    #endregion<font></font>
+    #region Private Variables<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Arguments for GPU instancing (for transfer to ComputeBuffer)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Number of indexes per instance, number of instances,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Start index position, base vertex position, instance start position</font></font><font></font>
+    uint[] args = new uint[5] { 0, 0, 0, 0, 0 };<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Argument buffer for GPU instancing</font></font><font></font>
+    ComputeBuffer argsBuffer;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
     #region MonoBehaviour Functions<font></font>
     void Start ()<font></font>
-    {<font></font>
-        // 引数バッファを初期化<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Initialize the argument buffer</font></font><font></font>
         argsBuffer = new ComputeBuffer(1, args.Length * sizeof(uint),<font></font>
             ComputeBufferType.IndirectArguments);<font></font>
     }<font></font>
 <font></font>
-    void Update ()<font></font>
-    {<font></font>
-        // メッシュをインスタンシング<font></font>
-        RenderInstancedMesh();<font></font>
-    }<font></font>
+    void Update ()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Instancing the mesh</font></font><font></font>
+        RenderInstancedMesh();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    void OnDisable()<font></font>
-    {<font></font>
-        // 引数バッファを解放<font></font>
+    void OnDisable()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Release the argument buffer</font></font><font></font>
         if (argsBuffer != null)<font></font>
             argsBuffer.Release();<font></font>
-        argsBuffer = null;<font></font>
-    }<font></font>
-    #endregion<font></font>
+        argsBuffer = null;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 <font></font>
     #region Private Functions<font></font>
-    void RenderInstancedMesh()<font></font>
-    {<font></font>
-        // 描画用マテリアルがNull, または, GPUBoidsスクリプトがNull,<font></font>
-        // またはGPUインスタンシングがサポートされていなければ, 処理をしない<font></font>
+    void RenderInstancedMesh()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // The drawing material is Null, or the GPUBoids script is Null,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Or if GPU instancing is not supported, do not process</font></font><font></font>
         if (InstanceRenderMaterial == null || GPUBoidsScript == null ||<font></font>
             !SystemInfo.supportsInstancing)<font></font>
             return;<font></font>
-<font></font>
-        // 指定したメッシュのインデックス数を取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Get the number of indexes of the specified mesh</font></font><font></font>
         uint numIndices = (InstanceMesh != null) ?<font></font>
-            (uint)InstanceMesh.GetIndexCount(0) : 0;<font></font>
-        // メッシュのインデックス数をセット<font></font>
-        args[0] = numIndices;<font></font>
-        // インスタンス数をセット<font></font>
-        args[1] = (uint)GPUBoidsScript.GetMaxObjectNum();<font></font>
-        argsBuffer.SetData(args); // バッファにセット<font></font>
-<font></font>
-        // Boidデータを格納したバッファをマテリアルにセット<font></font>
+            (uint)InstanceMesh.GetIndexCount(0) : 0;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Set the number of indexes of the mesh</font></font><font></font>
+        args[0] = numIndices;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Set the number of instances</font></font><font></font>
+        args[1] = (uint)GPUBoidsScript.GetMaxObjectNum();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        argsBuffer.SetData (args); // Set in buffer</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Set the buffer containing Boid data to the material</font></font><font></font>
         InstanceRenderMaterial.SetBuffer("_BoidDataBuffer",<font></font>
-            GPUBoidsScript.GetBoidDataBuffer());<font></font>
-        // Boidオブジェクトスケールをセット<font></font>
-        InstanceRenderMaterial.SetVector("_ObjectScale", ObjectScale);<font></font>
-        // 境界領域を定義<font></font>
+            GPUBoidsScript.GetBoidDataBuffer());<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Set the Boid object scale</font></font><font></font>
+        InstanceRenderMaterial.SetVector("_ObjectScale", ObjectScale);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // define the boundary area</font></font><font></font>
         var bounds = new Bounds<font></font>
         (<font></font>
             GPUBoidsScript.GetSimulationAreaCenter(), // 中心<font></font>
             GPUBoidsScript.GetSimulationAreaSize()    // サイズ<font></font>
-        );<font></font>
-        // メッシュをGPUインスタンシングして描画<font></font>
+        );<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // GPU instantiate and draw mesh</font></font><font></font>
         Graphics.DrawMeshInstancedIndirect<font></font>
-        (<font></font>
-            InstanceMesh,           // インスタンシングするメッシュ<font></font>
-            0,                      // submeshのインデックス<font></font>
-            InstanceRenderMaterial, // 描画を行うマテリアル<font></font>
-            bounds,                 // 境界領域<font></font>
-            argsBuffer              // GPUインスタンシングのための引数のバッファ<font></font>
-        );<font></font>
-    }<font></font>
-    #endregion<font></font>
+        (<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            InstanceMesh, // Instancing mesh</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            0, // submesh index</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            InstanceRenderMaterial, // Material to draw</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            bounds, // realm domain</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            argsBuffer // Argument buffer for GPU instancing</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        );</font></font></font></font><font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font></font></font><font></font>
 }<font></font>
 <font></font>
 </pre>
 </div>
 
-<h4><a id="h3-4-3-1"></a>GPUインスタンシング</h4>
-<p>大量の同一のMeshを描画したい時、一つ一つGameObjectを生成するのでは、ドローコールが上がり描画負荷が増大していきます。また、ComputeShaderでの計算結果をCPUメモリに転送するコストが高く、高速に処理を行いたい場合、GPUでの計算結果をそのまま描画用シェーダに渡し描画処理をさせることが必要です。UnityのGPUインスタンシングを使えば、不要なGameObjectの生成を行うことなく、大量の同一のMeshを少ないドローコールで高速に描画することができます。</p>
+<h4><a id="h3-4-3-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPU instancing</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When you want to draw a large number of the same mesh, if you create GameObjects one by one, the draw call will increase and the drawing load will increase. </font><font style="vertical-align: inherit;">In addition, the cost of transferring the calculation result of ComputeShader to the CPU memory is high, and if you want to perform processing at high speed, it is necessary to pass the calculation result of GPU as it is to the drawing shader and perform drawing processing. </font><font style="vertical-align: inherit;">With Unity's GPU instancing, you can draw a large number of identical meshes at high speed with few draw calls without creating unnecessary GameObjects.</font></font></p>
 
-<h6><a id="h3-4-3-1-0-1"></a>Graphics.DrawMeshInstancedIndirect()メソッド</h6>
-<p>このスクリプトでは、Graphics.DrawMeshInstancedIndirectメソッドを用いてGPUインスタンシングによるメッシュ描画を行います。このメソッドでは、メッシュのインデックス数やインスタンス数をComputeBufferとして渡すことができます。GPUからすべてのインスタンスデータを読み込みたい場合に便利です。</p>
-<p>Start()では、このGPUインスタンシングのための引数バッファを初期化しています。初期化時のコンストラクタの3つ目の引数には<b>ComputeBufferType.IndirectArguments</b>を指定します.</p>
-<p>RenderInstancedMesh()では、GPUインスタンシングによるメッシュ描画を実行しています。描画のためのマテリアルInstanceRenderMaterialに、SetBufferメソッドで、Boidsシミュレーションによって得られたBoidのデータ（速度、位置の配列）を渡しています。</p>
-<p>Graphics.DrawMeshInstancedIndrectメソッドには、インスタンシングするメッシュ、submeshのインデックス、描画用マテリアル、境界データ、また、インスタンス数などのデータを格納したバッファを引数に渡します。</p>
-<p>このメソッドは通常Update()内で呼ばれるようにします。</p>
+<h6><a id="h3-4-3-1-0-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Graphics.DrawMeshInstancedIndirect () method</font></font></h6>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This script uses the Graphics.DrawMeshInstancedIndirect method to draw a mesh with GPU instancing. </font><font style="vertical-align: inherit;">This method allows you to pass the number of mesh indexes and instances as a ComputeBuffer. </font><font style="vertical-align: inherit;">This is useful if you want to read all instance data from the GPU.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Start () initializes the argument buffer for this GPU instancing. </font><font style="vertical-align: inherit;">Specify </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ComputeBufferType.IndirectArguments</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> as the </font><font style="vertical-align: inherit;">third argument of the constructor at initialization </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">RenderInstancedMesh () is performing mesh drawing with GPU instancing. </font><font style="vertical-align: inherit;">The Boid data (velocity, position array) obtained by the Boids simulation is passed to the material InstanceRenderMaterial for drawing with the SetBuffer method.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Graphics.DrawMeshInstancedIndrect method is passed as an argument a buffer that stores data such as the mesh to be instantiated, the index of the submesh, the drawing material, the boundary data, and the number of instances.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This method should normally be called within Update ().</font></font></p>
 
 <h3><a id="h3-4-4"></a><span class="secno">3.4.4　</span>BoidsRender.shader</h3>
-<p>Graphics.DrawMeshInstancedIndrectメソッドに対応した描画用のシェーダです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A shader for drawing that supports the Graphics.DrawMeshInstancedIndrect method.</font></font></p>
 <div class="emlist-code">
 <p class="caption">BoidsRender.shader</p>
 <pre class="emlist language-hlsl">Shader "Hidden/GPUBoids/BoidsRender"<font></font>
@@ -719,8 +712,8 @@ public class BoidsRender : MonoBehaviour<font></font>
     }<font></font>
     SubShader<font></font>
     {<font></font>
-        Tags { "RenderType"="Opaque" }<font></font>
-        LOD 200<font></font>
+        Tags { "RenderType"="Opaque" }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        LOD 200</font></font></font></font><font></font>
 <font></font>
         CGPROGRAM<font></font>
         #pragma surface surf Standard vertex:vert addshadow<font></font>
@@ -729,28 +722,28 @@ public class BoidsRender : MonoBehaviour<font></font>
         struct Input<font></font>
         {<font></font>
             float2 uv_MainTex;<font></font>
-        };<font></font>
-        // Boidの構造体<font></font>
-        struct BoidData<font></font>
-        {<font></font>
-            float3 velocity; // 速度<font></font>
-            float3 position; // 位置<font></font>
-        };<font></font>
+        };<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Boid structure</font></font><font></font>
+        struct BoidData<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            float3 velocity; // velocity</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            float3 position; // position</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        };</font></font></font></font><font></font>
 <font></font>
-        #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED<font></font>
-        // Boidデータの構造体バッファ<font></font>
+        #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Boid data structure buffer</font></font><font></font>
         StructuredBuffer&lt;BoidData&gt; _BoidDataBuffer;<font></font>
         #endif<font></font>
-<font></font>
-        sampler2D _MainTex; // テクスチャ<font></font>
-<font></font>
-        half   _Glossiness; // 光沢<font></font>
-        half   _Metallic;   // 金属特性<font></font>
-        fixed4 _Color;      // カラー<font></font>
-<font></font>
-        float3 _ObjectScale; // Boidオブジェクトのスケール<font></font>
-<font></font>
-        // オイラー角（ラジアン）を回転行列に変換<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        sampler2D _MainTex; // Texture</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        half _Glossiness; // Gloss</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        half _Metallic; // Metal characteristics</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        fixed4 _Color; // Color</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        float3 _ObjectScale; // Boid object scale</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Convert Euler angles (radians) to rotation matrix</font></font><font></font>
         float4x4 eulerAnglesToRotationMatrix(float3 angles)<font></font>
         {<font></font>
             float ch = cos(angles.y); float sh = sin(angles.y); // heading<font></font>
@@ -758,63 +751,63 @@ public class BoidsRender : MonoBehaviour<font></font>
             float cb = cos(angles.x); float sb = sin(angles.x); // bank<font></font>
 <font></font>
             // RyRxRz (Heading Bank Attitude)<font></font>
-            return float4x4(<font></font>
-                ch * ca + sh * sb * sa, -ch * sa + sh * sb * ca, sh * cb, 0,<font></font>
-                cb * sa, cb * ca, -sb, 0,<font></font>
-                -sh * ca + ch * sb * sa, sh * sa + ch * sb * ca, ch * cb, 0,<font></font>
+            return float4x4(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                ch * ca + sh * sb * sa, -ch * sa + sh * sb * ca, sh * cb, 0,</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                cb * sa, cb * ca, -sb, 0,</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                -sh * ca + ch * sb * sa, sh * sa + ch * sb * ca, ch * cb, 0,</font></font></font></font><font></font>
                 0, 0, 0, 1<font></font>
             );<font></font>
         }<font></font>
-<font></font>
-        // 頂点シェーダ<font></font>
-        void vert(inout appdata_full v)<font></font>
-        {<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Vertex shader</font></font><font></font>
+        void vert(inout appdata_full v)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
             #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED<font></font>
-<font></font>
-            // インスタンスIDからBoidのデータを取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Get Boid data from instance ID</font></font><font></font>
             BoidData boidData = _BoidDataBuffer[unity_InstanceID];<font></font>
-<font></font>
-            float3 pos = boidData.position.xyz; // Boidの位置を取得<font></font>
-            float3 scl = _ObjectScale;          // Boidのスケールを取得<font></font>
-<font></font>
-            // オブジェクト座標からワールド座標に変換する行列を定義<font></font>
-            float4x4 object2world = (float4x4)0;<font></font>
-            // スケール値を代入<font></font>
-            object2world._11_22_33_44 = float4(scl.xyz, 1.0);<font></font>
-            // 速度からY軸についての回転を算出<font></font>
-            float rotY =<font></font>
-                atan2(boidData.velocity.x, boidData.velocity.z);<font></font>
-            // 速度からX軸についての回転を算出<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            float3 pos = boidData.position.xyz; // Get the position of Boid</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            float3 scl = _ObjectScale; // Get the Boid scale</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Define a matrix to convert from object coordinates to world coordinates</font></font><font></font>
+            float4x4 object2world = (float4x4)0;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Substitute scale value</font></font><font></font>
+            object2world._11_22_33_44 = float4(scl.xyz, 1.0);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Calculate the rotation about the Y axis from the velocity</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            float rotY =</font></font></font></font><font></font>
+                atan2(boidData.velocity.x, boidData.velocity.z);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Calculate the rotation about the X axis from the velocity</font></font><font></font>
             float rotX =<font></font>
-                -asin(boidData.velocity.y / (length(boidData.velocity.xyz)<font></font>
-                + 1e-8)); // 0除算防止<font></font>
-            // オイラー角（ラジアン）から回転行列を求める<font></font>
-            float4x4 rotMatrix =<font></font>
-                eulerAnglesToRotationMatrix(float3(rotX, rotY, 0));<font></font>
-            // 行列に回転を適用<font></font>
-            object2world = mul(rotMatrix, object2world);<font></font>
-            // 行列に位置（平行移動）を適用<font></font>
-            object2world._14_24_34 += pos.xyz;<font></font>
-<font></font>
-            // 頂点を座標変換<font></font>
-            v.vertex = mul(object2world, v.vertex);<font></font>
-            // 法線を座標変換<font></font>
+                -asin(boidData.velocity.y / (length(boidData.velocity.xyz)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                + 1e-8)); // 0 division prevention</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Find the rotation matrix from Euler angles (radians)</font></font><font></font>
+            float4x4 rotMatrix =<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                eulerAnglesToRotationMatrix (float3 (rotX, rotY, 0));</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Apply rotation to matrix</font></font><font></font>
+            object2world = mul(rotMatrix, object2world);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Apply position (translation) to matrix</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            object2world._14_24_34 + = pos.xyz;</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Coordinate transformation of vertices</font></font><font></font>
+            v.vertex = mul(object2world, v.vertex);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Convert normals to coordinates</font></font><font></font>
             v.normal = normalize(mul(object2world, v.normal));<font></font>
             #endif<font></font>
         }<font></font>
 <font></font>
         void setup()<font></font>
-        {<font></font>
-        }<font></font>
-<font></font>
-        // サーフェスシェーダ<font></font>
-        void surf (Input IN, inout SurfaceOutputStandard o)<font></font>
-        {<font></font>
+        {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Surface shader</font></font><font></font>
+        void surf (Input IN, inout SurfaceOutputStandard o)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;<font></font>
             o.Albedo = c.rgb;<font></font>
             o.Metallic = _Metallic;<font></font>
-            o.Smoothness = _Glossiness;<font></font>
-        }<font></font>
+            o.Smoothness = _Glossiness;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font>
         ENDCG<font></font>
     }<font></font>
     FallBack "Diffuse"<font></font>
@@ -822,41 +815,41 @@ public class BoidsRender : MonoBehaviour<font></font>
 <font></font>
 </pre>
 </div>
-<p>#pragma surface surf Standard vertex:vert addshadowこの部分では、サーフェスシェーダとしてsurf()、ライティングモデルはStandard、カスタム頂点シェーダとしてvert()を指定するという処理を行っています。</p>
-<p>#pragma instancing_options ディレクティブで procedural:FunctionName と記述することによって、Graphics.DrawMeshInstancedIndirectメソッドを使うときのための追加のバリアントを生成するようにUnityに指示することができ、頂点シェーダステージの始めに、FunctionNameで指定した関数が呼ばれるようになります。公式のサンプル（https://docs.unity3d.com/ScriptReference/Graphics.DrawMeshInstancedIndirect.html）などを見ると、この関数内で、個々のインスタンスの位置や回転、スケールに基づき、unity_ObjectToWorld行列, unity_WorldToObject行列の書き換えを行っていますが、このサンプルプログラムでは、頂点シェーダ内でBoidsのデータを受け取り、頂点や法線の座標変換を行っています（良いのかわかりませんが…）。そのため、指定したsetup関数内では何も記述していません。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#pragma surface surf Standard vertex: vert addshadow In this part, surf () is specified as the surface shader, Standard is specified as the lighting model, and vert () is specified as the custom vertex shader.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can tell Unity to generate an additional variant for when using the Graphics.DrawMeshInstancedIndirect method by writing procedural: FunctionName in the #pragma instancing_options directive, specified by FunctionName at the beginning of the vertex shader stage. The function will be called. </font><font style="vertical-align: inherit;">If you look at the official sample (https://docs.unity3d.com/ScriptReference/Graphics.DrawMeshInstancedIndirect.html) etc., in this function, based on the position, rotation and scale of each instance, of the unity_ObjectToWorld matrix, unity_WorldToObject matrix I am rewriting, but in this sample program, I receive Boids data in the vertex shader and perform coordinate conversion of vertices and normals (I do not know if it is good ...). </font><font style="vertical-align: inherit;">Therefore, nothing is described in the specified setup function.</font></font></p>
 
-<h4><a id="h3-4-4-1"></a>頂点シェーダでインスタンスごとのBoidのデータを取得し座標変換をする</h4>
-<p>頂点シェーダ（Vertex Shader）に、シェーダに渡されたメッシュの頂点に対して行う処理を記述します。</p>
-<p>unity_InstanceIDによってインスタンスごとに固有のIDを取得することができます。このIDをBoidデータのバッファとして宣言したStructuredBufferの配列のインデックスに指定することによって、インスタンスごとに固有のBoidデータを得ることができます。</p>
+<h4><a id="h3-4-4-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Get Boid data for each instance with vertex shader and perform coordinate conversion</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Describe the processing to be performed on the vertices of the mesh passed to the shader in the vertex shader (Vertex Shader).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can get a unique ID for each instance by unity_InstanceID. </font><font style="vertical-align: inherit;">By specifying this ID in the index of the array of StructuredBuffer declared as a buffer of Boid data, you can get Boid data unique to each instance.</font></font></p>
 
-<h4><a id="h3-4-4-2"></a>回転を求める</h4>
-<p>Boidの速度データから、進行方向を向くような回転の値を算出します。ここでは直感的に扱うために、回転はオイラー角で表現することにします。Boidを飛行体と捉えると、オブジェクトを基準とした座標の3軸の回転は、それぞれ、ピッチ、ヨー、ロールと呼ばれます。</p>
+<h4><a id="h3-4-4-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ask for rotation</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From the Boid's velocity data, calculate the value of rotation that points in the direction of travel. </font><font style="vertical-align: inherit;">For the sake of intuitive handling, we will use Euler angles for rotation. </font><font style="vertical-align: inherit;">If you think of a Boid as a flying object, the three-axis rotations of the coordinates relative to the object are called pitch, yaw, and roll, respectively.</font></font></p>
 <div id="roll-pitch-yaw" class="image">
 <img src="./Chapter 3 _ GPU implementation of the simulation of the group_files/roll-pitch-yaw.png" alt="Axle and rotation designation">
-<p class="caption">
-図3.4: 軸と回転の呼称
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.4: Axis and Rotation Names
+</font></font></p>
 </div>
-<p>まず、Z軸についての速度とX軸についての速度から、逆正接（アークタンジェント）を返すatan2メソッドを用いてヨー（水平面に対してどの方向を向いているか）を求めます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, from the velocity about the Z axis and the velocity about the X axis, find the yaw (which direction is facing the horizontal plane) using the atan2 method that returns the arctangent.</font></font></p>
 <div id="arctan" class="image">
 <img src="./Chapter 3 _ GPU implementation of the simulation of the group_files/arctan.png" alt="Relationship between speed and angle (yaw)">
-<p class="caption">
-図3.5: 速度と角度（ヨー）の関係
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.5: Relationship between speed and angle (yaw)
+</font></font></p>
 </div>
-<p>次に、速度の大きさと、Y軸についての速度の比率から、逆正弦（アークサイン）を返すasinメソッドを用いてピッチ（上下の傾き）を求めています。それぞれの軸についての速度の中でY軸の速度が小さい場合は、変化が少なく水平を保つように重みのついた回転量になるようになっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, from the magnitude of the velocity and the ratio of the velocity with respect to the Y axis, the pitch (slope up and down) is calculated using the asin method that returns an inverse sine (arc sine). </font><font style="vertical-align: inherit;">If the speed of the Y axis is small among the speeds of each axis, the amount of rotation is weighted so that there is little change and the speed remains horizontal.</font></font></p>
 <div id="arcsin" class="image">
 <img src="./Chapter 3 _ GPU implementation of the simulation of the group_files/arcsin.png" alt="Relationship between speed and angle (pitch)">
-<p class="caption">
-図3.6: 速度と角度（ピッチ）の関係
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.6: Relationship between velocity and angle (pitch)
+</font></font></p>
 </div>
 
-<h4><a id="h3-4-4-3"></a>Boidのトランスフォームを適用する行列を計算</h4>
-<p>移動、回転、拡大縮小といった座標変換処理は、まとめて一つの行列で表現することができます。4x4の行列object2worldを定義します。</p>
+<h4><a id="h3-4-4-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Calculate the matrix to apply the Boids transform</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Coordinate transformation processes such as movement, rotation, and scaling can be collectively represented by a single matrix. </font><font style="vertical-align: inherit;">Defines a 4x4 matrix object2world.</font></font></p>
 
-<h5><a id="h3-4-4-3-1"></a>拡大縮小</h5>
-<p>まず、スケール値を代入します。XYZ軸それぞれに <span class="equation">\rm S_x S_y S_z {}</span> だけ拡大縮小を行う行列Sは以下のように表現されます。</p>
+<h5><a id="h3-4-4-3-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Scale</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, substitute the scale value. </font><font style="vertical-align: inherit;">The </font><font style="vertical-align: inherit;">matrix S that </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">scales</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> by </font><span class="equation"><font style="vertical-align: inherit;">\ rm S_x S_y S_z {} on</font></span><font style="vertical-align: inherit;"> each of the XYZ axes </font><font style="vertical-align: inherit;">is expressed as follows.</font></font></p>
 <div class="equation">
 <pre>\rm<font></font>
 S=<font></font>
@@ -870,9 +863,9 @@ S=<font></font>
 \right)<font></font>
 </pre>
 </div>
-<p>HLSLのfloat4x4型の変数は、._11_22_33_44のようなスィズルを用いて行列の特定の要素を指定できます。デフォルトであれば、成分は以下のように整列してます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Variables of type float4x4 in HLSL can specify specific elements of the matrix using a swizzle such as ._11_22_33_44. </font><font style="vertical-align: inherit;">By default, the components are arranged as follows:</font></font></p>
 <div id="tbl2" class="table">
-<p class="caption">表3.1: </p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Form 3.1: </font></font></p>
 <table>
 <tbody><tr><th>11</th><th>12</th><th>13</th><th>14</th></tr>
 <tr><td>21</td><td>22</td><td>23</td><td>24</td></tr>
@@ -880,10 +873,10 @@ S=<font></font>
 <tr><td>41</td><td>42</td><td>43</td><td>44</td></tr>
 </tbody></table>
 </div>
-<p>ここでは、11、22、33、にXYZそれぞれのスケールの値、44には1を代入します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, substitute the XYZ scale values ​​for 11, 22, 33, and 1 for 44.</font></font></p>
 
-<h5><a id="h3-4-4-3-2"></a>回転</h5>
-<p>次に、回転を適用します。XYZ軸それぞれについての回転 <span class="equation">\rm R_x R_y R_z {}</span> を行列で表現すると、</p>
+<h5><a id="h3-4-4-3-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">rotation</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then apply the rotation. </font><font style="vertical-align: inherit;">If the rotation </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ rm R_x R_y R_z {}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> for </font><font style="vertical-align: inherit;">each of the XYZ axes </font><font style="vertical-align: inherit;">is represented by a matrix,</font></font></p>
 <div class="equation">
 <pre>\rm<font></font>
 R_x(\phi)=<font></font>
@@ -898,44 +891,44 @@ R_x(\phi)=<font></font>
 </pre>
 </div>
 <div class="equation">
-<pre>\rm<font></font>
-R_y(\theta)=<font></font>
-\left(<font></font>
-\begin{array}{cccc}<font></font>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\rm</font></font></font></font><font></font>
+R_y(\theta)=<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\left(</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\begin{array}{cccc}</font></font></font></font><font></font>
 \rm cos(\theta) &amp; 0 &amp; \rm sin(\theta) &amp; 0 \\<font></font>
 0 &amp; 1 &amp; 0 &amp; 0 \\<font></font>
-\rm -sin(\theta) &amp; 0 &amp; \rm cos(\theta) &amp; 0 \\<font></font>
-0 &amp; 0 &amp; 0 &amp; 1<font></font>
-\end{array}<font></font>
-\right)<font></font>
+\rm -sin(\theta) &amp; 0 &amp; \rm cos(\theta) &amp; 0 \\<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+0 &amp; 0 &amp; 0 &amp; 1</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\end{array}</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\right)</font></font></font></font><font></font>
 </pre>
 </div>
 <div class="equation">
-<pre>\rm<font></font>
-R_z(\psi)=<font></font>
-\left(<font></font>
-\begin{array}{cccc}<font></font>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\rm</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+R_z (\ psi) =</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\left(</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\begin{array}{cccc}</font></font></font></font><font></font>
 \rm cos(\psi) &amp; \rm -sin(\psi) &amp; 0 &amp; 0 \\<font></font>
 \rm sin(\psi) &amp; \rm cos(\psi) &amp; 0 &amp; 0 \\<font></font>
-0 &amp; 0 &amp; 1 &amp; 0 \\<font></font>
-0 &amp; 0 &amp; 0 &amp; 1<font></font>
-\end{array}<font></font>
-\right)<font></font>
+0 &amp; 0 &amp; 1 &amp; 0 \\<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+0 &amp; 0 &amp; 0 &amp; 1</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\end{array}</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\right)</font></font></font></font><font></font>
 </pre>
 </div>
-<p>これを一つに行列に合成します。このとき、合成する回転の軸の順によって回転時の挙動が変化しますが、この順に合成すると、Unityの標準の回転と同様のものになるはずです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Combine this into a matrix. </font><font style="vertical-align: inherit;">At this time, the behavior at the time of rotation changes depending on the order of the axes of rotation to be combined, but if you combine in this order, it should be similar to the standard rotation of Unity.</font></font></p>
 <div id="synth-euler2matrix" class="image">
 <img src="./Chapter 3 _ GPU implementation of the simulation of the group_files/synth-euler2matrix.png" alt="Synthesis of rotation matrix">
-<p class="caption">
-図3.7: 回転行列の合成
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.7: Synthesis of rotation matrix
+</font></font></p>
 </div>
-<p>これによって求められた回転行列と、上のスケールを適用した行列との積を求めることによって、回転を適用します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The rotation is applied by finding the product of the rotation matrix thus obtained and the matrix to which the above scale is applied.</font></font></p>
 
-<h5><a id="h3-4-4-3-3"></a>平行移動</h5>
-<p>次に、平行移動を適用します。それぞれの軸に、 <span class="equation">\rm T_x T_y T_z {}</span> 平行移動するとすると、行列は以下のように表現されます。</p>
+<h5><a id="h3-4-4-3-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Translation</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then apply translation. </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Assuming</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> that </font><span class="equation"><font style="vertical-align: inherit;">\ rm T_x T_y T_z {}</font></span><font style="vertical-align: inherit;"> translates </font><font style="vertical-align: inherit;">to each axis </font><font style="vertical-align: inherit;">, the matrix is ​​expressed as follows.</font></font></p>
 <div class="equation">
-<pre>\rm T=<font></font>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ rm T =</font></font></font></font><font></font>
 \left(<font></font>
 \begin{array}{cccc}<font></font>
 1 &amp; 0 &amp; 0 &amp; \rm T_x \\<font></font>
@@ -946,24 +939,24 @@ R_z(\psi)=<font></font>
 \right)<font></font>
 </pre>
 </div>
-<p>この平行移動は、14, 24, 34成分にXYZそれぞれの軸についての位置（Position）データを加算することで適用できます。</p>
-<p>これらの計算によって得られた行列を、頂点、法線に適用させることによって、Boidのトランスフォームデータを反映します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This translation can be applied by adding the Position data for each of the XYZ axes to the 14, 24, and 34 components.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By applying the matrix obtained by these calculations to the vertices and normals, the Boid transform data is reflected.</font></font></p>
 
-<h3><a id="h3-4-5"></a><span class="secno">3.4.5　</span>描画結果</h3>
-<p>このように群れっぽい動きをするオブジェクトが描画されると思います。</p>
+<h3><a id="h3-4-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.4.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Drawing result</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I think that objects that move like a group like this are drawn.</font></font></p>
 <div id="result" class="image">
 <img src="./Chapter 3 _ GPU implementation of the simulation of the group_files/result.png" alt="Execution result">
-<p class="caption">
-図3.8: 実行結果
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.8: Execution result
+</font></font></p>
 </div>
 
-<h2><a id="h3-5"></a><span class="secno">3.5　</span>まとめ</h2>
-<p>この章で紹介した実装は、最低限のBoidsのアルゴリズムを利用したものですが、パラメータの調整によっても、群は大きなまとまりになったり、幾つもの小群体が作られたりと、異なる特徴を持った動きを見せると思います。ここで示した基本的な行動規則の他にも、考慮すべきルールが存在します。例えば、これが魚の群だとして、それらを捕食する外敵が現れたとすると当然逃げるような動きをし、地形など障害物があるとすれば魚はぶつからないように避けるでしょう。視覚について考えると、動物の種によっては視野や精度も異なり、視界の外の他の個体は計算処理から除外するなどすると、より実際のものに近づいていくと思います。空を飛ぶのか、水の中を動くのか、陸上を移動するのかといった環境や、移動運動のための運動器官の特性によっても動きの特徴が変わってきます。個体差にも着眼すべきです。</p>
-<p>GPUによる並列処理は、CPUによる演算に比べれば多くの個体を計算できますが、基本的には他の個体との計算は総当たりで行っており、計算効率はあまり良いとは言えません。それには、個体をその位置によってグリッドやブロックで分割した領域に登録しておき、隣接した領域に存在する個体についてだけ計算処理を行うというように、近傍個体探索の効率化を図ることで計算コストを抑えることができます。</p>
-<p>このように改良の余地は多く残されており、適切な実装と行動のルールを適用することにより、いっそう美しく、迫力、密度と味わいのある群の動きが表現できるようになることと思います。できるようになりたいです。</p>
+<h2><a id="h3-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The implementation introduced in this chapter uses the minimum Boids algorithm, but it has different characteristics such as a large group or a number of small colonies even by adjusting the parameters. I think it will move. </font><font style="vertical-align: inherit;">In addition to the basic rules of conduct shown here, there are other rules to consider. </font><font style="vertical-align: inherit;">For example, if this is a school of fish and foreign enemies that prey on them appear, they will naturally move away, and if there are obstacles such as terrain, the fish will avoid hitting them. </font><font style="vertical-align: inherit;">When thinking about vision, the field of view and accuracy differ depending on the species of animal, and I think that if you exclude other individuals outside the field of view from the calculation process, it will be closer to the actual one. </font><font style="vertical-align: inherit;">The characteristics of movement also change depending on the environment such as whether it flies in the sky, moves in water, or moves on land, and the characteristics of the motor organs for locomotion. </font><font style="vertical-align: inherit;">You should also pay attention to individual differences.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Parallel processing by GPU can calculate more individuals than calculation by CPU, but basically the calculation with other individuals is done by brute force, and the calculation efficiency is not very good. </font><font style="vertical-align: inherit;">To do this, the calculation cost is improved by improving the efficiency of searching for nearby individuals, such as registering individuals in an area divided by a grid or block according to their position and performing calculation processing only for individuals existing in adjacent areas. Can be suppressed.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There is still plenty of room for improvement, and by applying appropriate implementation and behavioral rules, we will be able to express even more beautiful, powerful, dense and tasty group movements. </font><font style="vertical-align: inherit;">I want to be able to do it.</font></font></p>
 
-<h2><a id="h3-6"></a><span class="secno">3.6　</span>参照</h2>
+<h2><a id="h3-6"></a><span class="secno"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See </font><span class="secno"><font style="vertical-align: inherit;">3.6　</font></span></font></h2>
 <ul>
 <li>Boids Background and Update - https://www.red3d.com/cwr/boids/</li>
 <li>THE NATURE OF CODE - http://natureofcode.com/</li>
@@ -973,4 +966,4 @@ R_z(\psi)=<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 3 _ GPU implementation of the simulation of the group_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 3 _ GPU implementation of the simulation of the group_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 3 _ GPU implementation of the simulation of the group_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 3 _ GPU implementation of the simulation of the group_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 3 _ GPU implementation of the simulation of the group_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

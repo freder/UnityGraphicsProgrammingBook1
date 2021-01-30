@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0088)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/SimpleComputeShader.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 2 _ Getting Started with ComputeShader_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 2 _ Getting Started with ComputeShader_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 2 _ Getting Started with ComputeShader_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ Getting Started with ComputeShader_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ Getting Started with ComputeShader_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 2 _ Getting Started with ComputeShader_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 2 _ Getting Started with ComputeShader_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ Getting Started with ComputeShader_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ Getting Started with ComputeShader_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 2 _ Getting Started with ComputeShader_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Getting Started with ComputeShader</font></font></h1>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here's a simple explanation of how to use ComputeShader (hereafter "Compute Shader" if needed) in Unity. </font><font style="vertical-align: inherit;">Compute shaders are used to parallelize simple operations using the GPU and perform large numbers of operations at high speed. </font><font style="vertical-align: inherit;">It also delegates processing to the GPU, but it is different from the normal rendering pipeline. </font><font style="vertical-align: inherit;">In CG, it is often used to express the movement of a large number of particles.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Some of the content that follows from this chapter uses compute shaders, and knowledge of compute shaders is required to read them.</font></font></p>
@@ -75,25 +68,25 @@ Figure 2.1: Kernel, thread, group image
 <p><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A thread</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is a unit that runs the kernel. </font><font style="vertical-align: inherit;">One thread runs one kernel. </font><font style="vertical-align: inherit;">Compute shaders allow the kernel to run in parallel on multiple threads at the same time. </font><font style="vertical-align: inherit;">Threads are specified in three dimensions (x, y, z).</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, (4, 1, 1) will execute 4 * 1 * 1 = 4 threads at the same time. </font><font style="vertical-align: inherit;">If (2, 2, 1), 2 * 2 * 1 = 4 threads will be executed at the same time. </font><font style="vertical-align: inherit;">The same four threads run, but in some situations it may be more efficient to specify the threads in two dimensions, such as the latter. </font><font style="vertical-align: inherit;">This will be explained later. </font><font style="vertical-align: inherit;">For the time being, it is necessary to recognize that the number of threads is specified in three dimensions.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, a </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">group</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is a unit that executes a thread. </font><font style="vertical-align: inherit;">Also, the threads that a </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">group</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> runs are </font><font style="vertical-align: inherit;">called </font><b><font style="vertical-align: inherit;">group threads</font></b><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">For example, suppose a group has (4, 1, 1) threads per unit. </font><font style="vertical-align: inherit;">When there are two of these groups, each group has (4, 1, 1) threads.</font></font></p>
-<p>グループもスレッドと同様に 3 次元で指定されます。例えば、(2, 1, 1) グループが、(4, 4, 1) スレッドで実行されるカーネルを実行するとき、グループ数は 2 * 1 * 1 = 2 です。この 2 つのグループは、それぞれ 4 * 4 * 1 = 16 スレッドを持つことになります。したがって、合計スレッド数は、2 * 16 = 32 となります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Groups are specified in three dimensions, just like threads. </font><font style="vertical-align: inherit;">For example, when a (2, 1, 1) group runs a kernel running on (4, 4, 1) threads, the number of groups is 2 * 1 * 1 = 2. </font><font style="vertical-align: inherit;">Each of these two groups will have 4 * 4 * 1 = 16 threads. </font><font style="vertical-align: inherit;">Therefore, the total number of threads is 2 * 16 = 32.</font></font></p>
 
-<h2><a id="h2-2"></a><span class="secno">2.2　</span>サンプル (1) : GPU で演算した結果を取得する</h2>
-<p>サンプル (1) 「SampleScene_Array」では、適当な計算をコンピュートシェーダで実行し、その結果を配列として取得する方法について扱います。サンプルには次のような操作が含まれます。</p>
+<h2><a id="h2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sample (1): Get the result calculated by GPU</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sample (1) "SampleScene_Array" deals with how to execute an appropriate calculation with a compute shader and get the result as an array. </font><font style="vertical-align: inherit;">The sample includes the following operations:</font></font></p>
 <ul>
-<li>コンピュートシェーダを使って複数のデータを処理し、その結果を取得する。</li>
-<li>コンピュートシェーダに複数の機能を実装し、使い分ける。</li>
-<li>コンピュートシェーダ (GPU) にスクリプト (CPU) から値を渡す。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Use the compute shader to process multiple data and get the results.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Implement multiple functions in the compute shader and use them properly.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pass the value from the script (CPU) to the compute shader (GPU).</font></font></li>
 </ul>
-<p>サンプル (1) の実行結果は次の通りになります。デバッグ出力だけですから、ソースコードを読みながら動作を確認してください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The execution result of sample (1) is as follows. </font><font style="vertical-align: inherit;">Since it is only debug output, please check the operation while reading the source code.</font></font></p>
 <div id="primerofcomputeshader03" class="image">
 <img src="./Chapter 2 _ Getting Started with ComputeShader_files/primerofcomputeshader03.png" alt="Execution result of sample (1)" class="width-100per">
-<p class="caption">
-図2.2: サンプル (1) の実行結果
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.2: Execution result of sample (1)
+</font></font></p>
 </div>
 
-<h3><a id="h2-2-1"></a><span class="secno">2.2.1　</span>コンピュートシェーダの実装</h3>
-<p>ここからサンプルを実例に解説を進めます。非常に短いので、コンピュートシェーダの実装については先に一通り目を通して頂くのが良いと思います。基本構成として、関数の定義、関数の実装、バッファがあり、必要に応じて変数があります。</p>
+<h3><a id="h2-2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Compute shader implementation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From here, I will explain using a sample as an example. </font><font style="vertical-align: inherit;">It's very short, so it's a good idea to take a look at the compute shader implementation first. </font><font style="vertical-align: inherit;">The basic configuration is a function definition, a function implementation, a buffer, and variables as needed.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Array.compute</p>
 <pre class="emlist">#pragma kernel KernelFunction_A<font></font>
@@ -110,44 +103,44 @@ void KernelFunction_A(uint3 groupID : SV_GroupID,<font></font>
 }<font></font>
 <font></font>
 [numthreads(4, 1, 1)]<font></font>
-void KernelFunction_B(uint3 groupID : SV_GroupID,<font></font>
-                      uint3 groupThreadID : SV_GroupThreadID)<font></font>
-{<font></font>
-    intBuffer[groupThreadID.x] += 1;<font></font>
-}<font></font>
+void KernelFunction_B(uint3 groupID : SV_GroupID,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                      uint3 groupThreadID : SV_GroupThreadID)</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
+    intBuffer[groupThreadID.x] += 1;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>特徴として、<b>numthreads</b> 属性と、<b>SV_GroupID</b> セマンティクスなどがありますが、これについては後述します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Features include the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">numthreads</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> attribute and </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SV_GroupID</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> semantics, which will be discussed later.</font></font></p>
 
-<h3><a id="h2-2-2"></a><span class="secno">2.2.2　</span>カーネルの定義</h3>
-<p>先に解説した通り、正確な定義はさておき、<b>カーネルは GPU で実行される1つの処理を指し、コード上では 1 つの関数として扱われます。</b>カーネルは 1 つのコンピュートシェーダに複数実装することができます。</p>
-<p>この例では、カーネルは <code class="inline-code tt">KernelFunction_A</code> ないし <code class="inline-code tt">KernelFunction_B</code> 関数がカーネルに相当します。また、カーネルとして扱う関数は <code class="inline-code tt">#pragma kernel</code> を使って定義します。これによってカーネルとそれ以外の関数と識別します。</p>
-<p>定義された複数のカーネルのうち、任意の 1 つを識別するために、固有のインデックスがカーネルに与えられます。インデックスは <code class="inline-code tt">#pragma kernel</code> で定義された順に、上から 0, 1 … と与えられます。</p>
+<h3><a id="h2-2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Kernel definition</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As mentioned earlier, aside from the exact definition, the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">kernel refers to a single operation performed on the GPU and is treated as a single function in the code. </font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Multiple kernels can be implemented in one compute shader.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this example, </font></font><code class="inline-code tt">KernelFunction_A</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">there </font><font style="vertical-align: inherit;">is </font><font style="vertical-align: inherit;">no </font><font style="vertical-align: inherit;">kernel </font><font style="vertical-align: inherit;">and the </font></font><code class="inline-code tt">KernelFunction_B</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">function corresponds to the kernel. </font><font style="vertical-align: inherit;">Also, the function </font></font><code class="inline-code tt">#pragma kernel</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to be </font><font style="vertical-align: inherit;">treated as a kernel is </font><font style="vertical-align: inherit;">defined using. </font><font style="vertical-align: inherit;">This distinguishes it from the kernel and other functions.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A unique index is given to the kernel to identify any one of the multiple defined kernels. </font><font style="vertical-align: inherit;">The indexes are </font></font><code class="inline-code tt">#pragma kernel</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">given as 0, 1… from the top in the order defined by.</font></font></p>
 
-<h3><a id="h2-2-3"></a><span class="secno">2.2.3　</span>バッファや変数の用意</h3>
-<p>コンピュートシェーダで実行した結果を保存する<b>バッファ領域</b>を作っておきます。サンプルの変数 <code class="inline-code tt">RWStructuredBuffer&lt;int&gt; intBuffer</code>} がこれに相当します。</p>
-<p>またスクリプト (CPU) 側から任意の値を与えたい場合には、一般的な CPU プログラミングと同じように変数を用意します。この例では変数 <code class="inline-code tt">intValue</code> がこれに相当し、スクリプトから値を渡します。</p>
+<h3><a id="h2-2-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Preparation of buffers and variables</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Create a </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">buffer area</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> to </font><font style="vertical-align: inherit;">store the result of execution by the compute shader </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">The sample variable </font></font><code class="inline-code tt">RWStructuredBuffer&lt;int&gt; intBuffer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">} corresponds to this.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you want to give an arbitrary value from the script (CPU) side, prepare a variable in the same way as general CPU programming. </font><font style="vertical-align: inherit;">In this example, the variable </font></font><code class="inline-code tt">intValue</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">corresponds to this, and the value is passed from the script.</font></font></p>
 
-<h3><a id="h2-2-4"></a><span class="secno">2.2.4　</span>numthreads による実行スレッド数の指定</h3>
-<p><b>numthreads</b> 属性 (Attribute) は、カーネル (関数) を実行するスレッドの数を指定します。スレッド数の指定は、(x, y, z) で指定し、例えば (4, 1, 1) なら、 4 * 1 * 1 = 4 スレッドでカーネルを実行します。他に、(2, 2, 1) なら 2 * 2 * 1 = 4 スレッドでカーネルを実行します。共に 4 スレッドで実行されますが、この違いや使い分けについては後述します。</p>
+<h3><a id="h2-2-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Specifying the number of execution threads by numthreads</font></font></h3>
+<p><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The numthreads</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> attribute (Attribute) specifies the number of threads that execute the kernel (function). </font><font style="vertical-align: inherit;">The number of threads is specified by (x, y, z). For example, (4, 1, 1), 4 * 1 * 1 = 4 threads execute the kernel. </font><font style="vertical-align: inherit;">Besides, (2, 2, 1) runs the kernel in 2 * 2 * 1 = 4 threads. </font><font style="vertical-align: inherit;">Both are executed in 4 threads, but the difference and proper use will be described later.</font></font></p>
 
-<h3><a id="h2-2-5"></a><span class="secno">2.2.5　</span>カーネル (関数) の引数</h3>
-<p>カーネルに設定できる引数には制約があり、一般的な CPU プログラミングと比較して自由度は極めて低いです。</p>
-<p>引数に続く値を<code class="inline-code tt">セマンティクス</code>と呼び、この例では <code class="inline-code tt">groupID : SV_GroupID</code> と <code class="inline-code tt">groupThreadID : SV_GroupThreadID</code> を設定しています。セマンティクスは引数がどのような値であるかを示すための物であり、他の名前に変更することができません。</p>
-<p>引数名 (変数名) は自由に定義することができますが、コンピュートシェーダを使うにあたって定義されるセマンティクスのいずれかを設定する必要があります。つまり、任意の型の引数を定義してカーネル内で参照する、といった実装はできず、カーネルで参照することができる引数は、定められた限定的なものから選択する、ということです。</p>
-<p><code class="inline-code tt">SV_GroupID</code> は、カーネルを実行するスレッドが、どのグループで実行されているかを (x, y, z) で示します。<code class="inline-code tt">SV_GroupThreadID</code> は、カーネルを実行するスレッドが、グループ内の何番目のスレッドであるかを (x, y, z) で示します。</p>
-<p>例えば (4, 4, 1) のグループで、(2, 2, 1) のスレッドを実行するとき、<code class="inline-code tt">SV_GroupID</code> は (0 ~ 3, 0 ~ 3, 0) の値を返します。<code class="inline-code tt">SV_GroupThreadID</code> は (0 ~ 1, 0 ~ 1, 0) の値を返します。</p>
-<p>サンプルで設定されるセマンティクス以外にも <code class="inline-code tt">SV_~</code> から始まるセマンティクスがあり、利用することができますが、ここでは説明を割愛します。一通りコンピュートシェーダの動きが分かった後に目を通すほうが良いと思います。</p>
+<h3><a id="h2-2-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Kernel (function) arguments</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are restrictions on the arguments that can be set in the kernel, and the degree of freedom is extremely low compared to general CPU programming.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following the argument value </font></font><code class="inline-code tt">セマンティクス</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is referred to as, in this example </font></font><code class="inline-code tt">groupID : SV_GroupID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">city </font></font><code class="inline-code tt">groupThreadID : SV_GroupThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">sets the. </font><font style="vertical-align: inherit;">Semantics are meant to indicate what the value of the argument is and cannot be renamed to any other name.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The argument name (variable name) can be defined freely, but one of the semantics defined when using the compute shader must be set. </font><font style="vertical-align: inherit;">In other words, it is not possible to implement an argument of any type and refer to it in the kernel, and the arguments that can be referenced in the kernel are selected from the specified limited ones.</font></font></p>
+<p><code class="inline-code tt">SV_GroupID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Indicates in which group the thread running the kernel is running (x, y, z). </font></font><code class="inline-code tt">SV_GroupThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Indicates the number of threads in the group that runs the kernel with (x, y, z).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, in a group of (4, 4, 1), when running a thread of (2, 2, 1) </font></font><code class="inline-code tt">SV_GroupID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, returns a value of (0 ~ 3, 0 ~ 3, 0). </font></font><code class="inline-code tt">SV_GroupThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Returns a value of (0 ~ 1, 0 ~ 1, 0).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition to the semantics set in the sample, there are other </font></font><code class="inline-code tt">SV_~</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">semantics that start with and can be used, but I will omit the explanation here. </font><font style="vertical-align: inherit;">I think it's better to read it after understanding the movement of the compute shader.</font></font></p>
 <ul>
 <li>SV_GroupID - Microsoft Developer Network<ul>
 <li><a href="https://msdn.microsoft.com/ja-jp/library/ee422449(v=vs.85).aspx" class="link">https://msdn.microsoft.com/ja-jp/library/ee422449(v=vs.85).aspx</a></li>
-<li>異なる SV~ セマンティクスとその値について確認することができます。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can see different SV ~ semantics and their values.</font></font></li>
 </ul>
 </li>
 </ul>
 
-<h3><a id="h2-2-6"></a><span class="secno">2.2.6　</span>カーネル (関数) の処理内容</h3>
-<p>サンプルでは、用意したバッファに、順にスレッド番号を代入していく処理を行っています。<code class="inline-code tt">groupThreadID</code> は、あるグループで実行されるスレッド番号が与えられます。このカーネルは (4, 1, 1) スレッドで実行されますから、<code class="inline-code tt">groupThreadID</code> は (0 ~ 3, 0, 0) が与えられます。</p>
+<h3><a id="h2-2-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Kernel (function) processing contents</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample, the thread numbers are assigned to the prepared buffers in order. </font></font><code class="inline-code tt">groupThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is given the thread number to run in a group. </font><font style="vertical-align: inherit;">This kernel runs in (4, 1, 1) threads, so </font></font><code class="inline-code tt">groupThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is given (0 ~ 3, 0, 0).</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Array.compute</p>
 <pre class="emlist">[numthreads(4, 1, 1)]<font></font>
@@ -158,15 +151,15 @@ void KernelFunction_A(uint3 groupID : SV_GroupID,<font></font>
 }<font></font>
 </pre>
 </div>
-<p>今回のサンプルはこのスレッドを、(1, 1, 1) のグループで実行します (後述するスクリプトから) 。すなわちグループを 1 つだけ実行し、そのグループには、4 * 1 * 1 のスレッドが含まれます。結果として<code class="inline-code tt">groupThreadID.x</code> には 0 ~ 3 の値が与えられることを確認してください。</p>
-<p>※この例では <code class="inline-code tt">groupID</code> を利用していませんが、スレッドと同様に、3次元で指定されるグループ数が与えられます。代入してみるなどして、コンピュートシェーダの動きを確認するために使ってみてください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This sample runs this thread in groups (1, 1, 1) (from the script below). </font><font style="vertical-align: inherit;">That is, it runs only one group, which contains 4 * 1 * 1 threads. </font><font style="vertical-align: inherit;">As a result </font></font><code class="inline-code tt">groupThreadID.x</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Please make sure that the value of 0 to 3 is applied to.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* Although is </font></font><code class="inline-code tt">groupID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">not used in </font><font style="vertical-align: inherit;">this example, the </font><font style="vertical-align: inherit;">number of groups specified in 3D is given as in the case of threads. </font><font style="vertical-align: inherit;">Try substituting it and use it to see how the compute shader works.</font></font></p>
 
-<h3><a id="h2-2-7"></a><span class="secno">2.2.7　</span>スクリプトからコンピュートシェーダを実行する</h3>
-<p>実装したコンピュートシェーダをスクリプトから実行します。スクリプト側で必要になるものは概ね次の通りです。</p>
+<h3><a id="h2-2-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Run the compute shader from a script</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Run the implemented compute shader from a script. </font><font style="vertical-align: inherit;">The items required on the script side are as follows.</font></font></p>
 <ul>
-<li>コンピュートシェーダへの参照 | <code class="inline-code tt">comuteShader</code></li>
-<li>実行するカーネルのインデックス | <code class="inline-code tt">kernelIndex_KernelFunction_A, B</code></li>
-<li>コンピュートシェーダの実行結果を保存するバッファ | <code class="inline-code tt">intComputeBuffer</code></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">References to Compute Shaders | </font></font><code class="inline-code tt">comuteShader</code></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kernel index to run | </font></font><code class="inline-code tt">kernelIndex_KernelFunction_A, B</code></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A buffer that stores the execution results of the compute shader | </font></font><code class="inline-code tt">intComputeBuffer</code></li>
 </ul>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Array.cs</p>
@@ -192,8 +185,8 @@ void Start()<font></font>
 </pre>
 </div>
 
-<h3><a id="h2-2-8"></a><span class="secno">2.2.8　</span>実行するカーネルのインデックスを取得する</h3>
-<p>あるカーネルを実行するためには、そのカーネルを指定するためのインデックス情報が必要です。インデックスは <code class="inline-code tt">#pragma kernel</code> で定義された順に、上から 0, 1 … と与えられますが、スクリプト側から <code class="inline-code tt">FindKernel</code> 関数を使うのが良いでしょう。</p>
+<h3><a id="h2-2-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Get the index of the kernel to run</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In order to run a kernel, you need index information to specify that kernel. </font><font style="vertical-align: inherit;">The indexes are </font></font><code class="inline-code tt">#pragma kernel</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">given as 0, 1… from the top in the order defined by </font></font><code class="inline-code tt">FindKernel</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, but it is better to use the function </font><font style="vertical-align: inherit;">from the script side </font><font style="vertical-align: inherit;">.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Array.cs</p>
 <pre class="emlist">this.kernelIndex_KernelFunction_A<font></font>
@@ -204,8 +197,8 @@ this.kernelIndex_KernelFunction_B<font></font>
 </pre>
 </div>
 
-<h3><a id="h2-2-9"></a><span class="secno">2.2.9　</span>演算結果を保存するバッファの生成する</h3>
-<p>コンピュートシェーダ (GPU) による演算結果を CPU 側に保存するためのバッファ領域を用意します。Unity　では <code class="inline-code tt">ComputeBuffer</code> として定義されています。</p>
+<h3><a id="h2-2-9"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.9　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Generate a buffer to save the operation result</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Prepare a buffer area to save the calculation result by the compute shader (GPU) on the CPU side. </font><font style="vertical-align: inherit;">It is </font></font><code class="inline-code tt">ComputeBuffer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">defined as in </font><font style="vertical-align: inherit;">Unity </font><font style="vertical-align: inherit;">.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Array.cs</p>
 <pre class="emlist">this.intComputeBuffer = new ComputeBuffer(4, sizeof(int));<font></font>
@@ -213,22 +206,22 @@ this.computeShader.SetBuffer<font></font>
     (this.kernelIndex_KernelFunction_A, "intBuffer", this.intComputeBuffer);<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">ComputeBuffer</code> を (1) 保存する領域のサイズ、(2) 保存するデータの単位当たりのサイズを指定して初期化します。ここでは int 型のサイズ 4 つ分の領域が用意されています。これはコンピュートシェーダの実行結果が int[4] として保存されるためです。必要に応じてサイズを変更します。</p>
-<p>次いで、コンピュートシェーダに実装された、(1) どのカーネルが実行するときに、(2) どの GPU 上のバッファを使うのかを指定し、(3) CPU 上のどのバッファに相当するのか、を指定します。</p>
-<p>この例では、(1) <code class="inline-code tt">KernelFunction_A</code> が実行されるときに参照される、(2) <code class="inline-code tt">intBuffer</code> なるバッファ領域は、(3) <code class="inline-code tt">intComputeBuffer</code> に相当する、と指定されます。</p>
+<p><code class="inline-code tt">ComputeBuffer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initialize by specifying (1) the size of the area to be saved and (2) the size of the data to be saved per unit. </font><font style="vertical-align: inherit;">Spaces for four int sizes are provided here. </font><font style="vertical-align: inherit;">This is because the execution result of the compute shader is saved as an int [4]. </font><font style="vertical-align: inherit;">Resize as needed.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then, implemented in the compute shader, (1) specify which kernel runs, (2) specify which buffer to use on which GPU, and (3) specify which buffer on the CPU corresponds to. To do.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this example, the </font><font style="vertical-align: inherit;">buffer area </font></font><code class="inline-code tt">KernelFunction_A</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(2) referenced when </font><font style="vertical-align: inherit;">(1) </font><font style="vertical-align: inherit;">is executed </font><font style="vertical-align: inherit;">is specified to correspond to </font></font><code class="inline-code tt">intBuffer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(3) </font></font><code class="inline-code tt">intComputeBuffer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
 
-<h3><a id="h2-2-10"></a><span class="secno">2.2.10　</span>スクリプトからコンピュートシェーダに値を渡す</h3>
+<h3><a id="h2-2-10"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.10　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Passing values ​​from scripts to compute shaders</font></font></h3>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Array.cs</p>
 <pre class="emlist">this.computeShader.SetInt("intValue", 1);
 </pre>
 </div>
-<p>処理したい内容によってはスクリプト (CPU) 側からコンピュートシェーダ (GPU) 側に値を渡し、参照したい場合があると思います。ほとんどの型の値は <code class="inline-code tt">ComputeShader.Set~</code> を使って、コンピュートシェーダ内にある変数に設定することができます。このとき、引数に設定する引数の変数名と、コンピュートシェーダ内に定義された変数名は一致する必要があります。この例では <code class="inline-code tt">intValue</code> に 1 を渡しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Depending on what you want to process, you may want to pass a value from the script (CPU) side to the compute shader (GPU) side and refer to it. </font><font style="vertical-align: inherit;">Most types of values </font></font><code class="inline-code tt">ComputeShader.Set~</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">can be set to variables in the compute shader using. </font><font style="vertical-align: inherit;">At this time, the variable name of the argument set in the argument and the variable name defined in the compute shader must match. </font><font style="vertical-align: inherit;">In this example, </font></font><code class="inline-code tt">intValue</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">we are passing 1.</font></font></p>
 
-<h3><a id="h2-2-11"></a><span class="secno">2.2.11　</span>コンピュートシェーダの実行</h3>
-<p>コンピュートシェーダに実装(定義)されたカーネルは、<code class="inline-code tt">ComputeShader.Dispatch</code> メソッドで実行します。指定したインデックスのカーネルを、指定したグループ数で実行します。グループ数は X * Y * Z で指定します。このサンプルでは 1 * 1 * 1 = 1 グループです。</p>
+<h3><a id="h2-2-11"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.11 Running　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Compute Shader</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The kernel implemented (defined) in the compute shader is </font></font><code class="inline-code tt">ComputeShader.Dispatch</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">executed by </font><font style="vertical-align: inherit;">the </font><font style="vertical-align: inherit;">method. </font><font style="vertical-align: inherit;">Runs the kernel with the specified index in the specified number of groups. </font><font style="vertical-align: inherit;">The number of groups is specified by X * Y * Z. </font><font style="vertical-align: inherit;">In this sample, 1 * 1 * 1 = 1 group.</font></font></p>
 <div class="emlist-code">
-<p class="caption">SimpleComputeShader_Array.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SimpleComputeShader_Array.cs</font></font></font></font></p>
 <pre class="emlist">this.computeShader.Dispatch<font></font>
     (this.kernelIndex_KernelFunction_A, 1, 1, 1);<font></font>
 <font></font>
@@ -242,10 +235,10 @@ for (int i = 0; i &lt; 4; i++)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>コンピュートシェーダ (カーネル) の実行結果は、<code class="inline-code tt">ComputeBuffer.GetData</code> で取得します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The execution result of the compute shader (kernel) is </font></font><code class="inline-code tt">ComputeBuffer.GetData</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">obtained by.</font></font></p>
 
-<h3><a id="h2-2-12"></a><span class="secno">2.2.12　</span>実行結果の確認 (A)</h3>
-<p>あらためてコンピュートシェーダ側の実装を確認します。このサンプルでは次のカーネルを 1 * 1 * 1 = 1グループで実行しています。スレッドは、4 * 1 * 1 = 4 スレッドです。また <code class="inline-code tt">intValue</code> にはスクリプトから 1 を与えています。</p>
+<h3><a id="h2-2-12"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.12　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Confirmation of execution result (A)</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Check the implementation on the compute shader side again. </font><font style="vertical-align: inherit;">In this sample, the following kernels are running in 1 * 1 * 1 = 1 groups. </font><font style="vertical-align: inherit;">The threads are 4 * 1 * 1 = 4 threads. </font><font style="vertical-align: inherit;">It also </font></font><code class="inline-code tt">intValue</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">gives 1 from the script.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Array.compute</p>
 <pre class="emlist">[numthreads(4, 1, 1)]<font></font>
@@ -256,10 +249,10 @@ void KernelFunction_A(uint3 groupID : SV_GroupID,<font></font>
 }<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">groupThreadID(SV_GroupThreadID)</code> は、今このカーネルが、グループ内の何番目のスレッドで実行されているかを示す値が入るので、この例では (0 ~ 3, 0, 0) が入ります。したがって、<code class="inline-code tt">groupThreadID.x</code> は 0 ~ 3 です。つまり、<code class="inline-code tt">intBuffer[0] = 0</code>　～ <code class="inline-code tt">intBuffer[3] = 3</code> までが並列して実行されることになります。</p>
+<p><code class="inline-code tt">groupThreadID(SV_GroupThreadID)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Will contain a value that indicates which thread in the group the kernel is currently running on, so in this example (0 ~ 3, 0, 0) will be entered. </font><font style="vertical-align: inherit;">Therefore, </font></font><code class="inline-code tt">groupThreadID.x</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is 0 to 3. </font><font style="vertical-align: inherit;">In other words, </font></font><code class="inline-code tt">intBuffer[0] = 0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">　~ </font></font><code class="inline-code tt">intBuffer[3] = 3</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">will be until are executed in parallel.</font></font></p>
 
-<h3><a id="h2-2-13"></a><span class="secno">2.2.13　</span>異なるカーネル (B) を実行する</h3>
-<p>1 つのコンピュートシェーダに実装した異なるカーネルを実行するときは、別のカーネルのインデックスを指定します。この例では、<code class="inline-code tt">KernelFunction_A</code> を実行した後に <code class="inline-code tt">KernelFunction_B</code> を実行します。さらに <code class="inline-code tt">KernelFunction_A</code> で利用したバッファ領域を、<code class="inline-code tt">KernelFunction_B</code> でも使っています。</p>
+<h3><a id="h2-2-13"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.13 Run a　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> different kernel (B)</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When running different kernels implemented in one compute shader, specify the index of another kernel. </font><font style="vertical-align: inherit;">In this example, </font></font><code class="inline-code tt">KernelFunction_A</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">run after </font></font><code class="inline-code tt">KernelFunction_B</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Furthermore </font></font><code class="inline-code tt">KernelFunction_A</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, the buffer area used in is </font></font><code class="inline-code tt">KernelFunction_B</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">also used.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Array.cs</p>
 <pre class="emlist">this.computeShader.SetBuffer<font></font>
@@ -276,49 +269,49 @@ for (int i = 0; i &lt; 4; i++)<font></font>
 </pre>
 </div>
 
-<h3><a id="h2-2-14"></a><span class="secno">2.2.14　</span>実行結果の確認 (B)</h3>
-<p><code class="inline-code tt">KernelFunction_B</code> は次のようなコードを実行します。このとき <code class="inline-code tt">intBuffer</code> は <code class="inline-code tt">KernelFunction_A</code> で使ったものを引き続き指定している点に注意してください。</p>
+<h3><a id="h2-2-14"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.14　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Confirmation of execution result (B)</font></font></h3>
+<p><code class="inline-code tt">KernelFunction_B</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Executes code similar to the following. </font><font style="vertical-align: inherit;">This time </font></font><code class="inline-code tt">intBuffer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is </font></font><code class="inline-code tt">KernelFunction_A</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Please note that specifies continue what we used in.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Array.compute</p>
 <pre class="emlist">RWStructuredBuffer&lt;int&gt; intBuffer;<font></font>
 <font></font>
 [numthreads(4, 1, 1)]<font></font>
 void KernelFunction_B<font></font>
-(uint3 groupID : SV_GroupID, uint3 groupThreadID : SV_GroupThreadID)<font></font>
-{<font></font>
-    intBuffer[groupThreadID.x] += 1;<font></font>
-}<font></font>
+(uint3 groupID : SV_GroupID, uint3 groupThreadID : SV_GroupThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
+    intBuffer[groupThreadID.x] += 1;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>このサンプルでは、<code class="inline-code tt">KernelFunction_A</code> によって <code class="inline-code tt">intBuffer</code> に 0 ~ 3 が順に与えられています。したがって <code class="inline-code tt">KernelFunction_B</code> を実行した後は、値が 1 ~ 4 になることを確認します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this sample, </font></font><code class="inline-code tt">KernelFunction_A</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">by </font></font><code class="inline-code tt">intBuffer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">a 20-3 it has been given in the order. </font><font style="vertical-align: inherit;">Therefore, </font></font><code class="inline-code tt">KernelFunction_B</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">after running, make sure the value is between 1 and 4.</font></font></p>
 
-<h3><a id="h2-2-15"></a><span class="secno">2.2.15　</span>バッファの破棄</h3>
-<p>利用し終えた ComputeBuffer は、明示的に破棄する必要があります。</p>
+<h3><a id="h2-2-15"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.15　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Discard the buffer</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ComputeBuffers that are no longer in use must be explicitly destroyed.</font></font></p>
 <div class="emlist-code">
-<p class="caption">SimpleComputeShader_Array.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SimpleComputeShader_Array.cs</font></font></font></font></p>
 <pre class="emlist">this.intComputeBuffer.Release();
 </pre>
 </div>
 
-<h3><a id="h2-2-16"></a><span class="secno">2.2.16　</span>サンプル (1) で解決していない問題</h3>
-<p>多次元のスレッドまたはグループを指定する意図について、このサンプルでは解説していません。例えば、 (4, 1, 1) スレッドと、(2, 2, 1) スレッドは、どちらも 4 スレッド実行されますが、この 2 つは使い分ける意味があります。これについては後に続くサンプル (2) で解説します。</p>
+<h3><a id="h2-2-16"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.16　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Problems not solved by sample (1)</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The intent of specifying multidimensional threads or groups is not covered in this sample. </font><font style="vertical-align: inherit;">For example, (4, 1, 1) thread and (2, 2, 1) thread both run 4 threads, but it makes sense to use the two properly. </font><font style="vertical-align: inherit;">This will be explained in the sample (2) that follows.</font></font></p>
 
-<h2><a id="h2-3"></a><span class="secno">2.3　</span>サンプル (2) : GPU の演算結果をテクスチャにする</h2>
-<p>サンプル (2) 「SampleScene_Texture」では、コンピュートシェーダの算出結果をテクスチャにして取得します。サンプルには次のような操作が含まれます。</p>
+<h2><a id="h2-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sample (2): Texture the GPU calculation result</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sample (2) In "SampleScene_Texture", the calculation result of the compute shader is acquired as a texture. </font><font style="vertical-align: inherit;">The sample includes the following operations:</font></font></p>
 <ul>
-<li>コンピュートシェーダを使って、テクスチャに情報を書き込む。</li>
-<li>多次元 (2次元) のスレッドを有効に活用する。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Write information to the texture using a compute shader.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Make effective use of multidimensional (two-dimensional) threads.</font></font></li>
 </ul>
-<p>サンプル (2) の実行結果は次の通りになります。横方向と縦方向にグラデーションするテクスチャを生成します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The execution result of sample (2) is as follows. </font><font style="vertical-align: inherit;">Generates a texture that has a horizontal and vertical gradient.</font></font></p>
 <div id="primerofcomputeshader04" class="image">
 <img src="./Chapter 2 _ Getting Started with ComputeShader_files/primerofcomputeshader04.png" alt="Execution result of sample (2)" class="width-100per">
-<p class="caption">
-図2.3: サンプル (2) の実行結果
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.3: Execution result of sample (2)
+</font></font></p>
 </div>
 
-<h3><a id="h2-3-1"></a><span class="secno">2.3.1　</span>カーネルの実装</h3>
-<p>全体の実装についてはサンプルを参照してください。このサンプルでは概ね次のようなコードをコンピュートシェーダで実行します。カーネルが多次元スレッドで実行される点に注目してください。(8, 8, 1) なので、1 グループあたり、8 * 8 * 1 = 64 スレッドで実行されます。また演算結果の保存先が <code class="inline-code tt">RWTexture2D&lt;float4&gt;</code> であることも大きな変更点です。</p>
+<h3><a id="h2-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Kernel implementation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See the sample for the overall implementation. </font><font style="vertical-align: inherit;">In this sample, the following code is roughly executed in the compute shader. </font><font style="vertical-align: inherit;">Notice that the kernel runs in multidimensional threads. </font><font style="vertical-align: inherit;">Since it is (8, 8, 1), it will be executed in 8 * 8 * 1 = 64 threads per group. </font><font style="vertical-align: inherit;">Another </font></font><code class="inline-code tt">RWTexture2D&lt;float4&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">major change is that the </font><font style="vertical-align: inherit;">calculation result is saved </font><font style="vertical-align: inherit;">in.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Texture.compute</p>
 <pre class="emlist">RWTexture2D&lt;float4&gt; textureBuffer;<font></font>
@@ -331,42 +324,42 @@ void KernelFunction_A(uint3 dispatchThreadID : SV_DispatchThreadID)<font></font>
 <font></font>
     textureBuffer[dispatchThreadID.xy]<font></font>
         = float4(dispatchThreadID.x / width,<font></font>
-                 dispatchThreadID.x / width,<font></font>
-                 dispatchThreadID.x / width,<font></font>
+                 dispatchThreadID.x / width,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                 dispatchThreadID.x / width,</font></font></font></font><font></font>
                  1);<font></font>
 }<font></font>
 </pre>
 </div>
 
-<h3><a id="h2-3-2"></a><span class="secno">2.3.2　</span>特殊な引数 SV_DispatchThreadID</h3>
-<p>サンプル (1) では <code class="inline-code tt">SV_DispatchThradID</code> セマンティクスは使いませんでした。少々複雑ですが、<b>「あるカーネルを実行するスレッドが、すべてのスレッドの中のどこに位置するか (x,y,z) 」</b>を示しています。</p>
-<p><code class="inline-code tt">SV_DispathThreadID</code> は、<code class="inline-code tt">SV_Group_ID * numthreads + SV_GroupThreadID</code> で算出される値です。<code class="inline-code tt">SV_Group_ID</code> はあるグループを (x, y, z) で示し、<code class="inline-code tt">SV_GroupThreadID</code> は、あるグループに含まれるスレッドを (x, y, z) で示します。</p>
+<h3><a id="h2-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Special argument SV_DispatchThreadID</font></font></h3>
+<p><font style="vertical-align: inherit;"></font><code class="inline-code tt">SV_DispatchThradID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">No semantics were used in </font><font style="vertical-align: inherit;">sample (1) </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">It's a bit complicated, but </font><font style="vertical-align: inherit;">it shows </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"where the thread running a kernel is in all threads (x, y, z)"</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><code class="inline-code tt">SV_DispathThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is the </font></font><code class="inline-code tt">SV_Group_ID * numthreads + SV_GroupThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">value calculated by. </font></font><code class="inline-code tt">SV_Group_ID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Indicates a group with (x, y, z), and indicates the </font></font><code class="inline-code tt">SV_GroupThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">threads contained in a group with (x, y, z).</font></font></p>
 
-<h4><a id="h2-3-2-1"></a>具体的な計算例 (1)</h4>
-<p>例えば、(2, 2, 1) グループで、(4, 1, 1) スレッドで実行される、カーネルを実行するとします。その内の 1 つのカーネルは、(0, 1, 0) 番目のグループに含まれる、(2, 0, 0) 番目のスレッドで実行されます。このとき <code class="inline-code tt">SV_DispatchThreadID</code> は、(0, 1, 0) * (4, 1, 1) + (2, 0, 0) = (0, 1, 0) + (2, 0, 0) = (2, 1, 0) になります。</p>
+<h4><a id="h2-3-2-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Specific calculation example (1)</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, suppose you run a kernel in a (2, 2, 1) group that runs on (4, 1, 1) threads. </font><font style="vertical-align: inherit;">One of the kernels runs on the (2, 0, 0) th thread in the (0, 1, 0) th group. </font><font style="vertical-align: inherit;">In this case </font></font><code class="inline-code tt">SV_DispatchThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, (0, 1, 0) * (4, 1, 1) + (2, 0, 0) = (0, 1, 0) + (2, 0, 0) = (2, 1, 0) ).</font></font></p>
 
-<h4><a id="h2-3-2-2"></a>具体的な計算例 (2)</h4>
-<p>今度は最大値を考えましょう。(2, 2, 1) グループで、(4, 1, 1) スレッドでカーネルが実行されるとき、(1, 1, 0) 番目のグループに含まれる、(3, 0, 0) 番目のスレッドが最後のスレッドです。このとき <code class="inline-code tt">SV_DispatchThreadID</code> は、(1, 1, 0) * (4, 1, 1) + (3, 0, 0) = (4, 1, 0) + (3, 0, 0) = (7, 1, 0) になります。</p>
+<h4><a id="h2-3-2-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Specific calculation example (2)</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now let's consider the maximum value. </font><font style="vertical-align: inherit;">In the (2, 2, 1) group, when the kernel runs on the (4, 1, 1) thread, the (3, 0, 0) th thread in the (1, 1, 0) th group Is the last thread. </font><font style="vertical-align: inherit;">In this case </font></font><code class="inline-code tt">SV_DispatchThreadID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, (1, 1, 0) * (4, 1, 1) + (3, 0, 0) = (4, 1, 0) + (3, 0, 0) = (7, 1, 0) ).</font></font></p>
 
-<h3><a id="h2-3-3"></a><span class="secno">2.3.3　</span>テクスチャ (ピクセル) に値を書き込む</h3>
-<p>以降は時系列順に解説するのが困難ですので、サンプル全体に目を通しながら確認してください。</p>
-<p>サンプル (2) の <code class="inline-code tt">dispatchThreadID.xy</code> は、テクスチャ上にあるすべてのピクセルを示すように、グループとスレッドを設定しています。グループを設定するのはスクリプト側なので、スクリプトとコンピュートシェーダを横断して確認する必要があります。</p>
+<h3><a id="h2-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Write a value to a texture (pixel)</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">After that, it is difficult to explain in chronological order, so please check while reading the entire sample.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sample (2) </font></font><code class="inline-code tt">dispatchThreadID.xy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">sets groups and threads to show all the pixels on the texture. </font><font style="vertical-align: inherit;">Since it is the script side that sets the group, we need to look across the script and the compute shader.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Texture.compute</p>
 <pre class="emlist">textureBuffer[dispatchThreadID.xy]<font></font>
     = float4(dispatchThreadID.x / width,<font></font>
-             dispatchThreadID.x / width,<font></font>
-             dispatchThreadID.x / width,<font></font>
+             dispatchThreadID.x / width,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+             dispatchThreadID.x / width,</font></font></font></font><font></font>
              1);<font></font>
 </pre>
 </div>
-<p>このサンプルでは仮に 512x512 のテクスチャを用意していますが、<code class="inline-code tt">dispatchThreadID.x</code> が 0 ~ 511 を示すとき、<code class="inline-code tt">dispatchThreadID / width</code> は、0 ~ 0.998… を示します。つまり <code class="inline-code tt">dispatchThreadID.xy</code> の値( = ピクセル座標)が大きくなるにつれて、黒から白に塗りつぶしていくことになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this sample, we have prepared a texture of 512x512, but when </font></font><code class="inline-code tt">dispatchThreadID.x</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is 0 ~ 511, it </font></font><code class="inline-code tt">dispatchThreadID / width</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is 0 ~ 0.998…. </font><font style="vertical-align: inherit;">In other words, as </font></font><code class="inline-code tt">dispatchThreadID.xy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the value (= pixel coordinates) increases, it will be filled from black to white.</font></font></p>
 <div class="note">
-<p>テクスチャは、RGBA チャネルから構成され、それぞれ 0 ~ 1 で設定します。すべて 0 のとき、完全に黒くなり、すべて 1 のとき、完全に白くなります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Textures consist of RGBA channels, each set from 0 to 1. </font><font style="vertical-align: inherit;">When all 0s, it is completely black, and when all 1s, it is completely white.</font></font></p>
 </div>
 
-<h3><a id="h2-3-4"></a><span class="secno">2.3.4　</span>テクスチャの用意</h3>
-<p>以降がスクリプト側の実装の解説です。サンプル (1) では、コンピュートシェーダの計算結果を保存するために配列のバッファを用意しました。サンプル (2) では、その代わりにテクスチャを用意します。</p>
+<h3><a id="h2-3-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Preparing textures</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following is an explanation of the implementation on the script side. </font><font style="vertical-align: inherit;">In sample (1), we prepared an array buffer to store the calculation results of the compute shader. </font><font style="vertical-align: inherit;">In sample (2), we will prepare a texture instead.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Texture.cs</p>
 <pre class="emlist">RenderTexture renderTexture_A;<font></font>
@@ -376,11 +369,11 @@ void Start()<font></font>
     this.renderTexture_A = new RenderTexture<font></font>
         (512, 512, 0, RenderTextureFormat.ARGB32);<font></font>
     this.renderTexture_A.enableRandomWrite = true;<font></font>
-    this.renderTexture_A.Create();<font></font>
-…<font></font>
+    this.renderTexture_A.Create();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+…</font></font></font></font><font></font>
 </pre>
 </div>
-<p>解像度とフォーマットを指定して RenderTexture を初期化します。このとき <code class="inline-code tt">RenderTexture.enableRandomWrite</code> を有効にして、テクスチャへの書き込みを有効にしている点に注意します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initialize RenderTexture by specifying the resolution and format. </font><font style="vertical-align: inherit;">Note </font></font><code class="inline-code tt">RenderTexture.enableRandomWrite</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">that </font><font style="vertical-align: inherit;">this </font><font style="vertical-align: inherit;">is enabled to enable writing to the texture.</font></font></p>
 <ul>
 <li>RenderTexture.enableRandomWrite - Unity<ul>
 <li><a href="https://docs.unity3d.com/ScriptReference/RenderTexture-enableRandomWrite.html" class="link">https://docs.unity3d.com/ScriptReference/RenderTexture-enableRandomWrite.html</a></li>
@@ -388,13 +381,13 @@ void Start()<font></font>
 </li>
 </ul>
 
-<h3><a id="h2-3-5"></a><span class="secno">2.3.5　</span>スレッド数の取得</h3>
-<p>カーネルのインデックスが取得できるように、カーネルがどれくらいのスレッド数で実行できるかも取得できます(スレッドサイズ)。</p>
+<h3><a id="h2-3-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Get the number of threads</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Just as you can get the index of the kernel, you can also get how many threads the kernel can run (thread size).</font></font></p>
 <div class="emlist-code">
-<p class="caption">SimpleComputeShader_Texture.cs</p>
-<pre class="emlist">void Start()<font></font>
-{<font></font>
-…<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SimpleComputeShader_Texture.cs</font></font></font></font></p>
+<pre class="emlist">void Start()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+…</font></font></font></font><font></font>
     uint threadSizeX, threadSizeY, threadSizeZ;<font></font>
 <font></font>
     this.computeShader.GetKernelThreadGroupSizes<font></font>
@@ -404,9 +397,9 @@ void Start()<font></font>
 </pre>
 </div>
 
-<h3><a id="h2-3-6"></a><span class="secno">2.3.6　</span>カーネルの実行</h3>
-<p><code class="inline-code tt">Dispath</code> メソッドで処理を実行します。このとき、グループ数の指定方法に注意します。この例では、グループ数は「テクスチャの水平(垂直)方向の解像度 / 水平(垂直)方向のスレッド数」で算出しています。</p>
-<p>水平方向について考えるとき、テクスチャの解像度は 512、スレッド数は 8 ですから、水平方向のグループ数は 512 / 8 = 64 になります。同様に垂直方向も 64 です。したがって、合計グループ数は 64 * 64 = 4096 になります。</p>
+<h3><a id="h2-3-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Kernel execution</font></font></h3>
+<p><code class="inline-code tt">Dispath</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Execute the process with the method. </font><font style="vertical-align: inherit;">At this time, pay attention to how to specify the number of groups. </font><font style="vertical-align: inherit;">In this example, the number of groups is calculated by "horizontal (vertical) resolution of texture / number of threads in horizontal (vertical) direction".</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When thinking about the horizontal direction, the texture resolution is 512 and the number of threads is 8, so the number of horizontal groups is 512/8 = 64. </font><font style="vertical-align: inherit;">Similarly, the vertical direction is 64. </font><font style="vertical-align: inherit;">Therefore, the total number of groups is 64 * 64 = 4096.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SimpleComputeShader_Texture.cs</p>
 <pre class="emlist">void Update()<font></font>
@@ -421,34 +414,34 @@ void Start()<font></font>
         .material.mainTexture = this.renderTexture_A;<font></font>
 </pre>
 </div>
-<p>言い換えれば、各グループは 8 * 8 * 1 = 64 (= スレッド数) ピクセルずつ処理することになります。グループは 4096 あるので、4096 * 64 = 262,144 ピクセル処理します。画像は、512 * 512 = 262,144 ピクセルなので、ちょうどすべてのピクセルを並列に処理できたことになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In other words, each group will process 8 * 8 * 1 = 64 (= number of threads) pixels. </font><font style="vertical-align: inherit;">Since there are 4096 groups, we will process 4096 * 64 = 262,144 pixels. </font><font style="vertical-align: inherit;">The image is 512 * 512 = 262,144 pixels, which means that we were able to process just all the pixels in parallel.</font></font></p>
 
-<h4><a id="h2-3-6-1"></a>異なるカーネルの実行</h4>
-<p>もう一方のカーネルは、x ではなく、 y 座標を使って塗りつぶしていきます。このとき 0 に近い値、黒い色が下のほうに表れている点に注意します。テクスチャを操作するときは原点を考慮しなければならないこともあります。</p>
+<h4><a id="h2-3-6-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Execution of different kernels</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The other kernel fills using the y coordinate instead of x. </font><font style="vertical-align: inherit;">At this time, note that a value close to 0, a black color, appears at the bottom. </font><font style="vertical-align: inherit;">You may need to consider the origin when working with textures.</font></font></p>
 
-<h3><a id="h2-3-7"></a><span class="secno">2.3.7　</span>多次元スレッド、グループの利点</h3>
-<p>サンプル (2) のように、多次元の結果が必要な場合、あるいは多次元の演算が必要な場合には、多次元のスレッドやグループが有効に働きます。もしサンプル (2) を 1 次元のスレッドで処理しようとすると、縦方向のピクセル座標を任意に算出する必要があります。</p>
+<h3><a id="h2-3-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Multidimensional threads, advantages of groups</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Multidimensional threads and groups work well when you need multidimensional results, or when you need multidimensional operations, as in sample (2). </font><font style="vertical-align: inherit;">If sample (2) is to be processed in a one-dimensional thread, the vertical pixel coordinates will need to be calculated arbitrarily.</font></font></p>
 <div class="note">
-<p>実際に実装しようとすると確認できますが、画像処理でいうところのストライド、例えば 512x512 の画像があるとき、その 513 番目のピクセルは、(0, 1) 座標になる、といった算出が必要になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can confirm it when you actually implement it, but when you have a stride in image processing, for example, a 512x512 image, the 513th pixel is the (0, 1) coordinate, and so on. ..</font></font></p>
 </div>
-<p>演算数は削減したほうが良いですし、高度な処理を行うにしたがって複雑さは増します。コンピュートシェーダを使った処理を設計するときは、上手く多次元を活用できないか検討するのが良いです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is better to reduce the number of operations, and the complexity increases as the advanced processing is performed. </font><font style="vertical-align: inherit;">When designing processing with compute shaders, it's a good idea to consider whether you can take advantage of multidimensionality.</font></font></p>
 
-<h2><a id="h2-4"></a><span class="secno">2.4　</span>さらなる学習のための補足情報</h2>
-<p>本章ではコンピュートシェーダについてサンプルを解説する形式で入門情報としましたが、これから先、学習を進める上で必要ないくつかの情報を補足します。</p>
+<h2><a id="h2-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Supplementary information for further learning</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we have provided introductory information in the form of explaining samples of compute shaders, but from now on, we will supplement some information necessary for learning.</font></font></p>
 
-<h3><a id="h2-4-1"></a><span class="secno">2.4.1　</span>GPU アーキテクチャ・基本構造</h3>
+<h3><a id="h2-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> GPU architecture / basic structure</font></font></h3>
 <div id="primerofcomputeshader02" class="image">
 <img src="./Chapter 2 _ Getting Started with ComputeShader_files/primerofcomputeshader02.png" alt="Image of GPU architecture" class="width-100per">
-<p class="caption">
-図2.4: GPU アーキテクチャのイメージ
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.4: Image of GPU architecture
+</font></font></p>
 </div>
-<p>GPU のアーキテクチャ・構造についての基本的な知識があれば、コンピュートシェーダを使った処理の実装の際、それを最適化するために役に立つので、少しだけここで紹介します。</p>
-<p>GPU は多数の <b>Streaming Multiprocessor(SM)</b> が搭載されていて、それらが分担・並列化して与えられた処理を実行します。</p>
-<p>SM には更に小さな <b>Streaming Processor(SP)</b> が複数搭載されていて、SM に割り当てられた処理を SP が計算する、といった形式です。</p>
-<p>SM には<b>レジスタ</b>と<b>シェアードメモリ</b>が搭載されていて、<b>グローバルメモリ(DRAM上のメモリ)</b>よりも高速に読み書きすることができます。レジスタは関数内でのみ参照されるローカル変数に使われ、シェアードメモリは同一 SM 内に所属するすべての SP から参照し書き込むことができます。</p>
-<p>つまり、各メモリの最大サイズやスコープを把握し、無駄なく高速にメモリを読み書きできる最適な実装を実現できるのが理想です。</p>
-<p>例えば最も考慮する必要があるであろうシェアードメモリは、クラス修飾子 (storage-class modifiers) <code class="inline-code tt">groupshared</code> を使って定義します。ここでは入門なので具体的な導入例を割愛しますが、最適化に必要な技術・用語として覚えておいて、以降の学習に役立ててください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you have a basic knowledge of GPU architecture and structure, it will be useful for optimizing it when implementing processing using compute shaders, so I will introduce it here a little.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The GPU is </font><font style="vertical-align: inherit;">equipped with a </font><font style="vertical-align: inherit;">large number of </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Streaming Multiprocessors (SM)</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , which are shared and parallelized to execute the given processing.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The SM </font><font style="vertical-align: inherit;">has multiple </font><font style="vertical-align: inherit;">smaller </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Streaming Processors (SPs)</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , and the SP calculates the processing assigned to the SM.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The SM has </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">registers</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">shared memory,</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> which allows it </font><font style="vertical-align: inherit;">to read and write faster than </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">global memory (memory on DRAM)</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Registers are used for local variables that are referenced only within the function, and shared memory can be referenced and written by all SPs that belong to the same SM.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In other words, it is ideal to know the maximum size and scope of each memory and realize an optimal implementation that can read and write memory at high speed without waste.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, shared memory, which you may need to consider most, is </font></font><code class="inline-code tt">groupshared</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">defined using </font><font style="vertical-align: inherit;">storage-class modifiers </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Since this is an introduction, I will omit a concrete introduction example, but please remember it as a technique and terminology necessary for optimization and use it for future learning.</font></font></p>
 <ul>
 <li>Variable Syntax - Microsoft Developer Network<ul>
 <li><a href="https://msdn.microsoft.com/en-us/library/bb509706(v=vs.85).aspx" class="link">https://msdn.microsoft.com/en-us/library/bb509706(v=vs.85).aspx</a></li>
@@ -456,29 +449,29 @@ void Start()<font></font>
 </li>
 </ul>
 
-<h4><a id="h2-4-1-1"></a>レジスタ</h4>
-<p>SP に最も近い位置に置かれ、最も高速にアクセスできるメモリ領域です。4 byte 単位で構成され、カーネル(関数)スコープの変数が配置されます。スレッドごとに独立するため共有することができません。</p>
+<h4><a id="h2-4-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">register</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The fastest accessible memory area located closest to the SP. </font><font style="vertical-align: inherit;">It consists of 4 bytes and contains kernel (function) scope variables. </font><font style="vertical-align: inherit;">Since each thread is independent, it cannot be shared.</font></font></p>
 
-<h4><a id="h2-4-1-2"></a>シェアードメモリ</h4>
-<p>SM に置かれるメモリ領域で、L1 キャッシュと合わせて管理されています。同じ SM 内にある SP(= スレッド) で共有することができ、かつ十分に高速にアクセスすることができます。</p>
+<h4><a id="h2-4-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Shared memory</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A memory area located in the SM, which is managed together with the L1 cache. </font><font style="vertical-align: inherit;">It can be shared by SPs (= threads) in the same SM and can be accessed fast enough.</font></font></p>
 
-<h4><a id="h2-4-1-3"></a>グローバルメモリ</h4>
-<p>GPU 上ではなく DRAM 上のメモリ領域です。GPU 上にのプロセッサからは離れた位置にあるため参照は低速です。一方で、容量が大きく、すべてのスレッドからデータの読み書きが可能です。</p>
+<h4><a id="h2-4-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Global memory</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A memory area on the DRAM, not on the GPU. </font><font style="vertical-align: inherit;">References are slow because they are far from the processor on the GPU. </font><font style="vertical-align: inherit;">On the other hand, it has a large capacity and can read and write data from all threads.</font></font></p>
 
-<h4><a id="h2-4-1-4"></a>ローカルメモリ</h4>
-<p>GPU 上ではなく DRAM 上のメモリ領域で、レジスタに収まらないデータを格納します。GPU 上のプロセッサからは離れた位置にあるため参照は低速です。</p>
+<h4><a id="h2-4-1-4"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Local memory</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The memory area on the DRAM, not the GPU, stores data that does not fit in the registers. </font><font style="vertical-align: inherit;">References are slow because they are far from the processor on the GPU.</font></font></p>
 
-<h4><a id="h2-4-1-5"></a>テクスチャメモリ</h4>
-<p>テクスチャデータ専用のメモリで、グローバルメモリをテクスチャ専用に扱います。</p>
+<h4><a id="h2-4-1-5"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Texture memory</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This memory is dedicated to texture data and handles global memory exclusively for textures.</font></font></p>
 
-<h4><a id="h2-4-1-6"></a>コンスタントメモリ</h4>
-<p>読み込み専用のメモリで、カーネル(関数)の引数や定数を保存しておくためなどに使われます。専用のキャッシュを持っていて、グローバルメモリよりも高速に参照できます。</p>
+<h4><a id="h2-4-1-6"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Constant memory</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is a read-only memory and is used to store kernel (function) arguments and constants. </font><font style="vertical-align: inherit;">It has its own cache and can be referenced faster than global memory.</font></font></p>
 
-<h3><a id="h2-4-2"></a><span class="secno">2.4.2　</span>効率の良いスレッド数指定のヒント</h3>
-<p>総スレッド数が実際に処理したいデータ数よりも大きい場合は、無意味に実行される (あるいは処理されない) スレッドが生じることになり非効率です。総スレッド数は可能な限り処理したいデータ数と一致させるように設計します。</p>
+<h3><a id="h2-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Tips for specifying the number of threads efficiently</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the total number of threads is larger than the number of data you actually want to process, it will result in threads that are executed (or not processed) meaninglessly, which is inefficient. </font><font style="vertical-align: inherit;">Design the total number of threads to match the number of data you want to process as much as possible.</font></font></p>
 
-<h3><a id="h2-4-3"></a><span class="secno">2.4.3　</span>現行スペック上の限界</h3>
-<p>執筆時時点での現行スペックの上限を紹介します。最新版でない可能性があることに十分に注意してください。ただし、これらのような制限を考慮しつつ実装することが求められます。</p>
+<h3><a id="h2-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Limits on current specifications</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Introducing the upper limit of the current specifications at the time of writing. </font><font style="vertical-align: inherit;">Please note that it may not be the latest version. </font><font style="vertical-align: inherit;">However, it is required to implement it while considering these restrictions.</font></font></p>
 <ul>
 <li>Compute Shader Overview - Microsoft Developer Network<ul>
 <li><a href="https://msdn.microsoft.com/en-us/library/ff476331(v=vs.85).aspx" class="link">https://msdn.microsoft.com/en-us/library/ff476331(v=vs.85).aspx</a></li>
@@ -515,4 +508,4 @@ void Start()<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 2 _ Getting Started with ComputeShader_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 2 _ Getting Started with ComputeShader_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 2 _ Getting Started with ComputeShader_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 2 _ Getting Started with ComputeShader_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 2 _ Getting Started with ComputeShader_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

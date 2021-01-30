@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0042)https://freder.io/files/unity3/sakota.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 6 _ Strange Attractor_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 6 _ Strange Attractor_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Strange Attractor_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Strange Attractor_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Strange Attractor_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 6 _ Strange Attractor_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Strange Attractor_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Strange Attractor_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Strange Attractor_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 6 _ Strange Attractor_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">Chapter 6　</font></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;"> Strange Attractor</font></font></h1>
 
 <h2><a id="h6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -94,8 +87,8 @@ Figure 6.2: Mid-term Lorenz attractor
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Lorenz equation is represented by the following nonlinear ODE.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By setting p = 10, r = 28, b = 8/3 in each variable of p, r, and b in the above equation, it will behave chaotically as "Strange Attractor".</font></font></p>
 
-<h3><a id="h6-3-2"></a><span class="secno">6.3.2　</span>Lorenz Attractorの実装</h3>
-<p>それではLorenz方程式をコンピュートシェーダーによって実装してみましょう。まずはコンピュートシェーダー内で演算したい構造体を定義します。<br></p>
+<h3><a id="h6-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation of Lorenz Attractor</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now let's implement the Lorenz equation with a compute shader. </font><font style="vertical-align: inherit;">First, define the structure you want to calculate in the compute shader.</font></font><br></p>
 <div class="emlist-code">
 <p class="caption">StrangeAttractor.cs</p>
 <pre class="emlist">protected struct Params<font></font>
@@ -119,8 +112,8 @@ Figure 6.2: Mid-term Lorenz attractor
 }<font></font>
 </pre>
 </div>
-<p>なお、この構造体は今後複数のStrange Attractorで汎用的に使う予定ですので、抽象クラスのStrangeAttractor.cs内に定義しています。<br></p>
-<p>次にComputeBufferの初期化処理を行います。<br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since this structure will be used universally in multiple Strange Attractors in the future, it is defined in the abstract class StrangeAttractor.cs.</font></font><br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, the Compute Buffer is initialized.</font></font><br></p>
 <div class="emlist-code">
 <p class="caption">LorenzAttrator.cs</p>
 <pre class="emlist">protected sealed override void InitializeComputeBuffer()<font></font>
@@ -129,8 +122,8 @@ Figure 6.2: Mid-term Lorenz attractor
 <font></font>
     cBuffer = new ComputeBuffer(instanceCount, Marshal.SizeOf(typeof(Params)));<font></font>
     Params[] parameters = new Params[cBuffer.count];<font></font>
-    for (int i = 0; i &lt; instanceCount; i++)<font></font>
-    {<font></font>
+    for (int i = 0; i &lt; instanceCount; i++)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         var normalize = (float)i / instanceCount;<font></font>
         var color = gradient.Evaluate(normalize);<font></font>
         parameters[i] = new Params(Random.insideUnitSphere *<font></font>
@@ -140,8 +133,8 @@ Figure 6.2: Mid-term Lorenz attractor
 }<font></font>
 </pre>
 </div>
-<p>抽象クラスのStrangeAttractor.csで定義した抽象メソッドInitializeComputeBufferをLorenzAttrator.csにて実装しています。<br>Unityのインスペクターにてグラデーションやエミッターサイズ、粒子サイズを調整したいので、インスペクターに露出したgradientやemitterSize、particleSizeでParams構造体を初期化し、ComputeBufferの変数、cBufferにSetDataします。<br>今回はパーティクルのid順で、少しずつ遅延させて速度ベクトルを適用していきたいと思っていますので、パーティクルid順でグラーデーションカラーをつけています。<br>「Strange Attractor」はものによって初期ポジションがその後の振る舞いに大きく関係してきますので、色々な初期ポジションを試していただきたいのですが、本サンプルでは球体を初期形状とします。<br></p>
-<p>次に、LorenzAttratorの変数p、r、bをコンピュートシェーダーに渡します。<br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The abstract method InitializeComputeBuffer defined in the abstract class StrangeAttractor.cs is implemented in LorenzAttrator.cs. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since I want to adjust the gradation, emitter size, and particle size in Unity's inspector, initialize the Params structure with the gradient, emitterSize, and particleSize exposed in the inspector, and setData to the ComputeBuffer variable, cBuffer. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, I want to apply the velocity vector by delaying it little by little in the order of particle id, so I add the gradation color in order of particle id. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In "Strange Attractor", the initial position is greatly related to the subsequent behavior depending on the thing, so I would like you to try various initial positions, but in this sample, the sphere is the initial shape.</font></font><br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then pass the LorenzAttrator variables p, r, b to the compute shader.</font></font><br></p>
 <div class="emlist-code">
 <p class="caption">LorenzAttrator.cs</p>
 <pre class="emlist">[SerializeField, Tooltip("Default is 10")]<font></font>
@@ -161,15 +154,15 @@ protected override void InitializeShaderUniforms()<font></font>
     bId = Shader.PropertyToID(bProp);<font></font>
 }<font></font>
 <font></font>
-protected override void UpdateShaderUniforms()<font></font>
-{<font></font>
+protected override void UpdateShaderUniforms()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     computeShaderInstance.SetFloat(pId, p);<font></font>
     computeShaderInstance.SetFloat(rId, r);<font></font>
-    computeShaderInstance.SetFloat(bId, b);<font></font>
-}<font></font>
+    computeShaderInstance.SetFloat(bId, b);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>次にコンピュートシェーダー側でエミット時のパーティクルの状態を初期化します。<br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, initialize the state of particles at the time of emission on the compute shader side.</font></font><br></p>
 <div class="emlist-code">
 <p class="caption">LorenzAttractor.compute</p>
 <pre class="emlist">#pragma kernel Emit<font></font>
@@ -180,8 +173,8 @@ protected override void UpdateShaderUniforms()<font></font>
 #define THREAD_Z 1<font></font>
 #define DT 0.022<font></font>
 <font></font>
-struct Params<font></font>
-{<font></font>
+struct Params<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     float3 emitPos;<font></font>
     float3 position;<font></font>
     float3 velocity; //xyz = velocity<font></font>
@@ -203,8 +196,8 @@ void Emit(uint id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>Emitメソッドで初期化を行なっています。p.lifeはパーティクルの発生してからの時間を管理しており、初期値の時点でid毎に微量の遅延を設けています。<br>これはパーティクルが一斉に同じ軌道を描くのを簡易に防ぐためです。また、id毎のグラデーションカラーを設定していますので、カラーをきれいに見せるためにも役立ちます。<br>ここでは、パーティクルサイズのp.sizeを初期段階で0にしていますが、これは発生した瞬間のパーティクルを不可視にすることによって、自然な吹き出しにする為です。<br></p>
-<p>次にイテレーション部分を見ていきます。<br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initialization is performed by the Emit method. </font><font style="vertical-align: inherit;">p.life manages the time since the generation of particles, and provides a small delay for each id at the time of the initial value. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is to easily prevent the particles from drawing the same trajectory all at once. </font><font style="vertical-align: inherit;">Also, since the gradation color is set for each id, it is useful for making the color look beautiful. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, the particle size p.size is set to 0 at the initial stage, but this is to make the particles invisible at the moment of occurrence to make the balloon natural.</font></font><br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, let's look at the iteration part.</font></font><br></p>
 <div class="emlist-code">
 <p class="caption">LorenzAttractor.compute</p>
 <pre class="emlist">#define DT 0.022<font></font>
@@ -213,10 +206,10 @@ void Emit(uint id : SV_DispatchThreadID)<font></font>
 float p;<font></font>
 float r;<font></font>
 float b;<font></font>
-<font></font>
-//Lorenz方程式の演算部分です。<font></font>
-float3 LorenzAttractor(float3 pos)<font></font>
-{<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// The arithmetic part of the Lorenz equation.</font></font><font></font>
+float3 LorenzAttractor(float3 pos)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     float dxdt = (p * (pos.y - pos.x));<font></font>
     float dydt = (pos.x * (r - pos.z) - pos.y);<font></font>
     float dzdt = (pos.x * pos.y - b * pos.z);<font></font>
@@ -227,35 +220,35 @@ float3 LorenzAttractor(float3 pos)<font></font>
 void Iterator(uint id : SV_DispatchThreadID)<font></font>
 {<font></font>
     Params p = buf[id];<font></font>
-    p.life.x += DT;<font></font>
-    //速度ベクトルのベクトル長を0から1でクランプしつつ、サイズに掛ける事によってスタートを自然に見せています。<font></font>
+    p.life.x += DT;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Clamp the vector length of the velocity vector from 0 to 1 and multiply it by the size to make the start look natural.</font></font><font></font>
     p.size.x = p.size.y * saturate(length(p.velocity));<font></font>
     if (p.life.x &gt; 0)<font></font>
     {<font></font>
         p.velocity = LorenzAttractor(p.position);<font></font>
         p.position += p.velocity;<font></font>
     }<font></font>
-    buf[id] = p;<font></font>
-}<font></font>
+    buf[id] = p;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>上記のLorenzAttractorメソッドが「Lorenz方程式」の演算部分になります。微量なデルタタイムでのx,y,zの速度ベクトルを演算し、最後にデルタタイムを掛け、移動量を導き出しています。<br>経験上、コンピュートシェーダー内で形状に関わる微分演算を行う際は、Unityからのデルタタイムを送らずに、フレームレート差から独立した固定値のデルタタイムを使用した方が安定した形状を保ちます。<br>これはフレームレートが落ちすぎた場合に、UnityのTime.deltaTimeの数値が微分演算を行うにしては大きくなりすぎることがある為です。デルタ幅が大きくなれば、それだけ演算結果が前回の物と比べ荒い大雑把な形状になってしまいます。<br>また、別の理由として、「Strange Attractor」はその方程式によっては、デルタタイムの取り方によって完全な収束もしくは無限大の発散をしてしまう場合がある為です。<br>これら2つの理由から、今回DTは定義済みの物を使用しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The LorenzAttractor method above is the arithmetic part of the "Lorenz equation". </font><font style="vertical-align: inherit;">The velocity vector of x, y, z with a small amount of delta time is calculated, and finally the delta time is multiplied to derive the amount of movement. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From experience, when performing derivative operations related to the shape in the compute shader, it is better to use a fixed value delta time independent of the frame rate difference instead of sending the delta time from Unity to maintain a stable shape. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is because if the frame rate drops too much, the value of Unity's Time.deltaTime may become too large for differential operations. </font><font style="vertical-align: inherit;">The larger the delta width, the rougher the calculation result will be compared to the previous one. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Another reason is that, depending on the equation, the "Strange Attractor" may completely converge or diverge infinitely depending on how the delta time is taken. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For these two reasons, DT is using the predefined ones this time.</font></font></p>
 
 <h2><a id="h6-4"></a><span class="secno">6.4　</span>Thomas' Cyclically Symmetric Attractor</h2>
-<p>次に生物学者のRené Thomas氏により発表された「Thomas' Cyclically Symmetric Attractor」の実装をしていきたいと思います。<br>初期値に左右されず、時間経過にしたがって安定状態になり、形状も非常にユニークな物になっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, I would like to implement the "Thomas' Cyclically Symmetric Attractor" announced by biologist René Thomas. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is not affected by the initial value, it becomes stable over time, and the shape is very unique.</font></font></p>
 <div id="id_sakota_2FThomasAttractor2" class="image">
-<img src="./Chapter 6 _ Strange Attractor_files/ThomasAttractor2.png" alt="Stable period of Thomas&#39;Cyclically Symmetric Attractor" class="width-100per">
-<p class="caption">
-図6.3: Thomas' Cyclically Symmetric Attractorの安定期
-</p>
+<img src="./Chapter 6 _ Strange Attractor_files/ThomasAttractor2.png" alt="Stable period of Thomas'Cyclically Symmetric Attractor" class="width-100per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.3: Thomas' Cyclically Symmetric Attractor Stable Period
+</font></font></p>
 </div>
 
-<h3><a id="h6-4-1"></a><span class="secno">6.4.1　</span>Thomas' Cyclically Symmetric 方程式</h3>
-<p>方程式は次の非線形常微分方程式で表されます。</p>
-<p>上記の方程式の変数bにおいて、<span class="equation">b \simeq 0.208186</span>として定めた場合、カオス的に「Strange Attractor」として振る舞い、<span class="equation">b \simeq 0</span>と定めた場合は空間を漂う形となります。</p>
+<h3><a id="h6-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Thomas' Cyclically Symmetric equation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The equation is represented by the following nonlinear ODE.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the variable b of the above equation, </font><font style="vertical-align: inherit;">if it is set as </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">b \ simeq 0.208186,</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> it </font><span class="equation"><font style="vertical-align: inherit;">behaves chaotically</font></span><font style="vertical-align: inherit;"> as "Strange Attractor", </font><font style="vertical-align: inherit;">and if it is set as </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">b \ simeq 0,</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> it </font><span class="equation"><font style="vertical-align: inherit;">floats</font></span><font style="vertical-align: inherit;"> in space.</font></font></p>
 
-<h3><a id="h6-4-2"></a><span class="secno">6.4.2　</span>Thomas' Cyclically Symmetric Attractorの実装</h3>
-<p>それでは「Thomas' Cyclically Symmetric 方程式」をコンピュートシェーダーによって実装してみましょう。<br>前述の「Lorenz Attractor」の実装と共通する部分がある為、パラメーターの構造体や手続き的な部分は継承し必要な部分のみ取り上げます。<br>まずは、CPU側でカラーと初期ポジションをオーバーライドし定めます。<br></p>
+<h3><a id="h6-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation of Thomas'Cyclically Symmetric Attractor</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now let's implement the "Thomas' Cyclically Symmetric equation" with a compute shader. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since there is a part in common with the implementation of "Lorenz Attractor" mentioned above, the parameter structure and procedural part are inherited and only the necessary part is taken up. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, override the color and initial position on the CPU side.</font></font><br></p>
 <div class="emlist-code">
 <p class="caption">ThomasAttractor.cs</p>
 <pre class="emlist">protected sealed override void InitializeComputeBuffer()<font></font>
@@ -275,8 +268,8 @@ void Iterator(uint id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>今回は色をきれいに見せる為に、内側から外側にいくにつれてマントル的にグラデーションカラーをつけた球体を初期ポジションとして定めています。<br></p>
-<p>次にエミット時とイテレーション時のコンピュートシェーダーのメソッドを見ていきます。<br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, in order to make the colors look beautiful, the initial position is a sphere with a mantle-like gradation color from the inside to the outside.</font></font><br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, let's look at the compute shader methods at the time of emission and iteration.</font></font><br></p>
 <div class="emlist-code">
 <p class="caption">ThomasAttractor.compute</p>
 <pre class="emlist">//Thomas Attractor parameters<font></font>
@@ -287,23 +280,23 @@ float3 ThomasAttractor(float3 pos)<font></font>
     float dxdt = -b * pos.x + sin(pos.y);<font></font>
     float dydt = -b * pos.y + sin(pos.z);<font></font>
     float dzdt = -b * pos.z + sin(pos.x);<font></font>
-    return float3(dxdt, dydt, dzdt) * DT;<font></font>
-}<font></font>
+    return float3(dxdt, dydt, dzdt) * DT;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 <font></font>
 [numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
-void Emit(uint id : SV_DispatchThreadID)<font></font>
-{<font></font>
+void Emit(uint id : SV_DispatchThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     Params p = buf[id];<font></font>
     p.life = (float)id * -1e-05;<font></font>
     p.position = p.emitPos;<font></font>
     p.size.x = p.size.y;<font></font>
-    buf[id] = p;<font></font>
-}<font></font>
-<font></font>
-[numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
-void Iterator(uint id : SV_DispatchThreadID)<font></font>
-{<font></font>
-    Params p = buf[id];<font></font>
+    buf[id] = p;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+[numthreads(THREAD_X, THREAD_Y, THREAD_Z)]</font></font></font></font><font></font>
+void Iterator(uint id : SV_DispatchThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    Params p = buf[id];</font></font></font></font><font></font>
     p.life.x += DT;<font></font>
     if (p.life.x &gt; 0)<font></font>
     {<font></font>
@@ -314,14 +307,14 @@ void Iterator(uint id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>ThomasAttractorメソッドが「Thomas' Cyclically Symmetric 方程式」の演算部分になります。<br>また、Emit時の実装は、LorenzAttratorと違い、今回は初期ポジションをあえて見せたいので、初期サイズからターゲットサイズに設定しています。<br>その他はほぼ同じ実装になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The ThomasAttractor method becomes the arithmetic part of the "Thomas' Cyclically Symmetric equation". </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, unlike LorenzAttrator, the implementation at Emit is set from the initial size to the target size because I want to show the initial position this time. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Others have almost the same implementation.</font></font></p>
 
-<h2><a id="h6-5"></a><span class="secno">6.5　</span>まとめ</h2>
-<p>本章では、「Strange Attractor」をコンピュートシェーダーを用いてGPU実装する例をご紹介しました。<br>「Strange Attractor」にはさまざまな種類があり、実装においても比較的少ない演算でカオス的な振る舞いを見せる為、グラフィックスにおいても有用なアクセントになるのではないでしょうか。<br>他にも、「<a id="fnb-japanese" href="https://freder.io/files/unity3/sakota.html#fn-japanese" class="noteref" epub:type="noteref">*4</a>UedaAttractor」と呼ばれる2次元運動のものや、「<a id="fnb-aizawa" href="https://freder.io/files/unity3/sakota.html#fn-aizawa" class="noteref" epub:type="noteref">*5</a>AizawaAttractor」のようなスピン運動を見せるもの等多種多様ありますので、もし興味がございましたらぜひ挑戦してみてください。</p>
+<h2><a id="h6-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we introduced an example of implementing "Strange Attractor" on GPU using a compute shader. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are various types of "Strange Attractor", and even in the implementation, it shows chaotic behavior with relatively few operations, so it may be a useful accent in graphics as well. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are many other </font><font style="vertical-align: inherit;">types, such as </font><font style="vertical-align: inherit;">a two-dimensional motion called </font><font style="vertical-align: inherit;">" </font></font><a id="fnb-japanese" href="https://freder.io/files/unity3/sakota.html#fn-japanese" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 4</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ueda Attractor" and </font><font style="vertical-align: inherit;">a spin motion like </font><font style="vertical-align: inherit;">" </font></font><a id="fnb-aizawa" href="https://freder.io/files/unity3/sakota.html#fn-aizawa" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 5</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Aizawa Attractor", so if you are interested, please try it.</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-japanese"><p class="footnote">[*4] http://www-lab23.kuee.kyoto-u.ac.jp/ueda/Kambe-Bishop_ver3-1.pdf</p></div>
 <div class="footnote" epub:type="footnote" id="fn-aizawa"><p class="footnote">[*5] http://www.algosome.com/articles/aizawa-attractor-chaos.html</p></div>
 
-<h2><a id="h6-6"></a><span class="secno">6.6　</span>参考</h2>
+<h2><a id="h6-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
 <ul>
 <li>http://paulbourke.net/fractals/lorenz/</li>
 <li>https://en.wikipedia.org/wiki/Thomas%27_cyclically_symmetric_attractor</li>
@@ -330,4 +323,4 @@ void Iterator(uint id : SV_DispatchThreadID)<font></font>
 </ul><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 432px; top: 23.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 6 _ Strange Attractor_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第6章　Strange Attractor</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Strange Attractor_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Strange Attractor_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Strange Attractor_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Strange Attractor_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

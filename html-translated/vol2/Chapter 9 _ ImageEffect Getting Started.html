@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0053)https://freder.io/files/unity2/SimpleImageEffect.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 9 _ ImageEffect Getting Started_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 9 _ ImageEffect Getting Started_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 9 _ ImageEffect Getting Started_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ ImageEffect Getting Started_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ ImageEffect Getting Started_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 9 _ ImageEffect Getting Started_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 9 _ ImageEffect Getting Started_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ ImageEffect Getting Started_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ ImageEffect Getting Started_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 9 _ ImageEffect Getting Started_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h9"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 9　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ImageEffect Getting Started</font></font></h1>
 <div id="id_SimpleImageEffect_2F02mono" class="image">
 <img src="./Chapter 9 _ ImageEffect Getting Started_files/02mono.png" alt="Negative / positive inversion by ImageEffect">
@@ -78,26 +71,26 @@ Figure 9.2: ImageEffect implementation implements fragment shader
 </font></font></p>
 </div>
 
-<h2><a id="h9-2"></a><span class="secno">9.2　</span>Unity における ImageEffect の簡単な流れ</h2>
-<p>Unity において、ImageEffect の処理順序は概ね次のようになります。</p>
+<h2><a id="h9-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Simple flow of ImageEffect in Unity</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In Unity, the processing order of ImageEffect is roughly as follows.</font></font></p>
 <ol>
-<li>カメラがシーンを描画する。</li>
-<li>カメラの描画内容が OnRenderImage メソッドに入力される。</li>
-<li>ImageEffect 用のシェーダで、入力された描画内容を修正する。</li>
-<li>OnRenderImage メソッドが修正された描画内容を出力する。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The camera draws the scene.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The drawing contents of the camera are input to the OnRenderImage method.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the shader for ImageEffect, modify the input drawing contents.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The OnRenderImage method outputs the modified drawing content.</font></font></li>
 </ol>
 
-<h2><a id="h9-3"></a><span class="secno">9.3　</span>サンプルシーンから構成を確認する</h2>
-<p>もっとも簡単なサンプルシーンを用意しました。サンプルの "ImageEffectBase" シーンを開いて確認してください。関連するスクリプトなどのリソースは、それと同じ名前のものです。</p>
-<p>よく似たサンプルに ImageEffect シーンと、同じ名前のリソースがありますが、そちらは後で解説するので注意してください。</p>
-<p>サンプルを開くと、シーン中のカメラが映し出すイメージは、ImageEffect によって色がネガポジ反転します。これは Unity が標準で生成する ImageEffect 用のシェーダと同等の効果ですが、実際のソースコードはわずかに異なります。</p>
-<p>サンプルシーンの "Main Camera" に "ImageEffectBase" スクリプトがアタッチされていることを確認してください。さらに "ImageEffectBase" では同じ名前のマテリアルが参照され、そのマテリアルには同じ名前のシェーダが設定されています。</p>
+<h2><a id="h9-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Check the configuration from the sample scene</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We have prepared the simplest sample scene. </font><font style="vertical-align: inherit;">Open the sample "ImageEffectBase" scene to see it. </font><font style="vertical-align: inherit;">The associated script and other resources have the same name.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A similar sample has a resource with the same name as the ImageEffect scene, but be aware that it will be discussed later.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When you open the sample, the image projected by the camera in the scene will be negatively and positively inverted by ImageEffect. </font><font style="vertical-align: inherit;">This is equivalent to the shader for ImageEffect that Unity generates by default, but the actual source code is slightly different.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Make sure the "ImageEffectBase" script is attached to the "Main Camera" in the sample scene. </font><font style="vertical-align: inherit;">In addition, "ImageEffectBase" references a material with the same name, and that material has a shader with the same name.</font></font></p>
 
-<h2><a id="h9-4"></a><span class="secno">9.4　</span>スクリプトの実装</h2>
-<p>まずは ImageEffect のシェーダをスクリプトから呼び出すまでの処理を先に解説しようと思います。</p>
+<h2><a id="h9-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Script implementation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First of all, I will explain the process from calling the Shader of ImageEffect from the script.</font></font></p>
 
-<h3><a id="h9-4-1"></a><span class="secno">9.4.1　</span>OnRenderImage メソッド</h3>
-<p>Unity が出力する映像に変更を加えたいとき、ほとんどの場合には OnRenderImage メソッドを実装する必要があります。OnRenderImage は Start や Update などと同じように Unity の標準のワークフローに定義されるメソッドです。</p>
+<h3><a id="h9-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.4.1　</font></font></font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> OnRenderImage method</font></font></font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When you want to make changes to the video that Unity outputs, you almost always need to implement the OnRenderImage method. </font><font style="vertical-align: inherit;">OnRenderImage is a method defined in Unity's standard workflow, like Start and Update.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ImageEffectBase.cs</p>
 <pre class="emlist">[ExecuteInEditMode]<font></font>
@@ -106,29 +99,29 @@ public class ImageEffectBase : MonoBehaviour<font></font>
 {<font></font>
 …<font></font>
 protected virtual void OnRenderImage<font></font>
-    (RenderTexture source, RenderTexture destination)<font></font>
-{<font></font>
+    (RenderTexture source, RenderTexture destination)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     Graphics.Blit(source, destination, this.material);<font></font>
 }<font></font>
 </pre>
 </div>
-<p>OnRenderImage は、Camera コンポーネントをもつ GameObject に追加されたときにだけ呼び出されます。したがって、ImageEffect クラスには、<code class="inline-code tt">[RequireComponent(typeof(Camera))]</code> を定義しています。</p>
-<p>また ImageEffect が適用された結果は、Scene を実行する前から見えていた方がよいので、<code class="inline-code tt">ExcludeInEditMode</code> 属性も定義されています。複数の ImageEffect を切り替えて確認するときや、無効にした状態を確認するときは、ImageEffect のスクリプトを disable にします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OnRenderImage is only called when it is added to a GameObject that has a Camera component. </font><font style="vertical-align: inherit;">Therefore, the ImageEffect class </font></font><code class="inline-code tt">[RequireComponent(typeof(Camera))]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">defines.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The </font></font><code class="inline-code tt">ExcludeInEditMode</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">attributes are also defined </font><font style="vertical-align: inherit;">because the result of applying ImageEffect should be visible before running Scene </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Disable the ImageEffect script when you want to switch between multiple ImageEffects and check when they are disabled.</font></font></p>
 
-<h4><a id="h9-4-1-1"></a>引数 source, destination について</h4>
-<p>OnRenderImage は引数の 1 つ目（source）に入力、2 つ目（destination）に出力先が与えられています。いずれも RenderTexture 型ですが、特別の設定がないとき、source にはカメラの描画結果が与えられ、destination には null が与えられています。</p>
-<p>ImageEffect は、source に入力された絵を変更して destination に書き込む処理を行いますが、destination が null のとき、変更された絵の出力先はフレームバッファ、すなわちディスプレイに見えている領域になります。</p>
-<p>また Camera の出力先に RenderTexture が設定されているとき、source はその RenderTexture と同等になります。</p>
+<h4><a id="h9-4-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">About the arguments source and destination</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OnRenderImage is given an input in the first argument (source) and an output destination in the second (destination). </font><font style="vertical-align: inherit;">Both are of type RenderTexture, but unless otherwise specified, source is given the drawing result of the camera and destination is given null.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ImageEffect modifies the picture entered in source and writes it to destination, but when destination is null, the modified picture is output to the framebuffer, the area visible to the display.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, when RenderTexture is set to the output destination of the Camera, the source is equivalent to that RenderTexture.</font></font></p>
 
 <h4><a id="h9-4-1-2"></a>Graphics.Blit</h4>
-<p><code class="inline-code tt">Graphics.Blit</code> メソッドは、指定したマテリアルとシェーダを使って、入力された RenderTexture を出力となる RenderTexture に描画する処理です。ここでの入力と出力は OnRenderImage の source および destination になります。また、マテリアルは ImageEffect のためのシェーダが設定されたものになります。</p>
-<p>原則として、 OnRenderImage メソッドでは、引数の destination に必ず何かしらのイメージデータを渡す必要があります。したがってほとんどの場合に OnRenderImage 内では Graphics.Blit が呼び出されます。</p>
-<p>応用的に、たとえば別のエフェクトに使うためのテクスチャを作るとき、テクスチャを複製するときなどにも <code class="inline-code tt">Graphics.Blit</code> を用いることがあります。あるいは、別の方法を用いて destination にデータを渡すことがありますが、ここでは入門のためにそれらの応用例については割愛します。</p>
-<p>次の項目は ImageEffect を適用する過程の話と少々異なるので、もし、はじめて読まれるときは、飛ばしてシェーダの解説に進むことを推奨します。</p>
+<p><code class="inline-code tt">Graphics.Blit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The method is the process of drawing the input RenderTexture to the output RenderTexture using the specified material and shader. </font><font style="vertical-align: inherit;">The inputs and outputs here are the source and destination of the OnRenderImage. </font><font style="vertical-align: inherit;">Also, the material will be the one with the shader set for ImageEffect.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As a general rule, the OnRenderImage method must always pass some image data to the destination argument. </font><font style="vertical-align: inherit;">Therefore, in most cases Graphics.Blit is called within OnRenderImage.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It </font></font><code class="inline-code tt">Graphics.Blit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">may </font><font style="vertical-align: inherit;">also </font><font style="vertical-align: inherit;">be used </font><font style="vertical-align: inherit;">as an application, for example, when creating a texture for use in another effect, or when duplicating a texture </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Alternatively, you may use another method to pass the data to the destination, but I'll omit those application examples here for the sake of getting started.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following items are a little different from the process of applying ImageEffect, so if you are reading for the first time, it is recommended that you skip to the shader description.</font></font></p>
 
-<h3><a id="h9-4-2"></a><span class="secno">9.4.2　</span>ImageEffect が利用可能か検証する</h3>
-<p>ImageEffect を解説するにあたり、この項目の実装および解説は不要と思うのですが、より実用的な実装がなされた資料を読むときに障害にならないよう、解説することにしました。Unity が用意する ImageEffect の資料にも同等の機能が実装されています。</p>
-<p>ImageEffect は画素毎に演算される処理です。したがって高度な GPU を持たない実行環境では、演算数の多さのために　ImageEffect が歓迎されないことがあります。そこで、ImageEffect が実行環境で利用できるかどうか、開始時に検証し、利用できなければ無効化するのが親切です。</p>
+<h3><a id="h9-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Verify if ImageEffect is available</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I don't think it is necessary to implement or explain this item when explaining ImageEffect, but I decided to explain it so that it would not be an obstacle when reading materials with more practical implementations. </font><font style="vertical-align: inherit;">Equivalent functionality is implemented in the ImageEffect documentation provided by Unity.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ImageEffect is a process that is calculated for each pixel. </font><font style="vertical-align: inherit;">Therefore, in an execution environment without an advanced GPU, ImageEffect may not be welcomed due to the large number of operations. </font><font style="vertical-align: inherit;">Therefore, it is helpful to verify at the start whether ImageEffect is available in the execution environment and disable it if it is not available.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ImageEffectBase.cs</p>
 <pre class="emlist">protected virtual void Start()<font></font>
@@ -142,22 +135,22 @@ protected virtual void OnRenderImage<font></font>
 }<font></font>
 </pre>
 </div>
-<p>検証は Unity が用意する <code class="inline-code tt">SystemInfo.supportsImageEffects</code> によって簡単に実現することができます。</p>
-<p>この実装はほとんどのケースで有用と思いますが、たとえばシェーダ側に実装されるfallback（フォールバック）機能を使う場合などのときは、異なる実装が必要になることがあります。あくまで参考にしてください。</p>
-<p>1 つだけ注意する必要があるとすれば、<code class="inline-code tt">this.material</code> の参照を検証するタイミングです。例では Start メソッドで検証していますが、これが Awake や OnEnable のとき、たとえば <code class="inline-code tt">this.material</code> に参照が与えられていたとしても、Unity は null を示します(そして <code class="inline-code tt">base.enabled = false</code> によってスクリプトが無効になります)。詳細は割愛しますが、<code class="inline-code tt">ExcludeInEditMode</code> の仕様に依存するものです（弊害とは言い難い）。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Verification </font></font><code class="inline-code tt">SystemInfo.supportsImageEffects</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">can be easily achieved by </font><font style="vertical-align: inherit;">providing Unity </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This implementation will be useful in most cases, but you may need a different implementation, for example when using the fallback feature implemented on the shader side. </font><font style="vertical-align: inherit;">Please refer to it to the last.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The only </font></font><code class="inline-code tt">this.material</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">thing </font><font style="vertical-align: inherit;">you need to be aware of is when </font><font style="vertical-align: inherit;">to validate the reference. </font><font style="vertical-align: inherit;">The example validates with the Start method, but when this is Awake or OnEnable </font></font><code class="inline-code tt">this.material</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, Unity will show null (and </font></font><code class="inline-code tt">base.enabled = false</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">will invalidate the script) </font><font style="vertical-align: inherit;">, even if a reference is given to </font><font style="vertical-align: inherit;">, for example </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Details are omitted, but </font></font><code class="inline-code tt">ExcludeInEditMode</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it depends on the specifications (it is hard to say that it is harmful).</font></font></p>
 
-<h2><a id="h9-5"></a><span class="secno">9.5　</span>もっとも簡単な ImageEffect シェーダの実装</h2>
-<p>続いて ImageEffect のシェーダについて解説します。ここで紹介するもっとも基本的なサンプルは、Unity が標準的に作成するものと同様に、出力する色を反転するだけの効果を実装しています。</p>
+<h2><a id="h9-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Simplest ImageEffect Shader Implementation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, I will explain about the ImageEffect shader. </font><font style="vertical-align: inherit;">The most basic sample presented here implements the effect of just flipping the output colors, similar to what Unity creates as standard.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ImageEffectBase.shader</p>
 <pre class="emlist">Shader "ImageEffectBase"<font></font>
 {<font></font>
     Properties<font></font>
     {<font></font>
-        _MainTex("Texture", 2D) = "white" {}<font></font>
-    }<font></font>
-    SubShader<font></font>
-    {<font></font>
+        _MainTex("Texture", 2D) = "white" {}<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+    SubShader<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         Cull Off ZWrite Off ZTest Always<font></font>
 <font></font>
         Pass<font></font>
@@ -184,12 +177,12 @@ protected virtual void OnRenderImage<font></font>
 }<font></font>
 </pre>
 </div>
-<p>大まかな処理の流れとして、<code class="inline-code tt">_MainTex</code> にカメラが描画するイメージが入力され、フラグメントシェーダで画素に最終的に表示する色を決定する、といったイメージです。</p>
-<p>ここで <code class="inline-code tt">_MainTex</code> に与えられるテクスチャ情報は <code class="inline-code tt">OnRenderImage</code> の <code class="inline-code tt">source</code>,<code class="inline-code tt">Graphics.Blit</code> の <code class="inline-code tt">source</code> に等しいです。</p>
-<p><code class="inline-code tt">_MainTex</code> は <code class="inline-code tt">Graphics.Blit</code> の入力のために Unity によって予約されている点に注意してください。異なる他の名前に変更すると、<code class="inline-code tt">Graphics.Blit</code> の <code class="inline-code tt">source</code> が正しくシェーダに入力されません。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As a rough process flow, </font></font><code class="inline-code tt">_MainTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the image drawn by the camera is input to, and the fragment shader determines the final color to be displayed on the pixel.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here </font></font><code class="inline-code tt">_MainTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">texture information given to </font></font><code class="inline-code tt">OnRenderImage</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the </font></font><code class="inline-code tt">source</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">Graphics.Blit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the </font></font><code class="inline-code tt">source</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is equal to.</font></font></p>
+<p><code class="inline-code tt">_MainTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tooth </font></font><code class="inline-code tt">Graphics.Blit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Please note that has been reserved by the Unity for input. </font><font style="vertical-align: inherit;">If you change to a different other name, </font></font><code class="inline-code tt">Graphics.Blit</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the </font></font><code class="inline-code tt">source</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is not entered correctly shader.</font></font></p>
 
-<h3><a id="h9-5-1"></a><span class="secno">9.5.1　</span>Unity が標準で生成するシェーダとの差異</h3>
-<p>Unity が標準で生成する ImageEffect は次のように少々長く複雑です（抜粋しています）。ImageEffect もシェーダですから、標準的なレンダリングパイプラインを経て最終的な出力を得ます。したがって、ImageEffect が実現する効果には本質的に影響しないように見えるバーテックスシェーダも、ImageEffect のシェーダには定義されている必要があります。</p>
+<h3><a id="h9-5-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.5.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Differences from the standard shaders generated by Unity</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The ImageEffect that Unity generates by default is a bit long and complex (excerpt): </font><font style="vertical-align: inherit;">ImageEffect is also a shader, so you get the final output through a standard rendering pipeline. </font><font style="vertical-align: inherit;">Therefore, a vertex shader that does not seem to affect the effect that ImageEffect achieves must also be defined in the ImageEffect shader.</font></font></p>
 <div class="emlist-code">
 <p class="caption">NewImageEffectShader.shader</p>
 <pre class="emlist">SubShader<font></font>
@@ -210,14 +203,14 @@ protected virtual void OnRenderImage<font></font>
             float2 uv : TEXCOORD0;<font></font>
         };<font></font>
 <font></font>
-        struct v2f<font></font>
-        {<font></font>
-            float2 uv : TEXCOORD0;<font></font>
-            float4 vertex : SV_POSITION;<font></font>
-        };<font></font>
+        struct v2f<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            float2 uv : TEXCOORD0;</font></font></font></font><font></font>
+            float4 vertex : SV_POSITION;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        };</font></font></font></font><font></font>
 <font></font>
-        v2f vert (appdata v)<font></font>
-        {<font></font>
+        v2f vert (appdata v)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
             v2f o;<font></font>
             o.vertex = UnityObjectToClipPos(v.vertex);<font></font>
             o.uv = v.uv;<font></font>
@@ -226,8 +219,8 @@ protected virtual void OnRenderImage<font></font>
 <font></font>
         sampler2D _MainTex;<font></font>
 <font></font>
-        fixed4 frag (v2f i) : SV_Target<font></font>
-        {<font></font>
+        fixed4 frag (v2f i) : SV_Target<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
             fixed4 col = tex2D(_MainTex, i.uv);<font></font>
             col.rgb = 1 - col.rgb;<font></font>
             return col;<font></font>
@@ -237,50 +230,50 @@ protected virtual void OnRenderImage<font></font>
 }<font></font>
 </pre>
 </div>
-<p>ImageEffect におけるバーテックスシェーダは、カメラに正面を向いて、その全面を埋めるような四角形のメッシュとその UV 座標を、フラグメントシェーダに渡しているだけです。このバーテックスシェーダに手を加えることで実現できる効果もありますが、ほとんどの ImageEffect では不要です。</p>
-<p>そのためか、Unity には標準的なバーテックスシェーダとその入力を定義するための構造体が用意されています。それらは "UnityCG.cginc" に定義されています。ここで用意した標準ではないシェーダのソースコードでは、UnityCg.cginc に定義された <code class="inline-code tt">vertex vert_img</code> や <code class="inline-code tt">appdata</code>、<code class="inline-code tt">v2f_img</code>を利用することによって、ソースコード全体を簡潔にしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The vertex shader in ImageEffect simply faces the camera and passes a rectangular mesh that fills the entire surface and its UV coordinates to the fragment shader. </font><font style="vertical-align: inherit;">There are some benefits that can be achieved by modifying this vertex shader, but most ImageEffects do not.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">That's why Unity provides a standard vertex shader and a structure to define its inputs. </font><font style="vertical-align: inherit;">They are defined in "UnityCG.cginc". </font><font style="vertical-align: inherit;">Here, in the source code of the shader is not a prepared standard, defined in the UnityCg.cginc </font></font><code class="inline-code tt">vertex vert_img</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ya </font></font><code class="inline-code tt">appdata</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">v2f_img</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">by making use of, and to simplify the entire source code.</font></font></p>
 
 <h3><a id="h9-5-2"></a><span class="secno">9.5.2　</span>Cull, ZWrite, ZTest</h3>
-<p>一見するとカリングと Zバッファの書き込み、参照については、標準の値で問題なさそうです。しかしながら Unity は不用意なＺバッファへの書き込みを防ぐために、<code class="inline-code tt">Cull Off ZWrite Off ZTest Always</code> の定義を推奨しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">At first glance, standard values ​​seem to be fine for culling, writing and referencing the Z-buffer. </font><font style="vertical-align: inherit;">However, Unity </font></font><code class="inline-code tt">Cull Off ZWrite Off ZTest Always</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">recommends defining to </font><font style="vertical-align: inherit;">prevent inadvertent writing to the Z-buffer </font><font style="vertical-align: inherit;">.</font></font></p>
 
-<h2><a id="h9-6"></a><span class="secno">9.6　</span>もっとも簡単な練習</h2>
-<p>ImageEffect を簡単に練習してみましょう。サンプルでは単純に全画面をネガポジ反転するようにしていますが、この章の初めに掲載した図のように、イメージ全体の "斜め半分にだけ" ネガポジ反転を適用するようにしてみます。</p>
-<p><code class="inline-code tt">input.uv</code> には、イメージ全体のうち 1 画素分を示す座標が与えられていますから、これを活用します。イメージ全体の各画素は 0 ~ 1 で正規化された x * y 座標で示されます。</p>
-<p>動作する一例のコードは、サンプルの "Prtactice" フォルダに含まれていますし、後に続いて解説しますが、もし初心者の方に目を通して頂けているのであれば、まずご自身で実装してみることをオススメします。</p>
+<h2><a id="h9-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> The easiest practice</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's practice ImageEffect easily. </font><font style="vertical-align: inherit;">The sample simply flips the full screen negatively and positively, but try applying negative and positive flipping "only to the diagonal half" of the entire image, as shown in the figure at the beginning of this chapter.</font></font></p>
+<p><code class="inline-code tt">input.uv</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is given coordinates that indicate one pixel of the entire image, so take advantage of this. </font><font style="vertical-align: inherit;">Each pixel in the entire image is represented by the x * y coordinates normalized by 0 to 1.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">An example code that works is included in the sample "Prtactice" folder and will be explained later, but if you are new to it, try implementing it yourself first. I recommend that.</font></font></p>
 
-<h3><a id="h9-6-1"></a><span class="secno">9.6.1　</span>上下左右の半分は簡単</h3>
-<p>上下半分に色を変化させるのはすごく簡単です。これによって、ImageEffect の座標の原点を確認するのがよいと思います。たとえば次の 2 行のコードでは、それぞれ x 座標と y 座標が半分より小さいときに色を反転します。</p>
+<h3><a id="h9-6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Easy up, down, left and right halves</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It's very easy to change the color in the upper and lower halves. </font><font style="vertical-align: inherit;">This is a good way to see the origin of the ImageEffect's coordinates. </font><font style="vertical-align: inherit;">For example, the following two lines of code invert colors when the x and y coordinates are less than half, respectively.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Practice/ImageEffectShader_01.shader</p>
 <pre class="emlist">color.rgb = input.uv.x &lt; 0.5 ? 1 - color.rgb : color.rgb;<font></font>
 color.rgb = input.uv.y &lt; 0.5 ? 1 - color.rgb : color.rgb;<font></font>
 </pre>
 </div>
-<p>色の変化から、ImageEffect に与えられる座標の原点は、左下であることが確認できたでしょうか。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Did you confirm from the color change that the origin of the coordinates given to ImageEffect is the lower left?</font></font></p>
 
-<h3><a id="h9-6-2"></a><span class="secno">9.6.2　</span>斜め半分も簡単</h3>
-<p>上下左右の半分は簡単だと先にいっていますが、実際には斜め半分も簡単です。次のようなソースコードで斜め半分にエフェクトを適用する（色を反転する）ことができます。</p>
+<h3><a id="h9-6-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.6.2 Easy　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> diagonal half</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I mentioned earlier that the top, bottom, left, and right halves are easy, but in reality, the diagonal halves are also easy. </font><font style="vertical-align: inherit;">You can apply the effect (invert the color) diagonally in half with the following source code.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Practice/ImageEffectShader_02.shader</p>
 <pre class="emlist">color.rgb = input.uv.y &lt; input.uv.x ? 1 - color.rgb : color.rgb;
 </pre>
 </div>
 
-<h2><a id="h9-7"></a><span class="secno">9.7　</span>座標に関する便利な定義値</h2>
-<p>紹介したように UnityCg.cginc には <code class="inline-code tt">vertex vert_img</code> や<code class="inline-code tt">appdata</code> のような便利な関数や構造体が定義されていますが、これら以外にも ImageEffect を実装する上で便利な値が定義されています。</p>
+<h2><a id="h9-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Convenient definition values ​​for coordinates</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">That was introduced as UnityCg.cginc The </font></font><code class="inline-code tt">vertex vert_img</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">killing </font></font><code class="inline-code tt">appdata</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">of such useful functions and structures have been defined, convenient value in implementing the ImageEffect In addition to these have been defined.</font></font></p>
 
 <h3><a id="h9-7-1"></a><span class="secno">9.7.1　</span>_ScreenParams</h3>
-<p><code class="inline-code tt">_ScreenParams</code> は、<code class="inline-code tt">float4</code> 型の値で、<code class="inline-code tt">x, y</code> にはそれぞれ出力するイメージのピクセル幅と高さが、<code class="inline-code tt">w, z</code> には <code class="inline-code tt">1 + 1 / x</code>, <code class="inline-code tt">1 + 1 / y</code> が与えられています。</p>
-<p>たとえば 640x480 サイズのレンダリングを実行するとき、<code class="inline-code tt">x = 640</code>, <code class="inline-code tt">y = 480</code>,<code class="inline-code tt">z = 1 + 1 / 640</code>, <code class="inline-code tt">z = 1 + 1 / 480</code> となります。実際のところ、<code class="inline-code tt">w</code> と <code class="inline-code tt">z</code> はそれほど使うことがないでしょう。</p>
-<p>一方で <code class="inline-code tt">x</code>、<code class="inline-code tt">y</code> の値はたとえばイメージ上の何ピクセルに相当するのか算出したり、あるいはアスペクト比を算出するために頻繁に用いられます。これらは凝ったエフェクトを作る上で重要ですが、わざわざスクリプトから値を与えずとも Unity 側が用意してくれるのは助かりますね。頭の片隅に入れておけば、他の方のシェーダを読むときの助けになることもあると思います。</p>
+<p><code class="inline-code tt">_ScreenParams</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is </font></font><code class="inline-code tt">float4</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the type of value, </font></font><code class="inline-code tt">x, y</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to the pixel width and height of the image to be output, respectively, </font></font><code class="inline-code tt">w, z</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the </font></font><code class="inline-code tt">1 + 1 / x</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">1 + 1 / y</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">we are given.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, when you run the rendering of 640x480 size, </font></font><code class="inline-code tt">x = 640</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">y = 480</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">z = 1 + 1 / 640</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">z = 1 + 1 / 480</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and will be. </font><font style="vertical-align: inherit;">As a matter of fact, </font></font><code class="inline-code tt">w</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and </font></font><code class="inline-code tt">z</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it would not have to use so much.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">On the other hand </font></font><code class="inline-code tt">x</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">y</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the value of is often used to calculate, for example, how many pixels on an image it corresponds to, or to calculate the aspect ratio. </font><font style="vertical-align: inherit;">These are important for creating elaborate effects, but it would be helpful if Unity provided them without giving any values ​​from the script. </font><font style="vertical-align: inherit;">If you put it in the corner of your head, it may help you to read other shaders.</font></font></p>
 
 <h3><a id="h9-7-2"></a><span class="secno">9.7.2　</span>_TexelSize</h3>
-<p>同じような定義値の 1 つに、<code class="inline-code tt">&lt;sampler2Dの変数名&gt;_TexelSize</code> という定義値があります。ここでは <code class="inline-code tt">_MainTex_TexelSize</code> になります。</p>
-<p><code class="inline-code tt">_ScreenParams</code> と同じく <code class="inline-code tt">float4</code> 型の値ですが、<code class="inline-code tt">x = 1 / width</code>, <code class="inline-code tt">y = 1 / height</code>, <code class="inline-code tt">z = width</code>, <code class="inline-code tt">y = height</code> と、各要素に与えられる値が異なります。また対応する <code class="inline-code tt">sampler2D</code> 型によって値が異なる点も特徴です。<code class="inline-code tt">_MainTex</code> にかかわらず、対応する <code class="inline-code tt">~_TexlSize</code> を定義すれば、Unity から値が与えられます。</p>
-<p><code class="inline-code tt">_ScreenParams</code> を使っている ImageEffect も沢山ありますが、どちらかというと <code class="inline-code tt">_MainTex_TexelSize</code> の方が使いやすいと思います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">One of the similar </font></font><code class="inline-code tt">&lt;sampler2Dの変数名&gt;_TexelSize</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">definition values ​​is. </font><font style="vertical-align: inherit;">Here it </font></font><code class="inline-code tt">_MainTex_TexelSize</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">will be.</font></font></p>
+<p><code class="inline-code tt">_ScreenParams</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the same </font></font><code class="inline-code tt">float4</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, but the type of values, </font></font><code class="inline-code tt">x = 1 / width</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">y = 1 / height</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">z = width</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">y = height</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and, different value given to each element. </font><font style="vertical-align: inherit;">Another </font></font><code class="inline-code tt">sampler2D</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">feature is that the values ​​differ depending on the </font><font style="vertical-align: inherit;">corresponding </font><font style="vertical-align: inherit;">type. </font></font><code class="inline-code tt">_MainTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Regardless, </font></font><code class="inline-code tt">~_TexlSize</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">if you define </font><font style="vertical-align: inherit;">a corresponding </font><font style="vertical-align: inherit;">, Unity will give you a value.</font></font></p>
+<p><code class="inline-code tt">_ScreenParams</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are many ImageEffects that </font></font><code class="inline-code tt">_MainTex_TexelSize</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">use, but I think </font><font style="vertical-align: inherit;">it </font><font style="vertical-align: inherit;">'s easier to use.</font></font></p>
 
-<h3><a id="h9-7-3"></a><span class="secno">9.7.3　</span>1 つとなりの画素を参照する</h3>
-<p>たとえば 1 つ隣の画素の色（値）を参照したい、ということは画像処理などでは頻繁にありますが、次のようなコードによって、隣の画素の値を参照することができます。</p>
+<h3><a id="h9-7-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.7.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Refer to one pixel</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, it is often the case in image processing that you want to refer to the color (value) of the next pixel, but you can refer to the value of the next pixel with the following code.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Practice/ImageEffectShader_03.shader</p>
 <pre class="emlist">sampler2D _MainTex;<font></font>
@@ -301,22 +294,22 @@ fixed4 frag(v2f_img input) : SV_Target<font></font>
 }<font></font>
 </pre>
 </div>
-<p>このコードは周辺 4 つの画素を参照して平均の値を返すものです。画像処理では文字どおり平滑化フィルタなどと呼ばれます。他にもより高品質なノイズ軽減のためのフィルタが同じように周辺の画素を参照して実装されることもありますし、たとえばエッジ・輪郭線検出フィルタなどでも用いられています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This code references the four surrounding pixels and returns the average value. </font><font style="vertical-align: inherit;">In image processing, it is literally called a smoothing filter. </font><font style="vertical-align: inherit;">In addition, a higher quality noise reduction filter may be implemented by referring to the surrounding pixels in the same way, and it is also used in edge / contour detection filters, for example.</font></font></p>
 
-<h2><a id="h9-8"></a><span class="secno">9.8　</span>深度と法線の取得</h2>
+<h2><a id="h9-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Obtaining depth and normals</font></font></h2>
 <div id="id_SimpleImageEffect_2F03mono" class="image">
 <img src="./Chapter 9 _ ImageEffect Getting Started_files/03mono.png" alt="Image of G-Buffer">
-<p class="caption">
-図9.3: G-Buffer のイメージ
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.3: Image of G-Buffer
+</font></font></p>
 </div>
-<p>モデルに適用するマテリアル（シェーダ）を実装するときは、その多くの場合にモデルの深度や法線情報を参照すると思います。2 次元のイメージ情報を操作する ImageEffect においては、深度や法線情報を取得できないように思われますが、イメージ上のある画素に映されるオブジェクトの深度や法線情報を取得する方法は用意されています。</p>
-<p>技術的な詳細を解説するにはレンダリングパイプラインの解説が必要になり、少々長くなるので割愛させてください。簡潔に説明すると、描画するイメージ上のある画素に対応する深度情報や法線情報はバッファしておくことができます。それらのバッファは G-Buffer と呼ばれます。G-Buffer には色を保存したり、深度を保存したりするものがあります。（ちなみに G-Buffer の読み方は「ゲーバッファー」であると原著論文には示されています。）</p>
-<p>オブジェクトの描画時に、深度や法線情報もバッファに書きこんでおき、描画の最後に実行される ImageEffect でそれを参照する、というイメージです。この技術は Deffered レンダリングでは重要な役割を持っていますが、Forward レンダリングでも使うことができます。</p>
-<p>これらの解説にはサンプルの "ImageEffect" シーンおよび、それと同名のリソースを使います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When implementing a material (shader) to apply to a model, you will often refer to the model's depth and normal information. </font><font style="vertical-align: inherit;">ImageEffect, which manipulates two-dimensional image information, does not seem to be able to acquire depth and normal information, but there is a method to acquire the depth and normal information of an object projected on a certain pixel on the image. I have.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To explain the technical details, it is necessary to explain the rendering pipeline, which will be a little long, so let me omit it. </font><font style="vertical-align: inherit;">Briefly, depth information and normal information corresponding to a pixel on the image to be drawn can be buffered. </font><font style="vertical-align: inherit;">Those buffers are called G-Buffers. </font><font style="vertical-align: inherit;">Some G-Buffers store colors and depths. </font><font style="vertical-align: inherit;">(By the way, the original paper shows that the reading of G-Buffer is "game buffer".)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When drawing an object, the depth and normal information is also written in the buffer, and it is referenced by ImageEffect, which is executed at the end of drawing. </font><font style="vertical-align: inherit;">This technique plays an important role in Deffered rendering, but it can also be used in Forward rendering.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">These discussions use a sample "ImageEffect" scene and a resource with the same name.</font></font></p>
 
-<h3><a id="h9-8-1"></a><span class="secno">9.8.1　</span>深度と法線情報を取得するための設定</h3>
-<p>深度と法線情報を ImageEffect で参照するためには、少し設定が必要です。基本的な機能は共通なので、ここでは ImageEffectBase.cs を継承した ImageEffect.cs でその設定を行うようにします。</p>
+<h3><a id="h9-8-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.8.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Settings for getting depth and normal information</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A little setting is required to refer to the depth and normal information in ImageEffect. </font><font style="vertical-align: inherit;">Since the basic functions are common, here we will set it in ImageEffect.cs, which inherits ImageEffectBase.cs.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ImageEffect.cs</p>
 <pre class="emlist">public class ImageEffect : ImageEffectBase<font></font>
@@ -332,27 +325,27 @@ fixed4 frag(v2f_img input) : SV_Target<font></font>
         this.camera.depthTextureMode = this.depthTextureMode;<font></font>
     }<font></font>
 <font></font>
-    protected virtual void OnValidate()<font></font>
-    {<font></font>
+    protected virtual void OnValidate()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         if (this.camera != null)<font></font>
         {<font></font>
             this.camera.depthTextureMode = this.depthTextureMode;<font></font>
-        }<font></font>
-    }<font></font>
+        }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>深度と法線情報を取得するためには、カメラに <code class="inline-code tt">DepthTextureMode</code> を設定する必要があります。これは深度や法線などの情報を、どのように書き込むかを制御するための設定です。初期値は <code class="inline-code tt">None</code>です。</p>
-<p>残念ながら <code class="inline-code tt">DepthTextureMode</code> はカメラの Inspector に表示されないパラメータなので、スクリプトから任意にカメラの参照を取得して設定する必要があります。</p>
-<p><code class="inline-code tt">OnValidate</code> メソッドについて、あまり利用したことがない方のために説明しておくと、Inspector 上でパラメータが更新されたときに呼び出されるメソッドです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To get the depth and normal information, </font></font><code class="inline-code tt">DepthTextureMode</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you need to set the </font><font style="vertical-align: inherit;">camera </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">This is a setting to control how information such as depth and normal is written. </font><font style="vertical-align: inherit;">The initial value is </font></font><code class="inline-code tt">None</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Unfortunately, it </font></font><code class="inline-code tt">DepthTextureMode</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'s a parameter that doesn't appear in the camera's Inspector, so you'll need to optionally get a camera reference from the script and set it.</font></font></p>
+<p><code class="inline-code tt">OnValidate</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> For those who haven't used the method very often, it is the method that is called when the parameter is updated on the Inspector.</font></font></p>
 
-<h3><a id="h9-8-2"></a><span class="secno">9.8.2　</span>DepthTextureMode の値</h3>
-<p>ここで紹介するコードを使って、<code class="inline-code tt">DepthTextureMode</code> の値を Inspector 上から変更します。いくつか値がありますが、ここでは <code class="inline-code tt">DepthNormals</code> を使う点に注意してください。</p>
-<p><code class="inline-code tt">Depth</code> を設定すれば深度情報のみを取得するための設定になります。ただし <code class="inline-code tt">Depth</code> と <code class="inline-code tt">DepthNormals</code> とでは、シェーダから深度情報を取得する手順が少々異なります。また <code class="inline-code tt">MotionVectors</code> を設定すれば、各画素に対応する動きの情報を取得することができ大変面白いのですが、すべて解説すると少々長くなるので、この場では割愛させてください。</p>
+<h3><a id="h9-8-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.8.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> DepthTextureMode value</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Use the code presented here </font></font><code class="inline-code tt">DepthTextureMode</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to change the value of inspector. </font><font style="vertical-align: inherit;">There are some values, but </font></font><code class="inline-code tt">DepthNormals</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">note that we use </font><font style="vertical-align: inherit;">here </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><code class="inline-code tt">Depth</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If is set, it will be the setting to acquire only the depth information. </font><font style="vertical-align: inherit;">However </font></font><code class="inline-code tt">Depth</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">theft </font></font><code class="inline-code tt">DepthNormals</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">door, the slightly different procedure to obtain the depth information from the shader. </font><font style="vertical-align: inherit;">Also </font></font><code class="inline-code tt">MotionVectors</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">by setting the, How can a lot of fun can get the information of the motion corresponding to each pixel, a little because the longer and all commentary, please let omitted in this place.</font></font></p>
 
-<h2><a id="h9-9"></a><span class="secno">9.9　</span>シェーダ上での深度と法線の取得</h2>
-<p>カメラに <code class="inline-code tt">DepthTextureMode</code> を設定したとき、シェーダ上から深度情報と法線情報を取得する方法は次のとおりです。</p>
-<p><code class="inline-code tt">_CameraDepthNormalsTexture</code> は、<code class="inline-code tt">_MainTex</code> に描画するイメージが与えられるのと同様に、深度と法線の情報が与えられる <code class="inline-code tt">sampler2D</code> です。したがって <code class="inline-code tt">input.uv</code> を使って参照すれば、描画するイメージのある画素に対応する深度と法線情報を取得することができます。</p>
+<h2><a id="h9-9"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.9　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Getting depth and normals on shaders</font></font></h2>
+<p><font style="vertical-align: inherit;"></font><code class="inline-code tt">DepthTextureMode</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here's how to get depth and normal information from the shader when set to </font><font style="vertical-align: inherit;">camera </font><font style="vertical-align: inherit;">:</font></font></p>
+<p><code class="inline-code tt">_CameraDepthNormalsTexture</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is </font></font><code class="inline-code tt">_MainTex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">given depth and normal information, just as the image to draw is given </font></font><code class="inline-code tt">sampler2D</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Therefore </font></font><code class="inline-code tt">input.uv</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, you can use to get the depth and normal information for a pixel with an image to draw.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ImageEffect.shader</p>
 <pre class="emlist">sampler2D _MainTex;<font></font>
@@ -374,27 +367,27 @@ fixed4 frag(v2f_img input) : SV_Target<font></font>
 }<font></font>
 </pre>
 </div>
-<p><code class="inline-code tt">_CameraDepthNormalsTexture</code> から取得することができる値は深度と法線の値が合わさったものなので、これをそれぞれの値に分解する必要があります。分解するための関数は Unity が用意してくれているものを使います。<code class="inline-code tt">DecodeDepthNormal</code> 関数に、分解したい値とその結果を代入するための変数を与えます。</p>
+<p><code class="inline-code tt">_CameraDepthNormalsTexture</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The values ​​that can be obtained from are the sum of the depth and normal values, so we need to decompose them into their respective values. </font><font style="vertical-align: inherit;">The function for decomposing is the one provided by Unity. </font></font><code class="inline-code tt">DecodeDepthNormal</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Give the function a variable to assign the value you want to decompose and the result.</font></font></p>
 
-<h3><a id="h9-9-1"></a><span class="secno">9.9.1　</span>深度情報の取得と可視化</h3>
+<h3><a id="h9-9-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.9.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Acquisition and visualization of depth information</font></font></h3>
 <div id="id_SimpleImageEffect_2F04mono" class="image">
 <img src="./Chapter 9 _ ImageEffect Getting Started_files/04mono.png" alt="Depth visualization with ImageEffect">
-<p class="caption">
-図9.4: ImageEffect による深度の可視化
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.4: Depth visualization with ImageEffect
+</font></font></p>
 </div>
-<p>先に深度情報について説明します。深度情報は実はプラットフォームによって扱いが異なります。Unity ではその差を吸収するためのいくつかの仕組みが用意されていますが、ImageEffect の実装にあたっては、<code class="inline-code tt">Linear01Depth</code> 関数を使うのがよいと思います。<code class="inline-code tt">Linear01Depth</code> は、取得した深度の値を 0 ~ 1 に正規化するための関数です。</p>
-<p>サンプルでは取得した深度の値を R,G,B に与えることで、深度の値を可視化しています。シーン中のカメラを動かしたり、<code class="inline-code tt">Clipping Planes</code> の値を Inspector 上から変更するなどして、どのように変化するのかを確認することをオススメします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will explain the depth information first. </font><font style="vertical-align: inherit;">Depth information is actually handled differently depending on the platform. </font><font style="vertical-align: inherit;">Unity provides some mechanisms to absorb the difference </font></font><code class="inline-code tt">Linear01Depth</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, but I think it's better to use a function </font><font style="vertical-align: inherit;">when implementing ImageEffect </font><font style="vertical-align: inherit;">. </font></font><code class="inline-code tt">Linear01Depth</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is a function to normalize the obtained depth value from 0 to 1.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample, the acquired depth value is given to R, G, and B to visualize the depth value. </font></font><code class="inline-code tt">Clipping Planes</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is recommended to </font><font style="vertical-align: inherit;">move the camera in the scene or </font><font style="vertical-align: inherit;">change the value from the Inspector to see how it changes.</font></font></p>
 
-<h3><a id="h9-9-2"></a><span class="secno">9.9.2　</span>法線情報の可視化</h3>
+<h3><a id="h9-9-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.9.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Visualization of normal information</font></font></h3>
 <div id="id_SimpleImageEffect_2F05mono" class="image">
 <img src="./Chapter 9 _ ImageEffect Getting Started_files/05mono.png" alt="Visualization of normals with ImageEffect">
-<p class="caption">
-図9.5: ImageEffect による法線の可視化
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.5: ImageEffect Visualization of Normals
+</font></font></p>
 </div>
-<p>法線情報の可視化については、深度情報ほどの複雑さはありません。法線の情報はスクリプトや一般的なシェーダから参照されるものと同等です。ある画素に映される面の方向を示す X,Y Z の情報が 0 ~ 1 に正規化された形式で与えられています。</p>
-<p>法線が正しく取得できているかどうかを確認するだけなら、X,Y,Z の値をそのまま R,G,B とみなして出力すればよいです。つまり右を向く面ほど X = R の値が大きくなり、より赤に、上を向く面ほど Y = G の値が大きくなり、より緑になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Visualization of normal information is not as complicated as depth information. </font><font style="vertical-align: inherit;">The normal information is equivalent to that referenced by scripts and common shaders. </font><font style="vertical-align: inherit;">X, YZ information indicating the direction of the surface projected on a pixel is given in a format normalized to 0 to 1.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you just want to check if the normals are obtained correctly, you can output the values ​​of X, Y, Z as R, G, B as they are. </font><font style="vertical-align: inherit;">In other words, the face facing to the right has a larger value of X = R and becomes more red, and the face facing upward has a value of Y = G and becomes greener.</font></font></p>
 
 <h2><a id="h9-10"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.10　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The main references in this chapter are: </font><font style="vertical-align: inherit;">Both are official Unity.</font></font></p>
@@ -405,4 +398,4 @@ fixed4 frag(v2f_img input) : SV_Target<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 9 _ ImageEffect Getting Started_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 9 _ ImageEffect Getting Started_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 9 _ ImageEffect Getting Started_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 9 _ ImageEffect Getting Started_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 9 _ ImageEffect Getting Started_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

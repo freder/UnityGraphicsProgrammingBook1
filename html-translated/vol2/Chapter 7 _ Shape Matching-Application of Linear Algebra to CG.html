@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0041)https://freder.io/files/unity2/takao.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Shape Matching-Application of Linear Algebra to CG</font></font></h1>
 
 <h2><a id="h7-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -76,133 +69,133 @@ Figure 7.1: Matrix
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's take a quick look at the basics of matrix operations. If you are already familiar with it, you can skip this section.</font></font></p>
 
 <h3><a id="h7-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.3.1 Addition,　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> subtraction, multiplication and division</font></font></h3>
-<p>行列には, スカラーの四則演算と同様, 加減乗除算が存在します.簡単のために, 2次正方行列<a id="fnb-square" href="https://freder.io/files/unity2/takao.html#fn-square" class="noteref" epub:type="noteref">*1</a><span class="equation">\mbox{\boldmath $A$}</span>と<span class="equation">\mbox{\boldmath $B$}</span>, 2次元ベクトル<span class="equation">\mbox{\boldmath $c$}</span>を以下で定義しておきます.</p>
-<div class="footnote" epub:type="footnote" id="fn-square"><p class="footnote">[*1] 正方行列 <span class="equation">\cdots</span> 行と列の数が等しい行列のこと.</p></div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Similar to the four arithmetic operations of scalars, there are additions, subtractions, multiplications and divisions in matrices. For simplicity, quadratic square matrices </font></font><a id="fnb-square" href="https://freder.io/files/unity2/takao.html#fn-square" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1 </font></font></a><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ B $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , The 2D vector </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ c $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is defined below.</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-square"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 1] Square matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ cdots A</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> matrix </font><font style="vertical-align: inherit;">with the same number of rows and columns.</font></font></p></div>
 
-<h4><a id="h7-3-1-1"></a>加算</h4>
-<p>行列の加算は, 式(\ref{plus})のように, 要素ごとに和を計算します.</p>
+<h4><a id="h7-3-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Addition</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Matrix addition calculates the sum for each element, as in the formula (\ ref {plus}).</font></font></p>
 
-<h4><a id="h7-3-1-2"></a>減算</h4>
-<p>行列の減算は, 式(\ref{minus})のように, 要素ごとに差を計算します.</p>
+<h4><a id="h7-3-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Subtraction</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Matrix subtraction calculates the difference element by element, as in the formula (\ ref {minus}).</font></font></p>
 
-<h4><a id="h7-3-1-3"></a>乗算</h4>
-<p>行列の乗算は少し複雑で, 式(\ref{times})のようになります.</p>
-<p>掛ける順序を逆にすると, 計算結果も変化するので, 注意してください.</p>
+<h4><a id="h7-3-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Multiply</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Matrix multiplication is a bit more complicated, like an expression (\ ref {times}).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Please note that if you reverse the order of multiplication, the calculation result will also change.</font></font></p>
 
-<h4><a id="h7-3-1-4"></a>除算(逆行列)</h4>
-<p>行列の除算は, スカラーにおける除算と少し異なる, <b>逆行列</b>と呼ばれる概念を使用します.まずはじめに, スカラーでは, 自分自身の逆数を掛けると, 必ず1になる性質を持っています.</p>
-<p>つまり, 除算という行為は, 「逆数を掛ける」という演算と等しくなります.</p>
-<p>これを行列に置き換えると, 行列にかけて単位行列を生み出すものが, 除算を表す行列であるということができます.行列において, スカラーの<span class="equation">1</span>に対応するものは単位行列と呼ばれ, 以下で定義されます.</p>
-<p>スカラーの<span class="equation">1</span>と同様, 単位行列をどのような行列にかけても, 値が変化しません.</p>
-<p>これらを踏まえて, 行列の除算について考えます.逆行列を<span class="equation">\mbox{\boldmath $M$}^{-1}</span>とすると, 逆行列の定義は以下となります.</p>
-<p>導出は省略しますが, 行列<span class="equation">\mbox{\boldmath $A$}</span>の逆行列の要素は, 以下で定義されます.</p>
-<p>この時の, <span class="equation">a_{00}a_{11} - a_{01}a_{10}</span>を行列式(Determinant)と呼び, <span class="equation">det(\mbox{\boldmath $A$})</span>と表します.</p>
+<h4><a id="h7-3-1-4"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Divide (reverse column)</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Matrix division uses </font><font style="vertical-align: inherit;">a concept called </font><font style="vertical-align: inherit;">the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">inverse matrix</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , which is a </font><font style="vertical-align: inherit;">little different from division in scalars </font><font style="vertical-align: inherit;">. First of all, scalars have the property that when multiplied by their own reciprocal, they always become 1.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In other words, the act of division is equivalent to the operation of "multiplying the reciprocal".</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Replacing this with a matrix, we can say that what produces the identity matrix over the matrix is ​​the matrix that represents division. In the matrix, the </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">one</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> corresponding to </font><span class="equation"><font style="vertical-align: inherit;">1</font></span><font style="vertical-align: inherit;"> in the scalar </font><font style="vertical-align: inherit;">is called the identity matrix and is defined below. ..</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As with the scalar </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the value does not change when the identity matrix is ​​applied to any matrix.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With these in mind, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">let's</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> consider matrix division. If the inverse matrix is </font><span class="equation"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ M $} ^ {-1}</font></span><font style="vertical-align: inherit;"> , the definition of the inverse matrix is ​​as follows.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Derivation is omitted, but </font><font style="vertical-align: inherit;">the elements of the inverse matrix of </font><font style="vertical-align: inherit;">the matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are defined below.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">At this time, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">a_ {00} a_ {11} --a_ {01} a_ {10}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is called a determinant (Determinant) and </font><font style="vertical-align: inherit;">is expressed as </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">det (\ mbox {\ boldmath $ A $})</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 
-<h3><a id="h7-3-2"></a><span class="secno">7.3.2　</span>行列のベクトルへの作用</h3>
-<p>行列は, ベクトルと乗算することによってベクトルの指す座標を変換することができます.ご存知の通り, CGでは, 座標変換行列(ワールド, プロジェクション, ビュー変換行列)などとして用いられることがほとんどです.行列とベクトルの積は, 以下で定義されます.</p>
+<h3><a id="h7-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Matrix action on vector</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A matrix can transform the coordinates pointed to by a vector by multiplying it by a vector. As you know, in CG, it is mostly used as a coordinate transformation matrix (world, projection, view transformation matrix). The product of and the vector is defined below.</font></font></p>
 
-<h2><a id="h7-4"></a><span class="secno">7.4　</span>行列演算の応用</h2>
-<p>本節からは, 大学で習う範囲の行列の概念を解説していきます.少々難しいと感じられる部分が多いかとは思いますが, Shape Matchingを理解するには, これだけの概念が必要ですので, 頑張って理解していきましょう.と言いつつ, 本節の話は行列演算ライブラリ内部で吸収される部分でもありますので, 第\ref{shapematching}節まで読み飛ばしていただいても実装に支障はありません.</p>
+<h2><a id="h7-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Application of matrix operation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From this section, I will explain the concept of the matrix in the range learned at the university. I think that there are many parts that seem a little difficult, but to understand Shape Matching, this concept is necessary, so do your best. However, since the story in this section is also absorbed inside the matrix operation library, there is no problem in implementing it even if you skip to section \ ref {shape matching}.</font></font></p>
 
-<h3><a id="h7-4-1"></a><span class="secno">7.4.1　</span>転置行列</h3>
-<p>転置行列は, 要素の行と列を入れ替えたもので, 以下で定義されます.</p>
+<h3><a id="h7-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Transpose matrix</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The transposed matrix is ​​the swapped rows and columns of the elements and is defined below.</font></font></p>
 
-<h3><a id="h7-4-2"></a><span class="secno">7.4.2　</span>対称行列</h3>
-<p><span class="equation">\mbox{\boldmath $A$}^{T} = \mbox{\boldmath $A$}</span>を満たす行列を, 対称行列と呼びます.</p>
+<h3><a id="h7-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Symmetric matrix</font></font></h3>
+<p><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> matrix that satisfies </font><span class="equation"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $} ^ {T} = \ mbox {\ boldmath $ A $}</font></span><font style="vertical-align: inherit;"> is called a symmetric matrix.</font></font></p>
 
-<h3><a id="h7-4-3"></a><span class="secno">7.4.3　</span>固有値と固有ベクトル</h3>
-<p>正方行列<span class="equation">\mbox{\boldmath $A$}</span>が与えられたとき,</p>
-<p>を満たす<span class="equation">\lambda</span>を, <span class="equation">\mbox{\boldmath $A$}</span>の<b>固有値</b>, <span class="equation">\mbox{\boldmath $v$}</span>を<b>固有ベクトル</b>と呼びます.</p>
-<p>固有値と固有ベクトルの算出方法を以下に示します.まず, 式(\ref{eigen})を変形して,</p>
-<p>とします.ここで, <span class="equation">\mbox{\boldmath $v$} \neq 0</span>という条件を用いると, 式(\ref{eigen2})は,</p>
-<p>となります.この式を展開すると, <span class="equation">\lambda</span>についての2次方程式になるため, これを解くことで<span class="equation">\lambda</span>を算出することができます.また, 算出されたそれぞれの<span class="equation">\lambda</span>を式(\ref{eigen2})に代入することで, 固有ベクトル<span class="equation">\mbox{\boldmath $v$}</span>を算出することができます.</p>
-<p>数式だけでは, 固有値・固有ベクトルの概念はわかりにくいので, @kenmatsu4氏による固有値の可視化が行われたQiita記事(章末に記載)を併せてご覧いただけるとよいかと思います.</p>
+<h3><a id="h7-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Eigenvalues ​​and eigenvectors</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Given the square matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ,</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Meet the </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ lambda</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> a, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Mbox {\ Boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> of </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">eigenvalues</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Mbox {\ Boldmath $ V $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">eigenvectors</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is called.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The calculation method of eigenvalues ​​and eigenvectors is shown below. First, the formula (\ ref {eigen}) is transformed.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, </font><font style="vertical-align: inherit;">using the condition </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ v $} \ neq 0</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the expression (\ ref {eigen2}) becomes:</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Becomes. Expanding this expression, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ lambda</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> to become a quadratic equation for, by solving this </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ lambda</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> can be calculated. Moreover, each of the calculated </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ lambda</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> expressions (\ ref { By substituting into eigen2}), </font><font style="vertical-align: inherit;">you can calculate the </font><font style="vertical-align: inherit;">eigenvector </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ v $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the concept of eigenvalues ​​and eigenvectors is difficult to understand from mathematical formulas alone, I think you should also read the Qiita article (described at the end of the chapter) where eigenvalues ​​were visualized by @ kenmatsu4.</font></font></p>
 
-<h3><a id="h7-4-4"></a><span class="secno">7.4.4　</span>固有値分解</h3>
-<p>正方行列<span class="equation">\mbox{\boldmath $A$}</span>における固有値と固有ベクトルを用いて, 行列<span class="equation">\mbox{\boldmath $A$}</span>を違う形で表すことができます.まず, 固有値<span class="equation">\lambda</span>を大きさ順に並べ替え, それを対角要素に持つ行列<span class="equation">\mbox{\boldmath $\Lambda$}</span>を作成します.次に, それぞれの固有値に対応する固有ベクトルを左から順に並べた行列<span class="equation">\mbox{\boldmath $V$}</span>を作成します.すると, 式(<span class="equation">\ref{eigen}</span>)を, これらの行列を用いて以下のように書き換えることができます.</p>
-<p>さらに, これを左辺に行列<span class="equation">\mbox{\boldmath $A$}</span>が残るよう, 両辺右から<span class="equation">\mbox{\boldmath $V$}^{-1}</span>を掛けると,</p>
-<p>となります.</p>
-<p>このように, 行列を式(\ref{eigendecomp})のような形式に分解することを, 行列の固有値分解と呼びます.</p>
+<h3><a id="h7-4-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Eigenvalue decomposition</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The eigenvalues ​​and eigenvectors in the </font><font style="vertical-align: inherit;">square matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> can be used to represent the matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in different ways. First, the eigenvalues </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ lambda</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are sorted by size </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">, </font><font style="vertical-align: inherit;">Create </font><font style="vertical-align: inherit;">a matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ \ Lambda $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> with </font><font style="vertical-align: inherit;">it as a diagonal element </font><font style="vertical-align: inherit;">. Next, a matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ V $} in</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> which the eigenvectors corresponding to each eigenvalue are arranged in order from the left </font><span class="equation"><font style="vertical-align: inherit;">.</font></span><font style="vertical-align: inherit;"> Then, the expression ( </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ ref {eigen}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) can be rewritten using these matrices as follows.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Furthermore, </font><font style="vertical-align: inherit;">multiply this by </font><span class="equation"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ V $} ^ {-1}</font></span><font style="vertical-align: inherit;"> from the right of both sides so </font><font style="vertical-align: inherit;">that the matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> remains </font><font style="vertical-align: inherit;">on the left side </font><font style="vertical-align: inherit;">.</font></font><span class="equation"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Will be.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Decomposing a matrix into a form like an expression (\ ref {eigendecomp}) in this way is called eigenvalue decomposition of a matrix.</font></font></p>
 
-<h3><a id="h7-4-5"></a><span class="secno">7.4.5　</span>正規直交基底</h3>
-<p>互いに垂直であり, かつそれぞれが単位ベクトルであるベクトルの組を, 正規直交基底と呼びます.任意のベクトルは, 正規直交基底の組を用いて表すことができます<a id="fnb-ichi" href="https://freder.io/files/unity2/takao.html#fn-ichi" class="noteref" epub:type="noteref">*2</a>.2次元の場合, 正規直交基底となりうるベクトルは2つとなります.例えば, よく用いられるx軸とy軸は, <span class="equation">\mbox{\boldmath $x$} = (1, 0), \mbox{\boldmath $y$} = (0, 1)</span>の組で正規直交基底を成しているので,任意のベクトルをこの<span class="equation">\mbox{\boldmath $x$}, \mbox{\boldmath $y$}</span>で表すことができます.<span class="equation">\mbox{\boldmath $v$} = (4, 13)</span>を正規直交基底<span class="equation">\mbox{\boldmath $x$}, \mbox{\boldmath $y$}</span>を用いて表すと,<span class="equation">\mbox{\boldmath $v$} = 4\mbox{\boldmath $x$} + 13\mbox{\boldmath $y$}</span>となります.</p>
-<div class="footnote" epub:type="footnote" id="fn-ichi"><p class="footnote">[*2] 正式にはベクトルの一次結合と呼びます.</p></div>
+<h3><a id="h7-4-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Orthonormal Basis</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A set of vectors that are perpendicular to each other and each is a unit vector is called an orthonormal basis. Any vector can be represented using a set of orthonormal bases </font></font><a id="fnb-ichi" href="https://freder.io/files/unity2/takao.html#fn-ichi" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 2. In the case of two dimensions, There are two vectors that can be orthonormal bases. For example, the commonly used x-axis and y-axis are </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ x $} = (1, 0), \ mbox {\ boldmath $ y $} = Since the set of (0, 1)</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> forms an orthonormal basis, any vector </font><font style="vertical-align: inherit;">can be represented </font><font style="vertical-align: inherit;">by this </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ x $}, \ mbox {\ boldmath $ y $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Expressing mbox {\ boldmath $ v $} = (4, 13)</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> using orthonormal basis </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ x $}, \ mbox {\ boldmath $ y $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ v $} = 4 \ mbox {\ boldmath $ x $} + 13 \ mbox {\ boldmath $ y $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-ichi"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 2] Formally, it is called a linear combination of vectors.</font></font></p></div>
 
-<h3><a id="h7-4-6"></a><span class="secno">7.4.6　</span>エルミート行列</h3>
-<p>エルミート行列が定義されるのは, 本来複素数の範囲であり本章の領域を超えますので, 実数の範囲で簡単に説明します.実数の範囲では, 行列<span class="equation">\mbox{\boldmath $A$}</span>のエルミート行列<span class="equation">\mbox{\boldmath $A$}^{*}</span>は, 単に対称行列であることを意味しており,</p>
-<p>となります.</p>
+<h3><a id="h7-4-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Hermitian matrix</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Hermitian matrix is ​​defined in the range of complex numbers, which is beyond the scope of this chapter, so I will briefly explain it in the range of real numbers. In the range of real numbers, </font><font style="vertical-align: inherit;">the Hermitian </font><font style="vertical-align: inherit;">of the matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> The matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $} ^ {*}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> simply means that it is a symmetric matrix.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Will be.</font></font></p>
 
-<h3><a id="h7-4-7"></a><span class="secno">7.4.7　</span>直交行列</h3>
-<p>正方行列<span class="equation">\mbox{\boldmath $Q$}</span>を列ベクトル <span class="equation">Q = (\mbox{\boldmath $q$}_1, \mbox{\boldmath $q$}_2, \cdots, \mbox{\boldmath $q$}_n)</span>に分解したとき, これらのベクトルの組が正規直交系をなしている, つまり,</p>
-<p>が成り立つとき, <span class="equation">\mbox{\boldmath $Q$}</span>は直交行列であるといいます.また, 直交行列を行ベクトルに分解したとしても, 正規直交系をなしている特徴があります.</p>
+<h3><a id="h7-4-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Orthogonal matrix</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Square matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ Q $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> column vector </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Q = (\ mbox {\ boldmath $ q $} _1, \ mbox {\ boldmath $ q $} _2, \ cdots, \ mbox {\ boldmath $ q $</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> When decomposed into </font><span class="equation"><font style="vertical-align: inherit;">} _n)</font></span><font style="vertical-align: inherit;"> , the set of these vectors forms an orthonormal system, that is,</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When is true, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ Q $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is said to be an orthogonal matrix. Also, even if the orthogonal matrix is ​​decomposed into row vectors, it has the characteristic of </font><span class="equation"><font style="vertical-align: inherit;">forming an</font></span><font style="vertical-align: inherit;"> orthonormal system.</font></font></p>
 
-<h3><a id="h7-4-8"></a><span class="secno">7.4.8　</span>ユニタリ行列</h3>
-<p>を満たす行列を, ユニタリ行列と呼びます.ユニタリ行列<span class="equation">\mbox{\boldmath $U$}</span>の要素がすべて実数(実行列)の場合, <span class="equation">\mbox{\boldmath $U$}^{*} = \mbox{\boldmath $U$}^{T}</span>となるため, 実ユニタリ行列<span class="equation">\mbox{\boldmath $U$}</span>は直交行列であることがわかります.</p>
+<h3><a id="h7-4-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Unitary matrix</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A matrix that satisfies is called a unitary matrix. If </font><font style="vertical-align: inherit;">all the elements of the </font><font style="vertical-align: inherit;">unitary matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ U $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are real ( </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">execution</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> columns), </font><span class="equation"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ U $} ^ {*} = \ mbox Since</font></span><font style="vertical-align: inherit;"> it becomes </font><span class="equation"><font style="vertical-align: inherit;">{\ boldmath $ U $} ^ {T}</font></span><font style="vertical-align: inherit;"> , </font><font style="vertical-align: inherit;">we can see that </font><font style="vertical-align: inherit;">the real unitary matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ U $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is an orthogonal matrix.</font></font></p>
 
-<h2><a id="h7-5"></a><span class="secno">7.5　</span>特異値分解</h2>
-<p>任意の<span class="equation">m \times n</span>行列<span class="equation">\mbox{\boldmath $A$}</span>を, 以下の形に分解することを, 行列の特異値分解と呼びます.</p>
-<p>尚, <span class="equation">\mbox{\boldmath $U$}</span>と<span class="equation">\mbox{\boldmath $V$}^{T}</span>は, <span class="equation">m \times m</span>の直交行列,<span class="equation">\mbox{\boldmath $\Sigma$}</span>は, <span class="equation">m \times n</span>の対角行列(対角成分は非負で大きさの順に並んだ行列)となっています.</p>
-<p>「任意の」という言葉が肝で, 行列の固有値分解は正方行列に対してのみ定義されますが, 特異値分解は長方行列でも行うことができます.CGの世界では, 扱う行列が正方行列であることがほとんどですので, 固有値分解とさほど計算方法は変わりません.また, <span class="equation">\mbox{\boldmath $A$}</span>が対称行列のとき, <span class="equation">\mbox{\boldmath $A$}</span>の固有値と特異値は一致します.さらに, <span class="equation">\mbox{\boldmath $A$}^{T} \mbox{\boldmath $A$}</span>の<span class="equation">0</span>でない固有値の正の平方根は<span class="equation">\mbox{\boldmath $A$}</span>の特異値です.</p>
+<h2><a id="h7-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Singular value decomposition</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Decomposing an </font><font style="vertical-align: inherit;">arbitrary </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">m \ times n</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> into the following form is called singular value decomposition of the matrix.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Note that </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ U $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ V $} ^ {T}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are </font><font style="vertical-align: inherit;">orthogonal matrices of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">m \ times m</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ \ Sigma $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">m \ times. It is</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> a diagonal matrix of </font><span class="equation"><font style="vertical-align: inherit;">n</font></span><font style="vertical-align: inherit;"> (diagonal elements are non-negative and arranged in order of magnitude).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The word "arbitrary" is important, and the eigenvalue decomposition of a matrix is ​​defined only for a square matrix, but the singular value decomposition can also be performed for a square matrix. In the CG world, the matrix to be handled is a square matrix. In most cases, the calculation method is not so different from the eigenvalue decomposition. Also, when </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is a symmetric matrix, </font><font style="vertical-align: inherit;">the eigenvalues ​​and singular values ​​of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> matches. in addition, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ a $ } </font><font style="vertical-align: inherit;">^ {T} \ mbox {\ boldmath $ a $</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> } of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is a positive eigenvalues is not the square root of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ a $</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> } of singular value is.</font></font></p>
 
-<h3><a id="h7-5-1"></a><span class="secno">7.5.1　</span>特異値分解のアルゴリズム</h3>
-<p>固有値分解をプログラムに落とし込むには, 式(\ref{svd})を式変形するとわかりやすいです.行列<span class="equation">\mbox{\boldmath $A$}</span>の左からその行列の転置<span class="equation">\mbox{\boldmath $A$}^{T}</span>を掛けると, 以下のようになります.</p>
-<p>形が固有値分解と同じになっているのに気づくかと思います.実際, 特異値行列の自乗は固有値行列になることが知られています.よって, 特異値の算出は, 行列を固有値分解し, 固有値の2乗根を取ることで行うことが可能です.このことから, 固有値分解をアルゴリズム内に組み込むことになりますが, 固有値を求めるために2次方程式を解く必要が出てきます.幸い, 2次方程式は解の公式が単純ですので, プログラムに落とすのも簡単です<a id="fnb-kai" href="https://freder.io/files/unity2/takao.html#fn-kai" class="noteref" epub:type="noteref">*3</a>.</p>
-<div class="footnote" epub:type="footnote" id="fn-kai"><p class="footnote">[*3] 3次方程式や4次方程式にも解の公式は存在しますが, 一般的にニュートン法等を用いて計算を行います. </p></div>
-<p><span class="equation">\mbox{\boldmath $A$}^{T}\mbox{\boldmath $A$}</span>固有値分解することで, <span class="equation">\mbox{\boldmath $\Sigma$}</span>と<span class="equation">\mbox{\boldmath $V$}^{T}</span>が算出できましたので, 残りの<span class="equation">\mbox{\boldmath $U$}</span>は式(\ref{svd})を変形して以下で算出できます.</p>
-<p>尚, Vは直交行列なので, 転置と逆行列が一致します.</p>
-<p>これをプログラムで表すと, 以下のようになります.</p>
+<h3><a id="h7-5-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.5.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Singular value decomposition algorithm</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The dropped eigenvalue decomposition to program the formula is helpful to the (\ ref {svd}) Formula deformed. Matrices </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> } transpose of the left from the matrix of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> } Multiply by </font><span class="equation"><font style="vertical-align: inherit;">^ {T}</font></span><font style="vertical-align: inherit;"> to get:</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You will notice that the form is the same as the eigenvalue decomposition. In fact, it is known that the square of the singular value matrix becomes the eigenvalue matrix. Therefore, the calculation of the singular value decomposes the matrix into eigenvalues. This can be done by taking the square root of the eigenvalues. This leads to the incorporation of eigenvalue decomposition into the algorithm, but fortunately it is necessary to solve a quadratic equation to find the eigenvalues. Since the solution formula of the quadratic equation is simple, it is easy to drop it into the program </font></font><a id="fnb-kai" href="https://freder.io/files/unity2/takao.html#fn-kai" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 3</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-kai"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 3] Although there are solution formulas for cubic and quartic equations, they are generally calculated using Newton's method. </font></font></p></div>
+<p><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ A $} ^ {T} \ mbox {\ boldmath $ A $} By</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> eigenvalue decomposition, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ \ Sigma $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ V $} ^ {</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Now that </font><span class="equation"><font style="vertical-align: inherit;">T}</font></span><font style="vertical-align: inherit;"> has been calculated, the remaining </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ U $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> can be calculated by transforming the formula (\ ref {svd}) as follows.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since V is an orthogonal matrix, the transpose and the inverse matrix match.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This can be expressed programmatically as follows.</font></font></p>
 <div id="render" class="code">
-<p class="caption">リスト7.1: 特異値分解のアルゴリズム(Matrix2x2.cs)</p>
-<pre class="list language-csharp"> 1: /// &lt;summary&gt;<font></font>
- 2: /// 特異値分解<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.1: Singular Value Decomposition Algorithm (Matrix2x2.cs)</font></font></p>
+<pre class="list language-csharp"> 1: /// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 2: /// Singular value decomposition</font></font><font></font>
  3: /// &lt;/summary&gt;<font></font>
  4: /// &lt;param name="u"&gt;Returns rotation matrix u&lt;/param&gt;<font></font>
  5: /// &lt;param name="s"&gt;Returns sigma matrix&lt;/param&gt;<font></font>
  6: /// &lt;param name="v"&gt;Returns rotation matrix v(not transposed)&lt;/param&gt;<font></font>
  7: public void SVD(ref Matrix2x2 u, ref Matrix2x2 s, ref Matrix2x2 v)<font></font>
- 8: {<font></font>
- 9:     // 対角行列であった場合、特異値分解は単純に以下で与えられる。<font></font>
+ 8: {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 9: // If it was a diagonal matrix, the singular value decomposition is simply given below.</font></font><font></font>
 10:     if (Mathf.Abs(this[1, 0] - this[0, 1]) &lt; MATRIX_EPSILON<font></font>
 11:         &amp;&amp; Mathf.Abs(this[1, 0]) &lt; MATRIX_EPSILON)<font></font>
 12:     {<font></font>
 13:         u.SetValue(this[0, 0] &lt; 0 ? -1 : 1, 0,<font></font>
 14:                     0, this[1, 1] &lt; 0 ? -1 : 1);<font></font>
-15:         s.SetValue(Mathf.Abs(this[0, 0]), Mathf.Abs(this[1, 1]));<font></font>
-16:         v.LoadIdentity();<font></font>
+15:         s.SetValue(Mathf.Abs(this[0, 0]), Mathf.Abs(this[1, 1]));<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+16: v.LoadIdentity ();</font></font></font></font><font></font>
 17:     }<font></font>
-18: <font></font>
-19:     // 対角行列でない場合、A^T*Aを計算する。<font></font>
+18: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+19: // Calculate A ^ T * A if it is not a diagonal matrix.</font></font><font></font>
 20:     else<font></font>
-21:     {<font></font>
-22:         // 0列ベクトルの長さ(非ルート)<font></font>
-23:         float i   = this[0, 0] * this[0, 0] + this[1, 0] * this[1, 0];<font></font>
-24:         // 1列ベクトルの長さ(非ルート)<font></font>
-25:         float j   = this[0, 1] * this[0, 1] + this[1, 1] * this[1, 1];<font></font>
-26:         // 列ベクトルの内積<font></font>
+21:     {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+22: // 0 Column vector length (non-root)</font></font><font></font>
+23:         float i   = this[0, 0] * this[0, 0] + this[1, 0] * this[1, 0];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+24: // Length of 1 column vector (non-root)</font></font><font></font>
+25:         float j   = this[0, 1] * this[0, 1] + this[1, 1] * this[1, 1];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+26: // Inner product of column vectors</font></font><font></font>
 27:         float i_dot_j = this[0, 0] * this[0, 1]<font></font>
 28:                           + this[1, 0] * this[1, 1];<font></font>
-29: <font></font>
-30:         // A^T*Aが直交行列であった場合<font></font>
+29: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+30: // If A ^ T * A is an orthogonal matrix</font></font><font></font>
 31:         if (Mathf.Abs(i_dot_j) &lt; MATRIX_EPSILON)<font></font>
-32:         {<font></font>
-33:             // 特異値行列の対角要素の計算<font></font>
+32:         {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+33: // Calculation of diagonal elements of the singular value matrix</font></font><font></font>
 34:             float s1 = Mathf.Sqrt(i);<font></font>
 35:             float s2 = Mathf.Abs(i - j) &lt;<font></font>
 36:                         MATRIX_EPSILON ? s1 : Mathf.Sqrt(j);<font></font>
 37: <font></font>
 38:             u.SetValue(this[0, 0] / s1, this[0, 1] / s2,<font></font>
 39:                         this[1, 0] / s1, this[1, 1] / s2);<font></font>
-40:             s.SetValue(s1, s2);<font></font>
-41:             v.LoadIdentity();<font></font>
-42:         }<font></font>
-43:         // A^T*Aが直交行列でない場合、固有値を求めるために二次方程式を解く。<font></font>
+40:             s.SetValue(s1, s2);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+41: v.LoadIdentity ();</font></font></font></font><font></font>
+42:         }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+43: // If A ^ T * A is not an orthogonal matrix, solve the quadratic equation to find the eigenvalues.</font></font><font></font>
 44:         else<font></font>
-45:         {<font></font>
-46:             // 固有値/固有ベクトルの算出<font></font>
-47:             float i_minus_j = i - j;    // 列ベクトルの長さの差<font></font>
-48:             float i_plus_j = i + j;     // 列ベクトルの長さの和<font></font>
-49: <font></font>
-50:             // 2次方程式の解の公式<font></font>
+45:         {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+46: // Calculation of eigenvalues ​​/ eigenvectors</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+47: float i_minus_j = i --j; // Difference in column vector length</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+48: float i_plus_j = i + j; // sum of column vector lengths</font></font><font></font>
+49: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+50: // Formula for solving quadratic equations</font></font><font></font>
 51:             float root = Mathf.Sqrt(i_minus_j * i_minus_j<font></font>
 52:                                       + 4 * i_dot_j * i_dot_j);<font></font>
 53:             float eig = (i_plus_j + root) * 0.5f;<font></font>
@@ -212,15 +205,15 @@ Figure 7.1: Matrix
 57:                           Mathf.Sqrt((i_plus_j - root) / 2);<font></font>
 58: <font></font>
 59:             s.SetValue(s1, s2);<font></font>
-60: <font></font>
-61:             // A^T*Aの固有ベクトルをVとして用いる。<font></font>
+60: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+61: // Use the eigenvector of A ^ T * A as V.</font></font><font></font>
 62:             float v_s = eig - i;<font></font>
-63:             float len = Mathf.Sqrt(v_s * v_s + i_dot_j * i_dot_j);<font></font>
-64:             i_dot_j /= len;<font></font>
-65:             v_s /= len;<font></font>
+63:             float len = Mathf.Sqrt(v_s * v_s + i_dot_j * i_dot_j);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+64: i_dot_j / = len;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+65: v_s / = only;</font></font><font></font>
 66:             v.SetValue(i_dot_j, -v_s, v_s, i_dot_j);<font></font>
-67: <font></font>
-68:             // vとsが算出済みなので、回転行列uをAv/sで算出<font></font>
+67: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+68: // Since v and s have already been calculated, the rotation matrix u is calculated by Av / s.</font></font><font></font>
 69:             u.SetValue(<font></font>
 70:                 (this[0, 0] * i_dot_j + this[0, 1] * v_s) / s1,<font></font>
 71:                 (this[0, 1] * i_dot_j - this[0, 0] * v_s) / s2,<font></font>
@@ -233,15 +226,15 @@ Figure 7.1: Matrix
 </pre>
 </div>
 
-<h2><a id="h7-6"></a><span class="secno">7.6　</span>特異値分解を用いるアルゴリズム</h2>
-<p>特異値分解は, 多種多様な分野で活躍しており, 主に統計学における主成分分析(PCA)で用いられることが多いようです.CGで利用される例も少なくはなく,</p>
+<h2><a id="h7-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Algorithm using singular value decomposition</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Singular value decomposition is active in a wide variety of fields, and seems to be used mainly in principal component analysis (PCA) in statistics. There are many cases where it is used in CG.</font></font></p>
 <ul>
 <li>Shape Matching<a id="fnb-sm" href="https://freder.io/files/unity2/takao.html#fn-sm" class="noteref" epub:type="noteref">*4</a></li>
 <li>Anisotropic Kernel<a id="fnb-ak" href="https://freder.io/files/unity2/takao.html#fn-ak" class="noteref" epub:type="noteref">*5</a></li>
 <li>Material Point Method<a id="fnb-mpm" href="https://freder.io/files/unity2/takao.html#fn-mpm" class="noteref" epub:type="noteref">*6</a></li>
 </ul>
-<p>などが挙げられます.</p>
-<p>今回は, Shape Matchingにフォーカスを当て, 基礎的な考え方について解説していきます.</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">And so on.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, we will focus on Shape Matching and explain the basic idea.</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-sm"><p class="footnote">[*4] Meshless deformations based on shape matching, Matthias Muller et al., SIGGRAPH 2005 </p></div>
 <div class="footnote" epub:type="footnote" id="fn-ak"><p class="footnote">[*5] Reconstructing surfaces of particle-based fluids using anisotropic kernels, Jihun Yu et al., ACM Transaction on Graphics 2013</p></div>
 <div class="footnote" epub:type="footnote" id="fn-mpm"><p class="footnote">[*6] A material point method for snow simulation, Alexey Stomakhin et al., SIGGRAPH 2013</p></div>
@@ -249,49 +242,49 @@ Figure 7.1: Matrix
 <h2><a id="h7-7"></a><span class="secno">7.7　</span>Shape Matching</h2>
 <p>\label{shapematching}</p>
 
-<h3><a id="h7-7-1"></a><span class="secno">7.7.1　</span>概要</h3>
-<p>Shape Matchingとは, 異なる2つの形状を, 極力誤差のない範囲で整列させる技術を指します.現在では, Shape Matchingを用いて, 弾性体を疑似的にシミュレートするような手法も開発されています.</p>
-<p>本節では, <span class="imgref"><a href="https://freder.io/files/unity2/takao.html#aim">図7.2</a></span>, <span class="imgref"><a href="https://freder.io/files/unity2/takao.html#result">図7.3</a></span>のように,ユニコーンのオブジェクトの配置を, ライオンのオブジェクトの配置へ整列するアルゴリズムを解説します.</p>
+<h3><a id="h7-7-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.7.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Overview</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Shape Matching is a technique for aligning two different shapes within the range where there is as little error as possible. Currently, a method for simulating an elastic body using Shape Matching is being developed. ..</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This section </font><font style="vertical-align: inherit;">describes the algorithm for aligning the unicorn object placement to the lion object placement </font><font style="vertical-align: inherit;">, as </font><span class="imgref"><a href="https://freder.io/files/unity2/takao.html#result"><font style="vertical-align: inherit;">shown</font></a></span><font style="vertical-align: inherit;"> in </font></font><span class="imgref"><a href="https://freder.io/files/unity2/takao.html#aim"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 7.2</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><span class="imgref"><a href="https://freder.io/files/unity2/takao.html#result"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 7.3</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div id="aim" class="image">
 <img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/aim.png" alt="Two objects">
-<p class="caption">
-図7.2: 2つのオブジェクト
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.2: Two objects
+</font></font></p>
 </div>
 <div id="result" class="image">
 <img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/result.png" alt="Aligned result" class="width-055per">
-<p class="caption">
-図7.3: 整列した結果
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.3: Aligned results
+</font></font></p>
 </div>
 
-<h3><a id="h7-7-2"></a><span class="secno">7.7.2　</span>アルゴリズム</h3>
-<p>初めに, それぞれの形状の上に同数の点の集合を定義します. (ライオンの点集合をP, ユニコーンの点集合をQとします.)</p>
-<p>このとき, 下添え字が同一のものは, <span class="imgref"><a href="https://freder.io/files/unity2/takao.html#point">図7.4</a></span>のように, 幾何学的に対応した位置にあることに注意してください.</p>
+<h3><a id="h7-7-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.7.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Algorithm</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, define a set of the same number of points on each shape. (Lion's point set is P, Unicorn's point set is Q.)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">At this time, </font><font style="vertical-align: inherit;">note that </font><font style="vertical-align: inherit;">those with the same subscript are </font><font style="vertical-align: inherit;">in the geometrically corresponding positions as </font></font><span class="imgref"><a href="https://freder.io/files/unity2/takao.html#point"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">shown in Fig. 7.4</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div id="point" class="image">
 <img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/point.png" alt="Correspondence of point set">
-<p class="caption">
-図7.4: 点集合の対応
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.4: Correspondence of point sets
+</font></font></p>
 </div>
-<p>次に, それぞれの点集合の重心を計算します.</p>
-<p>ユニコーンの点集合の重心が, ライオンの点集合の重心と同じ位置に来るとすると,ユニコーンの点集合に回転行列<span class="equation">\mbox{\boldmath $R$}</span>を作用させ, ベクトル<span class="equation">\mbox{\boldmath $t$}</span>平行移動させた結果が,ライオンの重心と等しくなることから, 以下の式が導出できます.</p>
-<p>これを変形すると,</p>
-<p>となり, さらに変形して,</p>
-<p>となります.</p>
-<p>よって, この式から, 回転行列<span class="equation">\mbox{\boldmath $R$}</span>が求まれば, 自動的に平行移動ベクトル<span class="equation">\mbox{\boldmath $t$}</span>が求まることがわかります.ここで, もともとの点の位置から, それぞれの重心を引いた点集合を定義します.</p>
-<p>これにより, それぞれの点集合の重心を原点としたローカル座標で計算を行うことができるようになります.</p>
-<p>次に, <span class="equation">\mbox{\boldmath $p$}_{i}^{\prime}, \mbox{\boldmath $q$}_{i}^{\prime}</span>の分散共分散行列<span class="equation">\mbox{\boldmath $H$}</span>を計算します.</p>
-<p>この分散共分散行列<span class="equation">\mbox{\boldmath $H$}</span>には, 2つの点集合のばらつき具合などの情報が格納されます.ここでのベクトルの積<span class="equation">\mbox{\boldmath $q$}_{i}^{\prime} {\mbox{\boldmath $p$}_{i}^{\prime}}^{T}</span>は, 通常のベクトルの内積演算とは異なり, 直積(outer product)と呼ばれる演算となります.ベクトル同士の直積をとると, 行列が生成されます.2次元ベクトルでの直積は, 以下で定義されています.</p>
-<p>さらに, 分散共分散行列<span class="equation">\mbox{\boldmath $H$}</span>を特異値分解します.</p>
-<p>特異値分解をした結果の中で, <span class="equation">\mbox{\boldmath $\sum$}</span>は伸縮を表す行列であるため,求める回転行列<span class="equation">\mbox{\boldmath $R$}</span>は,</p>
-<p>となります. (詳細な導出方法はやや高度となりますので, ここでは省略させていただきます.)</p>
-<p>最後に, 求めた回転行列と式(\ref{trans})から, 平行移動ベクトル<span class="equation">\mbox{\boldmath $t$}</span>を算出することができます.</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, calculate the centroid of each point set.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Assuming that the center of gravity of the unicorn point set is at the same position as the center of gravity of the lion point set, the rotation matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ R $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is </font><span class="equation"><font style="vertical-align: inherit;">applied</font></span><font style="vertical-align: inherit;"> to the unicorn point set, </font><font style="vertical-align: inherit;">and the vector </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ t Since</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> the result of the </font><span class="equation"><font style="vertical-align: inherit;">$}</font></span><font style="vertical-align: inherit;"> translation is equal to the center of gravity of the lion, the following equation can be derived.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When this is transformed,</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">And further deformed,</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Will be.</font></font></font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, from this equation, if the rotation matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ R $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is obtained, the translation vector </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ t $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is </font><font style="vertical-align: inherit;">automatically </font><font style="vertical-align: inherit;">obtained. Here, the original point Define a set of points from the position of, minus the center of gravity of each.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This makes it possible to perform calculations with local coordinates with the center of gravity of each point set as the origin.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, </font><font style="vertical-align: inherit;">the variance-covariance matrix </font><span class="equation"><font style="vertical-align: inherit;">\ mbox {\ boldmath of </font></span></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ p $} _ {i} ^ {\ prime}, \ mbox {\ boldmath $ q $} _ {i} ^ {\ prime}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Calculate </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">$ H $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This variance-covariance matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ H $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> stores information such as the variability of the two point sets. Here the product of the vectors </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ q $} _ {i } ^ {\ prime} {\ mbox {\ boldmath $ p $} _ {i} ^ {\ prime}} ^ {T}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is an operation called direct product (outer product), unlike the normal vector internal product operation. The direct product of the vectors produces a matrix. The direct product of the two-dimensional vectors is defined below.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, the covariance matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ H $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is singularly decomposed.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the result of singular value decomposition, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ \ sum $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is a matrix representing expansion and contraction, so the desired rotation matrix </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ R $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(The detailed derivation method is a little advanced, so I will omit it here.)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, the translation vector </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mbox {\ boldmath $ t $}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> can be calculated </font><font style="vertical-align: inherit;">from the obtained rotation matrix and equation (\ ref {trans}) </font><font style="vertical-align: inherit;">.</font></font></p>
 
-<h3><a id="h7-7-3"></a><span class="secno">7.7.3　</span>実装</h3>
-<p>今回の実装は, 前節でのアルゴリズムをほぼそのままコードに落とすだけなので, 詳しい説明は省略させていただきます.尚, ShapeMaching.cs内のStart関数内ですべての処理を完結させています.</p>
+<h3><a id="h7-7-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.7.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this implementation, the algorithm in the previous section is just dropped into the code, so detailed explanation is omitted. In addition, all the processing is completed in the Start function in ShapeMaching.cs.</font></font></p>
 <div id="shapematching_impl" class="code">
-<p class="caption">リスト7.2: ShapeMatching(ShapeMaching.cs)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.2: ShapeMatching (ShapeMaching.cs)</font></font></p>
 <pre class="list language-csharp"> 1: // Set p, q<font></font>
  2: p = new Vector2[n];<font></font>
  3: q = new Vector2[n];<font></font>
@@ -310,8 +303,8 @@ Figure 7.1: Matrix
 16: }<font></font>
 17: centerP /= n;<font></font>
 18: centerQ /= n;<font></font>
-19: <font></font>
-20: // Calc p', q'<font></font>
+19: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+20: // Calc, p, q!</font></font><font></font>
 21: Matrix2x2 H = new Matrix2x2(0, 0, 0, 0);<font></font>
 22: for (int i = 0; i &lt; n; i++)<font></font>
 23: {<font></font>
@@ -332,32 +325,32 @@ Figure 7.1: Matrix
 </pre>
 </div>
 
-<h2><a id="h7-8"></a><span class="secno">7.8　</span>結果</h2>
-<p>無事, ユニコーンの形状をライオンの形状に整列することができました.</p>
+<h2><a id="h7-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Results</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I was able to safely align the shape of the unicorn with the shape of the lion.</font></font></p>
 <div id="before" class="image">
 <img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/before.png" alt="Before execution" class="width-080per">
-<p class="caption">
-図7.5: 実行前
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.5: Before execution
+</font></font></p>
 </div>
 <div id="res" class="image">
 <img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/res.png" alt="After execution" class="width-080per">
-<p class="caption">
-図7.6: 実行後
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.6: After execution
+</font></font></p>
 </div>
 
-<h2><a id="h7-9"></a><span class="secno">7.9　</span>まとめ</h2>
-<p>本節では, 特異値分解を使用したShape Matching法の実装について解説しました.今回は2次元での実装でしたが, 3次元での実装も同じアルゴリズムで行うことができます.説明が至らない部分も多々あったかと思いますが, これを機に, 行列演算のCG分野での応用方法に興味を持っていただき, 学習を深めていただければ幸いです.</p>
+<h2><a id="h7-9"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.9　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this section, we explained the implementation of the Shape Matching method using singular value decomposition. This time, it was implemented in 2D, but it can also be implemented in 3D with the same algorithm. I think that there were many, but I hope that you will take this opportunity to become interested in the application method of matrix arithmetic in the CG field and deepen your learning.</font></font></p>
 
 <h2><a id="h7-10"></a><span class="secno">7.10　</span>References</h2>
 <ul>
 <li>3D Geometry for Computer Graphics (<a href="https://igl.ethz.ch/teaching/tau/cg/cg2005/svd.ppt" class="link">https://igl.ethz.ch/teaching/tau/cg/cg2005/svd.ppt</a>)</li>
-<li>理工系の数理 線形代数 (永井敏隆, 永井敦 著) 裳華房</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mathematical linear algebra of science and engineering (by Toshitaka Nagai, Atsushi Nagai) Shokabo</font></font></li>
 <li>Singular Value Decomposition (the SVD) : MIT OpenCourseWare (<a href="https://www.youtube.com/watch?v=mBcLRGuAFUk" class="link">https://www.youtube.com/watch?v=mBcLRGuAFUk</a>)</li>
 <li>Lecture: The Singular Value Decomposition (SVD) : AMATH 301 (<a href="https://www.youtube.com/watch?v=EokL7E6o1AE" class="link">https://www.youtube.com/watch?v=EokL7E6o1AE</a>)</li>
 <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Visualize what eigenvalues ​​and eigenvectors are @ kenmatsu4 ( </font></font><a href="https://qiita.com/kenmatsu4/items/2a8573e3c878fc2da306" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://qiita.com/kenmatsu4/items/2a8573e3c878fc2da306</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></li>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

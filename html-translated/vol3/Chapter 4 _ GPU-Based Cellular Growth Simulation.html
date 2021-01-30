@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0044)https://freder.io/files/unity3/Nakamura.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h4"></a><span class="secno">第4章　</span>GPU-Based Cellular Growth Simulation</h1>
 
 <h2><a id="h4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -81,62 +74,62 @@
 
 <h2><a id="h4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Cell division and growth simulation</font></font></h2>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the simulation program, we prepare two structures, Particle and Edge, to imitate the behavior of the cell.</font></font></p>
-<p>1つのParticleは1つの細胞を表し、以下のようなふるまいをします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">One particle represents one cell and behaves as follows.</font></font></p>
 <ul>
-<li>Growth(成長) : 時間とともに大きくなる</li>
-<li>Repulsion(反発) : ほかのParticleと衝突して反発しあう</li>
-<li>Division(分裂) : 特定の条件で分裂して2つのParticleに増える</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Growth: grows over time</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Repulsion: Collides with other particles and repels each other</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Division: Divides under certain conditions and grows into two particles</font></font></li>
 </ul>
 <div id="id_Nakamura_2FFigureGrowthRepulsionDivision" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/FigureGrowthRepulsionDivision.png" alt="Cell behavior">
-<p class="caption">
-図4.2: 細胞のふるまい
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.2: Cell behavior
+</font></font></p>
 </div>
-<p>Edgeは細胞同士がくっつきあう様子を表現します。分裂したParticle同士をEdgeで繋ぎ、バネのように引き合うことでParticle同士をくっつけ、細胞のネットワーク構造を表現します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Edge expresses how cells stick to each other. </font><font style="vertical-align: inherit;">By connecting the divided particles with Edge and attracting them like a spring, the particles are attached to each other to express the network structure of cells.</font></font></p>
 <div id="id_Nakamura_2FFigureEdgeSpring" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/FigureEdgeSpring.png" alt="Edge sticks connected Particles together">
-<p class="caption">
-図4.3: Edgeは繋いだParticle同士をくっつけ合う
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.3: Edge sticks connected particles together
+</font></font></p>
 </div>
 
-<h2><a id="h4-3"></a><span class="secno">4.3　</span>実装</h2>
-<p>本節では必要な機能を段階的に実装することを通じて解説を進めます。</p>
+<h2><a id="h4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this section, we will explain by gradually implementing the necessary functions.</font></font></p>
 
-<h3><a id="h4-3-1"></a><span class="secno">4.3.1　</span>Particleの実装 (CellularGrowthParticleOnly.cs)</h3>
-<p>まずはParticleの挙動のみを実装したサンプルCellularGrowthParticleOnly.csを通して、Particleの挙動と実装を解説します。</p>
-<p>Particleの構造は以下のように定義します。</p>
+<h3><a id="h4-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Particle Implementation (CellularGrowthParticleOnly.cs)</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, we will explain the behavior and implementation of particles through the sample CellularGrowthParticleOnly.cs that implements only the behavior of particles.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The structure of Particles is defined as follows.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Particle.cs</p>
 <pre class="emlist">[StructLayout(LayoutKind.Sequential)]<font></font>
-public struct Particle_t {<font></font>
-    public Vector2 position;    // 位置<font></font>
-    public Vector2 velocity;    // 速度<font></font>
-    float radius;               // サイズ<font></font>
-    float threshold;            // 最大サイズ<font></font>
-    int links;                  // 繋がっているEdgeの数(後述のsceneで利用)<font></font>
-    uint alive;                 // 活性化フラグ<font></font>
+public struct Particle_t {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Vector2 position; // position</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Vector2 velocity; // velocity</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float radius; // size</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float threshold; // maximum size</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int links; // Number of connected Edges (used in the scene below)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint alive; // activation flag</font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>本プロジェクトではParticleを任意のタイミングで増減させるため、オブジェクトプールをAppend/ConsumeStructuredBufferによって管理し、GPU上でオブジェクトの数を制御できるようにします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this project, Particles are increased or decreased at any time, so the object pool is managed by Append / ConsumeStructuredBuffer so that the number of objects can be controlled on the GPU.</font></font></p>
 
-<h4><a id="h4-3-1-1"></a>Append/ConsumeStructuredBufferについて</h4>
-<p>Append/ConsumeStructuredBuffer<a id="fnb-appendstructuredbuffer" href="https://freder.io/files/unity3/Nakamura.html#fn-appendstructuredbuffer" class="noteref" epub:type="noteref">*4</a><a id="fnb-consumestructuredbuffer" href="https://freder.io/files/unity3/Nakamura.html#fn-consumestructuredbuffer" class="noteref" epub:type="noteref">*5</a>は、Direct3D11から利用可能になったGPU上でLIFO(Last In First Out : 後入れ先出し)を行うためのコンテナです。AppendStructuredBufferはデータの追加を行い、ConsumeStructuredBufferはデータの取り出しを行う役割を持ちます。</p>
-<p>このコンテナを用いることでGPU上で動的に数を制御でき、オブジェクトの増減を表現できるようになります。</p>
+<h4><a id="h4-3-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">About Append / ConsumeStructuredBuffer</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Append / ConsumeStructuredBuffer </font></font><a id="fnb-appendstructuredbuffer" href="https://freder.io/files/unity3/Nakamura.html#fn-appendstructuredbuffer" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 4 </font></font></a><a id="fnb-consumestructuredbuffer" href="https://freder.io/files/unity3/Nakamura.html#fn-consumestructuredbuffer" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 5</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is a container for performing LIFO (Last In First Out) on the GPU made available from Direct3D11. </font><font style="vertical-align: inherit;">AppendStructuredBuffer is responsible for adding data, and ConsumeStructuredBuffer is responsible for retrieving data.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By using this container, you can dynamically control the number on the GPU and express the increase or decrease of objects.</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-appendstructuredbuffer"><p class="footnote">[*4] https://docs.microsoft.com/ja-jp/windows/desktop/direct3dhlsl/sm5-object-appendstructuredbuffer</p></div>
 <div class="footnote" epub:type="footnote" id="fn-consumestructuredbuffer"><p class="footnote">[*5] https://docs.microsoft.com/ja-jp/windows/desktop/direct3dhlsl/sm5-object-consumestructuredbuffer</p></div>
 
-<h4><a id="h4-3-1-2"></a>バッファの初期化</h4>
-<p>まずはParticleのバッファとオブジェクトプールのバッファの初期化を行います。</p>
+<h4><a id="h4-3-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Buffer initialization</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, initialize the particle buffer and the object pool buffer.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowthParticleOnly.cs</p>
-<pre class="emlist">protected void Start () {<font></font>
-    // Particleの初期化<font></font>
+<pre class="emlist">protected void Start () {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Particle initialization</font></font><font></font>
     particleBuffer = new PingPongBuffer(count, typeof(Particle_t));<font></font>
-<font></font>
-    // オブジェクトプールの初期化<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Initialize the object pool</font></font><font></font>
     poolBuffer = new ComputeBuffer(<font></font>
         count,<font></font>
         Marshal.SizeOf(typeof(int)),<font></font>
@@ -149,53 +142,53 @@ public struct Particle_t {<font></font>
         ComputeBufferType.IndirectArguments<font></font>
     );<font></font>
     countBuffer.SetData(countArgs);<font></font>
-<font></font>
-    // 分裂可能なオブジェクトを管理するオブジェクトプール<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Object pool that manages divisible objects</font></font><font></font>
     dividablePoolBuffer = new ComputeBuffer(<font></font>
-        count,<font></font>
-        Marshal.SizeOf(typeof(int)),<font></font>
-        ComputeBufferType.Append<font></font>
-    );<font></font>
-    dividablePoolBuffer.SetCounterValue(0);<font></font>
-<font></font>
-    // Particleとオブジェクトプールの初期化カーネルの実行(後述)<font></font>
+        count,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Marshal.SizeOf(typeof(int)),</font></font></font></font></font></font><font></font>
+        ComputeBufferType.Append<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    dividablePoolBuffer.SetCounterValue (0);</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Particle and object pool initialization Kernel execution (see below)</font></font><font></font>
     InitParticlesKernel();<font></font>
 <font></font>
     ...<font></font>
 }<font></font>
 </pre>
 </div>
-<p>particleBufferとして利用しているPingPongBufferクラスはバッファを読み込み用と書き込み用の2つを用意するもので、後述のParticleの相互作用を計算する場面において活用します。</p>
-<p>poolBufferとdividablePoolBufferがAppend/ConsumeStructuredBufferであり、初期化時の引数ComputeBufferTypeにComputeBufferType.Appendを指定しています。Append/ConsumeStructuredBufferは可変長のデータを扱えるのですが、初期化コードを見てわかるように、データ数の上限はバッファの作成時に設定しなければなりません。</p>
-<p>int型のAppend/ConsumeStructuredBufferとして作成したpoolBufferは、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The PingPongBuffer class used as particleBuffer prepares two buffers, one for reading and the other for writing, and it is used in the scene of calculating the interaction of Particles described later.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">poolBuffer and divideablePoolBuffer are Append / ConsumeStructuredBuffer, and ComputeBufferType.Append is specified in the argument ComputeBufferType at the time of initialization. </font><font style="vertical-align: inherit;">Append / ConsumeStructuredBuffer can handle variable length data, but as you can see from the initialization code, the upper limit of the number of data must be set when creating the buffer.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The poolBuffer created as an int type Append / ConsumeStructuredBuffer is</font></font></p>
 <ol>
-<li>初期化時に非活性なParticleのindexをpoolBufferに貯める(StackへのPush)</li>
-<li>Particleを追加する際にpoolBufferからindexを取り出し(StackからのPop)、そのindexに紐づくparticleBuffer内のParticleのaliveフラグをonにする</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Store the index of particles that are inactive at initialization in poolBuffer (Push to Stack)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When adding a particle, take out the index from the poolBuffer (Pop from the Stack) and turn on the alive flag of the Particle in the particleBuffer associated with that index.</font></font></li>
 </ol>
-<p>という流れによってオブジェクトプールとして機能させます。つまり、poolBufferが持つintバッファは常に非活性なParticleのindexを指しており、必要に応じて取り出したりすることによってオブジェクトプールとして機能させることができるのです。(<span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FObjectPool">図4.4</a></span>)</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It functions as an object pool according to the flow. </font><font style="vertical-align: inherit;">In other words, the int buffer of poolBuffer always points to the index of inactive Particles, and can be made to function as an object pool by fetching it as needed. </font><font style="vertical-align: inherit;">( </font></font><span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FObjectPool"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fig. 4.4</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></p>
 <div id="id_Nakamura_2FObjectPool" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/ObjectPool.png" alt="The array on the left is particleBuffer and the right is poolBuffer.In the initial state, all the particles in particleBuffer are inactive, but when making particles appear, the index of the inactive particle is taken out from poolBuffer and the particle at the corresponding index is taken out. Activate">
-<p class="caption">
-図4.4: 左の配列がparticleBufferで右がpoolBufferを表している　初期状態ではparticleBuffer内のParticleが全て非活性状態だが、Particleを出現させる際はpoolBufferから非活性のParticleのindexを取り出し、該当indexの箇所のParticleを活性化させる
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.4: The array on the left represents particleBuffer and the right represents poolBuffer.In the initial state, all particles in particleBuffer are inactive, but when particles appear, the index of the inactive Particle is taken out from poolBuffer and the corresponding index is displayed. Activate the particles in the area
+</font></font></p>
 </div>
-<p>countBufferはint型のバッファで、オブジェクトプールの数を管理するために用います。</p>
-<p>Startの最後に呼び出しているInitParticlesKernelでは、Particleとオブジェクトプールの初期化を行うGPUカーネルを実行しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">countBuffer is an int type buffer and is used to manage the number of object pools.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The InitParticlesKernel called at the end of Start runs the GPU kernel that initializes the Particles and object pool.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowthParticleOnly.cs</p>
 <pre class="emlist">protected void InitParticlesKernel()<font></font>
 {<font></font>
     var kernel = compute.FindKernel("InitParticles");<font></font>
     compute.SetBuffer(kernel, "_Particles", particleBuffer.Read);<font></font>
-<font></font>
-    // オブジェクトプールをAppendStructuredBufferとして指定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Specify the object pool as AppendStructuredBuffer</font></font><font></font>
     compute.SetBuffer(kernel, "_ParticlePoolAppend", poolBuffer);<font></font>
 <font></font>
     Dispatch1D(kernel, count);<font></font>
 }<font></font>
 </pre>
 </div>
-<p>以下が初期化を行うカーネルになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following is the kernel to be initialized.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.compute</p>
 <pre class="emlist">THREAD<font></font>
@@ -207,21 +200,21 @@ void InitParticles(uint3 id : SV_DispatchThreadID)<font></font>
   _Particles.GetDimensions(count, strides);<font></font>
   if (idx &gt;= count)<font></font>
     return;<font></font>
-<font></font>
-  // Particleの初期化<font></font>
-  Particle p = create();<font></font>
-  p.alive = false; // 全Particleを非活性に<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Particle initialization</font></font><font></font>
+  Particle p = create();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  p.alive = false; // Inactivate all Particles</font></font><font></font>
   _Particles[idx] = p;<font></font>
-<font></font>
-  // オブジェクトプールにParticleのindexを追加<font></font>
-  _ParticlePoolAppend.Append(idx);<font></font>
-}<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Add particle index to object pool</font></font><font></font>
+  _ParticlePoolAppend.Append(idx);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 </pre>
 </div>
-<p>上記のカーネルを実行することで、particleBuffer内のすべてのParticleが初期化され非活性状態に、poolBufferには非活性状態の全Particleのindexが格納されます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By executing the above kernel, all the particles in the particleBuffer will be initialized and inactive, and the poolBuffer will store the indexes of all the particles in the inactive state.</font></font></p>
 
-<h4><a id="h4-3-1-3"></a>Particleの出現</h4>
-<p>Particleを初期化できたので、次はParticleを出現させます。CellularGrowthParticleOnly.csでは、マウスをクリックした位置にParticleを発生させます。</p>
+<h4><a id="h4-3-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Appearance of Particles</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now that we have initialized the particles, let's make them appear. </font><font style="vertical-align: inherit;">In CellularGrowthParticleOnly.cs, particles are generated at the position where the mouse is clicked.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowthParticleOnly.cs</p>
 <pre class="emlist">protected void Update() {<font></font>
@@ -229,28 +222,28 @@ void InitParticles(uint3 id : SV_DispatchThreadID)<font></font>
     if(Input.GetMouseButton(0))<font></font>
     {<font></font>
         EmitParticlesKernel(GetMousePoint());<font></font>
-    }<font></font>
-    ...<font></font>
-}<font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    ...</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 </pre>
 </div>
-<p>マウスがクリックされていると、EmitParticlesKernelを実行してParticleを出現させます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the mouse is clicked, it runs the EmitParticlesKernel to spawn particles.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowthParticleOnly.cs</p>
 <pre class="emlist">protected void EmitParticlesKernel(Vector2 point, int emitCount = 32)<font></font>
-{<font></font>
-    // オブジェクトプールの数とemitCountを比較して、<font></font>
-    // オブジェクトプールが空の状態で_ParticlePoolConsume.Consume()が実行されないようにする<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Compare the number of object pools with emitCount,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Prevent _ParticlePoolConsume.Consume () from running when the object pool is empty</font></font><font></font>
     emitCount = Mathf.Max(<font></font>
-        0,<font></font>
-        Mathf.Min(emitCount, CopyPoolSize(poolBuffer))<font></font>
+        0,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Mathf.Min (emitCount, CopyPoolSize (poolBuffer))</font></font></font></font></font></font><font></font>
     );<font></font>
     if (emitCount &lt;= 0) return;<font></font>
 <font></font>
     var kernel = compute.FindKernel("EmitParticles");<font></font>
     compute.SetBuffer(kernel, "_Particles", particleBuffer.Read);<font></font>
-<font></font>
-    // オブジェクトプールをConsumeStructuredBufferとして指定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Specify the object pool as ConsumeStructuredBuffer</font></font><font></font>
     compute.SetBuffer(kernel, "_ParticlePoolConsume", poolBuffer);<font></font>
 <font></font>
     compute.SetVector("_Point", point);<font></font>
@@ -260,79 +253,79 @@ void InitParticles(uint3 id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>InitParticlesKernelでは_ParticlePoolAppendパラメータに指定していたpoolBufferを、EmitParticlesKernelでは_ParticlePoolConsumeパラメータに指定していることからわかるように、Append/ConsumeStructuredBufferにはそれぞれ同一のバッファを指定します。</p>
-<p>GPU上の処理での用途によって、バッファを追加用か(AppendStructuredBuffer)、取り出し用か(ConsumeStructuredBuffer)の設定を変えているだけで、CPU側からみると同じバッファをGPU側に送信していることになります。</p>
-<p>EmitParticlesKernelの冒頭では、emitCountとGetPoolSizeで取得したオブジェクトプールのサイズを比較していますが、これはオブジェクトプールが空の状態でプールからのindexの取り出しが実行されないようにするためで、もし空のオブジェクトプールからさらにindexを取り出そうとすると(GPUカーネル内で_ParticlePoolConsume.Consumeを実行すると)、予期しない動作が発生してしまいます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As you can see from the fact that the poolBuffer specified in the _ParticlePoolAppend parameter in InitParticlesKernel is specified in the _ParticlePoolConsume parameter in EmitParticlesKernel, the same buffer is specified in Append / ConsumeStructuredBuffer.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Depending on the purpose of processing on the GPU, just changing the setting of whether to add a buffer (AppendStructuredBuffer) or to retrieve (ConsumeStructuredBuffer), the same buffer is sent to the GPU side from the CPU side. Become.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">At the beginning of EmitParticlesKernel, we compare the size of the object pool obtained by emitCount and GetPoolSize, but this is to prevent index retrieval from the pool when the object pool is empty, if it is an empty object. Attempting to retrieve more indexes from the pool (running _ParticlePoolConsume.Consume inside the GPU kernel) results in unexpected behavior.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.compute</p>
 <pre class="emlist">THREAD<font></font>
 void EmitParticles(uint3 id : SV_DispatchThreadID)<font></font>
-{<font></font>
-  // _EmitCountよりも多くのParticleを追加しないようにする<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Avoid adding more Particles than _EmitCount</font></font><font></font>
   if (id.x &gt;= (uint) _EmitCount)<font></font>
     return;<font></font>
-<font></font>
-  // オブジェクトプールから非活性のParticleのindexを取り出し<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Extract the index of the inactive Particle from the object pool</font></font><font></font>
   uint idx = _ParticlePoolConsume.Consume();<font></font>
 <font></font>
   Particle c = create();<font></font>
-<font></font>
-  // マウスの位置から少しずれた位置にParticleを配置する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Place the Particle at a position slightly offset from the mouse position</font></font><font></font>
   float2 offset = random_point_on_circle(id.xx + float2(0, _Time));<font></font>
   c.position = _Point.xy + offset;<font></font>
   c.radius = nrand(id.xx + float2(_Time, 0));<font></font>
-<font></font>
-  // 活性化したParticleを非活性だったindexの個所に設定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Set the activated Particle to the inactive index location</font></font><font></font>
   _Particles[idx] = c;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>EmitParticlesでは非活性なParticleのindexをオブジェクトプールから取り出し、活性化したParticleをparticleBufferの該当indexの位置に設定しています。</p>
-<p>上記のカーネルの処理によって、オブジェクトプールの数を考慮しつつParticleを出現させることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In Emit Particles, the index of the inactive particle is taken out from the object pool, and the activated particle is set at the position of the corresponding index in the particle Buffer.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By the above kernel processing, particles can be spawned while considering the number of object pools.</font></font></p>
 
-<h4><a id="h4-3-1-4"></a>Particleのふるまい</h4>
-<p>これでParticleの出現を管理することができたので、次はParticleのふるまいをプログラムしていきます。</p>
-<p>本章で開発するシミュレータの細胞は<span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FFigureGrowthRepulsionDivision">図4.2</a></span>にもある通り、以下のふるまいをします。</p>
+<h4><a id="h4-3-1-4"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Particle behavior</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now that we have managed the appearance of particles, it's time to program the behavior of particles.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The cells of the simulator developed in this chapter </font><font style="vertical-align: inherit;">behave as follows, as </font></font><span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FFigureGrowthRepulsionDivision"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">shown in Figure 4.2</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <ul>
-<li>Growth : Particleは特定のサイズに達するまで徐々に大きくなる</li>
-<li>Repulsion : ほかのParticleと接触すると反発しあうように力が加わる</li>
-<li>Division : Particleは特定の条件で分裂する</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Growth: Particles grow gradually until they reach a certain size</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Repulsion: Forces are applied to repel each other when they come into contact with other particles.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Division: Particles split under certain conditions</font></font></li>
 </ul>
 
 <h4><a id="h4-3-1-5"></a>GrowthとRepulsion</h4>
-<p>GrowthとRepulsionはUpdate内で毎フレーム実行します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Growth and Repulsion are executed every frame in Update.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowthParticleOnly.cs</p>
 <pre class="emlist">protected void Update() {<font></font>
     ...<font></font>
-    UpdateParticlesKernel();<font></font>
-    ...<font></font>
-}<font></font>
+    UpdateParticlesKernel();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    ...</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 ...<font></font>
 protected void UpdateParticlesKernel()<font></font>
 {<font></font>
     var kernel = compute.FindKernel("UpdateParticles");<font></font>
-<font></font>
-    // 読み込み用のバッファを設定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Set the read buffer</font></font><font></font>
     compute.SetBuffer(kernel, "_ParticlesRead", particleBuffer.Read);<font></font>
-<font></font>
-    // 書き込み用のバッファを設定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Set a buffer for writing</font></font><font></font>
     compute.SetBuffer(kernel, "_Particles", particleBuffer.Write);<font></font>
-<font></font>
-    compute.SetFloat("_Drag", drag);            // 速度の減衰率<font></font>
-    compute.SetFloat("_Limit", limit);          // 速度の限界値<font></font>
-    compute.SetFloat("_Repulsion", repulsion);  // 反発する距離にかける係数<font></font>
-    compute.SetFloat("_Grow", grow);            // 成長速度<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetFloat ("_Drag", drag); // Speed ​​attenuation</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetFloat ("_Limit", limit); // Speed ​​limit</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetFloat ("_Repulsion", repulsion); // Coefficient over repulsive distance</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetFloat("_Grow", grow); // growth rate</font></font><font></font>
 <font></font>
     Dispatch1D(kernel, count);<font></font>
-<font></font>
-    // 読み込み用と書き込み用のバッファをスワップ(Ping Pong)<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Swap read and write buffers (Ping Pong)</font></font><font></font>
     particleBuffer.Swap();<font></font>
 }<font></font>
 </pre>
 </div>
-<p>読み込み用と書き込み用のバッファをそれぞれ設定し、処理の後にバッファをスワップしている理由は後述します。</p>
-<p>以下がUpdateParticlesカーネルになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The reason for setting the read and write buffers and swapping the buffers after processing will be described later.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Below is the Update Particles kernel.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CelluarGrowth.compute</p>
 <pre class="emlist">THREAD<font></font>
@@ -346,25 +339,25 @@ void UpdateParticles(uint3 id : SV_DispatchThreadID)<font></font>
     return;<font></font>
 <font></font>
   Particle p = _ParticlesRead[idx];<font></font>
-<font></font>
-  // 活性化しているParticleのみ処理する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Process only activated Particles</font></font><font></font>
   if (p.alive)<font></font>
-  {<font></font>
-    // Grow : Particleの成長<font></font>
+  {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Grow: Particle growth</font></font><font></font>
     p.radius = min(p.threshold, p.radius + _DT * _Grow);<font></font>
-<font></font>
-    // Repulsion : Particle同士の衝突<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Repulsion: Collisions between Particles</font></font><font></font>
     for (uint i = 0; i &lt; count; i++)<font></font>
     {<font></font>
       Particle other = _ParticlesRead[i];<font></font>
       if(i == idx || !other.alive) continue;<font></font>
-<font></font>
-      // Particle同士の距離を計算<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      // Calculate the distance between particles</font></font><font></font>
       float2 dir = p.position - other.position;<font></font>
       float l = length(dir);<font></font>
-<font></font>
-      // Particle同士の距離が互いの半径の合計*_Repulsionよりも<font></font>
-      // 近ければ衝突している<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      // The distance between the particles is greater than the sum of their radii * _Repulsion</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      // If they are close, they are in conflict</font></font><font></font>
       float r = (p.radius + other.radius) * _Repulsion;<font></font>
       if (l &lt; r)<font></font>
       {<font></font>
@@ -376,39 +369,39 @@ void UpdateParticles(uint3 id : SV_DispatchThreadID)<font></font>
     float vl = length(vel);<font></font>
     // check if velocity length over than zero to avoid NaN position<font></font>
     if (vl &gt; 0)<font></font>
-    {<font></font>
-      p.position += normalize(vel) * min(vl, _Limit);<font></font>
-<font></font>
-      // _Dragパラメータに従ってvelocityを減衰させる<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      p.position + = normalize (vel) * min (vl, _Limit);</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      // Attenuate velocity according to _Drag parameter</font></font><font></font>
       p.velocity =<font></font>
-        normalize(p.velocity) *<font></font>
-        min(<font></font>
+        normalize(p.velocity) *<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        min (</font></font></font></font></font></font><font></font>
           length(p.velocity) * _Drag,<font></font>
           _Limit<font></font>
         );<font></font>
     }<font></font>
-    else<font></font>
-    {<font></font>
-      p.velocity = float2(0, 0);<font></font>
-    }<font></font>
+    else<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font></font></font><font></font>
+      p.velocity = float2(0, 0);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font></font></font><font></font>
   }<font></font>
 <font></font>
   _Particles[idx] = p;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>UpdateParticlesカーネルでは、Particle同士の衝突を計算するため、読み込み用のバッファ(_ParticlesRead)と書き込み用のバッファ(_Particles)とを利用しています。</p>
-<p>もしここで読み込みも書き込みも同一のバッファを利用してしまった場合、GPUの並列処理により、別スレッドで更新された後のParticleの情報を、また別のスレッドがParticleの位置計算に用いる可能性が出てきてしまい、計算の整合性が取れない問題(データレース)が発生してしまいます。</p>
-<p>一つのスレッドが別スレッドで更新される情報を参照しなければ、読み込みと書き込み用で別々にバッファを用意する必要はありませんが、スレッドが別スレッドで更新されたバッファを参照してしまうような場合は、UpdateParticlesカーネルのように読み込みと書き込み用のバッファを別々に用意し、更新を行うたびに交互に入れ替える必要があります。(処理が終わるたびに交互にバッファを入れ替えることからPing Pongバッファと呼びます)</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The UpdateParticles kernel uses a read buffer (_ParticlesRead) and a write buffer (_Particles) to calculate collisions between particles.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the same buffer is used for both reading and writing here, there is a possibility that another thread will use the particle information after being updated by another thread for particle position calculation due to GPU parallel processing. Will appear, and a problem (data race) will occur in which the calculation is inconsistent.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If one thread does not refer to the information updated by another thread, it is not necessary to prepare separate buffers for reading and writing, but if the thread refers to the buffer updated by another thread. Like the UpdateParticles kernel, it needs to have separate read and write buffers, which alternate with each update. </font><font style="vertical-align: inherit;">(It is called Ping Pong buffer because it alternates buffers after each process.)</font></font></p>
 
 <h4><a id="h4-3-1-6"></a>Division</h4>
-<p>Particleの分裂はコルーチンによって一定時間ごとに実行します。</p>
-<p>Particleの分裂処理は</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Particle splitting is performed by coroutines at regular intervals.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Particle splitting process</font></font></p>
 <ol>
-<li>分裂可能なParticleのindexを取得し、dividablePoolBufferに格納</li>
-<li>dividablePoolBufferから分裂させたい分のParticleを取り出し、分裂させる</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Get the index of divisible particles and store it in the dividablePoolBuffer</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Take out the particles you want to split from the dividablePoolBuffer and split them.</font></font></li>
 </ol>
-<p>という流れで行われます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is done in the flow.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowthParticleOnly.cs</p>
 <pre class="emlist">protected void Start() {<font></font>
@@ -425,21 +418,21 @@ protected IEnumerator IDivider()<font></font>
     {<font></font>
         yield return new WaitForSeconds(divideInterval);<font></font>
         Divide();<font></font>
-    }<font></font>
-}<font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 <font></font>
 protected void Divide() {<font></font>
     GetDividableParticlesKernel();<font></font>
-    DivideParticlesKernel(maxDivideCount);<font></font>
-}<font></font>
-<font></font>
-...<font></font>
-<font></font>
-// 分裂可能なParticle候補をdividablePoolBufferに格納<font></font>
-protected void GetDividableParticlesKernel()<font></font>
-{<font></font>
-    // dividablePoolBufferをリセット<font></font>
-    dividablePoolBuffer.SetCounterValue(0);<font></font>
+    DivideParticlesKernel(maxDivideCount);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+...</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Store divisible particle candidates in dividablePoolBuffer</font></font><font></font>
+protected void GetDividableParticlesKernel()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Reset dividablePoolBuffer</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    dividablePoolBuffer.SetCounterValue (0);</font></font></font></font></font></font><font></font>
 <font></font>
     var kernel = compute.FindKernel("GetDividableParticles");<font></font>
     compute.SetBuffer(kernel, "_Particles", particleBuffer.Read);<font></font>
@@ -449,17 +442,17 @@ protected void GetDividableParticlesKernel()<font></font>
 }<font></font>
 <font></font>
 protected void DivideParticlesKernel(int maxDivideCount = 16)<font></font>
-{<font></font>
-    // 分裂させたい数(maxDivideCount)と<font></font>
-    // 分裂可能なParticleの数(dividablePoolBufferのサイズ)を比較<font></font>
-    maxDivideCount = Mathf.Min(<font></font>
-        CopyPoolSize(dividablePoolBuffer),<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // With the number you want to split (maxDivideCount)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Compare the number of particles that can be split (the size of the dividable PoolBuffer)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    maxDivideCount = Mathf.Min (</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        CopyPoolSize (dividablePoolBuffer),</font></font></font></font></font></font><font></font>
         maxDivideCount<font></font>
     );<font></font>
-<font></font>
-    // 分裂させたい数(maxDivideCount)と<font></font>
-    // オブジェクトプールに残っているParticleの数(poolBufferのサイズ)を比較<font></font>
-    maxDivideCount = Mathf.Min(CopyPoolSize(poolBuffer), maxDivideCount);<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // With the number you want to split (maxDivideCount)</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Compare the number of particles remaining in the object pool (poolBuffer size)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    maxDivideCount = Mathf.Min (CopyPoolSize (poolBuffer), maxDivideCount);</font></font></font></font></font></font><font></font>
 <font></font>
     if (maxDivideCount &lt;= 0) return;<font></font>
 <font></font>
@@ -473,54 +466,54 @@ protected void DivideParticlesKernel(int maxDivideCount = 16)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>GetDividableParticlesカーネルによって、dividablePoolBufferに分裂可能なParticle(activeになっているParticle)を追加し、そのバッファを元に、実際に分裂処理を行うDivideParticlesカーネルを実行する回数をもとめます。</p>
-<p>分裂処理の回数のもとめ方はDivideParticlesKernel関数の冒頭の通りで、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The GetDividableParticles kernel adds divisible particles (active particles) to the dividablePoolBuffer, and uses that buffer to determine the number of times to execute the DivideParticles kernel that actually performs the split processing.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">How to find the number of splits is as shown at the beginning of the DivideParticlesKernel function.</font></font></p>
 <ul>
 <li>maxDivideCount</li>
-<li>dividablePoolBufferが持つ分裂可能なParticle数、</li>
-<li>poolBufferが持つオブジェクトプールに残っている非活性なParticle数</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The number of particles that can be divided by the dividablePoolBuffer,</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Number of inactive particles remaining in the object pool of poolBuffer</font></font></li>
 </ul>
-<p>とを比較します。これらの数値の比較によって、分裂可能な数の制限を超えて分裂処理が走ることを防いでいます。</p>
-<p>以下がカーネルの中身になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Compare with. </font><font style="vertical-align: inherit;">Comparing these numbers prevents the split process from running beyond the limit of the number of splits that can be split.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following is the contents of the kernel.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.compute</p>
-<pre class="emlist">// 分裂できるParticleの候補を決定する関数<font></font>
-// ここの条件を変更することで分裂パターンを調整することができる<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Function that determines the candidate particles that can be split</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// You can adjust the split pattern by changing the conditions here</font></font><font></font>
 bool dividable_particle(Particle p, uint idx)<font></font>
-{<font></font>
-  // 成長率に応じて分裂<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Split according to growth rate</font></font><font></font>
   float rate = (p.radius / p.threshold);<font></font>
   return rate &gt;= 0.95;<font></font>
-<font></font>
-  // ランダムに分裂<font></font>
-  // return nrand(float2(idx, _Time)) &lt; 0.1;<font></font>
-}<font></font>
-<font></font>
-// Particleを分裂する関数<font></font>
-uint divide_particle(uint idx, float2 offset)<font></font>
-{<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Randomly split</font></font><font></font>
+  // return nrand(float2(idx, _Time)) &lt; 0.1;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Function that splits particles</font></font><font></font>
+uint divide_particle(uint idx, float2 offset)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font>
   Particle parent = _Particles[idx];<font></font>
   Particle child = create();<font></font>
-<font></font>
-  // サイズを半分に設定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Set the size in half</font></font><font></font>
   float rh = parent.radius * 0.5;<font></font>
   rh = max(rh, 0.1);<font></font>
   parent.radius = child.radius = rh;<font></font>
-<font></font>
-  // 親と子の位置をずらす<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Shift the position of parent and child</font></font><font></font>
   float2 center = parent.position;<font></font>
   parent.position = center - offset;<font></font>
   child.position = center + offset;<font></font>
-<font></font>
-  // 子の最大サイズをランダムに設定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Randomly set the maximum size of the child</font></font><font></font>
   float x = nrand(float2(_Time, idx));<font></font>
   child.threshold = rh * lerp(1.25, 2.0, x);<font></font>
-<font></font>
-  // 子のindexをオブジェクトプールから取得し、子Particleをバッファに設定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Get the child index from the object pool and set the child particle in the buffer</font></font><font></font>
   uint cidx = _ParticlePoolConsume.Consume();<font></font>
   _Particles[cidx] = child;<font></font>
-<font></font>
-  // 親Particleを更新<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Update parent particle</font></font><font></font>
   _Particles[idx] = parent;<font></font>
 <font></font>
   return cidx;<font></font>
@@ -529,20 +522,20 @@ uint divide_particle(uint idx, float2 offset)<font></font>
 uint divide_particle(uint idx)<font></font>
 {<font></font>
   Particle parent = _Particles[idx];<font></font>
-<font></font>
-  // ランダムに位置をずらす<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Randomly shift the position</font></font><font></font>
   float2 offset =<font></font>
     random_point_on_circle(float2(idx, _Time)) *<font></font>
     parent.radius * 0.25;<font></font>
 <font></font>
-  return divide_particle(idx, offset);<font></font>
-}<font></font>
+  return divide_particle(idx, offset);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 <font></font>
 ...<font></font>
 <font></font>
 THREAD<font></font>
-void GetDividableParticles(uint3 id : SV_DispatchThreadID)<font></font>
-{<font></font>
+void GetDividableParticles(uint3 id : SV_DispatchThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font>
   uint idx = id.x;<font></font>
   uint count, strides;<font></font>
   _Particles.GetDimensions(count, strides);<font></font>
@@ -559,15 +552,15 @@ void GetDividableParticles(uint3 id : SV_DispatchThreadID)<font></font>
 THREAD<font></font>
 void DivideParticles(uint3 id : SV_DispatchThreadID)<font></font>
 {<font></font>
-  if (id.x &gt;= _DivideCount)<font></font>
-    return;<font></font>
+  if (id.x &gt;= _DivideCount)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return;</font></font></font></font></font></font><font></font>
 <font></font>
   uint idx = _DividablePoolConsume.Consume();<font></font>
-  divide_particle(idx);<font></font>
-}<font></font>
+  divide_particle(idx);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 </pre>
 </div>
-<p>これらの処理によって実現される細胞分裂の結果は以下のようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The results of cell division achieved by these processes are as follows.</font></font></p>
 <div id="id_Nakamura_2FParticleOnly" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/ParticleOnly.jpg" alt="CellularGrowthParticleOnly.scene">
 <p class="caption">
@@ -575,34 +568,34 @@ void DivideParticles(uint3 id : SV_DispatchThreadID)<font></font>
 </p>
 </div>
 
-<h3><a id="h4-3-2"></a><span class="secno">4.3.2　</span>ネットワーク構造の表現 (CellularGrowth.cs)</h3>
-<p>細胞同士がくっつきあう様子を実現するため、Particle同士を結ぶEdgeを導入し、細胞をネットワーク構造で表現します。</p>
-<p>ここからはCellularGrowth.csの実装を通して解説を進めます。</p>
-<p>EdgeはParticleが分裂するタイミングで追加され、分裂したParticle同士をつなげます。</p>
-<p>Edgeの構造は以下のように定義します。</p>
+<h3><a id="h4-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Representation of network structure (CellularGrowth.cs)</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In order to realize how cells stick to each other, we will introduce Edge that connects particles and express cells in a network structure.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From here, we will proceed through the implementation of CellularGrowth.cs.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Edges are added when the particles split, connecting the split particles together.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The structure of Edge is defined as follows.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Edge.cs</p>
 <pre class="emlist">[StructLayout(LayoutKind.Sequential)]<font></font>
-public struct Edge_t<font></font>
-{<font></font>
-    public int a, b;        // Edgeが結ぶ2つのParticleのindex<font></font>
-    public Vector2 force;   // 2つのParticle同士をくっつけあわせる力<font></font>
-    uint alive;             // 活性化フラグ<font></font>
+public struct Edge_t<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public int a, b; // Index of two Particles connected by Edge</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Vector2 force; // The force to attach two Particles together</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint alive; // activation flag</font></font></font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>EdgeもParticleと同様に増減するため、Append/ConsumeStructuredBufferで管理します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Edge also increases or decreases like Particle, so manage it with Append / ConsumeStructuredBuffer.</font></font></p>
 
 <h4><a id="h4-3-2-1"></a>Division</h4>
-<p>ネットワーク構造の分裂は以下のような流れで行います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The network structure is divided according to the following flow.</font></font></p>
 <ol>
-<li>分裂可能なEdgeの候補を取得し、dividablePoolBufferに格納</li>
-<li>分裂可能なEdgeが空の場合は、接続Edges数が0のParticle(linksが0のParticle)を分裂させ、2つのParticleをEdgeで接続する</li>
-<li>分裂可能なEdgeがある場合は、dividablePoolBufferからEdgeを取り出し分裂させる</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Get divisible Edge candidates and store in dividablePoolBuffer</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the splittable Edge is empty, split the Particle with 0 connected Edges (Particle with 0 links) and connect the two Particles with Edge.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If there is a splittable Edge, remove the Edge from the divideablePoolBuffer and split it</font></font></li>
 </ol>
-<p>実際に分裂するのはParticleなのですが、ここで"分裂可能なEdge"と言っているのは、後ほど紹介する分裂パターンにおいて、分裂元のParticleと接続されているEdgeを処理する際に都合が良いため、ネットワーク構造の分裂はEdge単位で行っています。</p>
-<p>上に挙げた分裂の流れによって、一つのParticleから分裂を繰り返し、大きなネットワーク構造を生成することができます。</p>
-<p>Edgeの分裂は前節のCellularGrowthParticleOnly.csと同様、コルーチンによって一定時間ごとに実行されます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is the Particle that actually splits, but the term "splittable Edge" here is convenient when processing the Edge that is connected to the Particle that splits from the split pattern that will be introduced later. For good reason, the network structure is split in Edge units.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The above-mentioned flow of division allows one particle to repeat division and generate a large network structure.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Edge splitting is performed by coroutines at regular intervals, similar to CellularGrowthParticleOnly.cs in the previous section.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.cs</p>
 <pre class="emlist">protected IEnumerator IDivider()<font></font>
@@ -612,41 +605,41 @@ public struct Edge_t<font></font>
     {<font></font>
         yield return new WaitForSeconds(divideInterval);<font></font>
         Divide();<font></font>
-    }<font></font>
-}<font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 <font></font>
-protected void Divide()<font></font>
-{<font></font>
-    // 1. 分裂可能なEdgeの候補を取得し、dividablePoolBufferに格納<font></font>
+protected void Divide()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // 1. Get divisible Edge candidates and store them in the divideablePoolBuffer</font></font><font></font>
     GetDividableEdgesKernel();<font></font>
-<font></font>
-    int dividableEdgesCount = CopyPoolSize(dividablePoolBuffer);<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int dividableEdgesCount = CopyPoolSize (dividablePoolBuffer);</font></font></font></font></font></font><font></font>
     if(dividableEdgesCount == 0)<font></font>
-    {<font></font>
-        // 2. 分裂可能なEdgeが空の場合は、<font></font>
-        // 接続Edges数が0のParticle(linksが0のParticle)を分裂させ、<font></font>
-        // 2つのParticleをEdgeで接続する<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // 2. If the splittable Edge is empty,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Split a Particle with 0 connected Edges (Particle with 0 links) and split it.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Connect two Particles with Edge</font></font><font></font>
         DivideUnconnectedParticles();<font></font>
-    } else<font></font>
-    {<font></font>
-        // 3. 分裂可能なEdgeがある場合は、dividablePoolBufferからEdgeを取り出し分裂させる<font></font>
-        // 分裂パターン(後述)に応じてEdgeの分裂を実行する<font></font>
+    } else<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // 3. If there is a splittable Edge, take the Edge from the divideablePoolBuffer and split it.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Execute Edge split according to split pattern (described later)</font></font><font></font>
         switch(pattern)<font></font>
         {<font></font>
-            case DividePattern.Closed:<font></font>
-                // 閉じたネットワーク構造を生成するパターン<font></font>
-                DivideEdgesClosedKernel(<font></font>
-                    dividableEdgesCount,<font></font>
+            case DividePattern.Closed:<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // Patterns that generate closed network structures</font></font><font></font>
+                DivideEdgesClosedKernel(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    dividableEdgesCount,</font></font></font></font></font></font><font></font>
                     maxDivideCount<font></font>
                 );<font></font>
                 break;<font></font>
-            case DividePattern.Branch:<font></font>
-                // 枝分かれするパターン<font></font>
-                DivideEdgesBranchKernel(<font></font>
-                    dividableEdgesCount,<font></font>
-                    maxDivideCount<font></font>
-                );<font></font>
-                break;<font></font>
+            case DividePattern.Branch:<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // Branching pattern</font></font><font></font>
+                DivideEdgesBranchKernel(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    dividableEdgesCount,</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    maxDivideCount</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                );</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                break;</font></font></font></font></font></font><font></font>
         }<font></font>
     }<font></font>
 }<font></font>
@@ -654,9 +647,9 @@ protected void Divide()<font></font>
 ...<font></font>
 <font></font>
 protected void GetDividableEdgesKernel()<font></font>
-{<font></font>
-    // 分裂可能なEdgeを格納するバッファをリセット<font></font>
-    dividablePoolBuffer.SetCounterValue(0);<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Reset the buffer that stores the splittable Edge</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    dividablePoolBuffer.SetCounterValue (0);</font></font></font></font></font></font><font></font>
 <font></font>
     var kernel = compute.FindKernel("GetDividableEdges");<font></font>
     compute.SetBuffer(<font></font>
@@ -665,8 +658,8 @@ protected void GetDividableEdgesKernel()<font></font>
     );<font></font>
     compute.SetBuffer(kernel, "_Edges", edgePool.ObjectBuffer);<font></font>
     compute.SetBuffer(kernel, "_DividablePoolAppend", dividablePoolBuffer);<font></font>
-<font></font>
-    // Particleの最大接続数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Maximum number of particle connections</font></font><font></font>
     compute.SetInt("_MaxLink", maxLink);<font></font>
 <font></font>
     Dispatch1D(kernel, count);<font></font>
@@ -676,44 +669,44 @@ protected void GetDividableEdgesKernel()<font></font>
 <font></font>
 protected void DivideUnconnectedParticles()<font></font>
 {<font></font>
-    var kernel = compute.FindKernel("DivideUnconnectedParticles");<font></font>
-    compute.SetBuffer(<font></font>
-        kernel, "_Particles",<font></font>
-        particlePool.ObjectPingPong.Read<font></font>
-    );<font></font>
-    compute.SetBuffer(<font></font>
+    var kernel = compute.FindKernel("DivideUnconnectedParticles");<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetBuffer(</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        kernel, "_Particles",</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        particlePool.ObjectPingPong.Read</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetBuffer(</font></font></font></font></font></font><font></font>
         kernel, "_ParticlePoolConsume",<font></font>
-        particlePool.PoolBuffer<font></font>
-    );<font></font>
-    compute.SetBuffer(kernel, "_Edges", edgePool.ObjectBuffer);<font></font>
+        particlePool.PoolBuffer<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetBuffer(kernel, "_Edges", edgePool.ObjectBuffer);</font></font></font></font></font></font><font></font>
     compute.SetBuffer(kernel, "_EdgePoolConsume", edgePool.PoolBuffer);<font></font>
-<font></font>
-    Dispatch1D(kernel, count);<font></font>
-}<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    Dispatch1D(kernel, count);</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 </pre>
 </div>
-<p>分裂可能なEdgeを取得するカーネル(GetDividableEdges)は以下の通りです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The kernels (GetDividableEdges) for getting divisible edges are:</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.compute</p>
-<pre class="emlist">// 分裂可能かどうかの判断を行う<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Determine if it can be split</font></font><font></font>
 bool dividable_edge(Edge e, uint idx)<font></font>
 {<font></font>
   Particle pa = _Particles[e.a];<font></font>
   Particle pb = _Particles[e.b];<font></font>
-<font></font>
-  // Particleの接続数が最大接続数(_MaxLink)を超えず、<font></font>
-  // dividable_particleに定義された分裂条件を満たしていれば分裂可能とする<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // The number of particle connections does not exceed the maximum number of connections (_MaxLink)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Allow splitting if the splitting conditions defined in dividable_particle are met</font></font><font></font>
   return<font></font>
     !(pa.links &gt;= _MaxLink &amp;&amp; pb.links &gt;= _MaxLink) &amp;&amp;<font></font>
     (dividable_particle(pa, e.a) &amp;&amp; dividable_particle(pb, e.b));<font></font>
 }<font></font>
 <font></font>
 ...<font></font>
-<font></font>
-// 分裂可能なEdgeを取得する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Get a splittable Edge</font></font><font></font>
 THREAD<font></font>
-void GetDividableEdges(uint3 id : SV_DispatchThreadID)<font></font>
-{<font></font>
+void GetDividableEdges(uint3 id : SV_DispatchThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font>
   uint idx = id.x;<font></font>
   uint count, strides;<font></font>
   _Edges.GetDimensions(count, strides);<font></font>
@@ -724,26 +717,26 @@ void GetDividableEdges(uint3 id : SV_DispatchThreadID)<font></font>
   if (e.alive &amp;&amp; dividable_edge(e, idx))<font></font>
   {<font></font>
     _DividablePoolAppend.Append(idx);<font></font>
-  }<font></font>
-}<font></font>
+  }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 </pre>
 </div>
-<p>分裂可能なEdgeが存在しない場合は、以下の接続しているEdgeのないParticleを分裂させるカーネル(DivideUnconnectedParticles)を実行します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If there is no splittable Edge, run the following kernel (Divide Disconnected Particles) that splits the following connected Edgeless Particles.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.compute</p>
-<pre class="emlist">// indexがaのParticleとbのParticleをつなぐEdgeを生成する関数<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// A function that creates an Edge that connects Particles with index a and Particles b</font></font><font></font>
 void connect(int a, int b)<font></font>
-{<font></font>
-  // Edgeのオブジェクトプールから非活性なEdgeのindexを取り出す<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Fetch the inactive Edge index from the Edge object pool</font></font><font></font>
   uint eidx = _EdgePoolConsume.Consume();<font></font>
-<font></font>
-  // Atomic演算(後述)を用いて<font></font>
-  // 各Particleの接続数をインクリメントする<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Using Atomic operation (described later)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Increment the number of connections for each particle</font></font><font></font>
   InterlockedAdd(_Particles[a].links, 1);<font></font>
   InterlockedAdd(_Particles[b].links, 1);<font></font>
-<font></font>
-  Edge e;<font></font>
-  e.a = a;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  Edge e;</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  ea = a;</font></font></font></font></font></font><font></font>
   e.b = b;<font></font>
   e.force = float2(0, 0);<font></font>
   e.alive = true;<font></font>
@@ -751,11 +744,11 @@ void connect(int a, int b)<font></font>
 }<font></font>
 <font></font>
 ...<font></font>
-<font></font>
-// 接続しているEdgeが存在しないParticleを分裂させる<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Split a Particle that does not have a connected Edge</font></font><font></font>
 THREAD<font></font>
-void DivideUnconnectedParticles(uint3 id : SV_DispatchThreadID)<font></font>
-{<font></font>
+void DivideUnconnectedParticles(uint3 id : SV_DispatchThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font>
   uint count, stride;<font></font>
   _Particles.GetDimensions(count, stride);<font></font>
   if (id.x &gt;= count)<font></font>
@@ -763,38 +756,38 @@ void DivideUnconnectedParticles(uint3 id : SV_DispatchThreadID)<font></font>
 <font></font>
   uint idx = id.x;<font></font>
   Particle parent = _Particles[idx];<font></font>
-  if (!parent.alive || parent.links &gt; 0)<font></font>
-    return;<font></font>
-<font></font>
-  // 親Particleから分裂した子Particleを生成<font></font>
+  if (!parent.alive || parent.links &gt; 0)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return;</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Generate a split child Particle from a parent Particle</font></font><font></font>
   uint cidx = divide_particle(idx);<font></font>
-<font></font>
-  // 親Particleと子ParticleをEdgeで接続する<font></font>
-  connect(idx, cidx);<font></font>
-}<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Connect parent and child particles with Edge</font></font><font></font>
+  connect(idx, cidx);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 </pre>
 </div>
-<p>分裂したParticle同士を接続するEdgeを生成するconnect関数では、Atomic演算というテクニックを用いてParticleの接続数をインクリメントしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The connect function, which creates an Edge that connects split particles, uses a technique called Atomic operation to increment the number of particle connections.</font></font></p>
 <div class="column">
 
-<h3><a id="column-1"></a>Atomic演算 (InterlockedAdd関数について)</h3>
-<p>あるスレッドがグローバルメモリやシェアードメモリ上のデータを読み込み、修正し、書き込むという一連の処理を行うとき、その処理中にそのメモリ領域に他のスレッドからの書き込みが行われるなどして、値が変化するのを防ぎたい場合があります。(並列処理特有の、スレッドがメモリにアクセスする順番によって結果が変化してしまうデータレース(データの競合)と呼ばれる現象)</p>
-<p>これを保証するのがAtomic演算で、リソースの演算操作(四則演算や比較)中に他のスレッドからの干渉を防ぎ、GPU上で安全に逐次的な処理を実現できます。</p>
-<p>HLSLではこれらの操作を行う関数<a id="fnb-atomicfunctions" href="https://freder.io/files/unity3/Nakamura.html#fn-atomicfunctions" class="noteref" epub:type="noteref">*6</a>はInterlockedというprefixがついており、本章の例ではInterlockedAddを用いています。</p>
-<p>InterlockedAdd関数は、第一引数に指定されたリソースに第二引数に指定された整数を足し合わせる処理で、_Particles[index].linksに1を足すことで接続数をインクリメントしています。</p>
-<p>こうすることでスレッド間で一貫性のある接続数の管理が実現でき、矛盾なく接続数を増やしたり減らしたりすることが可能になります。</p>
+<h3><a id="column-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Atomic operation (about InterlockedAdd function)</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When a thread performs a series of processes of reading, modifying, and writing data in global memory or shared memory, the value changes due to writing from other threads to the memory area during the process. You may want to prevent it from happening. </font><font style="vertical-align: inherit;">(A phenomenon called data race (data race), in which the result changes depending on the order in which threads access memory, which is peculiar to parallel processing)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Atomic arithmetic guarantees this, preventing interference from other threads during resource arithmetic operations (four arithmetic operations and comparisons), and safely realizing sequential processing on the GPU.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In HLSL, the functions </font></font><a id="fnb-atomicfunctions" href="https://freder.io/files/unity3/Nakamura.html#fn-atomicfunctions" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 6</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> that perform these operations have </font><font style="vertical-align: inherit;">a prefix called Interlocked, and the examples in this chapter use InterlockedAdd.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The InterlockedAdd function is the process of adding the integer specified in the second argument to the resource specified in the first argument, and increments the number of connections by adding 1 to _Particles [index] .links.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This allows you to manage the number of connections consistently between threads, and you can increase or decrease the number of connections consistently.</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-atomicfunctions"><p class="footnote">[*6] https://docs.microsoft.com/ja-jp/windows/desktop/direct3d11/direct3d-11-advanced-stages-cs-atomic-functions</p></div>
 </div>
-<p>分裂可能なEdgeがある場合はdividablePoolBufferからEdgeを取り出し分裂させます。DividePatternというenumパラメータを用意していることからわかるように、分裂には様々なパターンを適用することができます。</p>
-<p>ここでは閉じたネットワーク構造を生成する分裂パターン(DividePattern.Closed)を紹介します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If there is a splittable Edge, remove the Edge from the divideablePoolBuffer and split it. </font><font style="vertical-align: inherit;">As you can see from the enum parameter called DividePattern, various patterns can be applied to the division.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, we introduce a split pattern (DividePattern.Closed) that creates a closed network structure.</font></font></p>
 
-<h5><a id="h4-3-2-1-1"></a>閉じたネットワーク構造(DividePattern.Closed)</h5>
-<p>閉じたネットワーク構造を生成するパターンでは、以下の図のような分裂を行います。</p>
+<h5><a id="h4-3-2-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Closed network structure (DividePattern.Closed)</font></font></h5>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The pattern that creates a closed network structure splits as shown in the figure below.</font></font></p>
 <div id="id_Nakamura_2FClosedLink" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/ClosedLink.jpg" alt="Pattern that creates a closed network structure (DividePattern.Closed)">
-<p class="caption">
-図4.6: 閉じたネットワーク構造を生成するパターン(DividePattern.Closed)
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.6: Pattern that creates a closed network structure (DividePattern.Closed)
+</font></font></p>
 </div>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.cs</p>
@@ -802,21 +795,21 @@ void DivideUnconnectedParticles(uint3 id : SV_DispatchThreadID)<font></font>
     int dividableEdgesCount,<font></font>
     int maxDivideCount = 16<font></font>
 )<font></font>
-{<font></font>
-    // 閉じたネットワーク構造に分裂するパターン<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Pattern that splits into a closed network structure</font></font><font></font>
     var kernel = compute.FindKernel("DivideEdgesClosed");<font></font>
     DivideEdgesKernel(kernel, dividableEdgesCount, maxDivideCount);<font></font>
 }<font></font>
-<font></font>
-// 分裂パターンで共通の処理<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Common processing in split patterns</font></font><font></font>
 protected void DivideEdgesKernel(<font></font>
-    int kernel,<font></font>
-    int dividableEdgesCount,<font></font>
-    int maxDivideCount<font></font>
-)<font></font>
-{<font></font>
-    // オブジェクトプールが空の状態でConsumeが呼ばれないように<font></font>
-    // maxDivideCountと各オブジェクトプールのサイズを比較<font></font>
+    int kernel,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int dividableEdgesCount,</font></font></font></font></font></font><font></font>
+    int maxDivideCount<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+)</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Prevent Consume from being called when the object pool is empty</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Compare maxDivideCount with the size of each object pool</font></font><font></font>
     maxDivideCount = Mathf.Min(dividableEdgesCount, maxDivideCount);<font></font>
     maxDivideCount = Mathf.Min(particlePool.CopyPoolSize(), maxDivideCount);<font></font>
     maxDivideCount = Mathf.Min(edgePool.CopyPoolSize(), maxDivideCount);<font></font>
@@ -825,11 +818,11 @@ protected void DivideEdgesKernel(<font></font>
     compute.SetBuffer(<font></font>
         kernel, "_Particles",<font></font>
         particlePool.ObjectPingPong.Read<font></font>
-    );<font></font>
-    compute.SetBuffer(<font></font>
+    );<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetBuffer(</font></font></font></font></font></font><font></font>
         kernel, "_ParticlePoolConsume",<font></font>
-        particlePool.PoolBuffer<font></font>
-    );<font></font>
+        particlePool.PoolBuffer<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font></font></font><font></font>
     compute.SetBuffer(kernel, "_Edges", edgePool.ObjectBuffer);<font></font>
     compute.SetBuffer(kernel, "_EdgePoolConsume", edgePool.PoolBuffer);<font></font>
 <font></font>
@@ -840,25 +833,25 @@ protected void DivideEdgesKernel(<font></font>
 }<font></font>
 </pre>
 </div>
-<p>閉じたネットワーク構造を生成するGPUカーネル(DivideEdgesClosed)で用いている関数divide_edge_closedは、Particleが持つEdgeの数に応じて処理を変えます。</p>
-<p>いずれか一方のParticleの接続数が1の場合、分裂したParticleと足し合わせた3つのParticleで3角形を描くようにEdgeで繋ぎます。(<span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FFigureClosedLink1">図4.7</a></span>)</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The function divide_edge_closed used in the GPU kernel (DivideEdgesClosed) that generates a closed network structure changes the processing according to the number of Edges that the Particle has.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the number of connections of one of the particles is 1, connect them with Edge so as to draw a triangle with 3 particles added to the split particles. </font><font style="vertical-align: inherit;">( </font></font><span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FFigureClosedLink1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fig. 4.7</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></p>
 <div id="id_Nakamura_2FFigureClosedLink1" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/FigureClosedLink1.png" alt="Two particles and split particles form a closed network in a triangular shape">
-<p class="caption">
-図4.7: 2つのParticleと分裂したParticleで3角形を描くように閉じたネットワークを形成する
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.7: Two particles and split particles form a closed network in a triangular shape.
+</font></font></p>
 </div>
-<p>それ以外のケースでは、分裂したParticleを既存の2つのParticleの間に挿入するようにEdgeを繋ぎ、分裂元のParticleと繋がっていたEdgeを変換して閉じたネットワークが維持されるように処理します。(<span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FFigureClosedLink2">図4.8</a></span>)</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In other cases, the Edge is connected so that the split particle is inserted between the two existing particles, and the Edge that was connected to the split source particle is converted to maintain a closed network. I will. </font><font style="vertical-align: inherit;">( </font></font><span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FFigureClosedLink2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fig. 4.8</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></p>
 <div id="id_Nakamura_2FFigureClosedLink2" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/FigureClosedLink2.png" alt="Insert split particles between two existing particles and adjust Edge connectivity to maintain a closed network">
-<p class="caption">
-図4.8: 分裂したParticleを既存の2つのParticleの間に挿入し、閉じたネットワークが維持されるようにEdgeの接続関係を調整する
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.8: Insert a split particle between two existing particles and adjust the Edge connectivity to maintain a closed network.
+</font></font></p>
 </div>
-<p>こうした分裂処理を繰り返すことによって、閉じたネットワーク構造が成長していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By repeating this division process, a closed network structure grows.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.compute</p>
-<pre class="emlist">// 閉じたネットワーク構造への分裂を実行する関数<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// A function that performs a split into a closed network structure</font></font><font></font>
 void divide_edge_closed(uint idx)<font></font>
 {<font></font>
   Edge e = _Edges[idx];<font></font>
@@ -867,70 +860,70 @@ void divide_edge_closed(uint idx)<font></font>
   Particle pb = _Particles[e.b];<font></font>
 <font></font>
   if ((pa.links == 1) || (pb.links == 1))<font></font>
-  {<font></font>
-    // 3つのParticleで三角形を描くように分裂し、Edgeで繋ぐ<font></font>
+  {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Divide into a triangle with 3 particles and connect them with Edge</font></font><font></font>
     uint cidx = divide_particle(e.a);<font></font>
     connect(e.a, cidx);<font></font>
     connect(cidx, e.b);<font></font>
   }<font></font>
-  else<font></font>
-  {<font></font>
-    // 2つのParticleの間にParticleを生成し、<font></font>
-    // 一繋ぎになるようにEdgeを繋ぐ<font></font>
+  else<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  {</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Generate a Particle between two Particles and</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Connect Edges so that they are connected</font></font><font></font>
     float2 dir = pb.position - pa.position;<font></font>
     float2 offset = normalize(dir) * pa.radius * 0.25;<font></font>
     uint cidx = divide_particle(e.a, offset);<font></font>
-<font></font>
-    // 親Particleと分裂した子Particleを結ぶ<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Connect the parent particle and the split child particle</font></font><font></font>
     connect(e.a, cidx);<font></font>
-<font></font>
-    // 元の2つのParticleを結んでいたEdgeを、<font></font>
-    // 分裂した子Particleを結ぶEdgeに変換する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Edge that connected the original two Particles,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Convert to Edge connecting split child Particles</font></font><font></font>
     InterlockedAdd(_Particles[e.a].links, -1);<font></font>
-    InterlockedAdd(_Particles[cidx].links, 1);<font></font>
-    e.a = cidx;<font></font>
+    InterlockedAdd(_Particles[cidx].links, 1);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    ea = cidx;</font></font></font></font></font></font><font></font>
   }<font></font>
 <font></font>
   _Edges[idx] = e;<font></font>
 }<font></font>
 <font></font>
 ...<font></font>
-<font></font>
-// 閉じたネットワーク構造に分裂するパターン<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Pattern that splits into a closed network structure</font></font><font></font>
 THREAD<font></font>
 void DivideEdgesClosed(uint3 id : SV_DispatchThreadID)<font></font>
 {<font></font>
   if (id.x &gt;= _DivideCount)<font></font>
     return;<font></font>
-<font></font>
-  // 分裂可能なEdgeのindexを取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Get the index of the splittable Edge</font></font><font></font>
   uint idx = _DividablePoolConsume.Consume();<font></font>
-  divide_edge_closed(idx);<font></font>
-}<font></font>
+  divide_edge_closed(idx);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 </pre>
 </div>
 
-<h4><a id="h4-3-2-2"></a>Edgeの引き合い</h4>
-<p>自然に存在する多くの細胞は他の細胞とくっつきあう性質を持ちます。こうした性質を模倣するため、Edgeは繋がった2つのParticleをバネのように引き合います。</p>
+<h4><a id="h4-3-2-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Inquiries about Edge</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Many naturally occurring cells have the property of sticking to other cells. </font><font style="vertical-align: inherit;">To mimic these properties, Edge pulls two connected particles together like a spring.</font></font></p>
 <ol>
-<li>Edgeごとに2つのParticleを引き付けるバネの力を計算</li>
-<li>Particleごとに接続したEdgeが持つ力を加える</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Calculate the force of the spring that attracts two particles for each edge</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Add the power of Edge connected for each particle</font></font></li>
 </ol>
-<p>という流れでバネの引き合いを実現しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Inquiries about springs are realized.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.cs</p>
 <pre class="emlist">protected void Update() {<font></font>
     ...<font></font>
-    UpdateEdgesKernel();<font></font>
-    SpringEdgesKernel();<font></font>
+    UpdateEdgesKernel();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    SpringEdgesKernel ();</font></font></font></font></font></font><font></font>
     ...<font></font>
 }<font></font>
 <font></font>
 ...<font></font>
 <font></font>
 protected void UpdateEdgesKernel()<font></font>
-{<font></font>
-    // Edgeごとにバネが引き合う力を計算する<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Calculate the force that the spring attracts for each Edge</font></font><font></font>
     var kernel = compute.FindKernel("UpdateEdges");<font></font>
     compute.SetBuffer(<font></font>
         kernel, "_Particles",<font></font>
@@ -939,29 +932,29 @@ protected void UpdateEdgesKernel()<font></font>
     compute.SetBuffer(kernel, "_Edges", edgePool.ObjectBuffer);<font></font>
     compute.SetFloat("_Spring", spring);<font></font>
 <font></font>
-    Dispatch1D(kernel, count);<font></font>
-}<font></font>
+    Dispatch1D(kernel, count);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 <font></font>
-protected void SpringEdgesKernel()<font></font>
-{<font></font>
-    // ParticleごとにEdgeが持つバネの力を加える<font></font>
-    var kernel = compute.FindKernel("SpringEdges");<font></font>
-    compute.SetBuffer(<font></font>
-        kernel, "_Particles",<font></font>
-        particlePool.ObjectPingPong.Read<font></font>
-    );<font></font>
-    compute.SetBuffer(kernel, "_Edges", edgePool.ObjectBuffer);<font></font>
-<font></font>
-    Dispatch1D(kernel, count);<font></font>
-}<font></font>
+protected void SpringEdgesKernel()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Apply the spring force of Edge for each particle</font></font><font></font>
+    var kernel = compute.FindKernel("SpringEdges");<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetBuffer(</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        kernel, "_Particles",</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        particlePool.ObjectPingPong.Read</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    compute.SetBuffer(kernel, "_Edges", edgePool.ObjectBuffer);</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    Dispatch1D(kernel, count);</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font></font></font><font></font>
 </pre>
 </div>
-<p>以下がカーネルの中身になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following is the contents of the kernel.</font></font></font></font></p>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.compute</p>
 <pre class="emlist">THREAD<font></font>
-void UpdateEdges(uint3 id : SV_DispatchThreadID)<font></font>
-{<font></font>
+void UpdateEdges(uint3 id : SV_DispatchThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font></font></font><font></font>
   uint idx = id.x;<font></font>
   uint count, strides;<font></font>
   _Edges.GetDimensions(count, strides);<font></font>
@@ -969,8 +962,8 @@ void UpdateEdges(uint3 id : SV_DispatchThreadID)<font></font>
     return;<font></font>
 <font></font>
   Edge e = _Edges[idx];<font></font>
-<font></font>
-  // 引き合う力を初期化<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Initialize the attractive force</font></font><font></font>
   e.force = float2(0, 0);<font></font>
 <font></font>
   if (!e.alive)<font></font>
@@ -981,24 +974,24 @@ void UpdateEdges(uint3 id : SV_DispatchThreadID)<font></font>
 <font></font>
   Particle pa = _Particles[e.a];<font></font>
   Particle pb = _Particles[e.b];<font></font>
-  if (!pa.alive || !pb.alive)<font></font>
-  {<font></font>
-    _Edges[idx] = e;<font></font>
-    return;<font></font>
-  }<font></font>
-<font></font>
-  // 2つのParticle間の距離を測り、<font></font>
-  // 離れていたり、近づきすぎていれば引き合う力を加える<font></font>
+  if (!pa.alive || !pb.alive)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  {</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    _Edges[idx] = e;</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return;</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  }</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Measure the distance between the two Particles,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Apply force to attract if you are too far away or too close</font></font><font></font>
   float2 dir = pa.position - pb.position;<font></font>
   float r = pa.radius + pb.radius;<font></font>
   float len = length(dir);<font></font>
-  if (abs(len - r) &gt; 0)<font></font>
-  {<font></font>
-    // 適切な距離(互いの半径の合計)になるように力を加える<font></font>
-    float l = ((len - r) / r);<font></font>
+  if (abs(len - r) &gt; 0)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  {</font></font></font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Apply force to the proper distance (sum of radii of each other)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float l = ((len - r) / r);</font></font></font></font></font></font><font></font>
     float2 f = normalize(dir) * l * _Spring;<font></font>
-    e.force = f;<font></font>
-  }<font></font>
+    e.force = f;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  }</font></font></font></font></font></font><font></font>
 <font></font>
   _Edges[idx] = e;<font></font>
 }<font></font>
@@ -1009,56 +1002,56 @@ void SpringEdges(uint3 id : SV_DispatchThreadID)<font></font>
   uint idx = id.x;<font></font>
   uint count, strides;<font></font>
   _Particles.GetDimensions(count, strides);<font></font>
-  if (idx &gt;= count)<font></font>
-    return;<font></font>
+  if (idx &gt;= count)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return;</font></font></font></font></font></font><font></font>
 <font></font>
   Particle p = _Particles[idx];<font></font>
-  if (!p.alive || p.links &lt;= 0)<font></font>
-    return;<font></font>
-<font></font>
-  // 接続数が多いほど、引き合う力を弱める<font></font>
+  if (!p.alive || p.links &lt;= 0)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return;</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // The more connections you have, the weaker your attraction</font></font><font></font>
   float dif = 1.0 / p.links;<font></font>
 <font></font>
   int iidx = (int)idx;<font></font>
 <font></font>
   _Edges.GetDimensions(count, strides);<font></font>
-<font></font>
-  // すべてのEdgeから自身と接続しているParticleを探す<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Find the Particles that are connected to you from all Edges</font></font><font></font>
   for (uint i = 0; i &lt; count; i++)<font></font>
   {<font></font>
     Edge e = _Edges[i];<font></font>
     if (!e.alive)<font></font>
       continue;<font></font>
-<font></font>
-    // 接続しているEdgeが見つかったら力を加える<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Apply force when you find a connected Edge</font></font><font></font>
     if (e.a == iidx)<font></font>
     {<font></font>
       p.velocity -= e.force * dif;<font></font>
     }<font></font>
-    else if (e.b == iidx)<font></font>
-    {<font></font>
-      p.velocity += e.force * dif;<font></font>
-    }<font></font>
+    else if (e.b == iidx)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font></font></font><font></font>
+      p.velocity += e.force * dif;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font></font></font><font></font>
   }<font></font>
 <font></font>
   _Particles[idx] = p;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>以上までの処理でネットワークで構成された細胞が成長していく様子を表現することができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By the above processing, it is possible to express how the cells composed of the network grow.</font></font></p>
 
-<h3><a id="h4-3-3"></a><span class="secno">4.3.3　</span>分割パターンのバリエーション</h3>
-<p>分割させるEdgeの判定(dividable_edge関数)と分割ロジックを調整することで、様々な分割パターンをデザインすることができます。</p>
-<p>サンプルプロジェクトのCellularGrowth.csでは、分裂パターンをenumパラメータによって切り替えられるようにしています。</p>
+<h3><a id="h4-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Variation of division pattern</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Various division patterns can be designed by adjusting the judgment of the edge to be divided (dividable_edge function) and the division logic.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample project CellularGrowth.cs, the split pattern can be switched by the enum parameter.</font></font></p>
 
-<h4><a id="h4-3-3-1"></a>枝分かれする分裂パターン (DividePattern.Branch)</h4>
-<p>枝分かれするパターンでは、以下の<span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FFigureBranchLink">図4.9</a></span>のような分裂を行います。</p>
-<p>分裂した子Particleは親Particleとのみ接続します。これを繰り返すだけで枝分かれしたネットワークが成長します。</p>
+<h4><a id="h4-3-3-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dividing pattern (Divide Pattern.Branch)</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the branching pattern, the </font><font style="vertical-align: inherit;">division is performed as </font></font><span class="imgref"><a href="https://freder.io/files/unity3/Nakamura.html#id_Nakamura_2FFigureBranchLink"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">shown in Figure 4.9</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> below </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Split child Particles connect only to the parent Particle. </font><font style="vertical-align: inherit;">A branched network grows just by repeating this.</font></font></p>
 <div id="id_Nakamura_2FFigureBranchLink" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/FigureBranchLink.png" alt="Branching split pattern">
-<p class="caption">
-図4.9: 枝分かれする分裂パターン
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.9: Branching split pattern
+</font></font></p>
 </div>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.cs</p>
@@ -1066,8 +1059,8 @@ void SpringEdges(uint3 id : SV_DispatchThreadID)<font></font>
     int dividableEdgesCount,<font></font>
     int maxDivideCount = 16<font></font>
 )<font></font>
-{<font></font>
-    // 枝分かれする分裂パターンを実行<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Execute a branching split pattern</font></font><font></font>
     var kernel = compute.FindKernel("DivideEdgesBranch");<font></font>
     DivideEdgesKernel(kernel, dividableEdgesCount, maxDivideCount);<font></font>
 }<font></font>
@@ -1075,61 +1068,61 @@ void SpringEdges(uint3 id : SV_DispatchThreadID)<font></font>
 </div>
 <div class="emlist-code">
 <p class="caption">CellularGrowth.compute</p>
-<pre class="emlist">// 枝分かれ分裂を実行する関数<font></font>
-void divide_edge_branch(uint idx)<font></font>
-{<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Function that performs branching</font></font><font></font>
+void divide_edge_branch(uint idx)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
   Edge e = _Edges[idx];<font></font>
   Particle pa = _Particles[e.a];<font></font>
   Particle pb = _Particles[e.b];<font></font>
-<font></font>
-  // 接続数の少ない方のParticleindexを取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Get the Particle index with the smaller number of connections</font></font><font></font>
   uint i = lerp(e.b, e.a, step(pa.links, pb.links));<font></font>
 <font></font>
   uint cidx = divide_particle(i);<font></font>
-  connect(i, cidx);<font></font>
-}<font></font>
+  connect(i, cidx);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 <font></font>
 ...<font></font>
-<font></font>
-// 枝分かれ分裂パターン<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Branching split pattern</font></font><font></font>
 THREAD<font></font>
-void DivideEdgesBranch(uint3 id : SV_DispatchThreadID)<font></font>
-{<font></font>
+void DivideEdgesBranch(uint3 id : SV_DispatchThreadID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
   if (id.x &gt;= _DivideCount)<font></font>
     return;<font></font>
-<font></font>
-  // 分裂可能なEdgeのindexを取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Get the index of the splittable Edge</font></font></font></font><font></font>
   uint idx = _DividablePoolConsume.Consume();<font></font>
-  divide_edge_branch(idx);<font></font>
-}<font></font>
+  divide_edge_branch(idx);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>枝分かれするパターンにおいては、分裂するEdgeを判定するロジックがビジュアルに大きく影響します。dividable_edge関数内で参照しているParticleの最大接続数(_MaxLink)の値を変化させることで、枝分かれ具合をコントロールすることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In a branching pattern, the logic that determines which edges are split has a significant visual impact. </font><font style="vertical-align: inherit;">You can control the degree of branching by changing the value of the maximum number of connections (_MaxLink) of the Particles referenced in the dividable_edge function.</font></font></p>
 <div id="id_Nakamura_2FBranchLink2" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/BranchLink2.png" alt="_Pattern with MaxLink set to 2 (Divide Pattern.Branch)">
-<p class="caption">
-図4.10: _MaxLinkに2を設定したパターン(DividePattern.Branch)
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.10: Pattern with _MaxLink set to 2 (DividePattern.Branch)
+</font></font></p>
 </div>
 <div id="id_Nakamura_2FBranchLink3" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/BranchLink3.png" alt="_Pattern with MaxLink set to 3 (Divide Pattern.Branch)">
-<p class="caption">
-図4.11: _MaxLinkに3を設定したパターン(DividePattern.Branch)
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.11: Pattern with _MaxLink set to 3 (Divide Pattern.Branch)
+</font></font></p>
 </div>
 <div id="id_Nakamura_2FBranchLinkChanged" class="image">
 <img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/BranchLinkChanged.png" alt="A pattern in which _MaxLink was set to 3 to grow to some extent and then set to 2 to continue growing (Divide Pattern.Branch).">
-<p class="caption">
-図4.12: _MaxLinkを3に設定してある程度成長させた後、2に設定して成長を続けさせたパターン(DividePattern.Branch)
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.12: A pattern in which _MaxLink was set to 3 to grow to some extent and then set to 2 to continue growing (Divide Pattern.Branch).
+</font></font></p>
 </div>
 
-<h2><a id="h4-4"></a><span class="secno">4.4　</span>まとめ</h2>
-<p>本章では、GPU上で細胞の分裂と成長をシミュレーションするプログラムを紹介しました。</p>
-<p>こうした細胞をモチーフとしたCGを生成する試みは他にも、Andy Lomas<a id="fnb-andylomas" href="https://freder.io/files/unity3/Nakamura.html#fn-andylomas" class="noteref" epub:type="noteref">*7</a>によるMorphogenetic Creationsプロジェクトや、学術的なものだとJ.A.Kaandorp<a id="fnb-jakaandorp" href="https://freder.io/files/unity3/Nakamura.html#fn-jakaandorp" class="noteref" epub:type="noteref">*8</a>によるComputational Biologyプロジェクトがあり、特に後者のものは生物学に基づいたよりリアルなシミュレーションを行っています。</p>
-<p>また、Maxime Causeret<a id="fnb-maximecauseret" href="https://freder.io/files/unity3/Nakamura.html#fn-maximecauseret" class="noteref" epub:type="noteref">*9</a>によるMax Cooperのミュージックビデオ<a id="fnb-maxcooper" href="https://freder.io/files/unity3/Nakamura.html#fn-maxcooper" class="noteref" epub:type="noteref">*10</a>が細胞などの有機的なモチーフを使用した素晴らしい映像作品の例として挙げられます。(この映像作品内のシミュレーション部分にはHoudiniが使われています)</p>
-<p>今回は2次元上に分裂・成長するものに留まりましたが、元のiGeoのチュートリアル<a id="fnb-tutorial56" href="https://freder.io/files/unity3/Nakamura.html#fn-tutorial56" class="noteref" epub:type="noteref">*12</a>にもあるように、本プログラムは3次元上に拡張することも可能です。</p>
-<p>3次元への拡張では、3つの細胞から面を構成し、成長して広がる細胞ネットワークを用いて、グニグニと有機的に成長するメッシュを実現することもできます。3次元への拡張を行っているサンプルは https://github.com/mattatz/CellularGrowth に上げているので、興味のある方は参考にしてみてください。</p>
+<h2><a id="h4-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we introduced a program that simulates cell division and growth on the GPU.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Other attempts to generate CG with such cells as motifs </font><font style="vertical-align: inherit;">include the Morphogenetic Creations project by </font><font style="vertical-align: inherit;">Andy Lomas </font></font><a id="fnb-andylomas" href="https://freder.io/files/unity3/Nakamura.html#fn-andylomas" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 7</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and the </font><font style="vertical-align: inherit;">Computational Biology project by </font><font style="vertical-align: inherit;">JAKaandorp </font></font><a id="fnb-jakaandorp" href="https://freder.io/files/unity3/Nakamura.html#fn-jakaandorp" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 8</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> for </font><font style="vertical-align: inherit;">academic purposes </font><font style="vertical-align: inherit;">, especially the latter in biology. We are doing a more realistic simulation based on it.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, </font><font style="vertical-align: inherit;">Max Cooper's music video </font><a id="fnb-maxcooper" href="https://freder.io/files/unity3/Nakamura.html#fn-maxcooper" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;">* 10</font></a><font style="vertical-align: inherit;"> by </font><font style="vertical-align: inherit;">Maxime Causeret </font></font><a id="fnb-maximecauseret" href="https://freder.io/files/unity3/Nakamura.html#fn-maximecauseret" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 9</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is </font><font style="vertical-align: inherit;">an example of a wonderful video work using organic motifs such as cells. </font><font style="vertical-align: inherit;">(Houdini is used for the simulation part in this video work)</font></font><a id="fnb-maxcooper" href="https://freder.io/files/unity3/Nakamura.html#fn-maxcooper" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, it was limited to those that split and grow in two dimensions, but as shown in the original iGeo tutorial </font></font><a id="fnb-tutorial56" href="https://freder.io/files/unity3/Nakamura.html#fn-tutorial56" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 12</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , this program can also be extended in three dimensions.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the extension to three dimensions, it is also possible to realize a mesh that grows organically with Gniguni by using a cell network that consists of three cells and grows and spreads. </font><font style="vertical-align: inherit;">Samples of 3D extensions are available at https://github.com/mattatz/CellularGrowth, so if you are interested, please refer to them.</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-andylomas"><p class="footnote">[*7] http://www.andylomas.com/</p></div>
 <div class="footnote" epub:type="footnote" id="fn-jakaandorp"><p class="footnote">[*8] https://staff.fnwi.uva.nl/j.a.kaandorp/research.html</p></div>
 <div class="footnote" epub:type="footnote" id="fn-maximecauseret"><p class="footnote">[*9] http://teresuac.fr/</p></div>
@@ -1144,4 +1137,4 @@ void DivideEdgesBranch(uint3 id : SV_DispatchThreadID)<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 4 _ GPU-Based Cellular Growth Simulation_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

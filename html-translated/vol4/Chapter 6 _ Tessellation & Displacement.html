@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0042)https://freder.io/files/unity4/sakota.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 6 _ Tessellation &amp; Displacement_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'auto';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 6 _ Tessellation &amp; Displacement_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Tessellation &amp; Displacement_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Tessellation &amp; Displacement_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Tessellation &amp; Displacement_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 6 _ Tessellation &amp; Displacement_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Tessellation &amp; Displacement_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Tessellation &amp; Displacement_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Tessellation &amp; Displacement_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 6 _ Tessellation &amp; Displacement_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Tessellation &amp; Displacement</font></font></h1>
 
 <h2><a id="h6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -100,10 +93,10 @@ Figure 6.1: Tessellation pipeline Source: Microsoft
         _Specular ("Specular", Range(0, 1) ) = 0<font></font>
         _Gloss ("Gloss", Range(0, 1) ) = 0<font></font>
     }<font></font>
-    SubShader<font></font>
-    {<font></font>
-        Tags { "RenderType"="Opaque" }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        LOD 300</font></font><font></font>
+    SubShader<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        Tags { "RenderType"="Opaque" }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        LOD 300</font></font></font></font></font></font><font></font>
 <font></font>
         CGPROGRAM<font></font>
 <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -118,8 +111,8 @@ Figure 6.1: Tessellation pipeline Source: Microsoft
         struct appdata<font></font>
         {<font></font>
             float4 vertex : POSITION;<font></font>
-            float4 tangent : TANGENT;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-            float3 normal: NORMAL;</font></font><font></font>
+            float4 tangent : TANGENT;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            float3 normal: NORMAL;</font></font></font></font></font></font><font></font>
             float2 texcoord : TEXCOORD0;<font></font>
         };<font></font>
 <font></font>
@@ -176,14 +169,14 @@ Figure 6.1: Tessellation pipeline Source: Microsoft
         sampler2D _NormalMap;<font></font>
         fixed4 _Color;<font></font>
 <font></font>
-        void surf (Input IN, inout SurfaceOutput o)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        {</font></font><font></font>
+        void surf (Input IN, inout SurfaceOutput o)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font></font></font><font></font>
             half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;<font></font>
             o.Albedo = c.rgb;<font></font>
-            o.Specular = _Specular;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-            o.Gloss = _Gloss;</font></font><font></font>
-            o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));<font></font>
-        }<font></font>
+            o.Specular = _Specular;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            o.Gloss = _Gloss;</font></font></font></font></font></font><font></font>
+            o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font>
         ENDCG<font></font>
     }<font></font>
     FallBack "Diffuse"<font></font>
@@ -205,50 +198,50 @@ Figure 6.1: Tessellation pipeline Source: Microsoft
 struct InternalTessInterp_appdata<font></font>
 {<font></font>
     float4 vertex : INTERNALTESSPOS;<font></font>
-    float4 tangent : TANGENT;<font></font>
-    float3 normal : NORMAL;<font></font>
+    float4 tangent : TANGENT;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 normal: NORMAL;</font></font></font></font><font></font>
     float2 texcoord : TEXCOORD0;<font></font>
 };<font></font>
-<font></font>
-//パッチ定数関数で定義して返すテッセレーション係数構造体<font></font>
-struct TessellationFactors<font></font>
-{<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Tessellation coefficient structure defined and returned by the patch constant function</font></font><font></font>
+struct TessellationFactors<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     float edge[3] : SV_TessFactor;<font></font>
-    float inside : SV_InsideTessFactor;<font></font>
-};<font></font>
-<font></font>
-// hull constant shader（パッチ定数関数）<font></font>
-TessellationFactors hull_const (InputPatch&lt;InternalTessInterp_appdata, 3&gt; v)<font></font>
-{<font></font>
+    float inside : SV_InsideTessFactor;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+};</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// hull constant shader (patch constant function)</font></font><font></font>
+TessellationFactors hull_const (InputPatch&lt;InternalTessInterp_appdata, 3&gt; v)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     TessellationFactors o;<font></font>
     float4 tf;<font></font>
-<font></font>
-    //Surface shaderでのTessellation時のコメントで解説した分割Utility関数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Split Utility function explained in the comment at the time of Tessellation on Surface shader</font></font><font></font>
     tf = UnityEdgeLengthBasedTessCull(<font></font>
         v[0].vertex, v[1].vertex, v[2].vertex,<font></font>
         _EdgeLength, _Displacement * 1.5f<font></font>
     );<font></font>
-<font></font>
-    //エッジの分割数をセット<font></font>
-    o.edge[0] = tf.x;<font></font>
-    o.edge[1] = tf.y;<font></font>
-    o.edge[2] = tf.z;<font></font>
-    //中央部の分割数をセット<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Set the number of edge divisions</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.edge [0] = tf.x;</font></font></font></font><font></font>
+    o.edge[1] = tf.y;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.edge [2] = tf.z;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Set the number of divisions in the center</font></font><font></font>
     o.inside = tf.w;<font></font>
     return o;<font></font>
 }<font></font>
-<font></font>
-// hull shader（制御点関数）<font></font>
-<font></font>
-//分割プリミティブタイプ triで3角ポリゴン<font></font>
-[UNITY_domain("tri")]<font></font>
-//integer,fractional_odd,fractional_evenから分割割合を選択<font></font>
-[UNITY_partitioning("fractional_odd")]<font></font>
-//分割後のトポロジー triangle_cwは時計回り3角ポリゴン 反時計回りはtriangle_ccw<font></font>
-[UNITY_outputtopology("triangle_cw")]<font></font>
-//パッチ定数関数名を指定<font></font>
-[UNITY_patchconstantfunc("hull_const")]<font></font>
-//出力コントロールポイント。3角ポリゴンの為3つ出力<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// hull shader (control point function)</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Triangular polygon with split primitive type tri</font></font><font></font>
+[UNITY_domain("tri")]<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Select the division ratio from integer, fractional_odd, fractional_even</font></font><font></font>
+[UNITY_partitioning("fractional_odd")]<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Topology after division triangle_cw is a clockwise triangle polygon Counterclockwise is triangle_ccw</font></font><font></font>
+[UNITY_outputtopology("triangle_cw")]<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Specify the patch constant function name</font></font><font></font>
+[UNITY_patchconstantfunc("hull_const")]<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Output control point. </font><font style="vertical-align: inherit;">3 outputs for triangular polygons</font></font><font></font>
 [UNITY_outputcontrolpoints(3)]<font></font>
 InternalTessInterp_appdata hull_shader (<font></font>
     InputPatch&lt;InternalTessInterp_appdata,3&gt; v,<font></font>
@@ -262,10 +255,10 @@ InternalTessInterp_appdata hull_shader (<font></font>
 </div>
 
 <h3><a id="h6-4-2"></a><span class="secno">6.4.2　</span>Tessellation Stage</h3>
-<p>ここでHull shaderで返したテッセレーション係数（TessellationFactors構造体）に応じて、パッチに分割処理がかけられます。<br>Tessellation Stageはプログラマブルではありませんので、関数を記述することはできません。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, the patch is divided according to the tessellation factor (Tessellation Factors structure) returned by the Hull shader. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Tessellation Stage is not programmable, so you cannot write a function.</font></font></p>
 
 <h3><a id="h6-4-3"></a><span class="secno">6.4.3　</span>Domain Shader Stage</h3>
-<p>Domain ShaderはTessellation Stageの処理結果を元に頂点や法線、接線、UV等のポジションの反映を行うプログラマブルなStageです。<br>SV_DomainLocationというセマンティクスのパラメーターがDomain Shaderに入力されますので、このパラメーターを使って座標を反映させていく形になります。<br>また、Displacement処理を行いたい場合もDomain Shaderに記述しましょう。Domain Shaderの後は、Fragment Shaderに処理が流れ最終的な描画処理を行う形になりますが、#pragmaでGeometry Shader関数を指定している場合は、Geometory Shaderに流すことも可能です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Domain Shader is a programmable stage that reflects positions such as vertices, normals, tangents, and UVs based on the processing results of the Tessellation Stage. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A semantic parameter called SV_DomainLocation is input to the Domain Shader, so this parameter will be used to reflect the coordinates. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, if you want to perform displacement processing, describe it in Domain Shader. </font><font style="vertical-align: inherit;">After Domain Shader, the process flows to Fragment Shader and the final drawing process is performed, but if the Geometry Shader function is specified in #pragma, it can also be sent to Geometry Shader.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Tessellation.Shader</p>
 <pre class="emlist">#pragma domain domain_shader<font></font>
@@ -284,8 +277,8 @@ float4 _MainTex_ST;<font></font>
 sampler2D _DispTex;<font></font>
 float _Displacement<font></font>
 <font></font>
-v2f vert_process (appdata v)<font></font>
-{<font></font>
+v2f vert_process (appdata v)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     v2f o;<font></font>
     UNITY_INITIALIZE_OUTPUT(v2f,o);<font></font>
     o.pos = UnityObjectToClipPos(v.vertex);<font></font>
@@ -294,57 +287,57 @@ v2f vert_process (appdata v)<font></font>
     float3 worldNormal = UnityObjectToWorldNormal(v.normal);<font></font>
     fixed3 worldTangent = UnityObjectToWorldDir(v.tangent.xyz);<font></font>
     fixed tangentSign = v.tangent.w * unity_WorldTransformParams.w;<font></font>
-    fixed3 worldBinormal = cross(worldNormal, worldTangent) * tangentSign;<font></font>
-    o.tSpace0 = float4(<font></font>
+    fixed3 worldBinormal = cross(worldNormal, worldTangent) * tangentSign;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.tSpace0 = float4 (</font></font></font></font><font></font>
         worldTangent.x, worldBinormal.x, worldNormal.x, worldPos.x<font></font>
-    );<font></font>
-    o.tSpace1 = float4(<font></font>
-        worldTangent.y, worldBinormal.y, worldNormal.y, worldPos.y<font></font>
-    );<font></font>
-    o.tSpace2 = float4(<font></font>
-        worldTangent.z, worldBinormal.z, worldNormal.z, worldPos.z<font></font>
-    );<font></font>
+    );<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.tSpace1 = float4 (</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        worldTangent.y, worldBinormal.y, worldNormal.y, worldPos.y</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.tSpace2 = float4 (</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        worldTangent.z, worldBinormal.z, worldNormal.z, worldPos.z</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font><font></font>
     return o;<font></font>
 }<font></font>
 <font></font>
 void disp (inout appdata v)<font></font>
 {<font></font>
     float d = tex2Dlod(_DispTex, float4(v.texcoord.xy,0,0)).r * _Displacement;<font></font>
-    v.vertex.xyz -= v.normal * d;<font></font>
-}<font></font>
-<font></font>
-// ドメインシェーダー関数<font></font>
+    v.vertex.xyz -= v.normal * d;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Domain shader function</font></font><font></font>
 [UNITY_domain("tri")]<font></font>
 v2f domain_shader (<font></font>
     TessellationFactors tessFactors,<font></font>
-    const OutputPatch&lt;InternalTessInterp_appdata, 3&gt; vi,<font></font>
-    float3 bary : SV_DomainLocation<font></font>
+    const OutputPatch&lt;InternalTessInterp_appdata, 3&gt; vi,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 bars: SV_DomainLocation</font></font><font></font>
 )<font></font>
 {<font></font>
     appdata v;<font></font>
-    UNITY_INITIALIZE_OUTPUT(appdata,v);<font></font>
-    //Tessellation stageで計算されたSV_DomainLocationセマンティクスのbaryを元に各座標を設定します<font></font>
-    v.vertex   =<font></font>
-        vi[0].vertex * bary.x +<font></font>
-        vi[1].vertex * bary.y +<font></font>
-        vi[2].vertex * bary.z;<font></font>
-    v.tangent  =<font></font>
-        vi[0].tangent * bary.x +<font></font>
-        vi[1].tangent * bary.y +<font></font>
-        vi[2].tangent * bary.z;<font></font>
-    v.normal   =<font></font>
-        vi[0].normal * bary.x +<font></font>
-        vi[1].normal * bary.y +<font></font>
-        vi[2].normal * bary.z;<font></font>
-    v.texcoord =<font></font>
-        vi[0].texcoord * bary.x +<font></font>
-        vi[1].texcoord * bary.y +<font></font>
-        vi[2].texcoord * bary.z;<font></font>
-<font></font>
-    //Displacement処理を行う場合はここが最適になります。<font></font>
-    disp (v);<font></font>
-<font></font>
-    //最後にフラグメントシェーダーへ渡す直前の処理を記述します<font></font>
+    UNITY_INITIALIZE_OUTPUT(appdata,v);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Set each coordinate based on the SV_DomainLocation semantics calculated in the Tessellation stage.</font></font><font></font>
+    v.vertex   =<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [0] .vertex * bary.x +</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [1] .vertex * bary.y +</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [2] .vertex * Bary.z;</font></font></font></font><font></font>
+    v.tangent  =<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [0] .tangent * bary.x +</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [1] .tangent * bary.y +</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [2] .tangent * Bary.z;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    v.normal =</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [0] .normal * bary.x +</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [1] .normal * Bary.y +</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [2] .normal * Bary.z;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    v.texcoord =</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [0] .texcoord * bary.x +</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [1] .texcoord * bary.y +</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        vi [2] .texcoord * Bary.z;</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // This is the best place to do Displacement processing.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    disp (v);</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Finally, describe the process just before passing to the fragment shader.</font></font><font></font>
     v2f o = vert_process (v);<font></font>
     return o;<font></font>
 }<font></font>
@@ -369,4 +362,4 @@ Figure 6.2: Fluid Displacement
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 6 _ Tessellation &amp; Displacement_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Tessellation &amp; Displacement_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Tessellation &amp; Displacement_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Tessellation &amp; Displacement_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Tessellation &amp; Displacement_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

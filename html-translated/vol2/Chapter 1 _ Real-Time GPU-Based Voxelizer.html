@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0044)https://freder.io/files/unity2/Nakamura.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h1"></a><span class="secno">第1章　</span>Real-Time GPU-Based Voxelizer</h1>
 
 <h2><a id="h1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -84,19 +77,19 @@
 </ol>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voxelization in CPU is a static function of CPUVoxelizer class</font></font></p>
 <div class="emlist-code">
-<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
 <pre class="emlist">public class CPUVoxelizer<font></font>
 {<font></font>
-    public static void Voxelize (<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        Mesh mesh,</font></font><font></font>
+    public static void Voxelize (<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Mesh mesh,</font></font></font></font><font></font>
         int resolution,<font></font>
         out List&lt;Vector3&gt; voxels,<font></font>
         out float unit,<font></font>
         bool surfaceOnly = false<font></font>
     ) {<font></font>
     ...<font></font>
-    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-    ...</font></font><font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    ...</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
@@ -124,7 +117,7 @@ Figure 1.2: Mesh BoundingBox
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As will be described in detail later, when voxels are created, the intersection of the triangles and voxels that make up the mesh is determined. However, if the triangles and voxel surfaces overlap exactly, the intersection may not be determined correctly.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, the range in which the BoundingBox of the mesh model is expanded by "half the length of the unit length that constitutes one voxel" is specified as the voxelization range.</font></font></p>
 <div class="emlist-code">
-<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></font></font></p>
 <pre class="emlist">mesh.RecalculateBounds();<font></font>
 var bounds = mesh.bounds;<font></font>
 <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -135,49 +128,49 @@ float maxLength = Mathf.Max(<font></font>
 );<font></font>
 unit = maxLength / resolution;<font></font>
 <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-// Half the unit length</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-var hunit = unit * 0.5f;</font></font><font></font>
-<font></font>
-// 「一つのボクセルを構成する単位長の半分の長さ分」拡張した範囲を<font></font>
-// ボクセル化の範囲とする<font></font>
-<font></font>
-// ボクセル化するboundsの最小値<font></font>
-var start = bounds.min - new Vector3(hunit, hunit, hunit);<font></font>
-<font></font>
-// ボクセル化するboundsの最大値<font></font>
-var end = bounds.max + new Vector3(hunit, hunit, hunit);<font></font>
-<font></font>
-// ボクセル化するboundsのサイズ<font></font>
+// Half the unit length</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var hunit = unit * 0.5f;</font></font></font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// "Half the length of the unit length that makes up one voxel" Expanded range</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Scope of voxels</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Minimum value of bounds to voxelize</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var start = bounds.min - new Vector3 (unit, unit, unit);</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Maximum value of bounds to voxelize</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var end = bounds.max + new Vector3 (unit, unit, unit);</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Size of bounds to voxelize</font></font><font></font>
 var size = end - start;<font></font>
 </pre>
 </div>
 
-<h3><a id="h1-2-4"></a><span class="secno">1.2.4　</span>ボクセルデータを格納する3次元の配列データを生成する</h3>
-<p>ボクセルを表す構造体として、サンプルコードではVoxel_t構造体を用意しています。</p>
+<h3><a id="h1-2-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Generate 3D array data to store voxel data</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample code provides a Voxel_t structure as a structure that represents voxels.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Voxel.cs</p>
 <pre class="emlist">[StructLayout(LayoutKind.Sequential)]<font></font>
-public struct Voxel_t {<font></font>
-    public Vector3 position;   // ボクセルの位置<font></font>
-    public uint fill;          // ボクセルを埋めるべきかどうかのフラグ<font></font>
-    public uint front;         // ボクセルと交差した3角形が決められた方向から見て前面かどうかのフラグ<font></font>
+public struct Voxel_t {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Vector3 position; // Voxel position</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public uint fill; // Flag whether voxels should be filled</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public uint front; // Flag whether the triangle that intersects the voxel is the front when viewed from the determined direction</font></font><font></font>
     ...<font></font>
 }<font></font>
 </pre>
 </div>
-<p>このVoxel_tの三次元配列を生成し、そこにボクセルデータを格納していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A three-dimensional array of this Voxel_t is generated, and voxel data is stored in it.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">// ボクセルの単位長さとボクセル化を行う範囲に基づいて、3次元ボクセルデータのサイズを決定する<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Determine the size of 3D voxel data based on the unit length of voxels and the range of voxelization</font></font><font></font>
 var width = Mathf.CeilToInt(size.x / unit);<font></font>
 var height = Mathf.CeilToInt(size.y / unit);<font></font>
 var depth = Mathf.CeilToInt(size.z / unit);<font></font>
 var volume = new Voxel_t[width, height, depth];<font></font>
 </pre>
 </div>
-<p>また、後に続く処理の中で各ボクセルの位置やサイズを参照するため、事前に3次元ボクセルデータと一致するAABB配列を生成しておきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, in order to refer to the position and size of each voxel in the subsequent processing, generate an AABB array that matches the 3D voxel data in advance.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
 <pre class="emlist">var boxes = new Bounds[width, height, depth];<font></font>
 var voxelUnitSize = Vector3.one * unit;<font></font>
 for(int x = 0; x &lt; width; x++)<font></font>
@@ -196,77 +189,77 @@ for(int x = 0; x &lt; width; x++)<font></font>
 </div>
 <div class="column">
 
-<h3><a id="column-1"></a>AABB</h3>
-<p>AABB（Axis-Aligned Bounding Box、軸平行境界ボックス）とは、3次元空間のXYZ軸に対して各辺が平行な直方体の境界図形を指します。</p>
-<p>AABBは衝突判定に利用されることが多く、2つのメッシュ同士の衝突判定や、あるメッシュと光線との衝突判定を簡易的に行う際に使われたりするケースがあります。</p>
-<p>メッシュに対する衝突判定を厳密にやろうとすると、メッシュを構成する三角形全てに対して判定を行わなければなりませんが、メッシュを含むAABBのみであれば高速に計算することができ、便利です。</p>
+<h3><a id="column-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">AABB</font></font></font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">AABB (Axis-Aligned Bounding Box) is a rectangular parallelepiped boundary figure whose sides are parallel to the XYZ axes in 3D space.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">AABB is often used for collision detection, and in some cases it is used for collision detection between two meshes or for simple collision detection between a certain mesh and a light beam.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you want to make a strict collision detection for a mesh, you have to make a judgment for all the triangles that make up the mesh, but if you only use AABB including the mesh, you can calculate at high speed, which is convenient.</font></font></p>
 <div id="id_Nakamura_2FAABB" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/AABB.png" alt="Collision detection between AABBs of two polygonal objects">
-<p class="caption">
-図1.3: 2つの多角形オブジェクトのAABB同士の衝突判定
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.3: Collision detection between AABBs of two polygonal objects
+</font></font></p>
 </div>
 </div>
 
-<h3><a id="h1-2-5"></a><span class="secno">1.2.5　</span>メッシュの表面に位置するボクセルを生成する</h3>
-<p>以下の図のように、メッシュの表面に位置するボクセルを生成します。</p>
+<h3><a id="h1-2-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Generate voxels located on the surface of the mesh</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Generate voxels located on the surface of the mesh as shown in the figure below.</font></font></p>
 <div id="id_Nakamura_2FVoxelSurface2" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelSurface2.png" alt="First, generate voxels located on the surface of the mesh, and then generate voxels based on it so as to fill the contents of the mesh.">
-<p class="caption">
-図1.4: まずメッシュの表面に位置するボクセルを生成し、それを基にしてメッシュの中身を埋めていくようにボクセルを生成する
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.4: First, generate voxels located on the surface of the mesh, and then generate voxels based on it so as to fill the contents of the mesh.
+</font></font></p>
 </div>
-<p>メッシュの表面に位置するボクセルを求めるには、メッシュを構成するそれぞれの3角形とボクセルとの交差判定を行う必要があります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To find the voxels located on the surface of the mesh, it is necessary to determine the intersection of each of the triangles that make up the mesh and the voxels.</font></font></p>
 
-<h4><a id="h1-2-5-1"></a>3角形とボクセルの交差判定（SATを用いた交差判定アルゴリズム）</h4>
-<p>3角形とボクセルとの交差判定には、SAT（Separating Axis Theorem、分離軸定理）を用います。SATを用いた交差判定アルゴリズムは3角形とボクセル同士に限らず、凸面同士の交差判定として汎用的に用いることができます。</p>
-<p>SATは以下のことを証明しました。</p>
+<h4><a id="h1-2-5-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crossing judgment of triangle and voxel (crossing judgment algorithm using SAT)</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SAT (Separating Axis Theorem) is used to determine the intersection of a triangle and a voxel. </font><font style="vertical-align: inherit;">The intersection determination algorithm using SAT is not limited to triangles and voxels, but can be used for general purposes as intersection determination between convex surfaces.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The SAT has proved that:</font></font></p>
 <div class="column">
 
-<h3><a id="column-2"></a>SAT（Separating Axis Theorem、分離軸定理）の簡単な解説</h3>
-<p>一方にオブジェクトA全体、もう一方にオブジェクトB全体が存在するような直線が求められれば、オブジェクトAとオブジェクトBは交わりません。このような、2つのオブジェクトを分離する直線を分離直線と呼び、その分離直線は常に分離軸と直交します。</p>
+<h3><a id="column-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A brief explanation of SAT (Separating Axis Theorem)</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you want a straight line with the entire object A on one side and the entire object B on the other, object A and object B will not intersect. </font><font style="vertical-align: inherit;">Such a straight line that separates two objects is called a separation straight line, and the separation line is always orthogonal to the separation axis.</font></font></p>
 </div>
-<p>SATにより、2つの凸面同士の射影が重ならない軸（分離軸）が求められれば、その2つの凸面を分離する直線が存在するので、2つの凸面が交わらないということを導き出せます。逆に、分離軸が見つからなければ2つの凸面同士は交差していると判断できます。（形状が凹である場合、分離軸が見つからなくとも交差していない場合があります。）</p>
-<p>凸面形状は、ある軸に射影されると、その形状の影がその軸を表す線の上に投影されたように映ります。これは軸上の線分として表すことができ、範囲区間[min, max]で表わせます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the SAT finds an axis (separation axis) where the projections of two convex surfaces do not overlap, it can be derived that the two convex surfaces do not intersect because there is a straight line that separates the two convex surfaces. </font><font style="vertical-align: inherit;">Conversely, if no separation axis is found, it can be determined that the two convex surfaces intersect. </font><font style="vertical-align: inherit;">(If the shape is concave, it may not intersect even if the separation axis is not found.)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When a convex shape is projected onto an axis, the shadow of that shape appears as if it were projected onto a line that represents that axis. </font><font style="vertical-align: inherit;">This can be represented as a line segment on the axis and can be represented by the range interval [min, max].</font></font></p>
 <div id="id_Nakamura_2FSAT1" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/SAT1.png" alt="The convex shape is projected onto a certain axis, and the range of the convex shape projected on the axis (min, max).">
-<p class="caption">
-図1.5: 凸面形状をある軸に射影し、軸上に映された凸面形状の範囲（min, max）
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.5: Convex shape projected onto a certain axis and the range of the convex shape projected on the axis (min, max)
+</font></font></p>
 </div>
-<p>以下の図のように、2つの凸面形状の分離直線が存在する場合、その直線に直交する分離軸に対する凸面形状の射影区間同士は重なりません。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As shown in the figure below, when there are two convex separation straight lines, the projection sections of the convex shape with respect to the separation axis orthogonal to the straight lines do not overlap.</font></font></p>
 <div id="id_Nakamura_2FSAT2" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/SAT2.png" alt="If there is a straight line that separates the two convex shapes, the projection sections on the axis orthogonal to the straight line do not overlap.">
-<p class="caption">
-図1.6: ２つの凸面形状を分離する直線がある場合、その直線に直交する軸への射影区間同士は重ならない
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.6: If there is a straight line that separates the two convex shapes, the projection sections on the axes orthogonal to the straight line do not overlap.
+</font></font></p>
 </div>
-<p>しかし同じ2つの凸面であっても、以下の図のように、他の非分離軸への射影は重なることがあります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, even with the same two convex surfaces, projections on other non-separable axes may overlap, as shown in the figure below.</font></font></p>
 <div id="id_Nakamura_2FSAT3" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/SAT3.png" alt="When projecting on an axis orthogonal to a straight line that does not separate the two convex shapes, the projections may overlap.">
-<p class="caption">
-図1.7: 2つの凸面形状を分離しない直線と直交する軸に射影した場合、射影同士が重なることがある
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.7: When projecting on an axis orthogonal to a straight line that does not separate the two convex shapes, the projections may overlap.
+</font></font></p>
 </div>
-<p>形状によっては、分離軸になる可能性のある軸が明白であるものがあり、そのような2つの形状AとBの間の交わりを判定するには、分離軸になり得る軸それぞれに2つの形状を射影し、2つの射影区間[Amin, Amax]と[Bmin, Bmax]が互いに重なっていないかどうかを調べていけば交差判定ができます。式で表すと、Amax &lt; Bmin または Bmax &lt; Amin であれば、2つの区間は重なっていません。</p>
-<p>凸面同士の分離軸になる可能性がある軸は</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For some shapes, the possible axes of separation are obvious, and to determine the intersection of two such shapes A and B, two for each of the possible axes of separation. Crossing can be determined by projecting the shape and checking whether the two projection sections [Amin, Amax] and [Bmin, Bmax] overlap each other. </font><font style="vertical-align: inherit;">Expressed in the formula, if Amax &lt;Bmin or Bmax &lt;Amin, the two intervals do not overlap.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The axis that can be the separation axis between the convex surfaces is</font></font></p>
 <ul>
-<li>凸面1の辺と凸面2の辺のクロス積</li>
-<li>凸面1の法線</li>
-<li>凸面2の法線</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cross product of the side of convex surface 1 and the side of convex surface 2</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Convex 1 normal</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Convex 2 normal</font></font></li>
 </ul>
-<p>であることが導かれており、このことから三角形とボクセル（AABB）同士では、分離軸になる可能性がある軸は</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From this, the axis that can be the separation axis between the triangle and the voxel (AABB) is</font></font></p>
 <ul>
-<li>三角形の3つの辺とAABBの直交する3つの辺同士の組み合わせから得られる9通りのクロス積</li>
-<li>AABBの3つの法線</li>
-<li>三角形の法線</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nine cross products obtained from the combination of the three sides of the triangle and the three orthogonal sides of AABB.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">AABB's three normals</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Triangle normal</font></font></li>
 </ul>
-<p>であるため、これら13通りの軸それぞれについて、射影が重なるかどうか判定していくことで、三角形とボクセルとの交差判定を行います。</p>
-<p>一つの3角形とすべてのボクセルデータとの交差判定を行うのは無駄な処理が多くなる可能性があるため、3角形を含むAABBを計算し、そこに含まれるボクセルとの交差判定を行います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, for each of these 13 axes, the intersection of the triangle and the voxel is determined by determining whether or not the projections overlap.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since it may be useless to judge the intersection of one triangle and all voxel data, calculate the AABB including the triangle and judge the intersection with the voxels contained in it. ..</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">// 三角形のAABBを計算<font></font>
-var min = tri.bounds.min - start;<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Calculate the triangle AABB</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var min = tri.bounds.min - start;</font></font></font></font><font></font>
 var max = tri.bounds.max - start;<font></font>
 int iminX = Mathf.RoundToInt(min.x / unit);<font></font>
 int iminY = Mathf.RoundToInt(min.y / unit);<font></font>
@@ -280,8 +273,8 @@ iminZ = Mathf.Clamp(iminZ, 0, depth - 1);<font></font>
 imaxX = Mathf.Clamp(imaxX, 0, width - 1);<font></font>
 imaxY = Mathf.Clamp(imaxY, 0, height - 1);<font></font>
 imaxZ = Mathf.Clamp(imaxZ, 0, depth - 1);<font></font>
-<font></font>
-// 三角形のAABBの中でボクセルとの交差判定を行う<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Judge the intersection with voxels in the triangular AABB</font></font><font></font>
 for(int x = iminX; x &lt;= imaxX; x++) {<font></font>
     for(int y = iminY; y &lt;= imaxY; y++) {<font></font>
         for(int z = iminZ; z &lt;= imaxZ; z++) {<font></font>
@@ -293,41 +286,41 @@ for(int x = iminX; x &lt;= imaxX; x++) {<font></font>
 }<font></font>
 </pre>
 </div>
-<p>三角形とボクセルとの交差判定はIntersects(Triangle, Bounds)関数で行います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Intersects (Triangle, Bounds) function is used to determine the intersection of a triangle and a voxel.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
 <pre class="emlist">public static bool Intersects(Triangle tri, Bounds aabb)<font></font>
 {<font></font>
-    ...<font></font>
-}<font></font>
+    ...<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>この関数内では、前述の13通りの軸について交差判定を行っていきますが、AABBの3つの法線が既知である（XYZ軸に沿った辺を持つので、単にX軸（1, 0, 0）、Y軸（0, 1, 0）、Z軸（0, 0, 1）の法線を持つ）ことを利用したり、AABBの中心が原点（0, 0, 0）に来るように三角形とAABBの座標を平行移動させることで、交差判定を最適化しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this function, the intersection judgment is performed for the above 13 axes, but the three normals of AABB are known (since they have sides along the XYZ axes, they are simply the X axis (1, 0, 0), Y-axis (0, 1, 0), Z-axis (0, 0, 1) normals), or so that the center of AABB is at the origin (0, 0, 0) The intersection judgment is optimized by translating the coordinates of the triangle and AABB.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">// AABBの中心座標と各辺の半分の長さ(extents)を取得<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Get the center coordinates of AABB and the extents of each side</font></font><font></font>
 Vector3 center = aabb.center, extents = aabb.max - center;<font></font>
-<font></font>
-// AABBの中心が原点(0, 0, 0)に来るように三角形の座標を平行移動<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Translate the coordinates of the triangle so that the center of AABB is at the origin (0, 0, 0)</font></font><font></font>
 Vector3 v0 = tri.a - center,<font></font>
         v1 = tri.b - center,<font></font>
         v2 = tri.c - center;<font></font>
-<font></font>
-// 三角形の三辺を表すベクトルを取得<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Get the vector representing the three sides of the triangle</font></font><font></font>
 Vector3 f0 = v1 - v0,<font></font>
         f1 = v2 - v1,<font></font>
         f2 = v0 - v2;<font></font>
 <font></font>
 </pre>
 </div>
-<p>まずは、三角形の3つの辺とAABBの直交する3つの辺同士の組み合わせから得られる9通りのクロス積を軸とした交差判定を行っていきますが、AABBの3つの辺の方向がXYZ軸に平行であることを利用し、クロス積を得るための計算を省くことができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, we will make an intersection judgment based on the nine cross products obtained from the combination of the three sides of the triangle and the three orthogonal sides of AABB, but the direction of the three sides of AABB will be the XYZ axes. You can take advantage of the parallelism and omit the calculation to get the cross product.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">// AABBの辺はそれぞれ方向ベクトルx(1, 0, 0)、y(0, 1, 0)、z(0, 0, 1)であるので、<font></font>
-// 計算を行わずに9通りのクロス積を得ることができる<font></font>
-Vector3<font></font>
-    a00 = new Vector3(0, -f0.z, f0.y), // X軸とf0とのクロス積<font></font>
-    a01 = new Vector3(0, -f1.z, f1.y), // Xとf1<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Since the sides of AABB are the direction vectors x (1, 0, 0), y (0, 1, 0), z (0, 0, 1), respectively,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// You can get 9 different cross products without doing any calculations</font></font><font></font>
+Vector3<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    a00 = new Vector3 (0, -f0.z, f0.y), // Cross product of X axis and f0</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    a01 = new Vector3 (0, -f1.z, f1.y), // X and f1</font></font><font></font>
     a02 = new Vector3(0, -f2.z, f2.y), // Xとf2<font></font>
     a10 = new Vector3(f0.z, 0, -f0.x), // Yとf0<font></font>
     a11 = new Vector3(f1.z, 0, -f1.x), // Yとf1<font></font>
@@ -335,9 +328,9 @@ Vector3<font></font>
     a20 = new Vector3(-f0.y, f0.x, 0), // Zとf0<font></font>
     a21 = new Vector3(-f1.y, f1.x, 0), // Zとf1<font></font>
     a22 = new Vector3(-f2.y, f2.x, 0); // Zとf2<font></font>
-<font></font>
-// 9つの軸について交差判定を行う（後述）<font></font>
-// （どれか一つでも交差しない軸があれば、三角形とAABBは交差していないのでfalseを返す）<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Perform intersection judgment for 9 axes (described later)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// (If any one of the axes does not intersect, the triangle and AABB do not intersect, so false is returned)</font></font><font></font>
 if (<font></font>
     !Intersects(v0, v1, v2, extents, a00) ||<font></font>
     !Intersects(v0, v1, v2, extents, a01) ||<font></font>
@@ -355,51 +348,51 @@ if (<font></font>
 <font></font>
 </pre>
 </div>
-<p>これらの軸上で三角形とAABBを射影して交差を判定するのが以下の関数です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following function projects the triangle and AABB on these axes to determine the intersection.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
 <pre class="emlist">protected static bool Intersects(<font></font>
     Vector3 v0,<font></font>
     Vector3 v1,<font></font>
     Vector3 v2,<font></font>
     Vector3 extents,<font></font>
-    Vector3 axis<font></font>
-)<font></font>
-{<font></font>
-    ...<font></font>
-}<font></font>
+    Vector3 axis<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+)</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
+    ...<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>ここで注意したいのが、AABBの中心を原点に持ってくることによる最適化を行っていることです。AABBの各頂点を全て軸に射影する必要はなく、AABBのXYZ軸について最大値を持つ頂点、つまり各辺の半分の長さ（extents）を射影するだけで軸上の区間を得ることができます。</p>
-<p>extentsを射影して得られた値rはAABBの射影軸上の区間[-r, r]を表すので、AABBについては射影の計算が一回で済む、ということです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The point to note here is that the optimization is performed by bringing the center of AABB to the origin. </font><font style="vertical-align: inherit;">It is not necessary to project all the vertices of AABB on the axis, and the interval on the axis can be obtained simply by projecting the vertex with the maximum value for the XYZ axes of AABB, that is, the extents of half the length of each side. I will.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The value r obtained by projecting extents represents the interval [-r, r] on the projection axis of AABB, which means that the projection can be calculated only once for AABB.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">// 三角形の頂点を軸上に射影する<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Project the vertices of the triangle on the axis</font></font><font></font>
 float p0 = Vector3.Dot(v0, axis);<font></font>
 float p1 = Vector3.Dot(v1, axis);<font></font>
 float p2 = Vector3.Dot(v2, axis);<font></font>
-<font></font>
-// AABBのXYZ軸について最大値を持つ頂点（extents）を軸上に射影し、値rを得る<font></font>
-// AABBの区間は[-r, r]であるので、AABBについては全頂点を射影する必要はない<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Project the extents with the maximum value for the XYZ axes of AABB on the axis to get the value r</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Since the section of AABB is [-r, r], it is not necessary to project all vertices for AABB.</font></font><font></font>
 float r =<font></font>
     extents.x * Mathf.Abs(axis.x) +<font></font>
     extents.y * Mathf.Abs(axis.y) +<font></font>
     extents.z * Mathf.Abs(axis.z);<font></font>
-<font></font>
-// 三角形の射影区間<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Triangular projection section</font></font><font></font>
 float minP = Mathf.Min(p0, p1, p2);<font></font>
 float maxP = Mathf.Max(p0, p1, p2);<font></font>
-<font></font>
-// 三角形の区間とAABBの区間が重なっているかの判別<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Determine if the triangular section and the AABB section overlap</font></font><font></font>
 return !((maxP &lt; -r) || (r &lt; minP));<font></font>
 <font></font>
 </pre>
 </div>
-<p>9通りのクロス積を軸とした判別の次は、AABBの3つの法線を軸として判別を行います。</p>
-<p>AABBの法線がXYZ軸に平行であるという特性を利用し、AABBの中心を原点に持ってくるよう座標値を平行移動しているので、単に三角形の各頂点のXYZ成分についての最小値・最大値とextentsを比較するだけで交差判定が行えます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next to the discrimination based on the nine cross products, the discrimination is performed based on the three normals of AABB.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Using the characteristic that the normal of AABB is parallel to the XYZ axes, the coordinate values ​​are translated so as to bring the center of AABB to the origin, so the minimum value for the XYZ component of each vertex of the triangle is simply. Crossing judgment can be performed simply by comparing the maximum value and extends.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">// X軸<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// X axis</font></font><font></font>
 if (<font></font>
     Mathf.Max(v0.x, v1.x, v2.x) &lt; -extents.x ||<font></font>
     Mathf.Min(v0.x, v1.x, v2.x) &gt; extents.x<font></font>
@@ -407,18 +400,18 @@ if (<font></font>
 {<font></font>
     return false;<font></font>
 }<font></font>
-<font></font>
-// Y軸<font></font>
-if (<font></font>
-    Mathf.Max(v0.y, v1.y, v2.y) &lt; -extents.y ||<font></font>
-    Mathf.Min(v0.y, v1.y, v2.y) &gt; extents.y<font></font>
-)<font></font>
-{<font></font>
-    return false;<font></font>
-}<font></font>
-<font></font>
-// Z軸<font></font>
-if (<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Y axis</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+if (</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    Mathf.Max (v0.y, v1.y, v2.y) &lt;-extents.y ||</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    Mathf.Min (v0.y, v1.y, v2.y)&gt; extents.y</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+)</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return false;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Z axis</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+if (</font></font></font></font><font></font>
     Mathf.Max(v0.z, v1.z, v2.z) &lt; -extents.z ||<font></font>
     Mathf.Min(v0.z, v1.z, v2.z) &gt; extents.z<font></font>
 )<font></font>
@@ -427,81 +420,81 @@ if (<font></font>
 }<font></font>
 </pre>
 </div>
-<p>最後は三角形の法線についてですが、三角形の法線を持つPlaneとAABBとの交差について判定を行っています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lastly, regarding the triangular normal, we are making a judgment about the intersection of the Plane with the triangular normal and AABB.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
 <pre class="emlist">var normal = Vector3.Cross(f1, f0).normalized;<font></font>
 var pl = new Plane(normal, Vector3.Dot(normal, tri.a));<font></font>
 return Intersects(pl, aabb);<font></font>
 </pre>
 </div>
-<p>Intersects(Plane, Bounds)関数でPlaneとAABBとの交差を判定します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Intersects (Plane, Bounds) function determines the intersection of Plane and AABB.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">public static bool Intersects(Plane pl, Bounds aabb)<font></font>
-{<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist">public static bool Intersects(Plane pl, Bounds aabb)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     Vector3 center = aabb.center;<font></font>
     var extents = aabb.max - center;<font></font>
-<font></font>
-    // Planeのnormal上にextentsを射影<font></font>
-    var r =<font></font>
-        extents.x * Mathf.Abs(pl.normal.x) +<font></font>
-        extents.y * Mathf.Abs(pl.normal.y) +<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Project the extents on the normal of Plane</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var r =</font></font></font></font><font></font>
+        extents.x * Mathf.Abs(pl.normal.x) +<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        extents.y * Mathf.Abs (pl.normal.y) +</font></font></font></font><font></font>
         extents.z * Mathf.Abs(pl.normal.z);<font></font>
-<font></font>
-    // PlaneとAABBの中心との距離を計算<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Calculate the distance between Plane and the center of AABB</font></font><font></font>
     var s = Vector3.Dot(pl.normal, center) - pl.distance;<font></font>
-<font></font>
-    // sが[-r, r]の範囲にあるかどうか判定<font></font>
-    return Mathf.Abs(s) &lt;= r;<font></font>
-}<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Determine if s is in the range [-r, r]</font></font><font></font>
+    return Mathf.Abs(s) &lt;= r;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
 
-<h4><a id="h1-2-5-2"></a>交差したボクセルを配列データに書き込む</h4>
-<p>一つの三角形について、交差するボクセルを判定できると、ボクセルデータのfillフラグを立て、その三角形が決められた方向から見て前面か背面かを示すfrontフラグを設定します。（frontフラグについては後述）</p>
-<p>ボクセルによっては前面を向いている三角形と背面を向いている三角形両方と交差している場合がありますが、その場合、frontフラグは背面を優先するようにします。</p>
+<h4><a id="h1-2-5-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Write intersected voxels to array data</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the intersecting voxels can be determined for one triangle, the fill flag of the voxel data is set, and the front flag is set to indicate whether the triangle is front or back when viewed from the determined direction. </font><font style="vertical-align: inherit;">(The front flag will be described later)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Some voxels may intersect both front-facing and back-facing triangles, in which case the front flag should prioritize the back.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">if(Intersects(tri, boxes[x, y, z])) {<font></font>
-    // 交差した(x, y, z)にあるボクセルを取得する<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist">if(Intersects(tri, boxes[x, y, z])) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Get voxels at intersecting (x, y, z)</font></font><font></font>
     var voxel = volume[x, y, z];<font></font>
-<font></font>
-    // ボクセルの位置を設定する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Set the voxel position</font></font><font></font>
     voxel.position = boxes[x, y, z].center;<font></font>
 <font></font>
-    if(voxel.fill &amp; 1 == 0) {<font></font>
-        // ボクセルがまだ埋まっていない場合<font></font>
-        // ボクセルと交差した三角形が前面かどうかのフラグを立てる<font></font>
+    if(voxel.fill &amp; 1 == 0) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // If the voxels are not yet filled</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Flag the triangle that intersects the voxel for the front</font></font><font></font>
         voxel.front = front;<font></font>
-    } else {<font></font>
-        // ボクセルが既にほかの三角形で埋められている場合<font></font>
-        // 背面のフラグを優先する<font></font>
+    } else {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // If the voxel is already filled with other triangles</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Give priority to the flag on the back</font></font><font></font>
         voxel.front = voxel.front &amp; front;<font></font>
     }<font></font>
-<font></font>
-    // ボクセルを埋めるフラグを立てる<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Flag to fill voxels</font></font><font></font>
     voxel.fill = 1;<font></font>
     volume[x, y, z] = voxel;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>frontフラグは後述の「メッシュの中身を埋める処理」に必要で、「中身を埋めていく方向」から見て前面か背面かを設定します。</p>
-<p>サンプルコードでは、forward(0, 0, 1)方向にメッシュの中身を埋めていくので、三角形がforward(0, 0, 1)から見て前面かどうかを判定します。</p>
-<p>3角形の法線とボクセルを埋める方向との内積が0以下であれば、3角形はその方向から見て前面であることがわかります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The front flag is required for the "process to fill the contents of the mesh" described later, and sets whether it is the front or the back when viewed from the "direction to fill the contents".</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the sample code, the contents of the mesh are filled in the forward (0, 0, 1) direction, so it is determined whether the triangle is in front when viewed from forward (0, 0, 1).</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the inner product of the normal of the triangle and the direction to fill the voxels is 0 or less, it means that the triangle is the front when viewed from that direction.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">public class Triangle {<font></font>
-    public Vector3 a, b, c;     // 3角形を構成する3点<font></font>
-    public bool frontFacing;    // 3角形がボクセルを埋める方向から見て表面かどうかのフラグ<font></font>
-    public Bounds bounds;       // 3角形のAABB<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></p>
+<pre class="emlist">public class Triangle {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Vector3 a, b, c; // 3 points that make up a triangle</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public bool frontFacing; // Flag whether the triangle is a surface when viewed from the direction of filling the voxels</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Bounds bounds; // Triangular AABB</font></font><font></font>
 <font></font>
     public Triangle (Vector3 a, Vector3 b, Vector3 c, Vector3 dir) {<font></font>
         this.a = a;<font></font>
         this.b = b;<font></font>
         this.c = c;<font></font>
-<font></font>
-        // 3角形がボクセルを埋める方向から見て前面かどうかを判定する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Determine if the triangle is front when viewed from the direction of filling the voxels</font></font><font></font>
         var normal = Vector3.Cross(b - a, c - a);<font></font>
         this.frontFacing = (Vector3.Dot(normal, dir) &lt;= 0f);<font></font>
 <font></font>
@@ -511,70 +504,70 @@ return Intersects(pl, aabb);<font></font>
 </pre>
 </div>
 
-<h3><a id="h1-2-6"></a><span class="secno">1.2.6　</span>メッシュの表面を表すボクセルデータから、メッシュ内部に位置するボクセルを埋める</h3>
-<p>メッシュ表面に位置するボクセルデータが計算できたので、次はその内部を埋めていきます。</p>
+<h3><a id="h1-2-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Fill the voxels located inside the mesh from the voxel data representing the surface of the mesh</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now that we have calculated the voxel data located on the mesh surface, we will fill in the inside.</font></font></p>
 <div id="id_Nakamura_2FVoxelFill" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill.png" alt="State after generating voxel data located on the mesh surface">
-<p class="caption">
-図1.8: メッシュ表面に位置するボクセルデータを生成した後の状態
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.8: State after generating voxel data located on the mesh surface
+</font></font></p>
 </div>
 
-<h4><a id="h1-2-6-1"></a>ボクセルを埋める流れ</h4>
-<p>ボクセルを埋める方向からみて前面を向いているボクセルを探索します。</p>
-<p>以下の図のように空のボクセルは素通りします。</p>
+<h4><a id="h1-2-6-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Flow to fill voxels</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Search for voxels that are facing forward when viewed from the direction of filling the voxels.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Empty voxels will pass through as shown in the figure below.</font></font></p>
 <div id="id_Nakamura_2FVoxelFill0" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill0.png" alt="Search for voxels that are facing forward when viewed from the direction of filling the voxels. Empty voxels pass through (the arrow indicates the direction of filling the voxels, and the frame indicates the voxel position being searched).">
-<p class="caption">
-図1.9: ボクセルを埋める方向からみて前面を向いているボクセルを探索する　空のボクセルは素通りする（矢印がボクセルを埋める方向で、枠が探索中のボクセル位置を表す）
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.9: Search for voxels facing forward when viewed from the voxel-filling direction Empty voxels pass through (arrows fill voxels and frames represent voxel positions being searched)
+</font></font></p>
 </div>
-<p>前面を向いているボクセルを見つけたら、前面を向いているボクセルの中を進んでいきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Once you find a voxel that is facing the front, proceed through the voxel that is facing the front.</font></font></p>
 <div id="id_Nakamura_2FVoxelFill1" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill1.png" alt="The state where the voxel facing the front is found (the line protruding from the mesh surface is the normal of the mesh, and in the figure, the normal of the mesh and the direction of filling the voxel are opposite, so the voxel at the frame position is You can see that it is located on the front)">
-<p class="caption">
-図1.10: 前面を向いているボクセルを見つけた状態（メッシュ表面から出ている線はメッシュの法線であり、図ではメッシュの法線とボクセルを埋める方向が向かいあっているので、枠の位置のボクセルは前面に位置していることがわかる）
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.10: Finding a voxel facing the front (the line coming out of the mesh surface is the mesh normal, and in the figure the mesh normal and the voxel filling direction are opposite, so the position of the frame You can see that the voxel is located in the front)
+</font></font></p>
 </div>
 <div id="id_Nakamura_2FVoxelFill2" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill2.png" alt="Go through the voxels facing the front">
-<p class="caption">
-図1.11: 前面を向いているボクセルの中を進む
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.11: Go through a voxel facing the front
+</font></font></p>
 </div>
-<p>前面を向いているボクセルの中を抜けると、メッシュ内部に到達します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">After passing through the voxels facing the front, you will reach the inside of the mesh.</font></font></p>
 <div id="id_Nakamura_2FVoxelFill3" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill3.png" alt="After passing through the voxels facing the front and reaching the inside of the mesh">
-<p class="caption">
-図1.12: 前面を向いているボクセルの中を抜け、メッシュ内部に到達した状態
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.12: Passing through a voxel facing the front and reaching the inside of the mesh
+</font></font></p>
 </div>
-<p>メッシュ内部の中を進んでいき、到達したボクセルを埋めていきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proceed through the inside of the mesh and fill the voxels that have arrived.</font></font></p>
 <div id="id_Nakamura_2FVoxelFill4" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill4.png" alt="Fill the reached voxels as if filling the inside of the mesh">
-<p class="caption">
-図1.13: メッシュ内部を埋めていくように、到達したボクセルを埋めていく
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.13: Fill the reached voxels as they fill the inside of the mesh
+</font></font></p>
 </div>
-<p>そして、ボクセルを埋める方向からみて背面を向いているボクセルに到達すると、メッシュの内部を埋めきったことがわかります。背面を向いたボクセルの中を進んでいき、またメッシュの外に到達すると、また前面を向いているボクセルを探索しはじめます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then, when you reach the voxel facing the back when viewed from the direction of filling the voxel, you can see that the inside of the mesh has been filled. </font><font style="vertical-align: inherit;">Go through the voxels facing the back, and when you reach the outside of the mesh, you will start searching for the voxels facing the front again.</font></font></p>
 <div id="id_Nakamura_2FVoxelFill5" class="image">
 <img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill5.png" alt="Proceed through the voxel facing the back from the direction of filling the voxel, and reach the outside of the mesh again">
-<p class="caption">
-図1.14: ボクセルを埋める方向から背面を向いているボクセルの中を進んでいき、またメッシュの外に到達する
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.14: Proceed through the voxel facing backwards from the direction of filling the voxel and then out of the mesh
+</font></font></p>
 </div>
 
-<h4><a id="h1-2-6-2"></a>ボクセルを埋める実装</h4>
-<p>前項で決めたようにforward(0, 0, 1)方向に向かって内部を埋めていくので、3次元ボクセル配列ではz方向に向かって内部を埋めていくことになります。</p>
-<p>z方向の一番手前側、volume[x, y, 0]からはじめてvolume[x, y, depth - 1]まで中身を埋める処理を進めます。</p>
+<h4><a id="h1-2-6-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Implementation to fill voxels</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As determined in the previous section, the inside is filled in the forward (0, 0, 1) direction, so in a 3D voxel array, the inside is filled in the z direction.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The process of filling the contents starts from volume [x, y, 0] on the front side in the z direction and proceeds to volume [x, y, depth -1].</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">// メッシュの内部を埋める<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Fill the inside of the mesh</font></font><font></font>
 for(int x = 0; x &lt; width; x++)<font></font>
 {<font></font>
     for(int y = 0; y &lt; height; y++)<font></font>
-    {<font></font>
-        // z方向の手前側から奥に向かってメッシュ内部を埋めていく<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Fill the inside of the mesh from the front side in the z direction to the back side</font></font><font></font>
         for(int z = 0; z &lt; depth; z++)<font></font>
         {<font></font>
             ...<font></font>
@@ -583,58 +576,58 @@ for(int x = 0; x &lt; width; x++)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>既にボクセルデータに書き込まれてあるfrontフラグ（z方向に向かって前面か背面か）を基に、前述のボクセルを埋める流れに沿って処理を進めます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Based on the front flag (front or back in the z direction) already written in the voxel data, the process proceeds according to the above-mentioned flow of filling voxels.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">...<font></font>
-// z方向の手前側から奥に向かってメッシュ内部を埋めていく<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist">...<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Fill the inside of the mesh from the front side in the z direction to the back side</font></font><font></font>
 for(int z = 0; z &lt; depth; z++)<font></font>
-{<font></font>
-    // (x, y, z)が空の場合は無視<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Ignore if (x, y, z) is empty</font></font><font></font>
     if (volume[x, y, z].IsEmpty()) continue;<font></font>
-<font></font>
-    // 前面に位置するボクセルを進む<font></font>
-    int ifront = z;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Go through the voxels located in front</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int ifront = z;</font></font></font></font><font></font>
     for(; ifront &lt; depth &amp;&amp; volume[x, y, ifront].IsFrontFace(); ifront++) {}<font></font>
-<font></font>
-    // 最後までいけば終わり<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // If you go to the end, it's over</font></font><font></font>
     if(ifront &gt;= depth) break;<font></font>
-<font></font>
-    // 背面に位置するボクセルを探す<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Find the voxels located on the back</font></font><font></font>
     int iback = ifront;<font></font>
-<font></font>
-    // メッシュ内部を進んでいく<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Go inside the mesh</font></font><font></font>
     for (; iback &lt; depth &amp;&amp; volume[x, y, iback].IsEmpty(); iback++) {}<font></font>
-<font></font>
-    // 最後までいけば終わり<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // If you go to the end, it's over</font></font></font></font><font></font>
     if (iback &gt;= depth) break;<font></font>
-<font></font>
-    // (x, y, iback)が背面かどうかを判定<font></font>
-    if(volume[x, y, iback].IsBackFace()) {<font></font>
-        // 背面に位置するボクセルを進む<font></font>
-        for (; iback &lt; depth &amp;&amp; volume[x, y, iback].IsBackFace(); iback++) {}<font></font>
-    }<font></font>
-<font></font>
-    // (x, y, ifront)から(x, y, iback)の位置までボクセルを埋める<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Determine if (x, y, iback) is on the back</font></font><font></font>
+    if(volume[x, y, iback].IsBackFace()) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Follow the voxels located on the back</font></font><font></font>
+        for (; iback &lt; depth &amp;&amp; volume[x, y, iback].IsBackFace(); iback++) {}<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Fill voxels from (x, y, ifront) to (x, y, iback)</font></font><font></font>
     for(int z2 = ifront; z2 &lt; iback; z2++)<font></font>
-    {<font></font>
-        var p = boxes[x, y, z2].center;<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        var p = boxes [x, y, z2] .center;</font></font></font></font><font></font>
         var voxel = volume[x, y, z2];<font></font>
         voxel.position = p;<font></font>
         voxel.fill = 1;<font></font>
         volume[x, y, z2] = voxel;<font></font>
     }<font></font>
-<font></font>
-    // 処理し終えた(x, y, iback)までループを進める<font></font>
-    z = iback;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Proceed through the loop until it finishes processing (x, y, iback)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    z = iback;</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>ここまででメッシュの中身を充填したボクセルデータを得ることができました。</p>
-<p>処理し終えた3次元のボクセルデータの中には、空のボクセルが含まれているため、CPUVoxelizer.Voxelizeではメッシュの表面と充填された中身を構成するボクセルのみを返すようにしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Up to this point, we have obtained voxel data filled with the contents of the mesh.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the processed 3D voxel data contains empty voxels, CPUVoxelizer.Voxelize returns only the voxels that make up the surface of the mesh and the filled contents.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CPUVoxelizer.cs</p>
-<pre class="emlist">// 空でないボクセルを取得する<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Get non-empty voxels</font></font><font></font>
 voxels = new List&lt;Voxel_t&gt;();<font></font>
 for(int x = 0; x &lt; width; x++) {<font></font>
     for(int y = 0; y &lt; height; y++) {<font></font>
@@ -643,29 +636,29 @@ for(int x = 0; x &lt; width; x++) {<font></font>
             {<font></font>
                 voxels.Add(volume[x, y, z]);<font></font>
             }<font></font>
-        }<font></font>
-    }<font></font>
-}<font></font>
+        }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>CPUVoxelizerTest.csで、CPUVoxelizerで得たボクセルデータを用いてメッシュを構築し、ボクセルを可視化しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In CPUVoxelizerTest.cs, a mesh is constructed using the voxel data obtained by CPUVoxelizer, and the voxels are visualized.</font></font></p>
 <div id="id_Nakamura_2FCPUVoxelizerTest" class="image">
-<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/CPUVoxelizerTest.png" alt="CPUVoxelizer.Voxelizeで得たボクセルデータをMeshにして可視化したデモ（CPUVoxelizerTest.scene）">
-<p class="caption">
-図1.15: CPUVoxelizer.Voxelizeで得たボクセルデータをMeshにして可視化したデモ（CPUVoxelizerTest.scene）
-</p>
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/CPUVoxelizerTest.png" alt="Demonstration of visualization of voxel data obtained by CPUVoxelizer.Voxelize as a mesh (CPUVoxelizerTest.scene)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.15: Demo of voxel data obtained by CPUVoxelizer.Voxelize visualized as a mesh (CPUVoxelizerTest.scene)
+</font></font></p>
 </div>
 
-<h2><a id="h1-3"></a><span class="secno">1.3　</span>ボクセルのメッシュ表現</h2>
-<p>ボクセルデータの配列Voxel_t[]と、一つのボクセルの単位長さの情報を基にメッシュを構築する処理をVoxelMeshクラスに記述しています。</p>
-<p>前節のCPUVoxelizerTest.csではこのクラスを用いてボクセルメッシュの生成を行っています。</p>
+<h2><a id="h1-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Voxel mesh representation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The VoxelMesh class describes the process of constructing a mesh based on the voxel data array Voxel_t [] and the unit length information of one voxel.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizerTest.cs in the previous section uses this class to generate voxel mesh.</font></font></p>
 <div class="emlist-code">
-<p class="caption">VoxelMesh.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">VoxelMesh.cs</font></font></font></font></p>
 <pre class="emlist">public class VoxelMesh {<font></font>
 <font></font>
     public static Mesh Build (Voxel_t[] voxels, float size)<font></font>
-    {<font></font>
-        var hsize = size * 0.5f;<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        var hsize = size * 0.5f;</font></font></font></font><font></font>
         var forward = Vector3.forward * hsize;<font></font>
         var back = -forward;<font></font>
         var up = Vector3.up * hsize;<font></font>
@@ -682,8 +675,8 @@ for(int x = 0; x &lt; width; x++) {<font></font>
             if(voxel[i].fill == 0) continue;<font></font>
 <font></font>
             var p = voxels[i].position;<font></font>
-<font></font>
-            // 一つのボクセルを表現するCubeを構成する8隅の頂点<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // The vertices of the eight corners that make up the Cube that represents one voxel</font></font><font></font>
             var corners = new Vector3[8] {<font></font>
                 p + forward + left + up,<font></font>
                 p + back + left + up,<font></font>
@@ -695,25 +688,25 @@ for(int x = 0; x &lt; width; x++) {<font></font>
                 p + back + right + down,<font></font>
                 p + forward + right + down,<font></font>
             };<font></font>
-<font></font>
-            // Cubeを構成する6面を構築する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Build the 6 faces that make up the Cube</font></font><font></font>
 <font></font>
             // up<font></font>
             AddTriangle(<font></font>
                 corners[0], corners[3], corners[1],<font></font>
                 up, vertices, normals, triangles<font></font>
-            );<font></font>
-            AddTriangle(<font></font>
-                corners[2], corners[1], corners[3],<font></font>
-                up, vertices, normals, triangles<font></font>
-            );<font></font>
+            );<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
+                corners[2], corners[1], corners[3],<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                up, vertices, normals, triangles</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font>
 <font></font>
-            // down<font></font>
-            AddTriangle(<font></font>
+            // down<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
                 corners[4], corners[5], corners[7],<font></font>
-                down, vertices, normals, triangles<font></font>
-            );<font></font>
-            AddTriangle(<font></font>
+                down, vertices, normals, triangles<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
                 corners[6], corners[7], corners[5],<font></font>
                 down, vertices, normals, triangles<font></font>
             );<font></font>
@@ -721,48 +714,48 @@ for(int x = 0; x &lt; width; x++) {<font></font>
             // right<font></font>
             AddTriangle(<font></font>
                 corners[7], corners[6], corners[3],<font></font>
-                right, vertices, normals, triangles<font></font>
-            );<font></font>
-            AddTriangle(<font></font>
-                corners[2], corners[3], corners[6],<font></font>
-                right, vertices, normals, triangles<font></font>
-            );<font></font>
+                right, vertices, normals, triangles<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
+                corners[2], corners[3], corners[6],<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                right, vertices, normals, triangles</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font>
 <font></font>
-            // left<font></font>
-            AddTriangle(<font></font>
+            // left<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
                 corners[5], corners[4], corners[1],<font></font>
-                left, vertices, normals, triangles<font></font>
-            );<font></font>
-            AddTriangle(<font></font>
-                corners[0], corners[1], corners[4],<font></font>
-                left, vertices, normals, triangles<font></font>
-            );<font></font>
+                left, vertices, normals, triangles<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
+                corners[0], corners[1], corners[4],<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                left, vertices, normals, triangles</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font>
 <font></font>
-            // forward<font></font>
-            AddTriangle(<font></font>
+            // forward<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
                 corners[4], corners[7], corners[0],<font></font>
-                forward, vertices, normals, triangles<font></font>
-            );<font></font>
-            AddTriangle(<font></font>
-                corners[3], corners[0], corners[7],<font></font>
-                forward, vertices, normals, triangles<font></font>
-            );<font></font>
+                forward, vertices, normals, triangles<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
+                corners[3], corners[0], corners[7],<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                forward, vertices, normals, triangles</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font>
 <font></font>
-            // back<font></font>
-            AddTriangle(<font></font>
-                corners[6], corners[5], corners[2],<font></font>
-                forward, vertices, normals, triangles<font></font>
-            );<font></font>
-            AddTriangle(<font></font>
-                corners[1], corners[2], corners[5],<font></font>
-                forward, vertices, normals, triangles<font></font>
-            );<font></font>
+            // back<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
+                corners[6], corners[5], corners[2],<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                forward, vertices, normals, triangles</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            AddTriangle(</font></font></font></font><font></font>
+                corners[1], corners[2], corners[5],<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                forward, vertices, normals, triangles</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            );</font></font></font></font><font></font>
         }<font></font>
-<font></font>
-        var mesh = new Mesh();<font></font>
-        mesh.SetVertices(vertices);<font></font>
-<font></font>
-        // 頂点数が16bitでサポートできる数を超えていたら32bit index formatを適用する<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        var mesh = new Mesh ();</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        mesh.SetVertices (vertices);</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Apply 32bit index format if the number of vertices exceeds the number that can be supported by 16bit</font></font><font></font>
         mesh.indexFormat =<font></font>
             (vertices.Count &lt;= 65535)<font></font>
             ? IndexFormat.UInt16 : IndexFormat.UInt32;<font></font>
@@ -775,26 +768,26 @@ for(int x = 0; x &lt; width; x++) {<font></font>
 </pre>
 </div>
 
-<h2><a id="h1-4"></a><span class="secno">1.4　</span>GPUでの実装</h2>
-<p>ここからはGPUを用いてCPUVoxelizerで実装したボクセル化をより高速に実行する方法について解説します。</p>
-<p>CPUVoxelizerで実装したボクセル化のアルゴリズムは、XY平面上でボクセルの単位長さで区切られた格子空間上の各座標ごとに並列化することができます。</p>
+<h2><a id="h1-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation on GPU</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From here, I will explain how to execute voxelization implemented by CPU Voxelizer faster using GPU.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The voxelization algorithm implemented by CPUVoxelizer can be parallelized for each coordinate in the lattice space separated by the unit length of voxels on the XY plane.</font></font></p>
 <div id="id_Nakamura_2FParallelization" class="image">
-<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/Parallelization.png" alt="XY平面上でボクセルの単位長さで区切られた格子空間　ボクセル化はこの各格子ごとに並列化できるのでGPU実装が可能">
-<p class="caption">
-図1.16: XY平面上でボクセルの単位長さで区切られた格子空間　ボクセル化はこの各格子ごとに並列化できるのでGPU実装が可能
-</p>
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/Parallelization.png" alt="Lattice space delimited by unit length of voxels on the XY plane GPU implementation is possible because voxelization can be parallelized for each of these lattices.">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.16: Lattice space delimited by unit length of voxels on the XY plane. Voxelization can be parallelized for each lattice, so GPU implementation is possible.
+</font></font></p>
 </div>
-<p>並列化できるそれぞれの処理をGPUスレッドに割り振れば、GPUの高速な並列計算の恩恵により、高速に処理が実行できます。</p>
-<p>GPUでのボクセル化の実装はGPUVoxelizer.csとVoxelizer.computeに記述しています。</p>
-<p>（本節から登場する、UnityでGPGPUプログラミングをする上で欠かせないComputeShaderの基本についてはUnity Graphics Programming vol.1「ComputeShader入門」で解説しています）</p>
-<p>GPUでのボクセル化は、GPUVoxelizerクラスのstatic関数</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you allocate each process that can be parallelized to the GPU thread, you can execute the process at high speed thanks to the high-speed parallel computing of the GPU.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The implementation of voxelization on GPU is described in GPU Boxelizer.cs and Voxelizer.compute.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(The basics of Compute Shader, which appears in this section and is indispensable for GPGPU programming in Unity, are explained in Unity Graphics Programming vol.1 "Introduction to Compute Shader")</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voxelization on GPU is a static function of GPUVoxelizer class</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
 <pre class="emlist">public class GPUVoxelizer<font></font>
 {<font></font>
     public static GPUVoxelData Voxelize (<font></font>
-        ComputeShader voxelizer,<font></font>
-        Mesh mesh,<font></font>
+        ComputeShader voxelizer,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Mesh mesh,</font></font></font></font><font></font>
         int resolution<font></font>
     ) {<font></font>
     ...<font></font>
@@ -802,18 +795,18 @@ for(int x = 0; x &lt; width; x++) {<font></font>
 }<font></font>
 </pre>
 </div>
-<p>をコールすることで実行します。引数にVoxelizer.compute、ボクセル化したいメッシュ、解像度を指定して実行すると、ボクセルデータを示すGPUVoxelDataを返します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Execute by calling. </font><font style="vertical-align: inherit;">When executed with Voxelizer.compute, the mesh to be voxelized, and the resolution specified as arguments, GPUVoxelData indicating voxel data is returned.</font></font></p>
 
-<h3><a id="h1-4-1"></a><span class="secno">1.4.1　</span>GPUでのボクセル生成に必要なデータのセットアップ</h3>
-<p>ボクセル化の大まかな流れ(1) ~ (3)と同じようにして、ボクセル生成に必要なデータのセットアップを行います。</p>
+<h3><a id="h1-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4.1 Setting　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> up the data required for voxel generation on the GPU</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Follow the general flow of voxelization (1) to (3) to set up the data required for voxel generation.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
 <pre class="emlist">public static GPUVoxelData Voxelize (<font></font>
-    ComputeShader voxelizer,<font></font>
-    Mesh mesh,<font></font>
+    ComputeShader voxelizer,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    Mesh mesh,</font></font></font></font><font></font>
     int resolution<font></font>
-) {<font></font>
-    // CPUVoxelizer.Voxelizeと同じ処理 -------<font></font>
+) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Same process as CPUVoxelizer.Voxelize -------</font></font><font></font>
     mesh.RecalculateBounds();<font></font>
     var bounds = mesh.bounds;<font></font>
 <font></font>
@@ -822,94 +815,94 @@ for(int x = 0; x &lt; width; x++) {<font></font>
         Mathf.Max(bounds.size.y, bounds.size.z)<font></font>
     );<font></font>
     var unit = maxLength / resolution;<font></font>
-<font></font>
-    var hunit = unit * 0.5f;<font></font>
-<font></font>
-    var start = bounds.min - new Vector3(hunit, hunit, hunit);<font></font>
-    var end = bounds.max + new Vector3(hunit, hunit, hunit);<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var hunit = unit * 0.5f;</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var start = bounds.min - new Vector3 (unit, unit, unit);</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var end = bounds.max + new Vector3 (unit, unit, unit);</font></font><font></font>
     var size = end - start;<font></font>
 <font></font>
     int width = Mathf.CeilToInt(size.x / unit);<font></font>
     int height = Mathf.CeilToInt(size.y / unit);<font></font>
-    int depth = Mathf.CeilToInt(size.z / unit);<font></font>
-    // ------- ここまでCPUVoxelizer.Voxelizeと同じ<font></font>
+    int depth = Mathf.CeilToInt(size.z / unit);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // ------- So far the same as CPUVoxelizer.Voxelize</font></font><font></font>
     ...<font></font>
 }<font></font>
 </pre>
 </div>
-<p>Voxel_tの配列は、GPU上で扱えるようにするためにComputeBufferとして定義します。ここで注意したいのが、CPU実装だと3次元配列として生成したVoxel_t配列を1次元配列として定義していることです。</p>
-<p>これは、GPUでは多次元配列を扱うのが困難なためで、1次元配列として定義しておき、ComputeShader内では3次元上の位置(x, y, z)から1次元配列上のindexを取得することで、1次元配列を3次元配列のように処理しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The array of Voxel_t is defined as ComputeBuffer so that it can be handled on the GPU. </font><font style="vertical-align: inherit;">The point to note here is that the Voxel_t array generated as a 3D array is defined as a 1D array in the CPU implementation.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is because it is difficult for GPUs to handle multidimensional arrays, so define it as a one-dimensional array and get the index on the one-dimensional array from the three-dimensional position (x, y, z) in Compute Shader. By doing so, the one-dimensional array is processed like a three-dimensional array.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
-<pre class="emlist">// Voxel_t配列を表すComputeBufferを生成<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Generate a ComputeBuffer representing a Voxel_t array</font></font><font></font>
 var voxelBuffer = new ComputeBuffer(<font></font>
     width * height * depth,<font></font>
     Marshal.SizeOf(typeof(Voxel_t))<font></font>
 );<font></font>
-var voxels = new Voxel_t[voxelBuffer.count];<font></font>
-voxelBuffer.SetData(voxels); // 初期化<font></font>
+var voxels = new Voxel_t[voxelBuffer.count];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+voxelBuffer.SetData (voxels); // Initialize</font></font><font></font>
 </pre>
 </div>
-<p>これらセットアップしたデータをGPU側に転送します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Transfer these set up data to the GPU side.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
-<pre class="emlist">// ボクセルデータをGPU側に転送<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Transfer voxel data to GPU side</font></font><font></font>
 voxelizer.SetVector("_Start", start);<font></font>
 voxelizer.SetVector("_End", end);<font></font>
 voxelizer.SetVector("_Size", size);<font></font>
 <font></font>
 voxelizer.SetFloat("_Unit", unit);<font></font>
-voxelizer.SetFloat("_InvUnit", 1f / unit);<font></font>
-voxelizer.SetFloat("_HalfUnit", hunit);<font></font>
+voxelizer.SetFloat("_InvUnit", 1f / unit);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+voxelizer.SetFloat ("_ HalfUnit", unit);</font></font><font></font>
 voxelizer.SetInt("_Width", width);<font></font>
 voxelizer.SetInt("_Height", height);<font></font>
 voxelizer.SetInt("_Depth", depth);<font></font>
 </pre>
 </div>
-<p>メッシュを構成する三角形とボクセル同士の交差判定を行うため、メッシュを表すComputeBufferを生成します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Generate a Compute Buffer that represents the mesh in order to determine the intersection of the triangles and voxels that make up the mesh.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
-<pre class="emlist">// メッシュの頂点配列を表すComputeBufferを生成<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Generate a ComputeBuffer that represents the vertex array of the mesh</font></font><font></font>
 var vertices = mesh.vertices;<font></font>
 var vertBuffer = new ComputeBuffer(<font></font>
     vertices.Length,<font></font>
     Marshal.SizeOf(typeof(Vector3))<font></font>
 );<font></font>
 vertBuffer.SetData(vertices);<font></font>
-<font></font>
-// メッシュの三角形配列を表すComputeBufferを生成<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Generate a ComputeBuffer that represents a triangular array of meshes</font></font><font></font>
 var triangles = mesh.triangles;<font></font>
 var triBuffer = new ComputeBuffer(<font></font>
     triangles.Length,<font></font>
-    Marshal.SizeOf(typeof(int))<font></font>
-);<font></font>
+    Marshal.SizeOf(typeof(int))<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+);</font></font></font></font><font></font>
 triBuffer.SetData(triangles);<font></font>
 </pre>
 </div>
 
-<h3><a id="h1-4-2"></a><span class="secno">1.4.2　</span>GPUでメッシュの表面に位置するボクセルを生成する</h3>
-<p>GPUでメッシュの表面に位置するボクセルを生成する処理では、前面を向いている三角形と交差しているボクセルを生成した後で、背面を向いている三角形と交差しているボクセルを生成します。</p>
-<p>これは、同じ位置のボクセルに対して複数の三角形が交差している場合に、ボクセルに書き込まれるfrontフラグの値が一意に定まらない恐れがあるためです。</p>
-<p>GPUの並列計算で気をつけないといけないのは、同じデータに複数のスレッドが同時にアクセスしてしまうことによる、結果の不定性です。</p>
-<p>この表面を生成する処理においては、frontフラグの値が背面（false）であることを優先し、前面→背面という順でボクセル生成を実行することで結果の不定性を防いでいます。</p>
-<p>前面を向いている三角形と交差しているボクセルを生成するGPUカーネルSurfaceFrontに、先ほど生成したメッシュデータを転送します。</p>
+<h3><a id="h1-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Generate voxels located on the surface of the mesh on the GPU</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the process of generating voxels located on the surface of the mesh on the GPU, after generating voxels that intersect the front-facing triangle, the voxels that intersect the back-facing triangle are generated.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is because the value of the front flag written to the voxel may not be uniquely determined when multiple triangles intersect for the voxel at the same position.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">One thing to keep in mind when using GPU parallel computing is the indefiniteness of the results due to multiple threads accessing the same data at the same time.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the process of generating this surface, priority is given to the value of the front flag being the back (false), and voxel generation is executed in the order of front → back to prevent indeterminacy of the result.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Transfer the mesh data you just generated to the GPU kernel SurfaceFront, which creates voxels that intersect the front-facing triangles.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
-<pre class="emlist">// GPUカーネルSurfaceFrontにメッシュデータを転送<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Transfer mesh data to GPU kernel SurfaceFront</font></font><font></font>
 var surfaceFrontKer = new Kernel(voxelizer, "SurfaceFront");<font></font>
 voxelizer.SetBuffer(surfaceFrontKer.Index, "_VoxelBuffer", voxelBuffer);<font></font>
 voxelizer.SetBuffer(surfaceFrontKer.Index, "_VertBuffer", vertBuffer);<font></font>
 voxelizer.SetBuffer(surfaceFrontKer.Index, "_TriBuffer", triBuffer);<font></font>
-<font></font>
-// メッシュを構成する三角形の数を設定<font></font>
-var triangleCount = triBuffer.count / 3; // (三角形を構成する頂点indexの数 / 3)が三角形の数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Set the number of triangles that make up the mesh</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var triangleCount = triBuffer.count / 3; // (the number of vertex indexes that make up the triangle / 3) is the number of triangles</font></font><font></font>
 voxelizer.SetInt("_TriangleCount", triangleCount);<font></font>
 </pre>
 </div>
-<p>この処理はメッシュを構成する三角形ごとに並列に実行します。全ての三角形が処理されるように、カーネルのスレッドグループを(三角形の数triangleCount / カーネルのスレッド数 + 1, 1, 1)に設定し、カーネルを実行します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This process is performed in parallel for each triangle that makes up the mesh. </font><font style="vertical-align: inherit;">Set the kernel thread group to (triangleCount / number of kernel threads + 1, 1, 1) so that all triangles are processed and run the kernel.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
-<pre class="emlist">// 前面を向いている三角形と交差するボクセルを構築<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Build a voxel that intersects a front-facing triangle</font></font><font></font>
 voxelizer.Dispatch(<font></font>
     surfaceFrontKer.Index,<font></font>
     triangleCount / (int)surfaceFrontKer.ThreadX + 1,<font></font>
@@ -918,30 +911,30 @@ voxelizer.Dispatch(<font></font>
 );<font></font>
 </pre>
 </div>
-<p>SurfaceFrontカーネルは前面を向いている三角形のみを処理するため、三角形の前面背面をチェックし、背面である場合はそのまま処理を終了するようにreturnし、前面である場合はメッシュ表面を構築するsurface関数を実行しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the SurfaceFront kernel only processes triangles that are facing the front, it checks the front and back of the triangle, returns to finish the process if it is the back, and builds the mesh surface if it is the front. Is running.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Voxelizer.compute</p>
 <pre class="emlist">[numthreads(8, 1, 1)]<font></font>
 void SurfaceFront (uint3 id : SV_DispatchThreadID)<font></font>
-{<font></font>
-    // 三角形の数を超えているとreturn<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // return if the number of triangles is exceeded</font></font><font></font>
     int idx = (int)id.x;<font></font>
     if(idx &gt;= _TriangleCount) return;<font></font>
-<font></font>
-    // 三角形の頂点位置と前面背面フラグを取得<font></font>
-    float3 va, vb, vc;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Get the vertex position of the triangle and the front and back flags</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 va, vb, vc;</font></font></font></font><font></font>
     bool front;<font></font>
     get_triangle(idx, va, vb, vc, front);<font></font>
-<font></font>
-    // 背面である場合はreturn<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // return if it is on the back</font></font><font></font>
     if (!front) return;<font></font>
-<font></font>
-    // メッシュ表面を構築<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Build a mesh surface</font></font><font></font>
     surface(va, vb, vc, front);<font></font>
 }<font></font>
 </pre>
 </div>
-<p>get_triangle関数は、CPUからGPU側に渡されたメッシュデータ（三角形を構成する頂点indexを表す_TriBufferと頂点を表す_VertBuffer）に基づいて、三角形の頂点位置と前面背面フラグを取得します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The get_triangle function gets the vertex position and front / back flag of the triangle based on the mesh data (_TriBuffer representing the vertex index that constitutes the triangle and _VertBuffer representing the vertex) passed from the CPU to the GPU side.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Voxelizer.compute</p>
 <pre class="emlist">void get_triangle(<font></font>
@@ -953,24 +946,24 @@ void SurfaceFront (uint3 id : SV_DispatchThreadID)<font></font>
     int ia = _TriBuffer[idx * 3];<font></font>
     int ib = _TriBuffer[idx * 3 + 1];<font></font>
     int ic = _TriBuffer[idx * 3 + 2];<font></font>
-<font></font>
-    va = _VertBuffer[ia];<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    va = _VertBuffer [ia];</font></font></font></font><font></font>
     vb = _VertBuffer[ib];<font></font>
     vc = _VertBuffer[ic];<font></font>
-<font></font>
-    // 三角形がforward(0, 0, 1)方向から見て前面か背面かを判断<font></font>
-    float3 normal = cross((vb - va), (vc - vb));<font></font>
-    front = dot(normal, float3(0, 0, 1)) &lt; 0;<font></font>
-}<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Determine if the triangle is front or back when viewed from the forward (0, 0, 1) direction</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 normal = cross ((vb - va), (vc - vb));</font></font></font></font><font></font>
+    front = dot(normal, float3(0, 0, 1)) &lt; 0;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>ボクセルと三角形との交差判定を行い、その結果をボクセルデータに書き込むsurface関数は、1次元配列として生成したボクセルデータのindexを取得する手間があれど、その処理の内容はCPUVoxelizer上に実装したものとほぼ同じものになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The surface function that determines the intersection of a voxel and a triangle and writes the result to the voxel data takes time to acquire the index of the voxel data generated as a one-dimensional array, but the content of the process is implemented on the CPU Voxelizer. It will be almost the same as.</font></font></p>
 <div class="emlist-code">
-<p class="caption">Voxelizer.compute</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voxelizer.compute</font></font></font></font></p>
 <pre class="emlist">void surface (float3 va, float3 vb, float3 vc, bool front)<font></font>
-{<font></font>
-    // 三角形のAABBを計算<font></font>
-    float3 tbmin = min(min(va, vb), vc);<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Calculate the triangle AABB</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 tbmin = min (min (va, vb), vc);</font></font></font></font><font></font>
     float3 tbmax = max(max(va, vb), vc);<font></font>
 <font></font>
     float3 bmin = tbmin - _Start;<font></font>
@@ -987,20 +980,20 @@ void SurfaceFront (uint3 id : SV_DispatchThreadID)<font></font>
     imaxX = clamp(imaxX, 0, _Width - 1);<font></font>
     imaxY = clamp(imaxY, 0, _Height - 1);<font></font>
     imaxZ = clamp(imaxZ, 0, _Depth - 1);<font></font>
-<font></font>
-    // 三角形のAABBの中でボクセルとの交差判定を行う<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Judge the intersection with voxels in the triangular AABB</font></font><font></font>
     for(int x = iminX; x &lt;= imaxX; x++) {<font></font>
         for(int y = iminY; y &lt;= imaxY; y++) {<font></font>
-            for(int z = iminZ; z &lt;= imaxZ; z++) {<font></font>
-                // (x, y, z)に位置するボクセルのAABBを生成<font></font>
-                float3 center = float3(x, y, z) * _Unit + _Start;<font></font>
-                AABB aabb;<font></font>
-                aabb.min = center - _HalfUnit;<font></font>
+            for(int z = iminZ; z &lt;= imaxZ; z++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // Generate AABB for voxels located at (x, y, z)</font></font><font></font>
+                float3 center = float3(x, y, z) * _Unit + _Start;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                AABB aabb;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                aabb.min = center - _HalfUnit;</font></font></font></font><font></font>
                 aabb.center = center;<font></font>
                 aabb.max = center + _HalfUnit;<font></font>
                 if(intersects_tri_aabb(va, vb, vc, aabb))<font></font>
-                {<font></font>
-                    // (x, y, z)の位置から1次元のボクセル配列のindexを取得<font></font>
+                {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    // Get the index of a one-dimensional voxel array from the position of (x, y, z)</font></font><font></font>
                     uint vid = get_voxel_index(x, y, z);<font></font>
                     Voxel voxel = _VoxelBuffer[vid];<font></font>
                     voxel.position = get_voxel_position(x, y, z);<font></font>
@@ -1014,10 +1007,10 @@ void SurfaceFront (uint3 id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>これで前面を向いている三角形についてボクセルが生成できたので、次は背面を向いている三角形について処理していきます。</p>
-<p>背面を向いている三角形と交差するボクセルを生成するGPUカーネルSurfaceBackに先程と同じようにメッシュデータを転送し、実行します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now that we have generated voxels for the front-facing triangles, let's move on to the back-facing triangles.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Transfer the mesh data to the GPU kernel SurfaceBack, which generates voxels that intersect the triangle facing the back, and execute it as before.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
 <pre class="emlist">var surfaceBackKer = new Kernel(voxelizer, "SurfaceBack");<font></font>
 voxelizer.SetBuffer(surfaceBackKer.Index, "_VoxelBuffer", voxelBuffer);<font></font>
 voxelizer.SetBuffer(surfaceBackKer.Index, "_VertBuffer", vertBuffer);<font></font>
@@ -1030,7 +1023,7 @@ voxelizer.Dispatch(<font></font>
 );<font></font>
 </pre>
 </div>
-<p>SurfaceBackの処理は、三角形が前面を向いている場合にreturnを返す以外はSurfaceFrontと同じです。SurfaceFrontの後にSurfaceBackを実行することによって、もし前面を向いている三角形と背面を向いている三角形両方と交差しているボクセルが存在していても、ボクセルのfrontフラグがSurfaceBackによって上書きされる形になり、背面を向いていることが優先されるようになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The processing of SurfaceBack is the same as SurfaceFront except that it returns a return when the triangle is facing the front. </font><font style="vertical-align: inherit;">By running SurfaceBack after SurfaceFront, the voxel's front flag will be overridden by SurfaceBack, even if there are voxels that intersect both the front-facing triangle and the back-facing triangle. It will be prioritized to face the back.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Voxelizer.compute</p>
 <pre class="emlist">[numthreads(8, 1, 1)]<font></font>
@@ -1038,12 +1031,12 @@ void SurfaceBack (uint3 id : SV_DispatchThreadID)<font></font>
 {<font></font>
     int idx = (int)id.x;<font></font>
     if(idx &gt;= _TriangleCount) return;<font></font>
-<font></font>
-    float3 va, vb, vc;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 va, vb, vc;</font></font></font></font><font></font>
     bool front;<font></font>
     get_triangle(idx, va, vb, vc, front);<font></font>
-<font></font>
-    // 前面である場合はreturn<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // return if front</font></font><font></font>
     if (front) return;<font></font>
 <font></font>
     surface(va, vb, vc, front);<font></font>
@@ -1051,16 +1044,16 @@ void SurfaceBack (uint3 id : SV_DispatchThreadID)<font></font>
 </pre>
 </div>
 
-<h3><a id="h1-4-3"></a><span class="secno">1.4.3　</span>GPUでメッシュの表面を表すボクセルデータから、メッシュ内部に位置するボクセルを埋める</h3>
-<p>メッシュの内部を埋める処理はVolumeカーネルで行います。</p>
-<p>VolumeカーネルはXY平面上でボクセルの単位長さで区切られた格子空間上の各座標ごとにスレッドを用意して実行します。つまり、CPU実装だとXY座標について二重ループを実行していたところをGPUで並列化し、高速化しているということになります。</p>
+<h3><a id="h1-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Fill the voxels located inside the mesh from the voxel data representing the surface of the mesh on the GPU.</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The volume kernel is used to fill the inside of the mesh.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Volume kernel prepares and executes a thread for each coordinate in the lattice space separated by the unit length of voxels on the XY plane. </font><font style="vertical-align: inherit;">In other words, in the case of CPU implementation, the place where the double loop was executed for XY coordinates is parallelized by GPU and speeded up.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
-<pre class="emlist">// Volumeカーネルにボクセルデータを転送<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Transfer voxel data to Volume kernel</font></font><font></font>
 var volumeKer = new Kernel(voxelizer, "Volume");<font></font>
 voxelizer.SetBuffer(volumeKer.Index, "_VoxelBuffer", voxelBuffer);<font></font>
-<font></font>
-// メッシュ内部を埋める<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Fill the inside of the mesh</font></font><font></font>
 voxelizer.Dispatch(<font></font>
     volumeKer.Index,<font></font>
     width / (int)volumeKer.ThreadX + 1,<font></font>
@@ -1069,7 +1062,7 @@ voxelizer.Dispatch(<font></font>
 );<font></font>
 </pre>
 </div>
-<p>Volumeカーネルの実装はGPUVoxelizerに実装したものとほぼ同じものになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Volume kernel implementation is similar to the one implemented in GPU Foxelizer.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Voxelizer.compute</p>
 <pre class="emlist">[numthreads(8, 8, 1)]<font></font>
@@ -1082,59 +1075,59 @@ void Volume (uint3 id : SV_DispatchThreadID)<font></font>
 <font></font>
     for (int z = 0; z &lt; _Depth; z++)<font></font>
     {<font></font>
-        Voxel voxel = _VoxelBuffer[get_voxel_index(x, y, z)];<font></font>
-        // CPUVoxelizer.Voxelize内の処理とほぼ同じ処理が続く<font></font>
+        Voxel voxel = _VoxelBuffer[get_voxel_index(x, y, z)];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Almost the same processing as in CPUVoxelizer.Voxelize continues</font></font><font></font>
         ...<font></font>
     }<font></font>
 }<font></font>
 </pre>
 </div>
-<p>このようにしてボクセルデータが得られると、不要になったメッシュデータを破棄し、ボクセルのビジュアル表現をつくる際に必要なデータを持ったGPUVoxelDataを生成します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Once the voxel data is obtained in this way, it discards the mesh data that is no longer needed and generates GPUVoxel Data with the data needed to create the voxel visual representation.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUVoxelizer.cs</p>
-<pre class="emlist">// 不要になったメッシュデータを破棄<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUVoxelizer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Discard mesh data that is no longer needed</font></font><font></font>
 vertBuffer.Release();<font></font>
 triBuffer.Release();<font></font>
 <font></font>
 return new GPUVoxelData(voxelBuffer, width, height, depth, unit);<font></font>
 </pre>
 </div>
-<p>これでGPU実装によるボクセル化が完了しました。GPUVoxelizerTest.csで実際にGPUVoxelDataを用いてボクセルデータを可視化しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This completes voxelization by GPU implementation. </font><font style="vertical-align: inherit;">Voxel data is actually visualized using GPU VoxelData in GPUVoxelizerTest.cs.</font></font></p>
 
-<h2><a id="h1-5"></a><span class="secno">1.5　</span>CPU実装とGPU実装の速度差</h2>
-<p>テスト用のSceneではPlay時にVoxelizerを実行しているので、CPU実装とGPU実装の速度差がわかりにくいですが、GPU実装でかなりの高速化を実現しています。</p>
-<p>実行環境と、ボクセル化する対象のメッシュのポリゴン数、ボクセル化の解像度にパフォーマンスは大きく依存しますが、</p>
+<h2><a id="h1-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Speed ​​difference between CPU implementation and GPU implementation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the test scene, Voxelizer is executed at the time of Play, so it is difficult to understand the speed difference between CPU implementation and GPU implementation, but GPU implementation has achieved considerable speedup.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Performance depends greatly on the execution environment, the number of polygons in the mesh to be voxelized, and the resolution of voxelization.</font></font></p>
 <ul>
-<li>実行環境 OS: Windows10、CPU: Core i7、メモリ: 32GB、GPU: GeForce GTX 980</li>
-<li>頂点数 5319、三角形数 9761のメッシュ</li>
-<li>ボクセル化の解像度 256</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Execution environment OS: Windows10, CPU: Core i7, Memory: 32GB, GPU: GeForce GTX 980</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mesh with 5319 vertices and 9761 triangles</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voxelized resolution 256</font></font></li>
 </ul>
-<p>という条件では、GPU実装はCPU実装の50倍以上高速に動作しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Under these conditions, the GPU implementation is running 50 times faster than the CPU implementation.</font></font></p>
 
-<h2><a id="h1-6"></a><span class="secno">1.6　</span>応用例</h2>
-<p>GPU実装のParticleSystemを利用した応用例（GPUVoxelParticleSystem）を紹介します。</p>
-<p>GPUVoxelParticleSystemはGPUVoxelizerから得られたボクセルデータを表すComputeBufferを、ComputeShaderでのパーティクルの位置計算に利用します。</p>
+<h2><a id="h1-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Application example</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Introducing an application example (GPUVoxelParticleSystem) using the GPU-implemented ParticleSystem.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The GPU Voxel Particle System uses the Compute Buffer, which represents the voxel data obtained from the GPU Voxelizer, to calculate the position of particles in the Compute Shader.</font></font></p>
 <ol>
-<li>GPUVoxelizerでアニメーションモデルを毎フレームボクセル化</li>
-<li>GPUVoxelDataが持つComputeBufferを、パーティクルの位置計算を行うComputeShaderに渡す</li>
-<li>パーティクルをGPUインスタンシングで描画</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voxelize animation model every frame with GPU Voxelizer</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pass the ComputeBuffer of GPUVoxelData to the ComputeShader that calculates the position of particles.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Draw particles with GPU instancing</font></font></li>
 </ol>
-<p>という流れでエフェクトを作成しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I am creating an effect in the flow.</font></font></p>
 <div id="id_Nakamura_2FGPUVoxelParticleSystem3" class="image">
-<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/GPUVoxelParticleSystem3.png" alt="GPU実装のParticleSystemを利用した応用例（GPUVoxelParticleSystem）">
-<p class="caption">
-図1.17: GPU実装のParticleSystemを利用した応用例（GPUVoxelParticleSystem）
-</p>
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/GPUVoxelParticleSystem3.png" alt="Application example using ParticleSystem of GPU implementation (GPUVoxelParticleSystem)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.17: Application example using ParticleSystem of GPU implementation (GPUVoxelParticleSystem)
+</font></font></p>
 </div>
-<p>大量のパーティクルをボクセルの位置から出現させることで、パーティクルで構成されるアニメーションモデルのようなビジュアルを実現しています。</p>
-<p>アニメーションモデルに対してフレーム毎にボクセル化を施せるのは、GPU実装による高速化があってこそで、リアルタイムで利用できるビジュアル表現の幅を広げるためにも、こうしたGPUでの高速化は欠かせないものになっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By making a large number of particles appear from the voxel position, a visual like an animation model composed of particles is realized.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voxels can be applied to the animation model frame by frame only because of the speedup by implementing the GPU, and in order to expand the range of visual expressions that can be used in real time, such speedup on the GPU is indispensable. It has become a thing.</font></font></p>
 
-<h2><a id="h1-7"></a><span class="secno">1.7　</span>まとめ</h2>
-<p>本章では、メッシュモデルのボクセル化を行うアルゴリズムをCPU実装を例に紹介し、GPU実装によってボクセル化を高速化するところまで行いました。</p>
-<p>三角形とボクセルとの交差判定を用いてボクセルを生成するアプローチをとりましたが、平行投影によってモデルをXYZ方向から3Dテクスチャにレンダリングしていくことでボクセルデータを構築する方法もあります。</p>
-<p>本章で紹介した手法だと、ボクセル化後のモデルにどうテクスチャを貼るかといった点に課題がありますが、3Dテクスチャにモデルをレンダリングする手法であれば、ボクセルへの色付けはより手軽かつ正確に実現できるかもしれません。</p>
+<h2><a id="h1-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we introduced the algorithm for voxelizing the mesh model using CPU implementation as an example, and even speeded up voxelization by GPU implementation.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We took the approach of generating voxels using the intersection judgment of triangles and voxels, but there is also a method of constructing voxel data by rendering the model from the XYZ directions into a 3D texture by parallel projection.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The method introduced in this chapter has a problem in how to apply a texture to the voxelized model, but if the method renders the model to a 3D texture, coloring the voxels is easier and more accurate. You may be able to do it.</font></font></p>
 
-<h2><a id="h1-8"></a><span class="secno">1.8　</span>参考</h2>
+<h2><a id="h1-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
 <ul>
 <li>http://blog.wolfire.com/2009/11/Triangle-mesh-voxelization</li>
 <li>http://www.dyn4j.org/2010/01/sat/</li>
@@ -1144,4 +1137,4 @@ return new GPUVoxelData(voxelBuffer, width, height, depth, unit);<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

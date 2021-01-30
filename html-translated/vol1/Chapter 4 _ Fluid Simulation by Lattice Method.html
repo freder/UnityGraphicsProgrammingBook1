@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<!-- saved from url=(0075)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/sakota.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 4 _ Fluid Simulation by Lattice Method_files/style.scss">
   <meta name="generator" content="Re:VIEW">
-  <title>格子法による流体シミュレーション</title>
+  <title>Fluid simulation by grid method</title>
 
 			<style>
 				img {
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 4 _ Fluid Simulation by Lattice Method_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 4 _ Fluid Simulation by Lattice Method_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">Chapter 4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class=""> Fluid Simulation by Lattice Method</font></font></h1>
 
 <h2><a id="h4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> About this chapter</font></font></h2>
@@ -118,94 +111,94 @@
 <pre>\nabla \cdot \overrightarrow{u} = \nabla \cdot (u, v) = \dfrac{\partial u}{\partial x} + \dfrac{\partial v}{\partial y}
 </pre>
 </div>
-<p><span class="equation">\nabla</span>（ナブラ演算子）はベクトル微分演算子といいます。例えばベクトル場が2次元と想定した場合に、図のように<span class="equation"> \left( \dfrac {\partial } {\partial x}_, \dfrac {\partial } {\partial y} \right) </span>の偏微分を取る際の、偏微分の表記を簡略化した演算子として作用します。<span class="equation">\nabla</span>演算子は演算子ですので、それだけでは意味を持ちませんが、一緒に組み合わせる式が内積なのか、外積なのか、それとも単に<span class="equation">\nabla f</span>といった関数なのかで演算内容が変わってきます。<br>今回は偏微分の内積をとる「発散（ダイバージェンス）」について説明しておきましょう。まず、なぜこの式が「発散」という意味になるのかを見てみます。</p>
-<p>発散を理解する為に、まずは下記のような格子空間の一つのセルを切り出して考えてみましょう。</p>
+<p><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nabla</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (nabla operator) is called the vector differential operator. </font><font style="vertical-align: inherit;">For example, assuming that the vector field is two-dimensional, </font><font style="vertical-align: inherit;">the partial differential of </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ left (\ dfrac {\ partial} {\ partial x} _, \ dfrac {\ partial} {\ partial y} \ right)</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is </font><font style="vertical-align: inherit;">calculated as shown in the figure. </font><font style="vertical-align: inherit;">It acts as an operator that simplifies the notation of partial differential when taking. </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the \ nabla</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> operator is an operator, it has no meaning by itself, but the </font><font style="vertical-align: inherit;">operation content changes depending on </font><font style="vertical-align: inherit;">whether the expression to be combined together is an inner product, an outer product, or just a </font><font style="vertical-align: inherit;">function such as </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nabla f</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, let's explain "divergence" which takes the inner product of partial differential. </font><font style="vertical-align: inherit;">First, let's see why this formula means "divergence".</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In order to understand the divergence, let's first cut out one cell in the lattice space as shown below.</font></font></p>
 <div id="divergence-s" class="image">
-<img src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/divergence-s.png" alt="ベクトル場から微分区間（Δx,Δy）のセルを抽出" class="width-070per">
-<p class="caption">
-図4.1: ベクトル場から微分区間（Δx,Δy）のセルを抽出
-</p>
+<img src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/divergence-s.png" alt="Extract cells in the differential interval (Δx, Δy) from the vector field" class="width-070per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.1: Extracting cells in the differential interval (Δx, Δy) from the vector field
+</font></font></p>
 </div>
-<p>発散とは、ベクトル場の一つのセルにどれくらいのベクトルが流出、流入しているかを算出する事を言います。なお流出を＋、流入を−とします。</p>
-<p>発散は上記のように、ベクトル場のセルを切り取った際の偏微分をみた際に、x方向の特定のポイントxと微量に進んだ<span class="equation">\Delta x</span>との変化量、また、y方向の特定のポイントyと微量に進んだ<span class="equation">\Delta y</span>との変化量の内積で求める事ができます。なぜ偏微分との内積で流出が求まるかは、上記の図を微分演算する事で証明できます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Divergence is the calculation of how many vectors flow out and flow into one cell of a vector field. </font><font style="vertical-align: inherit;">The outflow is + and the inflow is-.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As mentioned above, the divergence is the </font><font style="vertical-align: inherit;">amount of change </font><font style="vertical-align: inherit;">between the specific point x in the x direction and the slightly advanced </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta x</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> when looking at the partial differential when the cell of the vector field is cut out, and the specific </font><font style="vertical-align: inherit;">amount in the y direction. It </font><font style="vertical-align: inherit;">can be calculated by the inner product of the amount of change between the </font><font style="vertical-align: inherit;">point y and the slightly advanced </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta y</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">The reason why the outflow can be obtained by the inner product with the partial differential can be proved by performing a differential operation on the above figure.</font></font></p>
 <div class="equation">
-<pre>\frac{i(x + \Delta x, y)\Delta y - i(x,y)\Delta y + j(x, y + \Delta y)\Delta x - j(x,y)\Delta x }{\Delta x \Delta y}
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ frac {i (x + \ Delta x, y) \ Delta y - i (x, y) \ Delta y + j (x, y + \ Delta y) \ Delta x - j (x, y) \ Delta x } {\ Delta x \ Delta y}
+</font></font></font></font></pre>
 </div>
 <div class="equation">
-<pre> = \frac{i(x+\Delta x, y) - i(x,y)}{\Delta x} + \frac{j(x, y+\Delta y) - j(x,y)}{\Delta y}
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> = \ frac {i (x + \ Delta x, y) - i (x, y)} {\ Delta x} + \ frac {j (x, y + \ Delta y) - j (x, y)} { \ Delta Y}
+</font></font></font></font></pre>
 </div>
-<p>上記の式から極限をとり、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Taking the limit from the above formula,</font></font></p>
 <div class="equation">
-<pre>\lim_{\Delta x \to 0} \frac{i(x+\Delta x, y) - i(x,y)}{\Delta x} + \lim_{\Delta y \to 0} \frac{j(x,y+\Delta y) - j(x,y)}{\Delta y} = \dfrac {\partial i} {\partial x} + \dfrac {\partial j} {\partial y}
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ lim _ {\ Delta x \ to 0} \ frac {i (x + \ Delta x, y) - i (x, y)} {\ Delta x} + \ lim _ {\ Delta y \ to 0} \ frac {j (x, y + \ Delta y) - j (x, y)} {\ Delta y} = \ dfrac {\ partial i} {\ partial x} + \ dfrac {\ partial j} {\ partial y }
+</font></font></font></font></pre>
 </div>
-<p>とする事で、最終的に偏微分との内積の式と等式になる事がわかります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By doing so, we can see that the final equation is the equation of the inner product with the partial derivative.</font></font></p>
 
-<h2><a id="h4-6"></a><span class="secno">4.6　</span>速度場</h2>
-<p>次に、格子法の本丸である速度場について説明していきます。その前に、速度場のナビエ・ストークス方程式を実装していくにあたって、先ほど確認した発散（divergence）に加え、勾配（gradient）とラプラシアン（Laplacian）について確認しておきましょう。</p>
+<h2><a id="h4-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Velocity field</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, I will explain the velocity field, which is the main body of the lattice method. </font><font style="vertical-align: inherit;">Before that, in implementing the Navier-Stokes equation of the velocity field, let's confirm the gradient and the Laplacian in addition to the divergence confirmed earlier.</font></font></p>
 
-<h3><a id="h4-6-1"></a><span class="secno">4.6.1　</span>勾配（Gradient）</h3>
+<h3><a id="h4-6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Gradient</font></font></h3>
 <div class="equation">
 <pre>\nabla f(x, y) = \left( \dfrac{\partial f}{\partial x}_,\dfrac{\partial f}{\partial y}\right)
 </pre>
 </div>
-<p><span class="equation">\nabla f (grad \ f)</span>は勾配を求める式となります。意味としては、各偏微分方向に微小に進んだ座標を、関数<span class="equation">f</span>にてサンプリングし、求められた各偏微分方向の値を合成する事によって、最終的にどのベクトルを向くのかを意味しています。つまり、偏微分した際の値の大きい方向に向いたベクトルを算出する事ができます。</p>
+<p><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nabla f (grad \ f)</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the formula for finding the gradient. </font><font style="vertical-align: inherit;">The meaning is </font><font style="vertical-align: inherit;">which vector is finally directed by sampling the </font><font style="vertical-align: inherit;">coordinates slightly advanced in each partial differential direction with the function </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">f</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and synthesizing the obtained values ​​in each partial differential direction. I will. </font><font style="vertical-align: inherit;">In other words, it is possible to calculate a vector that points in the direction of the larger value when partially differentiated.</font></font></p>
 
-<h3><a id="h4-6-2"></a><span class="secno">4.6.2　</span>ラプラシアン（Laplacian）</h3>
+<h3><a id="h4-6-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Laplacian</font></font></h3>
 <div class="equation">
 <pre>\Delta f = \nabla^2 f = \nabla \cdot \nabla f = \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2}
 </pre>
 </div>
-<p>ラプラシアンはナブラを上下反転させた記号で表されます。(デルタと同じですが、文脈から読み取り、間違えないようにしましょう。)<br><span class="equation">\nabla^2 f</span>、もしくは<span class="equation">\nabla \cdot \nabla f</span>とも書き、二階偏微分として演算されます。<br>また、解体して考えると、関数の勾配をとって、発散を求めた形とも取れるでしょう。<br>意味合い的に考えると、ベクトル場の中で勾配方向に集中した箇所は流入が多い為、発散をとった場合−に、逆に勾配の低い箇所は湧き出しが多いので発散を取った時に＋になる事が想像できます。<br>ラプラシアン演算子にはスカラーラプラシアンとベクトルラプラシアンがあり、ベクトル場に作用させる場合は、勾配・発散・回転（∇とベクトルの外積）を用いた、<br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Laplacian is represented by a symbol with the nabla turned upside down. </font><font style="vertical-align: inherit;">(Same as delta, but read from the context and make sure you don't make a mistake.) </font><font style="vertical-align: inherit;">Also write </font></font><br><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nabla ^ 2 f</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> or </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nabla \ cdot \ nabla f</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and it is calculated as the second derivative. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, if you think about it by disassembling it, you can take the form of finding the divergence by taking the gradient of the function. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In terms of meaning, in the vector field, the part concentrated in the gradient direction has a lot of inflow, so when the divergence is taken, the part with a low gradient has a lot of springing out, so when the divergence is taken, it becomes +. I can imagine that. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Laplacian operators include scalar Laplacian and vector Laplacian, and when acting on a vector field, gradient, divergence, and rotation (cross product of ∇ and vector) are used.</font></font><br></p>
 <div class="equation">
 <pre>\nabla^2 \overrightarrow{u} = \nabla \nabla \cdot \overrightarrow{u} - \nabla \times \nabla \times \overrightarrow{u}
 </pre>
 </div>
-<p>といった式で導くのですが、直交座標系の場合のみ、ベクトルの成分毎に勾配と発散を求め、合成する事で求める事ができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, only in the case of the Cartesian coordinate system, the gradient and divergence can be obtained for each component of the vector and can be obtained by combining them.</font></font></p>
 <div class="equation">
 <pre>\nabla^2 \overrightarrow{u} = \left(<font></font>
-\dfrac{\partial ^2 u_x}{\partial x^2}+\dfrac{\partial ^2 u_x}{\partial y^2}+\dfrac{\partial ^2 u_x}{\partial z^2}_,<font></font>
-\dfrac{\partial ^2 u_y}{\partial x^2}+\dfrac{\partial ^2 u_y}{\partial y^2}+\dfrac{\partial ^2 u_y}{\partial z^2}_,<font></font>
+\dfrac{\partial ^2 u_x}{\partial x^2}+\dfrac{\partial ^2 u_x}{\partial y^2}+\dfrac{\partial ^2 u_x}{\partial z^2}_,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+\ dfrac {\ partial ^ 2 u_y} {\ partial x ^ 2} + \ dfrac {\ partial ^ 2 u_y} {\ partial y ^ 2} + \ dfrac {\ partial ^ 2 u_y} {\ partial z ^ 2} _,</font></font></font></font><font></font>
 \dfrac{\partial ^2 u_z}{\partial x^2}+\dfrac{\partial ^2 u_z}{\partial y^2}+\dfrac{\partial ^2 u_z}{\partial z^2}<font></font>
 \right)<font></font>
 </pre>
 </div>
-<p>以上で、格子法でのナビエ・ストークス方程式を解くための必要な数式の確認は完了しました。ここから、速度場の方程式を各項ごとに見ていきましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This completes the confirmation of the mathematical formulas required to solve the Navier-Stokes equation in the grid method. </font><font style="vertical-align: inherit;">From here, let's look at the velocity field equation for each term.</font></font></p>
 
-<h3><a id="h4-6-3"></a><span class="secno">4.6.3　</span>ナビエ・ストークス方程式から速度場の確認</h3>
+<h3><a id="h4-6-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Confirmation of velocity field from Navier-Stokes equation</font></font></h3>
 <div class="equation">
 <pre>\dfrac {\partial \overrightarrow {u}} {\partial t}=-\left( \overrightarrow {u} \cdot \nabla \right) \overrightarrow {u} + \nu \nabla ^{2} \overrightarrow {u} + \overrightarrow {f}
 </pre>
 </div>
-<p>上記の内、<span class="equation">\overrightarrow {u}</span>は流速、<span class="equation">\nu</span>は動粘性係数（kinematic viscosity）、<span class="equation">\overrightarrow{f}</span>は外力（force）になります。<br>左辺側は時間で偏微分をとった際の流速である事がわかります。右辺側は第一項を移流項、第二項を拡散粘性項、第三項を圧力項、第四項を外力項とします。</p>
-<p>これらは、計算時には一括でできるものであっても、実装時にはステップに分けて実装して行く必要があります。<br>まず、ステップとして、外力を受けなければ、初期条件のまま変化を起こす事ができませんので、第四項の外力項から考えて見たいと思います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Of the above, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ overrightarrow {u}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the flow velocity, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nu</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the kinematic viscosity, and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ overrightarrow {f}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the external force (force). </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can see that the left side is the flow velocity when the partial differential is taken with respect to time. </font><font style="vertical-align: inherit;">On the right side, the first term is the advection term, the second term is the diffusion viscosity term, the third term is the pressure term, and the fourth term is the external force term.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Even if these can be done collectively at the time of calculation, it is necessary to implement them in steps at the time of implementation. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First of all, as a step, if you do not receive an external force, you cannot make a change under the initial conditions, so I would like to start with the external force term in the fourth term.</font></font></p>
 
-<h3><a id="h4-6-4"></a><span class="secno">4.6.4　</span>速度場外力項</h3>
-<p>これはシンプルに外部からのベクトルを加算する部分となります。つまり初期条件で速度場がベクトル量0の状態に対し、ベクトルの起点としてUIであったりなんらかのイベントから、RWTexture2Dの該当IDにベクトルを加算する部分となります。<br>コンピュートシェーダーの外力項のカーネルは、以下の様に実装しておきます。また、コンピュートシェーダーにて使用予定の各係数やバッファの定義も記述しておきます。</p>
+<h3><a id="h4-6-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6.4 External　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> force term of velocity field</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is simply the part that adds the vectors from the outside. </font><font style="vertical-align: inherit;">In other words, when the velocity field is 0 in the initial condition, the vector is added to the corresponding ID of RWTexture2D from the UI as the starting point of the vector or some event. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The kernel of the external force term of the compute shader is implemented as follows. </font><font style="vertical-align: inherit;">Also, describe the definitions of each coefficient and buffer that will be used in the compute shader.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist">float visc;                   //動粘性係数<font></font>
-float dt;                     //デルタタイム<font></font>
-float velocityCoef;           //速度場外力係数<font></font>
-float densityCoef;            //密度場外圧係数<font></font>
-<font></font>
-//xy = velocity, z = density, 描画シェーダに渡す流体ソルバー<font></font>
-RWTexture2D&lt;float4&gt; solver;<font></font>
-//density field, 密度場<font></font>
-RWTexture2D&lt;float&gt;  density;<font></font>
-//velocity field, 速度場<font></font>
-RWTexture2D&lt;float2&gt; velocity;<font></font>
-//xy = pre vel, z = pre dens. when project, x = p, y = div<font></font>
-//1ステップ前のバッファ保存、及び質量保存時の一時バッファ<font></font>
-RWTexture2D&lt;float3&gt; prev;<font></font>
-//xy = velocity source, z = density source 外力入力バッファ<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">float visc; //Dynamic viscosity coefficient</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float dt; // delta time</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float velocityCoef; //external force coefficient of velocity field</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float densityCoef; //Density outside pressure coefficient</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// xy = velocity, z = density, fluid solver to pass to drawing shader</font></font><font></font>
+RWTexture2D&lt;float4&gt; solver;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+//density field, density field</font></font><font></font>
+RWTexture2D&lt;float&gt;  density;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+//velocity field, velocity field</font></font><font></font>
+RWTexture2D&lt;float2&gt; velocity;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// xy = for vel, z = for dens. </font><font style="vertical-align: inherit;">when project, x = p, y = div</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Save the buffer one step before and the temporary buffer when saving the mass</font></font><font></font>
+RWTexture2D&lt;float3&gt; prev;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// xy = velocity source, z = density source External force input buffer</font></font><font></font>
 Texture2D source;<font></font>
 <font></font>
 [numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
 void AddSourceVelocity(uint2 id : SV_DispatchThreadID)<font></font>
-{<font></font>
-    uint w, h;<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint w, h;</font></font></font></font><font></font>
     velocity.GetDimensions(w, h);<font></font>
 <font></font>
     if (id.x &lt; w &amp;&amp; id.y &lt; h)<font></font>
@@ -216,21 +209,21 @@ void AddSourceVelocity(uint2 id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>次のステップとして、第二項の拡散粘性項を実装します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The next step is to implement the second term, the diffusion viscosity term.</font></font></p>
 
-<h3><a id="h4-6-5"></a><span class="secno">4.6.5　</span>速度場拡散粘性項</h3>
+<h3><a id="h4-6-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Dispersion viscosity term of velocity field</font></font></h3>
 <div class="equation">
 <pre>\nu \nabla ^{2} \overrightarrow {u}
 </pre>
 </div>
-<p><span class="equation">\nabla</span>演算子や<span class="equation">\Delta</span>演算子の左右に値がある時には、「右の要素にのみ作用する」というルールがありますので、この場合、動粘性係数は一旦置いておいて、ベクトルラプラシアンの部分を先に考えます。<br>流速<span class="equation">\overrightarrow{u}</span>に対してベクトルラプラシアンで、ベクトルの各成分毎の勾配と発散をとり合成させ、流速を隣接へ拡散させています。そこに動粘性係数を乗算する事によって、拡散の勢いを調整します。<br>ここでは流速の各成分の勾配を取った上に拡散させていますので、隣接からの流入も隣接への流出も起こり、ステップ1で受けたベクトルが隣接へと影響していくという現象が分かるかと思います。<br>実装面においては、少し工夫が必要となります。数式通りに実装すると、粘性係数と微分時間・格子数を乗算させた拡散率が高くなってしまった場合に、振動が起こり、収束が取れず最後にはシミュレーション自体が発散してしまいます。<br>拡散をStableな状態にする為に、ここではガウス・ザイデル法やヤコビ法、SOR法等の反復法が用いられます。ここではガウス・ザイデル法でシミュレーションしてみましょう。<br>ガウス・ザイデル法とは、式を自セルに対する未知数からなる線形方程式に変換し、算出された値をすぐに次の反復時に使い、連鎖させることで近似の答えに収束させていく方法です。反復回数は多ければ多いほど正確な値へと収束していきますが、リアルタイムレンダリングにおけるグラフィックスで必要なのは、正確な結果ではなく、より良いフレームレートと見た目の美しさですので、イテレーション回数はマシンパフォーマンスや見た目を考慮し、調整しましょう。</p>
+<p><span class="equation"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When there are values ​​on the left and right of the </font><span class="equation"><font style="vertical-align: inherit;">\ nabla</font></span><font style="vertical-align: inherit;"> operator and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> operator, there is a rule that "acts only on the right element", so in this case, leave the kinematic viscosity coefficient once and leave the vector Laplacian part. Think first. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With </font><font style="vertical-align: inherit;">vector Laplacian for the </font><font style="vertical-align: inherit;">flow velocity </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ overright</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> arrow </font><span class="equation"><font style="vertical-align: inherit;">{u}</font></span><font style="vertical-align: inherit;"> , the gradient and divergence of each component of the vector are taken and combined, and the flow velocity is diffused adjacently. </font><font style="vertical-align: inherit;">By multiplying it by the kinematic viscosity coefficient, the momentum of diffusion is adjusted. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, since the gradient of each component of the flow velocity is taken and diffused, inflow from the adjacency and outflow to the adjacency occur, and the phenomenon that the vector received in step 1 affects the adjacency can be understood. think. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In terms of mounting, some ingenuity is required. </font><font style="vertical-align: inherit;">If implemented according to the formula, if the diffusivity obtained by multiplying the viscosity coefficient by the differential time / number of lattices becomes high, vibration will occur, convergence will not be achieved, and the simulation itself will eventually diverge. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Iterative methods such as the Gauss-Seidel method, Jacobi method, and SOR method are used here to make the diffusion stable. </font><font style="vertical-align: inherit;">Here, let's simulate with the Gauss-Seidel method. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Gauss-Seidel method is a method of converting a formula into a linear equation consisting of unknowns for its own cell, using the calculated value immediately at the next iteration, and chaining it to converge to an approximate answer. </font><font style="vertical-align: inherit;">The higher the number of iterations, the more accurate the values ​​will converge, but graphics in real-time rendering require better frame rates and aesthetics rather than accurate results, so iterations are machine. Adjust for performance and appearance.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">#define GS_ITERATE 4<font></font>
 <font></font>
 [numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
 void DiffuseVelocity(uint2 id : SV_DispatchThreadID)<font></font>
-{<font></font>
-    uint w, h;<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint w, h;</font></font></font></font><font></font>
     velocity.GetDimensions(w, h);<font></font>
 <font></font>
     if (id.x &lt; w &amp;&amp; id.y &lt; h)<font></font>
@@ -251,21 +244,21 @@ void DiffuseVelocity(uint2 id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>上記のSetBoundaryVelocity関数は境界用のメソッドになります。詳しくはリポジトリをご参照下さい。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The SetBoundaryVelocity function above is a method for boundaries. </font><font style="vertical-align: inherit;">Please refer to the repository for details.</font></font></p>
 
-<h3><a id="h4-6-6"></a><span class="secno">4.6.6　</span>質量保存</h3>
+<h3><a id="h4-6-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Quality preservation</font></font></h3>
 <div class="equation">
 <pre>\nabla \cdot \overrightarrow{u} = 0
 </pre>
 </div>
-<p>ここで一旦、項を進める前に質量保存側に立ち返りましょう。これまでの工程で、外力項で受けた力を速度場に拡散させましたが、現状、各セルの質量は保存されておらず、湧き出しっぱなしの場所と流入が多い場所とで、質量が保存されていない状態になっています。<br>上記の方程式の様に、質量は必ず保存させ各セルの発散を0に持っていかないといけませんから、ここで一旦質量を保存をしておきましょう。<br>なお、質量保存ステップをComputeShaderで行う際、隣接スレッドとの偏微分演算を行う為、場を確定しておかなければなりません。グループシェアードメモリ内で偏微分演算ができれば高速化が見込めたのですが、別のグループスレッドから偏微分を取った時に、やはり値が取得できず汚い結果となってしまった為、ここはバッファを確定しながら、3ステップに分け進めます。<br>速度場から発散算出 &gt; Poisson方程式をガウス・ザイデル法で算出 &gt; 速度場に減算させ質量保存<br>の3ステップにカーネルをわけ、場を確定しながら質量保存に持っていきます。なお、SetBound~系は境界に対するメソッドの呼び出しになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's go back to the conservation of mass side before proceeding with the section. </font><font style="vertical-align: inherit;">In the process so far, the force received in the external force term is diffused in the velocity field, but at present, the mass of each cell is not preserved, and the mass is in the place where it keeps springing out and the place where there is a lot of inflow. Is in an unsaved state. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As in the equation above, you must save the mass and bring the divergence of each cell to 0, so let's save the mass here. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, when performing the mass conservation step with Compute Shader, the field must be fixed because the partial differential operation with the adjacent thread is performed. </font><font style="vertical-align: inherit;">It was expected to speed up if the partial differential operation could be performed in the group shared memory, but when the partial differential was taken from another group thread, the value could not be obtained and the result was dirty, so here is a buffer. While confirming, proceed in 3 steps. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Divergence calculation from velocity field&gt; Poisson's equation is calculated by Gauss-Seidel method&gt; Subtract to velocity field, divide the </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">kernel into 3 steps of conservation of mass, and bring it to conservation of mass while determining the field. </font><font style="vertical-align: inherit;">In addition, SetBound ~ system is a method call for the boundary.</font></font></p>
 <div class="emlist-code">
-<pre class="emlist">//質量保存Step1.<font></font>
-//step1では、速度場から発散の算出<font></font>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//Quality preservation Step1.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// In step1, calculate the divergence from the velocity field</font></font><font></font>
 [numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
 void ProjectStep1(uint2 id : SV_DispatchThreadID)<font></font>
-{<font></font>
-    uint w, h;<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint w, h;</font></font></font></font><font></font>
     velocity.GetDimensions(w, h);<font></font>
 <font></font>
     if (id.x &lt; w &amp;&amp; id.y &lt; h)<font></font>
@@ -278,20 +271,20 @@ void ProjectStep1(uint2 id : SV_DispatchThreadID)<font></font>
                     (uvd.x * (velocity[int2(id.x + 1, id.y)].x -<font></font>
                               velocity[int2(id.x - 1, id.y)].x)) +<font></font>
                     (uvd.y * (velocity[int2(id.x, id.y + 1)].y -<font></font>
-                              velocity[int2(id.x, id.y - 1)].y)),<font></font>
-                    prev[id].z);<font></font>
+                              velocity[int2(id.x, id.y - 1)].y)),<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                    prev [id] .z);</font></font></font></font><font></font>
 <font></font>
         SetBoundaryDivergence(id, w, h);<font></font>
         SetBoundaryDivPositive(id, w, h);<font></font>
     }<font></font>
 }<font></font>
-<font></font>
-//質量保存Step2.<font></font>
-//step2では、step1で求めた発散からPoisson方程式をガウス・ザイデル法で解く<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+//Quality preservation Step2.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// In step2, the Poisson equation is solved by the Gauss-Seidel method from the divergence obtained in step1.</font></font><font></font>
 [numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
 void ProjectStep2(uint2 id : SV_DispatchThreadID)<font></font>
-{<font></font>
-    uint w, h;<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint w, h;</font></font></font></font><font></font>
 <font></font>
     velocity.GetDimensions(w, h);<font></font>
 <font></font>
@@ -309,13 +302,13 @@ void ProjectStep2(uint2 id : SV_DispatchThreadID)<font></font>
         }<font></font>
     }<font></font>
 }<font></font>
-<font></font>
-//質量保存Step3.<font></font>
-//step3で、∇･u = 0にする.<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+//Quality preservation Step3.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// In step3, set ∇ ･ u = 0.</font></font><font></font>
 [numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
 void ProjectStep3(uint2 id : SV_DispatchThreadID)<font></font>
-{<font></font>
-    uint w, h;<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint w, h;</font></font></font></font><font></font>
 <font></font>
     velocity.GetDimensions(w, h);<font></font>
 <font></font>
@@ -339,20 +332,20 @@ void ProjectStep3(uint2 id : SV_DispatchThreadID)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>これで速度場を質量保存がされた状態にできました。流出した箇所に流入がおき、流入が多い箇所からは流出がおきる為、流体らしい表現になりました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The velocity field is now in a state of conservation of mass. </font><font style="vertical-align: inherit;">Since the inflow occurs at the place where the outflow occurs and the outflow occurs from the place where there is a lot of inflow, it is expressed like a fluid.</font></font></p>
 
-<h3><a id="h4-6-7"></a><span class="secno">4.6.7　</span>移流項</h3>
+<h3><a id="h4-6-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Advection term</font></font></h3>
 <div class="equation">
 <pre>-\left( \overrightarrow {u} \cdot \nabla \right) \overrightarrow {u}
 </pre>
 </div>
-<p>移流項はラグランジュの方法的な手法が用いられるのですが、1ステップ前の速度場のバックトレースを行い、該当セルから速度ベクトルを引いた箇所の値を、現在いる場所に移動するといった作業を各セルに対して行います。バックトレースした際に、格子にぴったり収まる場所に遡れる訳ではありませんので、移流の際は近傍4セルとの線形補間を行い、正しい値を移流させます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lagrange's method is used for the advection term, but the work of back tracing the velocity field one step before and moving the value of the place where the velocity vector is subtracted from the corresponding cell to the current location Do this for each cell. </font><font style="vertical-align: inherit;">When backtraced, it does not go back to the place where it fits exactly in the grid, so when advection, linear interpolation with the neighboring 4 cells is performed and the correct value is advected.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">[numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
 void AdvectVelocity(uint2 id : SV_DispatchThreadID)<font></font>
-{<font></font>
-    uint w, h;<font></font>
-    density.GetDimensions(w, h);<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    uint w, h;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    density.GetDimensions (w, h);</font></font></font></font><font></font>
 <font></font>
     if (id.x &lt; w &amp;&amp; id.y &lt; h)<font></font>
     {<font></font>
@@ -360,25 +353,25 @@ void AdvectVelocity(uint2 id : SV_DispatchThreadID)<font></font>
         float x, y, s0, t0, s1, t1, dfdt;<font></font>
 <font></font>
         dfdt = dt * (w + h) * 0.5;<font></font>
-<font></font>
-        //バックトレースポイント割り出し.<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Back trace point index.</font></font><font></font>
         x = (float)id.x - dfdt * prev[id].x;<font></font>
-        y = (float)id.y - dfdt * prev[id].y;<font></font>
-        //ポイントがシミュレーション範囲内に収まるようにクランプ.<font></font>
+        y = (float)id.y - dfdt * prev[id].y;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Clamp so that the points are within the simulation range.</font></font><font></font>
         clamp(x, 0.5, w + 0.5);<font></font>
-        clamp(y, 0.5, h + 0.5);<font></font>
-        //バックトレースポイントの近傍セル割り出し.<font></font>
+        clamp(y, 0.5, h + 0.5);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Determining cells near the back trace point.</font></font><font></font>
         ddx0 = floor(x);<font></font>
         ddx1 = ddx0 + 1;<font></font>
-        ddy0 = floor(y);<font></font>
-        ddy1 = ddy0 + 1;<font></font>
-        //近傍セルとの線形補間用の差分を取っておく.<font></font>
+        ddy0 = floor(y);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Dy1 = Dy0 + 1;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Save the difference for linear interpolation with neighboring cells.</font></font><font></font>
         s1 = x - ddx0;<font></font>
-        s0 = 1.0 - s1;<font></font>
-        t1 = y - ddy0;<font></font>
-        t0 = 1.0 - t1;<font></font>
-<font></font>
-        //バックトレースし、1step前の値を近傍との線形補間をとって、現在の速度場に代入。<font></font>
+        s0 = 1.0 - s1;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        t1 = y - ddy0;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        t0 = 1.0 - t1;</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Backtrace, take the value one step before by linear interpolation with the neighborhood, and substitute it for the current velocity field.</font></font><font></font>
         velocity[id] = s0 * (t0 * prev[int2(ddx0, ddy0)].xy +<font></font>
                              t1 * prev[int2(ddx0, ddy1)].xy) +<font></font>
                        s1 * (t0 * prev[int2(ddx1, ddy0)].xy +<font></font>
@@ -389,50 +382,50 @@ void AdvectVelocity(uint2 id : SV_DispatchThreadID)<font></font>
 </pre>
 </div>
 
-<h2><a id="h4-7"></a><span class="secno">4.7　</span>密度場</h2>
-<p>次に密度場の方程式をみてみましょう。</p>
+<h2><a id="h4-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Density field</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, let's look at the density field equation.</font></font></p>
 <div class="equation">
 <pre>\dfrac {\partial \rho} {\partial t}=-\left( \overrightarrow {u} \cdot \nabla \right) \rho + \kappa \nabla ^{2} \rho + S
 </pre>
 </div>
-<p>上記の内、<span class="equation">\overrightarrow {u}</span>は流速、<span class="equation">\kappa</span>は拡散係数、ρは密度、Sは外圧になります。<br>密度場は必ずしも必要ではありませんが、速度場を求めた際の各ベクトルに対し、密度場で拡散させた画面上のピクセルを乗せる事で、溶けながら流れる様な、より流体らしい表現が可能になります。<br>尚、密度場の数式を見て気づいた方もいらっしゃるかと思いますが、速度場と全く同じフローになっており、違いはベクトルがスカラーになっている点と、動粘性係数<span class="equation">\nu</span>が拡散係数<span class="equation">\kappa</span>になっている点、質量保存則を用いない点の3点のみしかありません。<br>密度場は密度の変化の場ですので、非圧縮性である必要はなく、質量保存の必要がありません。また、動粘性係数と拡散係数は、係数としての使い所は同じになります。<br>ですので、先ほど速度場で用いたカーネルの質量保存則以外のカーネルを、次元を落として作ることによって、密度場を実装する事が可能です。紙面上密度場の解説はしませんが、リポジトリには密度場も実装しておりますので、そちらもご参照ください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Of the above, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ overrightarrow {u}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the flow velocity, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ kappa</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the diffusion coefficient, ρ is the density, and S is the external pressure. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The density field is not always necessary, but by placing the pixels on the screen diffused by the density field on each vector when the velocity field is calculated, it becomes possible to express a more fluid-like expression that flows while melting. I will. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As some of you may have noticed by looking at the formula of the density field, the flow is exactly the same as the velocity field, the difference is that the vector is a scalar and the kinematic viscosity coefficient </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nu</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the diffusion coefficient. </font><font style="vertical-align: inherit;">There are only three points, one that is </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ kappa</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and the other that does not use the law of conservation of mass. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the density field is a field of change in density, it does not need to be incompressible and does not need to be conserved by mass. </font><font style="vertical-align: inherit;">In addition, the kinematic viscosity coefficient and the diffusion coefficient have the same usage as coefficients. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, it is possible to implement the density field by making a kernel other than the mass conservation law of the kernel used in the velocity field earlier by lowering the dimension. </font><font style="vertical-align: inherit;">I will not explain the density field on paper, but please refer to the density field as it is also implemented in the repository.</font></font></p>
 
-<h2><a id="h4-8"></a><span class="secno">4.8　</span>シミュレーションの各項ステップ</h2>
-<p>上記の速度場及び密度場、質量保存則を用いることによって流体をシミュレーションする事ができるのですが、シミュレーションのステップについて、最後に見ておきましょう。</p>
+<h2><a id="h4-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Each item step of the simulation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fluids can be simulated by using the above velocity field, density field, and conservation of mass law, but let's take a look at the simulation steps at the end.</font></font></p>
 <ul>
-<li>外力イベントを発生させ、速度場と密度場の外力項にインプット</li>
-<li>速度場を以下のステップで更新<ul>
-<li>拡散粘性項</li>
-<li>質量保存則</li>
-<li>移流項</li>
-<li>質量保存則</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Generates an external force event and inputs it to the external force term of the velocity field and density field.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Update the speed field in the following steps</font></font><ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nisan viscosity term</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Quality preservation</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Advection term</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Quality preservation</font></font></font></font></li>
 </ul>
 </li>
-<li>その後密度場を以下のステップで更新<ul>
-<li>拡散項</li>
-<li>速度場の速度を用いで密度を移流</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then update the density field in the following steps</font></font><ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Stray term</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Advection density using velocity in velocity field</font></font></li>
 </ul>
 </li>
 </ul>
-<p>上記がStableFluidのシミュレーションステップになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The above is the simulation step of StableFluid.</font></font></p>
 
-<h2><a id="h4-9"></a><span class="secno">4.9　</span>結果</h2>
-<p>実行して、マウスでスクリーン上をドラッグすると、以下の様な流体シミュレーションを起こす事が可能です。</p>
+<h2><a id="h4-9"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.9　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Results</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By executing and dragging on the screen with the mouse, it is possible to cause the following fluid simulation.</font></font></p>
 <div id="fluid-s" class="image">
-<img src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/fluid-s.png" alt="実行例" class="width-070per">
-<p class="caption">
-図4.2: 実行例
-</p>
+<img src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/fluid-s.png" alt="Execution example" class="width-070per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.2: Execution example
+</font></font></p>
 </div>
 
-<h2><a id="h4-10"></a><span class="secno">4.10　</span>まとめ</h2>
-<p>流体シミュレーションは、プリレンダリングと違い、Unityの様なリアルタイムゲームエンジンにとっては負荷の高い分野です。しかし、GPU演算能力の向上から、2次元であればある程度の解像度でも耐えうるFPSが出せる様になってきました。また、途中で出てきたGPUにとって負荷の高い演算部分、ガウス・ザイデル反復法を別の処理で実装してみたり、速度場自体をカールノイズで代用してみたり等の工夫をすれば、より軽い演算での流体表現も可能になる事でしょう。</p>
-<p>もしこの章をお読みいただいて、少しでも流体に興味を持たれた方は、ぜひ次章の「粒子法による流体シミュレーション」にもトライして見て下さい。格子法とはまた違った角度から流体に迫れますので、流体シミュレーションの奥深さや実装の面白さを体験できる事かと思います。</p>
+<h2><a id="h4-10"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.10　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fluid simulation, unlike pre-rendering, is a heavy field for real-time game engines like Unity. </font><font style="vertical-align: inherit;">However, due to the improvement of GPU computing power, it has become possible to produce FPS that can withstand even a certain resolution if it is two-dimensional. </font><font style="vertical-align: inherit;">Also, if you try to implement the Gauss-Seidel iterative method, which is a heavy load for the GPU that came out on the way, with another process, or substitute the speed field itself with curl noise, etc. It will be possible to express fluids with lighter calculations.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you have read this chapter and are interested in fluids even a little, please try "Fluid simulation by particle method" in the next chapter. </font><font style="vertical-align: inherit;">Since you can approach the fluid from a different angle than the grid method, you can experience the depth of fluid simulation and the fun of mounting.</font></font></p>
 
-<h2><a id="h4-11"></a><span class="secno">4.11　</span>参考</h2>
+<h2><a id="h4-11"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.11　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
 <ul>
 <li>Jos Stam. SIGGRAPH 1999. Stable Fluids</li>
 </ul><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 380px; top: 33.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第4章　格子法による流体シミュレーション</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 4 _ Fluid Simulation by Lattice Method_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

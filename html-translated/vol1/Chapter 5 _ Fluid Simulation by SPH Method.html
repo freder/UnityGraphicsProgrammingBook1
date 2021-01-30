@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0074)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 5 _ Fluid Simulation by SPH Method_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 5 _ Fluid Simulation by SPH Method_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 5 _ Fluid Simulation by SPH Method_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Fluid Simulation by SPH Method_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Fluid Simulation by SPH Method_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 5 _ Fluid Simulation by SPH Method_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 5 _ Fluid Simulation by SPH Method_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Fluid Simulation by SPH Method_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Fluid Simulation by SPH Method_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 5 _ Fluid Simulation by SPH Method_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Fluid Simulation by SPH Method</font></font></h1>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the previous chapter, we explained how to create a fluid simulation using the grid method. </font><font style="vertical-align: inherit;">In this chapter, we will use the particle method, which is another fluid simulation method, especially the SPH method, to express the movement of the fluid. </font><font style="vertical-align: inherit;">Please note that there are some inadequate expressions as the explanation is given in a slightly chewed manner.</font></font></p>
 
@@ -142,216 +135,216 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
 </ul>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">And so on.</font></font></p>
 
-<h3><a id="h5-2-1"></a><span class="secno">5.2.1　</span>粒子法におけるナビエ・ストークス方程式の導出</h3>
-<p>はじめに、粒子法におけるナビエ・ストークス方程式(以下NS方程式)は、以下のように記述されます。</p>
+<h3><a id="h5-2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Derivation of Navier-Stokes equation in particle method</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, the Navier-Stokes equation (hereinafter referred to as NS equation) in the particle method is described as follows.</font></font></p>
 <div class="equation">
 <pre>  \dfrac{D \overrightarrow{u}}{Dt} = -\dfrac{1}{\rho}\nabla p + \nu \nabla \cdot \nabla \overrightarrow{u} + \overrightarrow{g}<font></font>
   \label{eq:navier}<font></font>
 </pre>
 </div>
-<p>前章の格子法で出てきたNS方程式とは少し形が異なりますね。移流項がまるまる抜けてしまっていますが、先程のオイラー微分とラグランジュ微分の関係を見てみると、うまくこの形に変形できることがわかります。粒子法では観測点を流れに沿って移動させますから、NS方程式計算時に移流項を考慮する必要がありません。移流の計算はNS方程式で算出した加速度をもとに粒子位置を直接更新することで済ませる事ができます。</p>
-<p>現実の流体は分子の集まりですので、ある種のパーティクルシステムであると言うことができます。しかし、コンピュータで実際の分子の数の計算を行うのは不可能ですので、計算可能な大きさに調節してあげる必要があります。<span class="imgref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#blob">図5.2</a></span>に示されているそれぞれの粒(<a id="fnb-blobfoot" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-blobfoot" class="noteref" epub:type="noteref">*4</a>)は、計算可能な大きさで分割した流体の一部分を表していています。これらの粒は、それぞれ質量<span class="equation">m</span>、位置ベクトル<span class="equation">\overrightarrow{x}</span>、速度ベクトル<span class="equation">\overrightarrow{u}</span>、体積<span class="equation">V</span>を持つと考えることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The shape is a little different from the NS equation that came out in the grid method in the previous chapter. </font><font style="vertical-align: inherit;">The advection term is completely omitted, but if you look at the relationship between the Euler derivative and the Lagrange derivative, you can see that it can be transformed into this shape well. </font><font style="vertical-align: inherit;">In the particle method, the observation point is moved along the flow, so there is no need to consider the advection term when calculating the NS equation. </font><font style="vertical-align: inherit;">The calculation of advection can be completed by directly updating the particle position based on the acceleration calculated by the NS equation.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A real fluid is a collection of molecules, so it can be said to be a kind of particle system. </font><font style="vertical-align: inherit;">However, it is impossible to calculate the actual number of molecules with a computer, so it is necessary to adjust it to a computable size. </font><font style="vertical-align: inherit;">Each grain ( </font><a id="fnb-blobfoot" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-blobfoot" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;">* 4</font></a><font style="vertical-align: inherit;"> ) </font><font style="vertical-align: inherit;">shown in </font></font><span class="imgref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#blob"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 5.2</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> represents a portion of the fluid divided by a computable size. </font><font style="vertical-align: inherit;">Each of these grains </font><font style="vertical-align: inherit;">can be thought of as having a </font><font style="vertical-align: inherit;">mass </font><span class="equation"><font style="vertical-align: inherit;">m</font></span><font style="vertical-align: inherit;"> , a position vector </font><span class="equation"><font style="vertical-align: inherit;">\ overridearrow {x}</font></span><font style="vertical-align: inherit;"> , a velocity vector </font><span class="equation"><font style="vertical-align: inherit;">\ overridearrow {u}</font></span><font style="vertical-align: inherit;"> , and a volume </font><span class="equation"><font style="vertical-align: inherit;">V</font></span><font style="vertical-align: inherit;"> , respectively.</font></font><a id="fnb-blobfoot" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-blobfoot" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><span class="equation"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"></font><span class="equation"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"></font><span class="equation"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"></font><span class="equation"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"></font></p>
 <div id="blob" class="image">
 <img src="./Chapter 5 _ Fluid Simulation by SPH Method_files/blob.png" alt="Fluid particle approximation" class="width-070per">
-<p class="caption">
-図5.2: 流体のパーティクル近似
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.2: Fluid particle approximation
+</font></font></p>
 </div>
-<p>これらそれぞれの粒について、外から受けた力<span class="equation">\overrightarrow{f}</span>を計算し、運動方程式<span class="equation">m \overrightarrow{a} = \overrightarrow{f}</span>を解くことで加速度が算出され、次のタイムステップでどのように移動するかを決めることができます。</p>
-<div class="footnote" epub:type="footnote" id="fn-blobfoot"><p class="footnote">[*4] 英語では'Blob'と呼ばれます</p></div>
-<p>前述の通り、それぞれの粒子は周りから何らかの力を受けて動きますが、その「力」とは一体何でしょうか。簡単な例として、重力<span class="equation">m \overrightarrow{g}</span>があげられますが、それ以外に周りの粒子からも何らかの力を受けるはずです。これらの力について、以下に解説します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For each of these grains </font><font style="vertical-align: inherit;">, the acceleration is calculated by calculating </font><font style="vertical-align: inherit;">the external force </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ overridearrow {f}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and solving the equation of motion </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">m \ overridearrow {a} = \ overridearrow {f}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , and how in the next time step. You can decide whether to move to.</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-blobfoot"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 4] Called'Blob'in English</font></font></p></div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As mentioned above, each particle moves by receiving some force from the surroundings, but what is that "force"? </font><font style="vertical-align: inherit;">A simple example is gravity </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">m \ overrightarrow {g},</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> but it should also receive some force from surrounding particles. </font><font style="vertical-align: inherit;">These forces are explained below.</font></font></p>
 
-<h4><a id="h5-2-1-1"></a>圧力</h4>
-<p>流体粒子にかかる力の1つ目は、圧力です。流体は必ず圧力の高い方から低い方に向かって流れます。もし圧力がどの方向からも同じだけかかっていたとすると、力は打ち消されて動きが止まってしまいますから、圧力のバランスが不均一である場合を考えます。前章で述べられたように、圧力のスカラー場の勾配を取ることで、自分の粒子位置から見て最も圧力上昇率の高い方向を算出することができます。粒子が力を受ける方向は、圧力の高い方から低い方ですので、マイナスを取って<span class="equation">-\nabla p</span>となります。また、粒子は体積を持っていますから、粒子にかかる圧力は、<span class="equation">-\nabla p</span>に粒子の体積をかけて算出します<a id="fnb-vol" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-vol" class="noteref" epub:type="noteref">*5</a>。最終的に、<span class="equation">- V \nabla p</span>という結果が導出されます。</p>
-<div class="footnote" epub:type="footnote" id="fn-vol"><p class="footnote">[*5] 流体の非圧縮条件により、単に体積をかけるだけで粒子にかかる圧力の積分を表すことができます。</p></div>
+<h4><a id="h5-2-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">pressure</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The first force exerted on a fluid particle is pressure. </font><font style="vertical-align: inherit;">The fluid always flows from the higher pressure side to the lower pressure side. </font><font style="vertical-align: inherit;">If the same amount of pressure is applied from all directions, the force will be canceled and the movement will stop, so consider the case where the pressure balance is uneven. </font><font style="vertical-align: inherit;">As mentioned in the previous chapter, by taking the gradient of the pressure scalar field, it is possible to calculate the direction with the highest pressure rise rate from the viewpoint of your own particle position. </font><font style="vertical-align: inherit;">The direction in which the particles receive the force is from the one with the highest pressure to the one with the lowest pressure, so take the minus and </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">become-\ nabla p</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Also, since particles have a volume, the pressure applied to the particles is </font><font style="vertical-align: inherit;">calculated by </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">multiplying-\ nabla p</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> by the volume of the particles </font></font><a id="fnb-vol" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-vol" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 5</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Finally, </font><font style="vertical-align: inherit;">the result </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--V \ nabla p</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is derived.</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-vol"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 5] Due to the uncompressed condition of the fluid, the integral of the pressure applied to the particles can be expressed simply by multiplying the volume.</font></font></p></div>
 
-<h4><a id="h5-2-1-2"></a>粘性力</h4>
-<p>流体粒子にかかる力の２つ目は、粘性力です。粘性(ねばりけ)のある流体とは、はちみつや溶かしたチョコレートなどに代表される、変形しづらい流体のことを指します。粘性があるという言葉を粒子法の表現に当てはめてみると、<b>粒子の速度は、周りの粒子速度の平均をとりやすい</b>ということになります。前章で述べられた通り、周囲の平均をとるという演算は、ラプラシアンを用いて行うことができます。</p>
-<p>粘性の度合いを<b>動粘性係数</b><span class="equation">\mu</span>を用いて表すと、<span class="equation">\mu \nabla \cdot \nabla \overrightarrow{u}</span>と表す事ができます。</p>
+<h4><a id="h5-2-1-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Viscous force</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The second force applied to fluid particles is viscous force. </font><font style="vertical-align: inherit;">A viscous fluid is a fluid that is hard to deform, such as honey and melted chocolate. </font><font style="vertical-align: inherit;">Applying the word viscous to the expression of the particle method, </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the velocity of a particle is easy to average the velocity of the surrounding particles</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">As mentioned in the previous chapter, the operation of averaging the surroundings can be performed using the Laplacian.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Expressing the degree of </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">viscosity</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> using the </font><b><font style="vertical-align: inherit;">kinematic viscosity coefficient </font></b></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mu</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , it can be expressed as </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ mu \ nabla \ cdot \ nabla \ overridearrow {u}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 
-<h4><a id="h5-2-1-3"></a>圧力・粘性力・外力の統合</h4>
-<p>これらの力を運動方程式<span class="equation">m \overrightarrow{a} = \overrightarrow{f}</span>に当てはめて整理すると、</p>
+<h4><a id="h5-2-1-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Integration of pressure, viscous force and external force</font></font></h4>
+<p><font style="vertical-align: inherit;"></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Applying</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> these forces to the equation of motion </font><span class="equation"><font style="vertical-align: inherit;">m \ overrightarrow {a} = \ overrightarrow {f}</font></span><font style="vertical-align: inherit;"> ,</font></font></p>
 <div class="equation">
 <pre>  m \dfrac{D\overrightarrow{u}}{Dt} = - V \nabla p + V \mu \nabla \cdot \nabla \overrightarrow{u} + m\overrightarrow{g}
 </pre>
 </div>
-<p>ここで、<span class="equation">m</span>は<span class="equation">\rho V</span>であることから、変形して(<span class="equation">V</span>が打ち消されます)</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, since </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">m</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ rho V,</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> it is transformed ( </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">V</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is canceled).</font></font></p>
 <div class="equation">
 <pre>  \rho \dfrac{D\overrightarrow{u}}{Dt} = - \nabla p + \mu \nabla \cdot \nabla \overrightarrow{u} + \rho \overrightarrow{g}
 </pre>
 </div>
-<p>両辺<span class="equation">\rho</span>で割り、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Divide by </font><font style="vertical-align: inherit;">both sides </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ rho</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ,</font></font></p>
 <div class="equation">
 <pre>  \dfrac{D\overrightarrow{u}}{Dt} = - \dfrac{1}{\rho}\nabla p + \dfrac{\mu}{\rho} \nabla \cdot \nabla \overrightarrow{u} + \overrightarrow{g}
 </pre>
 </div>
-<p>最後に、粘性項の係数<span class="equation">\dfrac{\mu}{\rho}</span>に<span class="equation">\nu</span>を導入して、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, the coefficient of viscosity term </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ dfrac {\ mu} {\</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> rho} in </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nu</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> by introducing,</font></font></p>
 <div class="equation">
 <pre>  \dfrac{D\overrightarrow{u}}{Dt} = - \dfrac{1}{\rho}\nabla p + \nu \nabla \cdot \nabla \overrightarrow{u} + \overrightarrow{g}
 </pre>
 </div>
-<p>となり、はじめに挙げたNS方程式を導出することができました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, we were able to derive the NS equation mentioned at the beginning.</font></font></p>
 
-<h3><a id="h5-2-2"></a><span class="secno">5.2.2　</span>粒子法における移流の表現</h3>
-<p>粒子法では、粒子自体が流体の観測点を表現しているので、移流項の計算は単に粒子位置を移動させるだけで完了します。実際の時間微分の計算では、無限に小さい時間を用いますが、コンピューターでの計算では無限を表現できないため、十分小さい時間<span class="equation">\Delta t</span>を用いて微分を表現します。これを差分と言い、<span class="equation">\Delta t</span>を小さくすればするほど、正確な計算を行うことができます。</p>
-<p>加速度について、差分の表現を導入すると、</p>
+<h3><a id="h5-2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Representation of advection in the particle method</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the particle method, the particles themselves represent the observation points of the fluid, so the calculation of the advection term is completed by simply moving the particle position. </font><font style="vertical-align: inherit;">In the actual calculation of the time derivative, infinitely small time is used, but since infinity cannot be expressed by computer calculation, </font><font style="vertical-align: inherit;">the differentiation is expressed using </font><font style="vertical-align: inherit;">sufficiently small time </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta t</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">This is called the difference, and the </font><font style="vertical-align: inherit;">smaller </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta t</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the more accurate the calculation.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Introducing the expression of difference for acceleration,</font></font></p>
 <div class="equation">
 <pre>  \overrightarrow{a} = \dfrac{D\overrightarrow{u}}{Dt} \equiv \frac{\Delta \overrightarrow{u}}{\Delta t}
 </pre>
 </div>
-<p>となります。よって速度の増分<span class="equation">\Delta \overrightarrow{u}</span>は、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It will be. </font><font style="vertical-align: inherit;">So the velocity increment </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta \ overrightarrow {u}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is</font></font></p>
 <div class="equation">
 <pre>\Delta \overrightarrow{u} = \Delta t \overrightarrow{a}
 </pre>
 </div>
-<p>となり、また、位置の増分についても同様に、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">And also for the position increment,</font></font></p>
 <div class="equation">
 <pre>  \overrightarrow{u} = \frac{\partial \overrightarrow{x}}{\partial t} \equiv \frac{\Delta \overrightarrow{x}}{\Delta t}
 </pre>
 </div>
-<p>より、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Than,</font></font></p>
 <div class="equation">
 <pre>\Delta \overrightarrow{x} = \Delta t \overrightarrow{u}
 </pre>
 </div>
-<p>となります。</p>
-<p>この結果を利用することで、次のフレームでの速度ベクトルと位置ベクトルを算出できます。現在のフレームでの粒子速度が<span class="equation">\overrightarrow{u}_n</span>であるとすると、次のフレームでの粒子速度は<span class="equation">\overrightarrow{u}_{n+1}</span>で、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It will be.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By using this result, the velocity vector and position vector in the next frame can be calculated. </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Assuming</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> that the particle velocity in the current frame is </font><span class="equation"><font style="vertical-align: inherit;">\ overrightarrow {u} _n</font></span><font style="vertical-align: inherit;"> , the particle velocity in the next frame is </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ overrightarrow {u} _ {n + 1}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="equation">
 <pre>\overrightarrow{u}_{n+1} = \overrightarrow{u}_n + \Delta \overrightarrow{u} = \overrightarrow{u}_n + \Delta t \overrightarrow{a}
 </pre>
 </div>
-<p>と表せます。</p>
-<p>現在のフレームでの粒子位置が<span class="equation">\overrightarrow{x}_n</span>であるとすると、次のフレームでの粒子位置は<span class="equation">\overrightarrow{x}_{n+1}</span>で、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Can be expressed as.</font></font></p>
+<p><font style="vertical-align: inherit;"></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Assuming</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> that the particle position in the current frame is </font><span class="equation"><font style="vertical-align: inherit;">\ overridearrow {x} _n</font></span><font style="vertical-align: inherit;"> , the particle position in the next frame is </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ overridearrow {x} _ {n + 1}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="equation">
 <pre>\overrightarrow{x}_{n+1} = \overrightarrow{x}_n + \Delta \overrightarrow{x} = \overrightarrow{x}_n + \Delta t \overrightarrow{u}
 </pre>
 </div>
-<p>と表せます。</p>
-<p>この手法は、前進オイラー法と呼ばれます。これを毎フレーム繰り返すことで、各時刻での粒子の移動を表現することができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Can be expressed as.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This technique is called the forward Euler method. </font><font style="vertical-align: inherit;">By repeating this every frame, it is possible to express the movement of particles at each time.</font></font></p>
 
-<h2><a id="h5-3"></a><span class="secno">5.3　</span>SPH法による流体シミュレーション</h2>
-<p>前節では、粒子法におけるNS方程式の導出方法について解説しました。もちろん、これらの微分方程式をコンピュータでそのまま解くことはできませんので、何らかの近似をしてあげる必要があります。その手法として、CG分野でよく用いられる<b>SPH法</b>について解説します。</p>
-<p>SPH法は、本来宇宙物理学における天体同士の衝突シミュレーションに用いられていた手法ですが、1996年にDesbrunら<a id="fnb-desbrun" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-desbrun" class="noteref" epub:type="noteref">*6</a>によってCGにおける流体シミュレーションにも応用されました。また、並列化も容易で、現在のGPUでは大量の粒子の計算をリアルタイムに行うことが可能です。コンピュータシミュレーションでは、連続的な物理量を離散化して計算を行う必要がありますが、この離散化を、<b>重み関数</b>と呼ばれる関数を用いて行う手法をSPH法と呼びます。</p>
+<h2><a id="h5-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Fluid simulation by SPH method</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the previous section, we explained how to derive the NS equation in the particle method. </font><font style="vertical-align: inherit;">Of course, these differential equations cannot be solved as they are on a computer, so some kind of approximation needs to be made. </font><font style="vertical-align: inherit;">As a method, I </font><font style="vertical-align: inherit;">will explain the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SPH method</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> that </font><font style="vertical-align: inherit;">is often used in the CG field </font><font style="vertical-align: inherit;">.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The SPH method was originally used for collision simulation between celestial bodies in astrophysics </font><font style="vertical-align: inherit;">, but it was also applied to fluid simulation in CG by </font><font style="vertical-align: inherit;">Desbrun et al. </font></font><a id="fnb-desbrun" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-desbrun" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 6 in</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 1996 </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">In addition, parallelization is easy, and the current GPU can calculate a large number of particles in real time. </font><font style="vertical-align: inherit;">In computer simulation, it is necessary to discretize continuous physical quantities and perform calculations, and the method of performing this discretization </font><font style="vertical-align: inherit;">using a function called a </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">weight function</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is called the SPH method.</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-desbrun"><p class="footnote">[*6] Desbrun and Cani, Smoothed Particles: A new paradigm for animating highly deformable bodies, Eurographics Workshop on Computer Animation and Simulation (EGCAS), 1996.</p></div>
 
-<h3><a id="h5-3-1"></a><span class="secno">5.3.1　</span>物理量の離散化</h3>
-<p>SPH法では、粒子一つ一つが影響範囲を持っていて、他の粒子と距離が近いほどその粒子の影響が大きく受けるという動作をします。この影響範囲を図示すると<span class="imgref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#id_2dkernel">図5.3</a></span>のようになります。</p>
+<h3><a id="h5-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Discretization of physical quantities</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the SPH method, each particle has an influence range, and the closer the particle is to other particles, the greater the influence of that particle. </font></font><span class="imgref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#id_2dkernel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 5.3 shows the</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> extent of this effect </font><font style="vertical-align: inherit;">.</font></font></p>
 <div id="id_2dkernel" class="image">
 <img src="./Chapter 5 _ Fluid Simulation by SPH Method_files/2dkernel.png" alt="Two-dimensional weight function" class="width-050per">
-<p class="caption">
-図5.3: 2次元の重み関数
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.3: Two-dimensional weighting function
+</font></font></p>
 </div>
-<p>この関数を<b>重み関数</b><a id="fnb-weight_fn" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-weight_fn" class="noteref" epub:type="noteref">*7</a>と呼びます。</p>
-<div class="footnote" epub:type="footnote" id="fn-weight_fn"><p class="footnote">[*7] 通常この関数はカーネル関数とも呼ばれますが、ComputeShaderにおけるカーネル関数と区別するためこの呼び方にしています。</p></div>
-<p>SPH法における物理量を<span class="equation">\phi</span>とすると、重み関数を用いて以下のように離散化されます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This function </font><font style="vertical-align: inherit;">is called the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">weight function </font></font></b><a id="fnb-weight_fn" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-weight_fn" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 7</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-weight_fn"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 7] Normally, this function is also called a kernel function, but it is called this function to distinguish it from the kernel function in Compute Shader.</font></font></p></div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Assuming that the physical quantity in the SPH method is </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ phi</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , it is discretized as follows using a weighting function.</font></font></p>
 <div class="equation">
 <pre>  \phi(\overrightarrow{x}) = \sum_{j \in N}m_j\frac{\phi_j}{\rho_j}W(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p><span class="equation">N, m, \rho, h</span>はそれぞれ、近傍粒子の集合、粒子の質量、粒子の密度、重み関数の影響半径です。また、関数<span class="equation">W</span>が先ほど述べた重み関数になります。</p>
-<p>さらに、この物理量には、勾配とラプラシアンなどの偏微分演算が適用でき、勾配は、</p>
+<p><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">N, m, \ rho, and h</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> are the set of neighboring particles, the mass of the particles, the density of the particles, and the radius of influence of the weighting function, respectively. </font><font style="vertical-align: inherit;">Also, the function </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">W</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the weighting function mentioned earlier.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Furthermore, partial differential operations such as gradient and Laplacian can be applied to this physical quantity, and the gradient is</font></font></p>
 <div class="equation">
 <pre>  \nabla \phi(\overrightarrow{x}) = \sum_{j \in N}m_j\frac{\phi_j}{\rho_j} \nabla W(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p>ラプラシアンは、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Laplacian</font></font></p>
 <div class="equation">
 <pre>  \nabla^2 \phi(\overrightarrow{x}) = \sum_{j \in N}m_j\frac{\phi_j}{\rho_j} \nabla^2 W(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p>と表せます。式からわかるように、物理量の勾配及びラプラシアンは、重み関数に対してのみ適用されるイメージになります。重み関数<span class="equation">W</span>は、求めたい物理量によって異なるものを使用しまが、この理由の説明については割愛<a id="fnb-fujisawa" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-fujisawa" class="noteref" epub:type="noteref">*8</a>します。</p>
-<div class="footnote" epub:type="footnote" id="fn-fujisawa"><p class="footnote">[*8] "CGのための物理シミュレーションの基礎 - 藤澤誠" で詳しく解説されています。</p></div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Can be expressed as. </font><font style="vertical-align: inherit;">As you can see from the equation, the physical quantity gradient and the Laplacian are images that apply only to the weighting function. </font><font style="vertical-align: inherit;">The weight function </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">W</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is different depending on the physical quantity to be obtained, but the explanation of the reason is omitted </font></font><a id="fnb-fujisawa" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-fujisawa" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 8</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-fujisawa"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 8] It is explained in detail in "Basics of Physical Simulation for CG-Makoto Fujisawa".</font></font></p></div>
 
-<h3><a id="h5-3-2"></a><span class="secno">5.3.2　</span>密度の離散化</h3>
-<p>流体の粒子の密度は、先ほどの重み関数で離散化した物理量の式を利用して、</p>
+<h3><a id="h5-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Discretization of density</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The density of fluid particles is determined by using the formula of the physical quantity discretized by the weighting function.</font></font></p>
 <div class="equation">
 <pre>  \rho(\overrightarrow{x}) = \sum_{j \in N}m_jW_{poly6}(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p>と与えられます。ここで、利用する重み関数<span class="equation">W</span>は、以下で与えられます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is given. </font><font style="vertical-align: inherit;">Here, the weight function </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">W to be</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> used </font><font style="vertical-align: inherit;">is given below.</font></font></p>
 <div id="poly6" class="image">
 <img src="./Chapter 5 _ Fluid Simulation by SPH Method_files/poly6.jpg" alt="Poly6 weight function" class="width-070per">
-<p class="caption">
-図5.4: Poly6重み関数
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.4: Poly6 weight function
+</font></font></p>
 </div>
 
-<h3><a id="h5-3-3"></a><span class="secno">5.3.3　</span>粘性項の離散化</h3>
-<p>粘性項を離散化も密度の場合と同様重み関数を利用して、</p>
+<h3><a id="h5-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Discretization of viscous terms</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Discretizing the viscosity term also uses the weighting function as in the case of density.</font></font></p>
 <div class="equation">
 <pre>  f_{i}^{visc} = \mu\nabla^2\overrightarrow{u}_i = \mu \sum_{j \in N}m_j\frac{\overrightarrow{u}_j - \overrightarrow{u}_i}{\rho_j} \nabla^2 W_{visc}(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p>と表されます。ここで、重み関数のラプラシアン<span class="equation">\nabla^2 W_{visc}</span>は、以下で与えられます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is expressed as. </font><font style="vertical-align: inherit;">Where the weighting function Laplacian </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ nabla ^ 2 W_ {visc}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is given below.</font></font></p>
 <div id="visc" class="image">
 <img src="./Chapter 5 _ Fluid Simulation by SPH Method_files/visc.jpg" alt="Laplacian of Viscosity weight function" class="width-070per">
-<p class="caption">
-図5.5: Viscosity重み関数のラプラシアン
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.5: Laplacian of Viscosity weighting function
+</font></font></p>
 </div>
 
-<h3><a id="h5-3-4"></a><span class="secno">5.3.4　</span>圧力項の離散化</h3>
-<p>同様に、圧力項を離散化していきます。</p>
+<h3><a id="h5-3-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Discretization of pressure terms</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Similarly, the pressure term is discretized.</font></font></p>
 <div class="equation">
 <pre>  f_{i}^{press} = - \frac{1}{\rho_i} \nabla p_i = - \frac{1}{\rho_i} \sum_{j \in N}m_j\frac{p_j - p_i}{2\rho_j} \nabla W_{spiky}(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p>ここで、重み関数の勾配<span class="equation">W_{spiky}</span>は以下で与えられます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Where the gradient of the weighting function </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">W_ {spiky}</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is given below.</font></font></p>
 <div id="spiky" class="image">
 <img src="./Chapter 5 _ Fluid Simulation by SPH Method_files/spiky.jpg" alt="Gradient of Spiky weight function" class="width-070per">
-<p class="caption">
-図5.6: Spiky重み関数の勾配
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.6: Gradient of Spiky weight function
+</font></font></p>
 </div>
-<p>この時、粒子の圧力は事前に、Tait方程式と呼ばれる、</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">At this time, the pressure of the particles is called the Tait equation in advance.</font></font></p>
 <div class="equation">
 <pre>    p = B\left\{\left(\frac{\rho}{\rho_0}\right)^\gamma - 1\right\}
 </pre>
 </div>
-<p>で算出されています。 ここで、<span class="equation">B</span>は気体定数です。非圧縮性を保証するためには、本来ポアソン方程式を解かなければならないのですが、リアルタイム計算には向きません。その代わりSPH法<a id="fnb-wcsph" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-wcsph" class="noteref" epub:type="noteref">*9</a>では、近似的に非圧縮性を確保する点で格子法よりも圧力項の計算が苦手であるといわれます。</p>
-<div class="footnote" epub:type="footnote" id="fn-wcsph"><p class="footnote">[*9] Tait方程式を用いた圧力計算を行うSPH法を、特別にWCSPH法と呼びます。</p></div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is calculated by. </font><font style="vertical-align: inherit;">Where </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">B</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is the gas constant. </font><font style="vertical-align: inherit;">In order to guarantee incompressibility, Poisson's equation must be solved, but it is not suitable for real-time calculation. </font><font style="vertical-align: inherit;">Instead, it is said that the SPH method </font></font><a id="fnb-wcsph" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-wcsph" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 9</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is not as good at calculating the pressure term as the lattice method in terms of ensuring incompressibility approximately.</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-wcsph"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 9] The SPH method, which calculates pressure using the Tait equation, is specially called the WCSPH method.</font></font></p></div>
 
-<h2><a id="h5-4"></a><span class="secno">5.4　</span>SPH法の実装</h2>
-<p>サンプルはこちらのリポジトリ(<a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming" class="link">https://github.com/IndieVisualLab/UnityGraphicsProgramming</a>)のAssets/SPHFluid以下に掲載しています。今回の実装では、極力シンプルにSPHの手法を解説するために高速化や数値安定性は考慮していませんのでご了承ください。</p>
+<h2><a id="h5-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation of SPH method</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Samples can be </font><font style="vertical-align: inherit;">found under Assets / SPHFluid </font><font style="vertical-align: inherit;">in this repository ( </font></font><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ). </font><font style="vertical-align: inherit;">Please note that in this implementation, speedup and numerical stability are not considered in order to explain the SPH method as simply as possible.</font></font></p>
 
-<h3><a id="h5-4-1"></a><span class="secno">5.4.1　</span>パラメータ</h3>
-<p>シミュレーションに使用する諸々のパラメータの説明については、コード内コメントに記載しています。</p>
+<h3><a id="h5-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Parameters</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A description of the various parameters used in the simulation can be found in the comments in the code.</font></font></p>
 <div id="parameters" class="code">
-<p class="caption">リスト5.1: シミュレーションに使用するパラメータ(FluidBase.cs)</p>
-<pre class="list language-csharp"> 1: NumParticleEnum particleNum = NumParticleEnum.NUM_8K;    // 粒子数<font></font>
- 2: float smoothlen = 0.012f;               // 粒子半径<font></font>
- 3: float pressureStiffness = 200.0f;       // 圧力項係数<font></font>
- 4: float restDensity = 1000.0f;            // 静止密度<font></font>
- 5: float particleMass = 0.0002f;           // 粒子質量<font></font>
- 6: float viscosity = 0.1f;                 // 粘性係数<font></font>
- 7: float maxAllowableTimestep = 0.005f;    // 時間刻み幅<font></font>
- 8: float wallStiffness = 3000.0f;          // ペナルティ法の壁の力<font></font>
- 9: int iterations = 4;                     // イテレーション回数<font></font>
-10: Vector2 gravity = new Vector2(0.0f, -0.5f);     // 重力<font></font>
-11: Vector2 range = new Vector2(1, 1);              // シミュレーション空間<font></font>
-12: bool simulate = true;                           // 実行 or 一時停止<font></font>
-13: <font></font>
-14: int numParticles;              // パーティクルの個数<font></font>
-15: float timeStep;                // 時間刻み幅<font></font>
-16: float densityCoef;             // Poly6カーネルの密度係数<font></font>
-17: float gradPressureCoef;        // Spikyカーネルの圧力係数<font></font>
-18: float lapViscosityCoef;        // Laplacianカーネルの粘性係数<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.1: Parameters used for simulation (FluidBase.cs)</font></font></p>
+<pre class="list language-csharp"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 1: NumParticleEnum particleNum = NumParticleEnum.NUM_8K; // Number of particles</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 2: float smoothlen = 0.012f; // Particle radius</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 3: float pressureStiffness = 200.0f; // Pressure term coefficient</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 4: float restDensity = 1000.0f; // rest density</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 5: float particleMass = 0.0002f; // particle mass</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 6: float viscosity = 0.1f; // Viscosity coefficient</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 7: float maxAllowableTimestep = 0.005f; // Time step width</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 8: float wallStiffness = 3000.0f; // Penalty wall power</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 9: int iterations = 4; // number of iterations</font></font><font></font>
+10: Vector2 gravity = new Vector2(0.0f, -0.5f);     // 重力<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+11: Vector2 range = new Vector2 (1, 1); // Simulation space</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+12: bool simulate = true; // Run or pause</font></font><font></font>
+13: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+14: int numParticles; // Number of particles</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+15: float timeStep; // Time step width</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+16: float densityCoef; // Poly6 kernel density coefficient</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+17: float gradPressureCoef; // Pressure coefficient of Spiky kernel</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+18: float lapViscosityCoef; // Laplacian kernel viscosity coefficient</font></font><font></font>
 </pre>
 </div>
-<p>今回のデモシーンでは、コードに記載されているパラメータの初期化値とは異なる値をインスペクタで設定していますので注意してください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Please note that in this demoscene, the inspector sets a value that is different from the parameter initialization value described in the code.</font></font></p>
 
-<h3><a id="h5-4-2"></a><span class="secno">5.4.2　</span>SPH重み関数の係数の計算</h3>
-<p>重み関数の係数はシミュレーション中で変化しないため、初期化時にCPU側で計算しておきます。(ただし、実行途中でパラメータを編集する可能性も踏まえてUpdate関数内で更新しています)</p>
-<p>今回、粒子ごとの質量はすべて一定にしているので、物理量の式内にある質量<span class="equation">m</span>はシグマの外に出て以下になります。</p>
+<h3><a id="h5-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Calculation of coefficients of SPH weighting function</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the coefficient of the weight function does not change during simulation, it is calculated on the CPU side at the time of initialization. </font><font style="vertical-align: inherit;">(However, it is updated in the Update function in consideration of the possibility of editing the parameter during execution)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the mass of each particle is constant this time, the mass </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">m in</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> the formula of the physical quantity </font><font style="vertical-align: inherit;">goes out of the sigma and becomes as follows.</font></font></p>
 <div class="equation">
 <pre>  \phi(\overrightarrow{x}) = m \sum_{j \in N}\frac{\phi_j}{\rho_j}W(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p>そのため、係数計算の中に質量を含めてしまうことができます。</p>
-<p>重み関数の種類で係数も変化してきますから、それぞれに関して係数を計算します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, the mass can be included in the coefficient calculation.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the coefficient changes depending on the type of weight function, calculate the coefficient for each.</font></font></p>
 <div id="coefs" class="code">
-<p class="caption">リスト5.2: 重み関数の係数の事前計算(FluidBase.cs)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.2: Pre-calculation of weight function coefficients (FluidBase.cs)</font></font></p>
 <pre class="list language-csharp"> 1: densityCoef = particleMass * 4f / (Mathf.PI * Mathf.Pow(smoothlen, 8));<font></font>
  2: gradPressureCoef<font></font>
  3:     = particleMass * -30.0f / (Mathf.PI * Mathf.Pow(smoothlen, 5));<font></font>
@@ -359,9 +352,9 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
  5:     = particleMass * 20f / (3 * Mathf.PI * Mathf.Pow(smoothlen, 5));<font></font>
 </pre>
 </div>
-<p>最終的に、これらのCPU側で計算した係数(及び各種パラメータ)をGPU側の定数バッファに格納します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, the coefficients (and various parameters) calculated on the CPU side are stored in the constant buffer on the GPU side.</font></font></p>
 <div id="setconst" class="code">
-<p class="caption">リスト5.3: ComputeShaderの定数バッファに値を転送する(FluidBase.cs)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.3: Transferring a Value to the Compute Shader's Constant Buffer (FluidBase.cs)</font></font></p>
 <pre class="list language-csharp"> 1: fluidCS.SetInt("_NumParticles", numParticles);<font></font>
  2: fluidCS.SetFloat("_TimeStep", timeStep);<font></font>
  3: fluidCS.SetFloat("_Smoothlen", smoothlen);<font></font>
@@ -377,114 +370,114 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
 </pre>
 </div>
 <div id="const" class="code">
-<p class="caption">リスト5.4: ComputeShaderの定数バッファ(SPH2D.compute)</p>
-<pre class="list language-csharp"> 1: int   _NumParticles;      // 粒子数<font></font>
- 2: float _TimeStep;          // 時間刻み幅(dt)<font></font>
- 3: float _Smoothlen;         // 粒子半径<font></font>
- 4: float _PressureStiffness; // Beckerの係数<font></font>
- 5: float _RestDensity;       // 静止密度<font></font>
- 6: float _DensityCoef;       // 密度算出時の係数<font></font>
- 7: float _GradPressureCoef;  // 圧力算出時の係数<font></font>
- 8: float _LapViscosityCoef;  // 粘性算出時の係数<font></font>
- 9: float _WallStiffness;     // ペナルティ法の押し返す力<font></font>
-10: float _Viscosity;         // 粘性係数<font></font>
-11: float2 _Gravity;          // 重力<font></font>
-12: float2 _Range;            // シミュレーション空間<font></font>
-13: <font></font>
-14: float3 _MousePos;         // マウス位置<font></font>
-15: float _MouseRadius;       // マウスインタラクションの半径<font></font>
-16: bool _MouseDown;          // マウスが押されているか<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.4: Compute Shader constant buffer (SPH2D.compute)</font></font></p>
+<pre class="list language-csharp"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 1: int _NumParticles; // Number of particles</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 2: float _TimeStep; // Time step width (dt)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 3: float _Smoothlen; // particle radius</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 4: float _PressureStiffness; // Becker's coefficient</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 5: float _RestDensity; // Rest density</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 6: float _DensityCoef; // Coefficient when calculating density</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 7: float _GradPressureCoef; // Coefficient when calculating pressure</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 8: float _LapViscosityCoef; // Coefficient when calculating viscosity</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 9: float _WallStiffness; // Pushing back force of the penalty method</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+10: float _Viscosity; // Viscosity coefficient</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+11: float2 _Gravity; // Gravity</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+12: float2 _Range; // Simulation space</font></font><font></font>
+13: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+14: float3 _MousePos; // Mouse position</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+15: float _MouseRadius; // Radius of mouse interaction</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+16: bool _MouseDown; // Is the mouse pressed?</font></font><font></font>
 </pre>
 </div>
 
-<h3><a id="h5-4-3"></a><span class="secno">5.4.3　</span>密度の計算</h3>
+<h3><a id="h5-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Density calculation</font></font></h3>
 <div id="density_kernel" class="code">
-<p class="caption">リスト5.5: 密度の計算を行うカーネル関数(SPH2D.compute)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.5: Kernel function for calculating density (SPH2D.compute)</font></font></p>
 <pre class="list language-c"> 1: [numthreads(THREAD_SIZE_X, 1, 1)]<font></font>
- 2: void DensityCS(uint3 DTid : SV_DispatchThreadID) {<font></font>
- 3:     uint P_ID = DTid.x;     // 現在処理しているパーティクルID<font></font>
+ 2: void DensityCS(uint3 DTid : SV_DispatchThreadID) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 3: uint P_ID = DTid.x; // Particle ID currently being processed</font></font><font></font>
  4: <font></font>
  5:     float h_sq = _Smoothlen * _Smoothlen;<font></font>
  6:     float2 P_position = _ParticlesBufferRead[P_ID].position;<font></font>
- 7: <font></font>
- 8:     // 近傍探索(O(n^2))<font></font>
+ 7: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 8: // Proximity exploration (O(n^2))</font></font><font></font>
  9:     float density = 0;<font></font>
-10:     for (uint N_ID = 0; N_ID &lt; _NumParticles; N_ID++) {<font></font>
-11:             if (N_ID == P_ID) continue;     // 自身の参照回避<font></font>
+10:     for (uint N_ID = 0; N_ID &lt; _NumParticles; N_ID++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+11: if (N_ID == P_ID) continue; // Avoid referencing itself</font></font><font></font>
 12: <font></font>
 13:             float2 N_position = _ParticlesBufferRead[N_ID].position;<font></font>
-14: <font></font>
-15:             float2 diff = N_position - P_position;    // 粒子距離<font></font>
-16:             float r_sq = dot(diff, diff);             // 粒子距離の2乗<font></font>
-17: <font></font>
-18:             // 半径内に収まっていない粒子は除外<font></font>
-19:             if (r_sq &lt; h_sq) {<font></font>
-20:             // 計算には2乗しか含まれないのでルートをとる必要なし<font></font>
+14: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+15: float2 diff = N_position-P_position; // particle distance</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+16: float r_sq = dot (diff, diff); // Particle distance squared</font></font><font></font>
+17: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+18: // Exclude particles that do not fit within the radius</font></font><font></font>
+19:             if (r_sq &lt; h_sq) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+20: // No need to take a route as the calculation only includes the square</font></font><font></font>
 21:                     density += CalculateDensity(r_sq);<font></font>
 22:             }<font></font>
 23:     }<font></font>
-24: <font></font>
-25:     // 密度バッファを更新<font></font>
+24: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+25: // Update density buffer</font></font><font></font>
 26:     _ParticlesDensityBufferWrite[P_ID].density = density;<font></font>
 27: }<font></font>
 </pre>
 </div>
-<p>本来であれば粒子を全数調査せず、適切な近傍探索アルゴリズムを用いて近傍粒子を探す必要がありますが、今回の実装では簡単のために全数調査を行っています(10行目のforループ)。また、自分と相手粒子との距離計算を行うため、11行目で自身の粒子同士で計算を行うのを回避しています。</p>
-<p>重み関数の有効半径<span class="equation">h</span>による場合分けは19行目のif文で実現します。密度の足し合わせ(シグマの計算)は、9行目で0で初期化しておいた変数に対してシグマ内部の計算結果を加算していくことで実現します。ここで、もう一度密度の計算式を示します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Normally, it is necessary to search for nearby particles using an appropriate neighborhood search algorithm without searching for all particles, but in this implementation, 100% survey is performed for simplicity (for loop on line 10). .. </font><font style="vertical-align: inherit;">Also, since the distance between you and the other particle is calculated, you avoid calculating between your own particles in the 11th line.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The </font><font style="vertical-align: inherit;">case classification by </font><font style="vertical-align: inherit;">the effective radius </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">h</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> of the </font><font style="vertical-align: inherit;">weight function </font><font style="vertical-align: inherit;">is realized by the if statement on the 19th line. </font><font style="vertical-align: inherit;">Density addition (sigma calculation) is realized by adding the calculation result inside sigma to the variable initialized with 0 in the 9th line. </font><font style="vertical-align: inherit;">Here is the formula for calculating the density again.</font></font></p>
 <div class="equation">
 <pre>  \rho(\overrightarrow{x}) = \sum_{j \in N}m_jW_{poly6}(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p>密度の計算は上式のとおり、Poly6重み関数を用います。 Poly6重み関数は<span class="listref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#density_weight">リスト5.6</a></span>で計算します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The density is calculated using the Poly6 weighting function as shown in the above equation. </font><font style="vertical-align: inherit;">The Poly6 weighting function is </font><font style="vertical-align: inherit;">calculated in </font></font><span class="listref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#density_weight"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.6</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div id="density_weight" class="code">
-<p class="caption">リスト5.6: 密度の計算(SPH2D.compute)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.6: Density Calculation (SPH2D.compute)</font></font></p>
 <pre class="list language-c"> 1: inline float CalculateDensity(float r_sq) {<font></font>
  2:     const float h_sq = _Smoothlen * _Smoothlen;<font></font>
  3:     return _DensityCoef * (h_sq - r_sq) * (h_sq - r_sq) * (h_sq - r_sq);<font></font>
  4: }<font></font>
 </pre>
 </div>
-<p>最終的に<span class="listref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#density_kernel">リスト5.5</a></span>の25行目で書き込み用バッファに書き込みます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, </font><font style="vertical-align: inherit;">line 25 </font><font style="vertical-align: inherit;">of </font></font><span class="listref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#density_kernel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.5</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> writes to the write buffer.</font></font></p>
 
-<h3><a id="h5-4-4"></a><span class="secno">5.4.4　</span>粒子単位の圧力の計算</h3>
+<h3><a id="h5-4-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Calculation of pressure per particle</font></font></h3>
 <div id="press_kernel" class="code">
-<p class="caption">リスト5.7: 粒子毎の圧力を計算する重み関数(SPH2D.compute)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.7: Weighting function (SPH2D.compute) to calculate pressure per particle</font></font></p>
 <pre class="list language-c"> 1: [numthreads(THREAD_SIZE_X, 1, 1)]<font></font>
- 2: void PressureCS(uint3 DTid : SV_DispatchThreadID) {<font></font>
- 3:     uint P_ID = DTid.x;     // 現在処理しているパーティクルID<font></font>
+ 2: void PressureCS(uint3 DTid : SV_DispatchThreadID) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 3: uint P_ID = DTid.x; // Particle ID currently being processed</font></font><font></font>
  4: <font></font>
  5:     float  P_density = _ParticlesDensityBufferRead[P_ID].density;<font></font>
  6:     float  P_pressure = CalculatePressure(P_density);<font></font>
- 7: <font></font>
- 8:     // 圧力バッファを更新<font></font>
+ 7: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 8: // Update pressure buffer</font></font><font></font>
  9:     _ParticlesPressureBufferWrite[P_ID].pressure = P_pressure;<font></font>
 10: }<font></font>
 </pre>
 </div>
-<p>圧力項を解く前に、粒子単位の圧力を算出しておき、後の圧力項の計算コストを下げます。先程も述べましたが、圧力の計算では本来、以下の式のようなポアソン方程式と呼ばれる方程式を解く必要があります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Before solving the pressure term, calculate the pressure for each particle to reduce the calculation cost of the pressure term later. </font><font style="vertical-align: inherit;">As I mentioned earlier, pressure calculation originally requires solving an equation called Poisson's equation, such as the following equation.</font></font></p>
 <div class="equation">
 <pre>    \nabla^2 p = \rho \frac{\nabla \overrightarrow{u}}{\Delta t}
 </pre>
 </div>
-<p>しかし、コンピュータで正確にポアソン方程式を解く操作は非常に計算コストが高いため、以下のTait方程式を用いて近似的に求めます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, the operation of solving Poisson's equation accurately with a computer is very expensive, so it is calculated approximately using the Tait equation below.</font></font></p>
 <div class="equation">
 <pre>    p = B\left\{\left(\frac{\rho}{\rho_0}\right)^\gamma - 1\right\}
 </pre>
 </div>
 <div id="tait" class="code">
-<p class="caption">リスト5.8: Tait方程式の実装(SPH2D.compute)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.8: Implementation of the Tait equation (SPH2D.compute)</font></font></p>
 <pre class="list language-c"> 1: inline float CalculatePressure(float density) {<font></font>
  2:     return _PressureStiffness * max(pow(density / _RestDensity, 7) - 1, 0);<font></font>
  3: }<font></font>
 </pre>
 </div>
 
-<h3><a id="h5-4-5"></a><span class="secno">5.4.5　</span>圧力項・粘性項の計算</h3>
+<h3><a id="h5-4-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Calculation of pressure term and viscosity term</font></font></h3>
 <div id="force_kernel" class="code">
-<p class="caption">リスト5.9: 圧力項・粘性項を計算するカーネル関数(SPH2D.compute)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.9: Kernel function to calculate pressure and viscosity terms (SPH2D.compute)</font></font></p>
 <pre class="list language-c"> 1: [numthreads(THREAD_SIZE_X, 1, 1)]<font></font>
- 2: void ForceCS(uint3 DTid : SV_DispatchThreadID) {<font></font>
- 3:     uint P_ID = DTid.x; // 現在処理しているパーティクルID<font></font>
+ 2: void ForceCS(uint3 DTid : SV_DispatchThreadID) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 3: uint P_ID = DTid.x; // Particle ID currently being processed</font></font></font></font><font></font>
  4: <font></font>
  5:     float2 P_position = _ParticlesBufferRead[P_ID].position;<font></font>
  6:     float2 P_velocity = _ParticlesBufferRead[P_ID].velocity;<font></font>
@@ -492,19 +485,19 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
  8:     float  P_pressure = _ParticlesPressureBufferRead[P_ID].pressure;<font></font>
  9: <font></font>
 10:     const float h_sq = _Smoothlen * _Smoothlen;<font></font>
-11: <font></font>
-12:     // 近傍探索(O(n^2))<font></font>
-13:     float2 press = float2(0, 0);<font></font>
+11: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+12: // Proximity exploration (O(n^2))</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+13: float2 press = float2 (0, 0);</font></font></font></font><font></font>
 14:     float2 visco = float2(0, 0);<font></font>
-15:     for (uint N_ID = 0; N_ID &lt; _NumParticles; N_ID++) {<font></font>
-16:             if (N_ID == P_ID) continue;     // 自身を対象とした場合スキップ<font></font>
+15:     for (uint N_ID = 0; N_ID &lt; _NumParticles; N_ID++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+16: if (N_ID == P_ID) continue; // Skip if targeting itself</font></font><font></font>
 17: <font></font>
 18:             float2 N_position = _ParticlesBufferRead[N_ID].position;<font></font>
 19: <font></font>
 20:             float2 diff = N_position - P_position;<font></font>
 21:             float r_sq = dot(diff, diff);<font></font>
-22: <font></font>
-23:             // 半径内に収まっていない粒子は除外<font></font>
+22: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+23: // Exclude particles that do not fit within the radius</font></font><font></font>
 24:             if (r_sq &lt; h_sq) {<font></font>
 25:                     float  N_density<font></font>
 26:                     = _ParticlesDensityBufferRead[N_ID].density;<font></font>
@@ -513,32 +506,32 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
 29:                     float2 N_velocity<font></font>
 30:                     = _ParticlesBufferRead[N_ID].velocity;<font></font>
 31:                     float  r = sqrt(r_sq);<font></font>
-32: <font></font>
-33:                     // 圧力項<font></font>
+32: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+33: // Pressure item</font></font><font></font>
 34:                     press += CalculateGradPressure(...);<font></font>
-35: <font></font>
-36:                     // 粘性項<font></font>
+35: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+36: // Sticky items</font></font><font></font>
 37:                     visco += CalculateLapVelocity(...);<font></font>
 38:             }<font></font>
 39:     }<font></font>
-40: <font></font>
-41:     // 統合<font></font>
+40: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+41: // Integration</font></font><font></font>
 42:     float2 force = press + _Viscosity * visco;<font></font>
-43: <font></font>
-44:     // 加速度バッファの更新<font></font>
+43: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+44: // Acceleration buffer update</font></font><font></font>
 45:     _ParticlesForceBufferWrite[P_ID].acceleration = force / P_density;<font></font>
 46: }<font></font>
 </pre>
 </div>
-<p>圧力項、粘性項の計算も、密度の計算方法と同様に行います。</p>
-<p>初めに、以下の圧力項による力の計算を31行目にて行っています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The pressure term and viscosity term are calculated in the same way as the density calculation method.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, the force is calculated by the following pressure term on the 31st line.</font></font></p>
 <div class="equation">
 <pre>  f_{i}^{press} = - \frac{1}{\rho_i} \nabla p_i = - \frac{1}{\rho_i} \sum_{j \in N}m_j\frac{p_j - p_i}{2\rho_j} \nabla W_{press}(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p>シグマの中身の計算は以下の関数で行われます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The calculation of the contents of Sigma is performed by the following function.</font></font></p>
 <div id="press_weight" class="code">
-<p class="caption">リスト5.10: 圧力項の要素の計算(SPH2D.compute)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.10: Calculation of Pressure Term Elements (SPH2D.compute)</font></font></p>
 <pre class="list language-c"> 1: inline float2 CalculateGradPressure(...) {<font></font>
  2:     const float h = _Smoothlen;<font></font>
  3:     float avg_pressure = 0.5f * (N_pressure + P_pressure);<font></font>
@@ -547,45 +540,45 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
  6: }<font></font>
 </pre>
 </div>
-<p>次に、以下の粘性項による力の計算を34行目で行っています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, the force is calculated by the following viscosity term on the 34th line.</font></font></p>
 <div class="equation">
 <pre>  f_{i}^{visc} = \mu\nabla^2\overrightarrow{u}_i = \mu \sum_{j \in N}m_j\frac{\overrightarrow{u}_j - \overrightarrow{u}_i}{\rho_j} \nabla^2 W_{visc}(\overrightarrow{x_j} - \overrightarrow{x}, h)
 </pre>
 </div>
-<p>シグマの中身の計算は以下の関数で行われます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The calculation of the contents of Sigma is performed by the following function.</font></font></p>
 <div id="visc_weight" class="code">
-<p class="caption">リスト5.11: 粘性項の要素の計算(SPH2D.compute)</p>
-<pre class="list language-c"> 1: inline float2 CalculateLapVelocity(...) {<font></font>
- 2:     const float h = _Smoothlen;<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.11: Calculation of Viscosity Term Elements (SPH2D.compute)</font></font></p>
+<pre class="list language-c"> 1: inline float2 CalculateLapVelocity(...) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 2:     const float h = _Smoothlen;</font></font></font></font><font></font>
  3:     float2 vel_diff = (N_velocity - P_velocity);<font></font>
  4:     return _LapViscosityCoef / N_density * (h - r) * vel_diff;<font></font>
  5: }<font></font>
 </pre>
 </div>
-<p>最後に、<span class="listref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#force_kernel">リスト5.9</a></span>の39行目にて圧力項と粘性項で算出した力を足し合わせ、最終的な出力としてバッファに書き込んでいます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, on </font><font style="vertical-align: inherit;">line 39 of </font></font><span class="listref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#force_kernel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.9</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the forces calculated by the pressure and viscosity terms are added and written to the buffer as the final output.</font></font></p>
 
-<h3><a id="h5-4-6"></a><span class="secno">5.4.6　</span>衝突判定と位置更新</h3>
+<h3><a id="h5-4-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Collision detection and position update</font></font></h3>
 <div id="integrate_kernel" class="code">
-<p class="caption">リスト5.12: 衝突判定と位置更新を行うカーネル関数(SPH2D.compute)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.12: Kernel function for collision detection and position update (SPH2D.compute)</font></font></p>
 <pre class="list language-c"> 1: [numthreads(THREAD_SIZE_X, 1, 1)]<font></font>
- 2: void IntegrateCS(uint3 DTid : SV_DispatchThreadID) {<font></font>
- 3:     const unsigned int P_ID = DTid.x; // 現在処理しているパーティクルID<font></font>
- 4: <font></font>
- 5:     // 更新前の位置と速度<font></font>
+ 2: void IntegrateCS(uint3 DTid : SV_DispatchThreadID) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 3: const unsigned int P_ID = DTid.x; // Particle ID currently being processed</font></font><font></font>
+ 4: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 5: // Position and speed before update</font></font><font></font>
  6:     float2 position = _ParticlesBufferRead[P_ID].position;<font></font>
  7:     float2 velocity = _ParticlesBufferRead[P_ID].velocity;<font></font>
  8:     float2 acceleration = _ParticlesForceBufferRead[P_ID].acceleration;<font></font>
- 9: <font></font>
-10:     // マウスインタラクション<font></font>
+ 9: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+10: // Mouse interaction</font></font><font></font>
 11:     if (distance(position, _MousePos.xy) &lt; _MouseRadius &amp;&amp; _MouseDown) {<font></font>
 12:             float2 dir = position - _MousePos.xy;<font></font>
 13:             float pushBack = _MouseRadius-length(dir);<font></font>
 14:             acceleration += 100 * pushBack * normalize(dir);<font></font>
 15:     }<font></font>
-16: <font></font>
-17:     // 衝突判定を書くならここ -----<font></font>
-18: <font></font>
-19:     // 壁境界(ペナルティ法)<font></font>
+16: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+17: // Here to write collision detection -----</font></font><font></font>
+18: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+19: // Wall boundary (penalty method)</font></font><font></font>
 20:     float dist = dot(float3(position, 1), float3(1, 0, 0));<font></font>
 21:     acceleration += min(dist, 0) * -_WallStiffness * float2(1, 0);<font></font>
 22: <font></font>
@@ -597,27 +590,27 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
 28: <font></font>
 29:     dist = dot(float3(position, 1), float3(0, -1, _Range.y));<font></font>
 30:     acceleration += min(dist, 0) * -_WallStiffness * float2(0, -1);<font></font>
-31: <font></font>
-32:     // 重力の加算<font></font>
+31: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+32: // Addition of gravity</font></font><font></font>
 33:     acceleration += _Gravity;<font></font>
-34: <font></font>
-35:     // 前進オイラー法で次の粒子位置を更新<font></font>
+34: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+35: // Update the next particle position with the forward Euler method</font></font><font></font>
 36:     velocity += _TimeStep * acceleration;<font></font>
 37:     position += _TimeStep * velocity;<font></font>
-38: <font></font>
-39:     // パーティクルのバッファ更新<font></font>
+38: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+39: // Particle buffer update</font></font><font></font>
 40:     _ParticlesBufferWrite[P_ID].position = position;<font></font>
 41:     _ParticlesBufferWrite[P_ID].velocity = velocity;<font></font>
 42: }<font></font>
 </pre>
 </div>
-<p>壁との衝突判定をペナルティ法を用いて行います(19-30行目)。ペナルティ法とは、境界位置からはみ出した分だけ強い力で押し返すという手法になります。</p>
-<p>本来は壁との衝突判定の前に障害物との衝突判定も行うのですが、今回の実装ではマウスとのインタラクションを行うようにしています(213-218行目)。マウスが押されていれば、指定された力でマウス位置から遠ざかるような力を加えています。</p>
-<p>33行目にて外力である重力を加算しています。重力の値をゼロにすると無重力状態になり、面白い視覚効果が得られます。また、位置の更新は前述の前進オイラー法で行い(36-37行目)、最終的な結果をバッファに書き込みます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Collision detection with a wall is performed using the penalty method (lines 19-30). </font><font style="vertical-align: inherit;">The penalty method is a method of pushing back with a strong force as much as it protrudes from the boundary position.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Originally, collision detection with obstacles is also performed before collision detection with a wall, but in this implementation, interaction with the mouse is performed (lines 213-218). </font><font style="vertical-align: inherit;">If the mouse is pressed, the specified force is applied to move it away from the mouse position.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gravity, which is an external force, is added on the 33rd line. </font><font style="vertical-align: inherit;">Setting the gravity value to zero results in weightlessness and interesting visual effects. </font><font style="vertical-align: inherit;">Also, update the position using the forward Euler method described above (lines 36-37) and write the final result to the buffer.</font></font></p>
 
-<h3><a id="h5-4-7"></a><span class="secno">5.4.7　</span>シミュレーションメインルーチン</h3>
+<h3><a id="h5-4-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Simulation main routine</font></font></h3>
 <div id="routine" class="code">
-<p class="caption">リスト5.13: シミュレーションの主要関数(FluidBase.cs)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.13: Simulation key functions (FluidBase.cs)</font></font></p>
 <pre class="list language-csharp"> 1: private void RunFluidSolver() {<font></font>
  2: <font></font>
  3:   int kernelID = -1;<font></font>
@@ -654,22 +647,22 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
 34: }<font></font>
 </pre>
 </div>
-<p>これまでに述べたComputeShaderのカーネル関数を、毎フレーム呼び出す部分です。それぞれのカーネル関数に対して適切なComputeBufferを与えてあげます。</p>
-<p>ここで、タイムステップ幅<span class="equation">\Delta t</span>を小さくすればするほどシミュレーションの誤差が出にくくなることを思い出してみてください。60FPSで実行する場合、<span class="equation">\Delta t = 1 / 60</span>となりますが、これでは誤差が大きく出てしまい粒子が爆発してしまいます。さらに、<span class="equation">\Delta t = 1 / 60</span>より小さいタイムステップ幅をとると、1フレーム当たりの時間の進み方が実時間より遅くなり、スローモーションになってしまいます。これを回避するには、<span class="equation">\Delta t = 1 / (60 \times {iterarion})</span>として、メインルーチンを1フレームにつきiterarion回回します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the part that calls the Compute Shader kernel function described so far every frame. </font><font style="vertical-align: inherit;">Give the appropriate ComputeBuffer for each kernel function.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, </font><font style="vertical-align: inherit;">remember that the smaller </font><font style="vertical-align: inherit;">the time step width </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta t</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the less error the simulation will have. </font><font style="vertical-align: inherit;">When running at 60FPS, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta t = 1/60</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , but this causes a large error and the particles explode. </font><font style="vertical-align: inherit;">Furthermore, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">if the</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> time step width is smaller than </font><span class="equation"><font style="vertical-align: inherit;">\ Delta t = 1/60, the</font></span><font style="vertical-align: inherit;"> time per frame will advance slower than the real time, resulting in slow motion. </font><font style="vertical-align: inherit;">To avoid this, set </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Delta t = 1 / (60 \ times {iterarion}) and run</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> the main routine iterarion times per frame.</font></font></p>
 <div id="iteration" class="code">
-<p class="caption">リスト5.14: 主要関数のイテレーション(FluidBase.cs)</p>
-<pre class="list language-csharp"> 1: // 計算精度を上げるために時間刻み幅を小さくして複数回イテレーションする<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.14: Major Function Iteration (FluidBase.cs)</font></font></p>
+<pre class="list language-csharp"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 1: // Reduce the time step width and iterate multiple times to improve the calculation accuracy.</font></font><font></font>
  2: for (int i = 0; i&lt;iterations; i++) {<font></font>
  3:     RunFluidSolver();<font></font>
  4: }<font></font>
 </pre>
 </div>
-<p>こうすることで、小さいタイムステップ幅で実時間のシミュレーションを行うことができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This allows you to perform real-time simulations with a small time step width.</font></font></p>
 
-<h3><a id="h5-4-8"></a><span class="secno">5.4.8　</span>バッファの使い方</h3>
-<p>通常のシングルアクセスのパーティクルシステムとは異なり、粒子同士が相互作用しますから、計算途中に他のデータが書き換わってしまっては困ります。これを回避するために、GPUで計算を行っている際に値を書き換えない読み込み用バッファと書き込み用バッファの2つを用意します。これらのバッファを毎フレーム入れ替えることで、競合なくデータを更新できます。</p>
+<h3><a id="h5-4-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> How to use the buffer</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Unlike a normal single-access particle system, particles interact with each other, so it is a problem if other data is rewritten during the calculation. </font><font style="vertical-align: inherit;">To avoid this, prepare two buffers, a read buffer and a write buffer, which do not rewrite the value when performing calculations on the GPU. </font><font style="vertical-align: inherit;">By swapping these buffers every frame, you can update the data without conflict.</font></font></p>
 <div id="swap" class="code">
-<p class="caption">リスト5.15: バッファを入れ替える関数(FluidBase.cs)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.15: Buffer Swapping Function (FluidBase.cs)</font></font></p>
 <pre class="list language-csharp"> 1: void SwapComputeBuffer(ref ComputeBuffer ping, ref ComputeBuffer pong) {<font></font>
  2:     ComputeBuffer temp = ping;<font></font>
  3:     ping = pong;<font></font>
@@ -678,9 +671,9 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
 </pre>
 </div>
 
-<h3><a id="h5-4-9"></a><span class="secno">5.4.9　</span>粒子のレンダリング</h3>
+<h3><a id="h5-4-9"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.9　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Particle rendering</font></font></h3>
 <div id="rendercs" class="code">
-<p class="caption">リスト5.16: パーティクルのレンダリング(FluidRenderer.cs)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.16: Rendering Particles (FluidRenderer.cs)</font></font></p>
 <pre class="list language-csharp"> 1: void DrawParticle() {<font></font>
  2: <font></font>
  3:   Material m = RenderParticleMat;<font></font>
@@ -695,9 +688,9 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
 12: }<font></font>
 </pre>
 </div>
-<p>10行目にて、流体粒子の位置計算結果を格納したバッファをマテリアルにセットし、シェーダーに転送します。11行目にて、パーティクルの個数分インスタンス描画をするよう命令しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">On the 10th line, set the buffer containing the position calculation result of the fluid particle in the material and transfer it to the shader. </font><font style="vertical-align: inherit;">On the 11th line, we are instructing to draw instances for the number of particles.</font></font></p>
 <div id="render" class="code">
-<p class="caption">リスト5.17: パーティクルのレンダリング(Particle.shader)</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 5.17: Particle Rendering (Particle.shader)</font></font></p>
 <pre class="list language-c"> 1: struct FluidParticle {<font></font>
  2:     float2 position;<font></font>
  3:     float2 velocity;<font></font>
@@ -709,25 +702,25 @@ Figure 5.1: Left: Euler-like, Right: Lagrange-like
  9: // Vertex Shader<font></font>
 10: // --------------------------------------------------------------------<font></font>
 11: v2g vert(uint id : SV_VertexID) {<font></font>
-12: <font></font>
-13:     v2g o = (v2g)0;<font></font>
-14:     o.pos = float3(_ParticlesBuffer[id].position.xy, 0);<font></font>
-15:     o.color = float4(0, 0.1, 0.1, 1);<font></font>
+12: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+13: v2g or = (v2g) 0;</font></font><font></font>
+14:     o.pos = float3(_ParticlesBuffer[id].position.xy, 0);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+15: o.color = float4 (0, 0.1, 0.1, 1);</font></font><font></font>
 16:     return o;<font></font>
 17: }<font></font>
 </pre>
 </div>
-<p>1-6行目にて、流体粒子の情報を受け取るための情報の定義を行います。この時、スクリプトからマテリアルに転送したバッファの構造体と定義を一致させる必要があります。位置データの受け取りは、14行目のようにid : SV_VertexIDでバッファの要素を参照することで行います。</p>
-<p>あとは通常のパーティクルシステムと同様、<span class="imgref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#bill">図5.7</a></span>のようにジオメトリシェーダーで計算結果の位置データを中心としたビルボード<a id="fnb-billboard" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-billboard" class="noteref" epub:type="noteref">*10</a>を作成し、粒子画像をアタッチしてレンダリングします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lines 1-6 define the information for receiving fluid particle information. </font><font style="vertical-align: inherit;">At this time, it is necessary to match the definition with the structure of the buffer transferred from the script to the material. </font><font style="vertical-align: inherit;">The position data is received by referring to the buffer element with id: SV_VertexID as shown in the 14th line.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">After that, as with a normal particle system </font><font style="vertical-align: inherit;">, create a </font><font style="vertical-align: inherit;">billboard </font><a id="fnb-billboard" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-billboard" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;">* 10</font></a><font style="vertical-align: inherit;"> centered on the position data of the calculation result with the geometry shader </font><font style="vertical-align: inherit;">as </font></font><span class="imgref"><a href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#bill"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">shown in Fig. 5.7</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font><font style="vertical-align: inherit;">and attach and render the particle image.</font></font><a id="fnb-billboard" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/takao.html#fn-billboard" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font></p>
 <div id="bill" class="image">
 <img src="./Chapter 5 _ Fluid Simulation by SPH Method_files/bill.jpg" alt="Billboard creation" class="width-100per">
-<p class="caption">
-図5.7: ビルボードの作成
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.7: Creating a billboard
+</font></font></p>
 </div>
-<div class="footnote" epub:type="footnote" id="fn-billboard"><p class="footnote">[*10] 表が常に視点方向を向くPlaneのことを指します。</p></div>
+<div class="footnote" epub:type="footnote" id="fn-billboard"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 10] A Plane whose table always faces the viewpoint.</font></font></p></div>
 
-<h2><a id="h5-5"></a><span class="secno">5.5　</span>結果</h2>
+<h2><a id="h5-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Results</font></font></h2>
 <div id="result" class="image">
 <img src="./Chapter 5 _ Fluid Simulation by SPH Method_files/result.png" alt="Rendering result">
 <p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -741,4 +734,4 @@ Figure 5.8: Rendering result
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As mentioned earlier, there are many types of fluid simulation methods other than the SPH method. </font><font style="vertical-align: inherit;">Through this chapter, we hope that you will be interested in other physics simulations themselves in addition to other fluid simulation methods, and expand the range of expressions.</font></font></p><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 5 _ Fluid Simulation by SPH Method_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 5 _ Fluid Simulation by SPH Method_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 5 _ Fluid Simulation by SPH Method_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 5 _ Fluid Simulation by SPH Method_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 5 _ Fluid Simulation by SPH Method_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

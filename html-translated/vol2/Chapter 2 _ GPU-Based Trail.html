@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0044)https://freder.io/files/unity2/fuqunaga.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 2 _ GPU-Based Trail_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 2 _ GPU-Based Trail_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 2 _ GPU-Based Trail_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ GPU-Based Trail_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ GPU-Based Trail_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 2 _ GPU-Based Trail_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 2 _ GPU-Based Trail_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ GPU-Based Trail_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ GPU-Based Trail_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 2 _ GPU-Based Trail_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> GPU-Based Trail</font></font></h1>
 
 <h2><a id="h2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -95,7 +88,7 @@ Figure 2.1: Sample code execution screen. </font><font style="vertical-align: in
 </div>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Each Trail structure corresponds to one Trail. </font><font style="vertical-align: inherit;">currentNodeIdx Stores the index of the last written Node buffer.</font></font></p>
 <div class="emlist-code">
-<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.cs</font></font></p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.cs</font></font></font></font></p>
 <pre class="emlist">public struct Node<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
 {</font></font><font></font>
   public float time;<font></font>
@@ -106,10 +99,10 @@ Figure 2.1: Sample code execution screen. </font><font style="vertical-align: in
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Node structures are control points in the Trail. </font><font style="vertical-align: inherit;">It stores the location of the Node and the time it was updated.</font></font></p>
 <div class="emlist-code">
 <p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.cs</font></font></p>
-<pre class="emlist">public struct Input<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-{</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-  public Vector3 pos;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-}</font></font><font></font>
+<pre class="emlist">public struct Input<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  public Vector3 pos;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Input structure is the input for one frame from the emitter (the one that leaves the trajectory). </font><font style="vertical-align: inherit;">Here, it's just the position, but I think it would be interesting to add colors and so on.</font></font></p>
@@ -117,13 +110,13 @@ Figure 2.1: Sample code execution screen. </font><font style="vertical-align: in
 <h3><a id="h2-2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Initialization</font></font></h3>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initialize the buffer used by GPUTrails.Start ()</font></font></p>
 <div class="emlist-code">
-<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.cs</font></font></p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.cs</font></font></font></font></p>
 <pre class="emlist">trailBuffer = new ComputeBuffer(trailNum, Marshal.SizeOf(typeof(Trail)));<font></font>
 nodeBuffer = new ComputeBuffer(totalNodeNum, Marshal.SizeOf(typeof(Node)));<font></font>
 inputBuffer = new ComputeBuffer(trailNum, Marshal.SizeOf(typeof(Input)));<font></font>
 </pre>
 </div>
-<p>trailNum 個分の trailBufferを初期化しています。つまりこのプログラムでは複数本の Trail をまとめて処理しています。nodeBuffer ではすべての Trail 分の Node をまとめて１つのバッファで扱っています。インデックス０ ～ nodeNum-1 までが１本目、nodeNum ～ 2*nodeNum-1 までが２本目、といった具合です。inputBuffer も trailNum 個保持し、全 Trail の入力を管理します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initializing trailBuffers for trailNum. </font><font style="vertical-align: inherit;">In other words, this program processes multiple Trails at once. </font><font style="vertical-align: inherit;">In nodeBuffer, Nodes for all Trails are handled together in one buffer. </font><font style="vertical-align: inherit;">Indexes 0 to nodeNum-1 are the first, nodeNum to 2 * nodeNum-1 are the second, and so on. </font><font style="vertical-align: inherit;">The inputBuffer also holds trailNums and manages the input of all trails.</font></font></p>
 <div class="emlist-code">
 <p class="caption">GPUTrails.cs</p>
 <pre class="emlist">var initTrail = new Trail() { currentNodeIdx = -1 };<font></font>
@@ -133,48 +126,48 @@ trailBuffer.SetData(Enumerable.Repeat(initTrail, trailNum).ToArray());<font></fo
 nodeBuffer.SetData(Enumerable.Repeat(initNode, totalNodeNum).ToArray());<font></font>
 </pre>
 </div>
-<p>各バッファに初期値を入れています。Trail.currentNodeIdx、Node.time を負数にしておき、あとでこれらを未使用かどうかの判定に使います。inputBuffer は最初の更新ですべて値が書き込まれるので初期化の必要がなくノータッチです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The initial value is put in each buffer. </font><font style="vertical-align: inherit;">Set Trail.currentNodeIdx and Node.time to negative numbers, and use them later to determine whether they are unused. </font><font style="vertical-align: inherit;">Since all values ​​of inputBuffer are written in the first update, there is no need to initialize and there is no touch.</font></font></p>
 
-<h3><a id="h2-2-3"></a><span class="secno">2.2.3　</span>Node バッファの使い方</h3>
-<p>ここで Node バッファの使い方について解説します。</p>
+<h3><a id="h2-2-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> How to use Node buffer</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here's how to use the Node buffer.</font></font></p>
 
-<h4><a id="h2-2-3-1"></a>初期状態</h4>
+<h4><a id="h2-2-3-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">initial state</font></font></h4>
 <div id="id_fuqunaga_2Fnode0" class="image">
 <img src="./Chapter 2 _ GPU-Based Trail_files/node0.png" alt="initial state" class="width-050per">
-<p class="caption">
-図2.2: 初期状態
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.2: Initial state
+</font></font></p>
 </div>
-<p>まだ何も入力されていない状態です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nothing has been entered yet.</font></font></p>
 
-<h4><a id="h2-2-3-2"></a>入力中</h4>
+<h4><a id="h2-2-3-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Entering</font></font></h4>
 <div id="id_fuqunaga_2Fnode__update" class="image">
 <img src="./Chapter 2 _ GPU-Based Trail_files/node_update.png" alt="Entering" class="width-050per">
-<p class="caption">
-図2.3: 入力中
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.3: Input
+</font></font></p>
 </div>
-<p>１ノードづつ入力されて行きます。まだ未使用の Node があります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It will be input one node at a time. </font><font style="vertical-align: inherit;">I have an unused Node.</font></font></p>
 
-<h4><a id="h2-2-3-3"></a>ループ</h4>
+<h4><a id="h2-2-3-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">loop</font></font></font></font></h4>
 <div id="id_fuqunaga_2Fnode__loop" class="image">
 <img src="./Chapter 2 _ GPU-Based Trail_files/node_loop.png" alt="loop" class="width-050per">
-<p class="caption">
-図2.4: ループ
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.4: Loop
+</font></font></p>
 </div>
-<p>すべての Node を使い尽くすと、はじめに戻りの Node を上書きして行きます。リングバッファ状に使用しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When all the Nodes are exhausted, the returning Nodes will be overwritten at the beginning. </font><font style="vertical-align: inherit;">It is used like a ring buffer.</font></font></p>
 
-<h3><a id="h2-2-4"></a><span class="secno">2.2.4　</span>インプット</h3>
-<p>ここからは毎フレーム呼ばれる処理になります。エミッタの位置を入力して、Node を追加、更新していきます。</p>
-<p>まずは外部で inputBuffer を更新していきます。これはどんな処理でもかまいません。はじめは CPU で計算して <code class="inline-code tt">ComputeBuffer.SetData()</code> するのが簡単で良いかもしれません。サンプルコードでは簡単な GPU 実装のパーティクルを動かしこれらをエミッタとして扱っています。</p>
+<h3><a id="h2-2-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Input</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From here, it will be called every frame. </font><font style="vertical-align: inherit;">Enter the position of the emitter to add and update Nodes.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, update the inputBuffer externally. </font><font style="vertical-align: inherit;">This can be any process. </font><font style="vertical-align: inherit;">At first </font></font><code class="inline-code tt">ComputeBuffer.SetData()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, it may be easier and better to </font><font style="vertical-align: inherit;">calculate with the CPU </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">The sample code moves particles in a simple GPU implementation and treats them as emitters.</font></font></p>
 <div class="column">
 
 <h3><a id="column-1"></a>Curl Noise</h3>
-<p>サンプルコードのパーティクルは、Curl Noise で受ける力を求めて移動する挙動にしています。このように Curl Noise は簡単に疑似流体っぽい動きを作れたりするのでとても便利です。本書の<a href="https://freder.io/files/unity2/sakota.html">第6章「Curl Noise - 疑似流体のためのノイズアルゴリズムの解説」</a>で<b>@sakope</b>さんが詳しく解説しているのでぜひ御覧ください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The particles in the sample code move in search of the force received by Curl Noise. </font><font style="vertical-align: inherit;">As you can see, Curl Noise is very convenient because you can easily create pseudo-fluid-like movements. </font><font style="vertical-align: inherit;">Of this book </font></font><a href="https://freder.io/files/unity2/sakota.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- "Neuss' s Arco 's squirrel' s-time commentary for the pseudo-fluid Curl Noise" Chapter 6</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@sakope</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> See all means because I have been described in detail.</font></font></p>
 </div>
 
-<h4><a id="h2-2-4-1"></a>エミッタの更新</h4>
+<h4><a id="h2-2-4-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Emitter update</font></font></h4>
 <div class="emlist-code">
 <p class="caption">GPUTrailParticles.cs</p>
 <pre class="emlist">void Update()<font></font>
@@ -201,16 +194,16 @@ nodeBuffer.SetData(Enumerable.Repeat(initNode, totalNodeNum).ToArray());<font></
 }<font></font>
 </pre>
 </div>
-<p>２つのカーネルを実行しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I'm running two kernels.</font></font></p>
 <dl>
 <dt>CSPARAM.UPDATE</dt>
-<dd>エミッタとして使用するパーティクルを更新しています。</dd>
+<dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I'm updating the particles used as emitters.</font></font></dd>
 <dt>CSPARAM.WRITE_TO_INPUT</dt>
-<dd>エミッタの現在の位置を inputBuffer に書き込んでいます。これを Trail の入力して使用します。</dd>
+<dd><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The current position of the emitter is written to inputBuffer. </font><font style="vertical-align: inherit;">Use this as a Trail entry.</font></font></dd>
 </dl>
 
-<h4><a id="h2-2-4-2"></a>Trail への入力</h4>
-<p>さて、それでは inputBuffer を参照して、nodeBuffer を更新しましょう。</p>
+<h4><a id="h2-2-4-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Input to Trail</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, let's update nodeBuffer by referring to inputBuffer.</font></font></p>
 <div class="emlist-code">
 <p class="caption">GPUTrailParticles.cs</p>
 <pre class="emlist">void LateUpdate()<font></font>
@@ -229,7 +222,7 @@ nodeBuffer.SetData(Enumerable.Repeat(initNode, totalNodeNum).ToArray());<font></
 }<font></font>
 </pre>
 </div>
-<p>CPU 側では必要なパラメータを渡してComputeShaderをDispatch()しているだけです。メインの ComputeShader 側の処理は次のようになっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">On the CPU side, all you have to do is Dispatch () ComputeShader, passing the required parameters. </font><font style="vertical-align: inherit;">The processing on the main ComputeShader side is as follows.</font></font></p>
 <div class="emlist-code">
 <p class="caption">GPUTrail.compute</p>
 <pre class="emlist">[numthreads(256,1,1)]<font></font>
@@ -251,8 +244,8 @@ void CalcInput (uint3 id : SV_DispatchThreadID)<font></font>
         }<font></font>
 <font></font>
         if ( update )<font></font>
-        {<font></font>
-          Node node;<font></font>
+        {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+          Node node;</font></font><font></font>
           node.time = _Time;<font></font>
           node.position = input.position;<font></font>
 <font></font>
@@ -264,19 +257,19 @@ void CalcInput (uint3 id : SV_DispatchThreadID)<font></font>
 <font></font>
           // update trail<font></font>
           trail.currentNodeIdx = currentNodeIdx;<font></font>
-          _TrailBuffer[trailIdx] = trail;<font></font>
-        }<font></font>
+          _TrailBuffer[trailIdx] = trail;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font><font></font>
   }<font></font>
 }<font></font>
 </pre>
 </div>
-<p>くわしく見ていきましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's take a closer look.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">uint trailIdx = id.x;<font></font>
 if ( trailIdx &lt; _TrailNum)<font></font>
 </pre>
 </div>
-<p>まずは引数の id を Trail のインデックスとして使用しています。スレッド数の関係で Trail 数以上の id で呼ばれてしまうこともあるので範囲外のものを if 文で弾いています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, I'm using the argument id as the Trail index. </font><font style="vertical-align: inherit;">Due to the number of threads, it may be called with ids equal to or greater than the number of Trails, so I play something outside the range with an if statement.</font></font></p>
 <div class="emlist-code">
 <pre class="emlist">int currentNodeIdx = trail.currentNodeIdx;<font></font>
 <font></font>
@@ -288,14 +281,14 @@ if ( trail.currentNodeIdx &gt;= 0 )<font></font>
 }<font></font>
 </pre>
 </div>
-<p>次に <code class="inline-code tt">Trail.currentNodeIdx</code> を確認しています。負数の場合は未使用の Trail です。</p>
-<p><code class="inline-code tt"> GetNode() </code>は、_NodeBuffer から指定の Node を取得する関数です。インデックスの計算が間違いの元なので関数化しています。</p>
-<p>すでに使用されている Trail では、最新の Node とインプット位置との距離を比較して、<code class="inline-code tt">_UpdateDistanceMin</code> より離れていれば更新、近ければ更新しない、としています。エミッタの挙動によりますが、前回の Node とほぼ同じ位置のインプットはたいていほぼ停止状態で微妙に誤差で移動している状態なので、これらを律儀に Node 化して Trail を生成しようとすると、連続する Node 間で方向が大きく異なりかなり汚くなることが多いです。したがってあまり近い距離ではあえて Node の追加をせずにスキップしています。</p>
+<p><font style="vertical-align: inherit;"></font><code class="inline-code tt">Trail.currentNodeIdx</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I am checking </font><font style="vertical-align: inherit;">next </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">If it is negative, it is an unused Trail.</font></font></p>
+<p><code class="inline-code tt"> GetNode() </code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is a function that gets the specified Node from _NodeBuffer. </font><font style="vertical-align: inherit;">Since the index calculation is the source of mistakes, it is functionalized.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Trail, which is already in use, compares the distance between the latest Node and the input position and states that </font></font><code class="inline-code tt">_UpdateDistanceMin</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it will be updated if it is farther away and will not be updated if it is closer. </font><font style="vertical-align: inherit;">Although it depends on the behavior of the emitter, the input at almost the same position as the previous Node is usually in a state of being almost stopped and moving with a slight error, so if you try to generate a Trail by converting these into Nodes in a lawful manner, between consecutive Nodes The direction is very different and it is often quite dirty. </font><font style="vertical-align: inherit;">Therefore, at a very short distance, I dare to skip without adding Node.</font></font></p>
 <div class="emlist-code">
 <p class="caption">GPUTrail.compute</p>
 <pre class="emlist">if ( update )<font></font>
-{<font></font>
-  Node node;<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  Node node;</font></font><font></font>
   node.time = _Time;<font></font>
   node.position = input.position;<font></font>
 <font></font>
@@ -307,45 +300,45 @@ if ( trail.currentNodeIdx &gt;= 0 )<font></font>
 <font></font>
   // update trail<font></font>
   trail.currentNodeIdx = currentNodeIdx;<font></font>
-  _TrailBuffer[trailIdx] = trail;<font></font>
-}<font></font>
+  _TrailBuffer[trailIdx] = trail;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
 </pre>
 </div>
-<p>最後に _NodeBuffer および _TrailBuffer を更新しています。Trail には入力した Node のインデックスを currentNodeIdx として保存します。Trail あたりの Node 数を超えたらリングバッファ状になるようゼロに戻しています。Node には入力の時間と位置を保存しています。</p>
-<p>さて、これで Trail の論理的な処理は完成です。次はこの情報から描画する処理について見ていきましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, I'm updating _NodeBuffer and _TrailBuffer. </font><font style="vertical-align: inherit;">The Trail stores the index of the entered Node as currentNodeIdx. </font><font style="vertical-align: inherit;">When the number of Nodes per Trail is exceeded, it is returned to zero so that it becomes a ring buffer. </font><font style="vertical-align: inherit;">Node stores the time and position of the input.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Well, this completes the logical processing of Trail. </font><font style="vertical-align: inherit;">Next, let's look at the process of drawing from this information.</font></font></p>
 
-<h2><a id="h2-3"></a><span class="secno">2.3　</span>描画</h2>
-<p>Trail の描画は基本的には Node 間をラインで繋いでいく処理になります。ここでは個々の Trail はできるだけ簡素にして物量を重視していこうと思います。そのためラインはできるだけポリゴン数を少なくしたいのでカメラと正対する板ポリゴンとして生成します。</p>
+<h2><a id="h2-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Drawing</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Drawing a Trail is basically a process of connecting Nodes with a line. </font><font style="vertical-align: inherit;">Here, I will try to keep the individual trails as simple as possible and focus on quantity. </font><font style="vertical-align: inherit;">Therefore, we want to reduce the number of polygons as much as possible, so we will generate the line as a plate polygon facing the camera.</font></font></p>
 
-<h3><a id="h2-3-1"></a><span class="secno">2.3.1　</span>カメラと正対する板ポリゴンの生成</h3>
-<p>カメラと正対する板ポリゴンを生成する方法は次のようになります。</p>
+<h3><a id="h2-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.1</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Generation of plate polygons </font><span class="secno"><font style="vertical-align: inherit;">facing the　</font></span><font style="vertical-align: inherit;"> camera</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The method to generate the plate polygon facing the camera is as follows.</font></font></p>
 <div id="id_fuqunaga_2Fpolygon0" class="image">
 <img src="./Chapter 2 _ GPU-Based Trail_files/polygon0.png" alt="Node column" class="width-070per">
-<p class="caption">
-図2.5: Node 列
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.5: Node column
+</font></font></p>
 </div>
-<p>このような Node 列から</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From a Node column like this</font></font></p>
 <div id="id_fuqunaga_2Fpolygon1" class="image">
 <img src="./Chapter 2 _ GPU-Based Trail_files/polygon1.png" alt="Vertices generated from Node" class="width-070per">
-<p class="caption">
-図2.6: Node から生成した頂点
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.6: Vertices generated from Node
+</font></font></p>
 </div>
-<p>各 Node から視線方向と垂直な方向に指定の幅だけ移動した頂点を求めます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finds the vertices that are moved from each node by the specified width in the direction perpendicular to the line of sight.</font></font></p>
 <div id="id_fuqunaga_2Fpolygon2" class="image">
 <img src="./Chapter 2 _ GPU-Based Trail_files/polygon2.png" alt="Polygonization" class="width-070per">
-<p class="caption">
-図2.7: ポリゴン化
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.7: Polygonization
+</font></font></p>
 </div>
-<p>生成した頂点同士を繋いでポリゴンにします。それでは実際のコードを見ていきましょう。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Connect the generated vertices to make a polygon. </font><font style="vertical-align: inherit;">Let's take a look at the actual code.</font></font></p>
 
-<h3><a id="h2-3-2"></a><span class="secno">2.3.2　</span>CPU 側</h3>
-<p>CPU 側は単純にパラメータをマテリアルに渡して DrawProcedual() するだけの処理になっています。</p>
+<h3><a id="h2-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> CPU side</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">On the CPU side, the process is simply to pass the parameters to the material and perform DrawProcedual ().</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUTrailRenderer.cs</p>
-<pre class="emlist">void OnRenderObject()<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrailRenderer.cs</font></font></font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">void OnRenderObject ()</font></font></font></font><font></font>
 {<font></font>
   _material.SetInt(GPUTrails.CSPARAM.NODE_NUM_PER_TRAIL, trails.nodeNum);<font></font>
   _material.SetFloat(GPUTrails.CSPARAM.LIFE, trails._life);<font></font>
@@ -359,10 +352,10 @@ if ( trail.currentNodeIdx &gt;= 0 )<font></font>
 }<font></font>
 </pre>
 </div>
-<p>いままで出てこなかったパラメータ<code class="inline-code tt">trails._life</code>が登場しています。これは Node の生存時間で Node 自身が持っている生成時刻と照らし合わせて、これだけの時間が経つと透明にしていくような処理に使います。こうすることで Trail の末端がなめらかに消えていく表現ができます。</p>
-<p>特に入力すべきメッシュやポリゴンもないので、<code class="inline-code tt">Graphics.DrawProcedural()</code>で trails.nodeNum 個の頂点あるモデルを trails.trailNum 個のインスタンスまとめて描画する命令を発行しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Parameters </font></font><code class="inline-code tt">trails._life</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">that </font><font style="vertical-align: inherit;">have not appeared until now </font><font style="vertical-align: inherit;">have appeared. </font><font style="vertical-align: inherit;">This is used for processing that compares the lifetime of the Node with the generation time that the Node itself has, and makes it transparent after this amount of time. </font><font style="vertical-align: inherit;">By doing this, you can express that the end of the trail disappears smoothly.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since there are no meshes or polygons to input, </font></font><code class="inline-code tt">Graphics.DrawProcedural()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">we issue a command to draw a model with trails.nodeNum vertices in batches of trails.trailNum instances.</font></font></p>
 
-<h3><a id="h2-3-3"></a><span class="secno">2.3.3　</span>GPU 側</h3>
+<h3><a id="h2-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> GPU side</font></font></h3>
 
 <h4><a id="h2-3-3-1"></a>vertex shader</h4>
 <div class="emlist-code">
@@ -405,7 +398,7 @@ if ( trail.currentNodeIdx &gt;= 0 )<font></font>
 }<font></font>
 </pre>
 </div>
-<p>まずは vertex shader の処理です。このスレッドに対応した現在の Node とその次の Node の情報を出力します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First is the processing of vertex shader. </font><font style="vertical-align: inherit;">Outputs information about the current Node and the next Node corresponding to this thread.</font></font></p>
 <div class="emlist-code">
 <p class="caption">GPUTrails.shader</p>
 <pre class="emlist">Node node0 = GetNode(instanceId, id-1);<font></font>
@@ -414,20 +407,20 @@ Node node2 = GetNode(instanceId, id+1);<font></font>
 Node node3 = GetNode(instanceId, id+2);<font></font>
 </pre>
 </div>
-<p>現在の Node を node1 として、１つ前の node0、１つ先の node2、２つ先の node3 と計４つの Node を参照しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The current node is set to node1, and a total of four nodes are referenced, including the previous node0, the previous node2, and the second node3.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUTrails.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.shader</font></font></font></font></p>
 <pre class="emlist">bool isLastNode = (currentNodeIdx == (int)id);<font></font>
 <font></font>
 if ( isLastNode || !IsValid(node1))<font></font>
 {<font></font>
-  node0 = node1 = node2 = node3 = GetNode(instanceId, currentNodeIdx);<font></font>
-}<font></font>
+  node0 = node1 = node2 = node3 = GetNode(instanceId, currentNodeIdx);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>現在の Node が末端であるか、まだ未入力である場合、node0～3 を末端の Node のコピーとして扱います。つまり末端より先のまだ情報が無い Node をすべて末端に"折りたたんでいる"扱いにしています。こうすることでこのあとのポリゴン生成の処理にそのまま流すことができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the current Node is terminal or has not yet been entered, treat nodes 0-3 as a copy of the terminal Node. </font><font style="vertical-align: inherit;">In other words, all Nodes beyond the end that have no information yet are treated as "folded" to the end. </font><font style="vertical-align: inherit;">By doing this, it can be sent as it is to the subsequent polygon generation processing.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUTrails.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.shader</font></font></font></font></p>
 <pre class="emlist">float3 pos1 = node1.position;<font></font>
 float3 pos0 = IsValid(node0) ? node0.position : pos1;<font></font>
 float3 pos2 = IsValid(node2) ? node2.position : pos1;<font></font>
@@ -437,33 +430,33 @@ Out.pos = float4(pos1, 1);<font></font>
 Out.posNext = float4(pos2, 1);<font></font>
 </pre>
 </div>
-<p>さて、４つの Node から位置情報を取り出します。現在の Node （node1)以外はすべて未入力である可能性があるので注意が必要です。node0 が未入力なケースがちょっと意外かもしれませんが、currentNodeIdx == 0 のときリングバッファを遡って node0 はバッファの一番最後の Node を指しているのでこのようなケースがありえます。この場合も node1 の位置をコピーすることで、同じ場所に折りたたみます。node2,3 も同様です。このうち、pos1、pos2 を geometry shader に向けて出力します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, extract the location information from the four Nodes. </font><font style="vertical-align: inherit;">Please note that all but the current Node (node1) may be blank. </font><font style="vertical-align: inherit;">It may be a little surprising that node0 is not entered, but this is possible because node0 points to the last node in the buffer going back in the ring buffer when currentNodeIdx == 0. </font><font style="vertical-align: inherit;">Again, copy the location of node1 to fold it to the same location. </font><font style="vertical-align: inherit;">The same applies to nodes2 and 3. </font><font style="vertical-align: inherit;">Of these, pos1 and pos2 are output toward the geometry shader.</font></font></p>
 <div class="emlist-code">
 <p class="caption">GPUTrails.shader</p>
 <pre class="emlist">Out.dir = normalize(pos2 - pos0);<font></font>
 Out.dirNext = normalize(pos3 - pos1);<font></font>
 </pre>
 </div>
-<p>さらに pos0 → pos2 の方向ベクトルを pos1 における接線（tangent）、pos1 → pos3 の方向ベクトルを pos2 における tangent として出力します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Furthermore, the direction vector of pos0 → pos2 is output as the tangent at pos1, and the direction vector of pos1 → pos3 is output as the tangent at pos2.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUTrails.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.shader</font></font></font></font></p>
 <pre class="emlist">float ageRate = saturate((_Time.y - node1.time) / _Life);<font></font>
 float ageRateNext = saturate((_Time.y - node2.time) / _Life);<font></font>
 Out.col = lerp(_StartColor, _EndColor, ageRate);<font></font>
 Out.colNext = lerp(_StartColor, _EndColor, ageRateNext);<font></font>
 </pre>
 </div>
-<p>最後に node1、node2 の書き込み時間と現在の時間を比較して色を求めています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, the color is calculated by comparing the write time of node1 and node2 with the current time.</font></font></p>
 
 <h4><a id="h2-3-3-2"></a>geometry shader</h4>
 <div class="emlist-code">
-<p class="caption">GPUTrails.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.shader</font></font></font></font></p>
 <pre class="emlist">[maxvertexcount(4)]<font></font>
 void geom (point vs_out input[1], inout TriangleStream&lt;gs_out&gt; outStream)<font></font>
 {<font></font>
   gs_out output0, output1, output2, output3;<font></font>
-  float3 pos = input[0].pos;<font></font>
-  float3 dir = input[0].dir;<font></font>
+  float3 pos = input[0].pos;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float3 dir = input [0] .dir;</font></font></font></font><font></font>
   float3 posNext = input[0].posNext;<font></font>
   float3 dirNext = input[0].dirNext;<font></font>
 <font></font>
@@ -494,7 +487,7 @@ void geom (point vs_out input[1], inout TriangleStream&lt;gs_out&gt; outStream)<
 }<font></font>
 </pre>
 </div>
-<p>次に geometry shader の処理です。vertex shader から渡された Node ２つ分の情報からいよいよポリゴンを生成します。２つの pos と dir から、４つの位置＝４角形を求め TriangleStream として出力しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next is the processing of geometry shader. </font><font style="vertical-align: inherit;">The polygon is finally generated from the information for two Nodes passed from the vertex shader. </font><font style="vertical-align: inherit;">From 2 pos and dir, 4 positions = quadrangle are obtained and output as TriangleStream.</font></font></p>
 <div class="emlist-code">
 <p class="caption">GPUTrails.shader</p>
 <pre class="emlist">float3 camPos = _WorldSpaceCameraPos;<font></font>
@@ -502,23 +495,23 @@ float3 toCamDir = normalize(camPos - pos);<font></font>
 float3 sideDir = normalize(cross(toCamDir, dir));<font></font>
 </pre>
 </div>
-<p>pos からカメラへの方向ベクトル(toCameraDir)と、接線ベクトル(dir)の外積を求め、これをラインの幅として広げる方向(sideDir)にしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The outer product of the direction vector (toCameraDir) from pos to the camera and the tangent vector (dir) is obtained, and this is set as the width of the line (sideDir).</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUTrails.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.shader</font></font></font></font></p>
 <pre class="emlist">output0.pos = UnityWorldToClipPos(pos + (sideDir * width));<font></font>
 output1.pos = UnityWorldToClipPos(pos - (sideDir * width));<font></font>
 </pre>
 </div>
-<p>正負の sideDir 方向に移動した頂点を求めます。ここで Clip 座標系にして fragment shader へ渡すための座標変換まで済ませておきます。posNext に関しても同じ処理をすることで計４つの頂点が求まりました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Find the vertices that have moved in the positive and negative sideDir directions. </font><font style="vertical-align: inherit;">Here, we have completed the coordinate transformation to make it a Clip coordinate system and pass it to the fragment shader. </font><font style="vertical-align: inherit;">By performing the same processing for posNext, a total of four vertices were obtained.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GPUTrails.shader</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.shader</font></font></font></font></p>
 <pre class="emlist">output0.col =<font></font>
 output1.col = input[0].col;<font></font>
 output2.col =<font></font>
 output3.col = input[0].colNext;<font></font>
 </pre>
 </div>
-<p>各頂点に色を乗せて完成です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Add color to each vertex to complete.</font></font></p>
 
 <h4><a id="h2-3-3-3"></a>fragment shader</h4>
 <div class="emlist-code">
@@ -529,13 +522,13 @@ output3.col = input[0].colNext;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>最後に fragment shader です。これ以上無いくらい単純です。色を出力してるだけですね（笑</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Finally, the fragment shader. </font><font style="vertical-align: inherit;">It's as simple as it gets. </font><font style="vertical-align: inherit;">It just outputs the color (laughs)</font></font></p>
 
-<h2><a id="h2-4"></a><span class="secno">2.4　</span>応用</h2>
-<p>以上で Trail の生成ができたかと思います。今回は色だけの処理でしたが、テクスチャをのせたり、幅を変えてみたりといろいろな応用ができると思います。また、GPUTrails.cs、GPUTRailsRenderer.cs とソースコードも別れているとおり、GPUTrails.shader 側は単なるバッファを見て描画するだけの処理なので_TrailBuffer、_NodeBuffer さえ用意すれば実は Trail に限らずライン状の表示に流用できます。今回は _NodeBuffer に追加するだけの Trail でしたが、毎フレーム全 Node を更新することで触手のようなウネウネしたものも表現したりできると思います。</p>
+<h2><a id="h2-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Application</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I think that the Trail has been generated. </font><font style="vertical-align: inherit;">This time, the processing was only for colors, but I think that it can be applied in various ways, such as adding textures and changing the width. </font><font style="vertical-align: inherit;">Also, as the source code is separated from GPUTrails.cs and GPUTRailsRenderer.cs, the GPUTrails.shader side is just a process of drawing by looking at the buffer, so if you prepare _TrailBuffer and _NodeBuffer, it is not limited to Trail but actually line-shaped. It can be used for display. </font><font style="vertical-align: inherit;">This time it was just a trail added to _NodeBuffer, but I think that by updating all Nodes every frame, it is possible to express something like a tentacle.</font></font></p>
 
-<h2><a id="h2-5"></a><span class="secno">2.5　</span>まとめ</h2>
-<p>本章では Trail の GPU 実装のできるだけシンプルな例を紹介しました。GPU を使うとデバッグが大変になる反面、 CPU ではできないような圧倒的な物量表現が可能になります。その「うひょー！」感を本書を通して体験できる方が一人でも増えたらいいなと思います。また、Trail は「モデルを表示する」「スクリーンスペースでアルゴリズムで描画する」の間くらいの応用の幅が広く面白い領域の表現ではないかと思います。この過程で得る理解は Trail に限らずいろいろな映像表現をプログラミングするときに役立つのではないかと思います。</p><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 2 _ GPU-Based Trail_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+<h2><a id="h2-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This chapter has provided the simplest possible example of Trail's GPU implementation. </font><font style="vertical-align: inherit;">While debugging becomes difficult with the GPU, it enables overwhelming physical expression that cannot be done with the CPU. </font><font style="vertical-align: inherit;">I hope that as many people as possible can experience that "Uhyo!" Feeling through this book. </font><font style="vertical-align: inherit;">Also, I think Trail is an expression of an interesting area with a wide range of applications, such as "displaying a model" and "drawing with an algorithm in screen space". </font><font style="vertical-align: inherit;">I think that the understanding gained in this process will be useful when programming various video expressions, not limited to Trail.</font></font></p><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 2 _ GPU-Based Trail_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 2 _ GPU-Based Trail_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 2 _ GPU-Based Trail_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 2 _ GPU-Based Trail_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 2 _ GPU-Based Trail_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

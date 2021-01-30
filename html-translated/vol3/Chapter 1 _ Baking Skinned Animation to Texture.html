@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0042)https://freder.io/files/unity3/sugino.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 1 _ Baking Skinned Animation to Texture_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 1 _ Baking Skinned Animation to Texture_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 1 _ Baking Skinned Animation to Texture_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 1 _ Baking Skinned Animation to Texture_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 1 _ Baking Skinned Animation to Texture_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h1"></a><span class="secno">第1章　</span>Baking Skinned Animation to Texture</h1>
 
 <h2><a id="h1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -94,16 +87,16 @@ Figure 1.3: 5000 animated horses
 </p>
 </div>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Looking at the profiler, you can see that the GPU processing time is longer than the CPU processing time, and the CPU is waiting for the GPU processing to complete. </font></font><span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#profiler"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 1.4</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> And </font></font><code class="inline-code tt">PostLateUpdate.UpdateAllSkinnedMeshes</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you can see that </font><font style="vertical-align: inherit;">about 70% of GPU processing </font><font style="vertical-align: inherit;">is occupied. </font><font style="vertical-align: inherit;">Also, since there are as many horse objects as you can see, it </font></font><code class="inline-code tt">Camera.Renderer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">seems that you can reduce the number of GPU rendering processes by batching the objects or performing GPU instancing. </font><font style="vertical-align: inherit;">It is the way, but in the same way as any CPU Usage </font></font><code class="inline-code tt">PostLateUpdate.UpdateAllSkinnedMeshes</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and </font></font><code class="inline-code tt">Camera.Render</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">processing of account for most of the time.</font></font></p>
-<p>このテストシーンでは、PlayerSettingsでGPU Skinningを使用する設定になっています。もしもGPUでなくCPUでスキニングを行っていた場合、CPUの処理の割合が増大し、今よりもFPSが落ちることになります。GPUスキニング時は、CPU側でボーンの行列の計算を行い、行列情報をGPUに渡し、GPUでスキニング処理を行います。CPUスキニング時は、行列の計算とスキニングの処理までCPU側で行い、スキニングされた頂点データをGPU側に渡しています。</p>
-<p>このように、処理の最適化には最初にどこが処理のボトルネックになっているか、見極めることが重要になってきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this test scene, the Player Settings are set to use GPU Skinning. </font><font style="vertical-align: inherit;">If you were skinning on the CPU instead of the GPU, the CPU processing rate would increase and the FPS would be lower than it is now. </font><font style="vertical-align: inherit;">At the time of GPU skinning, the CPU side calculates the bone matrix, passes the matrix information to the GPU, and performs the skinning process on the GPU. </font><font style="vertical-align: inherit;">At the time of CPU skinning, matrix calculation and skinning processing are performed on the CPU side, and the skinned vertex data is passed to the GPU side.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this way, in order to optimize processing, it is important to first determine where the processing bottleneck is.</font></font></p>
 
-<h2><a id="h1-3"></a><span class="secno">1.3　</span>SkinnedMeshRendererのアニメーションする頂点の位置をあらかじめ計算しておく</h2>
-<p>プロファイリングの結果、メッシュのスキニングの処理が重そうだ。ということが分かったので、スキニングの処理自体はリアルタイムでは行わずに、あらかじめ計算しておく方法を検討してみようと思います。</p>
-<p><code class="inline-code tt">SkinnedMeshRenderer</code>のスキニング処理された後の頂点情報を取得する方法としては、<code class="inline-code tt">SkinnedMeshRenderer.BakeMesh(Mesh)</code>という関数があります。これは、スキニングされた状態のメッシュのスナップショットを作成し、指定したメッシュに格納します。少々、処理に時間がかかるのですが、スキニングされた頂点情報を事前に格納しておくという使い方のためなら、選択可能な方法といえます。</p>
+<h2><a id="h1-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Pre-calculate the positions of the animated vertices of SkinnedMeshRenderer</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As a result of profiling, the mesh skinning process seems to be heavy. </font><font style="vertical-align: inherit;">Now that I know that, I would like to consider a method of calculating in advance instead of performing the skinning process itself in real time.</font></font></p>
+<p><code class="inline-code tt">SkinnedMeshRenderer</code><font style="vertical-align: inherit;"></font><code class="inline-code tt">SkinnedMeshRenderer.BakeMesh(Mesh)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There is a function called </font><font style="vertical-align: inherit;">as a method to acquire the vertex information after the skinning process of </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">It takes a snapshot of the skinned mesh and stores it in the specified mesh. </font><font style="vertical-align: inherit;">It takes a little time to process, but it can be selected if it is used to store skinned vertex information in advance.</font></font></p>
 <div id="SkinnedMeshRenderer.BakeMesh" class="code">
-<p class="caption">リスト1.1: SkinnedMeshRenderer.BakeMesh() Example</p>
-<pre class="list"> 1: Animator animator;<font></font>
- 2: SkinnedMeshRenderer skinedMesh;<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.1: SkinnedMeshRenderer.BakeMesh () Example</font></font></p>
+<pre class="list"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 1: animator animator;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 2: SkinnedMeshRenderer skinedMesh;</font></font></font></font><font></font>
  3: List&lt;Mesh&gt; meshList;<font></font>
  4: <font></font>
  5: void Start(){<font></font>
@@ -113,29 +106,29 @@ Figure 1.3: 5000 animated horses
  9:     animator.Play("Run");<font></font>
 10: }<font></font>
 11: <font></font>
-12: void Update(){<font></font>
-13:     var mesh = new Mesh();<font></font>
-14:     skinnedMesh.BakeMesh(mesh);<font></font>
-15:     //mesh内に、スキニングされたメッシュのスナップショットが格納される<font></font>
+12: void Update(){<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+13: var mesh = new Mesh ();</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+14: skinnedMesh.BakeMesh (mesh);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+15: // A snapshot of the skinned mesh is stored in mesh</font></font><font></font>
 16:     meshList.Add(mesh);<font></font>
 17: }<font></font>
 </pre>
 </div>
-<p>これで、AnimatorのRunステートのアニメーションの<code class="inline-code tt">SkinnedMeshRenderer</code>の毎フレームのスナップショットのMeshがmeshListに格納されていきます。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#SkinnedMeshRenderer.BakeMesh">リスト1.1</a></span></p>
-<p>この保存された<code class="inline-code tt">meshList</code>を使い、パラパラ漫画で絵を切り替える要領でにメッシュ（<code class="inline-code tt">MeshFilter.sharedMesh</code>）を切り替えていくと、<code class="inline-code tt">SkinnedMeshRenderer</code>を使用せずにメッシュのアニメーションが表示できるので、プロファイリングした結果ボトルネックになっていたスキニングの処理を省くことができそうです。</p>
+<p><font style="vertical-align: inherit;"></font><code class="inline-code tt">SkinnedMeshRenderer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, the mesh of the snapshot of each frame of </font><font style="vertical-align: inherit;">the animation of </font><font style="vertical-align: inherit;">the </font><font style="vertical-align: inherit;">Animator's Run state </font><font style="vertical-align: inherit;">will be stored in the meshList. </font></font><span class="listref"><a href="https://freder.io/files/unity3/sugino.html#SkinnedMeshRenderer.BakeMesh"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.1</font></font></a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If </font></font><code class="inline-code tt">meshList</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you use </font><font style="vertical-align: inherit;">this saved </font><font style="vertical-align: inherit;">file </font></font><code class="inline-code tt">MeshFilter.sharedMesh</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and switch the </font><font style="vertical-align: inherit;">mesh ( </font><font style="vertical-align: inherit;">) in the same </font><font style="vertical-align: inherit;">way as switching pictures in a flip book, </font></font><code class="inline-code tt">SkinnedMeshRenderer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you can display the animation of the mesh without using, so the skinning process that was a bottleneck as a result of profiling It seems that you can omit.</font></font></p>
 
-<h2><a id="h1-4"></a><span class="secno">1.4　</span>頂点情報を保存する方法の検討</h2>
-<p>しかし、このMeshデータをフレームごとに複数保存しておく実装だとアニメーションによって変更しないメッシュの情報（Mesh.indeces, Mesh.uv等）も保存することになり、無駄が多くなります。スキニングアニメーションの場合、更新されるデータは頂点位置の情報と法線情報だけなので、これらのみを保存し、更新していけばいいのです。</p>
+<h2><a id="h1-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Examining how to save vertex information</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, if this implementation saves multiple Mesh data for each frame, mesh information (Mesh.indeces, Mesh.uv, etc.) that is not changed by animation will also be saved, resulting in a lot of waste. </font><font style="vertical-align: inherit;">In the case of skinning animation, the only data to be updated is the vertex position information and normal information, so you only need to save and update these.</font></font></p>
 
-<h3><a id="h1-4-1"></a><span class="secno">1.4.1　</span>頂点情報をVector3配列で保存しておく方法</h3>
-<p>そこで考えられるのが、フレームごとの頂点位置と法線データをVector3の配列で持っておいて、フレームごとにメッシュの位置と法線を更新していく方法です。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#mesh.SetVertices">リスト1.2</a></span></p>
+<h3><a id="h1-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> How to save vertex information as a Vector3 array</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">One possible method is to have the vertex position and normal data for each frame in an array of Vector3, and update the mesh position and normal for each frame. </font></font><span class="listref"><a href="https://freder.io/files/unity3/sugino.html#mesh.SetVertices"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.2</font></font></a></span></p>
 <div id="mesh.SetVertices" class="code">
-<p class="caption">リスト1.2: Update Mesh</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.2: Update Mesh</font></font></p>
 <pre class="list"> 1: Mesh objMesh;<font></font>
  2: List&lt;Vector3&gt;[] vertecesLists;<font></font>
- 3: List&lt;Vector3&gt;[] normalsLists;<font></font>
- 4: //保存しておいた頂点の情報<font></font>
- 5: //Mesh.SetVertices(List&lt;Vector3&gt;)で使うため<font></font>
+ 3: List&lt;Vector3&gt;[] normalsLists;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 4: // Saved vertex information</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 5: // For use with Mesh.SetVertices (List &lt;Vector3&gt;)</font></font><font></font>
  6: <font></font>
  7: void Start(){<font></font>
  8:     objMesh = GetComponent&lt;MeshFilter&gt;().mesh;<font></font>
@@ -143,64 +136,64 @@ Figure 1.3: 5000 animated horses
 10: }<font></font>
 11: <font></font>
 12: void Update(){<font></font>
-13:     var frame = xx;<font></font>
-14:     //現在時刻でのフレームを計算する<font></font>
-15: <font></font>
-16:     objMesh.SetVertices(vertecesLists[frame]);<font></font>
+13:     var frame = xx;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+14: // Calculate the frame at the current time</font></font><font></font>
+15: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+16: objMesh.SetVertices (vertecesLists [frame]);</font></font></font></font><font></font>
 17:     objMesh.SetNormals(normalsLists[frame]);<font></font>
 18: }<font></font>
 </pre>
 </div>
-<p>しかし、この方法だと今解決しようとしている数千のアニメーションオブジェクトを表示するという目的に対して、メッシュの更新自体のCPUの処理負荷が大きくなってしまいます。</p>
-<p>そこで、この章の冒頭から答えは書いてあるのですが、テクスチャに位置情報と法線情報を格納し、VertexTextureFetchを用いて頂点シェーダにおいてメッシュの頂点位置と法線情報を更新します。これにより元のメッシュデータ自体の更新は行う必要がなくなるのでCPUの処理負荷無しで頂点アニメーションを実現可能になります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, this method puts a heavy CPU load on the mesh update itself for the purpose of displaying the thousands of animation objects that we are trying to solve.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">So, as the answer is written from the beginning of this chapter, we store the position information and normal information in the texture, and use VertexTextureFetch to update the vertex position and normal information of the mesh in the vertex shader. </font><font style="vertical-align: inherit;">This eliminates the need to update the original mesh data itself, making it possible to realize vertex animation without the processing load of the CPU.</font></font></p>
 
-<h3><a id="h1-4-2"></a><span class="secno">1.4.2　</span>位置情報をテクスチャに書き込む</h3>
-<p>それでは、メッシュ頂点の位置情報をテクスチャに保存する手法について、軽く説明しようと思います。</p>
-<p>Unityの<code class="inline-code tt">Mesh</code>オブジェクトは、Unityで表示する3Dモデルの頂点の位置、法線、UV値などのデータが格納されたクラスになっています。頂点位置情報（<code class="inline-code tt">Mesh.vertices</code>）には、メッシュの全ての頂点数分の位置情報が<code class="inline-code tt">Vector3</code>の配列で保存されています。<span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#vec3">表1.1</a></span></p>
-<p>そして、Unityの<code class="inline-code tt">Texture2D</code>オブジェクトは、テクスチャの幅(<code class="inline-code tt">texture.width</code>)×高さ（<code class="inline-code tt">texture.height</code>）のピクセル数分、色情報(<code class="inline-code tt">Color</code>)の配列で保存されています。<span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#col">表1.2</a></span></p>
+<h3><a id="h1-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Write location information to texture</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, let's briefly explain how to save the position information of mesh vertices in a texture.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Unity </font></font><code class="inline-code tt">Mesh</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">objects are classes that store data such as vertex positions, normals, and UV values ​​of 3D models displayed in Unity. </font><font style="vertical-align: inherit;">In the vertex position information ( </font></font><code class="inline-code tt">Mesh.vertices</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">), the </font><font style="vertical-align: inherit;">position information </font><font style="vertical-align: inherit;">for all the vertices of the mesh is </font></font><code class="inline-code tt">Vector3</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">saved as an array. </font></font><span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#vec3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Table 1.1</font></font></a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">And Unity </font></font><code class="inline-code tt">Texture2D</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">objects are </font><font style="vertical-align: inherit;">saved as an array of </font><font style="vertical-align: inherit;">color information ( </font><font style="vertical-align: inherit;">) for the </font><font style="vertical-align: inherit;">number of pixels of </font><font style="vertical-align: inherit;">texture width ( </font></font><code class="inline-code tt">texture.width</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) x height ( </font></font><code class="inline-code tt">texture.height</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">) </font></font><code class="inline-code tt">Color</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font></font><span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Table 1.2</font></font></a></span></p>
 <div id="vec3" class="table">
-<p class="caption">表1.1: 位置情報（Vector3）</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Table 1.1: Location Information (Vector3)</font></font></p>
 <table>
-<tbody><tr><th>x   float   x方向成分</th></tr>
-<tr><th>y   float   y方向成分</th></tr>
-<tr><th>z   float   z方向成分</th></tr>
+<tbody><tr><th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">x float x direction component</font></font></th></tr>
+<tr><th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">y float y direction component</font></font></th></tr>
+<tr><th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">z float z direction component</font></font></th></tr>
 </tbody></table>
 </div>
 <div id="col" class="table">
-<p class="caption">表1.2: 色情報（Color）</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Table 1.2: Pornography (Color)</font></font></p>
 <table>
-<tbody><tr><th>r   float   赤色成分</th></tr>
-<tr><th>g   float   緑色成分</th></tr>
-<tr><th>b   float   青色成分</th></tr>
-<tr><th>a   float   不透明度成分</th></tr>
+<tbody><tr><th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">r float red component</font></font></th></tr>
+<tr><th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">g float green component</font></font></th></tr>
+<tr><th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">b float cyan component</font></font></th></tr>
+<tr><th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">a float opacity component</font></font></th></tr>
 </tbody></table>
 </div>
-<p>頂点の位置、Mesh.vertices<span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#vec3">表1.1</a></span>のx,y,zの値をそれぞれ、Texture2Dの色情報<span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#col">表1.2</a></span>のr,g,bに格納し、EditorScriptでTextureAssetとして保存すれば、頂点の位置情報をテクスチャとして保存することになります。メッシュ頂点の位置と法線をテクスチャの色として保存する、サンプルスクリプトです。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#vec2col">リスト1.3</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Positions of the vertices, Mesh.Vertices </font></font><span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#vec3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Table 1.1</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> x the, y, and z values respectively, the color information of Texture2D </font></font><span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Table 1.2</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> contains r of, g, a b, when stored as TextureAsset in EditorScript, texture vertex position information It will be saved as. </font><font style="vertical-align: inherit;">This is a sample script that saves the positions and normals of mesh vertices as texture colors. </font></font><span class="listref"><a href="https://freder.io/files/unity3/sugino.html#vec2col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.3</font></font></a></span></p>
 <div id="vec2col" class="code">
-<p class="caption">リスト1.3: 頂点情報をテクスチャに保存する</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.3: Saving vertex information to texture</font></font></p>
 <pre class="list"> 1: public void CreateTex(Mesh sourceMesh)<font></font>
  2: {<font></font>
  3:     var vertCount = sourceMesh.vertexCount;<font></font>
  4:     var width = Mathf.FloorToInt(Mathf.Sqrt(vertCount));<font></font>
- 5:     var height = Mathf.CeilToInt((float)vertCount / width);<font></font>
- 6:     //頂点数＜幅×高さになるwidth,heightを求める<font></font>
+ 5:     var height = Mathf.CeilToInt((float)vertCount / width);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 6: // Find the width and height where the number of vertices &lt;width x height</font></font><font></font>
  7: <font></font>
  8:     posTex = new Texture2D(width, height, TextureFormat.RGBAFloat, false);<font></font>
- 9:     normTex = new Texture2D(width, height, TextureFormat.RGBAFloat, false);<font></font>
-10:     //Color[]を格納するTexture2D<font></font>
-11:     //TextureFormat.RGBAFloatを指定することで、色情報を各要素Float値で持てる<font></font>
+ 9:     normTex = new Texture2D(width, height, TextureFormat.RGBAFloat, false);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+10: // Texture2D to store Color []</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+11: // By specifying TextureFormat.RGBAFloat, you can have color information with each element Float value.</font></font><font></font>
 12: <font></font>
-13:     var vertices = sourceMesh.vertices;<font></font>
-14:     var normals = sourceMesh.normals;<font></font>
+13:     var vertices = sourceMesh.vertices;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+14: var normals = sourceMesh.normals;</font></font></font></font><font></font>
 15:     var posColors = new Color[width * height];<font></font>
-16:     var normColors = new Color[width * height];<font></font>
-17:     //頂点数分の色情報配列<font></font>
+16:     var normColors = new Color[width * height];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+17: // Color information array for the number of vertices</font></font><font></font>
 18: <font></font>
 19:     for (var i = 0; i &lt; vertCount; i++)<font></font>
 20:     {<font></font>
 21:         posColors[i] = new Color(<font></font>
-22:             vertices[i].x,<font></font>
-23:             vertices[i].y,<font></font>
+22:             vertices[i].x,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+23: vertices [i] .y,</font></font></font></font><font></font>
 24:             vertices[i].z<font></font>
 25:         );<font></font>
 26:         normColors[i] = new Color(<font></font>
@@ -208,59 +201,59 @@ Figure 1.3: 5000 animated horses
 28:             normals[i].y,<font></font>
 29:             normals[i].z<font></font>
 30:         );<font></font>
-31:     }<font></font>
-32:     //各頂点において、Color.rgb = Vector3.xyzとなるように、<font></font>
-33:     //位置→色、法線→色となるような色配列(Color[])を生成する。<font></font>
+31:     }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+32: // At each vertex, Color.rgb = Vector3.xyz,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+33: // Generate a color array (Color []) such that position → color, normal → color.</font></font><font></font>
 34: <font></font>
 35:     posTex.SetPixels(posColors);<font></font>
 36:     normTex.SetPixels(normColors);<font></font>
 37:     posTex.Apply();<font></font>
-38:     normTex.Apply();<font></font>
-39:     //色配列をテクスチャにセットし、適用する<font></font>
+38:     normTex.Apply();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+39: // Set the color array to the texture and apply</font></font><font></font>
 40: }<font></font>
 </pre>
 </div>
-<p>これで、<code class="inline-code tt">Mesh</code>の頂点の位置、法線情報を位置テクスチャ、法線テクスチャに焼きこむことができました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, </font></font><code class="inline-code tt">Mesh</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the position of the vertex of, we were able to normal information position texture, stamped in the normal texture.</font></font></p>
 <div id="mesh2tex" class="image">
 <img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/mesh2tex.png" alt="Write the vertex position and normal of Mesh to Texture">
-<p class="caption">
-図1.5: Meshの頂点位置と法線をTextureに書き込み
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.5: Write Mesh vertex positions and normals to Texture
+</font></font></p>
 </div>
-<p>実際には、ポリゴンを作る時の頂点の並び順（Index）データが無いので位置テクスチャと法線テクスチャのみではメッシュの形を再現することはできないのですが、メッシュの情報をテクスチャに書き込むことができました。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#mesh2tex">図1.5</a></span></p>
-<p>Unityの公式マニュアルでは、<code class="inline-code tt">Texture2D.SetPixels(Color[])</code>は、<code class="inline-code tt">ColorFormat.RGBA32,ARGB32,RGB24,Alpha8</code>の場合のみ動作する。と書いてあります。これは、固定小数点値、Fixed精度のテクスチャフォーマット時のみということなのですが、どうやら<code class="inline-code tt">RGBAHalf, RGBAFloat</code>の浮動小数点値でも、動作するようで、色の各要素に負の値や1以上の値を代入しても、<code class="inline-code tt">Clamp</code>されずに値を保持してくれるようです。固定精度のテクスチャに<code class="inline-code tt">Color</code>を代入すると、RGB値は０～１の値、精度は1/256に制限されます。</p>
-<p>今回のアニメーションの頂点情報をテクスチャに焼きこむ手法では、アニメーションを一定間隔ごとにサンプリングし、各フレームのメッシュの頂点情報を並べて、一連のアニメーション情報をまとめて１枚のテクスチャに焼きこみます。テクスチャは、位置情報テクスチャと法線情報テクスチャの計２枚、生成します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actually, since there is no index data for making polygons, it is not possible to reproduce the shape of the mesh with only the position texture and normal texture, but it is possible to write the mesh information to the texture. It's done. </font></font><span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#mesh2tex"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 1.5</font></font></a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the Unity of the official manual, </font></font><code class="inline-code tt">Texture2D.SetPixels(Color[])</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it is </font></font><code class="inline-code tt">ColorFormat.RGBA32,ARGB32,RGB24,Alpha8</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to work if only. </font><font style="vertical-align: inherit;">is what it reads. </font><font style="vertical-align: inherit;">This is only for fixed-point and fixed-precision texture formats, but apparently </font></font><code class="inline-code tt">RGBAHalf, RGBAFloat</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it works with floating-point values, even if you assign a negative value or a value of 1 or more to each element of the color. , </font></font><code class="inline-code tt">Clamp</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it seems to us to hold the value without being. </font></font><code class="inline-code tt">Color</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Substituting a </font><font style="vertical-align: inherit;">fixed precision texture </font><font style="vertical-align: inherit;">limits the RGB value to a value between 0 and 1 and the precision to 1/256.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the method of burning the vertex information of this animation into a texture, the animation is sampled at regular intervals, the vertex information of the mesh of each frame is arranged, and a series of animation information is burned into one texture. </font><font style="vertical-align: inherit;">A total of two textures, a position information texture and a normal information texture, are generated.</font></font></p>
 
 <h3><a id="h1-4-3"></a><span class="secno">1.4.3　</span>AnimationClip.SampleAnimation()</h3>
-<p>今回、アニメーションのサンプリングには、<code class="inline-code tt">AnimationClip.SampleAnimation(gameObject, time);</code>という関数を使用します。指定したGameObjectに対して、AnimationClipの指定した時間の状態にする。というもので、レガシー<code class="inline-code tt">Animation</code>にも、<code class="inline-code tt">Animator</code>にも対応しています。（というより、AnimationやAnimatorのコンポーネントを使用せずにアニメーションを再生する方法です。）</p>
-<p>それでは、実際の、AnimationClipからフレームを指定し頂点位置を取得する実装を解説していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, </font></font><code class="inline-code tt">AnimationClip.SampleAnimation(gameObject, time);</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">we will use the function to </font><font style="vertical-align: inherit;">sample the animation </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">For the specified GameObject, set it to the state of the specified time of AnimationClip. </font><font style="vertical-align: inherit;">So </font></font><code class="inline-code tt">Animation</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">Animator</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">it supports </font><font style="vertical-align: inherit;">both </font><font style="vertical-align: inherit;">legacy </font><font style="vertical-align: inherit;">and </font><font style="vertical-align: inherit;">legacy </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">(Rather, it's a way to play an animation without using Animation or Animator components.)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, I will explain the actual implementation of specifying a frame from AnimationClip and acquiring the vertex position.</font></font></p>
 
-<h2><a id="h1-5"></a><span class="secno">1.5　</span>実装</h2>
-<p>今回のプログラムは次の３つの要素から成り立っています。</p>
+<h2><a id="h1-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This program consists of the following three elements.</font></font></p>
 <ul>
 <li>AnimationClipTextureBaker.cs</li>
 <li>MeshInfoTextureGen.compute</li>
 <li>TextureAnimPlayer.shader</li>
 </ul>
-<p>AnimationClipTextureBakerで、Animation、もしくはAnimatorからAnimationClipを取得し、AnimationClipを各フレームにサンプリングしながらのメッシュの頂点データのComputeBufferを作成します。そして、AnimationClipとMeshのデータから作られた頂点アニメーション情報のComputeBufferをMeshInfoTextureGen.computeにて、位置情報テクスチャと法線情報テクスチャに変換するComputeShaderです。</p>
-<p>TextureAnimPlayer.shaderは、作られた位置情報テクスチャと法線情報テクスチャを使ってメッシュをアニメーションさせるためのShaderになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With AnimationClipTextureBaker, get AnimationClip from Animation or Animator, and create ComputeBuffer of mesh vertex data while sampling AnimationClip to each frame. </font><font style="vertical-align: inherit;">And it is ComputeShader that converts ComputeBuffer of vertex animation information created from AnimationClip and Mesh data into position information texture and normal information texture with MeshInfoTextureGen.compute.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TextureAnimPlayer.shader is a Shader for animating the mesh with the created location and normal textures.</font></font></p>
 <div id="animBakerInspector" class="image">
 <img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/animBakerInspector.png" alt="AnimationClipTextureBaker Inspector">
 <p class="caption">
 図1.6: AnimationClipTextureBaker Inspector
 </p>
 </div>
-<p><code class="inline-code tt">AnimationClipTextureBaker</code>のインスペクタです。アニメーションテクスチャを生成するための<code class="inline-code tt">ComputeShader</code>、アニメーションテクスチャを再生するための<code class="inline-code tt">Shader</code>を設定します。そして、テクスチャ化したい<code class="inline-code tt">AnimationClip</code>を<code class="inline-code tt">Clips</code>に設定しておきます。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#animBakerInspector">図1.6</a></span></p>
+<p><code class="inline-code tt">AnimationClipTextureBaker</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Inspector. </font><font style="vertical-align: inherit;">Sets to </font></font><code class="inline-code tt">ComputeShader</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">play the </font><font style="vertical-align: inherit;">animated texture for generating the </font><font style="vertical-align: inherit;">animated texture </font></font><code class="inline-code tt">Shader</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Then, </font><font style="vertical-align: inherit;">set </font><font style="vertical-align: inherit;">what you want </font></font><code class="inline-code tt">AnimationClip</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to </font><font style="vertical-align: inherit;">texture to </font></font><code class="inline-code tt">Clips</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font></font><span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#animBakerInspector"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 1.6</font></font></a></span></p>
 <div id="animBakerInspector2" class="image">
 <img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/animBakerInspector2.png" alt="You can write textures from the context menu in the Inspector">
-<p class="caption">
-図1.7: インスペクタのコンテキストメニューからテクスチャの書き込みを実行できる
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.7: Texture writing can be done from the context menu in the Inspector
+</font></font></p>
 </div>
-<p><code class="inline-code tt">ContextMenuAttribute</code>を使用すると、スクリプト内のメソッドをUnityのインスペクタのコンテキストメニューから呼べるようになります。エディター拡張を作らなくても実行できるので便利です。今回の場合、コンテキストメニューの『bake texture』から、スクリプトの<code class="inline-code tt">Bake</code>を呼び出せます。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#animBakerInspector">図1.6</a></span></p>
-<p>それでは、実際のコードを見ていきましょう。</p>
+<p><code class="inline-code tt">ContextMenuAttribute</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Allows you to call methods in your script from the context menu in Unity's Inspector. </font><font style="vertical-align: inherit;">It is convenient because it can be executed without creating an editor extension. </font><font style="vertical-align: inherit;">In this case, </font></font><code class="inline-code tt">Bake</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you can call </font><font style="vertical-align: inherit;">the script from "bake texture" in the context menu </font><font style="vertical-align: inherit;">. </font></font><span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#animBakerInspector"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 1.6</font></font></a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now let's look at the actual code.</font></font></p>
 <div id="AnimationClipTextureBaker" class="code">
-<p class="caption">リスト1.4: AnimationClipTextureBaker.cs</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.4: AnimationClipTextureBaker.cs</font></font></p>
 <pre class="list"> 1: using System.Collections.Generic;<font></font>
  2: using System.Linq;<font></font>
  3: using UnityEngine;<font></font>
@@ -276,39 +269,39 @@ Figure 1.3: 5000 animated horses
 13:     public ComputeShader infoTexGen;<font></font>
 14:     public Shader playShader;<font></font>
 15:     public AnimationClip[] clips;<font></font>
-16: <font></font>
-17: //頂点情報は位置と法線の構造体<font></font>
-18:     public struct VertInfo<font></font>
+16: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+17: // Vertex information is a structure of position and normal</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+18: public struct VertInfo</font></font></font></font><font></font>
 19:     {<font></font>
 20:         public Vector3 position;<font></font>
 21:         public Vector3 normal;<font></font>
 22:     }<font></font>
-23: <font></font>
-24: //Reset()は、エディタ上でGameObjectにスクリプトを付けるときに呼ばれる<font></font>
+23: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+24: // Reset () is called when scripting a GameObject in the editor</font></font><font></font>
 25:     private void Reset()<font></font>
-26:     {<font></font>
-27:         var animation = GetComponent&lt;Animation&gt;();<font></font>
-28:         var animator = GetComponent&lt;Animator&gt;();<font></font>
+26:     {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+27: var animation = GetComponent &lt;Animation&gt; ();</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+28: var animator = GetComponent &lt;Animator&gt; ();</font></font></font></font><font></font>
 29: <font></font>
 30:         if (animation != null)<font></font>
 31:         {<font></font>
-32:             clips = new AnimationClip[animation.GetClipCount()];<font></font>
-33:             var i = 0;<font></font>
+32:             clips = new AnimationClip[animation.GetClipCount()];<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+33: var i = 0;</font></font></font></font><font></font>
 34:             foreach (AnimationState state in animation)<font></font>
 35:                 clips[i++] = state.clip;<font></font>
 36:         }<font></font>
 37:         else if (animator != null)<font></font>
-38:             clips = animator.runtimeAnimatorController.animationClips;<font></font>
-39: //Animation、Animatorのコンポーネントがあったら自動的にAnimationClipを設定する<font></font>
+38:             clips = animator.runtimeAnimatorController.animationClips;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+39: // Automatically set AnimationClip if there is an Animation or Animator component</font></font><font></font>
 40:     }<font></font>
 41: <font></font>
 42:     [ContextMenu("bake texture")]<font></font>
 43:     void Bake()<font></font>
-44:     {<font></font>
-45:         var skin = GetComponentInChildren&lt;SkinnedMeshRenderer&gt;();<font></font>
+44:     {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+45: var skin = GetComponentInChildren &lt;SkinnedMeshRenderer&gt; ();</font></font></font></font><font></font>
 46:         var vCount = skin.sharedMesh.vertexCount;<font></font>
-47:         var texWidth = Mathf.NextPowerOfTwo(vCount);<font></font>
-48:         var mesh = new Mesh();<font></font>
+47:         var texWidth = Mathf.NextPowerOfTwo(vCount);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+48: var mesh = new Mesh ();</font></font></font></font><font></font>
 49: <font></font>
 50:         foreach (var clip in clips)<font></font>
 51:         {<font></font>
@@ -328,15 +321,15 @@ Figure 1.3: 5000 animated horses
 65:                 rt.Create();<font></font>
 66:                 RenderTexture.active = rt;<font></font>
 67:                 GL.Clear(true, true, Color.clear);<font></font>
-68:             }<font></font>
-69:             //テクスチャの初期化<font></font>
+68:             }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+69: // Texture initialization</font></font><font></font>
 70: <font></font>
 71:             for (var i = 0; i &lt; frames; i++)<font></font>
 72:             {<font></font>
-73:                 clip.SampleAnimation(gameObject, dt * i);<font></font>
-74: //AnimationClipの指定した時間の状態でGameObjectをサンプリング<font></font>
-75:                 skin.BakeMesh(mesh);<font></font>
-76: //BakeMesh()を呼んでSkinningされた状態のメッシュデータを取得<font></font>
+73:                 clip.SampleAnimation(gameObject, dt * i);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+74: // Sampling GameObject at the specified time of AnimationClip</font></font><font></font>
+75:                 skin.BakeMesh(mesh);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+76: // Call BakeMesh () to get the mesh data in the skinned state</font></font><font></font>
 77: <font></font>
 78:                 infoList.AddRange(Enumerable.Range(0, vCount)<font></font>
 79:                     .Select(idx =&gt; new VertInfo()<font></font>
@@ -344,24 +337,24 @@ Figure 1.3: 5000 animated horses
 81:                         position = mesh.vertices[idx],<font></font>
 82:                         normal = mesh.normals[idx]<font></font>
 83:                     })<font></font>
-84:                 );<font></font>
-85: //アニメーションのフレームを先にリストに格納しておく<font></font>
+84:                 );<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+85: // Store the animation frame in the list first</font></font><font></font>
 86:             }<font></font>
 87:             var buffer = new ComputeBuffer(<font></font>
 88:                 infoList.Count,<font></font>
-89:                 System.Runtime.InteropServices.Marshal.SizeOf(<font></font>
-90:                     typeof(VertInfo)<font></font>
+89:                 System.Runtime.InteropServices.Marshal.SizeOf(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+90: typeof (VertInfo)</font></font></font></font><font></font>
 91:                 )<font></font>
 92:             );<font></font>
-93:             buffer.SetData(infoList.ToArray());<font></font>
-94: //頂点情報をComputeBufferにセット<font></font>
+93:             buffer.SetData(infoList.ToArray());<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+94: // Set vertex information in ComputeBuffer</font></font><font></font>
 95: <font></font>
-96:             var kernel = infoTexGen.FindKernel("CSMain");<font></font>
-97:             uint x, y, z;<font></font>
+96:             var kernel = infoTexGen.FindKernel("CSMain");<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+97: uint x, y, z;</font></font></font></font><font></font>
 98:             infoTexGen.GetKernelThreadGroupSizes(<font></font>
 99:                 kernel,<font></font>
-100:                 out x,<font></font>
-101:                 out y,<font></font>
+100:                 out x,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+101: out y,</font></font></font></font><font></font>
 102:                 out z<font></font>
 103:             );<font></font>
 104: <font></font>
@@ -374,12 +367,12 @@ Figure 1.3: 5000 animated horses
 111:                 vCount / (int)x + 1,<font></font>
 112:                 frames / (int)y + 1,<font></font>
 113:                 1<font></font>
-114:             );<font></font>
-115: //ComputeShaderをセットアップし、テクスチャ生成する<font></font>
+114:             );<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+115: // Set up Compute Shader and generate textures</font></font><font></font>
 116: <font></font>
 117:             buffer.Release();<font></font>
-118: <font></font>
-119: //生成したテクスチャを保存するためのエディタースクリプト<font></font>
+118: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+119: // Editor script to save the generated texture</font></font><font></font>
 120: #if UNITY_EDITOR<font></font>
 121:             var folderName = "BakedAnimationTex";<font></font>
 122:             var folderPath = Path.Combine("Assets", folderName);<font></font>
@@ -395,8 +388,8 @@ Figure 1.3: 5000 animated horses
 132:             var normTex = RenderTextureToTexture2D.Convert(nRt);<font></font>
 133:             Graphics.CopyTexture(pRt, posTex);<font></font>
 134:             Graphics.CopyTexture(nRt, normTex);<font></font>
-135: <font></font>
-136:             var mat = new Material(playShader);<font></font>
+135: <font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+136: var mat = new Material (playShader);</font></font></font></font><font></font>
 137:             mat.SetTexture("_MainTex", skin.sharedMaterial.mainTexture);<font></font>
 138:             mat.SetTexture("_PosTex", posTex);<font></font>
 139:             mat.SetTexture("_NmlTex", normTex);<font></font>
@@ -409,8 +402,8 @@ Figure 1.3: 5000 animated horses
 146: <font></font>
 147:             var go = new GameObject(name + "." + clip.name);<font></font>
 148:             go.AddComponent&lt;MeshRenderer&gt;().sharedMaterial = mat;<font></font>
-149:             go.AddComponent&lt;MeshFilter&gt;().sharedMesh = skin.sharedMesh;<font></font>
-150: //生成したテクスチャをマテリアルに設定して、メッシュを設定しPrefabを作っている<font></font>
+149:             go.AddComponent&lt;MeshFilter&gt;().sharedMesh = skin.sharedMesh;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+150: // Set the generated texture as a material, set the mesh and make a Prefab</font></font><font></font>
 151: <font></font>
 152:             AssetDatabase.CreateAsset(posTex,<font></font>
 153:                 Path.Combine(subFolderPath, pRt.name + ".asset"));<font></font>
@@ -430,10 +423,10 @@ Figure 1.3: 5000 animated horses
 167: }<font></font>
 </pre>
 </div>
-<p>いったん<code class="inline-code tt">RenderTexture</code>を生成してGPUで処理し、<code class="inline-code tt">Graphics.CopyTexture(rt,tex2d);</code>で<code class="inline-code tt">Texture2D</code>にコピーし、エディタースクリプトでUnityAssetとして保存しておけば、次からは再計算無しで使えるアセットとなるので、使いどころの多いテクニックかと思います。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#AnimationClipTextureBaker">リスト1.4</a></span>（119,120行目）</p>
-<p>今回の実装では、テクスチャへの書き込みを<code class="inline-code tt">ComputeShader</code>を用いて実装しています。大量の処理を行う場合、GPUを使用した方が高速になるので、有用なテクニックですので、ぜひマスターしてみてください。処理内容としては、スクリプトで生成した頂点アニメーションの位置バッファ、法線バッファを各ピクセルにそのまま配置しているだけです。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#MeshInfoTextureGen">リスト1.5</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If </font></font><code class="inline-code tt">RenderTexture</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you generate it </font><font style="vertical-align: inherit;">once </font><font style="vertical-align: inherit;">, process it on the GPU, </font><font style="vertical-align: inherit;">copy it </font><font style="vertical-align: inherit;">to, </font></font><code class="inline-code tt">Graphics.CopyTexture(rt,tex2d);</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and </font></font><code class="inline-code tt">Texture2D</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">save it as a Unity Asset with an editor script, it will be an asset that can be used without recalculation from now on, so I think it is a versatile technique. </font></font><span class="listref"><a href="https://freder.io/files/unity3/sugino.html#AnimationClipTextureBaker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.4</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> (lines 119,120)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this implementation, it is implemented by writing to the texture </font></font><code class="inline-code tt">ComputeShader</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">When doing a lot of processing, using the GPU is faster, so it is a useful technique, so please try to master it. </font><font style="vertical-align: inherit;">As for the processing content, the position buffer and normal buffer of the vertex animation generated by the script are simply placed in each pixel as they are. </font></font><span class="listref"><a href="https://freder.io/files/unity3/sugino.html#MeshInfoTextureGen"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.5</font></font></a></span></p>
 <div id="MeshInfoTextureGen" class="code">
-<p class="caption">リスト1.5: MeshInfoTextureGen.compute</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.5: MeshInfoTextureGen.compute</font></font></p>
 <pre class="list"> 1: #pragma kernel CSMain<font></font>
  2: <font></font>
  3: struct MeshInfo{<font></font>
@@ -453,24 +446,24 @@ Figure 1.3: 5000 animated horses
 17:     MeshInfo info = Info[index];<font></font>
 18: <font></font>
 19:     OutPosition[id.xy] = float4(info.position, 1.0);<font></font>
-20:     OutNormal[id.xy] = float4(info.normal, 1.0);<font></font>
-21: //テクスチャのx軸が頂点ID、y軸方向が時間になるように頂点情報を並べる<font></font>
+20:     OutNormal[id.xy] = float4(info.normal, 1.0);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+21: // Arrange the vertex information so that the x-axis of the texture is the vertex ID and the y-axis direction is time.</font></font><font></font>
 22: }<font></font>
 </pre>
 </div>
-<p>スクリプトから生成されたテクスチャがこちらになります。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#animTexes">図1.8</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here is the texture generated from the script. </font></font><span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#animTexes"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 1.8</font></font></a></span></p>
 <div id="animTexes" class="image">
 <img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/animTexes.png" alt="Generated texture">
-<p class="caption">
-図1.8: 生成されたテクスチャ
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.8: Generated texture
+</font></font></p>
 </div>
-<p>このテクスチャはx軸方向に１列ずつ、サンプリングした各フレームにおけるメッシュの頂点が格納されています。そして、y軸方向が時間になっていて、テクスチャをサンプリングするときの<code class="inline-code tt">uv.y</code>を変化させることでアニメーションの時間を指定することができるよう、テクスチャを設計しています。</p>
-<p>注目していただきたいことは<code class="inline-code tt">Texture.FilterMode = Bilinear</code>になっているトコロです。テクスチャをサンプリングするとき各ピクセルが隣接するピクセルと補間されるのですが、これにより、テクスチャ生成時にスクリプトでサンプリングしたフレームと次のフレームの間の中途半端な時刻のアニメーションテクスチャをアニメーション再生時にShaderでサンプリングしたとき、フレーム毎の位置と法線が自動的に補間されることになるので、アニメーションが滑らかに再生されることになります。ちょっと説明がややこしいですね！</p>
-<p>そしてこの場合、走行（Run）のアニメーションはループアニメーションなので<code class="inline-code tt">WrapMode = Repeat</code>にしています。これにより、アニメーションテクスチャの最後のピクセルと最初のピクセルが補間されるので、滑らかにループが繋がったアニメーションになります。もちろん、ループしないアニメーションからテクスチャを生成する場合、<code class="inline-code tt">WrapMode = Clamp</code>に設定する必要があります。</p>
-<p>次に、生成したアニメーションテクスチャを再生するためのShaderになります。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#TextureAnimPlayer">リスト1.6</a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This texture stores the vertices of the mesh in each sampled frame, one column in the x-axis direction. </font><font style="vertical-align: inherit;">And the </font></font><code class="inline-code tt">uv.y</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">texture is designed so that </font><font style="vertical-align: inherit;">the y-axis direction is time and </font><font style="vertical-align: inherit;">you can specify the animation time by changing </font><font style="vertical-align: inherit;">when sampling the </font><font style="vertical-align: inherit;">texture.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">What I would like you to pay attention to </font></font><code class="inline-code tt">Texture.FilterMode = Bilinear</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is Tokoro. </font><font style="vertical-align: inherit;">When sampling a texture, each pixel is interpolated with adjacent pixels, which causes the Shader to play an animated texture with a halfway time between the frame sampled by the script during texture generation and the next frame. When sampled, the frame-by-frame positions and normals will be automatically interpolated, resulting in smooth playback of the animation. </font><font style="vertical-align: inherit;">The explanation is a little complicated!</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">And in this case, the Run animation is a loop animation </font></font><code class="inline-code tt">WrapMode = Repeat</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">This interpolates the last and first pixels of the animation texture, resulting in a smooth looped animation. </font><font style="vertical-align: inherit;">Of course, if you </font></font><code class="inline-code tt">WrapMode = Clamp</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">want </font><font style="vertical-align: inherit;">to generate a texture from a non-looping animation, </font><font style="vertical-align: inherit;">you need to set it to.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next is the Shader for playing the generated animation texture. </font></font><span class="listref"><a href="https://freder.io/files/unity3/sugino.html#TextureAnimPlayer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.6</font></font></a></span></p>
 <div id="TextureAnimPlayer" class="code">
-<p class="caption">リスト1.6: TextureAnimPlayer.shaer</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.6: TextureAnimPlayer.shaer</font></font></p>
 <pre class="list"> 1: Shader "Unlit/TextureAnimPlayer"<font></font>
  2: {<font></font>
  3:     Properties<font></font>
@@ -485,16 +478,16 @@ Figure 1.3: 5000 animated horses
 12:     }<font></font>
 13:     SubShader<font></font>
 14:     {<font></font>
-15:             Tags { "RenderType"="Opaque" }<font></font>
-16:             LOD 100 Cull Off<font></font>
+15:             Tags { "RenderType"="Opaque" }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+16: LOD 100 Cull Off</font></font></font></font><font></font>
 17: <font></font>
 18:             Pass<font></font>
 19:             {<font></font>
 20:                     CGPROGRAM<font></font>
 21:                     #pragma vertex vert<font></font>
 22:                     #pragma fragment frag<font></font>
-23:                     #pragma multi_compile ___ ANIM_LOOP<font></font>
-24: //ループ用のマルチコンパイルを作っておくと便利<font></font>
+23:                     #pragma multi_compile ___ ANIM_LOOP<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+24: // It is convenient to make a multi-compile for the loop</font></font><font></font>
 25: <font></font>
 26:                     #include "UnityCG.cginc"<font></font>
 27: <font></font>
@@ -516,8 +509,8 @@ Figure 1.3: 5000 animated horses
 43:                     float4 _PosTex_TexelSize;<font></font>
 44:                     float _Length, _DT;<font></font>
 45: <font></font>
-46:                     v2f vert (appdata v, uint vid : SV_VertexID)<font></font>
-47: //SV_VertexIDのセマンティックで頂点IDを取得できる<font></font>
+46:                     v2f vert (appdata v, uint vid : SV_VertexID)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+47: // You can get the vertex ID with the semantic of SV_VertexID</font></font><font></font>
 48:                     {<font></font>
 49:                             float t = (_Time.y - _DT) / _Length;<font></font>
 50: #if ANIM_LOOP<font></font>
@@ -527,23 +520,23 @@ Figure 1.3: 5000 animated horses
 54: #endif<font></font>
 55: <font></font>
 56:                             float x = (vid + 0.5) * ts.x;<font></font>
-57:                             float y = t;<font></font>
-58: //uv.xは頂点IDを元に指定する<font></font>
-59: //uv.yにアニメーションをサンプリングする時間(t)を設定する<font></font>
+57:                             float y = t;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+58: // uv.x is specified based on the vertex ID</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+59: // Set the time (t) to sample the animation in uv.y</font></font><font></font>
 60: <font></font>
-61:                             float4 pos = tex2Dlod(<font></font>
-62:                     _PosTex,<font></font>
-63:                     float4(x, y, 0, 0)<font></font>
+61:                             float4 pos = tex2Dlod(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+62: _PosTex,</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+63: float4 (x, y, 0, 0)</font></font></font></font><font></font>
 64:                 );<font></font>
 65:                             float3 normal = tex2Dlod(<font></font>
-66:                     _NmlTex,<font></font>
-67:                     float4(x, y, 0, 0)<font></font>
-68:                 );<font></font>
-69: //テクスチャから位置情報と法線情報をサンプリング<font></font>
+66:                     _NmlTex,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+67: float4 (x, y, 0, 0)</font></font></font></font><font></font>
+68:                 );<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+69: // Sampling location and normal information from textures</font></font><font></font>
 70: <font></font>
 71:                             v2f o;<font></font>
-72:                             o.vertex = UnityObjectToClipPos(pos);<font></font>
-73:                             o.normal = UnityObjectToWorldNormal(normal);<font></font>
+72:                             o.vertex = UnityObjectToClipPos(pos);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+73: o.normal = UnityObjectToWorldNormal (normal);</font></font></font></font><font></font>
 74:                             o.uv = v.uv;<font></font>
 75:                             return o;<font></font>
 76:                     }<font></font>
@@ -563,34 +556,34 @@ Figure 1.3: 5000 animated horses
 90: }<font></font>
 </pre>
 </div>
-<p>アニメーションテクスチャを再生するShaderでは、VertexTextureFetch（VTF）という手法を使用しています。簡単にいうと、頂点シェーダ内でテクスチャをサンプリングし、頂点の位置や各値の計算に使用する。という方法で、ディスプレイスメントマッピング等に良く利用されます。</p>
-<p>テクスチャのサンプリングには頂点IDを使用しているのですが、これは、<code class="inline-code tt">SV_VertexID</code>のセマンティックで取得できます。頂点情報は位置情報も法線情報もテクスチャから取得するので、appdata内にはuvしか無い部分も注目です。（<code class="inline-code tt">appdata</code>に<code class="inline-code tt">POSITION,NORMAL</code>セマンティックを定義しても特にエラーにはなりません）</p>
-<p>テクスチャをサンプリングするときのUVですが、<code class="inline-code tt">uv.y</code>がアニメーションの正規化した時間（アニメーションの始まりを0、終わりを1.0にしたときの値）になっています。<code class="inline-code tt">uv.x</code>は、頂点インデックス（vid）、<code class="inline-code tt">uv.x = (vid + 0.5) * _TexelSize.x</code>となっていて、この0.5は何なのか？と思うかも知れないのですが、これはテクスチャを<code class="inline-code tt">Bilinear</code>でサンプリングしたとき、<code class="inline-code tt">(n + 0.5) / テクスチャサイズ</code>の位置だと、補間されていないテクスチャに入った値を得ることができるので、頂点IDに0.5の値を足して、メッシュ内の頂点同士の補間されていない位置や法線を取得しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Shaders that play animated textures use a technique called VertexTextureFetch (VTF). </font><font style="vertical-align: inherit;">Simply put, the texture is sampled in the vertex shader and used to calculate the position of the vertices and each value. </font><font style="vertical-align: inherit;">This method is often used for displacement mapping, etc.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I'm using the vertex ID to sample the texture, which </font></font><code class="inline-code tt">SV_VertexID</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">can be obtained semantically. </font><font style="vertical-align: inherit;">Since the vertex information obtains both the position information and the normal information from the texture, the part where there is only uv in the app data is also noteworthy. </font><font style="vertical-align: inherit;">( </font></font><code class="inline-code tt">appdata</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To </font></font><code class="inline-code tt">POSITION,NORMAL</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">not be a particularly error to define a semantic)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The UV when sampling the texture, </font></font><code class="inline-code tt">uv.y</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is the normalized time of the animation (the value when the start of the animation is 0 and the end is 1.0). </font></font><code class="inline-code tt">uv.x</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is the vertex index (vid), </font></font><code class="inline-code tt">uv.x = (vid + 0.5) * _TexelSize.x</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and what is this 0.5? </font><font style="vertical-align: inherit;">You may think that this is </font><font style="vertical-align: inherit;">the position </font></font><code class="inline-code tt">Bilinear</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">when sampling the </font><font style="vertical-align: inherit;">texture with </font><font style="vertical-align: inherit;">, </font></font><code class="inline-code tt">(n + 0.5) / テクスチャサイズ</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">because you can get the value in the uninterpolated texture, so add the value of 0.5 to the vertex ID and mesh We are getting the uninterpolated positions and normals between the vertices inside.</font></font></p>
 <div id="texelSize" class="caption-code">
-<p class="caption">リスト1.7: {TextureName}_TexelSize テクスチャサイズの情報を含むfloat4のプロパティ(Unity公式マニュアルより)</p>
-<pre class="list">x には 1.0/width が含まれます<font></font>
-y には 1.0/height が含まれます<font></font>
-z には width が含まれます<font></font>
-w には height が含まれます<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 1.7: {TextureName} _TexelSize Float4 properties with texture size information (from Unity official manual)</font></font></p>
+<pre class="list"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">x contains 1.0 / width</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+y contains 1.0 / height</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+z contains width</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+w contains height</font></font><font></font>
 </pre>
 </div>
 
-<h2><a id="h1-6"></a><span class="secno">1.6　</span>アニメーションする馬を5000頭置いてみる</h2>
+<h2><a id="h1-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.6 Place　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 5000 animated horses</font></font></h2>
 <div id="uma50002" class="image">
 <img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/uma50002.png" alt="5000 horses animated by texture">
-<p class="caption">
-図1.9: テクスチャによりアニメーションする5000頭の馬
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.9: 5000 horses animated by texture
+</font></font></p>
 </div>
-<p><code class="inline-code tt">SkinnedMeshRenderer</code>を使わず、<code class="inline-code tt">Renderer</code>とアニメーションテクスチャにより、アニメーションを再生しています。FPSはスキニングアニメーションを使用していたときと比べると8→56.4と、大きく改善しています。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#uma50002">図1.9</a></span></p>
-<p>※現在執筆中のPCのGPUは、GeForce MX150で、NVIDIA Pascal GPUの中でも最弱のものとなっています。プロファイラとゲームウィンドウを同時にキャプチャするため、レンダリング解像度が少し小さくなりましたが、処理負荷のほとんどがメッシュのスキニングの処理だったので、そこまでは影響ないはずです。。！</p>
-<p>また、注目してほしいのはインスタンシング対応等、他の最適化処理はしてないというトコロです。<code class="inline-code tt">SkinnedMeshRenderer</code>を使わなくなったので、GPUインスタンシングによる描画が可能になりました。Shaderのインスタンシング対応などにより、さらにパフォーマンスを追及することが可能だということです。</p>
-<p>ここでは解説しませんが、表紙の鳥はテクスチャアニメーションさせた鳥を<code class="inline-code tt">Graphics.DrawMeshInstancedIndirect()</code>を用いて約4000羽の鳥を一気に描画しています。Shaderのインスタンシング対応や他の応用については、ぼくのGitHubや他の記事を参考にしてみてください。</p>
+<p><code class="inline-code tt">SkinnedMeshRenderer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The </font></font><code class="inline-code tt">Renderer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">animation is being played </font><font style="vertical-align: inherit;">without using and </font><font style="vertical-align: inherit;">with animation textures. </font><font style="vertical-align: inherit;">FPS is greatly improved from 8 to 56.4 compared to when using skinning animation. </font></font><span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#uma50002"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 1.9</font></font></a></span></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* The GPU of the PC currently being written is GeForce MX150, which is the weakest of the NVIDIA Pascal GPUs. </font><font style="vertical-align: inherit;">The rendering resolution was a bit smaller because we captured the profiler and the game window at the same time, but that shouldn't be that much as most of the processing load was mesh skinning. </font><font style="vertical-align: inherit;">.. </font><font style="vertical-align: inherit;">!!</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, I would like you to pay attention to the fact that other optimization processing such as instancing support is not performed. </font></font><code class="inline-code tt">SkinnedMeshRenderer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since we no longer use, it is now possible to draw with GPU instancing. </font><font style="vertical-align: inherit;">It means that it is possible to pursue further performance by supporting Shader's instancing.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Although not explained here, the bird on the cover uses texture-animated </font></font><code class="inline-code tt">Graphics.DrawMeshInstancedIndirect()</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">birds to draw about 4000 birds at once. </font><font style="vertical-align: inherit;">For Shader instancing support and other applications, check out my GitHub and other articles.</font></font></p>
 
-<h2><a id="h1-7"></a><span class="secno">1.7　</span>制限と応用先の検討</h2>
-<p>このテクスチャを使った手法にはいくつか制限があります。メッシュの頂点数やアニメーションの長さによりテクスチャを保持しておくメモリが消費される。アニメーションのブレンドにはShaderを書く必要がある。AnimatorControllerのステートマシンを使用できない。などです。</p>
-<p>その中で、一番大きな制限としては、ハードウェアごとに使用できるテクスチャの最大サイズがあります。それは、4Kだったり8K、16Kだったりします。つまり、今回の手法ではメッシュの各フレームの頂点を横1列に並べるのでメッシュの頂点数がテクスチャサイズによって制限されるということです。</p>
-<p>しかし、大量にオブジェクトを出す場合、そこまで頂点数の多いものを出すべきではないので、頂点数の制限は、そのまま受け入れ、メッシュの頂点数がテクスチャの最大サイズを超えないようにすることが得策かも知れません。この頂点数の制限を超えてベイキングアニメーションテクスチャを使いたい場合、複数テクスチャを使用する方法が考えられます。</p>
+<h2><a id="h1-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Limitations and consideration of application destinations</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are some restrictions on the technique using this texture. </font><font style="vertical-align: inherit;">The memory for holding the texture is consumed depending on the number of vertices of the mesh and the length of the animation. </font><font style="vertical-align: inherit;">You need to write a Shader to blend the animation. </font><font style="vertical-align: inherit;">The state machine of AnimatorController cannot be used. </font><font style="vertical-align: inherit;">Etc.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The biggest limitation is the maximum size of textures that can be used for each hardware. </font><font style="vertical-align: inherit;">It can be 4K, 8K, 16K. </font><font style="vertical-align: inherit;">In other words, in this method, the vertices of each frame of the mesh are arranged in a horizontal row, so the number of vertices of the mesh is limited by the texture size.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, when you output a large number of objects, you should not output those with such a large number of vertices, so it is a good idea to accept the limit on the number of vertices as it is and make sure that the number of vertices of the mesh does not exceed the maximum size of the texture. maybe. </font><font style="vertical-align: inherit;">If you want to use baking animation textures beyond this limit on the number of vertices, you can consider using multiple textures.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Alternatively, you can pre-calculate the matrix for each bone in the skeleton instead of the vertices of the mesh and save it in a texture or buffer. </font><font style="vertical-align: inherit;">Since the skinning process itself is performed by Vertex Shader at the time of execution, the skinning process that was performed during normal mesh skinning </font></font><code class="inline-code tt">PostLateUpdate.UpdateAllSkinnedMeshes</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is performed </font></font><code class="inline-code tt">Camera.Render</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">collectively at the time of rendering, so the processing load is considerably lightened. </font><font style="vertical-align: inherit;">Please, try it.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since AnimatorController and Unity's state machine cannot be used, it is difficult to control the animation, so it is better to apply it to some deception such as mobs that repeat loop animation and swarms of flying birds and butterflies instead of the main character. I think it's good.</font></font></p>
 
@@ -604,4 +597,4 @@ w には height が含まれます<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

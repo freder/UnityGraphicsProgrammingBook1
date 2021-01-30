@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0046)https://freder.io/files/unity4/kaiware007.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 5 _ Triangulation by Ear Clipping_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 5 _ Triangulation by Ear Clipping_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 5 _ Triangulation by Ear Clipping_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Triangulation by Ear Clipping_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Triangulation by Ear Clipping_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 5 _ Triangulation by Ear Clipping_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 5 _ Triangulation by Ear Clipping_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Triangulation by Ear Clipping_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Triangulation by Ear Clipping_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 5 _ Triangulation by Ear Clipping_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h5"></a><span class="secno">第5章　</span>Triangulation by Ear Clipping</h1>
 
 <h2><a id="h5-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -82,252 +75,252 @@ Figure 5.2: Left: Simple polygon, Right: Non-simple polygon
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Any simple polygon can be triangulated. </font><font style="vertical-align: inherit;">Dividing a simple polygon with n vertices into triangles creates n-2 triangles.</font></font></p>
 
 <h2><a id="h5-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Ear cutting method (EarClipping method)</font></font></h2>
-<p>多角形の三角形分割の手法はいくつも存在しますが、今回は実装がシンプルな「耳刈り取り法」について説明します。「耳刈り取り法」は、「Two ears theorem」という定理に基づいて分割します。この「Ear(耳)」というのは、「2辺が多角形の辺であり、残り1辺が多角形の内部に存在する三角形」のことを指し、この定理は、「4本以上の辺を持つ穴のない単純多角形は少なくとも２つの耳を持っている」という定理です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are many methods for dividing polygons into triangles, but this time we will explain the "ear cutting method", which is simple to implement. </font><font style="vertical-align: inherit;">The "ear-cutting method" is divided based on the theorem "Two ears the orem". </font><font style="vertical-align: inherit;">This "Ear" refers to "a triangle whose two sides are polygonal sides and the remaining one side exists inside the polygon", and this theorem states that "four or more sides". A simple polygon without a hole with has at least two ears. "</font></font></p>
 <div id="id_kaiware_2Fear001" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/ear001.png" alt="ear" class="width-050per">
-<p class="caption">
-図5.3: 耳
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.3: Ears
+</font></font></p>
 </div>
-<p>「耳刈り取り法」は、この「耳」三角形を探し、多角形から取り除いていくアルゴリズムです。この「耳刈り取り法」ですが、他の分割アルゴリズムに比べてシンプルな半面、処理が遅いので速度が求められる場面ではあまり使えないと思います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The "ear trimming method" is an algorithm that searches for this "ear" triangle and removes it from the polygon. </font><font style="vertical-align: inherit;">This "ear cutting method" is simpler than other division algorithms, but it is slow, so I don't think it can be used very much in situations where speed is required.</font></font></p>
 
-<h3><a id="h5-3-1"></a><span class="secno">5.3.1　</span>三角形分割の流れ</h3>
-<p>まず、与えられた多角形の頂点配列の中から「耳」を探します。「耳」の条件は以下の2点です。</p>
+<h3><a id="h5-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Flow of triangle division</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, look for "ears" in the given array of polygon vertices. </font><font style="vertical-align: inherit;">The conditions for "ears" are the following two points.</font></font></p>
 <ul>
-<li>多角形の頂点viの前後の頂点(vi-1,vi+1)との線分のなす角度(内角)が180度以内（凸頂点という）</li>
-<li>多角形の頂点vi-1, vi, vi+1からなる三角形の中に他の頂点が含まれていない</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The angle (internal angle) of the line segment with the vertices (vi-1, vi + 1) before and after the vertex vi of the polygon is within 180 degrees (called a convex vertex).</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">No other vertices are included in the triangle consisting of polygon vertices vi-1, vi, vi + 1.</font></font></li>
 </ul>
 <div id="id_kaiware_2Fear__check001" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/ear_check001.png" alt="Ear conditions (within 180 degrees, no other vertices in the triangle)" class="width-050per">
-<p class="caption">
-図5.4: 耳の条件（180度以内、三角形の中に他の頂点が含まれない）
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.4: Ear conditions (within 180 degrees, no other vertices in the triangle)
+</font></font></p>
 </div>
-<p>上記の条件を満たした頂点viを耳リストに追加します。この処理はサンプルの Triangulation.cs の InitializeVertices関数が該当します。そして、耳リストの先頭から耳を構成する三角形を作成し、頂点viを頂点配列から取り除きます。<br>頂点viを取り除くと、多角形の形が変わります。残された頂点vi-1,vi+1に対して、再度前述の耳判定を行います。頂点vi-1,vi+1が耳の条件を満たしていれば、耳リストの末尾に追加されますが、逆に耳リストから削除される場合もあります。この処理はサンプルの Triangulation.cs の CheckVertex関数と、EarClipping関数が該当します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Add the vertex vi that meets the above conditions to the ear list. </font><font style="vertical-align: inherit;">This is done by the InitializeVertices function in the sample Triangulation.cs. </font><font style="vertical-align: inherit;">Then create the triangles that make up the ear from the top of the ear list and remove the vertex vi from the vertex array. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Removing the vertex vi changes the shape of the polygon. </font><font style="vertical-align: inherit;">For the remaining vertices vi-1, vi + 1, perform the above ear judgment again. </font><font style="vertical-align: inherit;">If vertices vi-1, vi + 1 meet the ear criteria, they will be added to the end of the ear list, but they may also be removed from the ear list. </font><font style="vertical-align: inherit;">This process corresponds to the CheckVertex function and EarClipping function of the sample Triangulation.cs.</font></font></p>
 <div id="id_kaiware_2Fear__check002" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/ear_check002.png" alt="Polygon before deleting vertex vi and polygon after deleting" class="width-075per">
-<p class="caption">
-図5.5: 頂点viを削除する前の多角形と、削除したあとの多角形
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.5: Polygon before and after deleting vertex vi
+</font></font></p>
 </div>
-<p>ある単純多角形を例に一連の流れを図で表してみます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's illustrate a series of flows using a simple polygon as an example.</font></font></p>
 <div id="id_kaiware_2Ftriangulation0" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/triangulation0.png" alt="A simple polygon" class="width-050per">
-<p class="caption">
-図5.6: ある単純多角形
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.6: A simple polygon
+</font></font></p>
 </div>
-<p>まず、耳を探します。この場合、耳リストには頂点0,1,4,6が含まれます。頂点2,5は凸頂点ではないので除外、頂点3は三角形2,3,4の中に頂点5が含まれているので除外されます。<br>まず、耳リストの先頭の頂点0を取り出します。頂点0の前後の頂点1,6で三角形を作ります。頂点0を頂点配列から削除し、前後の頂点1,6を結んで新しい多角形にします。そして頂点1,6について耳判定をします。もともと2つとも耳でしたが、耳判定後も耳のままです。この時の耳リストは、1,4,6です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, look for your ears. </font><font style="vertical-align: inherit;">In this case, the ear list contains vertices 0,1,4,6. </font><font style="vertical-align: inherit;">Vertices 2 and 5 are excluded because they are not convex vertices, and vertices 3 are excluded because they are contained in triangles 2, 3 and 4. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, take out the first vertex 0 of the ear list. </font><font style="vertical-align: inherit;">Make a triangle with vertices 1 and 6 before and after vertex 0. </font><font style="vertical-align: inherit;">Remove vertex 0 from the vertex array and connect the previous and next vertices 1 and 6 to form a new polygon. </font><font style="vertical-align: inherit;">Then, the ears are judged for vertices 1 and 6. </font><font style="vertical-align: inherit;">Originally both were ears, but they remain ears even after the ear judgment. </font><font style="vertical-align: inherit;">The ear list at this time is 1,4,6.</font></font></p>
 <div id="id_kaiware_2Ftriangulation1" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/triangulation1.png" alt="Polygon with 0 vertices removed" class="width-050per">
-<p class="caption">
-図5.7: 頂点0を削除した多角形
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.7: Polygon with 0 vertices removed
+</font></font></p>
 </div>
-<p>次に、耳リストの先頭から頂点1を取り出します。頂点1の前後の頂点2,6で三角形を作ります。頂点1を頂点配列から削除し、前後の頂点2,6を結んで新しい多角形にします。そして頂点2,6について耳判定をします。頂点1がなくなったことで、頂点2が凸頂点になり、耳の条件を満たしましたので、耳リストに追加します。頂点6は耳のままです。この時の耳リストは、4,6,2です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then take vertex 1 from the beginning of the ear list. </font><font style="vertical-align: inherit;">Make a triangle with vertices 2 and 6 before and after vertex 1. </font><font style="vertical-align: inherit;">Remove vertex 1 from the vertex array and connect the previous and next vertices 2 and 6 to form a new polygon. </font><font style="vertical-align: inherit;">Then, the ears are judged for vertices 2 and 6. </font><font style="vertical-align: inherit;">Since the vertex 1 is gone, the vertex 2 becomes a convex vertex and the ear condition is satisfied, so add it to the ear list. </font><font style="vertical-align: inherit;">Vertex 6 remains in the ear. </font><font style="vertical-align: inherit;">The ear list at this time is 4,6,2.</font></font></p>
 <div id="id_kaiware_2Ftriangulation2" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/triangulation2.png" alt="Polygon with vertex 1 removed" class="width-050per">
-<p class="caption">
-図5.8: 頂点1を削除した多角形
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.8: Polygon with vertex 1 removed
+</font></font></p>
 </div>
-<p>次に、耳リストの先頭から頂点4を取り出します。頂点4の前後の頂点3,5で三角形を作ります。頂点4を頂点配列から削除し、前後の頂点3,5を結んで新しい多角形にします。そして頂点3,5について耳判定をします。頂点4がなくなったことで、頂点3の前後の頂点2,5で作られる三角形の中に他の頂点が含まれなくなったので、頂点3を耳リストに追加します。また、頂点5の内角が180度以下になったことで凸頂点になり、耳の条件を満たしましたので、耳リストに追加します。この時の耳リストは、6,2,3,5 です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then take vertex 4 from the top of the ear list. </font><font style="vertical-align: inherit;">Make a triangle with vertices 3 and 5 before and after vertex 4. </font><font style="vertical-align: inherit;">Remove vertex 4 from the vertex array and connect the previous and next vertices 3 and 5 to form a new polygon. </font><font style="vertical-align: inherit;">Then, the ears are judged for vertices 3 and 5. </font><font style="vertical-align: inherit;">With the disappearance of vertex 4, the triangle created by vertices 2 and 5 before and after vertex 3 no longer contains other vertices, so add vertex 3 to the ear list. </font><font style="vertical-align: inherit;">Also, since the internal angle of vertex 5 is 180 degrees or less, it becomes a convex vertex and the ear condition is satisfied, so add it to the ear list. </font><font style="vertical-align: inherit;">The ear list at this time is 6,2,3,5.</font></font></p>
 <div id="id_kaiware_2Ftriangulation3" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/triangulation3.png" alt="Polygon with vertex 4 removed" class="width-050per">
-<p class="caption">
-図5.9: 頂点4を削除した多角形
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.9: Polygon with vertex 4 removed
+</font></font></p>
 </div>
-<p>次に、耳リストの先頭から頂点6を取り出します。頂点6の前後の頂点2,5で三角形を作ります。頂点6を頂点配列から削除し、前後の頂点2,5を結んで新しい多角形にします。そして頂点2,5について耳判定をします。もともと2つとも耳でしたが、耳判定後も耳のままです。この時の耳リストは、2,3,5 です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then take vertex 6 from the top of the ear list. </font><font style="vertical-align: inherit;">Make a triangle with vertices 2 and 5 before and after vertex 6. </font><font style="vertical-align: inherit;">Remove vertex 6 from the vertex array and connect the previous and next vertices 2 and 5 to form a new polygon. </font><font style="vertical-align: inherit;">Then, the ears are judged for vertices 2 and 5. </font><font style="vertical-align: inherit;">Originally both were ears, but they remain ears even after the ear judgment. </font><font style="vertical-align: inherit;">The ear list at this time is 2,3,5.</font></font></p>
 <div id="id_kaiware_2Ftriangulation4" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/triangulation4.png" alt="Polygon with vertex 6 removed" class="width-050per">
-<p class="caption">
-図5.10: 頂点6を削除した多角形
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.10: Polygon with vertex 6 removed
+</font></font></p>
 </div>
-<p>次に、耳リストの先頭から頂点2を取り出…そうと思いましたが、残された多角形の頂点が3つしか無いのでこのまま三角形にして三角形分割は終了です。最終的な三角形分割の結果は次のとおりです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, I took out vertex 2 from the top of the ear list ... I thought, but since there are only 3 vertices of the polygon left, I made a triangle as it is and the triangle division is finished. </font><font style="vertical-align: inherit;">The final result of the triangle split is:</font></font></p>
 <div id="id_kaiware_2Ftriangulation5" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/triangulation5.png" alt="Result of triangle division" class="width-050per">
-<p class="caption">
-図5.11: 三角形分割の結果
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.11: Triangular division result
+</font></font></p>
 </div>
 
-<h2><a id="h5-4"></a><span class="secno">5.4　</span>穴空き多角形の三角形分割</h2>
-<p>次に、穴のある多角形の三角形分割について解説します。もともと「耳刈り取り法」は穴のある多角形には適用できませんが、図のように外側の多角形に切れ込みをいれて内側の多角形と繋げてしまえば、内側の多角形が外側の多角形の一部になり、耳刈り取り法が適用できるようになります。この方法は複数の穴がある多角形でも可能です。</p>
+<h2><a id="h5-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Perforated polygonal triangle division</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, I will explain the triangular division of a polygon with holes. </font><font style="vertical-align: inherit;">Originally, the "ear cutting method" cannot be applied to polygons with holes, but if you make a notch in the outer polygon and connect it to the inner polygon as shown in the figure, the inner polygon will be the outer polygon. It will be part of the and you will be able to apply the ear-cutting method. </font><font style="vertical-align: inherit;">This method is also possible for polygons with multiple holes.</font></font></p>
 <div id="id_kaiware_2Fcombine__polygon001" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/combine_polygon001.png" alt="Joining inner and outer polygons (the figure is a fairly exaggerated expression)" class="width-050per">
-<p class="caption">
-図5.12: 内外多角形の結合（図はかなり大げさな表現）
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.12: Joining inner and outer polygons (figure is a fairly exaggerated representation)
+</font></font></p>
 </div>
 
-<h3><a id="h5-4-1"></a><span class="secno">5.4.1　</span>外側の多角形と内側の多角形の結合の流れ</h3>
-<p>前提として、外側の多角形と内側の多角形の頂点の順序は逆にする必要があります。たとえば、外側の多角形が時計回りに頂点が並んでいる場合、内側の多角形は反時計回りに並んでいる必要があります。次の多角形を例に結合の流れを説明します。</p>
+<h3><a id="h5-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Flow of joining outer polygon and inner polygon</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As a premise, the order of the vertices of the outer and inner polygons must be reversed. </font><font style="vertical-align: inherit;">For example, if the outer polygon has vertices aligned clockwise, the inner polygon must align counterclockwise. </font><font style="vertical-align: inherit;">The flow of joining is explained using the following polygon as an example.</font></font></p>
 <div id="id_kaiware_2Fpolygon__with__hole001" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/polygon_with_hole001.png" alt="Polygon with holes" class="width-050per">
-<p class="caption">
-図5.13: 穴のある多角形
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.13: Polygon with holes
+</font></font></p>
 </div>
-<p>　1. 複数の穴（内側の多角形）がある場合、内側の多角形の中で最もX座標が大きい（右側にある）多角形とその頂点を探します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">　1. If there are multiple holes (inner polygons), look for the polygon with the largest X coordinate (on the right) and its vertices among the inner polygons.</font></font></p>
 <div id="id_kaiware_2Fpolygon__with__hole002" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/polygon_with_hole002.png" alt="Vertex with the largest X coordinate" class="width-050per">
-<p class="caption">
-図5.14: 最もX座標が大きい頂点
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.14: Vertex with the highest X coordinate
+</font></font></p>
 </div>
-<p>　2. 最もX座標の大きい頂点をMとします。Mから右にまっすぐ線を引きます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">　2. Let M be the vertex with the largest X coordinate. </font><font style="vertical-align: inherit;">Draw a straight line from M to the right.</font></font></p>
 <div id="id_kaiware_2Fpolygon__with__hole003" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/polygon_with_hole003.png" alt="Draw a line to the right from vertex M" class="width-050per">
-<p class="caption">
-図5.15: 頂点Mから右に線を引く
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.15: Draw a line to the right from vertex M
+</font></font></p>
 </div>
-<p>　3. 頂点Mから右に伸ばした線と交差する外側の多角形の辺と交点Iを探します。複数の辺と交差する場合、最も頂点Mに近い交点の辺を選択します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">　3. Find the edge and intersection I of the outer polygon that intersects the line extending to the right from vertex M. </font><font style="vertical-align: inherit;">If it intersects multiple sides, select the side of the intersection closest to vertex M.</font></font></p>
 <div id="id_kaiware_2Fpolygon__with__hole003__1" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/polygon_with_hole003_1.png" alt="Vertex M and intersection I" class="width-050per">
-<p class="caption">
-図5.16: 頂点Mと交点I
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.16: Vertex M and intersection I
+</font></font></p>
 </div>
-<p>　4. 交差する辺の頂点のうち、最もX座標が大きい頂点Pを選択します。頂点M,I,Pを結ぶ三角形の中に他の頂点が含まれないかチェックします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">　4. Select the vertex P with the largest X coordinate among the vertices of the intersecting sides. </font><font style="vertical-align: inherit;">Check if the triangle connecting the vertices M, I, P contains other vertices.</font></font></p>
 <div id="id_kaiware_2Fpolygon__with__hole004" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/polygon_with_hole004.png" alt="Triangle M, I, P" class="width-050per">
-<p class="caption">
-図5.17: 三角形M,I,P
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.17: Triangle M, I, P
+</font></font></p>
 </div>
-<p>　5. 三角形M,I,Pに他の頂点が含まれない場合は、分割が可能なので、外側の多角形の頂点Pから内側の多角形の頂点Mを繋げ、内側の多角形を反時計回りに一周します。再度Mから、外側の多角形の頂点Pに繋げる時、頂点Mと頂点Pを複製して別の頂点とします(頂点M',P')。入る線と出る線を分けることで、見かけ上は線が重なっていますが、頂点の順序としては交差していない、ひとつの単純多角形となります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">　5. If the triangles M, I, P do not contain other vertices, it can be divided, so connect the vertices P of the outer polygon to the vertices M of the inner polygon, and turn the inner polygon counterclockwise. I will go around. </font><font style="vertical-align: inherit;">When connecting from M to the vertex P of the outer polygon again, the vertex M and the vertex P are duplicated to make another vertex (vertex M', P'). </font><font style="vertical-align: inherit;">By separating the incoming line and the outgoing line, the lines seem to overlap, but the order of the vertices is a simple polygon that does not intersect.</font></font></p>
 <div id="id_kaiware_2Fpolygon__with__hole005" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/polygon_with_hole005.png" alt="Diagram of connecting the outer polygon and the inner polygon" class="width-050per">
-<p class="caption">
-図5.18: 外側の多角形と内側の多角形を繋げた図
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.18: A diagram connecting the outer polygon and the inner polygon
+</font></font></p>
 </div>
-<p>　6. 三角形M,I,Pの中に他の頂点Rが含まれていた場合、その頂点Rを選択しますが、複数の頂点が含まれている場合、線分M,Iと線分M,Rのなす角θが最も小さい頂点Rを選択して、5の処理を行います。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">　6. If the triangles M, I, P contain other vertices R, select that vertex R, but if multiple vertices are included, line segments M, I and line segment M Select the vertex R with the smallest angle θ formed by, R, and perform processing 5.</font></font></p>
 <div id="id_kaiware_2Fpolygon__with__hole006" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/polygon_with_hole006.png" alt="Vertex R with the smallest angle θ formed by line segments MI and MR" class="width-050per">
-<p class="caption">
-図5.19: 線分MI,MRのなす角θが最も小さい頂点R
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.19: Vertex R with the smallest angle θ formed by line segments MI and MR
+</font></font></p>
 </div>
-<p>　7. 1に戻って他の内側の多角形と結合していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">　7. Go back to 1 and join with the other inner polygons.</font></font></p>
 
-<h2><a id="h5-5"></a><span class="secno">5.5　</span>入れ子構造の多角形の三角形分割</h2>
-<p>次に、入れ子構造の多角形の三角形分割について説明します。穴のある多角形の結合処理と三角形分割処理は前項で説明したので、ここでは主に多角形の親子関係のツリー構築の手順について説明します。</p>
+<h2><a id="h5-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Nested polygon triangulation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, I will explain the triangular division of a nested polygon. </font><font style="vertical-align: inherit;">Since the process of joining polygons with holes and the process of dividing triangles were explained in the previous section, here we will mainly explain the procedure for building a tree of parent-child relationships of polygons.</font></font></p>
 <ol>
-<li>多角形を矩形領域としたときの面積が大きい順にソートします。多角形の最小/最大座標の頂点で作る矩形領域の面積です。</li>
-<li>面積が大きい多角形の中に、他の多角形が全頂点が含まれているかを再帰的に判定し、親子関係のツリーを作ります。この時、最上位のルートは空の多角形（いわゆるダミー）として、あとの多角形の結合処理には使いません。何故、最上位をダミーにするのかというと、複数の全く被らない多角形の集合が渡された場合に、最上位が1つにならないからです。ダミーの最上位の下に全く重ならない複数の多角形をぶら下げることで、処理が単純にできます。また、階層が偶数階の時は、内側の多角形になるので、該当多角形の頂点配列を反時計回りに並べ替えます。</li>
-<li>親子関係ツリーができたら、上から1つ多角形を取り出します。それが外側の多角形になります。</li>
-<li>外側の多角形の1階層下(子)の多角形を取り出します。そして、内側の多角形として外側の多角形と結合して、三角形分割を行います。子がない場合はそのまま三角形分割します。</li>
-<li>3に戻って結合と分割を繰り返します。4で外側の多角形と内側の多角形群が１つの組み合わせとして処理されるので、次に取り出す三角形はまた外側の多角形になります。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sorts in descending order of area when the polygon is a rectangular area. </font><font style="vertical-align: inherit;">The area of ​​the rectangular area created by the vertices of the minimum / maximum coordinates of the polygon.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Recursively determines whether other polygons include all vertices in a polygon with a large area, and creates a tree of parent-child relationships. </font><font style="vertical-align: inherit;">At this time, the top-level route is an empty polygon (so-called dummy) and is not used for the subsequent combination processing of polygons. </font><font style="vertical-align: inherit;">The reason for making the top level a dummy is that if multiple sets of completely uncovered polygons are passed, the top level will not be one. </font><font style="vertical-align: inherit;">You can simplify the process by hanging multiple polygons that do not overlap at all below the top of the dummy. </font><font style="vertical-align: inherit;">Also, when the hierarchy is an even-numbered floor, it becomes an inner polygon, so the vertex array of the corresponding polygon is rearranged counterclockwise.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Once you have a parent-child relationship tree, take out one polygon from the top. </font><font style="vertical-align: inherit;">It becomes the outer polygon.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Extracts the polygon one level below (child) of the outer polygon. </font><font style="vertical-align: inherit;">Then, as an inner polygon, it is combined with the outer polygon to perform triangular division. </font><font style="vertical-align: inherit;">If there are no children, divide it into triangles as it is.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Go back to 3 and repeat the join and split. </font><font style="vertical-align: inherit;">In 4, the outer polygon and the inner polygon group are processed as one combination, so the next triangle to be extracted will be the outer polygon again.</font></font></li>
 </ol>
-<p>次の多角形の集合を例として説明します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's take the following set of polygons as an example.</font></font></p>
 <div id="id_kaiware_2Fnested__polygons001" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/nested_polygons001.png" alt="Nested polygon" class="width-050per">
-<p class="caption">
-図5.20: 入れ子構造の多角形
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.20: Nested polygons
+</font></font></p>
 </div>
-<p>多角形の親子関係を作ると次のようなツリーになりました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When you create a polygonal parent-child relationship, you get the following tree.</font></font></p>
 <div id="id_kaiware_2Fnested__polygons002" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/nested_polygons002.png" alt="Left: Nested polygon Right: Parent-child relationship" class="width-050per">
-<p class="caption">
-図5.21: 左：入れ子構造の多角形 右：親子関係
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.21: Left: Nested polygon Right: Parent-child relationship
+</font></font></p>
 </div>
-<p>ツリーの最上位（ダミーは除く）の多角形1と、その子の多角形2,4を取り出します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Extract polygon 1 at the top of the tree (excluding dummies) and polygons 2 and 4 of its children.</font></font></p>
 <div id="id_kaiware_2Fnested__polygons003" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/nested_polygons003.png" alt="Take out polygons 1, 2 and 4" class="width-050per">
-<p class="caption">
-図5.22: 多角形1,2,4を取り出す
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.22: Extract polygons 1, 2 and 4
+</font></font></p>
 </div>
-<p>多角形1,2,4を右から順に結合していきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Join polygons 1, 2 and 4 in order from the right.</font></font></p>
 <div id="id_kaiware_2Fnested__polygons004" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/nested_polygons004.png" alt="Combine polygons 1, 2 and 4" class="width-050per">
-<p class="caption">
-図5.23: 多角形1,2,4を結合
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.23: Joining polygons 1, 2 and 4
+</font></font></p>
 </div>
-<p>結合した多角形を三角形分割します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Divide the combined polygon into triangles.</font></font></p>
 <div id="id_kaiware_2Fnested__polygons005" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/nested_polygons005.png" alt="Triangulate the combined polygons" class="width-050per">
-<p class="caption">
-図5.24: 結合した多角形を三角形分割
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.24: Triangulation of combined polygons
+</font></font></p>
 </div>
-<p>三角形分割した多角形を取り除きます。親子関係ツリーの残りは3と5です。まず、3から取り出します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Remove the polygon that is divided into triangles. </font><font style="vertical-align: inherit;">The rest of the parent-child relationship tree is 3 and 5. </font><font style="vertical-align: inherit;">First, take it out from 3.</font></font></p>
 <div id="id_kaiware_2Fnested__polygons006" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/nested_polygons006.png" alt="Polygon 3" class="width-050per">
-<p class="caption">
-図5.25: 多角形3
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.25: Polygon 3
+</font></font></p>
 </div>
-<p>3には子は無いのでそのまま三角形分割します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since 3 has no children, it is divided into triangles as it is.</font></font></p>
 <div id="id_kaiware_2Fnested__polygons007" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/nested_polygons007.png" alt="Divide polygon 3 into triangles" class="width-050per">
-<p class="caption">
-図5.26: 多角形3を三角形分割
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.26: Polygon 3 divided into triangles
+</font></font></p>
 </div>
-<p>三角形分割した多角形を取り除きます。親子関係ツリーの残りは5だけです。5は三角形で子がないので、そのまま終了します。これで入れ子構造の多角形の三角形分割は完了です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Remove the polygon that is divided into triangles. </font><font style="vertical-align: inherit;">There are only 5 left in the parent-child relationship tree. </font><font style="vertical-align: inherit;">5 is a triangle and has no children, so it ends as it is. </font><font style="vertical-align: inherit;">This completes the triangular division of the nested polygon.</font></font></p>
 <div id="id_kaiware_2Fnested__polygons008" class="image">
 <img src="./Chapter 5 _ Triangulation by Ear Clipping_files/nested_polygons008.png" alt="Last polygon 5" class="width-050per">
-<p class="caption">
-図5.27: 最後の多角形5
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.27: Last polygon 5
+</font></font></p>
 </div>
 
-<h2><a id="h5-6"></a><span class="secno">5.6　</span>実装</h2>
-<p>今まで説明した３つのアルゴリズムを全て実装したサンプルのソースコードの説明に移ります。</p>
+<h2><a id="h5-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Implementation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's move on to the explanation of the sample source code that implements all three algorithms explained so far.</font></font></p>
 
-<h3><a id="h5-6-1"></a><span class="secno">5.6.1　</span>Polygonクラス</h3>
-<p>まず、多角形の頂点配列を管理するPolygonクラスを定義します。Polygonクラスは、頂点座標の配列やループの方向などの情報の保持、多角形の中に多角形が入っているかの判定を行います。</p>
+<h3><a id="h5-6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Polygon class</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, define a Polygon class that manages an array of polygon vertices. </font><font style="vertical-align: inherit;">The Polygon class holds information such as the array of vertex coordinates and the direction of the loop, and determines whether a polygon is included in the polygon.</font></font></p>
 <div class="emlist-code">
 <p class="caption">Polygon.cs</p>
 <pre class="emlist">public class Polygon<font></font>
-{<font></font>
-    // ループの方向<font></font>
-    public enum LoopType<font></font>
-    {<font></font>
-        CW,     // 時計回り<font></font>
-        CCW,    // 反時計回り<font></font>
-        ERR,    // 不定（向きがない）<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Loop direction</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public enum LoopType</font></font></font></font><font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        CW, // clockwise</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        CCW, // counterclockwise</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        ERR, // Indefinite (no orientation)</font></font><font></font>
     }<font></font>
-<font></font>
-    public Vector3[] vertices;  // 頂点配列<font></font>
-    public LoopType loopType;   // ループの方向<font></font>
-<font></font>
-    //～省略～<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Vector3 [] vertices; // Vertex array</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public LoopType loopType; </font><font style="vertical-align: inherit;">// Loop direction</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // ~ omitted ~</font></font><font></font>
 }<font></font>
 </pre>
 </div>
 
-<h3><a id="h5-6-2"></a><span class="secno">5.6.2　</span>Triangulationクラス</h3>
-<p>実際に多角形の三角形分割を行うTriangulationクラスです。TriangulationクラスのTriangulate関数がメインです。</p>
+<h3><a id="h5-6-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.6.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Triangulation class</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is a Triangulation class that actually divides a polygon into triangles. </font><font style="vertical-align: inherit;">The main is the Triangulate function of the Triangulation class.</font></font></p>
 
-<h4><a id="h5-6-2-1"></a>三角形分割に使うデータ構造</h4>
+<h4><a id="h5-6-2-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Data structure used for triangle division</font></font></h4>
 <div class="emlist-code">
-<p class="caption">Triangulation.csのデータ構造定義</p>
-<pre class="emlist">// 頂点配列<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Data structure definition in Triangulation.cs</font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Vertex array</font></font><font></font>
 List&lt;Vector3&gt; vertices = new List&lt;Vector3&gt;();<font></font>
-<font></font>
-// 頂点番号のリスト（末尾と先頭がつながってることにする）<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// List of vertex numbers (let's end and start connected)</font></font><font></font>
 LinkedList&lt;int&gt; indices = new LinkedList&lt;int&gt;();<font></font>
-<font></font>
-// 耳頂点リスト<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Ear vertex list</font></font><font></font>
 List&lt;int&gt; earTipList = new List&lt;int&gt;();<font></font>
 </pre>
 </div>
-<p>処理対象の多角形の頂点座標の配列を格納するvertices、多角形の頂点の番号（インデックス）を格納するindices、耳を格納するearTipListを定義しています。indicesは前後の頂点を参照する必要があるため、双方向リストの性質があるLinkedListを使っています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It defines vertices that stores the array of vertex coordinates of the polygon to be processed, indices that stores the number (index) of the vertices of the polygon, and earTipList that stores the ears. </font><font style="vertical-align: inherit;">Since indices need to refer to the vertices before and after, we use LinkedList, which has the property of a bidirectional list.</font></font></p>
 
-<h4><a id="h5-6-2-2"></a>階層構造を作る</h4>
-<p>まず、外から多角形を構成する頂点配列を渡されたら、それをPolygonクラスとしてリストに格納します。</p>
+<h4><a id="h5-6-2-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Create a hierarchical structure</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, if you are given an array of vertices that make up a polygon from the outside, store it in the list as a Polygon class.</font></font></p>
 <div class="emlist-code">
-<p class="caption">Polygonリスト</p>
-<pre class="emlist">// 多角形リスト<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Polygon list</font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Polygon list</font></font><font></font>
 List&lt;Polygon&gt; polygonList = new List&lt;Polygon&gt;();<font></font>
 <font></font>
 public void AddPolygon(Polygon polygon)<font></font>
@@ -336,35 +329,35 @@ public void AddPolygon(Polygon polygon)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>Triangulate関数の冒頭で、多角形データを追加したPolygonリストを矩形領域の面積の大きい順にソートします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">At the beginning of the Triangulate function, sort the Polygon list with polygonal data added in descending order of area of ​​the rectangular area.</font></font></p>
 <div class="emlist-code">
-<p class="caption">Polygonリストのソート部分</p>
-<pre class="emlist">// 多角形リストの矩形領域の面積の大きい順にソート<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sorted part of Polygon list</font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Sort in descending order of area of ​​rectangular area in polygon list</font></font><font></font>
 polygonList.Sort((a, b) =&gt; Mathf.FloorToInt(<font></font>
   (b.rect.width * b.rect.height) - (a.rect.width * a.rect.height)<font></font>
   ));<font></font>
 </pre>
 </div>
-<p>次に、ソートしたPolygonリストをツリー構造を作るTreeNodeクラスに詰め込んでいきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, we will pack the sorted Polygon list into the TreeNode class that creates the tree structure.</font></font></p>
 <div class="emlist-code">
-<p class="caption">PolygonリストをTreeNodeに詰める部分</p>
-<pre class="emlist">// ルート作成（空っぽ）<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The part that packs the Polygon list into a TreeNode</font></font></p>
+<pre class="emlist"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Create route (empty)</font></font><font></font>
 polygonTree = new TreeNode&lt;Polygon&gt;();<font></font>
-<font></font>
-// 多角形の階層構造を作る<font></font>
-foreach (Polygon polygon in polygonList)<font></font>
-{<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Create a polygonal hierarchy</font></font><font></font>
+foreach (Polygon polygon in polygonList)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
    TreeNode&lt;Polygon&gt; tree = polygonTree;<font></font>
 <font></font>
-   CheckInPolygonTree(tree, polygon, 1);<font></font>
-}<font></font>
+   CheckInPolygonTree(tree, polygon, 1);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>TreeNodeは以下のようになっています。よくあるツリー構造だと思いますが、空の最上位ノードのために、中身が存在するかのフラグisValueを定義しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The TreeNode looks like this: </font><font style="vertical-align: inherit;">I think it's a common tree structure, but for an empty top-level node, it defines a flag isValue for the existence of its contents.</font></font></p>
 <div class="emlist-code">
 <p class="caption">TreeNode.cs</p>
-<pre class="emlist">public class TreeNode&lt;T&gt;<font></font>
-{<font></font>
+<pre class="emlist">public class TreeNode&lt;T&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     public TreeNode&lt;T&gt; parent = null;<font></font>
     public List&lt;TreeNode&lt;T&gt;&gt; children = new List&lt;TreeNode&lt;T&gt;&gt;();<font></font>
 <font></font>
@@ -377,62 +370,62 @@ foreach (Polygon polygon in polygonList)<font></font>
         isValue = true;<font></font>
     }<font></font>
 <font></font>
-    public TreeNode()<font></font>
-    {<font></font>
-        isValue = false;<font></font>
-    }<font></font>
+    public TreeNode()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        isValue = false;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    public void AddChild(T val)<font></font>
-    {<font></font>
-        AddChild(new TreeNode&lt;T&gt;(val));<font></font>
-    }<font></font>
+    public void AddChild(T val)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        AddChild(new TreeNode&lt;T&gt;(val));<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    public void AddChild(TreeNode&lt;T&gt; tree)<font></font>
-    {<font></font>
+    public void AddChild(TreeNode&lt;T&gt; tree)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         children.Add(tree);<font></font>
-        tree.parent = this;<font></font>
-    }<font></font>
+        tree.parent = this;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    public void RemoveChild(TreeNode&lt;T&gt; tree)<font></font>
-    {<font></font>
+    public void RemoveChild(TreeNode&lt;T&gt; tree)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         if (children.Contains(tree))<font></font>
         {<font></font>
             children.Remove(tree);<font></font>
             tree.parent = null;<font></font>
-        }<font></font>
-    }<font></font>
+        }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>Triangulation.csに戻り、多角形の階層構造を作るCheckInPolygonTree関数の中身です。自身の多角形の中に渡された多角形が入るか確認し、更に自身の子の中にも入るかを再帰的に判定しています。自身には含まれるが、子には含まれない、または子が存在しない場合に、渡された多角形を自身の子にします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Returning to Triangulation.cs, it is the contents of the CheckInPolygonTree function that creates a hierarchical structure of polygons. </font><font style="vertical-align: inherit;">It checks whether the passed polygon fits inside its own polygon, and recursively determines whether it fits inside its own children. </font><font style="vertical-align: inherit;">Makes the passed polygon its own child if it is included in itself but not in its children, or if there are no children.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CheckInPolygonTree関数</p>
 <pre class="emlist">bool CheckInPolygonTree(TreeNode&lt;Polygon&gt; tree, Polygon polygon, int lv)<font></font>
-{<font></font>
-    // 自身に多角形が存在するか？<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Does it have a polygon?</font></font><font></font>
     bool isInChild = false;<font></font>
     if (tree.isValue)<font></font>
     {<font></font>
         if (tree.Value.IsPointInPolygon(polygon))<font></font>
-        {<font></font>
-            // 自身に含まれる場合、子にも含まれるか検索<font></font>
+        {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // If it is included in itself, search if it is also included in the child</font></font><font></font>
             for(int i = 0; i &lt; tree.children.Count; i++)<font></font>
             {<font></font>
                 isInChild |= CheckInPolygonTree(<font></font>
                     tree.children[i], polygon, lv + 1);<font></font>
             }<font></font>
-<font></font>
-            // 子に含まれない場合は自身の子にする<font></font>
-            if (!isInChild)<font></font>
-            {<font></font>
-                // 必要であれば頂点の順番を反転する<font></font>
-                // 偶数ネストの時はInnerなのでCW<font></font>
-                // 奇数ネストの時はOuterなのでCCW<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Make it your own child if it is not included in the child</font></font><font></font>
+            if (!isInChild)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // Invert the order of the vertices if necessary</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // CW because it is Inner when even nesting</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // CCW because it is Outer when odd nesting</font></font><font></font>
                 if (<font></font>
-                    ((lv % 2 == 0) &amp;&amp;<font></font>
-                     (polygon.loopType == Polygon.LoopType.CW)) ||<font></font>
-                    ((lv % 2 == 1) &amp;&amp;<font></font>
-                     (polygon.loopType == Polygon.LoopType.CCW))<font></font>
+                    ((lv % 2 == 0) &amp;&amp;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                     (polygon.loopType == Polygon.LoopType.CW)) ||</font></font></font></font><font></font>
+                    ((lv % 2 == 1) &amp;&amp;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                     (polygon.loopType == Polygon.LoopType.CCW))</font></font></font></font><font></font>
                     )<font></font>
                 {<font></font>
                     polygon.ReverseIndices();<font></font>
@@ -443,31 +436,31 @@ foreach (Polygon polygon in polygonList)<font></font>
             }<font></font>
         }<font></font>
         else<font></font>
-        {<font></font>
-            // 含まれない<font></font>
-            return false;<font></font>
-        }<font></font>
+        {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // not included</font></font><font></font>
+            return false;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font>
     }<font></font>
     else<font></font>
-    {<font></font>
-        // 自身に値がない場合、子の方だけ検索<font></font>
-        for (int i = 0; i &lt; tree.children.Count; i++)<font></font>
-        {<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Search only for children if they have no value</font></font><font></font>
+        for (int i = 0; i &lt; tree.children.Count; i++)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
             isInChild |= CheckInPolygonTree(<font></font>
-                tree.children[i], polygon, lv + 1);<font></font>
-        }<font></font>
-<font></font>
-        // 子に含まれない場合は自身の子にする<font></font>
-        if (!isInChild)<font></font>
-        {<font></font>
-            // 必要であれば頂点の順番を反転する<font></font>
-            // 偶数ネストの時はInnerなのでCW<font></font>
-            // 奇数ネストの時はOuterなのでCCW<font></font>
+                tree.children[i], polygon, lv + 1);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Make it your own child if it is not included in the child</font></font><font></font>
+        if (!isInChild)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Invert the order of the vertices if necessary</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // CW because it is Inner when even nesting</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // CCW because it is Outer when odd nesting</font></font><font></font>
             if (<font></font>
-                ((lv % 2 == 0) &amp;&amp;<font></font>
-                 (polygon.loopType == Polygon.LoopType.CW)) ||<font></font>
-                ((lv % 2 == 1) &amp;&amp;<font></font>
-                 (polygon.loopType == Polygon.LoopType.CCW))<font></font>
+                ((lv % 2 == 0) &amp;&amp;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                 (polygon.loopType == Polygon.LoopType.CW)) ||</font></font></font></font><font></font>
+                ((lv % 2 == 1) &amp;&amp;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                 (polygon.loopType == Polygon.LoopType.CCW))</font></font></font></font><font></font>
                 )<font></font>
             {<font></font>
                 polygon.ReverseIndices();<font></font>
@@ -482,36 +475,36 @@ foreach (Polygon polygon in polygonList)<font></font>
 </pre>
 </div>
 
-<h4><a id="h5-6-2-3"></a>穴のある多角形の処理（内外多角形の結合）</h4>
-<p>複数の内側の多角形がある場合、内側の多角形の中で最もX座標が大きい頂点とその多角形を選択します。その時、判定用にX座標と頂点番号、多角形の番号の情報をまとめておくクラスを定義します。</p>
+<h4><a id="h5-6-2-3"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Processing of polygons with holes (combination of inner and outer polygons)</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If there are multiple inner polygons, select the vertex with the largest X coordinate among the inner polygons and that polygon. </font><font style="vertical-align: inherit;">At that time, define a class that collects the X coordinate, vertex number, and polygon number information for judgment.</font></font></p>
 <div class="emlist-code">
-<p class="caption">XMaxData構造体</p>
-<pre class="emlist">/// &lt;summary&gt;<font></font>
-/// X座標最大値と多角形の情報<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">XMaxData structure</font></font></p>
+<pre class="emlist">/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// X coordinate maximum value and polygon information</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
 struct XMaxData<font></font>
-{<font></font>
-    public float xmax;  // x座標最大値<font></font>
-    public int no;      // 多角形の番号<font></font>
-    public int index;   // xmaxの頂点番号<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public float xmax; // x coordinate maximum value</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public int no; // Polygon number</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public int index; // vertex number of xmax</font></font><font></font>
 <font></font>
     public XMaxData(float x, int n, int ind)<font></font>
     {<font></font>
         xmax = x;<font></font>
         no = n;<font></font>
-        index = ind;<font></font>
-    }<font></font>
-}<font></font>
+        index = ind;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>次に、実際の結合処理ですが、複数の多角形をX座標が大きい順にソートする処理と、結合する処理の２つに分かれています。まずは、複数の多角形をX座標が大きい順にソートする処理です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, the actual joining process is divided into two processes: sorting multiple polygons in descending order of X coordinate, and joining. </font><font style="vertical-align: inherit;">The first is the process of sorting multiple polygons in descending order of X coordinate.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CombineOuterAndInners関数</p>
 <pre class="emlist">Vector3[] CombineOuterAndInners(Vector3[] outer, List&lt;Polygon&gt; inners)<font></font>
 {<font></font>
     List&lt;XMaxData&gt; pairs = new List&lt;XMaxData&gt;();<font></font>
-<font></font>
-    // 内側の多角形の中で最もX座標が大きい頂点を持つものを探す<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Find the inner polygon with the vertex with the largest X coordinate</font></font><font></font>
     for (int i = 0; i &lt; inners.Count; i++)<font></font>
     {<font></font>
         float xmax = inners[i].vertices[0].x;<font></font>
@@ -528,28 +521,28 @@ struct XMaxData<font></font>
         }<font></font>
         pairs.Add(new XMaxData(xmax, i, xmaxIndex));<font></font>
     }<font></font>
-<font></font>
-    // 右順(xmaxが大きい順)にソート<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Sort to the right (in descending order of xmax)</font></font><font></font>
     pairs.Sort((a, b) =&gt; Mathf.FloorToInt(b.xmax - a.xmax));<font></font>
-<font></font>
-    // 右から順に結合<font></font>
-    for (int i = 0; i &lt; pairs.Count; i++)<font></font>
-    {<font></font>
-        outer = CombinePolygon(outer, inners[pairs[i].no], pairs[i].index);<font></font>
-    }<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Combine from right</font></font><font></font>
+    for (int i = 0; i &lt; pairs.Count; i++)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        outer = CombinePolygon(outer, inners[pairs[i].no], pairs[i].index);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
     return outer;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>次に結合処理の部分です。CombinePolygon関数の中で、内側の多角形の最もX座標が大きい頂点Mから横に線を引き、その線と交差する外側の多角形の線分を探します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next is the join processing part. </font><font style="vertical-align: inherit;">In the CombinePolygon function, draw a horizontal line from the vertex M with the largest X coordinate of the inner polygon and find the line segment of the outer polygon that intersects that line.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CombinePolygon関数の序盤</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Early stage of CombinePolygon function</font></font></p>
 <pre class="emlist">Vector3[] CombinePolygon(Vector3[] outer, Polygon inner, int xmaxIndex)<font></font>
 {<font></font>
     Vector3 M = inner.vertices[xmaxIndex];<font></font>
-<font></font>
-    // 交点を探す<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Find the intersection</font></font><font></font>
     Vector3 intersectionPoint = Vector3.zero;<font></font>
     int index0 = 0;<font></font>
     int index1 = 0;<font></font>
@@ -558,46 +551,46 @@ struct XMaxData<font></font>
       new Vector3(maxX + 0.1f, M.y, M.z),<font></font>
       outer, ref intersectionPoint,<font></font>
       ref index0, ref index1))<font></font>
-    {<font></font>
-      ～省略～<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      ~ Omitted ~</font></font><font></font>
 </pre>
 </div>
-<p>線分M,Iと外側の多角形の線分の交点を探す関数、GeometryUtil.GetIntersectionPointは以下のようになっています。ポイントは、外側の多角形は時計回りなので、交差する線分の始点が線分M,Iより上で終点が下になるものだけを探すようにしている点です。そうすることで、すでに結合した内外多角形で、外側の多角形から内側の多角形に接続した線分を選択してしまうと、頂点の順序がおかしくなってしまうのを防ぎます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GeometryUtil.GetIntersectionPoint, a function that finds the intersection of line segments M and I and the line segment of the outer polygon, is as follows. </font><font style="vertical-align: inherit;">The point is that the outer polygon is clockwise, so we only look for those whose starting point is above the line segments M and I and whose end point is below. </font><font style="vertical-align: inherit;">Doing so will prevent the vertices from getting out of order if you select a line segment that connects the outer polygon to the inner polygon in the already joined inner and outer polygons.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GetIntersectionPoint関数</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GetIntersectionPoint function</font></font></font></font></p>
 <pre class="emlist">public static bool GetIntersectionPoint(Vector3 start, Vector3 end,<font></font>
                                         Vector3[] vertices,<font></font>
                                         ref Vector3 intersectionP,<font></font>
                                         ref int index0, ref int index1)<font></font>
 {<font></font>
-    float distanceMin = float.MaxValue;<font></font>
-    bool isHit = false;<font></font>
+    float distanceMin = float.MaxValue;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    bool isHit = false;</font></font></font></font><font></font>
 <font></font>
     for(int i = 0; i &lt; vertices.Length; i++)<font></font>
     {<font></font>
-        int index = i;<font></font>
-        int next = (i + 1) % vertices.Length;        // 次の頂点<font></font>
+        int index = i;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        int next = (i + 1)% vertices.Length; // Next vertex</font></font><font></font>
 <font></font>
         Vector3 iP = Vector3.zero;<font></font>
         Vector3 vstart = vertices[index];<font></font>
         Vector3 vend = vertices[next];<font></font>
-<font></font>
-        // 交差する多角形の線分の始点が線分M,I以上にいること<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // The starting point of the intersecting polygonal line segment must be at least the line segment M, I</font></font><font></font>
         Vector3 diff0 = vstart - start;<font></font>
         if (diff0.y &lt; 0f)<font></font>
         {<font></font>
             continue;<font></font>
         }<font></font>
-<font></font>
-        // 交差する多角形の線分の終点が線分M,I以下にいること<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // The end point of the intersecting polygonal line segment is below the line segment M, I</font></font><font></font>
         Vector3 diff1 = vend - start;<font></font>
-        if (diff1.y &gt; 0f)<font></font>
-        {<font></font>
-            continue;<font></font>
-        }<font></font>
+        if (diff1.y &gt; 0f)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            continue;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font>
 <font></font>
-        if (IsIntersectLine(start, end, vstart, vend, ref iP))<font></font>
-        {<font></font>
+        if (IsIntersectLine(start, end, vstart, vend, ref iP))<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
             float distance = Vector3.Distance(start, iP);<font></font>
 <font></font>
             if (distanceMin &gt;= distance)<font></font>
@@ -605,27 +598,27 @@ struct XMaxData<font></font>
                 distanceMin = distance;<font></font>
                 index0 = index;<font></font>
                 index1 = next;<font></font>
-                intersectionP = iP;<font></font>
-                isHit = true;<font></font>
+                intersectionP = iP;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                isHit = true;</font></font></font></font><font></font>
             }<font></font>
         }<font></font>
 <font></font>
     }<font></font>
-<font></font>
-    return isHit;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return isHit;</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>交点を見つけた後は、交差した線分の一番X座標が大きい頂点、頂点M、交点Iから作る三角形に他の頂点が含まれてないか確認します。三角形の中に頂点が含まれているかの判定には、二次元の外積を使って頂点が三角形の線分のどちら側にいるかを出しています。頂点がすべての線の右側にいれば三角形の中に含まれていることになります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">After finding the intersection, check if the triangle created from the vertex with the largest X coordinate of the intersecting line segment, vertex M, and intersection I contains other vertices. </font><font style="vertical-align: inherit;">To determine if a triangle contains vertices, a two-dimensional cross product is used to determine which side of the triangle's line segment the vertices are on. </font><font style="vertical-align: inherit;">If the vertices are to the right of all lines, they are inside the triangle.</font></font></p>
 <div class="emlist-code">
-<p class="caption">GeometryUtil.csのIsTriangle関数とCheckLine関数</p>
-<pre class="emlist">/// &lt;summary&gt;<font></font>
-/// 線と頂点の位置関係を返す<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">IsTriangle and CheckLine functions in GeometryUtil.cs</font></font></p>
+<pre class="emlist">/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Returns the positional relationship between the line and the vertex</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
 /// &lt;param name="o"&gt;&lt;/param&gt;<font></font>
 /// &lt;param name="p1"&gt;&lt;/param&gt;<font></font>
-/// &lt;param name="p2"&gt;&lt;/param&gt;<font></font>
-/// &lt;returns&gt; +1 : 線の右 -1 : 線の左 0 : 線上&lt;/returns&gt;<font></font>
+/// &lt;param name="p2"&gt;&lt;/param&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// &lt;returns&gt; +1: Right of line -1: Left of line 0: On line &lt;/ returns&gt;</font></font><font></font>
 public static int CheckLine(Vector3 o, Vector3 p1, Vector3 p2)<font></font>
 {<font></font>
     double x0 = o.x - p1.x;<font></font>
@@ -636,23 +629,23 @@ public static int CheckLine(Vector3 o, Vector3 p1, Vector3 p2)<font></font>
     double x0y1 = x0 * y1;<font></font>
     double x1y0 = x1 * y0;<font></font>
     double det = x0y1 - x1y0;<font></font>
-<font></font>
-    return (det &gt; 0D ? +1 : (det &lt; 0D ? -1 : 0));<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return (it&gt; 0D? +1: (it &lt;0D? -1: 0));</font></font><font></font>
 }<font></font>
 <font></font>
-/// &lt;summary&gt;<font></font>
-/// 三角形(時計回り)と点の内外判定<font></font>
+/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Triangle (clockwise) and point inside / outside judgment</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
 /// &lt;param name="o"&gt;&lt;/param&gt;<font></font>
 /// &lt;param name="p1"&gt;&lt;/param&gt;<font></font>
 /// &lt;param name="p2"&gt;&lt;/param&gt;<font></font>
-/// &lt;param name="p3"&gt;&lt;/param&gt;<font></font>
-/// &lt;returns&gt; +1 : 外側 -1 : 内側 0 : 線上&lt;/returns&gt;<font></font>
+/// &lt;param name="p3"&gt;&lt;/param&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// &lt;returns&gt; +1: outside -1: inside 0: online&lt;/returns&gt;</font></font><font></font>
 public static int IsInTriangle(Vector3 o,<font></font>
                                Vector3 p1,<font></font>
                                Vector3 p2,<font></font>
-                               Vector3 p3)<font></font>
-{<font></font>
+                               Vector3 p3)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     int sign1 = CheckLine(o, p2, p3);<font></font>
     if (sign1 &lt; 0)<font></font>
     {<font></font>
@@ -660,43 +653,43 @@ public static int IsInTriangle(Vector3 o,<font></font>
     }<font></font>
 <font></font>
     int sign2 = CheckLine(o, p3, p1);<font></font>
-    if (sign2 &lt; 0)<font></font>
-    {<font></font>
-        return +1;<font></font>
-    }<font></font>
+    if (sign2 &lt; 0)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        return +1;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
     int sign3 = CheckLine(o, p1, p2);<font></font>
-    if (sign3 &lt; 0)<font></font>
-    {<font></font>
-        return +1;<font></font>
-    }<font></font>
+    if (sign3 &lt; 0)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        return +1;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
     return (((sign1 != 0) &amp;&amp; (sign2 != 0) &amp;&amp; (sign3 != 0)) ? -1 : 0);<font></font>
 }<font></font>
 </pre>
 </div>
-<p>さて、CombinePolygonの続きです。交点を見つけた後に、三角形の中に他の頂点が入っているか判定しますが、外積を使って内外判定をする関係上、三角形の接続の向きが時計回りになるようにしています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, the continuation of Combine Polygon. </font><font style="vertical-align: inherit;">After finding the intersection, it is judged whether there are other vertices in the triangle, but the direction of the connection of the triangle is clockwise because the inside and outside judgment is made using the outer product.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CombinePolygon関数の中盤１</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Middle 1 of CombinePolygon function</font></font></p>
 <pre class="emlist">if (GeomUtil.GetIntersectionPoint(M,<font></font>
   new Vector3(maxX + 0.1f, M.y, M.z), outer,<font></font>
   ref intersectionPoint, ref index0, ref index1))<font></font>
-{<font></font>
-    // 交点発見<font></font>
-<font></font>
-    // 交差した線分の一番右の頂点を取得<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Intersection found</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Get the rightmost vertex of the intersecting line segment</font></font><font></font>
     int pindex;<font></font>
     Vector3[] triangle = new Vector3[3];<font></font>
-    if (outer[index0].x &gt; outer[index1].x)<font></font>
-    {<font></font>
-        pindex = index0;<font></font>
-        // 選択した線分の頂点によって三角形が逆向きになってしまうので、時計回りになるように調整する<font></font>
+    if (outer[index0].x &gt; outer[index1].x)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        pindex = index0;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // The triangle will be reversed depending on the vertex of the selected line segment, so adjust it so that it is clockwise.</font></font><font></font>
         triangle[0] = M;<font></font>
         triangle[1] = outer[pindex];<font></font>
-        triangle[2] = intersectionPoint;<font></font>
-    }<font></font>
-    else<font></font>
-    {<font></font>
+        triangle[2] = intersectionPoint;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+    else<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         pindex = index1;<font></font>
         triangle[0] = M;<font></font>
         triangle[1] = intersectionPoint;<font></font>
@@ -704,24 +697,24 @@ public static int IsInTriangle(Vector3 o,<font></font>
     }<font></font>
 </pre>
 </div>
-<p>交点Iと線分の最もX座標が大きい頂点が同一だった場合、頂点Mから見て遮るものが無いということなので、三角形の中に他の頂点が含まれているかのチェックは行いません。同一でなかった場合は、他の頂点が含まれているかのチェックを行いますが、三角形に含まれる頂点は、内側に凹んだ頂点なので、その条件を満たしつつ内包判定を行います。三角形に複数の頂点が含まれていた場合、線分M,Iと線分M,該当頂点のなす角が最も小さい頂点を選択して、finalIndexに格納します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the intersection I and the vertex with the largest X coordinate of the line segment are the same, there is nothing to block from the vertex M, so it is not checked whether the triangle contains other vertices. </font><font style="vertical-align: inherit;">If they are not the same, it is checked whether other vertices are included, but since the vertices included in the triangle are recessed vertices, the inclusion judgment is performed while satisfying that condition. </font><font style="vertical-align: inherit;">If the triangle contains multiple vertices, the vertex with the smallest angle between the line segments M and I and the line segment M and the corresponding vertex is selected and stored in the finalIndex.</font></font></p>
 <div class="emlist-code">
-<p class="caption">CombinePolygon関数の中盤２</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Middle 2 of CombinePolygon function</font></font></p>
 <pre class="emlist">Vector3 P = outer[pindex];<font></font>
 <font></font>
 int finalIndex = pindex;<font></font>
-<font></font>
-// 交点とPが同じだったら遮るものがないので三角形チェックしない<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// If the intersection and P are the same, there is nothing to block, so do not check the triangle</font></font><font></font>
 if((Vector3.Distance(intersectionPoint, P) &gt; float.Epsilon))<font></font>
 {<font></font>
     float angleMin = 361f;<font></font>
 <font></font>
     for(int i = 0; i &lt; outer.Length; i++)<font></font>
     {<font></font>
-<font></font>
-        // 凸頂点/反射頂点チェック<font></font>
-        int prevIndex = (i == 0) ? outer.Length - 1 : i - 1; // 一つ前の頂点<font></font>
-        int nextIndex = (i + 1) % outer.Length;        // 次の頂点<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Convex vertex / Reflective vertex check</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        int prevIndex = (i == 0)? outer.Length --1: i --1; // Previous vertex</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        int nextIndex = (i + 1)% outer.Length; // Next vertex</font></font><font></font>
         int nowIndex = i;<font></font>
 <font></font>
         if (nowIndex == pindex) continue;<font></font>
@@ -729,32 +722,32 @@ if((Vector3.Distance(intersectionPoint, P) &gt; float.Epsilon))<font></font>
         Vector3 outerP = outer[nowIndex];<font></font>
 <font></font>
         if (outerP.x &lt; M.x) continue;<font></font>
-<font></font>
-        // 分割時に複製した同一座標だったら無視<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Ignore if the coordinates are the same duplicated at the time of division</font></font><font></font>
         if (Vector3.Distance(outerP, P) &lt;= float.Epsilon) continue;<font></font>
 <font></font>
         Vector3 prevVertex = outer[prevIndex];<font></font>
         Vector3 nextVertex = outer[nextIndex];<font></font>
         Vector3 nowVertex = outer[nowIndex];<font></font>
-<font></font>
-        // 反射頂点か？<font></font>
-        bool isReflex = !GeomUtil.IsAngleLessPI(nowVertex,<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Is it a reflection vertex?</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        bool isReflex =! </font><font style="vertical-align: inherit;">GeomUtil.IsAngleLessPI (nowVertex,</font></font></font></font><font></font>
                                                 prevVertex,<font></font>
                                                 nextVertex);<font></font>
-<font></font>
-        // 三角形の中に「反射頂点」が含まれているか？<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Does the triangle contain "reflection vertices"?</font></font><font></font>
         if ((GeomUtil.IsInTriangle(outerP,<font></font>
                                    triangle[0],<font></font>
                                    triangle[1],<font></font>
                                    triangle[2]) &lt;= 0)&amp;&amp;(isReflex))<font></font>
-        {<font></font>
-            // 三角形の中に頂点が含まれてるので不可視<font></font>
-<font></font>
-            // M,IとM,outerPの線分のなす角度を求める（一番角度が浅い頂点を選択する）<font></font>
+        {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Invisible because the vertices are included in the triangle</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Find the angle between the M, I and M, outerP line segments (select the vertex with the shallowest angle)</font></font><font></font>
             float angle = Vector3.Angle(intersectionPoint - M, outerP - M);<font></font>
             if (angle &lt; angleMin)<font></font>
-            {<font></font>
-                angleMin = angle;<font></font>
+            {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                angleMin = angle;</font></font></font></font><font></font>
                 finalIndex = nowIndex;<font></font>
             }<font></font>
         }<font></font>
@@ -762,65 +755,65 @@ if((Vector3.Distance(intersectionPoint, P) &gt; float.Epsilon))<font></font>
 }<font></font>
 </pre>
 </div>
-<p>結合させる頂点（finalIndex）を探しだしたら、内外多角形の頂点配列をつなぎ合わせます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">After finding the vertices (finalIndex) to join, join the vertex arrays of the inner and outer polygons.</font></font></p>
 <ol>
-<li>新しい頂点配列のリストを作成します。</li>
-<li>リストに外側の多角形の結合させる頂点（finalIndex）までを追加します。</li>
-<li>結合する内側の多角形の頂点配列を、頂点Mから順番に一周するようにリストに追加します。</li>
-<li>再び内側の多角形から外側の多角形につなげる為、頂点Mと結合させる頂点（finalIndex）を複製して、リストに追加します。</li>
-<li>残りの外側の多角形の頂点をリストに追加して完了です。</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Create a list of new vertex arrays.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Add up to the vertices (finalIndex) to join the outer polygons to the list.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Add the inner polygonal vertex array to be joined to the list so that it goes around in order from vertex M.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In order to connect the inner polygon to the outer polygon again, duplicate the vertex (finalIndex) to be combined with vertex M and add it to the list.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Add the remaining outer polygon vertices to the list and you're done.</font></font></li>
 </ol>
 <div class="emlist-code">
-<p class="caption">CombinePolygonの後半</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Second half of Combine Polygon</font></font></p>
 <pre class="emlist">Vector3 FinalP = outer[finalIndex];<font></font>
-<font></font>
-// 結合（新しい多角形を作成）<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Join (create a new polygon)</font></font><font></font>
 List&lt;Vector3&gt; newOuterVertices = new List&lt;Vector3&gt;();<font></font>
-<font></font>
-// outerを分割するIndexまで追加<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Add up to Index that divides outer</font></font><font></font>
 for (int i = 0; i &lt;= finalIndex; i++)<font></font>
 {<font></font>
-    newOuterVertices.Add(outer[i]);<font></font>
-}<font></font>
-<font></font>
-// innerをすべて追加<font></font>
-for (int i = xmaxIndex; i &lt; inner.vertices.Length; i++)<font></font>
-{<font></font>
+    newOuterVertices.Add(outer[i]);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Add all inner</font></font><font></font>
+for (int i = xmaxIndex; i &lt; inner.vertices.Length; i++)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     newOuterVertices.Add(inner.vertices[i]);<font></font>
 }<font></font>
 for (int i = 0; i &lt; xmaxIndex; i++)<font></font>
-{<font></font>
-    newOuterVertices.Add(inner.vertices[i]);<font></font>
-}<font></font>
-<font></font>
-// 分割するために頂点を2つ増やす<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    newOuterVertices.Add(inner.vertices[i]);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Increase two vertices to split</font></font><font></font>
 newOuterVertices.Add(M);<font></font>
 newOuterVertices.Add(FinalP);<font></font>
-<font></font>
-// 残りのouterのindexを追加<font></font>
-for (int i = finalIndex + 1; i &lt; outer.Length; i++)<font></font>
-{<font></font>
-    newOuterVertices.Add(outer[i]);<font></font>
-}<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Add the index of the remaining outer</font></font><font></font>
+for (int i = finalIndex + 1; i &lt; outer.Length; i++)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
+    newOuterVertices.Add(outer[i]);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 <font></font>
 outer = newOuterVertices.ToArray();<font></font>
 </pre>
 </div>
 
-<h4><a id="h5-6-2-4"></a>三角形分割</h4>
-<p>内外多角形が一つの多角形になったら、いよいよ三角形分割です。まず、頂点のインデックス配列の初期化や、耳リストの作成を行います。</p>
+<h4><a id="h5-6-2-4"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Triangular division</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the inner and outer polygons become one polygon, it is finally divided into triangles. </font><font style="vertical-align: inherit;">First, initialize the index array of vertices and create an ear list.</font></font></p>
 <div class="emlist-code">
-<p class="caption">InitializeVertices関数</p>
-<pre class="emlist">/// &lt;summary&gt;<font></font>
-/// 初期化<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">InitializeVertices function</font></font></p>
+<pre class="emlist">/// &lt;summary&gt;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+/// Initialization</font></font><font></font>
 /// &lt;/summary&gt;<font></font>
-void InitializeVertices(Vector3[] points)<font></font>
-{<font></font>
+void InitializeVertices(Vector3[] points)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font>
     vertices.Clear();<font></font>
     indices.Clear();<font></font>
     earTipList.Clear();<font></font>
-<font></font>
-    // インデックス配列の作成<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Create index array</font></font><font></font>
     resultTriangulationOffset = resultVertices.Count;<font></font>
     for (int i = 0; i &lt; points.Length; i++)<font></font>
     {<font></font>
@@ -831,8 +824,8 @@ void InitializeVertices(Vector3[] points)<font></font>
 <font></font>
         resultVertices.Add(nowVertex);<font></font>
     }<font></font>
-<font></font>
-    // 凸三角形と耳の検索<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Search for convex triangles and ears</font></font><font></font>
     LinkedListNode&lt;int&gt; node = indices.First;<font></font>
     while (node != null)<font></font>
     {<font></font>
@@ -842,18 +835,18 @@ void InitializeVertices(Vector3[] points)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>頂点が耳かどうか判定するCheckVertex関数は次のようになっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The CheckVertex function that determines if a vertex is an ear looks like this:</font></font></p>
 <div class="emlist-code">
-<p class="caption">CheckVertex関数</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CheckVertex function</font></font></p>
 <pre class="emlist">void CheckVertex(LinkedListNode&lt;int&gt; node)<font></font>
-{<font></font>
-    // 凸頂点/反射頂点チェック<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Convex vertex / Reflective vertex check</font></font><font></font>
     int prevIndex = (node.Previous == null) ?<font></font>
-                      indices.Last.Value :<font></font>
-                      node.Previous.Value; // 一つ前の頂点<font></font>
+                      indices.Last.Value :<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                      node.Previous.Value; // Previous vertex</font></font><font></font>
     int nextIndex = (node.Next == null) ?<font></font>
-                      indices.First.Value :<font></font>
-                      node.Next.Value;        // 次の頂点<font></font>
+                      indices.First.Value :<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                      node.Next.Value; // Next vertex</font></font><font></font>
     int nowIndex = node.Value;<font></font>
 <font></font>
     Vector3 prevVertex = vertices[prevIndex];<font></font>
@@ -861,12 +854,12 @@ void InitializeVertices(Vector3[] points)<font></font>
     Vector3 nowVertex = vertices[nowIndex];<font></font>
 <font></font>
     bool isEar = false;<font></font>
-<font></font>
-    // 内角が180度以内か？<font></font>
-    if (GeomUtil.IsAngleLessPI(nowVertex, prevVertex, nextVertex))<font></font>
-    {<font></font>
-        // 耳チェック<font></font>
-        // 180度以内、三角形の中に他の頂点が含まれない<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Is the internal angle within 180 degrees?</font></font><font></font>
+    if (GeomUtil.IsAngleLessPI(nowVertex, prevVertex, nextVertex))<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Ear check</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Within 180 degrees, the triangle does not contain other vertices</font></font><font></font>
         isEar = true;<font></font>
         foreach(int i in indices)<font></font>
         {<font></font>
@@ -874,8 +867,8 @@ void InitializeVertices(Vector3[] points)<font></font>
                 continue;<font></font>
 <font></font>
             Vector3 p = vertices[i];<font></font>
-<font></font>
-            // 分割時に複製した同一座標だったら無視<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Ignore if the coordinates are the same duplicated at the time of division</font></font><font></font>
             if (Vector3.Distance(p, prevVertex) &lt;= float.Epsilon) continue;<font></font>
             if (Vector3.Distance(p, nowVertex) &lt;= float.Epsilon) continue;<font></font>
             if (Vector3.Distance(p, nextVertex) &lt;= float.Epsilon) continue;<font></font>
@@ -884,61 +877,61 @@ void InitializeVertices(Vector3[] points)<font></font>
                                      prevVertex,<font></font>
                                      nowVertex,<font></font>
                                      nextVertex) &lt;= 0)<font></font>
-            {<font></font>
-                isEar = false;<font></font>
+            {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                isEar = false;</font></font></font></font><font></font>
                 break;<font></font>
             }<font></font>
 <font></font>
         }<font></font>
-        if (isEar)<font></font>
-        {<font></font>
+        if (isEar)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
             if (!earTipList.Contains(nowIndex))<font></font>
-            {<font></font>
-                // 耳追加<font></font>
+            {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // Add ears</font></font><font></font>
                 earTipList.Add(nowIndex);<font></font>
             }<font></font>
         }<font></font>
         else<font></font>
-        {<font></font>
-            // すでに耳のときに耳ではなくなった場合除外<font></font>
-            if (earTipList.Contains(nowIndex))<font></font>
-            {<font></font>
-                // 耳削除<font></font>
-                earTipList.Remove(nowIndex);<font></font>
-            }<font></font>
-        }<font></font>
+        {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Exclude if it is no longer an ear when it is already an ear</font></font><font></font>
+            if (earTipList.Contains(nowIndex))<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            {</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // Ear removal</font></font><font></font>
+                earTipList.Remove(nowIndex);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            }</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font>
 <font></font>
     }<font></font>
 <font></font>
 }<font></font>
 </pre>
 </div>
-<p>実際の三角形分割は次のEarClipping関数の中で行います。前述したとおり、耳リストの先頭から頂点を取り出し、前後の頂点と結んだ三角形を出力。そして、頂点インデックス配列から耳の頂点を削除し、前後の頂点が耳になるか判定するという手順を繰り返します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The actual triangulation is done in the following EarClipping function. </font><font style="vertical-align: inherit;">As mentioned above, the vertices are taken out from the top of the ear list and the triangle connected to the front and back vertices is output. </font><font style="vertical-align: inherit;">Then, the procedure of deleting the vertices of the ear from the vertex index array and determining whether the vertices before and after are the ears is repeated.</font></font></p>
 <div class="emlist-code">
-<p class="caption">EarClipping関数</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">EarClipping function</font></font></p>
 <pre class="emlist">void EarClipping()<font></font>
 {<font></font>
     int triangleIndex = 0;<font></font>
 <font></font>
     while (earTipList.Count &gt; 0)<font></font>
-    {<font></font>
-        int nowIndex = earTipList[0];   // 先頭取り出し<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        int nowIndex = earTipList [0]; // Extract top</font></font><font></font>
 <font></font>
         LinkedListNode&lt;int&gt; indexNode = indices.Find(nowIndex);<font></font>
-        if (indexNode != null)<font></font>
-        {<font></font>
+        if (indexNode != null)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
             int prevIndex = (indexNode.Previous == null) ?<font></font>
-                              indices.Last.Value :<font></font>
-                              indexNode.Previous.Value; // 一つ前の頂点<font></font>
+                              indices.Last.Value :<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                              indexNode.Previous.Value; // Previous vertex</font></font><font></font>
             int nextIndex = (indexNode.Next == null) ?<font></font>
-                              indices.First.Value :<font></font>
-                              indexNode.Next.Value;        // 次の頂点<font></font>
+                              indices.First.Value :<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                              indexNode.Next.Value; // Next vertex</font></font><font></font>
 <font></font>
             Vector3 prevVertex = vertices[prevIndex];<font></font>
             Vector3 nextVertex = vertices[nextIndex];<font></font>
             Vector3 nowVertex = vertices[nowIndex];<font></font>
-<font></font>
-            // 三角形作成<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Triangle creation</font></font><font></font>
             triangles.Add(new Triangle(<font></font>
               prevVertex,<font></font>
               nowVertex,<font></font>
@@ -951,44 +944,44 @@ void InitializeVertices(Vector3[] points)<font></font>
             triangleIndex++;<font></font>
 <font></font>
             if (indices.Count == 3)<font></font>
-            {<font></font>
-                // 最後の三角形なので終了<font></font>
+            {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                // End because it is the last triangle</font></font><font></font>
                 break;<font></font>
             }<font></font>
-<font></font>
-            // 耳の頂点削除<font></font>
-            earTipList.RemoveAt(0);     // 先頭削除<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Delete ear vertices</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            earTipList.RemoveAt (0); // Remove top</font></font><font></font>
             indices.Remove(nowIndex);<font></font>
-<font></font>
-            // 前後の頂点のチェック<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            // Check the vertices before and after</font></font><font></font>
             int[] bothlist = { prevIndex, nextIndex };<font></font>
-            for (int i = 0; i &lt; bothlist.Length; i++)<font></font>
-            {<font></font>
+            for (int i = 0; i &lt; bothlist.Length; i++)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            {</font></font></font></font><font></font>
                 LinkedListNode&lt;int&gt; node = indices.Find(bothlist[i]);<font></font>
-                CheckVertex(node);<font></font>
-            }<font></font>
+                CheckVertex(node);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            }</font></font></font></font><font></font>
         }<font></font>
         else<font></font>
         {<font></font>
             Debug.LogError("index now found");<font></font>
-            break;<font></font>
-        }<font></font>
+            break;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font>
     }<font></font>
-<font></font>
-    // UV計算<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // UV calculation</font></font><font></font>
     for (int i = 0; i &lt; vertices.Count; i++)<font></font>
     {<font></font>
         Vector2 uv2 = CalcUV(vertices[i], uvRect);<font></font>
-        resultUVs.Add(uv2);<font></font>
-    }<font></font>
+        resultUVs.Add(uv2);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
 
-<h4><a id="h5-6-2-5"></a>メッシュ生成</h4>
-<p>三角形分割した結果をMeshにします。EarClipping関数の中で、必要な頂点配列とインデックス配列（resultVerticesとresultTriangulation）を用意して、Meshに流し込んでいます。</p>
+<h4><a id="h5-6-2-5"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mesh generation</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Make the result of triangle division into Mesh. </font><font style="vertical-align: inherit;">In the EarClipping function, we prepare the necessary vertex array and index array (resultVertices and resultTriangulation) and pour them into Mesh.</font></font></p>
 <div class="emlist-code">
-<p class="caption">MakeMesh関数</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">MakeMesh function</font></font></p>
 <pre class="emlist">void MakeMesh()<font></font>
 {<font></font>
     mesh = new Mesh();<font></font>
@@ -1008,20 +1001,20 @@ void InitializeVertices(Vector3[] points)<font></font>
 }<font></font>
 </pre>
 </div>
-<p>ついでに、UV座標もセットしています。UV座標は、多角形の矩形領域の中で割り当てるようにしてます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By the way, I also set the UV coordinates. </font><font style="vertical-align: inherit;">UV coordinates are assigned within the rectangular area of ​​the polygon.</font></font></p>
 <div class="emlist-code">
 <p class="caption">CalcUV</p>
-<pre class="emlist">Vector2 CalcUV(Vector3 vertex, Rect uvRect)<font></font>
-{<font></font>
+<pre class="emlist">Vector2 CalcUV(Vector3 vertex, Rect uvRect)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font><font></font>
     float u = (vertex.x - uvRect.x) / uvRect.width;<font></font>
     float v = (vertex.y - uvRect.y) / uvRect.height;<font></font>
 <font></font>
-    return new Vector2(u, v);<font></font>
-}<font></font>
+    return new Vector2(u, v);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
 </pre>
 </div>
 
-<h2><a id="h5-7"></a><span class="secno">5.7　</span>まとめ</h2>
+<h2><a id="h5-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I have explained the polygonal triangle division by the ear cutting method. </font><font style="vertical-align: inherit;">It is important to use it, but if you draw a figure with the mouse, it will become a mesh in real time, you can make the outline data of the font a mesh, etc., but since it is not such a fast algorithm, if the number of vertices increases, it will be speedy. There will be problems (calculated in order by the CPU), but I find it interesting that complex polygons can be divided into triangles with a simple algorithm.</font></font></p>
 
 <h2><a id="h5-8"></a><span class="secno"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See </font><span class="secno"><font style="vertical-align: inherit;">5.8　</font></span></font></h2>
@@ -1035,4 +1028,4 @@ void InitializeVertices(Vector3[] points)<font></font>
 <p><a href="https://ja.wikipedia.org/wiki/%E5%A4%9A%E8%A7%92%E5%BD%A2%E3%81%AE%E4%B8%89%E8%A7%92%E5%BD%A2%E5%88%86%E5%89%B2" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://ja.wikipedia.org/wiki/ Polygon triangulation</font></font></a></p><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 5 _ Triangulation by Ear Clipping_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 5 _ Triangulation by Ear Clipping_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 5 _ Triangulation by Ear Clipping_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 5 _ Triangulation by Ear Clipping_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 5 _ Triangulation by Ear Clipping_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

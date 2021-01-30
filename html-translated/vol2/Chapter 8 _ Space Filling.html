@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0042)https://freder.io/files/unity2/aoyama.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 8 _ Space Filling_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 8 _ Space Filling_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 8 _ Space Filling_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ Space Filling_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ Space Filling_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 8 _ Space Filling_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 8 _ Space Filling_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ Space Filling_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ Space Filling_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 8 _ Space Filling_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Space Filling</font></font></h1>
 
 <h2><a id="h8-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
@@ -88,31 +81,31 @@
 Figure 8.1: C1, C2, C3 and the two circles C4, C5 in contact with it
 </font></font></p>
 </div>
-<p>ここで、C1,C2に対してC4を考えると、C1,C2,C4について新たな2つのアポロニウスの円を得ることができます。この2つの円のうち、一方はC3となりますが、他方は新しい円C6となります。</p>
-<p>これを（C1,C2,C5）,（C2, C3, C4）,（C1, C3, C4）のように全ての組み合わせについてアポロニウスの円を考えると、それぞれについて最低1つの新しい円を得ることができます。これを無限に繰り返していくことにより、それぞれが接し合う円の集合が作り出されます。この円の集合が、アポロニウスのギャスケットです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, if we consider C4 as opposed to C1, C2, we can get two new Apollonius circles for C1, C2, and C4. </font><font style="vertical-align: inherit;">Of these two circles, one will be C3 and the other will be the new circle C6.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Considering the Apollonius circles for all combinations, such as (C1, C2, C5), (C2, C3, C4), (C1, C3, C4), you can get at least one new circle for each. I can do it. </font><font style="vertical-align: inherit;">By repeating this infinitely, a set of circles that touch each other is created. </font><font style="vertical-align: inherit;">This set of circles is the Apollonian Gasket.</font></font></p>
 <div id="id_aoyama_2Fapollonian__gasket" class="image">
 <img src="./Chapter 8 _ Space Filling_files/apollonian_gasket.png" alt="Apollonian Gasket" class="width-090per">
-<p class="caption">
-図8.2: アポロニウスのギャスケット
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.2: Apollonian Gasket
+</font></font></p>
 </div>
 <p>https://upload.wikimedia.org/wikipedia/commons/e/e6/Apollonian_gasket.svg</p>
 <div class="note">
-<p class="caption">アポロニウスの円</p>
-<p>    2つの定点A,Bを取り点Pを<span class="equation">AP : BP = 一定</span>となるように取ったときの点Pの軌跡のことです。    ただ、これとは別にアポロニウスの問題に対する解を指して、アポロニウスの円と呼ばれることもあり、アポロニウスのギャスケットにおいてはこちらの意味合いの方が強いです。</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Circles of Apollonius</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is the locus of the point P when the </font><font style="vertical-align: inherit;">    two fixed points A and B are taken and the point P is </font><font style="vertical-align: inherit;">taken so </font><font style="vertical-align: inherit;">that </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">AP: BP = constant</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">However, apart from this, it refers to the solution to the Apollonius problem and is sometimes called the Apollonius circle, which has a stronger meaning in the Apollonius Gasket.</font></font></p>
 </div>
 <div class="note">
-<p class="caption">アポロニウスの問題</p>
-<p>    ユークリッド平面幾何学において、与えられた3つの円に接する4つ目の円を描くという問題です。    この4つ目の円は最大で8つの解が存在するとされており、その内2つの解は常に3円と外接し、2つの円は常に3円と内接するとされています。</p>
-<p>    ちなみに、条件として与えられる3つの円は接し合っている必要はなく、あくまでその3つの円に接する4つ目の円を描くというのが問題です。</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Problem of Apollonius</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">    In Euclidean geometry, the problem is to draw a fourth circle tangent to the given three circles. </font><font style="vertical-align: inherit;">It is said that there are a maximum of eight solutions for this fourth circle, two of which are always circumscribed at 3 yen, and two circles are always inscribed at 3 yen.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">    By the way, the three circles given as a condition do not have to touch each other, and the problem is to draw a fourth circle that touches the three circles.</font></font></p>
 </div>
 
-<h2><a id="h8-4"></a><span class="secno">8.4　</span>アポロニウスのギャスケットの計算</h2>
-<p>ここからは実際のプログラムをみながら、アポロニウスのギャスケットの計算方法を順に説明していきます。サンプルプログラムがGihubに上がっていますので、必要であればそちらからDLしてご活用ください。</p>
+<h2><a id="h8-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Apollonian Gasket Calculation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">From here, I will explain the calculation method of Apollonian Gasket in order while looking at the actual program. </font><font style="vertical-align: inherit;">A sample program is available on Github, so please download it from there if necessary.</font></font></p>
 <p>URL：<a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming2" class="link">https://github.com/IndieVisualLab/UnityGraphicsProgramming2</a></p>
 
-<h3><a id="h8-4-1"></a><span class="secno">8.4.1　</span>事前準備</h3>
-<p>アポロニウスのギャスケットをプログラムするにあたり、今回は円を表現するクラスと複素数を扱うための構造体を自前で用意しています。</p>
+<h3><a id="h8-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Preparation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In programming the Apollonian Gasket, this time we have prepared our own class to represent the circle and a structure to handle complex numbers.</font></font></p>
 <p>　</p>
 <div class="emlist-code">
 <p class="caption">Circle.cs</p>
@@ -124,37 +117,37 @@ public class Circle<font></font>
     {<font></font>
         get { return 1f / this.radius; }<font></font>
     }<font></font>
-    public Complex Complex<font></font>
-    {<font></font>
+    public Complex Complex<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         get; private set;<font></font>
     }<font></font>
     public float Radius<font></font>
     {<font></font>
-        get { return Mathf.Abs(this.radius); }<font></font>
-    }<font></font>
-    public Vector2 Position<font></font>
-    {<font></font>
-        get { return this.Complex.Vec2; }<font></font>
-    }<font></font>
+        get { return Mathf.Abs(this.radius); }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+    public Vector2 Position<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        get { return this.Complex.Vec2; }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
     private float radius = 0f;<font></font>
 <font></font>
 <font></font>
-    public Circle(Complex complex, float radius)<font></font>
-    {<font></font>
+    public Circle(Complex complex, float radius)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         this.radius = radius;<font></font>
-        this.Complex = complex;<font></font>
-    }<font></font>
+        this.Complex = complex;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    /// ...<font></font>
-    /// 以下、円同士の関係性を調べる関数が実装されています<font></font>
-    /// 接しているか、交わっているか、内包しているか、など<font></font>
-    /// ...<font></font>
+    /// ...<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    /// Below, a function to check the relationship between circles is implemented.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    /// Whether they are in contact, intersect, include, etc.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    /// ...</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>円を表現するクラスの実装の一部です。</p>
-<p>基本的なプログラミングの知識があれば難しいことは何も無いと思います。なお、<code class="tt">Complex</code>とは今回自前で用意した複素数構造体のことで、<code class="tt">Curvature</code>は曲率と呼ばれるもので、どちらもアポロニウスのギャスケットを計算するのに必要な値です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Part of the implementation of a class that represents a circle.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If you have basic programming knowledge, there should be nothing difficult. </font><font style="vertical-align: inherit;">In addition, </font></font><code class="tt">Complex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is a complex number structure prepared by myself this time </font><font style="vertical-align: inherit;">, </font><font style="vertical-align: inherit;">and is </font></font><code class="tt">Curvature</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">called curvature, both of which are necessary values ​​for calculating the Apollonian Gasket.</font></font></p>
 <p>　</p>
 <div class="emlist-code">
 <p class="caption">Complex.cs</p>
@@ -172,30 +165,30 @@ public struct Complex<font></font>
     {<font></font>
         get { return this.real; }<font></font>
     }<font></font>
-    public float Imaginary<font></font>
-    {<font></font>
-        get { return this.imaginary; }<font></font>
-    }<font></font>
-    public float Magnitude<font></font>
-    {<font></font>
-        get { return Abs(this); }<font></font>
-    }<font></font>
-    public float SqrMagnitude<font></font>
-    {<font></font>
-        get { return SqrAbs(this); }<font></font>
-    }<font></font>
-    public float Phase<font></font>
-    {<font></font>
-        get { return Mathf.Atan2(this.imaginary, this.real); }<font></font>
-    }<font></font>
-    public Vector2 Vec2<font></font>
-    {<font></font>
-        get { return new Vector2(this.real, this.imaginary); }<font></font>
-    }<font></font>
-<font></font>
-    [SerializeField]<font></font>
-    private float real;<font></font>
-    [SerializeField]<font></font>
+    public float Imaginary<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        get { return this.imaginary; }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+    public float Magnitude<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        get { return Abs(this); }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+    public float SqrMagnitude<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        get { return SqrAbs(this); }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+    public float Phase<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        get { return Mathf.Atan2(this.imaginary, this.real); }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+    public Vector2 Vec2<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
+        get { return new Vector2(this.real, this.imaginary); }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    [SerializeField]</font></font></font></font><font></font>
+    private float real;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    [SerializeField]</font></font></font></font><font></font>
     private float imaginary;<font></font>
 <font></font>
 <font></font>
@@ -203,90 +196,90 @@ public struct Complex<font></font>
 <font></font>
     public Complex(Complex other) : this(other.real, other.imaginary) { }<font></font>
 <font></font>
-    public Complex(float real, float imaginary)<font></font>
-    {<font></font>
+    public Complex(float real, float imaginary)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         this.real = real;<font></font>
-        this.imaginary = imaginary;<font></font>
-    }<font></font>
+        this.imaginary = imaginary;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
-    /// ...<font></font>
-    /// 以下、複素数計算をする関数が実装されています<font></font>
-    /// 四則演算や絶対値計算など<font></font>
-    /// ...<font></font>
+    /// ...<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    /// Below, the function to calculate the complex number is implemented.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    /// Four arithmetic operations, absolute value calculation, etc.</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    /// ...</font></font></font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>複素数を扱うための構造体です。</p>
-<p>C#は<code class="tt">Complex</code>構造体を有していますが.Net4.0から搭載されています。本章を執筆している時点ではUnityの.Net4.6サポートはExperimental段階だったので、自前で用意することにしました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A structure for handling complex numbers.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C # has a </font></font><code class="tt">Complex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">structure, but it has been included since .Net 4.0. </font><font style="vertical-align: inherit;">At the time of writing this chapter, Unity's .Net 4.6 support was in the Experimental stage, so I decided to prepare it myself.</font></font></p>
 
-<h3><a id="h8-4-2"></a><span class="secno">8.4.2　</span>最初の3つの円の計算</h3>
-<p>アポロニウスのギャスケットを計算するための前提条件として、互いに接する3つの円が存在している必要があります。そこで今回のプログラムでは、ランダムに半径を決めた3つの円を生成し、それらが互いに接する様に座標を計算して配置しています。</p>
+<h3><a id="h8-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Calculation of the first three circles</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As a prerequisite for calculating the Apollonian Gasket, there must be three circles tangent to each other. </font><font style="vertical-align: inherit;">Therefore, in this program, three circles with randomly determined radii are generated, and the coordinates are calculated and arranged so that they touch each other.</font></font></p>
 <div class="emlist-code">
 <p class="caption">ApollonianGaskets.cs</p>
 <pre class="emlist language-cs">private void CreateFirstCircles(<font></font>
     out Circle c1, out Circle c2, out Circle c3)<font></font>
-{<font></font>
-    var r1 = Random.Range(<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var r1 = Random.Range (</font></font></font></font><font></font>
         this.firstRadiusMin, this.firstRadiusMax<font></font>
-    );<font></font>
-    var r2 = Random.Range(<font></font>
-        this.firstRadiusMin, this.firstRadiusMax<font></font>
-    );<font></font>
-    var r3 = Random.Range(<font></font>
-        this.firstRadiusMin, this.firstRadiusMax<font></font>
-    );<font></font>
-<font></font>
-    // ランダムな座標を取得<font></font>
+    );<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var r2 = Random.Range (</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        this.firstRadiusMin, this.firstRadiusMax</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font><font></font>
+    var r3 = Random.Range(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        this.firstRadiusMin, this.firstRadiusMax</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Get random coordinates</font></font><font></font>
     var p1 = this.GetRandPosInCircle(<font></font>
         this.fieldRadiusMin,<font></font>
-        this.fieldRadiusMax<font></font>
-    );<font></font>
+        this.fieldRadiusMax<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font><font></font>
     c1 = new Circle(new Complex(p1), r1);<font></font>
-<font></font>
-    // p1を元に接する円の中心座標を計算<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Calculate the center coordinates of the tangent circle based on p1</font></font><font></font>
     var p2 = -p1.normalized * ((r1 - p1.magnitude) + r2);<font></font>
     c2 = new Circle(new Complex(p2), r2);<font></font>
-<font></font>
-    // 2つの円に接する円の中心座標を計算<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Calculate the center coordinates of a circle tangent to two circles</font></font><font></font>
     var p3 = this.GetThirdVertex(p1, p2, r1 + r2, r2 + r3, r1 + r3);<font></font>
     c3 = new Circle(new Complex(p3), r3);<font></font>
 }<font></font>
 <font></font>
 private Vector2 GetRandPosInCircle(float fieldMin, float fieldMax)<font></font>
-{<font></font>
-    // 適当な角度を取得<font></font>
-    var theta = Random.Range(0f, Mathf.PI * 2f);<font></font>
-<font></font>
-    // 適当な距離を計算<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Get the right angle</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var theta = Random.Range (0f, Mathf.PI * 2f);</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Calculate the appropriate distance</font></font><font></font>
     var radius = Mathf.Sqrt(<font></font>
-        2f * Random.Range(<font></font>
-            0.5f * fieldMin * fieldMin,<font></font>
-            0.5f * fieldMax * fieldMax<font></font>
+        2f * Random.Range(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            0.5f * fieldMin * fieldMin,</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            0.5f * fieldMax * fieldMax</font></font></font></font><font></font>
         )<font></font>
     );<font></font>
-<font></font>
-    // 極座標系からユークリッド平面に変換<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Convert from polar coordinate system to Euclidean plane</font></font><font></font>
     return new Vector2(<font></font>
         radius * Mathf.Cos(theta),<font></font>
-        radius * Mathf.Sin(theta)<font></font>
-    );<font></font>
-}<font></font>
+        radius * Mathf.Sin(theta)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 <font></font>
 private Vector2 GetThirdVertex(<font></font>
-    Vector2 p1, Vector2 p2, float rab, float rbc, float rca)<font></font>
-{<font></font>
-    var p21 = p2 - p1;<font></font>
-<font></font>
-    // 余弦定理によって角度を計算<font></font>
-    var theta = Mathf.Acos(<font></font>
-        (rab * rab + rca * rca - rbc * rbc) / (2f * rca * rab)<font></font>
-    );<font></font>
-<font></font>
-    // 起点となる点の角度を計算して加算<font></font>
-    // thetaはあくまで三角形内における角度でしかないので、平面における角度ではない<font></font>
+    Vector2 p1, Vector2 p2, float rab, float rbc, float rca)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var p21 = p2 - p1;</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Calculate the angle by the cosine theorem</font></font><font></font>
+    var theta = Mathf.Acos(<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        (rab * rab + rca * rca - rbc * rbc) / (2f * rca * rab)</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    );</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Calculate and add the angle of the starting point</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // theta is just an angle in the triangle, not an angle in the plane</font></font><font></font>
     theta += Mathf.Atan2(p21.y, p21.x);<font></font>
-<font></font>
-    // 極座標系からユークリッド平面に変換した座標を起点となる座標に加算<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Add the coordinates converted from the polar coordinate system to the Euclidean plane to the starting coordinates.</font></font><font></font>
     return p1 + new Vector2(<font></font>
         rca * Mathf.Cos(theta),<font></font>
         rca * Mathf.Sin(theta)<font></font>
@@ -294,137 +287,137 @@ private Vector2 GetThirdVertex(<font></font>
 }<font></font>
 </pre>
 </div>
-<p><code class="tt">CreateFirstCircles</code>関数を呼び出すことで、初期条件の3円が生成されます。</p>
-<p>まずランダムに3つの半径<code class="tt">r1,r2,r3</code>を決め、次に<code class="tt">GetRandPosInCircle</code>関数によって<code class="tt">r1</code>の半径をもつ円（以下C1）の中心座標を決定します。この関数は、原点中心の半径<code class="tt">fieldMin</code>以上<code class="tt">fieldMax</code>以下の円の内部のランダム座標を返します。</p>
+<p><code class="tt">CreateFirstCircles</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By calling the function, the initial condition of 3 yen is generated.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Randomly into three radial first </font></font><code class="tt">r1,r2,r3</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">decided, then </font></font><code class="tt">GetRandPosInCircle</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the function </font></font><code class="tt">r1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">to determine the center coordinates of a circle having a radius (hereinafter C1). </font><font style="vertical-align: inherit;">This function </font><font style="vertical-align: inherit;">returns random coordinates inside a circle that is </font></font><code class="tt">fieldMin</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">greater </font></font><code class="tt">fieldMax</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">than </font><font style="vertical-align: inherit;">or </font><font style="vertical-align: inherit;">equal to </font><font style="vertical-align: inherit;">the radius of the origin center </font><font style="vertical-align: inherit;">.</font></font></p>
 <div id="id_aoyama_2Fcircle2" class="image">
 <img src="./Chapter 8 _ Space Filling_files/circle2.png" alt="Area where random coordinates are generated" class="width-080per">
-<p class="caption">
-図8.3: ランダムな座標が生成される領域
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.3: Area where random coordinates are generated
+</font></font></p>
 </div>
-<p>次に<code class="tt">r2</code>の半径をもつ円（以下C2）の中心座標を計算します。まず<span class="equation">（r1 - p1.magnitude） + r2</span>によって原点からC2の中心までの距離を計算します。これを符号反転したC1の正規化座標に乗算することで、C1と隣接する<code class="tt">r2</code>の半径をもつ円の中心座標を求めることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, </font></font><code class="tt">r2</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the center coordinates of a circle with a radius (below C2) to calculate. </font><font style="vertical-align: inherit;">First </font><font style="vertical-align: inherit;">, calculate the distance from the origin to the center of C2 by </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(r1-p1.magnitude) + r2</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">By multiplying this by the normalized coordinates of C1 which is sign-inverted, </font></font><code class="tt">r2</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the center coordinates of a circle with a radius </font><font style="vertical-align: inherit;">adjacent to C1 </font><font style="vertical-align: inherit;">can be obtained.</font></font></p>
 <div id="id_aoyama_2Fcircle3" class="image">
 <img src="./Chapter 8 _ Space Filling_files/circle3.png" alt="Position represented by p2 vector" class="width-080per">
-<p class="caption">
-図8.4: p2ベクトルの表す位置
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.4: Position represented by the p2 vector
+</font></font></p>
 </div>
-<p>最後に<code class="tt">r3</code>の半径をもつ円（以下C3）の中心座標を<code class="tt">GetThirdVertex</code>関数にて計算しますが、この計算では<b>余弦定理</b>を用います。読者のほとんどの方が高校で習っているかと思いますが、余弦定理というのは三角形の辺の長さと内角の余弦（cosのことです）の間に成り立つ定理のことです。△ABCにおいて、<span class="equation">a = BC, b = CA, c = AB, α = ∠CAB</span>とすると</p>
+<p><font style="vertical-align: inherit;"></font><code class="tt">r3</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The center coordinates of the circle with the </font><font style="vertical-align: inherit;">last </font><font style="vertical-align: inherit;">radius (hereinafter C3) are </font></font><code class="tt">GetThirdVertex</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">calculated by the function, but this calculation uses the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">cosine theorem</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">As most readers may have learned in high school, the cosine theorem is a theorem that holds between the length of the sides of a triangle and the cosine of an internal angle (cos). </font><font style="vertical-align: inherit;">△ in ABC, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">a = BC, b = CA, c = AB, alpha = ∠CAB</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> When</font></font></p>
 <div class="equation">
 <pre>a^2 = c^2 + b^2 - 2cbcosα
 </pre>
 </div>
-<p>が成り立つというのが余弦定理です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is the law of cosines.</font></font></p>
 <div id="id_aoyama_2Ftriangle" class="image">
 <img src="./Chapter 8 _ Space Filling_files/triangle.png" alt="Triangle ABC" class="width-030per">
-<p class="caption">
-図8.5: 三角形ABC
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.5: Triangle ABC
+</font></font></p>
 </div>
-<p>なぜ円の中心を考えるのに三角形が必要になるのかと思われた方もいらっしゃるかと思いますが、実は3つの円の間に成り立つ関係性によって、とても使い勝手の良い三角形を考えることができます。C1,C2,C3の各中心を頂点とする三角形を考えると、この3つの円はそれぞれが接しているので、円の半径から三角形の各辺の長さを知ることができます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You may be wondering why you need a triangle to think about the center of a circle, but in fact, the relationship between the three circles makes it possible to think of a very easy-to-use triangle. </font><font style="vertical-align: inherit;">Considering a triangle whose apex is the center of C1, C2, and C3, since these three circles are in contact with each other, the length of each side of the triangle can be known from the radius of the circle.</font></font></p>
 <div id="id_aoyama_2Fcircle4" class="image">
 <img src="./Chapter 8 _ Space Filling_files/circle4.png" alt="Triangle ABC and circle C1, C2, C3" class="width-080per">
-<p class="caption">
-図8.6: 三角形ABCと円C1,C2,C3
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.6: Triangle ABC and Circles C1, C2, C3
+</font></font></p>
 </div>
-<p>余弦定理を変形すると</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When the law of cosines is transformed</font></font></p>
 <div class="equation">
 <pre>cosα = \frac{c^2 + b^2 - a^2}{2cb}
 </pre>
 </div>
-<p>となるため、3つの辺の長さから余弦について解くことができます。二辺のなす角と距離が求まれば、そこからC1の中心座標を元にしてC3の中心座標を求められるようになります。。</p>
-<p>これで、初期条件として必要な互いに接する3つの円を生成することができました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, we can solve the cosine from the lengths of the three sides. </font><font style="vertical-align: inherit;">Once the angle and distance between the two sides are found, the center coordinates of C3 can be found based on the center coordinates of C1. </font><font style="vertical-align: inherit;">..</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You have now generated the three tangent circles you need as an initial condition.</font></font></p>
 
-<h3><a id="h8-4-3"></a><span class="secno">8.4.3　</span>C1,C2,C3に接する円の計算</h3>
-<p>前項で生成した3つの円C1,C2,C3を元にして、これらに接する円を計算します。新しく円を作るためには半径と中心座標の二つのパラメーターが必要となるので、それぞれを計算にて求めます。</p>
+<h3><a id="h8-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Calculation of the circle tangent to C1, C2, C3</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Based on the three circles C1, C2, and C3 generated in the previous section, the circles tangent to them are calculated. </font><font style="vertical-align: inherit;">Two parameters, radius and center coordinates, are required to create a new circle, so each is calculated.</font></font></p>
 
-<h4><a id="h8-4-3-1"></a>半径</h4>
-<p>まず半径から計算を行いますが、これは<b>デカルトの円定理</b>によって求めることができます。デカルトの円定理とは、互いに接する4つの円C1,C2,C3,C4について、曲率<a id="fnb-curvature" href="https://freder.io/files/unity2/aoyama.html#fn-curvature" class="noteref" epub:type="noteref">*6</a>をそれぞれk1,k2,k3,k4とすると</p>
+<h4><a id="h8-4-3-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">radius</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We first calculate from the radius, which can be calculated by </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Descartes's circle theorem</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Descartes's circle theorem is that for four circles C1, C2, C3, C4 that touch each other, the curvature </font></font><a id="fnb-curvature" href="https://freder.io/files/unity2/aoyama.html#fn-curvature" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 6</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is k1, k2, k3, k4, respectively.</font></font></p>
 <div class="equation">
-<pre>(k_1 + k_2 + k_3 + k_4)^2 = 2({k_1}^2 + {k_2}^2 + {k_3}^2 + {k_4}^2)
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(k_1 + k_2 + k_3 + k_4) ^ 2 = 2 ({k_1} ^ 2 + {k_2} ^ 2 + {k_3} ^ 2 + {k_4} ^ 2)
+</font></font></pre>
 </div>
-<p>が成り立つというものです。これは4つの円の半径に関する2次方程式ですが、この式を整理すると</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is true. </font><font style="vertical-align: inherit;">This is a quadratic equation for the radii of four circles, but if you organize this equation</font></font></p>
 <div class="equation">
-<pre>k_4 = k_1 + k_2 + k_3 \pm 2\sqrt{k_1k_2 + k_2k_3 + k_3k_1}
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">k_4 = k_1 + k_2 + k_3 \ pm 2 \ sqrt {k_1k_2 + k_2k_3 + k_3k_1}
+</font></font></pre>
 </div>
-<div class="footnote" epub:type="footnote" id="fn-curvature"><p class="footnote">[*6] 半径の逆数のことで<span class="equation">k = \pm\frac{1}{r}</span>で定義されます</p></div>
-<p>と変形できるため、3つの円C1,C2,C3が分かっていれば4つ目の円C4の曲率を求められます。曲率とは半径の逆数であるので、曲率の逆数を取ることにより円の半径を知ることができます。</p>
-<p>ここで、C4の曲率は複合により2つ求められますが、一方の解は常に正となり、もう一方は正負のどちらかとなります。C4の曲率が正の時はC1,C2,C3と外接し、負の時はC1,C2,C3と内接（3円を内包）しています。つまり、4つ目の円C4は2パターン考えることができ、その両方について取り得る可能性があります。</p>
+<div class="footnote" epub:type="footnote" id="fn-curvature"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 6] The reciprocal of the radius </font><font style="vertical-align: inherit;">, defined by </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">k = \ pm \ frac {1} {r}</font></font></span><font style="vertical-align: inherit;"></font></p></div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the three circles C1, C2, and C3 are known, the curvature of the fourth circle C4 can be obtained. </font><font style="vertical-align: inherit;">Since the curvature is the reciprocal of the radius, the radius of the circle can be known by taking the reciprocal of the curvature.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, the curvature of C4 is obtained by compounding two, but one solution is always positive and the other is either positive or negative. </font><font style="vertical-align: inherit;">When the curvature of C4 is positive, it is circumscribed to C1, C2, C3, and when it is negative, it is inscribed to C1, C2, C3 (including 3 circles). </font><font style="vertical-align: inherit;">In other words, the fourth circle C4 can be considered in two patterns, and there is a possibility that both can be considered.</font></font></p>
 <div id="id_aoyama_2Fcircle5" class="image">
 <img src="./Chapter 8 _ Space Filling_files/circle5.png" alt="Positive or negative of curvature" class="width-080per">
-<p class="caption">
-図8.7: 曲率の正負
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.7: Positive and negative curvature
+</font></font></p>
 </div>
-<p>これをプログラミングしているのが以下の部分となります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following part is programming this.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SoddyCircles.cs</p>
-<pre class="emlist language-cs">// 曲率の計算<font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Curvature calculation</font></font><font></font>
 var k1 = this.Circle1.Curvature;<font></font>
 var k2 = this.Circle2.Curvature;<font></font>
 var k3 = this.Circle3.Curvature;<font></font>
-<font></font>
-var plusK = k1 + k2 + k3 + 2f * Mathf.Sqrt(k1 * k2 + k2 * k3 + k3 * k1);<font></font>
-var minusK = k1 + k2 + k3 - 2f * Mathf.Sqrt(k1 * k2 + k2 * k3 + k3 * k1);<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var plusK = k1 + k2 + k3 + 2f * Mathf.Sqrt (k1 * k2 + k2 * k3 + k3 * k1);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var minusK = k1 + k2 + k3 - 2f * Mathf.Sqrt (k1 * k2 + k2 * k3 + k3 * k1);</font></font></font></font><font></font>
 </pre>
 </div>
-<p>なお、このデカルトの円定理は後にソディという化学者により再発見されており、C1,C2,C3,C4の円はソディの円と呼ばれています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This Cartesian circle theorem was later rediscovered by a chemist named Sodi, and the C1, C2, C3, and C4 circles are called Sodi's circles.</font></font></p>
 <div class="note">
-<p class="caption">ソディの円とアポロニウスの円</p>
-<p>    前項にてアポロニウスの円という話をしましたが、これはソディの円と何が違うのかと思った方もいらっしゃるかと思います。</p>
-<p>    アポロニウスの円というのは、アポロニウスの問題を解決する円の総称のことです。    ソディの円というのは、デカルトの円定理を満たす4つの円を指している言葉です。</p>
-<p>    つまり、ソディの円がアポロニウスの問題に対する解の一つであるので、アポロニウスの円でもあるということです。</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sodi's Circle and Apollonius' Circle</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">    In the previous section, we talked about the Circle of Apollonius, but I think some of you may have wondered what this is different from the Circle of Sodi.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">    The Apollonius circle is a general term for circles that solve the problems of Apollonius. </font><font style="vertical-align: inherit;">Sodi's circle is a term that refers to four circles that satisfy Descartes' circle theorem.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">    In other words, since Sodi's circle is one of the solutions to Apollonius' problem, it is also Apollonius's circle.</font></font></p>
 </div>
 
-<h4><a id="h8-4-3-2"></a>中心座標</h4>
-<p>次に中心座標の計算ですが、デカルトの円定理と似た形の<b>デカルトの複素数定理</b>によって求められます。デカルトの複素数定理とは、複素数平面上の互いに接する円C1,C2,C3,C4の中心座標をz1,z2,z3,z4として、曲率をk1,k2,k3,k4とすると</p>
+<h4><a id="h8-4-3-2"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Center coordinates</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next is the calculation of the center coordinates, which is calculated </font><font style="vertical-align: inherit;">by </font><font style="vertical-align: inherit;">the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cartesian complex number theorem</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font><font style="vertical-align: inherit;">which has a shape similar to the </font><b><font style="vertical-align: inherit;">Cartesian</font></b><font style="vertical-align: inherit;"> circle theorem </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">The Cartesian complex number theorem is that the center coordinates of the circles C1, C2, C3, C4 that touch each other on the complex plane are z1, z2, z3, z4, and the curvature is k1, k2, k3, k4.</font></font></p>
 <div class="equation">
-<pre>(k_1z_1 + k_2z_2 + k_3z_3 + k_4z_4)^2 = 2({k_1}^2{z_1}^2 + {k_2}^2{z_2}^2 + {k_3}^2{z_3}^2 + {k_4}^2{z_4}^2)
-</pre>
+<pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(k_1z_1 + k_2z_2 + k_3z_3 + k_4z_4) ^ 2 = 2 ({k_1} ^ 2 {z_1} ^ 2 + {k_2} ^ 2 {z_2} ^ 2 + {z_3} ^ 2 {z_3} ^ 2 + {k_4} ^ 2 {z_4} ^ 2)
+</font></font></font></font></pre>
 </div>
-<p>が成り立つというものです。この式をz4について整理すると</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is true. </font><font style="vertical-align: inherit;">To organize this formula for z4</font></font></p>
 <div class="equation">
 <pre>z4 = \frac{z_1k_1 + z_2k_2 + z_3k_3 \pm 2\sqrt{k_1k_2z_1z_2 + k_2k_3z_2z_3 + k_3k_1z_3z_1}}{k4}
 </pre>
 </div>
-<p>と変形できるので、これで円C4の中心座標を求めることができます。</p>
-<p>ここで、半径の計算の時に曲率が2つ求められましたが、デカルトの複素数定理についても複合により2つ求めることができます。ただし曲率の計算とは違い、2つのうちどちらか一方が正しいソディの円であるため、どちらが正しいかを判定する必要があります。</p>
-<p>これをプログラミングしているのが以下の部分となります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since it can be transformed into, the center coordinates of the circle C4 can be obtained with this.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, two curvatures were obtained when calculating the radius, but two can also be obtained by compounding the Cartesian complex number theorem. </font><font style="vertical-align: inherit;">However, unlike the curvature calculation, one of the two is the correct Sodi circle, so you need to determine which is correct.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following part is programming this.</font></font></p>
 <div class="emlist-code">
 <p class="caption">SoddyCircles.cs</p>
-<pre class="emlist language-cs">/// 中心座標の計算<font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">/// Calculation of center coordinates</font></font><font></font>
 var ck1 = Complex.Multiply(this.Circle1.Complex, k1);<font></font>
 var ck2 = Complex.Multiply(this.Circle2.Complex, k2);<font></font>
 var ck3 = Complex.Multiply(this.Circle3.Complex, k3);<font></font>
-<font></font>
-var plusZ = ck1 + ck2 + ck3<font></font>
-    + Complex.Multiply(Complex.Sqrt(ck1 * ck2 + ck2 * ck3 + ck3 * ck1), 2f);<font></font>
-var minusZ = ck1 + ck2 + ck3<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var plusZ = ck1 + ck2 + ck3</font></font></font></font><font></font>
+    + Complex.Multiply(Complex.Sqrt(ck1 * ck2 + ck2 * ck3 + ck3 * ck1), 2f);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var minusZ = ck1 + ck2 + ck3</font></font></font></font><font></font>
     - Complex.Multiply(Complex.Sqrt(ck1 * ck2 + ck2 * ck3 + ck3 * ck1), 2f);<font></font>
-<font></font>
-var recPlusK = 1f / plusK;<font></font>
-var recMinusK = 1f / minusK;<font></font>
-<font></font>
-// ソディの円の判定<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var recPlusK = 1f / plusK;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var recMinusK = 1f / minusK;</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Judgment of Sodi's circle</font></font><font></font>
 this.GetGasket(<font></font>
     new Circle(Complex.Divide(plusZ, plusK), recPlusK),<font></font>
     new Circle(Complex.Divide(minusZ, plusK), recPlusK),<font></font>
     out c4<font></font>
 );<font></font>
-<font></font>
-this.GetGasket(<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+this.GetGasket(</font></font></font></font><font></font>
     new Circle(Complex.Divide(plusZ, minusK), recMinusK),<font></font>
     new Circle(Complex.Divide(minusZ, minusK), recMinusK),<font></font>
-    out c5<font></font>
-);<font></font>
+    out c5<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+);</font></font></font></font><font></font>
 </pre>
 </div>
 <div class="emlist-code">
 <p class="caption">SoddyCircles.cs</p>
-<pre class="emlist language-cs">/// ソディの円の判定<font></font>
+<pre class="emlist language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">/// Judgment of Sodi's circle</font></font><font></font>
 (c1.IsCircumscribed(c4, CalculationAccuracy)<font></font>
     || c1.IsInscribed(c4, CalculationAccuracy)) &amp;&amp;<font></font>
 (c2.IsCircumscribed(c4, CalculationAccuracy)<font></font>
@@ -443,36 +436,36 @@ this.GetGasket(<font></font>
     return abs &lt;= accuracy * accuracy;<font></font>
 }<font></font>
 <font></font>
-public bool IsInscribed(Circle c, float accuracy)<font></font>
-{<font></font>
-    var d = (this.Position - c.Position).sqrMagnitude;<font></font>
+public bool IsInscribed(Circle c, float accuracy)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    var d = (this.Position - c.Position).sqrMagnitude;</font></font></font></font><font></font>
     var abs = Mathf.Abs(d - Mathf.Pow(this.Radius - c.Radius, 2));<font></font>
-<font></font>
-    return abs &lt;= accuracy * accuracy;<font></font>
-}<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    return abs &lt;= accuracy * accuracy;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
 <p>　</p>
-<p>これで、初期条件のC1,C2,C3を元にして、これらに接する円を2つ（以下C4,C5）得ることができました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, based on the initial conditions C1, C2, C3, we have obtained two circles tangent to them (hereinafter C4, C5).</font></font></p>
 
-<h3><a id="h8-4-4"></a><span class="secno">8.4.4　</span>アポロニウスのギャスケットの計算</h3>
-<p>ここまで来たら、あとは簡単にアポロニウスのギャスケットを計算することができます。<a href="https://freder.io/files/unity2/aoyama.html#h8-4-3">「8.4.3 C1,C2,C3に接する円の計算」</a>で行った計算を繰り返すだけです。</p>
-<p>前項では<a href="https://freder.io/files/unity2/aoyama.html#h8-4-2">「8.4.2 最初の3つの円の計算」</a>で求めたC1,C2,C3について接する円C4,C5を求めました。次は（C1,C2,C4）（C1,C2,C5）（C2,C3,C4）（C2,C3,C5）（C3,C1,C4）（C3,C1,C5）について接する円をそれぞれ求めていきます。</p>
-<p>ここで、組み合わせの上では接している円であっても、実際には他の円に重なってしまっている可能性があります。なので正しいソディの円であるかの判定を行ったあとに、今まで求めてきた全ての円に重なっていないことも確認する必要があります。</p>
+<h3><a id="h8-4-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Apollonian Gasket Calculation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">At this point, you can easily calculate the Apollonian Gasket. </font><font style="vertical-align: inherit;">Simply repeat the calculation performed in </font></font><a href="https://freder.io/files/unity2/aoyama.html#h8-4-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"8.4.3 Calculation of the circle tangent to C1, C2, C3"</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the previous section, </font><font style="vertical-align: inherit;">we found the circles C4 and C5 that are tangent to C1, C2 and C3 </font><font style="vertical-align: inherit;">found in </font></font><a href="https://freder.io/files/unity2/aoyama.html#h8-4-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"8.4.2 Calculation of the first three circles"</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Next, find the circles that touch (C1, C2, C4) (C1, C2, C5) (C2, C3, C4) (C2, C3, C5) (C3, C1, C4) (C3, C1, C5). I will continue.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Here, even if the circles are in contact with each other on the combination, they may actually overlap with other circles. </font><font style="vertical-align: inherit;">Therefore, after determining whether it is the correct Sodi circle, it is also necessary to confirm that it does not overlap all the circles that have been requested so far.</font></font></p>
 <div id="id_aoyama_2Fcircle6" class="image">
 <img src="./Chapter 8 _ Space Filling_files/circle6.png" alt="Of the circles C7 and C8 that touch C1, C4 and C6, C8 overlaps with C2 and is not included in the Apollonian Gasket." class="width-080per">
-<p class="caption">
-図8.8: C1,C4,C6に接する円C7,C8のうち、C8はC2と重なっているためアポロニウスのギャスケットには含まれない
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.8: Of the circles C7 and C8 tangent to C1, C4 and C6, C8 overlaps C2 and is not included in the Apollonian Gasket.
+</font></font></p>
 </div>
-<p>そうして、それぞれについて接する円を新たに得ることができます。あとは同じよう、接する円を求めるために元とした円と、新しく求めた接する円との全ての組み合わせについて、改めて新しい接する円を求め続けます。</p>
-<p>数学的にはこの手順を無限回繰り返した時に得られる円の集合がアポロニウスのギャスケットなのですが、プログラムについて無限回を扱うことはできません。なので、今回のプログラムにおいては、新しく求めた接する円の半径が一定値以下だった場合は、その組み合わせについては処理を終了という条件を与えています。</p>
-<p>これをプログラミングしているのが以下の部分となります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Then you will get a new circle that touches each one. </font><font style="vertical-align: inherit;">After that, in the same way, we will continue to find new tangent circles for all combinations of the original circle to find the tangent circle and the newly found tangent circle.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mathematically, the set of circles obtained by repeating this procedure infinitely is the Apollonian Gasket, but it is not possible to handle the program infinitely. </font><font style="vertical-align: inherit;">Therefore, in this program, if the radius of the newly obtained tangent circle is less than a certain value, the condition that the processing is completed is given for the combination.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The following part is programming this.</font></font></font></font></p>
 <div class="emlist-code">
 <p class="caption">ApollonianGaskets.cs</p>
 <pre class="emlist language-cs">private void Awake()<font></font>
-{<font></font>
-    // 初期条件の3円を生成<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Generate the initial condition of 3 yen</font></font><font></font>
     Circle c1, c2, c3;<font></font>
     this.CreateFirstCircles(out c1, out c2, out c3);<font></font>
     this.circles.Add(c1);<font></font>
@@ -482,8 +475,8 @@ public bool IsInscribed(Circle c, float accuracy)<font></font>
     this.soddys.Enqueue(new SoddyCircles(c1, c2, c3));<font></font>
 <font></font>
     while(this.soddys.Count &gt; 0)<font></font>
-    {<font></font>
-        // ソディの円を計算<font></font>
+    {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        // Calculate Sodi's circle</font></font><font></font>
         var soddy = this.soddys.Dequeue();<font></font>
 <font></font>
         Circle c4, c5;<font></font>
@@ -498,49 +491,49 @@ private void AddCircle(Circle c, SoddyCircles soddy)<font></font>
 {<font></font>
     if(c == null || c.Radius &lt;= MinimumRadius)<font></font>
     {<font></font>
-        return;<font></font>
-    }<font></font>
-    // 曲率が負の場合は問答無用で追加<font></font>
-    // 曲率が負の円は一度しか出てこない<font></font>
-    else if(c.Curvature &lt; 0f)<font></font>
-    {<font></font>
+        return;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // If the curvature is negative, no questions asked and added</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Circles with negative curvature appear only once</font></font><font></font>
+    else if(c.Curvature &lt; 0f)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         this.circles.Add(c);<font></font>
         soddy.GetSoddyCircles(c).ForEach(s =&gt; this.soddys.Enqueue(s));<font></font>
-<font></font>
-        return;<font></font>
-    }<font></font>
-<font></font>
-    // 他の円と被ってないか確認<font></font>
-    for(var i = 0; i &lt; this.circles.Count; i++)<font></font>
-    {<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        return;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Check if it covers other circles</font></font><font></font>
+    for(var i = 0; i &lt; this.circles.Count; i++)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    {</font></font></font></font><font></font>
         var o = this.circles[i];<font></font>
 <font></font>
         if(o.Curvature &lt; 0f)<font></font>
         {<font></font>
             continue;<font></font>
         }<font></font>
-        else if(o.IsMatch(c, CalculationAccuracy) == true)<font></font>
-        {<font></font>
-            return;<font></font>
-        }<font></font>
-    }<font></font>
+        else if(o.IsMatch(c, CalculationAccuracy) == true)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        {</font></font></font></font><font></font>
+            return;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        }</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    }</font></font></font></font><font></font>
 <font></font>
     this.circles.Add(c);<font></font>
-    soddy.GetSoddyCircles(c).ForEach(s =&gt; this.soddys.Enqueue(s));<font></font>
-}<font></font>
+    soddy.GetSoddyCircles(c).ForEach(s =&gt; this.soddys.Enqueue(s));<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>これで無事アポロニウスのギャスケットを求めることができました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You have now successfully requested the Apollonian Gasket.</font></font></p>
 <div id="id_aoyama_2Fgasket" class="image">
 <img src="./Chapter 8 _ Space Filling_files/gasket.png" alt="Execution result on Unity" class="width-100per">
-<p class="caption">
-図8.9: Unity上での実行結果
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 8.9: Execution result on Unity
+</font></font></p>
 </div>
 
-<h2><a id="h8-5"></a><span class="secno">8.5　</span>まとめ</h2>
-<p>ここまでアポロニウスのギャスケットを計算するために必要な手順を順序的に説明してきました。冒頭でも説明したましたが、本来アポロニウスのギャスケットというのはフラクタル図形という意味合いの方が強いです。</p>
-<p>しかし、今回の平面という制限を外し空間という世界に飛び出すと、途端に話が難しくなり、フラクタル図形から充填（パッキング）としての意味合いが強くなります。空間を球充填するという命題は、ケプラー予想などの有名な数学的予想が存在するなど、何百年に渡って議論の的とされてきた分野です。</p>
+<h2><a id="h8-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">So far, we have walked through the steps required to calculate the Apollonian Gasket. </font><font style="vertical-align: inherit;">As I explained at the beginning, the Apollonian Gasket has a stronger meaning as a fractal figure.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, if we remove the limitation of the plane this time and jump out into the world of space, it will become difficult to talk about it, and the meaning of filling (packing) from the fractal figure will become stronger. </font><font style="vertical-align: inherit;">The proposition of sphere-packing space is a field that has been controversial for hundreds of years, including the existence of famous mathematical conjectures such as the Kepler conjecture.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Space filling problem is also useful in practical terms. </font><font style="vertical-align: inherit;">It is applied in a wide range of fields such as optimization of VLSI layout design, optimization of cutting out parts such as cloth, and automation and optimization of UV development.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, I chose the Apollonian Gasket, which is relatively easy to understand and interesting. </font><font style="vertical-align: inherit;">If you are interested in packing itself, check out the algorithms introduced at the beginning.</font></font></p>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fill the inside of the object with the object. </font><font style="vertical-align: inherit;">I think it can be used as a new expression method in unexpected places.</font></font></p>
@@ -553,4 +546,4 @@ private void AddCircle(Circle c, SoddyCircles soddy)<font></font>
 </ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 8 _ Space Filling_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 8 _ Space Filling_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 8 _ Space Filling_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 8 _ Space Filling_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 8 _ Space Filling_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>

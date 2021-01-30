@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<!-- saved from url=(0082)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/MarchingCubes.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <link rel="stylesheet" type="text/css" href="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/style.scss">
@@ -11,7 +9,11 @@
 					max-width: 80vw;
 					max-height: 80vh;
 				}
-			</style>
+			</style><style>
+					.goog-te-banner-frame {
+						display: none;
+					}
+				</style>
 			<script>(function(){(function injection() {
   var pageLang = 'ja';
   var userLang = 'en';
@@ -27,13 +29,7 @@
   }
 
   function newElem() {
-    var elem = new google.translate.TranslateElement({
-      autoDisplay: false,
-      floatPosition: 0,
-      multilanguagePage: true,
-      pageLanguage: pageLang
-    });
-    return elem;
+    
   }
 
   if (window[teId]) {
@@ -47,15 +43,12 @@
           show();
         };
       }
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
-              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
-      document.getElementsByTagName('head')[0].appendChild(s);
+      
     }
   }
-})();})();</script><script src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/element_main.js"></script></head>
+})();})();</script><script src="https://translate.google.com/translate_a/element.js?cb=TECB_1E07F158C6FA4460B352973E9693B329&amp;client=tee&amp;hl=en"></script><script src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/element_main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/translate_static/js/element/main.js"></script><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/element/TE_20201130_00/e/js/element/element_main.js"></script></head>
 		
-<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/saved_resource.html"></iframe></div>
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:''" style="visibility:visible"></iframe></div>
 <h1><a id="h7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction to the Marching Cubes Method Starting with Atmosphere</font></font></h1>
 
 <h2><a id="h7-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.1 What is the　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Marching Cubes method?</font></font></h2>
@@ -89,84 +82,84 @@ Figure 7.3: Combination of corners
 
 <h2><a id="h7-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sample repository</font></font></h2>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample projects described in this chapter can be found in Assets / GPU ArchingCubes under Unity Graphics Programming's Unity Project https://github.com/IndieVisualLab/UnityGraphicsProgramming.</font></font></p>
-<p>実装にあたり、Paul Bourke氏のPolygonising a scalar fieldのサイト<a id="fnb-paul" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/MarchingCubes.html#fn-paul" class="noteref" epub:type="noteref">*1</a>を参考に、Unityに移植させて頂きました。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For implementation, </font><font style="vertical-align: inherit;">I ported it to Unity by referring to </font><font style="vertical-align: inherit;">Paul Bourke's Polygonising a scalar field site </font></font><a id="fnb-paul" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/MarchingCubes.html#fn-paul" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
 <div class="footnote" epub:type="footnote" id="fn-paul"><p class="footnote">[*1] Polygonising a scalar field http://paulbourke.net/geometry/polygonise/</p></div>
-<p>今回はこのサンプルプロジェクトに沿って解説していきます。</p>
-<p>実装は大きくわけて3つあります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, I will explain along with this sample project.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are three main implementations.</font></font></p>
 <ul>
-<li>メッシュの初期化、毎フレームの描画登録処理（C#スクリプト部分）</li>
-<li>ComputeBufferの初期化</li>
-<li>実際の描画処理（シェーダー部分）</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initialization of mesh, drawing registration process for each frame (C # script part)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initialization of Compute Buffer</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actual drawing process (shader part)</font></font></li>
 </ul>
-<p>まずは、メッシュの初期化や描画登録をする <b>GPUMarchingCubesDrawMesh</b> クラスから作っていきます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, </font><font style="vertical-align: inherit;">create from </font><font style="vertical-align: inherit;">the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPU ArchingCubesDrawMesh</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> class </font><font style="vertical-align: inherit;">that initializes the mesh and registers the drawing </font><font style="vertical-align: inherit;">.</font></font></p>
 
-<h3><a id="h7-2-1"></a><span class="secno">7.2.1　</span>GeometryShader用のメッシュを作る</h3>
-<p>前項で説明したとおり、マーチングキューブス法はグリッドの8つの角の組み合わせでポリゴンを生成するアルゴリズムです。リアルタイムにそれを行うには、動的にポリゴンを作る必要があります。<br>しかし、毎フレームCPU側(C#側)でメッシュの頂点配列を生成するのは非効率です。<br>そこで、GeometryShaderを使います。GeometryShaderは、大雑把に説明するとVertexShaderとFragmentShaderの間に位置するShaderで、VertexShaderで処理された頂点を増減させることができます。<br>例えば、1頂点の周囲に6つの頂点を追加して板ポリゴンを生成したりできます。<br>更に、Shader側(GPU側)で処理するのでとても高速です。<br>今回はGeometryShaderを使ってMarchingCubesのポリゴンを生成して表示してみます。</p>
-<p>まず、 <b>GPUMarchingCubesDrawMesh</b>クラスで使う変数群を定義します。</p>
+<h3><a id="h7-2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.2.1</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Make a mesh for Geometry </font><span class="secno"><font style="vertical-align: inherit;">Shader　</font></span></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As explained in the previous section, the Marching cubes method is an algorithm that generates polygons by combining the eight corners of the grid. </font><font style="vertical-align: inherit;">To do that in real time, you need to dynamically create polygons. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, it is inefficient to generate a mesh vertex array on the CPU side (C # side) every frame. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">So we use Geometry Shader. </font><font style="vertical-align: inherit;">GeometryShader is a Shader located between VertexShader and FragmentShader, which can increase or decrease the number of vertices processed by VertexShader. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, you can add 6 vertices around one vertex to generate a plate polygon. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Furthermore, it is very fast because it is processed on the Shader side (GPU side). </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, I will use Geometry Shader to generate and display Marching Cubes polygons.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, </font><font style="vertical-align: inherit;">define the variables used </font><font style="vertical-align: inherit;">in the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUMarchingCubesDrawMesh</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> class.</font></font></p>
 <div id="kaiware_define_cs" class="caption-code">
-<p class="caption">リスト7.1: 変数群の定義部分</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.1: Definition of variables</font></font></p>
 <pre class="list language-cs">using UnityEngine;<font></font>
 <font></font>
 public class GPUMarchingCubesDrawMesh : MonoBehaviour {<font></font>
 <font></font>
-    #region public<font></font>
-    public int segmentNum = 32;                 // グリッドの一辺の分割数<font></font>
+    #region public<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public int segmentNum = 32; // Number of divisions on one side of the grid</font></font><font></font>
 <font></font>
-    [Range(0,1)]<font></font>
-    public float threashold = 0.5f;             // メッシュ化するスカラー値のしきい値<font></font>
-    public Material mat;                        // レンダリング用のマテリアル<font></font>
+    [Range(0,1)]<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public float threashold = 0.5f; // Threshold for the scalar value to mesh</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Material mat; // Material for rendering</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Color DiffuseColor = Color.green; // Diffuse color</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public Color EmissionColor = Color.black; // Emission color</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public float EmissionIntensity = 0; // Emission intensity</font></font><font></font>
 <font></font>
-    public Color DiffuseColor = Color.green;    // ディフューズカラー<font></font>
-    public Color EmissionColor = Color.black;   // 発光色<font></font>
-    public float EmissionIntensity = 0;         // 発光の強さ<font></font>
+    [Range(0,1)]<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public float metallic = 0; // metallic feeling</font></font><font></font>
+    [Range(0, 1)]<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    public float glossiness = 0.5f; // Glossiness</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font><font></font>
 <font></font>
-    [Range(0,1)]<font></font>
-    public float metallic = 0;                  // メタリック感<font></font>
-    [Range(0, 1)]<font></font>
-    public float glossiness = 0.5f;             // 光沢感<font></font>
-    #endregion<font></font>
-<font></font>
-     #region private<font></font>
-    int vertexMax = 0;                          // 頂点数<font></font>
-    Mesh[] meshs = null;                        // Mesh配列<font></font>
-    Material[] materials = null;                // Meshごとのマテリアル配列<font></font>
-    float renderScale = 1f / 32f;               // 表示スケール<font></font>
-    MarchingCubesDefines mcDefines = null;      // MarchingCubes用定数配列群<font></font>
-    #endregion<font></font>
+     #region private<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    int vertexMax = 0; // number of vertices</font></font><font></font>
+    Mesh[] meshs = null;                        // Mesh配列<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    Material [] materials = null; // Material array for each mesh</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float renderScale = 1f / 32f; // Display scale</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    MarchingCubesDefines mcDefines = null; // Constant array group for MarchingCubes</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    #endregion</font></font><font></font>
 <font></font>
 }<font></font>
 </pre>
 </div>
-<p>次にGeometryShaderに渡すためのメッシュを作成します。メッシュの頂点は、分割した3次元グリッド内に1個ずつ配置するようにします。例えば、一辺の分割数が64の場合、64*64*64=262,144個もの頂点が必要になります。</p>
-<p>しかし、Unity2017.1.1f1において、１つのメッシュの頂点数は65,535個が上限となってます。その為、メッシュ１つにつき、頂点数を65,535個以内に収める形で分割します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, create a mesh to pass to the Geometry Shader. </font><font style="vertical-align: inherit;">The vertices of the mesh should be placed one by one in the divided 3D grid. </font><font style="vertical-align: inherit;">For example, if the number of divisions on one side is 64, 64 * 64 * 64 = 262,144 vertices are required.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">However, in Unity2017.1.1f1, the maximum number of vertices in one mesh is 65,535. </font><font style="vertical-align: inherit;">Therefore, each mesh is divided so that the number of vertices is within 65,535.</font></font></p>
 <div id="kaiware_create_mesh_cs" class="caption-code">
-<p class="caption">リスト7.2: メッシュ作成部分</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.2: Meshing part</font></font></p>
 <pre class="list language-cs">void Initialize()<font></font>
 {<font></font>
   vertexMax = segmentNum * segmentNum * segmentNum;<font></font>
 <font></font>
   Debug.Log("VertexMax " + vertexMax);<font></font>
-<font></font>
-  // 1Cubeの大きさをsegmentNumで分割してレンダリング時の大きさを決める<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Divide the size of 1Cube by segmentNum to determine the size at the time of rendering</font></font><font></font>
   renderScale = 1f / segmentNum;<font></font>
 <font></font>
   CreateMesh();<font></font>
-<font></font>
-  // シェーダーで使うMarchingCubes用の定数配列の初期化<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Initialize constant array for Marching Cubes used in shader</font></font><font></font>
   mcDefines = new MarchingCubesDefines();<font></font>
 }<font></font>
 <font></font>
-void CreateMesh()<font></font>
-{<font></font>
-  // Meshの頂点数は65535が上限なので、Meshを分割する<font></font>
-  int vertNum = 65535;<font></font>
-  int meshNum = Mathf.CeilToInt((float)vertexMax / vertNum);  // 分割するMeshの数<font></font>
+void CreateMesh()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Since the maximum number of vertices of Mesh is 65535, divide Mesh</font></font><font></font>
+  int vertNum = 65535;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  int meshNum = Mathf.CeilToInt ((float) vertexMax / vertNum); // Number of meshes to split</font></font><font></font>
   Debug.Log("meshNum " + meshNum );<font></font>
 <font></font>
   meshs = new Mesh[meshNum];<font></font>
   materials = new Material[meshNum];<font></font>
-<font></font>
-  // Meshのバウンズ計算<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Mesh bounce calculation</font></font><font></font>
   Bounds bounds = new Bounds(<font></font>
     transform.position,<font></font>
     new Vector3(segmentNum, segmentNum, segmentNum) * renderScale<font></font>
@@ -174,24 +167,24 @@ void CreateMesh()<font></font>
 <font></font>
   int id = 0;<font></font>
   for (int i = 0; i &lt; meshNum; i++)<font></font>
-  {<font></font>
-    // 頂点作成<font></font>
+  {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Vertex creation</font></font><font></font>
     Vector3[] vertices = new Vector3[vertNum];<font></font>
     int[] indices = new int[vertNum];<font></font>
     for(int j = 0; j &lt; vertNum; j++)<font></font>
     {<font></font>
       vertices[j].x = id % segmentNum;<font></font>
-      vertices[j].y = (id / segmentNum) % segmentNum;<font></font>
-      vertices[j].z = (id / (segmentNum * segmentNum)) % segmentNum;<font></font>
+      vertices[j].y = (id / segmentNum) % segmentNum;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      vertices [j] .z = (id / (segmentNum * segmentNum))% segmentNum;</font></font><font></font>
 <font></font>
       indices[j] = j;<font></font>
       id++;<font></font>
     }<font></font>
-<font></font>
-    // Mesh作成<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Mesh creation</font></font><font></font>
     meshs[i] = new Mesh();<font></font>
-    meshs[i].vertices = vertices;<font></font>
-    // GeometryShaderでポリゴンを作るのでMeshTopologyはPointsで良い<font></font>
+    meshs[i].vertices = vertices;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Mesh Topology can be Points because polygons are created with Geometry Shader</font></font><font></font>
     meshs[i].SetIndices(indices, MeshTopology.Points, 0);<font></font>
     meshs[i].bounds = bounds;<font></font>
 <font></font>
@@ -201,39 +194,39 @@ void CreateMesh()<font></font>
 </pre>
 </div>
 
-<h3><a id="h7-2-2"></a><span class="secno">7.2.2　</span>ComputeBufferの初期化</h3>
-<p><b>MarchingCubesDefinces.cs</b> というソースには、マーチングキューブス法のレンダリングで使う定数配列と、その定数配列をシェーダーに渡すためのComputeBufferが定義されています。ComputeBufferとは、シェーダーで使うデータを格納するバッファです。データはGPU側のメモリに置かれるのでシェーダーからのアクセスが早いです。</p>
-<p>実は、マーチングキューブス法のレンダリングで使う定数配列は、シェーダー側で定義することは可能です。しかし、何故シェーダーで使う定数配列を、C#側で初期化しているのかというと、シェーダーにはリテラル値(直書きした値)の個数が4096までしか登録出来ない制限があるためです。膨大な定数配列をシェーダー内に定義すると、あっという間にリテラル値の数の上限に到達してしまいます。</p>
-<p>そこで、ComputeShaderに格納して渡すことで、リテラル値ではなくなるので上限にひっかからなくなります。そのため、工程が少々増えてしまいますが、C#側でComputeBufferに定数配列を格納してシェーダーに渡すようにしています。</p>
+<h3><a id="h7-2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Initialization of Compute Buffer</font></font></h3>
+<p><b><font style="vertical-align: inherit;"></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The source </font><b><font style="vertical-align: inherit;">MarchingCubesDefinces.cs</font></b><font style="vertical-align: inherit;"> defines a constant array used for rendering the Marching Cubes method and a ComputeBuffer for passing the constant array to the shader. </font><font style="vertical-align: inherit;">ComputeBuffer is a buffer that stores data used by shaders. </font><font style="vertical-align: inherit;">Since the data is stored in the memory on the GPU side, it is quickly accessible from the shader.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In fact, the constant array used in the rendering of the Marching Cubes method can be defined on the shader side. </font><font style="vertical-align: inherit;">However, the reason why the constant array used in the shader is initialized on the C # side is that the shader has a limitation that the number of literal values ​​(directly written values) can only be registered up to 4096. </font><font style="vertical-align: inherit;">If you define a huge array of constants in your shader, you will quickly reach the upper limit of the number of literal values.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, by storing it in ComputeShader and passing it, it will not be a literal value, so it will not hit the upper limit. </font><font style="vertical-align: inherit;">Therefore, the number of processes increases a little, but on the C # side, the constant array is stored in ComputeBuffer and passed to the shader.</font></font></p>
 <div id="kaiware_computebuffer_init" class="caption-code">
-<p class="caption">リスト7.3: ComputeBufferの初期化部分</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.3: ComputeBuffer initialization part</font></font></p>
 <pre class="list language-cs">void Initialize()<font></font>
 {<font></font>
   vertexMax = segmentNum * segmentNum * segmentNum;<font></font>
 <font></font>
   Debug.Log("VertexMax " + vertexMax);<font></font>
-<font></font>
-  // 1Cubeの大きさをsegmentNumで分割してレンダリング時の大きさを決める<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Divide the size of 1Cube by segmentNum to determine the size at the time of rendering</font></font><font></font>
   renderScale = 1f / segmentNum;<font></font>
 <font></font>
   CreateMesh();<font></font>
-<font></font>
-  // シェーダーで使うMarchingCubes用の定数配列の初期化<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Initialize constant array for Marching Cubes used in shader</font></font><font></font>
   mcDefines = new MarchingCubesDefines();<font></font>
 }<font></font>
 </pre>
 </div>
-<p>先程のInitialize()関数の中で、MarchingCubesDefinesの初期化を行っています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the Initialize () function mentioned earlier, MarchingCubesDefines is initialized.</font></font></p>
 
-<h3><a id="h7-2-3"></a><span class="secno">7.2.3　</span>レンダリング</h3>
-<p>次にレンダリング処理を呼び出す関数です。<br>今回は、複数のメッシュを一度にレンダリングするのと、Unityのライティングの影響を受けられるようにするため、Graphics.DrawMesh() を使います。public 変数で定義したDiffuseColor等の意味は、シェーダー側の解説で説明します。</p>
-<p>前項の、MarchingCubesDefinesクラスのComputeBuffer達をmaterial.setBufferでシェーダーに渡しています。</p>
+<h3><a id="h7-2-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.2.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Rendering</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next is the function that calls the rendering process. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, I'll use Graphics.DrawMesh () to render multiple meshes at once and to be affected by Unity's lighting. </font><font style="vertical-align: inherit;">The meaning of DiffuseColor etc. defined in the public variable will be explained in the explanation on the shader side.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The ComputeBuffers of the MarchingCubesDefines class in the previous section are passed to the shader with material.setBuffer.</font></font></p>
 <div id="kaiware_rendermesh" class="caption-code">
-<p class="caption">リスト7.4: レンダリング部分</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.4: Rendered part</font></font></p>
 <pre class="list language-cs">void RenderMesh()<font></font>
 {<font></font>
-  Vector3 halfSize = new Vector3(segmentNum, segmentNum, segmentNum)<font></font>
-                     * renderScale * 0.5f;<font></font>
+  Vector3 halfSize = new Vector3(segmentNum, segmentNum, segmentNum)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                     * renderScale * 0.5f;</font></font></font></font><font></font>
   Matrix4x4 trs = Matrix4x4.TRS(<font></font>
                      transform.position,<font></font>
                      transform.rotation,<font></font>
@@ -261,67 +254,67 @@ void CreateMesh()<font></font>
 </pre>
 </div>
 
-<h2><a id="h7-3"></a><span class="secno">7.3　</span>呼び出し</h2>
+<h2><a id="h7-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Call</font></font></h2>
 <div id="kaiware_update" class="caption-code">
-<p class="caption">リスト7.5: 呼び出し部分</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.5: Calling Part</font></font></p>
 <pre class="list language-cs">// Use this for initialization<font></font>
 void Start ()<font></font>
 {<font></font>
-  Initialize();<font></font>
-}<font></font>
+  Initialize();<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 <font></font>
-void Update()<font></font>
-{<font></font>
-  RenderMesh();<font></font>
-}<font></font>
+void Update()<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  RenderMesh ();</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>Start()でInitialize()を呼び出してメッシュを生成、Update()関数でRenderMesh()を呼び出してレンダリングします。<br>Update()でRenderMesh()を呼び出す理由は、Graphics.DrawMesh()が即座に描画するわけではなく、「レンダリング処理に一旦登録する」という感じのものだからです。<br>登録することで、Unityがライトやシャドウを適応してくれます。似たような関数にGraphics.DrawMeshNow()がありますが、こちらは即座に描画するのでUnityのライトやシャドウが適応されません。また、Update()ではなく、OnRenderObject()やOnPostRender()などで呼び出す必要があります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Start () calls Initialize () to generate a mesh, and the Update () function calls RenderMesh () to render. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The reason for calling RenderMesh () with Update () is that Graphics.DrawMesh () does not draw immediately, but it feels like "registering for rendering process once". </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By registering, Unity will adapt the lights and shadows. </font><font style="vertical-align: inherit;">A similar function is Graphics.DrawMeshNow (), but it draws instantly, so Unity lights and shadows are not applied. </font><font style="vertical-align: inherit;">Also, you need to call it with OnRenderObject () or OnPostRender () instead of Update ().</font></font></p>
 
-<h2><a id="h7-4"></a><span class="secno">7.4　</span>シェーダ側の実装</h2>
-<p>今回のシェーダは、大きく分けて<b>「実体のレンダリング部」</b>と<b>「影のレンダリング部」</b>の２つに分かれます。さらに、それぞれの中で、頂点シェーダ、ジオメトリシェーダ、フラグメントシェーダの3つのシェーダ関数が実行されます。</p>
-<p>シェーダーのソースが長いので、実装全体はサンプルプロジェクトの方を見てもらうことにして、要所要所だけ解説します。解説するシェーダーのファイルは、GPUMarchingCubesRenderMesh.shaderです。</p>
+<h2><a id="h7-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Shader side implementation</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The shader this time is roughly divided into </font><font style="vertical-align: inherit;">two </font><b><font style="vertical-align: inherit;">parts, the " </font></b></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">rendering part of the entity"</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"rendering part of the shadow"</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">In addition, three shader functions are executed within each, the vertex shader, the geometry shader, and the fragment shader.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the shader source is long, I will have the sample project look at the entire implementation, and I will explain only the important points. </font><font style="vertical-align: inherit;">The shader file described is GPU ArchingCubesRenderMesh.shader.</font></font></p>
 
-<h3><a id="h7-4-1"></a><span class="secno">7.4.1　</span>変数の宣言</h3>
-<p>シェーダーの上の方では、レンダリングで使う構造体の定義をしています。</p>
+<h3><a id="h7-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Variable declaration</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">At the top of the shader, we define the structure used for rendering.</font></font></p>
 <div id="kaiware_shader_struct_define" class="caption-code">
-<p class="caption">リスト7.6: 構造体の定義部分</p>
-<pre class="list language-cs">// メッシュから渡ってくる頂点データ<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.6: Structure Definition Part</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Vertex data coming from the mesh</font></font><font></font>
 struct appdata<font></font>
-{<font></font>
-  float4 vertex : POSITION; // 頂点座標<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float4 vertex: POSITION; // vertex coordinates</font></font><font></font>
 };<font></font>
-<font></font>
-// 頂点シェーダからジオメトリシェーダに渡すデータ<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Data passed from the vertex shader to the geometry shader</font></font><font></font>
 struct v2g<font></font>
-{<font></font>
-  float4 pos : SV_POSITION; // 頂点座標<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float4 pos: SV_POSITION; // Vertex coordinates</font></font><font></font>
 };<font></font>
-<font></font>
-// 実体レンダリング時のジオメトリシェーダからフラグメントシェーダに渡すデータ<font></font>
-struct g2f_light<font></font>
-{<font></font>
-  float4 pos      : SV_POSITION;  // ローカル座標<font></font>
-  float3 normal   : NORMAL;       // 法線<font></font>
-  float4 worldPos : TEXCOORD0;    // ワールド座標<font></font>
-  half3 sh        : TEXCOORD3;    // SH<font></font>
-};<font></font>
-<font></font>
-// 影のレンダリング時のジオメトリシェーダからフラグメントシェーダに渡すデータ<font></font>
-struct g2f_shadow<font></font>
-{<font></font>
-  float4 pos      : SV_POSITION;  // 座標<font></font>
-  float4 hpos     : TEXCOORD1;<font></font>
-};<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Data passed from the geometry shader to the fragment shader when rendering the entity</font></font><font></font>
+struct g2f_light<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float4 pos: SV_POSITION; // Local coordinates</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float3 normal: NORMAL; </font><font style="vertical-align: inherit;">// normal</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float4 worldPos: TEXCOORD0; // World coordinates</font></font><font></font>
+  half3 sh        : TEXCOORD3;    // SH<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+};</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Data passed from the geometry shader to the fragment shader when rendering shadows</font></font><font></font>
+struct g2f_shadow<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float4 pos: SV_POSITION; // coordinate</font></font><font></font>
+  float4 hpos     : TEXCOORD1;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+};</font></font></font></font><font></font>
 </pre>
 </div>
-<p>次に変数の定義をしています。<br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Next, we are defining variables.</font></font><br></p>
 <div id="kaiware_shader_arguments_define" class="caption-code">
-<p class="caption">リスト7.7: 変数の定義部分</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.7: Variable definition part</font></font></p>
 <pre class="list language-cs">int _SegmentNum;<font></font>
 <font></font>
-float _Scale;<font></font>
-float _Threashold;<font></font>
+float _Scale;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+float _Threashold;</font></font></font></font><font></font>
 <font></font>
 float4 _DiffuseColor;<font></font>
 float3 _HalfSize;<font></font>
@@ -340,81 +333,81 @@ StructuredBuffer&lt;float3&gt; edgeDirection;<font></font>
 StructuredBuffer&lt;int&gt; triangleConnectionTable;<font></font>
 </pre>
 </div>
-<p>ここで定義している各種変数の中身は、C#側のRenderMesh()関数の中で、material.Set○○関数で受け渡しています。MarchingCubesDefinesクラスのComputeBuffer達は、StructuredBuffer&lt;○○&gt;と型の呼び名が変わっています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The contents of various variables defined here are passed by the material.Set ○○ function in the RenderMesh () function on the C # side. </font><font style="vertical-align: inherit;">ComputeBuffers in the MarchingCubesDefines class have changed their type names to StructuredBuffer &lt;○○&gt;.</font></font></p>
 
-<h3><a id="h7-4-2"></a><span class="secno">7.4.2　</span>頂点シェーダ</h3>
-<p>ほとんどの処理はジオメトリシェーダの方で行うので、頂点シェーダは凄くシンプルです。単純にメッシュから渡される頂点データをそのままジオメトリシェーダに渡しているだけです。</p>
+<h3><a id="h7-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Vertex shader</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The vertex shader is very simple, as most of the work is done by the geometry shader. </font><font style="vertical-align: inherit;">It simply passes the vertex data passed from the mesh to the geometry shader as is.</font></font></p>
 <div id="kaiware_shader_vertex" class="caption-code">
-<p class="caption">リスト7.8: 頂点シェーダの実装部分</p>
-<pre class="list language-cs">// メッシュから渡ってくる頂点データ<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.8: Vertex shader implementation</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Vertex data coming from the mesh</font></font><font></font>
 struct appdata<font></font>
-{<font></font>
-  float4 vertex : POSITION; // 頂点座標<font></font>
+{<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float4 vertex: POSITION; // vertex coordinates</font></font><font></font>
 };<font></font>
-<font></font>
-// 頂点シェーダからジオメトリシェーダに渡すデータ<font></font>
-struct v2g<font></font>
-{<font></font>
-  float4 pos : SV_POSITION; // 座標<font></font>
-};<font></font>
-<font></font>
-// 頂点シェーダ<font></font>
-v2g vert(appdata v)<font></font>
-{<font></font>
-  v2g o = (v2g)0;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Data passed from the vertex shader to the geometry shader</font></font><font></font>
+struct v2g<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  float4 pos: SV_POSITION; // coordinate</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+};</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Vertex shader</font></font><font></font>
+v2g vert(appdata v)<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  v2g or = (v2g) 0;</font></font><font></font>
   o.pos = v.vertex;<font></font>
   return o;<font></font>
 }<font></font>
 </pre>
 </div>
-<p>ちなみに、頂点シェーダは実体と影で共通です。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By the way, the vertex shader is common to the entity and the shadow.</font></font></p>
 
-<h3><a id="h7-4-3"></a><span class="secno">7.4.3　</span>実体のジオメトリシェーダ</h3>
-<p>長いので分割しながら説明します。</p>
+<h3><a id="h7-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Entity Geometry Shader</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since it is long, I will explain it while dividing it.</font></font></p>
 <div id="kaiware_shader_geometry_1" class="caption-code">
-<p class="caption">リスト7.9: ジオメトリシェーダーの関数宣言部分</p>
-<pre class="list language-cs">// 実体のジオメトリシェーダ<font></font>
-[maxvertexcount(15)]  // シェーダから出力する頂点の最大数の定義<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.9: Function declaration part of the geometry shader</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Entity geometry shader</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+[maxvertexcount (15)] // Definition of the maximum number of vertices output from the shader</font></font><font></font>
 void geom_light(point v2g input[1],<font></font>
                 inout TriangleStream&lt;g2f_light&gt; outStream)<font></font>
 </pre>
 </div>
-<p>まず、ジオメトリシェーダの宣言部です。</p>
-<p><code class="inline-code tt">[maxvertexcount(15)]</code>はシェーダから出力する頂点の最大数の定義です。今回のマーチングキューブス法のアルゴリズムでは1グリッドにつき、三角ポリゴンが最大5つできるので、3*5で合計15個の頂点が出力されます。<br>そのため、maxvertexcountの()の中に15と記述します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First is the declaration part of the geometry shader.</font></font></p>
+<p><code class="inline-code tt">[maxvertexcount(15)]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Is the definition of the maximum number of vertices output from the shader. </font><font style="vertical-align: inherit;">With the algorithm of the Marching Cubes method this time, a maximum of 5 triangular polygons can be created per grid, so a total of 15 vertices are output in 3 * 5. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, write 15 in () of maxvertexcount.</font></font></p>
 <div id="kaiware_shader_geometry_2" class="caption-code">
-<p class="caption">リスト7.10: グリッドの8つの角のスカラー値取得部分</p>
-<pre class="list language-cs">float cubeValue[8]; // グリッドの8つの角のスカラー値取得用の配列<font></font>
-<font></font>
-// グリッドの8つの角のスカラー値を取得<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.10: Scalar value acquisition part of the eight corners of the grid</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">float cubeValue [8]; // Array for getting scalar values ​​at the eight corners of the grid</font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Get the scalar values ​​for the eight corners of the grid</font></font><font></font>
 for (i = 0; i &lt; 8; i++) {<font></font>
   cubeValue[i] = Sample(<font></font>
-                  pos.x + vertexOffset[i].x,<font></font>
-                  pos.y + vertexOffset[i].y,<font></font>
-                  pos.z + vertexOffset[i].z<font></font>
+                  pos.x + vertexOffset[i].x,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  pos.y + vertexOffset [i] .y,</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  pos.z + vertexOffset [i] .z</font></font><font></font>
   );<font></font>
 }<font></font>
 </pre>
 </div>
-<p>posは、メッシュを作成する時にグリッド空間に配置した頂点の座標が入っています。vertexOffsetは、名前の通りposに加えるオフセット座標の配列です。</p>
-<p>このループは、1頂点＝１つのグリッドの8つの角の座標のボリュームデータ中のスカラー値を取得しています。vertexOffsetは、グリッドの角の順番を指しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">pos contains the coordinates of the vertices placed in the grid space when creating the mesh. </font><font style="vertical-align: inherit;">As the name implies, vertexOffset is an array of offset coordinates added to pos.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This loop gets the scalar values ​​in the volume data of the coordinates of the eight corners of one vertex = one grid. </font><font style="vertical-align: inherit;">vertexOffset points to the order of the corners of the grid.</font></font></p>
 <div id="id_marching__cubes__005_404x" class="image">
 <img src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/marching_cubes_005@4x.png" alt="Order of coordinates of grid corners">
-<p class="caption">
-図7.4: グリッドの角の座標の順番
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.4: Order of grid corner coordinates
+</font></font></p>
 </div>
 <div id="kaiware_shader_sampling" class="caption-code">
-<p class="caption">リスト7.11: サンプリング関数部分</p>
-<pre class="list language-cs">// サンプリング関数<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.11: Sampling function part</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// sampling function</font></font><font></font>
 float Sample(float x, float y, float z) {<font></font>
-<font></font>
-  // 座標がグリッド空間からはみ出してたいないか？<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Are the coordinates out of the grid space?</font></font><font></font>
   if ((x &lt;= 1) ||<font></font>
       (y &lt;= 1) ||<font></font>
       (z &lt;= 1) ||<font></font>
       (x &gt;= (_SegmentNum - 1)) ||<font></font>
-      (y &gt;= (_SegmentNum - 1)) ||<font></font>
-      (z &gt;= (_SegmentNum - 1))<font></font>
+      (y &gt;= (_SegmentNum - 1)) ||<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      (z&gt; = (_SegmentNum - 1))</font></font><font></font>
      )<font></font>
     return 0;<font></font>
 <font></font>
@@ -424,12 +417,12 @@ float Sample(float x, float y, float z) {<font></font>
 <font></font>
   float3 spPos;<font></font>
   float result = 0;<font></font>
-<font></font>
-  // ３つの球の距離関数<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // Distance function of 3 spheres</font></font><font></font>
   for (int i = 0; i &lt; 3; i++) {<font></font>
     float sp = -sphere(<font></font>
-      pos - float3(0.5, 0.25 + 0.25 * i, 0.5),<font></font>
-      0.1 + (sin(_Time.y * 8.0 + i * 23.365) * 0.5 + 0.5) * 0.025) + 0.5;<font></font>
+      pos - float3(0.5, 0.25 + 0.25 * i, 0.5),<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      0.1 + (sin (_Time.y * 8.0 + i * 23.365) * 0.5 + 0.5) * 0.025) + 0.5;</font></font><font></font>
     result = smoothMax(result, sp, 14);<font></font>
   }<font></font>
 <font></font>
@@ -437,53 +430,53 @@ float Sample(float x, float y, float z) {<font></font>
 }<font></font>
 </pre>
 </div>
-<p>ボリュームデータから指定した座標のスカラー値を取ってくる関数です。今回は膨大な3Dボリュームデータではなく、距離関数を使ったシンプルなアルゴリズムでスカラー値を算出します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This function fetches the scalar value of the specified coordinates from the volume data. </font><font style="vertical-align: inherit;">This time, instead of using a huge amount of 3D volume data, we will calculate the scalar value using a simple algorithm that uses a distance function.</font></font></p>
 <div class="column">
 
-<h4><a id="column-1"></a>距離関数について</h4>
-<p>今回マーチングキューブス法で描画する3次元形状は、<b>「距離関数」</b>と言うものを使って定義します。</p>
-<p>ここでいう距離関数とは、ざっくり説明すると「距離の条件を満たす関数」です。</p>
-<p>例えば、球体の距離関数は、以下になります。</p>
+<h4><a id="column-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">About the distance function</font></font></h4>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The 3D shape drawn by the Marching Cubes method this time is </font><font style="vertical-align: inherit;">defined using what is called </font><font style="vertical-align: inherit;">a </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"distance function"</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The distance function here is, roughly speaking, a "function that satisfies the distance condition".</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, the distance function of a sphere is:</font></font></p>
 <div id="kaiware_distance_function" class="caption-code">
-<p class="caption">リスト7.12: 球体の距離関数</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.12: Sphere Distance Function</font></font></p>
 <pre class="list language-cs">inline float sphere(float3 pos, float radius)<font></font>
 {<font></font>
-    return length(pos) - radius;<font></font>
-}<font></font>
+    return length(pos) - radius;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
 </pre>
 </div>
-<p>pos には、座標が入るのですが、球体の中心座標を原点(0,0,0)とした場合で考えます。radiusは半径です。</p>
-<p>length(pos)で長さを求めていますが、これは原点とposまでの距離で、それを半径radiusで引くので、半径以下の長さの場合、当たり前ですが負の値になります。</p>
-<p>つまり、座標posを渡して負の値が返ってきた場合は、「座標は球体の中にいる」という判定ができます。</p>
-<p>距離関数のメリットは、数行のシンプルな計算式で図形を表現できるので、プログラムが小さくしやすいところです。その他の距離関数についての情報は、Inigo Quilez氏のサイトでたくさん紹介されています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Coordinates are entered in pos, but consider the case where the center coordinates of the sphere are the origin (0,0,0). </font><font style="vertical-align: inherit;">radius is the radius.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The length is calculated by length (pos), but this is the distance between the origin and pos, and it is subtracted by the radius radius, so if the length is less than the radius, it is a natural but negative value.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In other words, if you pass the coordinates pos and a negative value is returned, you can judge that the coordinates are inside the sphere.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The advantage of the distance function is that it is easy to make the program small because the figure can be expressed with a simple calculation formula of several lines. </font><font style="vertical-align: inherit;">You can find a lot of information about other distance functions on Inigo Quilez's site.</font></font></p>
 <p><a href="http://iquilezles.org/www/articles/distfunctions/distfunctions.htm" class="link">http://iquilezles.org/www/articles/distfunctions/distfunctions.htm</a></p>
 </div>
 <div id="kaiware_sphere" class="caption-code">
-<p class="caption">リスト7.13: 3つの球の距離関数を合成したもの</p>
-<pre class="list language-cs">// 3つの球の距離関数<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.13: A composite of the distance functions of three spheres</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Distance function of 3 spheres</font></font><font></font>
 for (int i = 0; i &lt; 3; i++) {<font></font>
   float sp = -sphere(<font></font>
-    pos - float3(0.5, 0.25 + 0.25 * i, 0.5),<font></font>
-    0.1 + (sin(_Time.y * 8.0 + i * 23.365) * 0.5 + 0.5) * 0.025) + 0.5;<font></font>
+    pos - float3(0.5, 0.25 + 0.25 * i, 0.5),<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    0.1 + (sin (_Time.y * 8.0 + i * 23.365) * 0.5 + 0.5) * 0.025) + 0.5;</font></font><font></font>
   result = smoothMax(result, sp, 14);<font></font>
 }<font></font>
 </pre>
 </div>
-<p>今回は、グリッドの1マスの8つの角（頂点）をposとして使っています。球体の中心からの距離を、そのままボリュームデータの濃度として扱います。</p>
-<p>後述しますが、閾値が0.5以上の時にポリゴン化するため、符号を反転しています。また、座標を微妙にずらして3つの球体との距離を求めています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, 8 corners (vertices) of 1 square of the grid are used as pos. </font><font style="vertical-align: inherit;">The distance from the center of the sphere is treated as it is as the density of the volume data.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As will be described later, the sign is inverted because it is polygonized when the threshold value is 0.5 or more. </font><font style="vertical-align: inherit;">In addition, the coordinates are slightly shifted to obtain the distances to the three spheres.</font></font></p>
 <div id="kaiware_shader_smoothmax" class="caption-code">
-<p class="caption">リスト7.14: smoothMax関数</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.14: smoothMax function</font></font></p>
 <pre class="list language-cs">float smoothMax(float d1, float d2, float k)<font></font>
 {<font></font>
   float h = exp(k * d1) + exp(k * d2);<font></font>
-  return log(h) / k;<font></font>
-}<font></font>
+  return log(h) / k;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
 </pre>
 </div>
-<p>smoothMaxは、距離関数の結果をいい感じにブレンドする関数です。これを使って3つの球体をメタボールのように融合させることが出来ます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">smoothMax is a function that blends the results of distance functions nicely. </font><font style="vertical-align: inherit;">You can use this to fuse the three spheres like a metaball.</font></font></p>
 <div id="kaiware_shader_flagindex" class="caption-code">
-<p class="caption">リスト7.15: 閾値チェック</p>
-<pre class="list language-cs">// グリッドの８つの角の値が閾値を超えているかチェック<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.15: Threshold Check</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Check if the values ​​at the eight corners of the grid exceed the threshold</font></font><font></font>
 for (i = 0; i &lt; 8; i++) {<font></font>
   if (cubeValue[i] &lt;= _Threashold) {<font></font>
     flagIndex |= (1 &lt;&lt; i);<font></font>
@@ -491,64 +484,64 @@ for (i = 0; i &lt; 8; i++) {<font></font>
 }<font></font>
 <font></font>
 int edgeFlags = cubeEdgeFlags[flagIndex];<font></font>
-<font></font>
-// 空か完全に満たされている場合は何も描画しない<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Do not draw anything if empty or completely filled</font></font><font></font>
 if ((edgeFlags == 0) || (edgeFlags == 255)) {<font></font>
-  return;<font></font>
-}<font></font>
+  return;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
 </pre>
 </div>
-<p>グリッドの角のスカラー値が閾値を越えていたら、flagIndexにビットを立てていきます。そのflagIndexをインデックスとして、cubeEdgeFlags配列からポリゴンを生成するための情報を取り出してedgeFlagsに格納しています。グリッドの全ての角が閾値未満か閾値以上の場合は、完全に中か外なのでポリゴンは生成しません。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the scalar value at the corner of the grid exceeds the threshold, set a bit in flagIndex. </font><font style="vertical-align: inherit;">Using the flagIndex as an index, the information for generating polygons is extracted from the cubeEdgeFlags array and stored in edgeFlags. </font><font style="vertical-align: inherit;">If all corners of the grid are below or above the threshold, it is completely inside or outside and no polygons are generated.</font></font></p>
 <div id="kaiware_shader_offset" class="caption-code">
-<p class="caption">リスト7.16: ポリゴンの頂点座標計算</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.16: Polygon Vertex Coordinate Calculation</font></font></p>
 <pre class="list language-cs">float offset = 0.5;<font></font>
 float3 vertex;<font></font>
 for (i = 0; i &lt; 12; i++) {<font></font>
-  if ((edgeFlags &amp; (1 &lt;&lt; i)) != 0) {<font></font>
-    // 角同士の閾値のオフセットを取得<font></font>
+  if ((edgeFlags &amp; (1 &lt;&lt; i)) != 0) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Get the threshold offset between the corners</font></font><font></font>
     offset = getOffset(<font></font>
                cubeValue[edgeConnection[i].x],<font></font>
-               cubeValue[edgeConnection[i].y], _<font></font>
-               Threashold<font></font>
+               cubeValue[edgeConnection[i].y], _<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+               Threashold</font></font></font></font><font></font>
              );<font></font>
-<font></font>
-    // オフセットを元に頂点の座標を補完<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Complement the coordinates of the vertices based on the offset</font></font><font></font>
     vertex = vertexOffset[edgeConnection[i].x]<font></font>
              + offset * edgeDirection[i];<font></font>
 <font></font>
-    edgeVertices[i].x = pos.x + vertex.x * _Scale;<font></font>
-    edgeVertices[i].y = pos.y + vertex.y * _Scale;<font></font>
-    edgeVertices[i].z = pos.z + vertex.z * _Scale;<font></font>
-<font></font>
-    // 法線計算（Sampleし直すため、スケールを掛ける前の頂点座標が必要）<font></font>
-    edgeNormals[i] = getNormal(<font></font>
-                        defpos.x + vertex.x,<font></font>
-                        defpos.y + vertex.y,<font></font>
+    edgeVertices[i].x = pos.x + vertex.x * _Scale;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    edgeVertices [i] .y = pos.y + vertex.y * _Scale;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    edgeVertices [i] .z = pos.z + vertex.z * _Scale;</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Normal calculation (requires vertex coordinates before scaling to resample)</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    edgeNormals [i] = getNormal (</font></font></font></font><font></font>
+                        defpos.x + vertex.x,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                        defpos.y + vertex.y,</font></font></font></font><font></font>
                         defpos.z + vertex.z<font></font>
                      );<font></font>
   }<font></font>
 }<font></font>
 </pre>
 </div>
-<p>ポリゴンの頂点座標を計算している箇所です。先程の、edgeFlagsのビットを見て、グリッドの辺上に置くポリゴンの頂点座標を計算しています。</p>
-<p>getOffsetは、グリッドの2つの角のスカラー値と閾値から、今の角から次の角までの割合(offset)を出しています。今の角の座標から、次の角の方向へoffset分ずらすことで、最終的になめらかなポリゴンになります。</p>
-<p>getNormalでは、サンプリングし直して勾配を出して法線を算出しています。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is where the vertex coordinates of the polygon are calculated. </font><font style="vertical-align: inherit;">Looking at the bit of edgeFlags earlier, we are calculating the vertex coordinates of the polygon to be placed on the edge of the grid.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">getOffset gives the ratio (offset) from the current corner to the next corner from the scalar values ​​and thresholds of the two corners of the grid. </font><font style="vertical-align: inherit;">By offsetting the coordinates of the current corner toward the next corner by offset, the polygon will eventually become smooth.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In getNormal, the normal is calculated by re-sampling and calculating the gradient.</font></font></p>
 <div id="kaiware_shader_make_polygon" class="caption-code">
-<p class="caption">リスト7.17: 頂点を連結してポリゴンを作る</p>
-<pre class="list language-cs">// 頂点を連結してポリゴンを作成<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.17: Concatenate vertices to make a polygon</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Concatenate vertices to create polygons</font></font><font></font>
 int vindex = 0;<font></font>
-int findex = 0;<font></font>
-// 最大5つの三角形ができる<font></font>
-for (i = 0; i &lt; 5; i++) {<font></font>
-  findex = flagIndex * 16 + 3 * i;<font></font>
+int findex = 0;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Create up to 5 triangles</font></font><font></font>
+for (i = 0; i &lt; 5; i++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  findx = flagIndex * 16 + 3 * i;</font></font><font></font>
   if (triangleConnectionTable[findex] &lt; 0)<font></font>
     break;<font></font>
-<font></font>
-  // 三角形を作る<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  // make a triangle</font></font><font></font>
   for (j = 0; j &lt; 3; j++) {<font></font>
     vindex = triangleConnectionTable[findex + j];<font></font>
-<font></font>
-    // Transform行列を掛けてワールド座標に変換<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    // Multiply the Transform matrix to convert to world coordinates</font></font><font></font>
     float4 ppos = mul(_Matrix, float4(edgeVertices[vindex], 1));<font></font>
     o.pos = UnityObjectToClipPos(ppos);<font></font>
 <font></font>
@@ -556,22 +549,22 @@ for (i = 0; i &lt; 5; i++) {<font></font>
                     normalize(edgeNormals[vindex])<font></font>
                   );<font></font>
     o.normal = normalize(mul(_Matrix, float4(norm,0)));<font></font>
-<font></font>
-    outStream.Append(o);  // ストリップに頂点を追加<font></font>
-  }<font></font>
-  outStream.RestartStrip(); // 一旦区切って次のプリミティブストリップを開始<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    outStream.Append (o); // Append vertices to strip</font></font><font></font>
+  }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  outStream.RestartStrip (); // Break once and start the next primitive strip</font></font><font></font>
 }<font></font>
 </pre>
 </div>
-<p>先程求めた頂点座標群を繋いでポリゴンを作っている箇所です。triangleConnectionTable配列に接続する頂点のインデックスが入っています。頂点座標にTransformの行列を掛けてワールド座標に変換し、UnityObjectToClipPos()でスクリーン座標に変換しています。</p>
-<p>また、UnityObjectToWorldNormal()で法線もワールド座標系に変換しています。これらの頂点と法線は、次のフラグメントシェーダでライティングに使います。</p>
-<p>TriangleStream.Append()やRestartStrip()は、ジオメトリシェーダ用の特殊な関数です。Append()は、現在のストリップに頂点データを追加します。RestartStrip()は、新しいストリップを作成します。TriangleStreamなので1つのストリップには3つまでAppendするイメージです。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the place where the polygon is made by connecting the vertex coordinate groups obtained earlier. </font><font style="vertical-align: inherit;">triangleConnectionTable Contains the indexes of the vertices that connect to the array. </font><font style="vertical-align: inherit;">Multiply the vertex coordinates by the Transform matrix to convert to world coordinates, and then use UnityObjectToClipPos () to convert to screen coordinates.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, UnityObjectToWorldNormal () converts the normals to the world coordinate system. </font><font style="vertical-align: inherit;">These vertices and normals will be used for lighting in the next fragment shader.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TriangleStream.Append () and RestartStrip () are special functions for geometry shaders. </font><font style="vertical-align: inherit;">Append () adds vertex data to the current strip. </font><font style="vertical-align: inherit;">RestartStrip () creates a new strip. </font><font style="vertical-align: inherit;">Since it is a Triangle Stream, it is an image to append up to 3 on one strip.</font></font></p>
 
-<h3><a id="h7-4-4"></a><span class="secno">7.4.4　</span>実体のフラグメントシェーダ</h3>
-<p>UnityのGI(グローバルイル・ミネーション)などのライティングを反映させるため、Generate code後のSurfaceShaderのライティング処理部分を移植します。</p>
+<h3><a id="h7-4-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Entity Fragment Shader</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In order to reflect the lighting such as GI (Global Illumination) of Unity, the lighting processing part of Surface Shader after Generate code is ported.</font></font></p>
 <div id="kaiware_shader_fragment_define" class="caption-code">
-<p class="caption">リスト7.18: フラグメントシェーダの定義</p>
-<pre class="list language-cs">// 実体のフラグメントシェーダ<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.18: Fragment Shader Definition</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Entity fragment shader</font></font><font></font>
 void frag_light(g2f_light IN,<font></font>
   out half4 outDiffuse        : SV_Target0,<font></font>
   out half4 outSpecSmoothness : SV_Target1,<font></font>
@@ -579,9 +572,9 @@ void frag_light(g2f_light IN,<font></font>
   out half4 outEmission       : SV_Target3)<font></font>
 </pre>
 </div>
-<p>G-Bufferに出力するため出力(SV_Target)が4つあります。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are 4 outputs (SV_Target) to output to G-Buffer.</font></font></p>
 <div id="kaiware_shader_surface" class="caption-code">
-<p class="caption">リスト7.19: SurfaceOutputStandard構造体の初期化</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.19: Initializing the SurfaceOutputStandard structure</font></font></p>
 <pre class="list language-cs">#ifdef UNITY_COMPILER_HLSL<font></font>
   SurfaceOutputStandard o = (SurfaceOutputStandard)0;<font></font>
 #else<font></font>
@@ -592,29 +585,29 @@ void frag_light(g2f_light IN,<font></font>
   o.Metallic = _Metallic;<font></font>
   o.Smoothness = _Glossiness;<font></font>
   o.Alpha = 1.0;<font></font>
-  o.Occlusion = 1.0;<font></font>
-  o.Normal = normal;<font></font>
+  o.Occlusion = 1.0;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  o.Normal = normal;</font></font></font></font><font></font>
 </pre>
 </div>
-<p>あとで使うSurfaceOutputStandard構造体に、色や光沢感などのパラメータをセットします。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Set parameters such as color and gloss to the SurfaceOutputStandard structure that will be used later.</font></font></p>
 <div id="kaiware_shader_light" class="caption-code">
-<p class="caption">リスト7.20: GI関係の処理</p>
-<pre class="list language-cs">// Setup lighting environment<font></font>
-UnityGI gi;<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.20: GI-related processing</font></font></p>
+<pre class="list language-cs">// Setup lighting environment<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+UnityGI gi;</font></font></font></font><font></font>
 UNITY_INITIALIZE_OUTPUT(UnityGI, gi);<font></font>
 gi.indirect.diffuse = 0;<font></font>
 gi.indirect.specular = 0;<font></font>
-gi.light.color = 0;<font></font>
-gi.light.dir = half3(0, 1, 0);<font></font>
+gi.light.color = 0;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+gi.light.dir = half3 (0, 1, 0);</font></font></font></font><font></font>
 gi.light.ndotl = LambertTerm(o.Normal, gi.light.dir);<font></font>
 <font></font>
-// Call GI (lightmaps/SH/reflections) lighting function<font></font>
-UnityGIInput giInput;<font></font>
+// Call GI (lightmaps/SH/reflections) lighting function<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+UnityGIInput giInput;</font></font></font></font><font></font>
 UNITY_INITIALIZE_OUTPUT(UnityGIInput, giInput);<font></font>
-giInput.light = gi.light;<font></font>
-giInput.worldPos = worldPos;<font></font>
-giInput.worldViewDir = worldViewDir;<font></font>
-giInput.atten = 1.0;<font></font>
+giInput.light = gi.light;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+giInput.worldPos = worldPos;</font></font></font></font><font></font>
+giInput.worldViewDir = worldViewDir;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+giInput.atten = 1.0;</font></font></font></font><font></font>
 <font></font>
 giInput.ambient = IN.sh;<font></font>
 <font></font>
@@ -627,41 +620,41 @@ giInput.boxMin[0] = unity_SpecCube0_BoxMin;<font></font>
 #endif<font></font>
 <font></font>
 #if UNITY_SPECCUBE_BOX_PROJECTION<font></font>
-giInput.boxMax[0] = unity_SpecCube0_BoxMax;<font></font>
-giInput.probePosition[0] = unity_SpecCube0_ProbePosition;<font></font>
+giInput.boxMax[0] = unity_SpecCube0_BoxMax;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+giInput.probePosition [0] = unity_SpecCube0_ProbePosition;</font></font></font></font><font></font>
 giInput.boxMax[1] = unity_SpecCube1_BoxMax;<font></font>
-giInput.boxMin[1] = unity_SpecCube1_BoxMin;<font></font>
-giInput.probePosition[1] = unity_SpecCube1_ProbePosition;<font></font>
-#endif<font></font>
-<font></font>
-LightingStandard_GI(o, giInput, gi);<font></font>
+giInput.boxMin[1] = unity_SpecCube1_BoxMin;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+giInput.probePosition [1] = unity_SpecCube1_ProbePosition;</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+#endif</font></font></font></font><font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+LightingStandard_GI (o, giInput, gi);</font></font></font></font><font></font>
 </pre>
 </div>
-<p>GI関係の処理です。UnityGIInputに初期値を入れて、LightnintStandard_GI()で計算したGIの結果をUnityGIに書き込んでいます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GI related processing. </font><font style="vertical-align: inherit;">I put the initial value in UnityGIInput and write the result of GI calculated by LightnintStandard_GI () to UnityGI.</font></font></p>
 <div id="kaiware_shader_gi" class="caption-code">
-<p class="caption">リスト7.21: 光の反射具合の計算</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.21: Calculation of light reflection</font></font></p>
 <pre class="list language-cs">// call lighting function to output g-buffer<font></font>
 outEmission = LightingStandard_Deferred(o, worldViewDir, gi,<font></font>
                                         outDiffuse,<font></font>
-                                        outSpecSmoothness,<font></font>
-                                        outNormal);<font></font>
+                                        outSpecSmoothness,<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                        outNormal);</font></font></font></font><font></font>
 outDiffuse.a = 1.0;<font></font>
 <font></font>
 #ifndef UNITY_HDR_ON<font></font>
-outEmission.rgb = exp2(-outEmission.rgb);<font></font>
-#endif<font></font>
+outEmission.rgb = exp2(-outEmission.rgb);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+#endif</font></font></font></font><font></font>
 </pre>
 </div>
-<p>諸々の計算結果を LightingStandard_Deferred() に渡して光の反射具合を計算して、Emissionバッファに書き込みます。HDRの場合は、expで圧縮される部分を挟んでから書き込みます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pass the calculation results to LightingStandard_Deferred () to calculate the degree of light reflection and write it to the Emission buffer. </font><font style="vertical-align: inherit;">In the case of HDR, write after sandwiching the part compressed by exp.</font></font></p>
 
-<h3><a id="h7-4-5"></a><span class="secno">7.4.5　</span>影のジオメトリシェーダ</h3>
-<p>実体のジオメトリシェーダとほとんど同じです。違いがある所だけ解説します。</p>
+<h3><a id="h7-4-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Shadow Geometry Shader</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It's almost the same as the actual geometry shader. </font><font style="vertical-align: inherit;">I will explain only where there are differences.</font></font></p>
 <div id="kaiware_shader_geometry_shadow" class="caption-code">
-<p class="caption">リスト7.22: 影のジオメトリシェーダ</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.22: Shadow Geometry Shader</font></font></p>
 <pre class="list language-cs">int vindex = 0;<font></font>
 int findex = 0;<font></font>
-for (i = 0; i &lt; 5; i++) {<font></font>
-  findex = flagIndex * 16 + 3 * i;<font></font>
+for (i = 0; i &lt; 5; i++) {<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  findx = flagIndex * 16 + 3 * i;</font></font></font></font><font></font>
   if (triangleConnectionTable[findex] &lt; 0)<font></font>
     break;<font></font>
 <font></font>
@@ -669,20 +662,20 @@ for (i = 0; i &lt; 5; i++) {<font></font>
     vindex = triangleConnectionTable[findex + j];<font></font>
 <font></font>
     float4 ppos = mul(_Matrix, float4(edgeVertices[vindex], 1));<font></font>
-<font></font>
-    float3 norm;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    float3 norm;</font></font></font></font><font></font>
     norm = UnityObjectToWorldNormal(normalize(edgeNormals[vindex]));<font></font>
 <font></font>
-    float4 lpos1 = mul(unity_WorldToObject, ppos);<font></font>
-    o.pos = UnityClipSpaceShadowCasterPos(lpos1,<font></font>
+    float4 lpos1 = mul(unity_WorldToObject, ppos);<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.pos = UnityClipSpaceShadowCasterPos (lpos1,</font></font></font></font><font></font>
                                             normalize(<font></font>
                                               mul(_Matrix,<font></font>
                                                 float4(norm, 0)<font></font>
                                               )<font></font>
                                             )<font></font>
-                                          );<font></font>
-    o.pos = UnityApplyLinearShadowBias(o.pos);<font></font>
-    o.hpos = o.pos;<font></font>
+                                          );<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.pos = UnityApplyLinearShadowBias (o.pos);</font></font></font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    o.hpos = o.pos;</font></font></font></font><font></font>
 <font></font>
     outStream.Append(o);<font></font>
   }<font></font>
@@ -690,37 +683,37 @@ for (i = 0; i &lt; 5; i++) {<font></font>
 }<font></font>
 </pre>
 </div>
-<p>UnityClipSpaceShadowCasterPos()とUnityApplyLinearShadowBias()で頂点座標を影の投影先の座標に変換します。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Convert the vertex coordinates to the coordinates of the shadow projection destination with UnityClipSpaceShadowCasterPos () and UnityApplyLinearShadowBias ().</font></font></p>
 
-<h3><a id="h7-4-6"></a><span class="secno">7.4.6　</span>影のフラグメントシェーダ</h3>
+<h3><a id="h7-4-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Shadow Fragment Shader</font></font></h3>
 <div id="kaiware_shader_fragment_shadow" class="caption-code">
-<p class="caption">リスト7.23: 影のフラグメントシェーダ</p>
-<pre class="list language-cs">// 影のフラグメントシェーダ<font></font>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 7.23: Shadow Fragment Shader</font></font></p>
+<pre class="list language-cs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">// Shadow Fragment Shader</font></font><font></font>
 fixed4 frag_shadow(g2f_shadow i) : SV_Target<font></font>
 {<font></font>
-  return i.hpos.z / i.hpos.w;<font></font>
-}<font></font>
+  return i.hpos.z / i.hpos.w;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font></font></font><font></font>
 </pre>
 </div>
-<p>短すぎて説明するところがないです。実は return 0; でも正常に影が描画されます。Unityが中でいい感じにやってくれているんでしょうか？</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It's too short to explain. </font><font style="vertical-align: inherit;">Actually, the shadow is drawn normally even with return 0 ;. </font><font style="vertical-align: inherit;">Is Unity doing a good job inside?</font></font></p>
 
-<h2><a id="h7-5"></a><span class="secno">7.5　</span>完成</h2>
-<p>実行するとこんな感じの絵が出てくるはずです。</p>
+<h2><a id="h7-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Finish</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When you run it, you should see a picture like this.</font></font></p>
 <div id="marching_cubes_006" class="image">
 <img src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/marching_cubes_006.png" alt="Undulating" class="width-025per">
-<p class="caption">
-図7.5: うねうね
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.5: undulation
+</font></font></p>
 </div>
-<p>また、距離関数を組み合わせるといろいろな形が作れます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, various shapes can be created by combining distance functions.</font></font></p>
 <div id="marching_cubes_007" class="image">
 <img src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/marching_cubes_007.png" alt="Kaiware daikon" class="width-025per">
-<p class="caption">
-図7.6: かいわれーい
-</p>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.6: Kaiware daikon
+</font></font></font></font></p>
 </div>
 
-<h2><a id="h7-6"></a><span class="secno">7.6　</span>まとめ</h2>
+<h2><a id="h7-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
 <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time I used the distance function for simplification, but I think that the Marching cubes method can also be used to use 3D textures with volume data written in them and to visualize various 3D data. .. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For game use, you </font><font style="vertical-align: inherit;">may be able to create games like </font><font style="vertical-align: inherit;">ASTORONEER </font></font><a id="fnb-astroneer" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/MarchingCubes.html#fn-astroneer" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , which </font><font style="vertical-align: inherit;">allows you to dig and build terrain </font><font style="vertical-align: inherit;">. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Everyone, please try to find various expressions with the Marching Cubes method!</font></font></p>
 
 <h2><a id="h7-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
@@ -729,7 +722,7 @@ fixed4 frag_shadow(g2f_shadow i) : SV_Target<font></font>
 <li>modeling with distance functions -</li>
 </ul>
 <p>http://iquilezles.org/www/articles/distfunctions/distfunctions.htm</p>
-<div class="footnote" epub:type="footnote" id="fn-astroneer"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 2] ASTRONEER http://store.steampowered.com/app/361420/ASTRONEER/?l=japanese</font></font></p></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+<div class="footnote" epub:type="footnote" id="fn-astroneer"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 2] ASTRONEER http://store.steampowered.com/app/361420/ASTRONEER/?l=japanese</font></font></font></font></font></font></p></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/saved_resource(2).html"></iframe></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/saved_resource(1).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 7 _ Introduction to the Marching Cubes Method Starting with Atmosphere_files/saved_resource(2).html"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;"></iframe></body></html>
