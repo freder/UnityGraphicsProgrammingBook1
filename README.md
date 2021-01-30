@@ -1,6 +1,17 @@
 # google-translated version of `Unity Graphics Programming` vol. 1-4 (by `IndieVisualLab`)
 
-https://freder.github.io/UnityGraphicsProgrammingBook1/html-translated/index.html
+- html:
+    - https://freder.github.io/UnityGraphicsProgrammingBook1/html-translated/index.html
+- epub:
+    - [UnityGraphicsProgrammingBook1.epub](https://github.com/freder/UnityGraphicsProgrammingBook1/blob/translation/html-translated/UnityGraphicsProgrammingBook1.epub)
+    - [UnityGraphicsProgrammingBook2.epub](https://github.com/freder/UnityGraphicsProgrammingBook1/blob/translation/html-translated/UnityGraphicsProgrammingBook2.epub)
+    - [UnityGraphicsProgrammingBook3.epub](https://github.com/freder/UnityGraphicsProgrammingBook1/blob/translation/html-translated/UnityGraphicsProgrammingBook3.epub)
+    - [UnityGraphicsProgrammingBook4.epub](https://github.com/freder/UnityGraphicsProgrammingBook1/blob/translation/html-translated/UnityGraphicsProgrammingBook4.epub)
+- pdf:
+    - [Unity Graphics Programming Vol. 1.pdf](https://github.com/freder/UnityGraphicsProgrammingBook1/blob/translation/html-translated/Unity%20Graphics%20Programming%20Vol.%201.pdf)
+    - [Unity Graphics Programming Vol. 2.pdf](https://github.com/freder/UnityGraphicsProgrammingBook1/blob/translation/html-translated/Unity%20Graphics%20Programming%20Vol.%202.pdf)
+    - [Unity Graphics Programming Vol. 3.pdf](https://github.com/freder/UnityGraphicsProgrammingBook1/blob/translation/html-translated/Unity%20Graphics%20Programming%20Vol.%203.pdf)
+    - [Unity Graphics Programming Vol. 4.pdf](https://github.com/freder/UnityGraphicsProgrammingBook1/blob/translation/html-translated/Unity%20Graphics%20Programming%20Vol.%204.pdf)
 
 # build
 
