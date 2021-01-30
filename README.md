@@ -1,8 +1,8 @@
-# rudimentary way to get an english translation
+# google-translated version of `Unity Graphics Programming vol.1` (by `IndieVisualLab`)
 
-https://freder.github.io/UnityGraphicsProgrammingBook1/articles/index.html + google translate browser extension.
+https://freder.github.io/UnityGraphicsProgrammingBook1/html-translated/index.html
 
-## build
+# build
 
 coudn't get `npm run pdf` to work, so I'm rolling my own conversion to epub, using `pandoc`.
 
