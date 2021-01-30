@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://freder.io/files/unity3/sugino.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 1 _ Baking Skinned Animation to Texture_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Baking Skinned Animation to Texture</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 1 _ Baking Skinned Animation to Texture_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 1 _ Baking Skinned Animation to Texture_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/saved_resource.html"></iframe></div>
+<h1><a id="h1"></a><span class="secno">第1章　</span>Baking Skinned Animation to Texture</h1>
+
+<h2><a id="h1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hello, I'm Sugino! </font><font style="vertical-align: inherit;">This chapter displays thousands and tens of thousands of skinned animated objects.</font></font></p>
+<div id="birds" class="image">
+<img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/birds.png" alt="A flock of birds flapping their wings">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.1: A flock of birds flapping their wings
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In Unity, I think you'll be using the Animator and SkinnedMeshRenderer components to achieve character animation.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, what if you want to represent a flock or crowd of birds? </font><font style="vertical-align: inherit;">Would you like to use Animator and SkinnedMeshRenderer for thousands or tens of thousands of character objects? </font><font style="vertical-align: inherit;">Generally, when displaying a large number of objects on the screen, GPU instancing is used to render a large number of objects at once. </font><font style="vertical-align: inherit;">However, SkinnedMeshRenderer does not support instancing, which renders individual objects one by one, which is very heavy.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As a solution to solve this, there is a method to save the animated vertex position information as a texture, but in this chapter we will explain how to actually do it, the way of thinking and application until implementation, and points to be noted. I will.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Please feel free to ask questions on Twitter (to @sugi_cho) as some explanations may be omitted or some parts may be difficult to understand. </font><font style="vertical-align: inherit;">If there is something wrong, I would appreciate it if you could point it out (._.)</font></font></p>
+
+<h2><a id="h1-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Place 5000 Skined Mesh Renderers to animate</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First of all, I would like to see how heavy the processing would be if a large number (5000 objects) of normally animated objects were placed. </font><font style="vertical-align: inherit;">This time, we have prepared a simple animated horse 3D object with 1890 vertices.</font></font></p>
+<div id="uma_model" class="image">
+<img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/uma_model.png" alt="Horse model used">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.2: Horse model used
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When I actually moved it, I can see that the FPS is 8.8, which is considerably heavier. </font></font><span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#uma5000"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 1.3</font></font></a></span></p>
+<div id="uma5000" class="image">
+<img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/uma5000.png" alt="5000 animated horses">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.3: 5000 animated horses
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, let's look at Unity's profiler to find out what is getting heavier in this process. </font><font style="vertical-align: inherit;">Display Profiler (shortcut key: Ctr + 7) from the Window menu. </font><font style="vertical-align: inherit;">You can get more detailed information by selecting GPU from the Add Profiler pull-down and viewing the GPU Usage profiler. </font><font style="vertical-align: inherit;">Obtaining GPU Usage information itself is an overhead, so it is better not to display it when it is not needed, but this time GPU Usage will be important, so we will actively use it.</font></font></p>
+<div id="profiler" class="image">
+<img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/profiler.png" alt="Profiler Window (GPU Usage)">
+<p class="caption">
+図1.4: Profiler Window (GPU Usage)
+</p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Looking at the profiler, you can see that the GPU processing time is longer than the CPU processing time, and the CPU is waiting for the GPU processing to complete. </font></font><span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#profiler"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 1.4</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> And </font></font><code class="inline-code tt">PostLateUpdate.UpdateAllSkinnedMeshes</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">you can see that </font><font style="vertical-align: inherit;">about 70% of GPU processing </font><font style="vertical-align: inherit;">is occupied. </font><font style="vertical-align: inherit;">Also, since there are as many horse objects as you can see, it </font></font><code class="inline-code tt">Camera.Renderer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">seems that you can reduce the number of GPU rendering processes by batching the objects or performing GPU instancing. </font><font style="vertical-align: inherit;">It is the way, but in the same way as any CPU Usage </font></font><code class="inline-code tt">PostLateUpdate.UpdateAllSkinnedMeshes</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">and </font></font><code class="inline-code tt">Camera.Render</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">processing of account for most of the time.</font></font></p>
+<p>このテストシーンでは、PlayerSettingsでGPU Skinningを使用する設定になっています。もしもGPUでなくCPUでスキニングを行っていた場合、CPUの処理の割合が増大し、今よりもFPSが落ちることになります。GPUスキニング時は、CPU側でボーンの行列の計算を行い、行列情報をGPUに渡し、GPUでスキニング処理を行います。CPUスキニング時は、行列の計算とスキニングの処理までCPU側で行い、スキニングされた頂点データをGPU側に渡しています。</p>
+<p>このように、処理の最適化には最初にどこが処理のボトルネックになっているか、見極めることが重要になってきます。</p>
+
+<h2><a id="h1-3"></a><span class="secno">1.3　</span>SkinnedMeshRendererのアニメーションする頂点の位置をあらかじめ計算しておく</h2>
+<p>プロファイリングの結果、メッシュのスキニングの処理が重そうだ。ということが分かったので、スキニングの処理自体はリアルタイムでは行わずに、あらかじめ計算しておく方法を検討してみようと思います。</p>
+<p><code class="inline-code tt">SkinnedMeshRenderer</code>のスキニング処理された後の頂点情報を取得する方法としては、<code class="inline-code tt">SkinnedMeshRenderer.BakeMesh(Mesh)</code>という関数があります。これは、スキニングされた状態のメッシュのスナップショットを作成し、指定したメッシュに格納します。少々、処理に時間がかかるのですが、スキニングされた頂点情報を事前に格納しておくという使い方のためなら、選択可能な方法といえます。</p>
+<div id="SkinnedMeshRenderer.BakeMesh" class="code">
+<p class="caption">リスト1.1: SkinnedMeshRenderer.BakeMesh() Example</p>
+<pre class="list"> 1: Animator animator;<font></font>
+ 2: SkinnedMeshRenderer skinedMesh;<font></font>
+ 3: List&lt;Mesh&gt; meshList;<font></font>
+ 4: <font></font>
+ 5: void Start(){<font></font>
+ 6:     animator = GetComponent&lt;Animator&gt;();<font></font>
+ 7:     skinnedMesh = GetComponentInChildren&lt;SkinnedMeshRenderer&gt;();<font></font>
+ 8:     meshList = new List&lt;Mesh&gt;();<font></font>
+ 9:     animator.Play("Run");<font></font>
+10: }<font></font>
+11: <font></font>
+12: void Update(){<font></font>
+13:     var mesh = new Mesh();<font></font>
+14:     skinnedMesh.BakeMesh(mesh);<font></font>
+15:     //mesh内に、スキニングされたメッシュのスナップショットが格納される<font></font>
+16:     meshList.Add(mesh);<font></font>
+17: }<font></font>
+</pre>
+</div>
+<p>これで、AnimatorのRunステートのアニメーションの<code class="inline-code tt">SkinnedMeshRenderer</code>の毎フレームのスナップショットのMeshがmeshListに格納されていきます。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#SkinnedMeshRenderer.BakeMesh">リスト1.1</a></span></p>
+<p>この保存された<code class="inline-code tt">meshList</code>を使い、パラパラ漫画で絵を切り替える要領でにメッシュ（<code class="inline-code tt">MeshFilter.sharedMesh</code>）を切り替えていくと、<code class="inline-code tt">SkinnedMeshRenderer</code>を使用せずにメッシュのアニメーションが表示できるので、プロファイリングした結果ボトルネックになっていたスキニングの処理を省くことができそうです。</p>
+
+<h2><a id="h1-4"></a><span class="secno">1.4　</span>頂点情報を保存する方法の検討</h2>
+<p>しかし、このMeshデータをフレームごとに複数保存しておく実装だとアニメーションによって変更しないメッシュの情報（Mesh.indeces, Mesh.uv等）も保存することになり、無駄が多くなります。スキニングアニメーションの場合、更新されるデータは頂点位置の情報と法線情報だけなので、これらのみを保存し、更新していけばいいのです。</p>
+
+<h3><a id="h1-4-1"></a><span class="secno">1.4.1　</span>頂点情報をVector3配列で保存しておく方法</h3>
+<p>そこで考えられるのが、フレームごとの頂点位置と法線データをVector3の配列で持っておいて、フレームごとにメッシュの位置と法線を更新していく方法です。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#mesh.SetVertices">リスト1.2</a></span></p>
+<div id="mesh.SetVertices" class="code">
+<p class="caption">リスト1.2: Update Mesh</p>
+<pre class="list"> 1: Mesh objMesh;<font></font>
+ 2: List&lt;Vector3&gt;[] vertecesLists;<font></font>
+ 3: List&lt;Vector3&gt;[] normalsLists;<font></font>
+ 4: //保存しておいた頂点の情報<font></font>
+ 5: //Mesh.SetVertices(List&lt;Vector3&gt;)で使うため<font></font>
+ 6: <font></font>
+ 7: void Start(){<font></font>
+ 8:     objMesh = GetComponent&lt;MeshFilter&gt;().mesh;<font></font>
+ 9:     objMesh.MarkDynamic();<font></font>
+10: }<font></font>
+11: <font></font>
+12: void Update(){<font></font>
+13:     var frame = xx;<font></font>
+14:     //現在時刻でのフレームを計算する<font></font>
+15: <font></font>
+16:     objMesh.SetVertices(vertecesLists[frame]);<font></font>
+17:     objMesh.SetNormals(normalsLists[frame]);<font></font>
+18: }<font></font>
+</pre>
+</div>
+<p>しかし、この方法だと今解決しようとしている数千のアニメーションオブジェクトを表示するという目的に対して、メッシュの更新自体のCPUの処理負荷が大きくなってしまいます。</p>
+<p>そこで、この章の冒頭から答えは書いてあるのですが、テクスチャに位置情報と法線情報を格納し、VertexTextureFetchを用いて頂点シェーダにおいてメッシュの頂点位置と法線情報を更新します。これにより元のメッシュデータ自体の更新は行う必要がなくなるのでCPUの処理負荷無しで頂点アニメーションを実現可能になります。</p>
+
+<h3><a id="h1-4-2"></a><span class="secno">1.4.2　</span>位置情報をテクスチャに書き込む</h3>
+<p>それでは、メッシュ頂点の位置情報をテクスチャに保存する手法について、軽く説明しようと思います。</p>
+<p>Unityの<code class="inline-code tt">Mesh</code>オブジェクトは、Unityで表示する3Dモデルの頂点の位置、法線、UV値などのデータが格納されたクラスになっています。頂点位置情報（<code class="inline-code tt">Mesh.vertices</code>）には、メッシュの全ての頂点数分の位置情報が<code class="inline-code tt">Vector3</code>の配列で保存されています。<span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#vec3">表1.1</a></span></p>
+<p>そして、Unityの<code class="inline-code tt">Texture2D</code>オブジェクトは、テクスチャの幅(<code class="inline-code tt">texture.width</code>)×高さ（<code class="inline-code tt">texture.height</code>）のピクセル数分、色情報(<code class="inline-code tt">Color</code>)の配列で保存されています。<span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#col">表1.2</a></span></p>
+<div id="vec3" class="table">
+<p class="caption">表1.1: 位置情報（Vector3）</p>
+<table>
+<tbody><tr><th>x   float   x方向成分</th></tr>
+<tr><th>y   float   y方向成分</th></tr>
+<tr><th>z   float   z方向成分</th></tr>
+</tbody></table>
+</div>
+<div id="col" class="table">
+<p class="caption">表1.2: 色情報（Color）</p>
+<table>
+<tbody><tr><th>r   float   赤色成分</th></tr>
+<tr><th>g   float   緑色成分</th></tr>
+<tr><th>b   float   青色成分</th></tr>
+<tr><th>a   float   不透明度成分</th></tr>
+</tbody></table>
+</div>
+<p>頂点の位置、Mesh.vertices<span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#vec3">表1.1</a></span>のx,y,zの値をそれぞれ、Texture2Dの色情報<span class="tableref"><a href="https://freder.io/files/unity3/sugino.html#col">表1.2</a></span>のr,g,bに格納し、EditorScriptでTextureAssetとして保存すれば、頂点の位置情報をテクスチャとして保存することになります。メッシュ頂点の位置と法線をテクスチャの色として保存する、サンプルスクリプトです。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#vec2col">リスト1.3</a></span></p>
+<div id="vec2col" class="code">
+<p class="caption">リスト1.3: 頂点情報をテクスチャに保存する</p>
+<pre class="list"> 1: public void CreateTex(Mesh sourceMesh)<font></font>
+ 2: {<font></font>
+ 3:     var vertCount = sourceMesh.vertexCount;<font></font>
+ 4:     var width = Mathf.FloorToInt(Mathf.Sqrt(vertCount));<font></font>
+ 5:     var height = Mathf.CeilToInt((float)vertCount / width);<font></font>
+ 6:     //頂点数＜幅×高さになるwidth,heightを求める<font></font>
+ 7: <font></font>
+ 8:     posTex = new Texture2D(width, height, TextureFormat.RGBAFloat, false);<font></font>
+ 9:     normTex = new Texture2D(width, height, TextureFormat.RGBAFloat, false);<font></font>
+10:     //Color[]を格納するTexture2D<font></font>
+11:     //TextureFormat.RGBAFloatを指定することで、色情報を各要素Float値で持てる<font></font>
+12: <font></font>
+13:     var vertices = sourceMesh.vertices;<font></font>
+14:     var normals = sourceMesh.normals;<font></font>
+15:     var posColors = new Color[width * height];<font></font>
+16:     var normColors = new Color[width * height];<font></font>
+17:     //頂点数分の色情報配列<font></font>
+18: <font></font>
+19:     for (var i = 0; i &lt; vertCount; i++)<font></font>
+20:     {<font></font>
+21:         posColors[i] = new Color(<font></font>
+22:             vertices[i].x,<font></font>
+23:             vertices[i].y,<font></font>
+24:             vertices[i].z<font></font>
+25:         );<font></font>
+26:         normColors[i] = new Color(<font></font>
+27:             normals[i].x,<font></font>
+28:             normals[i].y,<font></font>
+29:             normals[i].z<font></font>
+30:         );<font></font>
+31:     }<font></font>
+32:     //各頂点において、Color.rgb = Vector3.xyzとなるように、<font></font>
+33:     //位置→色、法線→色となるような色配列(Color[])を生成する。<font></font>
+34: <font></font>
+35:     posTex.SetPixels(posColors);<font></font>
+36:     normTex.SetPixels(normColors);<font></font>
+37:     posTex.Apply();<font></font>
+38:     normTex.Apply();<font></font>
+39:     //色配列をテクスチャにセットし、適用する<font></font>
+40: }<font></font>
+</pre>
+</div>
+<p>これで、<code class="inline-code tt">Mesh</code>の頂点の位置、法線情報を位置テクスチャ、法線テクスチャに焼きこむことができました。</p>
+<div id="mesh2tex" class="image">
+<img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/mesh2tex.png" alt="Write the vertex position and normal of Mesh to Texture">
+<p class="caption">
+図1.5: Meshの頂点位置と法線をTextureに書き込み
+</p>
+</div>
+<p>実際には、ポリゴンを作る時の頂点の並び順（Index）データが無いので位置テクスチャと法線テクスチャのみではメッシュの形を再現することはできないのですが、メッシュの情報をテクスチャに書き込むことができました。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#mesh2tex">図1.5</a></span></p>
+<p>Unityの公式マニュアルでは、<code class="inline-code tt">Texture2D.SetPixels(Color[])</code>は、<code class="inline-code tt">ColorFormat.RGBA32,ARGB32,RGB24,Alpha8</code>の場合のみ動作する。と書いてあります。これは、固定小数点値、Fixed精度のテクスチャフォーマット時のみということなのですが、どうやら<code class="inline-code tt">RGBAHalf, RGBAFloat</code>の浮動小数点値でも、動作するようで、色の各要素に負の値や1以上の値を代入しても、<code class="inline-code tt">Clamp</code>されずに値を保持してくれるようです。固定精度のテクスチャに<code class="inline-code tt">Color</code>を代入すると、RGB値は０～１の値、精度は1/256に制限されます。</p>
+<p>今回のアニメーションの頂点情報をテクスチャに焼きこむ手法では、アニメーションを一定間隔ごとにサンプリングし、各フレームのメッシュの頂点情報を並べて、一連のアニメーション情報をまとめて１枚のテクスチャに焼きこみます。テクスチャは、位置情報テクスチャと法線情報テクスチャの計２枚、生成します。</p>
+
+<h3><a id="h1-4-3"></a><span class="secno">1.4.3　</span>AnimationClip.SampleAnimation()</h3>
+<p>今回、アニメーションのサンプリングには、<code class="inline-code tt">AnimationClip.SampleAnimation(gameObject, time);</code>という関数を使用します。指定したGameObjectに対して、AnimationClipの指定した時間の状態にする。というもので、レガシー<code class="inline-code tt">Animation</code>にも、<code class="inline-code tt">Animator</code>にも対応しています。（というより、AnimationやAnimatorのコンポーネントを使用せずにアニメーションを再生する方法です。）</p>
+<p>それでは、実際の、AnimationClipからフレームを指定し頂点位置を取得する実装を解説していきます。</p>
+
+<h2><a id="h1-5"></a><span class="secno">1.5　</span>実装</h2>
+<p>今回のプログラムは次の３つの要素から成り立っています。</p>
+<ul>
+<li>AnimationClipTextureBaker.cs</li>
+<li>MeshInfoTextureGen.compute</li>
+<li>TextureAnimPlayer.shader</li>
+</ul>
+<p>AnimationClipTextureBakerで、Animation、もしくはAnimatorからAnimationClipを取得し、AnimationClipを各フレームにサンプリングしながらのメッシュの頂点データのComputeBufferを作成します。そして、AnimationClipとMeshのデータから作られた頂点アニメーション情報のComputeBufferをMeshInfoTextureGen.computeにて、位置情報テクスチャと法線情報テクスチャに変換するComputeShaderです。</p>
+<p>TextureAnimPlayer.shaderは、作られた位置情報テクスチャと法線情報テクスチャを使ってメッシュをアニメーションさせるためのShaderになります。</p>
+<div id="animBakerInspector" class="image">
+<img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/animBakerInspector.png" alt="AnimationClipTextureBaker Inspector">
+<p class="caption">
+図1.6: AnimationClipTextureBaker Inspector
+</p>
+</div>
+<p><code class="inline-code tt">AnimationClipTextureBaker</code>のインスペクタです。アニメーションテクスチャを生成するための<code class="inline-code tt">ComputeShader</code>、アニメーションテクスチャを再生するための<code class="inline-code tt">Shader</code>を設定します。そして、テクスチャ化したい<code class="inline-code tt">AnimationClip</code>を<code class="inline-code tt">Clips</code>に設定しておきます。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#animBakerInspector">図1.6</a></span></p>
+<div id="animBakerInspector2" class="image">
+<img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/animBakerInspector2.png" alt="You can write textures from the context menu in the Inspector">
+<p class="caption">
+図1.7: インスペクタのコンテキストメニューからテクスチャの書き込みを実行できる
+</p>
+</div>
+<p><code class="inline-code tt">ContextMenuAttribute</code>を使用すると、スクリプト内のメソッドをUnityのインスペクタのコンテキストメニューから呼べるようになります。エディター拡張を作らなくても実行できるので便利です。今回の場合、コンテキストメニューの『bake texture』から、スクリプトの<code class="inline-code tt">Bake</code>を呼び出せます。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#animBakerInspector">図1.6</a></span></p>
+<p>それでは、実際のコードを見ていきましょう。</p>
+<div id="AnimationClipTextureBaker" class="code">
+<p class="caption">リスト1.4: AnimationClipTextureBaker.cs</p>
+<pre class="list"> 1: using System.Collections.Generic;<font></font>
+ 2: using System.Linq;<font></font>
+ 3: using UnityEngine;<font></font>
+ 4: <font></font>
+ 5: #if UNITY_EDITOR<font></font>
+ 6: using UnityEditor;<font></font>
+ 7: using System.IO;<font></font>
+ 8: #endif<font></font>
+ 9: <font></font>
+10: public class AnimationClipTextureBaker : MonoBehaviour<font></font>
+11: {<font></font>
+12: <font></font>
+13:     public ComputeShader infoTexGen;<font></font>
+14:     public Shader playShader;<font></font>
+15:     public AnimationClip[] clips;<font></font>
+16: <font></font>
+17: //頂点情報は位置と法線の構造体<font></font>
+18:     public struct VertInfo<font></font>
+19:     {<font></font>
+20:         public Vector3 position;<font></font>
+21:         public Vector3 normal;<font></font>
+22:     }<font></font>
+23: <font></font>
+24: //Reset()は、エディタ上でGameObjectにスクリプトを付けるときに呼ばれる<font></font>
+25:     private void Reset()<font></font>
+26:     {<font></font>
+27:         var animation = GetComponent&lt;Animation&gt;();<font></font>
+28:         var animator = GetComponent&lt;Animator&gt;();<font></font>
+29: <font></font>
+30:         if (animation != null)<font></font>
+31:         {<font></font>
+32:             clips = new AnimationClip[animation.GetClipCount()];<font></font>
+33:             var i = 0;<font></font>
+34:             foreach (AnimationState state in animation)<font></font>
+35:                 clips[i++] = state.clip;<font></font>
+36:         }<font></font>
+37:         else if (animator != null)<font></font>
+38:             clips = animator.runtimeAnimatorController.animationClips;<font></font>
+39: //Animation、Animatorのコンポーネントがあったら自動的にAnimationClipを設定する<font></font>
+40:     }<font></font>
+41: <font></font>
+42:     [ContextMenu("bake texture")]<font></font>
+43:     void Bake()<font></font>
+44:     {<font></font>
+45:         var skin = GetComponentInChildren&lt;SkinnedMeshRenderer&gt;();<font></font>
+46:         var vCount = skin.sharedMesh.vertexCount;<font></font>
+47:         var texWidth = Mathf.NextPowerOfTwo(vCount);<font></font>
+48:         var mesh = new Mesh();<font></font>
+49: <font></font>
+50:         foreach (var clip in clips)<font></font>
+51:         {<font></font>
+52:             var frames = Mathf.NextPowerOfTwo((int)(clip.length / 0.05f));<font></font>
+53:             var dt = clip.length / frames;<font></font>
+54:             var infoList = new List&lt;VertInfo&gt;();<font></font>
+55: <font></font>
+56:             var pRt = new RenderTexture(texWidth, frames,<font></font>
+57:                 0, RenderTextureFormat.ARGBHalf);<font></font>
+58:             pRt.name = string.Format("{0}.{1}.posTex", name, clip.name);<font></font>
+59:             var nRt = new RenderTexture(texWidth, frames,<font></font>
+60:                 0, RenderTextureFormat.ARGBHalf);<font></font>
+61:             nRt.name = string.Format("{0}.{1}.normTex", name, clip.name);<font></font>
+62:             foreach (var rt in new[] { pRt, nRt })<font></font>
+63:             {<font></font>
+64:                 rt.enableRandomWrite = true;<font></font>
+65:                 rt.Create();<font></font>
+66:                 RenderTexture.active = rt;<font></font>
+67:                 GL.Clear(true, true, Color.clear);<font></font>
+68:             }<font></font>
+69:             //テクスチャの初期化<font></font>
+70: <font></font>
+71:             for (var i = 0; i &lt; frames; i++)<font></font>
+72:             {<font></font>
+73:                 clip.SampleAnimation(gameObject, dt * i);<font></font>
+74: //AnimationClipの指定した時間の状態でGameObjectをサンプリング<font></font>
+75:                 skin.BakeMesh(mesh);<font></font>
+76: //BakeMesh()を呼んでSkinningされた状態のメッシュデータを取得<font></font>
+77: <font></font>
+78:                 infoList.AddRange(Enumerable.Range(0, vCount)<font></font>
+79:                     .Select(idx =&gt; new VertInfo()<font></font>
+80:                     {<font></font>
+81:                         position = mesh.vertices[idx],<font></font>
+82:                         normal = mesh.normals[idx]<font></font>
+83:                     })<font></font>
+84:                 );<font></font>
+85: //アニメーションのフレームを先にリストに格納しておく<font></font>
+86:             }<font></font>
+87:             var buffer = new ComputeBuffer(<font></font>
+88:                 infoList.Count,<font></font>
+89:                 System.Runtime.InteropServices.Marshal.SizeOf(<font></font>
+90:                     typeof(VertInfo)<font></font>
+91:                 )<font></font>
+92:             );<font></font>
+93:             buffer.SetData(infoList.ToArray());<font></font>
+94: //頂点情報をComputeBufferにセット<font></font>
+95: <font></font>
+96:             var kernel = infoTexGen.FindKernel("CSMain");<font></font>
+97:             uint x, y, z;<font></font>
+98:             infoTexGen.GetKernelThreadGroupSizes(<font></font>
+99:                 kernel,<font></font>
+100:                 out x,<font></font>
+101:                 out y,<font></font>
+102:                 out z<font></font>
+103:             );<font></font>
+104: <font></font>
+105:             infoTexGen.SetInt("VertCount", vCount);<font></font>
+106:             infoTexGen.SetBuffer(kernel, "Info", buffer);<font></font>
+107:             infoTexGen.SetTexture(kernel, "OutPosition", pRt);<font></font>
+108:             infoTexGen.SetTexture(kernel, "OutNormal", nRt);<font></font>
+109:             infoTexGen.Dispatch(<font></font>
+110:                 kernel,<font></font>
+111:                 vCount / (int)x + 1,<font></font>
+112:                 frames / (int)y + 1,<font></font>
+113:                 1<font></font>
+114:             );<font></font>
+115: //ComputeShaderをセットアップし、テクスチャ生成する<font></font>
+116: <font></font>
+117:             buffer.Release();<font></font>
+118: <font></font>
+119: //生成したテクスチャを保存するためのエディタースクリプト<font></font>
+120: #if UNITY_EDITOR<font></font>
+121:             var folderName = "BakedAnimationTex";<font></font>
+122:             var folderPath = Path.Combine("Assets", folderName);<font></font>
+123:             if (!AssetDatabase.IsValidFolder(folderPath))<font></font>
+124:                 AssetDatabase.CreateFolder("Assets", folderName);<font></font>
+125: <font></font>
+126:             var subFolder = name;<font></font>
+127:             var subFolderPath = Path.Combine(folderPath, subFolder);<font></font>
+128:             if (!AssetDatabase.IsValidFolder(subFolderPath))<font></font>
+129:                 AssetDatabase.CreateFolder(folderPath, subFolder);<font></font>
+130: <font></font>
+131:             var posTex = RenderTextureToTexture2D.Convert(pRt);<font></font>
+132:             var normTex = RenderTextureToTexture2D.Convert(nRt);<font></font>
+133:             Graphics.CopyTexture(pRt, posTex);<font></font>
+134:             Graphics.CopyTexture(nRt, normTex);<font></font>
+135: <font></font>
+136:             var mat = new Material(playShader);<font></font>
+137:             mat.SetTexture("_MainTex", skin.sharedMaterial.mainTexture);<font></font>
+138:             mat.SetTexture("_PosTex", posTex);<font></font>
+139:             mat.SetTexture("_NmlTex", normTex);<font></font>
+140:             mat.SetFloat("_Length", clip.length);<font></font>
+141:             if (clip.wrapMode == WrapMode.Loop)<font></font>
+142:             {<font></font>
+143:                 mat.SetFloat("_Loop", 1f);<font></font>
+144:                 mat.EnableKeyword("ANIM_LOOP");<font></font>
+145:             }<font></font>
+146: <font></font>
+147:             var go = new GameObject(name + "." + clip.name);<font></font>
+148:             go.AddComponent&lt;MeshRenderer&gt;().sharedMaterial = mat;<font></font>
+149:             go.AddComponent&lt;MeshFilter&gt;().sharedMesh = skin.sharedMesh;<font></font>
+150: //生成したテクスチャをマテリアルに設定して、メッシュを設定しPrefabを作っている<font></font>
+151: <font></font>
+152:             AssetDatabase.CreateAsset(posTex,<font></font>
+153:                 Path.Combine(subFolderPath, pRt.name + ".asset"));<font></font>
+154:             AssetDatabase.CreateAsset(normTex,<font></font>
+155:                 Path.Combine(subFolderPath, nRt.name + ".asset"));<font></font>
+156:             AssetDatabase.CreateAsset(mat,<font></font>
+157:                 Path.Combine(subFolderPath,<font></font>
+158:                 string.Format("{0}.{1}.animTex.asset", name, clip.name)));<font></font>
+159:             PrefabUtility.CreatePrefab(<font></font>
+160:                 Path.Combine(folderPath, go.name + ".prefab")<font></font>
+161:                 .Replace("\\", "/"), go);<font></font>
+162:             AssetDatabase.SaveAssets();<font></font>
+163:             AssetDatabase.Refresh();<font></font>
+164: #endif<font></font>
+165:         }<font></font>
+166:     }<font></font>
+167: }<font></font>
+</pre>
+</div>
+<p>いったん<code class="inline-code tt">RenderTexture</code>を生成してGPUで処理し、<code class="inline-code tt">Graphics.CopyTexture(rt,tex2d);</code>で<code class="inline-code tt">Texture2D</code>にコピーし、エディタースクリプトでUnityAssetとして保存しておけば、次からは再計算無しで使えるアセットとなるので、使いどころの多いテクニックかと思います。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#AnimationClipTextureBaker">リスト1.4</a></span>（119,120行目）</p>
+<p>今回の実装では、テクスチャへの書き込みを<code class="inline-code tt">ComputeShader</code>を用いて実装しています。大量の処理を行う場合、GPUを使用した方が高速になるので、有用なテクニックですので、ぜひマスターしてみてください。処理内容としては、スクリプトで生成した頂点アニメーションの位置バッファ、法線バッファを各ピクセルにそのまま配置しているだけです。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#MeshInfoTextureGen">リスト1.5</a></span></p>
+<div id="MeshInfoTextureGen" class="code">
+<p class="caption">リスト1.5: MeshInfoTextureGen.compute</p>
+<pre class="list"> 1: #pragma kernel CSMain<font></font>
+ 2: <font></font>
+ 3: struct MeshInfo{<font></font>
+ 4:     float3 position;<font></font>
+ 5:     float3 normal;<font></font>
+ 6: };<font></font>
+ 7: <font></font>
+ 8: RWTexture2D&lt;float4&gt; OutPosition;<font></font>
+ 9: RWTexture2D&lt;float4&gt; OutNormal;<font></font>
+10: StructuredBuffer&lt;MeshInfo&gt; Info;<font></font>
+11: int VertCount;<font></font>
+12: <font></font>
+13: [numthreads(8,8,1)]<font></font>
+14: void CSMain (uint3 id : SV_DispatchThreadID)<font></font>
+15: {<font></font>
+16:     int index = id.y * VertCount + id.x;<font></font>
+17:     MeshInfo info = Info[index];<font></font>
+18: <font></font>
+19:     OutPosition[id.xy] = float4(info.position, 1.0);<font></font>
+20:     OutNormal[id.xy] = float4(info.normal, 1.0);<font></font>
+21: //テクスチャのx軸が頂点ID、y軸方向が時間になるように頂点情報を並べる<font></font>
+22: }<font></font>
+</pre>
+</div>
+<p>スクリプトから生成されたテクスチャがこちらになります。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#animTexes">図1.8</a></span></p>
+<div id="animTexes" class="image">
+<img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/animTexes.png" alt="Generated texture">
+<p class="caption">
+図1.8: 生成されたテクスチャ
+</p>
+</div>
+<p>このテクスチャはx軸方向に１列ずつ、サンプリングした各フレームにおけるメッシュの頂点が格納されています。そして、y軸方向が時間になっていて、テクスチャをサンプリングするときの<code class="inline-code tt">uv.y</code>を変化させることでアニメーションの時間を指定することができるよう、テクスチャを設計しています。</p>
+<p>注目していただきたいことは<code class="inline-code tt">Texture.FilterMode = Bilinear</code>になっているトコロです。テクスチャをサンプリングするとき各ピクセルが隣接するピクセルと補間されるのですが、これにより、テクスチャ生成時にスクリプトでサンプリングしたフレームと次のフレームの間の中途半端な時刻のアニメーションテクスチャをアニメーション再生時にShaderでサンプリングしたとき、フレーム毎の位置と法線が自動的に補間されることになるので、アニメーションが滑らかに再生されることになります。ちょっと説明がややこしいですね！</p>
+<p>そしてこの場合、走行（Run）のアニメーションはループアニメーションなので<code class="inline-code tt">WrapMode = Repeat</code>にしています。これにより、アニメーションテクスチャの最後のピクセルと最初のピクセルが補間されるので、滑らかにループが繋がったアニメーションになります。もちろん、ループしないアニメーションからテクスチャを生成する場合、<code class="inline-code tt">WrapMode = Clamp</code>に設定する必要があります。</p>
+<p>次に、生成したアニメーションテクスチャを再生するためのShaderになります。<span class="listref"><a href="https://freder.io/files/unity3/sugino.html#TextureAnimPlayer">リスト1.6</a></span></p>
+<div id="TextureAnimPlayer" class="code">
+<p class="caption">リスト1.6: TextureAnimPlayer.shaer</p>
+<pre class="list"> 1: Shader "Unlit/TextureAnimPlayer"<font></font>
+ 2: {<font></font>
+ 3:     Properties<font></font>
+ 4:     {<font></font>
+ 5:             _MainTex ("Texture", 2D) = "white" {}<font></font>
+ 6:             _PosTex("position texture", 2D) = "black"{}<font></font>
+ 7:             _NmlTex("normal texture", 2D) = "white"{}<font></font>
+ 8:             _DT ("delta time", float) = 0e<font></font>
+ 9: <font></font>
+10:             _Length ("animation length", Float) = 1<font></font>
+11:             [Toggle(ANIM_LOOP)] _Loop("loop", Float) = 0<font></font>
+12:     }<font></font>
+13:     SubShader<font></font>
+14:     {<font></font>
+15:             Tags { "RenderType"="Opaque" }<font></font>
+16:             LOD 100 Cull Off<font></font>
+17: <font></font>
+18:             Pass<font></font>
+19:             {<font></font>
+20:                     CGPROGRAM<font></font>
+21:                     #pragma vertex vert<font></font>
+22:                     #pragma fragment frag<font></font>
+23:                     #pragma multi_compile ___ ANIM_LOOP<font></font>
+24: //ループ用のマルチコンパイルを作っておくと便利<font></font>
+25: <font></font>
+26:                     #include "UnityCG.cginc"<font></font>
+27: <font></font>
+28:                     #define ts _PosTex_TexelSize<font></font>
+29: <font></font>
+30:                     struct appdata<font></font>
+31:                     {<font></font>
+32:                             float2 uv : TEXCOORD0;<font></font>
+33:                     };<font></font>
+34: <font></font>
+35:                     struct v2f<font></font>
+36:                     {<font></font>
+37:                             float2 uv : TEXCOORD0;<font></font>
+38:                             float3 normal : TEXCOORD1;<font></font>
+39:                             float4 vertex : SV_POSITION;<font></font>
+40:                     };<font></font>
+41: <font></font>
+42:                     sampler2D _MainTex, _PosTex, _NmlTex;<font></font>
+43:                     float4 _PosTex_TexelSize;<font></font>
+44:                     float _Length, _DT;<font></font>
+45: <font></font>
+46:                     v2f vert (appdata v, uint vid : SV_VertexID)<font></font>
+47: //SV_VertexIDのセマンティックで頂点IDを取得できる<font></font>
+48:                     {<font></font>
+49:                             float t = (_Time.y - _DT) / _Length;<font></font>
+50: #if ANIM_LOOP<font></font>
+51:                             t = fmod(t, 1.0);<font></font>
+52: #else<font></font>
+53:                             t = saturate(t);<font></font>
+54: #endif<font></font>
+55: <font></font>
+56:                             float x = (vid + 0.5) * ts.x;<font></font>
+57:                             float y = t;<font></font>
+58: //uv.xは頂点IDを元に指定する<font></font>
+59: //uv.yにアニメーションをサンプリングする時間(t)を設定する<font></font>
+60: <font></font>
+61:                             float4 pos = tex2Dlod(<font></font>
+62:                     _PosTex,<font></font>
+63:                     float4(x, y, 0, 0)<font></font>
+64:                 );<font></font>
+65:                             float3 normal = tex2Dlod(<font></font>
+66:                     _NmlTex,<font></font>
+67:                     float4(x, y, 0, 0)<font></font>
+68:                 );<font></font>
+69: //テクスチャから位置情報と法線情報をサンプリング<font></font>
+70: <font></font>
+71:                             v2f o;<font></font>
+72:                             o.vertex = UnityObjectToClipPos(pos);<font></font>
+73:                             o.normal = UnityObjectToWorldNormal(normal);<font></font>
+74:                             o.uv = v.uv;<font></font>
+75:                             return o;<font></font>
+76:                     }<font></font>
+77: <font></font>
+78:                     half4 frag (v2f i) : SV_Target<font></font>
+79:                     {<font></font>
+80:                 half diff = dot(<font></font>
+81:                     i.normal,<font></font>
+82:                     float3(0, 1, 0)<font></font>
+83:                 ) * 0.5 + 0.5;<font></font>
+84:                             half4 col = tex2D(_MainTex, i.uv);<font></font>
+85:                             return diff * col;<font></font>
+86:                     }<font></font>
+87:                     ENDCG<font></font>
+88:             }<font></font>
+89:     }<font></font>
+90: }<font></font>
+</pre>
+</div>
+<p>アニメーションテクスチャを再生するShaderでは、VertexTextureFetch（VTF）という手法を使用しています。簡単にいうと、頂点シェーダ内でテクスチャをサンプリングし、頂点の位置や各値の計算に使用する。という方法で、ディスプレイスメントマッピング等に良く利用されます。</p>
+<p>テクスチャのサンプリングには頂点IDを使用しているのですが、これは、<code class="inline-code tt">SV_VertexID</code>のセマンティックで取得できます。頂点情報は位置情報も法線情報もテクスチャから取得するので、appdata内にはuvしか無い部分も注目です。（<code class="inline-code tt">appdata</code>に<code class="inline-code tt">POSITION,NORMAL</code>セマンティックを定義しても特にエラーにはなりません）</p>
+<p>テクスチャをサンプリングするときのUVですが、<code class="inline-code tt">uv.y</code>がアニメーションの正規化した時間（アニメーションの始まりを0、終わりを1.0にしたときの値）になっています。<code class="inline-code tt">uv.x</code>は、頂点インデックス（vid）、<code class="inline-code tt">uv.x = (vid + 0.5) * _TexelSize.x</code>となっていて、この0.5は何なのか？と思うかも知れないのですが、これはテクスチャを<code class="inline-code tt">Bilinear</code>でサンプリングしたとき、<code class="inline-code tt">(n + 0.5) / テクスチャサイズ</code>の位置だと、補間されていないテクスチャに入った値を得ることができるので、頂点IDに0.5の値を足して、メッシュ内の頂点同士の補間されていない位置や法線を取得しています。</p>
+<div id="texelSize" class="caption-code">
+<p class="caption">リスト1.7: {TextureName}_TexelSize テクスチャサイズの情報を含むfloat4のプロパティ(Unity公式マニュアルより)</p>
+<pre class="list">x には 1.0/width が含まれます<font></font>
+y には 1.0/height が含まれます<font></font>
+z には width が含まれます<font></font>
+w には height が含まれます<font></font>
+</pre>
+</div>
+
+<h2><a id="h1-6"></a><span class="secno">1.6　</span>アニメーションする馬を5000頭置いてみる</h2>
+<div id="uma50002" class="image">
+<img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/uma50002.png" alt="5000 horses animated by texture">
+<p class="caption">
+図1.9: テクスチャによりアニメーションする5000頭の馬
+</p>
+</div>
+<p><code class="inline-code tt">SkinnedMeshRenderer</code>を使わず、<code class="inline-code tt">Renderer</code>とアニメーションテクスチャにより、アニメーションを再生しています。FPSはスキニングアニメーションを使用していたときと比べると8→56.4と、大きく改善しています。<span class="imgref"><a href="https://freder.io/files/unity3/sugino.html#uma50002">図1.9</a></span></p>
+<p>※現在執筆中のPCのGPUは、GeForce MX150で、NVIDIA Pascal GPUの中でも最弱のものとなっています。プロファイラとゲームウィンドウを同時にキャプチャするため、レンダリング解像度が少し小さくなりましたが、処理負荷のほとんどがメッシュのスキニングの処理だったので、そこまでは影響ないはずです。。！</p>
+<p>また、注目してほしいのはインスタンシング対応等、他の最適化処理はしてないというトコロです。<code class="inline-code tt">SkinnedMeshRenderer</code>を使わなくなったので、GPUインスタンシングによる描画が可能になりました。Shaderのインスタンシング対応などにより、さらにパフォーマンスを追及することが可能だということです。</p>
+<p>ここでは解説しませんが、表紙の鳥はテクスチャアニメーションさせた鳥を<code class="inline-code tt">Graphics.DrawMeshInstancedIndirect()</code>を用いて約4000羽の鳥を一気に描画しています。Shaderのインスタンシング対応や他の応用については、ぼくのGitHubや他の記事を参考にしてみてください。</p>
+
+<h2><a id="h1-7"></a><span class="secno">1.7　</span>制限と応用先の検討</h2>
+<p>このテクスチャを使った手法にはいくつか制限があります。メッシュの頂点数やアニメーションの長さによりテクスチャを保持しておくメモリが消費される。アニメーションのブレンドにはShaderを書く必要がある。AnimatorControllerのステートマシンを使用できない。などです。</p>
+<p>その中で、一番大きな制限としては、ハードウェアごとに使用できるテクスチャの最大サイズがあります。それは、4Kだったり8K、16Kだったりします。つまり、今回の手法ではメッシュの各フレームの頂点を横1列に並べるのでメッシュの頂点数がテクスチャサイズによって制限されるということです。</p>
+<p>しかし、大量にオブジェクトを出す場合、そこまで頂点数の多いものを出すべきではないので、頂点数の制限は、そのまま受け入れ、メッシュの頂点数がテクスチャの最大サイズを超えないようにすることが得策かも知れません。この頂点数の制限を超えてベイキングアニメーションテクスチャを使いたい場合、複数テクスチャを使用する方法が考えられます。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Alternatively, you can pre-calculate the matrix for each bone in the skeleton instead of the vertices of the mesh and save it in a texture or buffer. </font><font style="vertical-align: inherit;">Since the skinning process itself is performed by Vertex Shader at the time of execution, the skinning process that was performed during normal mesh skinning </font></font><code class="inline-code tt">PostLateUpdate.UpdateAllSkinnedMeshes</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">is performed </font></font><code class="inline-code tt">Camera.Render</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">collectively at the time of rendering, so the processing load is considerably lightened. </font><font style="vertical-align: inherit;">Please, try it.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since AnimatorController and Unity's state machine cannot be used, it is difficult to control the animation, so it is better to apply it to some deception such as mobs that repeat loop animation and swarms of flying birds and butterflies instead of the main character. I think it's good.</font></font></p>
+
+<h2><a id="h1-8"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.8　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When optimizing processing, it is important to profile properly and determine which processing is heavy.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Skinning animation has a high processing load</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By saving the pre-skinned vertex coordinates in the texture, the execution processing load at the time can be reduced.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There is room for further optimization, such as GPU instancing and GPU movement of characters.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In real time, heavy processing such as skeleton matrices and simulation results can be saved in textures in advance to reduce the processing load at runtime, and there seems to be room for various applications.</font></font></li>
+</ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 1 _ Baking Skinned Animation to Texture_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 1 _ Baking Skinned Animation to Texture_files/saved_resource(2).html"></iframe></body></html>

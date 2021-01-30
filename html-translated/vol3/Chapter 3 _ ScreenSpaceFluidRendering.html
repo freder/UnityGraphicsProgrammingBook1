@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://freder.io/files/unity3/oishi.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 3 _ ScreenSpaceFluidRendering_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>ScreenSpaceFluidRendering</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 3 _ ScreenSpaceFluidRendering_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 3 _ ScreenSpaceFluidRendering_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 3 _ ScreenSpaceFluidRendering_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 3 _ ScreenSpaceFluidRendering_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 3 _ ScreenSpaceFluidRendering_files/saved_resource.html"></iframe></div>
+<h1><a id="h3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">Chapter 3　</font></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;"> ScreenSpaceFluidRendering</font></font></h1>
+
+<h2><a id="h3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This chapter </font><font style="vertical-align: inherit;">introduces </font><strong><font style="vertical-align: inherit;">Screen Space Fluid Rendering</font></strong><font style="vertical-align: inherit;"> by </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Deferred Shading</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> as one of the particle rendering methods </font><font style="vertical-align: inherit;">.</font></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font></p>
+
+<h2><a id="h3-2"></a><span class="secno">3.2　</span>Screen Space Fluid Renderingとは</h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Traditionally, the Martin Cubes method is used to render fluid-like continuums, but it is relatively computationally intensive and not suitable for detailed drawing in real-time applications. </font><font style="vertical-align: inherit;">Therefore, a method </font><font style="vertical-align: inherit;">called </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Screen Space Fluid Rendering</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> was devised </font><font style="vertical-align: inherit;">as a method for drawing particle-based fluids at high speed </font><font style="vertical-align: inherit;">.</font></font></p>
+<div id="ssfr_screen_space_fluid_rendering_overview" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_screen_space_fluid_rendering_overview.png" alt="Schematic of Screen Space Fluid Rendering">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.1: Schematic diagram of Screen Space Fluid Rendering
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This creates a surface from the depth of the surface of the particles in the screen space visible to the camera, as shown in Figure 3.1.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A technique called </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Deferred Rendering</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is used </font><font style="vertical-align: inherit;">to generate this surface geometry </font><font style="vertical-align: inherit;">.</font></font></p>
+
+<h2><a id="h3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.3 What is　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Deferred Rendering?</font></font></h2>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2-dimensional screen space (screen space)</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in the </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">shading (shadow calculation)</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is a technology to perform. </font><font style="vertical-align: inherit;">For the sake of distinction, the traditional type of technique is </font><font style="vertical-align: inherit;">called </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Forward Rendering</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 3.2 </font><font style="vertical-align: inherit;">outlines </font><font style="vertical-align: inherit;">the traditional </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Forward Rendering</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Deferred Rendering</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> rendering pipelines.</font></font></p>
+<div id="ssfr_rendering_pipeline_compare" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_rendering_pipeline_compare.png" alt="Comparison of Foward Rendering and Deferred Rendering pipelines">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.2: Comparison of Foward Rendering and Deferred Rendering pipelines
+</font></font></p>
+</div>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> the case of </font><strong><font style="vertical-align: inherit;">Forward Rendering</font></strong><font style="vertical-align: inherit;"> , lighting and shading processing are performed </font><font style="vertical-align: inherit;">in </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the first pass</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> of the </font><font style="vertical-align: inherit;">shader, </font><font style="vertical-align: inherit;">but in </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Deferred Rendering</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font><font style="vertical-align: inherit;">2D image information such </font><font style="vertical-align: inherit;">as </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">normal</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">position</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">depth</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">diffuse color</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> required for shading </font><font style="vertical-align: inherit;">is generated, and </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">G-Buffer</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Store in a buffer called. </font><font style="vertical-align: inherit;">In the second pass, that information is used to perform lighting and shading to obtain the final rendering result. </font><font style="vertical-align: inherit;">This </font><font style="vertical-align: inherit;">delays </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">the</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> actual rendering to </font><strong><font style="vertical-align: inherit;">the second pass (and beyond)</font></strong><font style="vertical-align: inherit;"> , hence the name </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">"Deferred" Rendering</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><strong>Deferred Rendering</strong>の利点としては、</p>
+<ul>
+<li>光源を多く使用できる</li>
+<li>シェーディングの際に、表示されている領域だけを計算するだけで済むので、フラグメントシェーダが実行される回数を最小限に抑えることができる</li>
+<li>ジオメトリの変形が可能</li>
+<li>G−Bufferの情報をPostEffectなどで使用できる（SSAOなど）</li>
+</ul>
+<p>欠点としては、</p>
+<ul>
+<li>半透明の表現に弱い</li>
+<li>MSAAなどアルゴリズムによってはアンチエイリアシングの十分な効果が得られなくなる</li>
+<li>複数のマテリアルを使うのが困難</li>
+<li>Orthographicカメラでのサポートをしていない</li>
+</ul>
+<p>などがあり、トレードオフとなるような制約もできてしまうため、使用にはそれらを考慮した上で判断を行う必要があります。</p>
+
+<h4><a id="h3-3-0-1"></a>Deferred Rendering の Unityでの使用条件</h4>
+<p><strong>Deferred Rendering</strong>には以下のような使用条件があり、環境によっては、本サンプルプログラムは動作いたしません。。</p>
+<ul>
+<li>Unity Pro でのみ使用可能</li>
+<li>マルチレンダーターゲット（MRT）が有効である</li>
+<li>シェーダーモデル 3.0以上</li>
+<li>デプスレンダーテクスチャとtwo-sidedステンシルバッファをサポートするグラフィックスカードが必要</li>
+</ul>
+<p>また、<strong>Deferred Rendering</strong>は、<strong>Orthographic</strong>プロジェクションを使用している場合はサポートされず、カメラのプロジェクションモードが<strong>Orthographic</strong>に設定されている場合は、<strong>Forward Rendering</strong>が使用されます。</p>
+
+<h2><a id="h3-4"></a><span class="secno">3.4　</span>G-Buffer（ジオメトリバッファ）</h2>
+<p>陰影計算、ラインティングの計算に使用する<strong>法線</strong>、<strong>位置</strong>、<strong>拡散反射色</strong>などのスクリーンスペースでの（2次元テクスチャ）の情報は、<strong>G-Buffer</strong>と呼ばれます。Unityのレンダリングパイプラインの<strong>G-Bufferパス</strong>では、それぞれのオブジェクトは一度レンダリングされ、<strong>G-Bufferテクスチャ</strong>にレンダリングされ、デフォルトで以下の情報が生成されます。</p>
+<div id="tbl1" class="table">
+<p class="caption">表3.1: </p>
+<table>
+<tbody><tr><th>render target</th><th>format</th><th>datat type</th></tr>
+<tr><td>RT0</td><td>ARGB32</td><td>Diffuse color (RGB), Occulusion (A)</td></tr>
+<tr><td>RT1</td><td>ARGB32</td><td>Specular color (RGB), Roughness (A)</td></tr>
+<tr><td>RT2</td><td>ARGB2101010</td><td>World space normal (RGB)</td></tr>
+<tr><td>RT3</td><td>ARGB2101010</td><td>Emission + (Ambient + Reflections + Lightmaps)</td></tr>
+<tr><td>Z-buffer</td><td></td><td>Depth + Stencil</td></tr>
+</tbody></table>
+</div>
+<p>これらの<strong>G-Bufferテクスチャ</strong>は、グローバルなプロパティとして設定されており、シェーダ内で取得することができます。</p>
+<div id="tbl2" class="table">
+<p class="caption">表3.2: </p>
+<table>
+<tbody><tr><th>shader property name</th><th>data type</th></tr>
+<tr><td>_CameraGBufferTexture0</td><td>Diffuse color (RGB), occulusion (A)</td></tr>
+<tr><td>_CameraGBufferTexture1</td><td>Specular color (RGB)</td></tr>
+<tr><td>_CameraGBufferTexture2</td><td>World space normal (RGB)</td></tr>
+<tr><td>_CameraGBufferTexture3</td><td>Emission + (Ambient + Reflections + Lightmaps)</td></tr>
+<tr><td>_CameraDepthTexture</td><td>Depth + Stencil</td></tr>
+</tbody></table>
+</div>
+<p>サンプルコードの、<strong>Assets/ScreenSpaceFluidRendering/Scenes/ShowGBufferTest</strong>を開くと、この<strong>G-Buffer</strong>を取得して画面に表示する様子を確認することができます。</p>
+<div id="ssfr_g-buffer" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_g-buffer.png" alt="G-Buffer generated by default">
+<p class="caption">
+図3.3: デフォルトで生成されるG-Buffer
+</p>
+</div>
+
+<h2><a id="h3-5"></a><span class="secno">3.5　</span>CommandBufferについて</h2>
+<p>この章で紹介するサンプルプログラムは、<strong>CommandBuffer</strong>というUnityのAPIを使用します。</p>
+<p><strong>CPU</strong>が実行するスクリプトに書かれたメソッドの中では、描画処理自体は行われません。代わりに、<strong>グラフィックスコマンドバッファ</strong>と言われる<strong>GPU</strong>が理解できる<strong>レンダリングコマンド</strong>のリストに追加され、生成された<strong>コマンドバッファ</strong>は<strong>GPU</strong>によって直接読み込まれ、実行されることによって実際にオブジェクトを描画します。</p>
+<p>Unityが用意する<strong>レンダリングコマンド</strong>は、例えば、<strong>Graphics.DrawMesh()</strong>, <strong>Graphics.DrawProcedural()</strong>などのメソッドです。</p>
+<p>UnityのAPIの<strong>CommandBuffer</strong>を用いることで、Unityの<strong>レンダリングパイプライン</strong>の特定のポイントに<strong>コマンドバッファ（レンダリングコマンドのリスト）</strong>を差し込んで、Unityの<strong>レンダリングパイプライン</strong>を拡張することができます。</p>
+<p><strong>CommandBuffer</strong>を使ったサンプルプロジェクトは、ここでいくつか確認することができます。</p>
+<p><a href="https://docs.unity3d.com/ja/current/Manual/GraphicsCommandBuffers.html" class="link">https://docs.unity3d.com/ja/current/Manual/GraphicsCommandBuffers.html</a></p>
+
+<h2><a id="h3-6"></a><span class="secno">3.6　</span>座標系、座標変換について</h2>
+<p>以降、スクリーンスペース上で行われる計算の内容の理解のために、簡単に、3DCGのグラフィクスパイプラインと座標系について説明いたします。</p>
+
+<h4><a id="h3-6-0-1"></a>Homogeneous Coordinates（同次座標系）</h4>
+<p>3次元の位置ベクトル(x,y,z)を考える時に、(x,y,z,w) というように4次元のものとして扱うことがあり、これをHomogeneous Coordinates（同次座標）と呼びます。このように4次元で考えることによって4x4のMatrix（行列）を効果的に掛け合わせることができます。座標変換の計算は、基本的に4x4のMatrixを掛け合わせることで行われるので、位置ベクトルは、このように4次元で表現します。</p>
+<p>同時座標と、非同次座標の変換はこのように行われます。(x/w, y/w, z/w, 1) = (x, y, z, w)</p>
+
+<h4><a id="h3-6-0-2"></a>Object Space (オブジェクト座標系, ローカル座標系, モデル座標系)</h4>
+<p>オブジェクトそれ自身が中心となる座標系です。</p>
+
+<h4><a id="h3-6-0-3"></a>World Space（ワールド座標系, グローバル座標系）</h4>
+<p><strong>World Space</strong> は、シーンを中心として、シーンの中で複数のオブジェクトが空間的にどのような関係にあるのかを示す座標系です。World Spaceには、オブジェクトの移動・回転・スケールを行う<strong>Modeling Transform</strong>によって、<strong>Object Space</strong>から変換されます。</p>
+
+<h4><a id="h3-6-0-4"></a>Eye(View) Space（視点座標系, カメラ座標系）</h4>
+<p><strong>Eye Space</strong>は、描画するカメラを中心とし、その視点を原点とする座標系です。カメラの位置・カメラの上方向の向き、カメラのフォーカス方向の向きなどの情報を定義した<strong>View Matrix</strong>による<strong>View Transform</strong>を行うことによって<strong>World Space</strong>から変換されます。</p>
+
+<h4><a id="h3-6-0-5"></a>Clip Space（クリッピング座標系, クリップ座標系）</h4>
+<p><strong>Clip Space</strong>は、上記の<strong>View Matrix</strong>で定義されたカメラの他のパラメータ、field of view(FOV)・アスペクト比・near clip・far clipを定義した<strong>Projection Matrix</strong>を<strong>View Space</strong>に掛け合わせる変換によって得られる座標系です。この変換を<strong>Projection Transform</strong>と言い、これによって、カメラで描画される空間のクリッピングを行います。</p>
+
+<h4><a id="h3-6-0-6"></a>Normalized Device Coordinates（正規化デバイス座標系）</h4>
+<p><strong>Clip Space</strong>によって得られた座標値xyz各要素に対してwで除算することによって、-1&lt;=x&lt;=1、-1&lt;=y&lt;=1、0&lt;=z&lt;=1にの範囲にすべての位置座標が正規化されます。これによって得られる座標系を<strong>Normalized Device Coordinates（NDC）</strong>と言います。この変換は<strong>Persepective Devide</strong>と呼ばれ、手前のオブジェクトは大きく、奥のものは小さく描画されるようになります。</p>
+
+<h4><a id="h3-6-0-7"></a>Screen(Window) Space （スクリーン座標系、ウィンドウ座標系）</h4>
+<p><strong>Normalized Device Coordinates</strong>で得られた正規化された値を、スクリーンの解像度に合うように変換した座標系です。Direct3Dの場合、左上を原点とします。</p>
+<p><strong>Deferred Rendering</strong>では、このスクリーン空間での画像を元に計算しますが、必要によって、それぞれの変換の逆行列を掛けることによって、任意の座標系の情報を算出し使用するので、このレンダリングパイプラインを理解しておく事は重要です。</p>
+<p>図3.3は3DCGのグラフィックスパイプラインと座標系、座標変換の関係について説明したものです。</p>
+<div id="ssfr_coordinate_system_and_transform" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_coordinate_system_and_transform.png" alt="Coordinate system, flow of coordinate transformation">
+<p class="caption">
+図3.4: 座標系、座標変換のフロー
+</p>
+</div>
+
+<h2><a id="h3-7"></a><span class="secno">3.7　</span>実装についての解説</h2>
+<p>サンプルコードの、</p>
+<p><strong>Assets/ScreenSpaceFluidRendering/Scenes/ScreenSpaceFluidRendering</strong></p>
+<p>シーンを開いてください。</p>
+
+<h3><a id="h3-7-1"></a><span class="secno">3.7.1　</span>アルゴリズムの概要</h3>
+<p><strong>Screen Space Fluid Rendering</strong>の大まかなアルゴリズムは以下の通りです。</p>
+<ol>
+<li>パーティクルを描画しスクリーンスペースの深度画像を生成する</li>
+<li>深度画像にブラーエフェクトをかけ滑らかにする</li>
+<li>深度から表面の法線を計算する</li>
+<li>表面の陰影を計算する</li>
+</ol>
+<p>※このサンプルコードでは、サーフェスジオメトリの作成までを行います。透過表現などは行っておリません。</p>
+
+<h3><a id="h3-7-2"></a><span class="secno">3.7.2　</span>スクリプトの構成</h3>
+<div id="tbl3" class="table">
+<p class="caption">表3.3: </p>
+<table>
+<tbody><tr><th>スクリプト名</th><th>機能</th></tr>
+<tr><td>ScreenSpaceFluidRenderer.cs</td><td>メインのスクリプト</td></tr>
+<tr><td>RenderParticleDepth.shader</td><td>パーティクルのスクリーンスペースの深度を求める</td></tr>
+<tr><td>BilateralFilterBlur.shader</td><td>深度に応じて減衰するブラー エフェクト</td></tr>
+<tr><td>CalcNormal.shader</td><td>スクリーンスペースのデプス情報から法線を求める</td></tr>
+<tr><td>RenderGBuffer.shader</td><td>G-Bufferに深度、法線、カラー情報などを書き込む</td></tr>
+</tbody></table>
+</div>
+
+<h3><a id="h3-7-3"></a><span class="secno">3.7.3　</span>CommandBufferを作成し、カメラに登録</h3>
+<p><strong>ScreenSpaceFluidRendering.cs</strong>の<strong>OnWillRenderObject</strong>関数内では、<strong>CommandBuffer</strong>を作成し、カメラのレンダリングパスの任意の箇所に<strong>CommandBuffer</strong>を登録する処理を行います。</p>
+<p>以下、コードを抜粋します</p>
+<div class="emlist-code">
+<p class="caption">ScreenSpaceFluidRendering.cs</p>
+<pre class="emlist language-csharp">// アタッチされたレンダラー(MeshRenderer)がカメラに映っているときに呼び出される<font></font>
+void OnWillRenderObject()<font></font>
+{<font></font>
+  // 自身がアクティブでなければ解放処理をして、以降は何もしない<font></font>
+  var act = gameObject.activeInHierarchy &amp;&amp; enabled;<font></font>
+  if (!act)<font></font>
+  {<font></font>
+    CleanUp();<font></font>
+    return;<font></font>
+  }<font></font>
+  // 現在レンダリング処理をしているカメラがなければ、以降は何もしない<font></font>
+  var cam = Camera.current;<font></font>
+  if (!cam)<font></font>
+  {<font></font>
+    return;<font></font>
+  }<font></font>
+<font></font>
+  // 現在レンダリング処理をしているカメラに、<font></font>
+  // CommandBufferがアタッチされていなければ<font></font>
+  if (!_cameras.ContainsKey(cam))<font></font>
+  {<font></font>
+    // CommandBufferの情報作成<font></font>
+    var buf = new CmdBufferInfo();<font></font>
+    buf.pass   = CameraEvent.BeforeGBuffer;<font></font>
+    buf.buffer = new CommandBuffer();<font></font>
+    buf.name = "Screen Space Fluid Renderer";<font></font>
+    // G-Bufferが生成される前のカメラのレンダリングパイプライン上のパスに、<font></font>
+    // 作成したCommandBufferを追加<font></font>
+    cam.AddCommandBuffer(buf.pass, buf.buffer);<font></font>
+<font></font>
+    // CommandBufferを追加したカメラを管理するリストにカメラを追加<font></font>
+    _cameras.Add(cam, buf);<font></font>
+  }<font></font>
+</pre>
+</div>
+<p><strong>Camera.AddCommandBuffer(CameraEvent evt, Rendering.CommandBuffer buffer)</strong>メソッドはカメラに、任意のパスで実行される<strong>コマンドバッファ</strong>を追加します。ここでは、<strong>CameraEvent.BeforeGBuffer</strong>で<strong>G-Bufferが生成される直前</strong>の位置を指定しており、ここに任意の<strong>コマンドバッファ</strong>を差し込むことで、スクリーンスペース上で計算されたジオメトリを生成させることができます。追加した<strong>コマンドバッファ</strong>は、アプリケーションの実行や、オブジェクトをDisableにしたタイミングで <strong>RemoveCommandBuffer</strong>メソッドを用いて削除します。カメラから<strong>コマンドバッファ</strong>を削除する処理は、<strong>Cleanup</strong>関数内に実装しています。</p>
+<p>続いて、<strong>CommandBuffer</strong>に<strong>レンダリングコマンド</strong>を登録していきます。その際、フレームの更新の頭で、<strong>CommandBuffer.Clear</strong>メソッドによって、すべてのバッファのコマンドを削除しておきます。</p>
+
+<h3><a id="h3-7-4"></a><span class="secno">3.7.4　</span>パーティクルの深度画像を生成する</h3>
+<p>与えられたパーティクルの<strong>頂点のデータ</strong>をもとに<strong>ポイントスプライト</strong>を生成し、その<strong>スクリーンスペースでの深度テクスチャ</strong>を計算します。</p>
+<p>以下、コードを抜粋します。</p>
+<div class="emlist-code">
+<p class="caption">ScreenSpaceFluidRendering.cs</p>
+<pre class="emlist language-csharp">// --------------------------------------------------------------------<font></font>
+// 1. パーティクルをポイントスプライトとして描画し、深度とカラーのデータを得る<font></font>
+// --------------------------------------------------------------------<font></font>
+// デプスバッファのシェーダプロパティIDを取得<font></font>
+int depthBufferId = Shader.PropertyToID("_DepthBuffer");<font></font>
+// 一時的なRenderTextureを取得<font></font>
+buf.GetTemporaryRT(depthBufferId, -1, -1, 24,<font></font>
+  FilterMode.Point, RenderTextureFormat.RFloat);<font></font>
+<font></font>
+// カラーバッファとデプスバッファをレンダーターゲットに指定<font></font>
+buf.SetRenderTarget<font></font>
+(<font></font>
+  new RenderTargetIdentifier(depthBufferId),  // デプス<font></font>
+  new RenderTargetIdentifier(depthBufferId)   // デプス書き込み用<font></font>
+);<font></font>
+// カラーバッファとデプスバッファをクリア<font></font>
+buf.ClearRenderTarget(true, true, Color.clear);<font></font>
+<font></font>
+// パーティクルのサイズをセット<font></font>
+_renderParticleDepthMaterial.SetFloat ("_ParticleSize", _particleSize);<font></font>
+// パーティクルのデータ（ComputeBuffer）をセット<font></font>
+_renderParticleDepthMaterial.SetBuffer("_ParticleDataBuffer",<font></font>
+_particleControllerScript.GetParticleDataBuffer());<font></font>
+<font></font>
+// パーティクルをポイントスプライトとして描画し、深度画像を得る<font></font>
+buf.DrawProcedural<font></font>
+(<font></font>
+  Matrix4x4.identity,<font></font>
+  _renderParticleDepthMaterial,<font></font>
+  0,<font></font>
+  MeshTopology.Points,<font></font>
+  _particleControllerScript.GetMaxParticleNum()<font></font>
+);<font></font>
+<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">RenderParticleDepth.shader</p>
+<pre class="emlist language-hlsl">// --------------------------------------------------------------------<font></font>
+// Vertex Shader<font></font>
+// --------------------------------------------------------------------<font></font>
+v2g vert(uint id : SV_VertexID)<font></font>
+{<font></font>
+  v2g o = (v2g)0;<font></font>
+  FluidParticle fp = _ParticleDataBuffer[id];<font></font>
+  o.position = float4(fp.position, 1.0);<font></font>
+  return o;<font></font>
+}<font></font>
+<font></font>
+// --------------------------------------------------------------------<font></font>
+// Geometry Shader<font></font>
+// --------------------------------------------------------------------<font></font>
+// ポイントスプライトの各頂点の位置<font></font>
+static const float3 g_positions[4] =<font></font>
+{<font></font>
+  float3(-1, 1, 0),<font></font>
+  float3( 1, 1, 0),<font></font>
+  float3(-1,-1, 0),<font></font>
+  float3( 1,-1, 0),<font></font>
+};<font></font>
+// 各頂点のUV座標値<font></font>
+static const float2 g_texcoords[4] =<font></font>
+{<font></font>
+  float2(0, 1),<font></font>
+  float2(1, 1),<font></font>
+  float2(0, 0),<font></font>
+  float2(1, 0),<font></font>
+};<font></font>
+<font></font>
+[maxvertexcount(4)]<font></font>
+void geom(point v2g In[1], inout TriangleStream&lt;g2f&gt; SpriteStream)<font></font>
+{<font></font>
+  g2f o = (g2f)0;<font></font>
+  // ポイントスプライトの中心の頂点の位置<font></font>
+  float3 vertpos = In[0].position.xyz;<font></font>
+  // ポイントスプライト4点<font></font>
+  [unroll]<font></font>
+  for (int i = 0; i &lt; 4; i++)<font></font>
+  {<font></font>
+    // クリップ座標系でのポイントスプライトの位置を求め代入<font></font>
+    float3 pos = g_positions[i] * _ParticleSize;<font></font>
+    pos = mul(unity_CameraToWorld, pos) + vertpos;<font></font>
+    o.position = UnityObjectToClipPos(float4(pos, 1.0));<font></font>
+    // ポイントスプライトの頂点のUV座標を代入<font></font>
+    o.uv       = g_texcoords[i];<font></font>
+    // 視点座標系でのポイントスプライトの位置を求め代入<font></font>
+    o.vpos     = UnityObjectToViewPos(float4(pos, 1.0)).xyz * float3(1, 1, 1);<font></font>
+    // ポイントスプライトのサイズを代入<font></font>
+    o.size     = _ParticleSize;<font></font>
+<font></font>
+    SpriteStream.Append(o);<font></font>
+  }<font></font>
+  SpriteStream.RestartStrip();<font></font>
+}<font></font>
+<font></font>
+// --------------------------------------------------------------------<font></font>
+// Fragment Shader<font></font>
+// --------------------------------------------------------------------<font></font>
+struct fragmentOut<font></font>
+{<font></font>
+  float  depthBuffer  : SV_Target0;<font></font>
+  float  depthStencil : SV_Depth;<font></font>
+};<font></font>
+<font></font>
+fragmentOut frag(g2f i)<font></font>
+{<font></font>
+  // 法線を計算<font></font>
+  float3 N = (float3)0;<font></font>
+  N.xy = i.uv.xy * 2.0 - 1.0;<font></font>
+  float radius_sq = dot(N.xy, N.xy);<font></font>
+  if (radius_sq &gt; 1.0) discard;<font></font>
+  N.z = sqrt(1.0 - radius_sq);<font></font>
+<font></font>
+  // クリップ空間でのピクセルの位置<font></font>
+  float4 pixelPos     = float4(i.vpos.xyz + N * i.size, 1.0);<font></font>
+  float4 clipSpacePos = mul(UNITY_MATRIX_P, pixelPos);<font></font>
+  // 深度<font></font>
+  float  depth = clipSpacePos.z / clipSpacePos.w; // 正規化<font></font>
+<font></font>
+  fragmentOut o  = (fragmentOut)0;<font></font>
+  o.depthBuffer  = depth;<font></font>
+  o.depthStencil = depth;<font></font>
+<font></font>
+  return o;<font></font>
+}<font></font>
+<font></font>
+</pre>
+</div>
+<p>C#スクリプトでは、まず、スクリーンスペースでの計算のための<strong>一時的なRenderTexture</strong>を生成します。コマンドバッファでは、<strong>CommandBuffer.GetTemporaryRT</strong>メソッドによって、<strong>一時的なRenderTexture</strong>データを作り、それを利用します。<strong>GetTemporaryRT</strong>メソッドの第一引数には、作成したいバッファのシェーダプロパティの<strong>ユニークID</strong>を渡します。シェーダにおける<strong>ユニークID</strong>とは、Unityのゲームシーンが実行される度に生成されるシェーダ内のプロパティにアクセスするための<strong>int型の固有のID</strong>で、<strong>Shader.PropertyToID</strong>メソッドで<strong>プロパティ名</strong>を渡して生成することができます。（この固有IDは、実行されたタイミングが異なるゲームシーンでは異なるため、その値を保持したり、ネットワークを通じて他のアプリケーション共有する事はできません）</p>
+<p><strong>GetTemporaryRT</strong>メソッドの第2,3引数では、解像度を指定します。<strong>-1</strong>を指定すると、現在ゲームシーンでレンダリングしているカメラの解像度（Camera pixel width, height）が渡されます。</p>
+<p>第4引数では、デプスバッファのビット数を指定します。<strong>_DepthBuffer</strong>では、デプス+ステンシルの値も書き込みたいため、0以上の値を指定します。</p>
+<p>生成したRenderTextureは、<strong>CommandBuffer.SetRenderTarget</strong>メソッドで、<strong>レンダーターゲット</strong>に指定し、<strong>ClearRenderTarget</strong>メソッドで、クリアをしておきます。これを行わないと毎フレームごとに上書きされていくため、適切に描画されません。</p>
+<p><strong>CommandBuffer.DrawProcedural</strong>メソッドで、パーティクルのデータを描画し、<strong>スクリーンスペース上でのカラーと深度のテクスチャ</strong>を計算します。この計算を図示すると以下のようになります。</p>
+<div id="ssfr_calculate_depth_texture" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_calculate_depth_texture.png" alt="Depth image calculation">
+<p class="caption">
+図3.5: 深度画像の計算
+</p>
+</div>
+<p><strong>Vertex</strong>シェーダ、<strong>Geometry</strong>シェーダでは、与えられたパーティクルのデータから視点方向にビルボードする<strong>ポイントスプライト</strong>を生成します。<strong>Fragment</strong>シェーダでは、<strong>ポイントスプライト</strong>のUV座標値から半球体の法線を計算し、これを元に、<strong>スクリーンスペースでの深度画像</strong>を得ます。</p>
+<div id="ssfr_depth_texture" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_depth_texture.jpg" alt="Depth image">
+<p class="caption">
+図3.6: 深度画像
+</p>
+</div>
+
+<h3><a id="h3-7-5"></a><span class="secno">3.7.5　</span>深度画像にブラーエフェクトをかけ滑らかにする</h3>
+<p><strong>得られた深度画像</strong>をブラーエフェクトをかけ滑らかにすることで、隣接するパーティクルとの境界を曖昧にし連結しているように描画することができます。ここでは、深度に応じてブラーエフェクトのオフセット量の減衰がなされるようなフィルタを用いています。</p>
+<div id="ssfr_blurred_depth_texture" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_blurred_depth_texture.jpg" alt="Blurred depth image">
+<p class="caption">
+図3.7: ブラーをかけた深度画像
+</p>
+</div>
+
+<h3><a id="h3-7-6"></a><span class="secno">3.7.6　</span>深度から表面の法線を計算する</h3>
+<p><strong>ブラーを施した深度画像</strong>から<strong>法線</strong>を計算します。法線の計算には、XとY方向に、<strong>偏微分</strong>を行うことによって求めます。</p>
+<div id="ssfr_calculate_normal" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_calculate_normal.png" alt="Normal calculation">
+<p class="caption">
+図3.8: 法線の計算
+</p>
+</div>
+<p>以下、コードを抜粋します</p>
+<div class="emlist-code">
+<p class="caption">CalcNormal.shader</p>
+<pre class="emlist language-hlsl">// --------------------------------------------------------------------<font></font>
+// Fragment Shader<font></font>
+// --------------------------------------------------------------------<font></font>
+// スクリーンのUVから視点座標系での位置を求める<font></font>
+float3 uvToEye(float2 uv, float z)<font></font>
+{<font></font>
+  float2 xyPos = uv * 2.0 - 1.0;<font></font>
+  // クリップ座標系での位置<font></font>
+  float4 clipPos = float4(xyPos.xy, z, 1.0);<font></font>
+  // 視点座標系での位置<font></font>
+  float4 viewPos = mul(unity_CameraInvProjection, clipPos);<font></font>
+  // 正規化<font></font>
+  viewPos.xyz = viewPos.xyz / viewPos.w;<font></font>
+<font></font>
+  return viewPos.xyz;<font></font>
+}<font></font>
+<font></font>
+// 深度の値を深度バッファから得る<font></font>
+float sampleDepth(float2 uv)<font></font>
+{<font></font>
+#if UNITY_REVERSED_Z<font></font>
+  return 1.0 - tex2D(_DepthBuffer, uv).r;<font></font>
+#else<font></font>
+  return tex2D(_DepthBuffer, uv).r;<font></font>
+#endif<font></font>
+}<font></font>
+<font></font>
+// 視点座標系での位置を得る<font></font>
+float3 getEyePos(float2 uv)<font></font>
+{<font></font>
+  return uvToEye(uv, sampleDepth(uv));<font></font>
+}<font></font>
+<font></font>
+float4 frag(v2f_img i) : SV_Target<font></font>
+{<font></font>
+  // スクリーン座標からテクスチャのUV座標に変換<font></font>
+  float2 uv = i.uv.xy;<font></font>
+  // 深度を取得<font></font>
+  float depth = tex2D(_DepthBuffer, uv);<font></font>
+<font></font>
+  // 深度が書き込まれていなければピクセルを破棄<font></font>
+#if UNITY_REVERSED_Z<font></font>
+  if (Linear01Depth(depth) &gt; 1.0 - 1e-3)<font></font>
+    discard;<font></font>
+#else<font></font>
+  if (Linear01Depth(depth) &lt; 1e-3)<font></font>
+    discard;<font></font>
+#endif<font></font>
+  // テクセルサイズを格納<font></font>
+  float2 ts = _DepthBuffer_TexelSize.xy;<font></font>
+<font></font>
+  // 視点座標系（カメラから見た）位置をスクリーンのuv座標から求める<font></font>
+  float3 posEye = getEyePos(uv);<font></font>
+<font></font>
+  // xについて偏微分<font></font>
+  float3 ddx  = getEyePos(uv + float2(ts.x, 0.0)) - posEye;<font></font>
+  float3 ddx2 = posEye - getEyePos(uv - float2(ts.x, 0.0));<font></font>
+  ddx = abs(ddx.z) &gt; abs(ddx2.z) ? ddx2 : ddx;<font></font>
+<font></font>
+  // yについて偏微分<font></font>
+  float3 ddy = getEyePos(uv + float2(0.0, ts.y)) - posEye;<font></font>
+  float3 ddy2 = posEye - getEyePos(uv - float2(0.0, ts.y));<font></font>
+  ddy = abs(ddy.z) &gt; abs(ddy2.z) ? ddy2 : ddy;<font></font>
+<font></font>
+  // 外積から上で求めたベクトルと直交する法線を求める<font></font>
+  float3 N = normalize(cross(ddx, ddy));<font></font>
+<font></font>
+  // 法線をカメラの位置との関係で変更する<font></font>
+  float4x4 vm = _ViewMatrix;<font></font>
+  N = normalize(mul(vm, float4(N, 0.0)));<font></font>
+<font></font>
+  // (-1.0～1.0) を (0.0～1.0) に変換<font></font>
+  float4 col = float4(N * 0.5 + 0.5, 1.0);<font></font>
+<font></font>
+  return col;<font></font>
+}<font></font>
+<font></font>
+</pre>
+</div>
+<div id="ssfr_normal_texture" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_normal_texture.jpg" alt="Normal image">
+<p class="caption">
+図3.9: 法線画像
+</p>
+</div>
+
+<h3><a id="h3-7-7"></a><span class="secno">3.7.7　</span>表面の陰影を計算する</h3>
+<p>これまでの計算で求めた深度画像と法線画像を、<strong>G-Buffer</strong>に書き込みを行います。<strong>G-Buffer</strong>が生成される<strong>レンダリングパス</strong>の直前に書き込むことによって、計算結果を元にしたジオメトリが生成され、シェーディングやライティングが施されます。</p>
+<p>コードを抜粋します</p>
+<div class="emlist-code">
+<p class="caption">ScreenSpaceFluidRendering.cs</p>
+<pre class="emlist language-csharp">// --------------------------------------------------------------------<font></font>
+// 4. 計算結果を G-Buffer に書き込みパーティクルを描画<font></font>
+// --------------------------------------------------------------------<font></font>
+buf.SetGlobalTexture("_NormalBuffer", normalBufferId); // 法線バッファをセット<font></font>
+buf.SetGlobalTexture("_DepthBuffer",  depthBufferId);  // デプスバッファをセット<font></font>
+<font></font>
+// プロパティをセット<font></font>
+_renderGBufferMaterial.SetColor("_Diffuse",  _diffuse );<font></font>
+_renderGBufferMaterial.SetColor("_Specular",<font></font>
+  new Vector4(_specular.r, _specular.g, _specular.b, 1.0f - _roughness));<font></font>
+_renderGBufferMaterial.SetColor("_Emission", _emission);<font></font>
+<font></font>
+// G-Buffer を レンダーターゲットにセット<font></font>
+buf.SetRenderTarget<font></font>
+(<font></font>
+  new RenderTargetIdentifier[4]<font></font>
+  {<font></font>
+    BuiltinRenderTextureType.GBuffer0, // Diffuse<font></font>
+    BuiltinRenderTextureType.GBuffer1, // Specular + Roughness<font></font>
+    BuiltinRenderTextureType.GBuffer2, // World Normal<font></font>
+    BuiltinRenderTextureType.GBuffer3  // Emission<font></font>
+  },<font></font>
+  BuiltinRenderTextureType.CameraTarget  // Depth<font></font>
+);<font></font>
+// G-Bufferに書き込み<font></font>
+buf.DrawMesh(quad, Matrix4x4.identity, _renderGBufferMaterial);<font></font>
+<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">RenderGBuffer.shader</p>
+<pre class="emlist language-hlsl">// GBufferの構造体<font></font>
+struct gbufferOut<font></font>
+{<font></font>
+  half4 diffuse  : SV_Target0; // 拡散反射<font></font>
+  half4 specular : SV_Target1; // 鏡面反射<font></font>
+  half4 normal   : SV_Target2; // 法線<font></font>
+  half4 emission : SV_Target3; // 放射光<font></font>
+  float depth    : SV_Depth;   // 深度<font></font>
+};<font></font>
+<font></font>
+sampler2D _DepthBuffer; // 深度<font></font>
+sampler2D _NormalBuffer;// 法線<font></font>
+<font></font>
+fixed4 _Diffuse;  // 拡散反射光の色<font></font>
+fixed4 _Specular; // 鏡面反射光の色<font></font>
+float4 _Emission; // 放射光の色<font></font>
+<font></font>
+void frag(v2f i, out gbufferOut o)<font></font>
+{<font></font>
+  float2 uv = i.screenPos.xy * 0.5 + 0.5;<font></font>
+<font></font>
+  float  d = tex2D(_DepthBuffer,  uv).r;<font></font>
+  float3 n = tex2D(_NormalBuffer, uv).xyz;<font></font>
+<font></font>
+#if UNITY_REVERSED_Z<font></font>
+  if (Linear01Depth(d) &gt; 1.0 - 1e-3)<font></font>
+    discard;<font></font>
+#else<font></font>
+  if (Linear01Depth(d) &lt; 1e-3)<font></font>
+    discard;<font></font>
+#endif<font></font>
+<font></font>
+  o.diffuse  = _Diffuse;<font></font>
+  o.specular = _Specular;<font></font>
+  o.normal   = float4(n.xyz , 1.0);<font></font>
+<font></font>
+  o.emission = _Emission;<font></font>
+#ifndef UNITY_HDR_ON<font></font>
+  o.emission = exp2(-o.emission);<font></font>
+#endif<font></font>
+<font></font>
+  o.depth    = d;<font></font>
+}<font></font>
+</pre>
+</div>
+<p><strong>SetRenderTarget</strong>メソッドで、レンダーターゲットに書き込み対象の<strong>G-Buffer</strong>を指定します。第1引数のターゲットとしたいカラーバッファに<strong>BuiltinRenderTextureType</strong>列挙型の<strong>GBuffer0</strong>、<strong>GBuffer1</strong>、<strong>GBuffer2</strong>、<strong>GBuffer3</strong>を指定した<strong>RenderTargetIdentifier</strong>の配列、また第2引数のターゲットとしたいデプスバッファに<strong>CameraTarget</strong>を指定することで、<strong>デフォルトのG-Buffer一式</strong>、<strong>深度情報</strong>を<strong>レンダーターゲット</strong>に指定することができます。</p>
+<p><strong>コマンドバッファ</strong>で複数の<strong>レンダーターゲット</strong>を指定したシェーダによるスクリーンスペース上の計算を行うために、ここでは、<strong>DrawMesh</strong>メソッドを用いて、画面を覆う矩形のメッシュを描画することで、これを実現しています。</p>
+
+<h3><a id="h3-7-8"></a><span class="secno">3.7.8　</span>一時的なRenderTextureの解放</h3>
+<p><strong>GetTemporaryRT</strong>メソッドで生成した一時的なRenderTextureは、<strong>ReleaseTemporaryRT</strong>メソッドで忘れずに解放します。これを行わないと、毎フレームメモリが確保され、メモリのオーバーフローが起きてしまいます。</p>
+
+<h3><a id="h3-7-9"></a><span class="secno">3.7.9　</span>レンダリング結果</h3>
+<div id="ssfr_result" class="image">
+<img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/ssfr_result.jpg" alt="Rendering result">
+<p class="caption">
+図3.10: レンダリング結果
+</p>
+</div>
+
+<h2><a id="h3-8"></a><span class="secno">3.8　</span>まとめ</h2>
+<p>この章は、<strong>Deferred Shading</strong>によるジオメトリの操作という点にフォーカスを当てた解説でした。今回のサンプルでは、半透明のオブジェクトとして、厚みに応じた光の吸収や内部での屈折を考慮した背景の透過、集光現象などの要素は実装しておりません。液体としての表現を追求するならば、これらの要素も実装していくと良いでしょう。<strong>Deferred Rendering</strong>を活用していくためには、Unityを使っていて普段は意識しなくても済むような座標系や座標変換、シェーディング、ライティングなどの3DCGのレンダリングにおける計算の理解が求められます。観測の範囲では、まだまだUnityでの<strong>Deferred Rendering</strong>を使用したサンプルコードや学習のためのリファレンスが多くなく、自分自身まだ理解が不十分ですが、CG表現の幅を広げることができる技術であると感じています。本章を通して、従来の<strong>Forward Rendering</strong>では実現できないようなCGによる表現を行いたいという目的を持った方への一助となれば幸いです。</p>
+
+<h2><a id="h3-9"></a><span class="secno"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See </font><span class="secno"><font style="vertical-align: inherit;">3.9　</font></span></font></h2>
+<ul>
+<li>GDC Screen Space Fluid Rendering for Games, Simon Green, NVIDIA</li>
+</ul>
+<p><a href="http://developer.download.nvidia.com/presentations/2010/gdc/Direct3D_Effects.pdf" class="link">http://developer.download.nvidia.com/presentations/2010/gdc/Direct3D_Effects.pdf</a></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Why real-time rendering, Satoshi Kodaira</font></font></li>
+</ul>
+<p><a href="https://www.slideshare.net/SatoshiKodaira/ss-69311865" class="link">https://www.slideshare.net/SatoshiKodaira/ss-69311865</a></p><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 579px; top: 21.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 3 _ ScreenSpaceFluidRendering_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第3章　ScreenSpaceFluidRendering</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 3 _ ScreenSpaceFluidRendering_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 3 _ ScreenSpaceFluidRendering_files/saved_resource(2).html"></iframe></body></html>

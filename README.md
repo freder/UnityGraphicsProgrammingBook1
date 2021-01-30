@@ -8,11 +8,15 @@ coudn't get `npm run pdf` to work, so I'm rolling my own conversion to epub, usi
 
 ```
 # install dependencies
-./setup.sh
+chmod +x setup.sh ; ./setup.sh
 
 # convert to 
 REVIEW_PREFIX='/usr/local/lib/ruby/gems/2.7.0/bin/' npx grunt html \
     && node make-epub.js
+
+mkdir html ; \
+    mv articles/*.html html/ ; \
+    cp -R articles/images html/images
 ```
 
 this creates:

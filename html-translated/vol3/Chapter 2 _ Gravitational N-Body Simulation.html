@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://freder.io/files/unity3/takao.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 2 _ Gravitational N-Body Simulation_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Gravitational N-Body Simulation</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 2 _ Gravitational N-Body Simulation_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 2 _ Gravitational N-Body Simulation_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ Gravitational N-Body Simulation_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ Gravitational N-Body Simulation_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 2 _ Gravitational N-Body Simulation_files/saved_resource.html"></iframe></div>
+<h1><a id="h2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">Chapter 2　</font></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;"> Gravitational N-Body Simulation</font></font></h1>
+
+<h2><a id="h2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will explain the GPU implementation method of Gravitational N-Body Simulation, which is a method of simulating the movement of celestial bodies existing in outer space.</font></font></p>
+<div id="id_takao_2Fthumb" class="image">
+<img src="./Chapter 2 _ Gravitational N-Body Simulation_files/thumb.png" alt="Result">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.1: Result
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The corresponding sample program is </font></font><br><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming3" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming3</font></font></a><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> "Assets / NBodySimulation".</font></font></p>
+
+<h2><a id="h2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2 What is　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> N-Body simulation?</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simulations that calculate the interaction of N physical objects are collectively called N-Body simulations. </font><font style="vertical-align: inherit;">There are many types of problems using N-Body simulation, and in particular, the problem of dealing with a system in which celestial bodies scattered in outer space attract each other by gravity to form a unit </font><font style="vertical-align: inherit;">is called a </font></font><b class="kw"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">gravity multisystem problem.</font></font></b><!-- IDX:重力多体系問題 --><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> I will. </font><font style="vertical-align: inherit;">The algorithm explained in this chapter corresponds to this, and it means to solve the equation of motion of the gravitational multisystem using N-Body simulation.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition to the gravity multisystem problem, N-Body simulation is also available.</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Calculation of intermolecular force</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Analysis of dark matter</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Analysis of cluster collisions</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is applied in a wide range of fields, from small to magnificent.</font></font></p>
+
+<h2><a id="h2-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Algorithm</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's see what kind of mathematical formulas we will solve immediately.</font></font></p>
+<p>重力多体系問題は、高校物理を履修している方にとっては馴染み深い方程式である、<b class="kw">万有引力の方程式</b><!-- IDX:万有引力の方程式 -->を、空間内の全天体に対して計算してあげることで、シミュレートが可能です。ただし、高校物理では一直線上にある物体のみを扱う都合上、このような記述で学習されていたのではないかと思います。</p>
+<p>ここで、<span class="equation">f</span>は万有引力、<span class="equation">G</span>は万有引力定数、<span class="equation">M, m</span>は2天体のそれぞれの質量、<span class="equation">r</span>は天体間の距離です。当然ながら、これでは2天体間の<b class="kw">力の大きさ</b><!-- IDX:力の大きさ -->(スカラー量)しか求めることはできません。</p>
+<p>今回の実装では、Unity内部の3次元空間上での動きを考える必要があるため、方向を示す<b class="kw">ベクトル量</b><!-- IDX:ベクトル量 -->が必要になります。そこで、2天体(<span class="equation">i, j</span>)間で発生する力のベクトルを求めるために、万有引力の方程式を次のように記述します。</p>
+<p>ここで、<span class="equation">\mbox{\boldmath $f$}_{ij}</span>は、天体iが天体jから受ける力のベクトル、<span class="equation">m_i, m_j</span>は2天体のそれぞれの質量、<span class="equation">r_{ij}</span>は天体<span class="equation">j</span>から天体<span class="equation">i</span>への方向ベクトルです。右辺左側は、最初に出てきた万有引力の方程式と同じく、力の大きさを算出しており、右辺右側部分で力を受ける方向の単位ベクトルをかけることで、ベクトル化しています。</p>
+<div id="id_takao_2Fvec" class="image">
+<pre>missing image: takao/vec</pre>
+<p class="caption">
+図: 数式の意味
+</p>
+</div>
+<p>さらに、2天体間ではなく、1つの天体(<span class="equation">i</span>)が周囲のすべての天体から受ける力の大きさを<span class="equation">\mbox{\boldmath $F$}_{i}</span>とすると、次のように計算できます。</p>
+<p>式にあるように、すべての万有引力の総和をとることで、周囲の天体から受ける力を算出することができます。</p>
+<p>また、シミュレーションを簡単にするために、Softening因子<span class="equation">\varepsilon</span>を用いて方程式を書き換えると、次のようになります。</p>
+<p>これにより、天体が同一の位置に来てしまっても衝突を無視することが可能になります(自身同士で計算をしてしまってもシグマ内の結果は<span class="equation">0</span>となります)。</p>
+<p>次に、運動の第二法則<span class="equation">m \mbox{\boldmath $a$} = \mbox{\boldmath $f$}</span>を利用して、力のベクトルを加速度のベクトルに変換していきます。まず、運動の第二法則を変形して、次式のようにします。</p>
+<p>続いて、重力多体系の運動方程式に、先ほどの変形式を代入して書き換えると、天体が受ける加速度を算出することができます。</p>
+<p>これで、シミュレーションの下準備は整いました。さて、数式では重力多体系問題を表現することができましたが、これらの数式をプログラムに落とし込むにはどのようにすればよいのでしょうか。次節でしっかりと解説していきたいと思います。</p>
+
+<h2><a id="h2-4"></a><span class="secno">2.4　</span>差分法</h2>
+<p>先述の式(\ref{eq:newton})は、方程式の中でも<b class="kw">微分方程式</b><!-- IDX:微分方程式 -->というものに分類されます。というのも、物理世界では<b class="kw">位置、速度、加速度</b><!-- IDX:位置、速度、加速度 -->の関係は次の画像のようになっており、加速度が位置関数の2階微分であることから、そのまま微分方程式と呼ばれます。</p>
+<div id="id_takao_2Fdiff" class="image">
+<pre class="dummyimage"></pre>
+<p class="caption">
+図2.2: 位置・速度・加速度の関係
+</p>
+</div>
+<p>コンピュータで微分方程式を解く方法は様々存在しますが、中でも一般的なのが<b class="kw">差分法</b><!-- IDX:差分法 -->と呼ばれるアルゴリズムです。手始めに、微分のおさらいから解説をはじめていきましょう。</p>
+
+<h3><a id="h2-4-1"></a><span class="secno">2.4.1　</span>微分</h3>
+<p>まずはじめに、数学的な微分の定義を確認します。関数<span class="equation">f(t)</span>の微分は次式で定義されます。</p>
+<p>数式だけでは何を示しているのかがわかりにくいので、グラフに置き換えると次のようになります。</p>
+<div id="id_takao_2Fgraph" class="image">
+<pre class="dummyimage"></pre>
+<p class="caption">
+図2.3: 前進差分
+</p>
+</div>
+<p>関数の微分値は、<span class="equation">t_n</span>時点でのグラフの傾きになることはすでにご存じかとは思います。つまるところこのグラフは、傾きを算出するために<span class="equation">\Delta t</span>を無限に小さくしていきますよ、という状態を表しており、式(\ref{eq:delta})そのものを表していることがわかるかと思います。</p>
+
+<h3><a id="h2-4-2"></a><span class="secno">2.4.2　</span>差分</h3>
+<p>コンピュータ上では数値としての「無限」を扱うことができません。そのため、できる限り小さい有限の<span class="equation">\Delta t</span>で近似してあげることになります。それを考慮して、先ほどの微分の定義を差分に書き換えると、次式のようになります。</p>
+<p>そのまま極限が取れた形ですね。「無限小の<span class="equation">\Delta t</span>はコンピュータ上で表現できないので、ある程度の大きさの<span class="equation">\Delta t</span>で止めて近似します」という認識で大丈夫だと思います。</p>
+<p>ここで、先ほどの<span class="imgref"><a href="https://freder.io/files/unity3/takao.html#id_takao_2Fdiff">図2.2</a></span>を物理っぽく表してみると、次のようになります。</p>
+<div id="id_takao_2Fdiff2" class="image">
+<pre class="dummyimage"></pre>
+<p class="caption">
+図2.4: 位置・速度・加速度の関係(数式)
+</p>
+</div>
+<p>つまり、式(\ref{eq:differenciate})を、<span class="imgref"><a href="https://freder.io/files/unity3/takao.html#id_takao_2Fdiff2">図2.4</a></span>に照らし合わせると、次のようになります。</p>
+<p>さらに、式(\ref{eq:x}), (\ref{eq:v})を合成すると、次のようになります。</p>
+<p>この式は、現在時刻<span class="equation">t</span>から「<span class="equation">\Delta t</span>秒後の位置座標は、現在時刻の加速度と速度がわかっていれば算出が可能である」ということを意味しています。これが、差分法でシミュレーションを行う際の基礎的な考え方となります。また、このような微分方程式を差分法を用いて表現したものを、<b class="kw">差分方程式(漸化式)</b><!-- IDX:差分方程式(漸化式) -->と呼びます。</p>
+<p>実際に差分法でリアルタイムシミュレーションを行う場合は、微小時間<span class="equation">\Delta t</span>(タイムステップ)を、1フレームの描画時間(60fpsであれば、1/60秒)にするのが一般的です。</p>
+
+<h2><a id="h2-5"></a><span class="secno">2.5　</span>実装</h2>
+<p>では、いよいよ実装に入っていきます。該当シーンは、「SimpleNBodySimulation.unity」になります。</p>
+
+<h3><a id="h2-5-1"></a><span class="secno">2.5.1　</span>CPU側のプログラム</h3>
+
+<h4><a id="h2-5-1-1"></a>天体のデータ構造</h4>
+<p>まず初めに、天体粒子のデータ構造を定義します。式(\ref{eq:delta})を見ると、1つの天体がもつべき物理量は、「位置、速度、質量」であることがわかります。よって、次の構造体を定義してあげればよさそうです。</p>
+<div class="emlist-code">
+<p class="caption">Body.cs</p>
+<pre class="emlist">public struct Body<font></font>
+{<font></font>
+  public Vector3 position;<font></font>
+  public Vector3 velocity;<font></font>
+  public float mass;<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h2-5-1-2"></a>バッファの用意</h4>
+<p>次に、生成したい粒子数をインスペクタから設定し、その個数分バッファを確保します。読み込み用と書き込み用でバッファを分けることにより、データの書き込み競合が起きないようにします。</p>
+<p>また、構造体ひとつあたりのByte数は、「System.Runtime.InteropServices」名前空間の、「Marshal.SizeOf(Type t)」関数で取得することが可能です。</p>
+<div class="emlist-code">
+<p class="caption">SimpleNBodySimulation.cs</p>
+<pre class="emlist">void InitBuffer()<font></font>
+{<font></font>
+  // バッファの作成 (Read/Write用) → 競合防止<font></font>
+  bodyBuffers = new ComputeBuffer[2];<font></font>
+<font></font>
+    // 各要素がBody構造体のバッファを粒子の個数分作成<font></font>
+  bodyBuffers[READ] = new ComputeBuffer(numBodies,<font></font>
+    Marshal.SizeOf(typeof(Body)));<font></font>
+<font></font>
+  bodyBuffers[WRITE] = new ComputeBuffer(numBodies,<font></font>
+    Marshal.SizeOf(typeof(Body)));<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h2-5-1-3"></a>天体の初期配置</h4>
+<p>続いて、空間に粒子を配置します。初めに、粒子用の配列を作成し、それぞれの要素に物理量の初期値を与えます。サンプルでは、球体内をランダムサンプリングして初期位置とし、速度を0、質量をランダムに与えました。</p>
+<p>最後に、作成した配列をバッファをセットして、準備は完了です<a id="fnb-scaling" href="https://freder.io/files/unity3/takao.html#fn-scaling" class="noteref" epub:type="noteref">*1</a>。</p>
+<div class="footnote" epub:type="footnote" id="fn-scaling"><p class="footnote">[*1] ※ ルック調整のために、位置座標をスケーリングできる変数を用意していますが、すでに調整済みですので皆さんは気にする必要はありません。</p></div>
+<div class="emlist-code">
+<p class="caption">SimpleNBodySimulation.cs</p>
+<pre class="emlist">void DistributeBodies()<font></font>
+{<font></font>
+  Random.InitState(seed);<font></font>
+<font></font>
+  // ルック調整用<font></font>
+  float scale = positionScale<font></font>
+                * Mathf.Max(1, numBodies / DEFAULT_PARTICLE_NUM);<font></font>
+<font></font>
+  // バッファにセットするための配列を用意<font></font>
+  Body[] bodies = new Body[numBodies];<font></font>
+<font></font>
+  int i = 0;<font></font>
+  while (i &lt; numBodies)<font></font>
+  {<font></font>
+    // 球体内でサンプリング<font></font>
+    Vector3 pos = Random.insideUnitSphere;<font></font>
+<font></font>
+    // 配列にセット<font></font>
+    bodies[i].position = pos * scale;<font></font>
+    bodies[i].velocity = Vector3.zero;<font></font>
+    bodies[i].mass = Random.Range(0.1f, 1.0f);<font></font>
+<font></font>
+<font></font>
+    i++;<font></font>
+  }<font></font>
+<font></font>
+  // バッファに配列をセット<font></font>
+  bodyBuffers[READ].SetData(bodies);<font></font>
+  bodyBuffers[WRITE].SetData(bodies);<font></font>
+<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h2-5-1-4"></a>シミュレーションルーチン</h4>
+<p>いよいよ、シミュレーションを実際に動かしていきます。次のコードは、毎フレーム実行される部分になります。</p>
+<p>まずは、ComputeShaderの定数バッファに値をセットします。差分方程式の<span class="equation">\Delta t</span>には、Unityに用意されている「Time.deltaTime」を使用します。また、GPUの実装の都合上、スレッド数・スレッドブロック数もあわせて転送しています。</p>
+<p>計算終了後、シミュレーションの計算結果は、書き込み用のバッファに格納されていますので、次のフレームで読み込み用バッファとして利用するために最後の行でバッファを入れ替えています。</p>
+<div class="emlist-code">
+<p class="caption">SimpleNBodySimulation.cs</p>
+<pre class="emlist">void Update()<font></font>
+{<font></font>
+  // コンピュートシェーダに定数を転送<font></font>
+  // Δt<font></font>
+  NBodyCS.SetFloat("_DeltaTime", Time.deltaTime);<font></font>
+  // 速度減衰率<font></font>
+  NBodyCS.SetFloat("_Damping", damping);<font></font>
+  // Softening因子<font></font>
+  NBodyCS.SetFloat("_SofteningSquared", softeningSquared);<font></font>
+  // 粒子数<font></font>
+  NBodyCS.SetInt("_NumBodies", numBodies);<font></font>
+<font></font>
+  // ブロック当たりのスレッド数<font></font>
+  NBodyCS.SetVector("_ThreadDim",<font></font>
+    new Vector4(SIMULATION_BLOCK_SIZE, 1, 1, 0));<font></font>
+<font></font>
+  // ブロック数<font></font>
+  NBodyCS.SetVector("_GroupDim",<font></font>
+  new Vector4(Mathf.CeilToInt(numBodies / SIMULATION_BLOCK_SIZE), 1, 1, 0));<font></font>
+<font></font>
+  // バッファアドレスを転送<font></font>
+  NBodyCS.SetBuffer(0, "_BodiesBufferRead", bodyBuffers[READ]);<font></font>
+  NBodyCS.SetBuffer(0, "_BodiesBufferWrite", bodyBuffers[WRITE]);<font></font>
+<font></font>
+  // コンピュートシェーダ実行<font></font>
+  NBodyCS.Dispatch(0,<font></font>
+    Mathf.CeilToInt(numBodies / SIMULATION_BLOCK_SIZE), 1, 1);<font></font>
+<font></font>
+<font></font>
+  // Read/Writeを入れ替え (競合防止)<font></font>
+  Swap(bodyBuffers);<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h2-5-1-5"></a>レンダリング</h4>
+<p>シミュレーション計算後に、粒子をレンダリングするマテリアルに対してインスタンス描画指示を出します。粒子をレンダリングする際、粒子の位置座標をシェーダに与えてあげる必要があるため、計算後のバッファをレンダリング用シェーダに転送します。</p>
+<div class="emlist-code">
+<p class="caption">ParticleRenderer.cs</p>
+<pre class="emlist">void OnRenderObject()<font></font>
+{<font></font>
+  particleRenderMat.SetPass(0);<font></font>
+  particleRenderMat.SetBuffer("_Particles"", bodyBuffers[READ]);<font></font>
+<font></font>
+  Graphics.DrawProcedural(MeshTopology.Points, numBodies);<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h2-5-2"></a><span class="secno">2.5.2　</span>GPU側のプログラム</h3>
+<p>N-Bodyシミュレーションでは、すべての粒子との相互作用を計算する必要がありますので、シンプルに計算していては実行時間が<span class="equation">O(n^2)</span>となってしまい、パフォーマンスを出すことができません。そこで、UnityGraphicsProgramming Vol1、第3章に掲載されているSharedMemory(共有メモリ)の使い方を活用することにします。</p>
+
+<h4><a id="h2-5-2-1"></a>考え方</h4>
+<p>同一ブロック内にあるデータは、シェアードメモリに格納してしまい、I/Oを高速化します。スレッドブロックをタイルに見立てた概念図を次に示します。</p>
+<div id="id_takao_2Ftile" class="image">
+<pre class="dummyimage"></pre>
+<p class="caption">
+図2.5: タイルの概念
+</p>
+</div>
+<p>ここで、行は実行されているグローバルスレッド(DispatchThreadID)、列はスレッド内で全数調査されている対象の粒子です。時間が経過するにつれて、実行している列が右に1個ずつずれていくような認識です。</p>
+<p>また、同時に実行されるタイルの総数は、(粒子の個数 / グループ内スレッド数)になります。サンプルでは、ブロック内スレッド数を256個(SIMULATION_BLOCK_SIZE)としているので、実際にはタイルの中身は5x5ではなく、256x256あるという認識です。</p>
+<p>すべての行は並列に動いていますが、タイル内でデータを共有するため、タイル内で実行されている列がすべてSyncに到達するまで同期待ちを行います(Sync層より右に行かない)。Sync層に到達したのち、次のタイルのデータをシェアードメモリに読み込みなおす、という形です。</p>
+
+<h4><a id="h2-5-2-2"></a>定数バッファの用意</h4>
+<p>CPUからの入力を受けるための定数バッファを、ComputeShader内に記述します。</p>
+<p>また、粒子データを保存するためのバッファも用意しておきます。今回、Body構造体は「Body.cginc」にまとめておきました。後々使いまわしそうなものは、cgincにまとめておくと便利です。</p>
+<p>最後に、シェアードメモリを使用するための宣言もしておきます。</p>
+<div class="emlist-code">
+<p class="caption">SimpleNBodySimulation.compute</p>
+<pre class="emlist">#include "Body.cginc"<font></font>
+<font></font>
+// 定数<font></font>
+cbuffer cb {<font></font>
+        float   _SofteningSquared, _DeltaTime, _Damping;<font></font>
+        uint    _NumBodies;<font></font>
+        float4  _GroupDim, _ThreadDim;<font></font>
+};<font></font>
+<font></font>
+<font></font>
+// 粒子のバッファ<font></font>
+StructuredBuffer&lt;Body&gt; _BodiesBufferRead;<font></font>
+RWStructuredBuffer&lt;Body&gt; _BodiesBufferWrite;<font></font>
+<font></font>
+// 共有メモリ (ブロック内で共有される)<font></font>
+groupshared Body sharedBody[SIMULATION_BLOCK_SIZE];<font></font>
+</pre>
+</div>
+
+<h4><a id="h2-5-2-3"></a>タイルの実装</h4>
+<p>次に、タイルを実装します。</p>
+<div class="emlist-code">
+<p class="caption">SimpleNBodySimulation.compute</p>
+<pre class="emlist">float3 computeBodyForce(Body body, uint3 groupID, uint3 threadID)<font></font>
+{<font></font>
+<font></font>
+  uint start = 0;                               // 開始<font></font>
+  uint finish = _NumBodies;<font></font>
+<font></font>
+  float3 acc = (float3)0;<font></font>
+  int currentTile = 0;<font></font>
+<font></font>
+  // タイル数(ブロック数)分実行<font></font>
+  for (uint i = start; i &lt; finish; i += SIMULATION_BLOCK_SIZE)<font></font>
+  {<font></font>
+    // 共有メモリに格納<font></font>
+    // sharedBody[ブロック内スレッドID]<font></font>
+    // = _BodiesBufferRead[タイルID * ブロック内総スレッド数 + スレッドID]<font></font>
+    sharedBody[threadID.x]<font></font>
+      = _BodiesBufferRead[wrap(groupID.x + currentTile, _GroupDim.x)<font></font>
+        * SIMULATION_BLOCK_SIZE + threadID.x];<font></font>
+<font></font>
+    // グループ同期<font></font>
+    GroupMemoryBarrierWithGroupSync();<font></font>
+<font></font>
+    // 周囲からの重力の影響を計算<font></font>
+    acc = gravitation(body, acc, threadID);<font></font>
+<font></font>
+    GroupMemoryBarrierWithGroupSync();<font></font>
+<font></font>
+    currentTile++;      // 次のタイルへ<font></font>
+  }<font></font>
+<font></font>
+  return acc;<font></font>
+<font></font>
+}<font></font>
+</pre>
+</div>
+<p>コード内にあるforループのイメージ図を次の画像に置いておきます。</p>
+<div id="id_takao_2Ftile__uni" class="image">
+<pre class="dummyimage"></pre>
+<p class="caption">
+図2.6: タイルIDのforループ
+</p>
+</div>
+
+<h4><a id="h2-5-2-4"></a>相互作用の計算</h4>
+<p>先ほどのループでタイルの移動を制御していましたので、今度は<b class="kw">タイルの中でのforループ</b><!-- IDX:タイルの中でのforループ -->を実装します。</p>
+<div class="emlist-code">
+<p class="caption">SimpleNBodySimulation.compute</p>
+<pre class="emlist">float3 gravitation(Body body, float3 accel, uint3 threadID)<font></font>
+{<font></font>
+<font></font>
+  // 全数調査<font></font>
+  // ブロック内のスレッド数分実行<font></font>
+  for (uint i = 0; i &lt; SIMULATION_BLOCK_SIZE;)<font></font>
+  {<font></font>
+    accel = bodyBodyInteraction(accel, sharedBody[i], body);<font></font>
+    i++;<font></font>
+  }<font></font>
+<font></font>
+  return accel;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>これで、タイル内の全数調査が完了します。また、この関数のreturn後のタイミングで、タイル内のすべてのスレッドが処理を完了するまで待機します。</p>
+<p>次に、式(\ref{eq:first})を、次のように実装します。</p>
+<div class="emlist-code">
+<p class="caption">SimpleNBodySimulation.compute</p>
+<pre class="emlist">// シグマ内の計算<font></font>
+float3 bodyBodyInteraction(float3 acc, Body b_i, Body b_j)<font></font>
+{<font></font>
+  float3 r = b_i.position - b_j.position;<font></font>
+<font></font>
+  // distSqr = dot(r_ij, r_ij) + EPS^2<font></font>
+  float distSqr = r.x * r.x + r.y * r.y + r.z * r.z;<font></font>
+  distSqr += _SofteningSquared;<font></font>
+<font></font>
+  // invDistCube = 1/distSqr^(3/2)<font></font>
+  float distSixth = distSqr * distSqr * distSqr;<font></font>
+  float invDistCube = 1.0f / sqrt(distSixth);<font></font>
+<font></font>
+  // s = m_j * invDistCube<font></font>
+  float s = b_j.mass * invDistCube;<font></font>
+<font></font>
+  // a_i =  a_i + s * r_ij<font></font>
+  acc += r * s;<font></font>
+<font></font>
+  return acc;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>これで、加速度の総和を求めるプログラムが完成しました。</p>
+
+<h4><a id="h2-5-2-5"></a>差分法で位置を更新</h4>
+<p>続いて、次のフレームでの粒子の座標・速度を、これまでの計算で算出された加速度を使って、算出します。</p>
+<div class="emlist-code">
+<p class="caption">SimpleNBodySimulation.compute</p>
+<pre class="emlist">[numthreads(SIMULATION_BLOCK_SIZE,1,1)]<font></font>
+void CSMain (<font></font>
+        uint3 groupID : SV_GroupID,     // グループID<font></font>
+        uint3 threadID : SV_GroupThreadID, // グループ内スレッドID<font></font>
+        uint3 DTid : SV_DispatchThreadID // グローバルスレッドID<font></font>
+) {<font></font>
+<font></font>
+        // 現在のグローバルスレッドインデックス<font></font>
+        uint index = DTid.x;<font></font>
+<font></font>
+        // 粒子をバッファから読み込み<font></font>
+        Body body = _BodiesBufferRead[index];<font></font>
+<font></font>
+        float3 force = computeBodyForce(body, groupID, threadID);<font></font>
+<font></font>
+        body.velocity += force * _DeltaTime;<font></font>
+        body.velocity *= _Damping;<font></font>
+<font></font>
+        // 差分法<font></font>
+        body.position += body.velocity * _DeltaTime;<font></font>
+<font></font>
+        _BodiesBufferWrite[index] = body;<font></font>
+<font></font>
+}<font></font>
+</pre>
+</div>
+<p>天体の位置座標が更新できました。これで、天体の動きのシミュレーションは完成です！</p>
+
+<h2><a id="h2-6"></a><span class="secno">2.6　</span>粒のレンダリング方法</h2>
+<p>本節では、前回<a id="fnb-ugp1" href="https://freder.io/files/unity3/takao.html#fn-ugp1" class="noteref" epub:type="noteref">*2</a>の記事で説明が不十分だった、GPUパーティクルの描画方法について補足しておきたいと思います。</p>
+<div class="footnote" epub:type="footnote" id="fn-ugp1"><p class="footnote">[*2] 「Unity Graphics Programming Vol.1 - 第5章 SPH法による流体シミュレーション」でも、同様の粒子のレンダリングを行っています。</p></div>
+
+<h3><a id="h2-6-1"></a><span class="secno">2.6.1　</span>ビルボード</h3>
+<p>ビルボードとは、常にカメラの方向を向く、シンプルな平面オブジェクトのことを指します。世の中の大半のパーティクルシステムは、ビルボードによって実装されているといっても過言ではありません。そのビルボードをシンプルに実装するためには、ビュー変換行列をうまく使ってあげる必要があります。</p>
+<p>ビュー変換行列には、カメラ位置と回転を、原点に戻すような数値の情報が含まれています。つまり、ビュー変換行列を空間内のすべてのオブジェクトに掛けることで、カメラを原点とした座標系に変換されるわけです。</p>
+<p>よって、<b class="kw">カメラの方向を向く</b><!-- IDX:カメラの方向を向く -->という特徴を持ったビルボードには、回転情報のみを含んだビュー変換行列の<b class="kw">逆行列</b><!-- IDX:逆行列 -->を、モデル変換行列としてかけてあげればよさそうです。(後述しますが、わかりにくいので<span class="imgref"><a href="https://freder.io/files/unity3/takao.html#id_takao_2Fbillboard">図2.8</a></span>に図解を掲載しています)</p>
+
+<h4><a id="h2-6-1-1"></a>ビルボードの実装</h4>
+<p>まず初めに、パーティクルを描画するためのQuadメッシュを作成します。これは、ジオメトリシェーダで1つの頂点を、xy平面に平行なQuadに拡張することで簡単に実現できます<a id="fnb-ugpgeo" href="https://freder.io/files/unity3/takao.html#fn-ugpgeo" class="noteref" epub:type="noteref">*3</a>。</p>
+<div class="footnote" epub:type="footnote" id="fn-ugpgeo"><p class="footnote">[*3] ジオメトリシェーダの詳しい解説は、UnityGraphicsProgramming Vol.1 「ジオメトリシェーダで草を生やす」をご覧ください。</p></div>
+<div id="id_takao_2Fbill" class="image">
+<img src="./Chapter 2 _ Gravitational N-Body Simulation_files/bill.jpg" alt="Quad extension with Geometry Shader" class="width-090per">
+<p class="caption">
+図2.7: GeometryShaderによるQuad拡張
+</p>
+</div>
+<p>このQuadに対して、ビュー変換行列の平行移動成分を打ち消した逆行列<a id="fnb-inverse" href="https://freder.io/files/unity3/takao.html#fn-inverse" class="noteref" epub:type="noteref">*4</a>を、モデル変換行列として与えてあげると、その場でカメラの方向を向くQuadが作成できます。</p>
+<div class="footnote" epub:type="footnote" id="fn-inverse"><p class="footnote">[*4] ビュー変換行列の逆行列は、単純に転置すればよいことが知られているので、ここでは転置で実装しています。</p></div>
+<p>何を言っているのかわからないと思いますので、次に解説図を示します。</p>
+<div id="id_takao_2Fbillboard" class="image">
+<pre class="dummyimage"></pre>
+<p class="caption">
+図2.8: ビルボードの仕組み
+</p>
+</div>
+<p>さらに、カメラの方向に向いたビルボードに対してビュー、プロジェクション行列をかけることにより、画面上の座標に変換することができます。これらを実装したシェーダを次に示します。</p>
+<div class="emlist-code">
+<p class="caption">ParticleRenderer.shader</p>
+<pre class="emlist">[maxvertexcount(4)]<font></font>
+void geom(point v2g input[1], inout TriangleStream&lt;g2f&gt; outStream) {<font></font>
+  g2f o;<font></font>
+<font></font>
+  float4 pos = input[0].pos;<font></font>
+<font></font>
+  float4x4 billboardMatrix = UNITY_MATRIX_V;<font></font>
+<font></font>
+  // 回転成分だけ取り出す<font></font>
+  billboardMatrix._m03 = billboardMatrix._m13 =<font></font>
+    billboardMatrix._m23 = billboardMatrix._m33 = 0;<font></font>
+<font></font>
+  for (int x = 0; x &lt; 2; x++) {<font></font>
+    for (int y = 0; y &lt; 2; y++) {<font></font>
+      float2 uv = float2(x, y);<font></font>
+      o.uv = uv;<font></font>
+<font></font>
+      o.pos = pos<font></font>
+        + mul(transpose(billboardMatrix), float4((uv * 2 - float2(1, 1))<font></font>
+        * _Scale, 0, 1));<font></font>
+<font></font>
+      o.pos = mul(UNITY_MATRIX_VP, o.pos);<font></font>
+<font></font>
+      o.id = input[0].id;<font></font>
+<font></font>
+      outStream.Append(o);<font></font>
+    }<font></font>
+  }<font></font>
+<font></font>
+  outStream.RestartStrip();<font></font>
+}<font></font>
+<font></font>
+</pre>
+</div>
+
+<h2><a id="h2-7"></a><span class="secno">2.7　</span>結果</h2>
+<p>以上のシミュレーションの結果を見てみましょう。</p>
+<div id="id_takao_2Fsimple" class="image">
+<img src="./Chapter 2 _ Gravitational N-Body Simulation_files/simple.png" alt="Simulation result (feeling of korejanai ...)">
+<p class="caption">
+図2.9: シミュレーション結果 (コレジャナイ感...)
+</p>
+</div>
+<p>動きを見てみると、すべての粒子が中心に集まってしまっていて、視覚的に面白くありません。そこで、次節にてひと工夫加えていきます。</p>
+
+<h2><a id="h2-8"></a><span class="secno">2.8　</span>視覚的に面白くするための工夫</h2>
+<p>該当シーンは、「NBodySimulation.unity」です。工夫といっても、変更点は1行だけで、次のようにタイル計算する部分を途中で打ち切ってしまいます。</p>
+<div class="emlist-code">
+<p class="caption">NBodySimulation.compute</p>
+<pre class="emlist">float3 computeBodyForce(Body body, uint3 groupID, uint3 threadID)<font></font>
+{<font></font>
+  ・・・<font></font>
+<font></font>
+  uint finish = _NumBodies / div;       // 途中で切る<font></font>
+<font></font>
+  ・・・<font></font>
+<font></font>
+}<font></font>
+</pre>
+</div>
+<p>これにより、相互作用の計算が全数調査されることなく途中で破棄されますが、結果的にすべての粒子の影響を受けなかったことで、粒子の塊がいくつか発生し、1点に集約されることはなくなります。</p>
+<p>そして、複数の塊の部分同士が相互作用することで、冒頭の<span class="imgref"><a href="https://freder.io/files/unity3/takao.html#id_takao_2Fthumb">図2.1</a></span>ような、よりダイナミックな動きを生みます。</p>
+
+<h2><a id="h2-9"></a><span class="secno">2.9　</span>まとめ</h2>
+<p>本章では、Gravitational N-Body SimulationのGPU実装手法を解説しました。小さな原子から、大きな宇宙まで、N-Bodyシミュレーションの持つポテンシャルは無限大です。ぜひ皆さんも、オリジナルの宇宙をUnity上で作ってみてはいかがでしょうか。少しでもお力になれましたら、幸いです！</p>
+
+<h2><a id="h2-10"></a><span class="secno">2.10　</span>参考</h2>
+<ul>
+<li>GPU Gems 3 - Chapter 31. Fast N-Body Simulation with CUDA</li>
+<li>N体シミュレーションで何がわかるか？ - 鹿児島大学 藤井通子 <a href="http://www.astro-wakate.org/ss2011/web/ss11_proceedings/proceeding/galaxy_fujii.pdf" class="link">http://www.astro-wakate.org/ss2011/web/ss11_proceedings/proceeding/galaxy_fujii.pdf</a></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Quaternion and Billboard-wgld.org </font></font><a href="https://wgld.org/d/webgl/w035.html" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://wgld.org/d/webgl/w035.html</font></font></a></li>
+</ul><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 34px; top: 27.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 2 _ Gravitational N-Body Simulation_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第2章　Gravitational N-Body Simulation</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 2 _ Gravitational N-Body Simulation_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 2 _ Gravitational N-Body Simulation_files/saved_resource(2).html"></iframe></body></html>

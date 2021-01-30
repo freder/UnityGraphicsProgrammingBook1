@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://freder.io/files/unity3/sakota.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 6 _ Strange Attractor_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Strange Attractor</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 6 _ Strange Attractor_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Strange Attractor_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Strange Attractor_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Strange Attractor_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 6 _ Strange Attractor_files/saved_resource.html"></iframe></div>
+<h1><a id="h6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">Chapter 6　</font></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;"> Strange Attractor</font></font></h1>
+
+<h2><a id="h6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will develop a visualization of a phenomenon called "Strange Attractor" that shows non-linear chaotic behavior by a differential equation or difference equation with a specific state using Unity and GPU arithmetic. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample in this chapter is </font><font style="vertical-align: inherit;">"Strange Attractors" from </font></font><br><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming3" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming3</font></font></a><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+
+<h3><a id="h6-1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Execution environment</font></font></h3>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Shader model 5.0 compatible environment where ComputeShader can be executed</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Confirmed operation with Unity 2018.2.9f1 at the time of writing</font></font></li>
+</ul>
+
+<h2><a id="h6-2"></a><span class="secno">6.2　</span>Strange Attractorとは</h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A state in which the motion of a dissipative system (energy non-conservation, an unbalanced system with a specific input and opening) maintains a stable orbit over time is called an "Attractor". </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Among them, the one that shows a chaotic behavior by amplifying the slight difference in the initial state with the passage of time is called "Strange Attractor".</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, </font><font style="vertical-align: inherit;">I would like to take up </font><font style="vertical-align: inherit;">" </font></font><a id="fnb-lorenz" href="https://freder.io/files/unity3/sakota.html#fn-lorenz" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Lorenz Attractor" and " </font></font><a id="fnb-thomas" href="https://freder.io/files/unity3/sakota.html#fn-thomas" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Thomas' Cyclically Symmetric Attractor" </font><font style="vertical-align: inherit;">as the subjects </font><font style="vertical-align: inherit;">.</font></font></p>
+
+<h2><a id="h6-3"></a><span class="secno">6.3　</span>Lorenz Attractor</h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Do you know the phenomenon called the butterfly effect? </font><font style="vertical-align: inherit;">This is </font><font style="vertical-align: inherit;">a word derived from </font><font style="vertical-align: inherit;">the title of a lecture given by meteorologist Edward N Lorenz at the American Association for the Advancement of Science in 1972, " </font></font><a id="fnb-butterflyEffect" href="https://freder.io/files/unity3/sakota.html#fn-butterflyEffect" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 3</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Does the flapping of a single Brazilian butterfly cause a tornado in Texas?" </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This term describes a phenomenon in which slight differences in initial values ​​do not always produce mathematically similar results, but are amplified chaotically and behave unpredictably.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lorenz, who pointed out this mathematical property, published "Lorenz Attractor" in 1963.</font></font></p>
+<div id="id_sakota_2FLorenzAttractor1" class="image">
+<img src="./Chapter 6 _ Strange Attractor_files/LorenzAttractor1.png" alt="Initial state of Lorenz attractor" class="width-100per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.1: Initial state of Lorenz attractor
+</font></font></p>
+</div>
+<div id="id_sakota_2FLorenzAttractor2" class="image">
+<img src="./Chapter 6 _ Strange Attractor_files/LorenzAttractor2.png" alt="Mid-term of Lorenz attractor" class="width-100per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.2: Mid-term Lorenz attractor
+</font></font></p>
+</div>
+<div class="footnote" epub:type="footnote" id="fn-lorenz"><p class="footnote">[*1] Lorenz, E. N.： Deterministic Nonperiodic Flow, Journal of Atmospheric Sciences, Vol.20, pp.130-141, 1963.</p></div>
+<div class="footnote" epub:type="footnote" id="fn-thomas"><p class="footnote">[*2] Thomas, René（1999）. "Deterministic chaos seen in terms of feedback circuits: Analysis, synthesis, 'labyrinth chaos'". Int. J. Bifurcation and Chaos. 9 （10）: 1889–1905.</p></div>
+<div class="footnote" epub:type="footnote" id="fn-butterflyEffect"><p class="footnote">[*3] http://eaps4.mit.edu/research/Lorenz/Butterfly_1972.pdf</p></div>
+
+<h3><a id="h6-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Lorenz equation</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Lorenz equation is represented by the following nonlinear ODE.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By setting p = 10, r = 28, b = 8/3 in each variable of p, r, and b in the above equation, it will behave chaotically as "Strange Attractor".</font></font></p>
+
+<h3><a id="h6-3-2"></a><span class="secno">6.3.2　</span>Lorenz Attractorの実装</h3>
+<p>それではLorenz方程式をコンピュートシェーダーによって実装してみましょう。まずはコンピュートシェーダー内で演算したい構造体を定義します。<br></p>
+<div class="emlist-code">
+<p class="caption">StrangeAttractor.cs</p>
+<pre class="emlist">protected struct Params<font></font>
+{<font></font>
+    Vector3 emitPos;<font></font>
+    Vector3 position;<font></font>
+    Vector3 velocity; // xyz = velocity, w = velocity coef;<font></font>
+    float   life;<font></font>
+    Vector2 size;     // x = current size, y = target size.<font></font>
+    Vector4 color;<font></font>
+<font></font>
+    public Params(Vector3 emitPos, float size, Color color)<font></font>
+    {<font></font>
+        this.emitPos = emitPos;<font></font>
+        this.position = Vector3.zero;<font></font>
+        this.velocity = Vector3.zero;<font></font>
+        this.life = 0;<font></font>
+        this.size = new Vector2(0, size);<font></font>
+        this.color = color;<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>なお、この構造体は今後複数のStrange Attractorで汎用的に使う予定ですので、抽象クラスのStrangeAttractor.cs内に定義しています。<br></p>
+<p>次にComputeBufferの初期化処理を行います。<br></p>
+<div class="emlist-code">
+<p class="caption">LorenzAttrator.cs</p>
+<pre class="emlist">protected sealed override void InitializeComputeBuffer()<font></font>
+{<font></font>
+    if (cBuffer != null)　cBuffer.Release();<font></font>
+<font></font>
+    cBuffer = new ComputeBuffer(instanceCount, Marshal.SizeOf(typeof(Params)));<font></font>
+    Params[] parameters = new Params[cBuffer.count];<font></font>
+    for (int i = 0; i &lt; instanceCount; i++)<font></font>
+    {<font></font>
+        var normalize = (float)i / instanceCount;<font></font>
+        var color = gradient.Evaluate(normalize);<font></font>
+        parameters[i] = new Params(Random.insideUnitSphere *<font></font>
+            emitterSize * normalize, particleSize, color);<font></font>
+    }<font></font>
+    cBuffer.SetData(parameters);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>抽象クラスのStrangeAttractor.csで定義した抽象メソッドInitializeComputeBufferをLorenzAttrator.csにて実装しています。<br>Unityのインスペクターにてグラデーションやエミッターサイズ、粒子サイズを調整したいので、インスペクターに露出したgradientやemitterSize、particleSizeでParams構造体を初期化し、ComputeBufferの変数、cBufferにSetDataします。<br>今回はパーティクルのid順で、少しずつ遅延させて速度ベクトルを適用していきたいと思っていますので、パーティクルid順でグラーデーションカラーをつけています。<br>「Strange Attractor」はものによって初期ポジションがその後の振る舞いに大きく関係してきますので、色々な初期ポジションを試していただきたいのですが、本サンプルでは球体を初期形状とします。<br></p>
+<p>次に、LorenzAttratorの変数p、r、bをコンピュートシェーダーに渡します。<br></p>
+<div class="emlist-code">
+<p class="caption">LorenzAttrator.cs</p>
+<pre class="emlist">[SerializeField, Tooltip("Default is 10")]<font></font>
+float p = 10f;<font></font>
+[SerializeField, Tooltip("Default is 28")]<font></font>
+float r = 28f;<font></font>
+[SerializeField, Tooltip("Default is 8/3")]<font></font>
+float b = 2.666667f;<font></font>
+<font></font>
+private int pId, rId, bId;<font></font>
+private string pProp = "p", rProp = "r", bProp = "b";<font></font>
+<font></font>
+protected override void InitializeShaderUniforms()<font></font>
+{<font></font>
+    pId = Shader.PropertyToID(pProp);<font></font>
+    rId = Shader.PropertyToID(rProp);<font></font>
+    bId = Shader.PropertyToID(bProp);<font></font>
+}<font></font>
+<font></font>
+protected override void UpdateShaderUniforms()<font></font>
+{<font></font>
+    computeShaderInstance.SetFloat(pId, p);<font></font>
+    computeShaderInstance.SetFloat(rId, r);<font></font>
+    computeShaderInstance.SetFloat(bId, b);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>次にコンピュートシェーダー側でエミット時のパーティクルの状態を初期化します。<br></p>
+<div class="emlist-code">
+<p class="caption">LorenzAttractor.compute</p>
+<pre class="emlist">#pragma kernel Emit<font></font>
+#pragma kernel Iterator<font></font>
+<font></font>
+#define THREAD_X 128<font></font>
+#define THREAD_Y 1<font></font>
+#define THREAD_Z 1<font></font>
+#define DT 0.022<font></font>
+<font></font>
+struct Params<font></font>
+{<font></font>
+    float3 emitPos;<font></font>
+    float3 position;<font></font>
+    float3 velocity; //xyz = velocity<font></font>
+    float  life;<font></font>
+    float2 size;     // x = current size, y = target size.<font></font>
+    float4 color;<font></font>
+};<font></font>
+<font></font>
+RWStructuredBuffer&lt;Params&gt; buf;<font></font>
+<font></font>
+[numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
+void Emit(uint id : SV_DispatchThreadID)<font></font>
+{<font></font>
+    Params p = buf[id];<font></font>
+    p.life = (float)id * -1e-05;<font></font>
+    p.position = p.emitPos;<font></font>
+    p.size.x = 0.0;<font></font>
+    buf[id] = p;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>Emitメソッドで初期化を行なっています。p.lifeはパーティクルの発生してからの時間を管理しており、初期値の時点でid毎に微量の遅延を設けています。<br>これはパーティクルが一斉に同じ軌道を描くのを簡易に防ぐためです。また、id毎のグラデーションカラーを設定していますので、カラーをきれいに見せるためにも役立ちます。<br>ここでは、パーティクルサイズのp.sizeを初期段階で0にしていますが、これは発生した瞬間のパーティクルを不可視にすることによって、自然な吹き出しにする為です。<br></p>
+<p>次にイテレーション部分を見ていきます。<br></p>
+<div class="emlist-code">
+<p class="caption">LorenzAttractor.compute</p>
+<pre class="emlist">#define DT 0.022<font></font>
+<font></font>
+// Lorenz Attractor parameters<font></font>
+float p;<font></font>
+float r;<font></font>
+float b;<font></font>
+<font></font>
+//Lorenz方程式の演算部分です。<font></font>
+float3 LorenzAttractor(float3 pos)<font></font>
+{<font></font>
+    float dxdt = (p * (pos.y - pos.x));<font></font>
+    float dydt = (pos.x * (r - pos.z) - pos.y);<font></font>
+    float dzdt = (pos.x * pos.y - b * pos.z);<font></font>
+    return float3(dxdt, dydt, dzdt) * DT;<font></font>
+}<font></font>
+<font></font>
+[numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
+void Iterator(uint id : SV_DispatchThreadID)<font></font>
+{<font></font>
+    Params p = buf[id];<font></font>
+    p.life.x += DT;<font></font>
+    //速度ベクトルのベクトル長を0から1でクランプしつつ、サイズに掛ける事によってスタートを自然に見せています。<font></font>
+    p.size.x = p.size.y * saturate(length(p.velocity));<font></font>
+    if (p.life.x &gt; 0)<font></font>
+    {<font></font>
+        p.velocity = LorenzAttractor(p.position);<font></font>
+        p.position += p.velocity;<font></font>
+    }<font></font>
+    buf[id] = p;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>上記のLorenzAttractorメソッドが「Lorenz方程式」の演算部分になります。微量なデルタタイムでのx,y,zの速度ベクトルを演算し、最後にデルタタイムを掛け、移動量を導き出しています。<br>経験上、コンピュートシェーダー内で形状に関わる微分演算を行う際は、Unityからのデルタタイムを送らずに、フレームレート差から独立した固定値のデルタタイムを使用した方が安定した形状を保ちます。<br>これはフレームレートが落ちすぎた場合に、UnityのTime.deltaTimeの数値が微分演算を行うにしては大きくなりすぎることがある為です。デルタ幅が大きくなれば、それだけ演算結果が前回の物と比べ荒い大雑把な形状になってしまいます。<br>また、別の理由として、「Strange Attractor」はその方程式によっては、デルタタイムの取り方によって完全な収束もしくは無限大の発散をしてしまう場合がある為です。<br>これら2つの理由から、今回DTは定義済みの物を使用しています。</p>
+
+<h2><a id="h6-4"></a><span class="secno">6.4　</span>Thomas' Cyclically Symmetric Attractor</h2>
+<p>次に生物学者のRené Thomas氏により発表された「Thomas' Cyclically Symmetric Attractor」の実装をしていきたいと思います。<br>初期値に左右されず、時間経過にしたがって安定状態になり、形状も非常にユニークな物になっています。</p>
+<div id="id_sakota_2FThomasAttractor2" class="image">
+<img src="./Chapter 6 _ Strange Attractor_files/ThomasAttractor2.png" alt="Stable period of Thomas&#39;Cyclically Symmetric Attractor" class="width-100per">
+<p class="caption">
+図6.3: Thomas' Cyclically Symmetric Attractorの安定期
+</p>
+</div>
+
+<h3><a id="h6-4-1"></a><span class="secno">6.4.1　</span>Thomas' Cyclically Symmetric 方程式</h3>
+<p>方程式は次の非線形常微分方程式で表されます。</p>
+<p>上記の方程式の変数bにおいて、<span class="equation">b \simeq 0.208186</span>として定めた場合、カオス的に「Strange Attractor」として振る舞い、<span class="equation">b \simeq 0</span>と定めた場合は空間を漂う形となります。</p>
+
+<h3><a id="h6-4-2"></a><span class="secno">6.4.2　</span>Thomas' Cyclically Symmetric Attractorの実装</h3>
+<p>それでは「Thomas' Cyclically Symmetric 方程式」をコンピュートシェーダーによって実装してみましょう。<br>前述の「Lorenz Attractor」の実装と共通する部分がある為、パラメーターの構造体や手続き的な部分は継承し必要な部分のみ取り上げます。<br>まずは、CPU側でカラーと初期ポジションをオーバーライドし定めます。<br></p>
+<div class="emlist-code">
+<p class="caption">ThomasAttractor.cs</p>
+<pre class="emlist">protected sealed override void InitializeComputeBuffer()<font></font>
+{<font></font>
+    if (cBuffer != null)　cBuffer.Release();<font></font>
+<font></font>
+    cBuffer = new ComputeBuffer(instanceCount, Marshal.SizeOf(typeof(Params)));<font></font>
+    Params[] parameters = new Params[cBuffer.count];<font></font>
+    for (int i = 0; i &lt; instanceCount; i++)<font></font>
+    {<font></font>
+        var normalize = (float)i / instanceCount;<font></font>
+        var color = gradient.Evaluate(normalize);<font></font>
+        parameters[i] = new Params(Random.insideUnitSphere *<font></font>
+            emitterSize * normalize, particleSize, color);<font></font>
+    }<font></font>
+    cBuffer.SetData(parameters);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>今回は色をきれいに見せる為に、内側から外側にいくにつれてマントル的にグラデーションカラーをつけた球体を初期ポジションとして定めています。<br></p>
+<p>次にエミット時とイテレーション時のコンピュートシェーダーのメソッドを見ていきます。<br></p>
+<div class="emlist-code">
+<p class="caption">ThomasAttractor.compute</p>
+<pre class="emlist">//Thomas Attractor parameters<font></font>
+float b;<font></font>
+<font></font>
+float3 ThomasAttractor(float3 pos)<font></font>
+{<font></font>
+    float dxdt = -b * pos.x + sin(pos.y);<font></font>
+    float dydt = -b * pos.y + sin(pos.z);<font></font>
+    float dzdt = -b * pos.z + sin(pos.x);<font></font>
+    return float3(dxdt, dydt, dzdt) * DT;<font></font>
+}<font></font>
+<font></font>
+[numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
+void Emit(uint id : SV_DispatchThreadID)<font></font>
+{<font></font>
+    Params p = buf[id];<font></font>
+    p.life = (float)id * -1e-05;<font></font>
+    p.position = p.emitPos;<font></font>
+    p.size.x = p.size.y;<font></font>
+    buf[id] = p;<font></font>
+}<font></font>
+<font></font>
+[numthreads(THREAD_X, THREAD_Y, THREAD_Z)]<font></font>
+void Iterator(uint id : SV_DispatchThreadID)<font></font>
+{<font></font>
+    Params p = buf[id];<font></font>
+    p.life.x += DT;<font></font>
+    if (p.life.x &gt; 0)<font></font>
+    {<font></font>
+        p.velocity = ThomasAttractor(p.position);<font></font>
+        p.position += p.velocity;<font></font>
+    }<font></font>
+    buf[id] = p;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>ThomasAttractorメソッドが「Thomas' Cyclically Symmetric 方程式」の演算部分になります。<br>また、Emit時の実装は、LorenzAttratorと違い、今回は初期ポジションをあえて見せたいので、初期サイズからターゲットサイズに設定しています。<br>その他はほぼ同じ実装になります。</p>
+
+<h2><a id="h6-5"></a><span class="secno">6.5　</span>まとめ</h2>
+<p>本章では、「Strange Attractor」をコンピュートシェーダーを用いてGPU実装する例をご紹介しました。<br>「Strange Attractor」にはさまざまな種類があり、実装においても比較的少ない演算でカオス的な振る舞いを見せる為、グラフィックスにおいても有用なアクセントになるのではないでしょうか。<br>他にも、「<a id="fnb-japanese" href="https://freder.io/files/unity3/sakota.html#fn-japanese" class="noteref" epub:type="noteref">*4</a>UedaAttractor」と呼ばれる2次元運動のものや、「<a id="fnb-aizawa" href="https://freder.io/files/unity3/sakota.html#fn-aizawa" class="noteref" epub:type="noteref">*5</a>AizawaAttractor」のようなスピン運動を見せるもの等多種多様ありますので、もし興味がございましたらぜひ挑戦してみてください。</p>
+<div class="footnote" epub:type="footnote" id="fn-japanese"><p class="footnote">[*4] http://www-lab23.kuee.kyoto-u.ac.jp/ueda/Kambe-Bishop_ver3-1.pdf</p></div>
+<div class="footnote" epub:type="footnote" id="fn-aizawa"><p class="footnote">[*5] http://www.algosome.com/articles/aizawa-attractor-chaos.html</p></div>
+
+<h2><a id="h6-6"></a><span class="secno">6.6　</span>参考</h2>
+<ul>
+<li>http://paulbourke.net/fractals/lorenz/</li>
+<li>https://en.wikipedia.org/wiki/Thomas%27_cyclically_symmetric_attractor</li>
+<li>Lorenz, E. N.： Deterministic Nonperiodic Flow, Journal of Atmospheric Sciences, Vol.20, pp.130-141, 1963.</li>
+<li>Thomas, René（1999）. "Deterministic chaos seen in terms of feedback circuits: Analysis, synthesis, 'labyrinth chaos'". Int. J. Bifurcation and Chaos. 9 （10）: 1889–1905.</li>
+</ul><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 432px; top: 23.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 6 _ Strange Attractor_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第6章　Strange Attractor</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Strange Attractor_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Strange Attractor_files/saved_resource(2).html"></iframe></body></html>
