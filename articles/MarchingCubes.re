@@ -232,7 +232,7 @@ void RenderMesh()
                      transform.rotation, 
                      transform.localScale
                   );
-        
+
   for (int i = 0; i < meshs.Length; i++)
   {
     materials[i].SetPass(0);

@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="style.scss" />
+  <meta name="generator" content="Re:VIEW" />
+  <title>ComputeShader 入門</title>
+</head>
+<body>
+<h1><a id="h2"></a><span class="secno">第2章　</span>ComputeShader 入門</h1>
+<p>Unity で ComputeShader (以降必要に応じて&quot;コンピュートシェーダ&quot;) を使う方法について、シンプルに解説します。コンピュートシェーダとは、GPU を使って単純処理を並列化し、大量の演算を高速に実行するために用いられます。また GPU に処理を委譲しますが、通常のレンダリングパイプラインとは異なることが特徴に挙げられます。CG においては、大量のパーティクルの動きを表現するためなどに良く用いられます。</p>
+<p>本章の以降に続く内容の一部にも、コンピュートシェーダが用いられたものがあり、それらを読み進める上で、コンピュートシェーダの知識が必要になります。</p>
+<p>ここではコンピュートシェーダを学習するにあたって、一番最初の足掛かりになるような内容について、2 つの簡単なサンプルを用いて解説しています。これらはコンピュートシェーダのすべての事について扱うものではありませんので、必要に応じて情報を補うようにしてください。</p>
+<p>Unity においては ComputeShader と呼称していますが、類似する技術に OpenCL, DirectCompute, CUDA などが挙げられます。基本概念は類似しており、特に DirectCompute(DirectX) と非常に近い関係にあります。もしアーキテクチャ周辺の概念や更なる詳細情報が必要になるときは、これらについても合わせて情報を集めるようにすると良いと思います。</p>
+<p>本章のサンプルは <a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming" class="link">https://github.com/IndieVisualLab/UnityGraphicsProgramming</a> の「SimpleComputeShader」です。</p>
+
+<h2><a id="h2-1"></a><span class="secno">2.1　</span>カーネル、スレッド、グループの概念</h2>
+<div id="primerofcomputeshader01" class="image">
+<img src="images/primerofcomputeshader01.png" alt="カーネル、スレッド、グループのイメージ" class="width-100per" />
+<p class="caption">
+図2.1: カーネル、スレッド、グループのイメージ
+</p>
+</div>
+<p>具体的な実装を解説するよりも前に、コンピュートシェーダで取り扱われる <b>カーネル(Kernel)</b>、<b>スレッド(Thread)</b>、<b>グループ(Group)</b> の概念を説明しておく必要があります。</p>
+<p><b>カーネル</b> とは、GPU で実行される 1 つの処理を指し、コード上では 1 つの関数として扱われます(一般的なシステム用語における意味でのカーネルに相当)。</p>
+<p><b>スレッド</b>とは、カーネルを実行する単位です。1 スレッドが、1 カーネルを実行します。コンピュートシェーダではカーネルを複数のスレッドで並行して同時に実行することができます。スレッドは (x, y, z) の3次元で指定しす。</p>
+<p>例えば、(4, 1, 1) なら 4 * 1 * 1 = 4 つのスレッドが同時に実行されます。(2, 2, 1) なら、2 * 2 * 1 = 4 つのスレッドが同時に実行されます。同じ 4 つのスレッドが実行されますが、状況に応じて、後者のような 2 次元でスレッドを指定する方が効率が良いことがあります。これについては後に続いて解説します。ひとまずスレッド数は 3 次元で指定されるという認識が必要です。</p>
+<p>最後に<b>グループ</b>とは、スレッドを実行する単位です。また、あるグループが実行するスレッドは<b>グループスレッド</b>と呼ばれます。例えば、あるグループが単位当たり、(4, 1, 1) スレッドを持つとします。このグループが 2 つあるとき、それぞれのグループが、(4, 1, 1) のスレッドを持ちます。</p>
+<p>グループもスレッドと同様に 3 次元で指定されます。例えば、(2, 1, 1) グループが、(4, 4, 1) スレッドで実行されるカーネルを実行するとき、グループ数は 2 * 1 * 1 = 2 です。この 2 つのグループは、それぞれ 4 * 4 * 1 = 16 スレッドを持つことになります。したがって、合計スレッド数は、2 * 16 = 32 となります。</p>
+
+<h2><a id="h2-2"></a><span class="secno">2.2　</span>サンプル (1) : GPU で演算した結果を取得する</h2>
+<p>サンプル (1) 「SampleScene_Array」では、適当な計算をコンピュートシェーダで実行し、その結果を配列として取得する方法について扱います。サンプルには次のような操作が含まれます。</p>
+<ul>
+<li>コンピュートシェーダを使って複数のデータを処理し、その結果を取得する。</li>
+<li>コンピュートシェーダに複数の機能を実装し、使い分ける。</li>
+<li>コンピュートシェーダ (GPU) にスクリプト (CPU) から値を渡す。</li>
+</ul>
+<p>サンプル (1) の実行結果は次の通りになります。デバッグ出力だけですから、ソースコードを読みながら動作を確認してください。</p>
+<div id="primerofcomputeshader03" class="image">
+<img src="images/primerofcomputeshader03.png" alt="サンプル (1) の実行結果" class="width-100per" />
+<p class="caption">
+図2.2: サンプル (1) の実行結果
+</p>
+</div>
+
+<h3><a id="h2-2-1"></a><span class="secno">2.2.1　</span>コンピュートシェーダの実装</h3>
+<p>ここからサンプルを実例に解説を進めます。非常に短いので、コンピュートシェーダの実装については先に一通り目を通して頂くのが良いと思います。基本構成として、関数の定義、関数の実装、バッファがあり、必要に応じて変数があります。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.compute</p>
+<pre class="emlist">#pragma kernel KernelFunction_A
+#pragma kernel KernelFunction_B
+
+RWStructuredBuffer&lt;int&gt; intBuffer;
+float floatValue;
+
+[numthreads(4, 1, 1)]
+void KernelFunction_A(uint3 groupID : SV_GroupID,
+                      uint3 groupThreadID : SV_GroupThreadID)
+{
+    intBuffer[groupThreadID.x] = groupThreadID.x * floatValue;
+}
+
+[numthreads(4, 1, 1)]
+void KernelFunction_B(uint3 groupID : SV_GroupID,
+                      uint3 groupThreadID : SV_GroupThreadID)
+{
+    intBuffer[groupThreadID.x] += 1;
+}
+</pre>
+</div>
+<p>特徴として、<b>numthreads</b> 属性と、<b>SV_GroupID</b> セマンティクスなどがありますが、これについては後述します。</p>
+
+<h3><a id="h2-2-2"></a><span class="secno">2.2.2　</span>カーネルの定義</h3>
+<p>先に解説した通り、正確な定義はさておき、<b>カーネルは GPU で実行される1つの処理を指し、コード上では 1 つの関数として扱われます。</b>カーネルは 1 つのコンピュートシェーダに複数実装することができます。</p>
+<p>この例では、カーネルは <code class="inline-code tt">KernelFunction_A</code> ないし <code class="inline-code tt">KernelFunction_B</code> 関数がカーネルに相当します。また、カーネルとして扱う関数は <code class="inline-code tt">#pragma kernel</code> を使って定義します。これによってカーネルとそれ以外の関数と識別します。</p>
+<p>定義された複数のカーネルのうち、任意の 1 つを識別するために、固有のインデックスがカーネルに与えられます。インデックスは <code class="inline-code tt">#pragma kernel</code> で定義された順に、上から 0, 1 … と与えられます。</p>
+
+<h3><a id="h2-2-3"></a><span class="secno">2.2.3　</span>バッファや変数の用意</h3>
+<p>コンピュートシェーダで実行した結果を保存する<b>バッファ領域</b>を作っておきます。サンプルの変数 <code class="inline-code tt">RWStructuredBuffer&lt;int&gt; intBuffer</code>} がこれに相当します。</p>
+<p>またスクリプト (CPU) 側から任意の値を与えたい場合には、一般的な CPU プログラミングと同じように変数を用意します。この例では変数 <code class="inline-code tt">intValue</code> がこれに相当し、スクリプトから値を渡します。</p>
+
+<h3><a id="h2-2-4"></a><span class="secno">2.2.4　</span>numthreads による実行スレッド数の指定</h3>
+<p><b>numthreads</b> 属性 (Attribute) は、カーネル (関数) を実行するスレッドの数を指定します。スレッド数の指定は、(x, y, z) で指定し、例えば (4, 1, 1) なら、 4 * 1 * 1 = 4 スレッドでカーネルを実行します。他に、(2, 2, 1) なら 2 * 2 * 1 = 4 スレッドでカーネルを実行します。共に 4 スレッドで実行されますが、この違いや使い分けについては後述します。</p>
+
+<h3><a id="h2-2-5"></a><span class="secno">2.2.5　</span>カーネル (関数) の引数</h3>
+<p>カーネルに設定できる引数には制約があり、一般的な CPU プログラミングと比較して自由度は極めて低いです。</p>
+<p>引数に続く値を<code class="inline-code tt">セマンティクス</code>と呼び、この例では <code class="inline-code tt">groupID : SV_GroupID</code> と <code class="inline-code tt">groupThreadID : SV_GroupThreadID</code> を設定しています。セマンティクスは引数がどのような値であるかを示すための物であり、他の名前に変更することができません。</p>
+<p>引数名 (変数名) は自由に定義することができますが、コンピュートシェーダを使うにあたって定義されるセマンティクスのいずれかを設定する必要があります。つまり、任意の型の引数を定義してカーネル内で参照する、といった実装はできず、カーネルで参照することができる引数は、定められた限定的なものから選択する、ということです。</p>
+<p><code class="inline-code tt">SV_GroupID</code> は、カーネルを実行するスレッドが、どのグループで実行されているかを (x, y, z) で示します。<code class="inline-code tt">SV_GroupThreadID</code> は、カーネルを実行するスレッドが、グループ内の何番目のスレッドであるかを (x, y, z) で示します。</p>
+<p>例えば (4, 4, 1) のグループで、(2, 2, 1) のスレッドを実行するとき、<code class="inline-code tt">SV_GroupID</code> は (0 ~ 3, 0 ~ 3, 0) の値を返します。<code class="inline-code tt">SV_GroupThreadID</code> は (0 ~ 1, 0 ~ 1, 0) の値を返します。</p>
+<p>サンプルで設定されるセマンティクス以外にも <code class="inline-code tt">SV_~</code> から始まるセマンティクスがあり、利用することができますが、ここでは説明を割愛します。一通りコンピュートシェーダの動きが分かった後に目を通すほうが良いと思います。</p>
+<ul>
+<li>SV_GroupID - Microsoft Developer Network<ul>
+<li><a href="https://msdn.microsoft.com/ja-jp/library/ee422449(v=vs.85).aspx" class="link">https://msdn.microsoft.com/ja-jp/library/ee422449(v=vs.85).aspx</a></li>
+<li>異なる SV~ セマンティクスとその値について確認することができます。</li>
+</ul>
+</li>
+</ul>
+
+<h3><a id="h2-2-6"></a><span class="secno">2.2.6　</span>カーネル (関数) の処理内容</h3>
+<p>サンプルでは、用意したバッファに、順にスレッド番号を代入していく処理を行っています。<code class="inline-code tt">groupThreadID</code> は、あるグループで実行されるスレッド番号が与えられます。このカーネルは (4, 1, 1) スレッドで実行されますから、<code class="inline-code tt">groupThreadID</code> は (0 ~ 3, 0, 0) が与えられます。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.compute</p>
+<pre class="emlist">[numthreads(4, 1, 1)]
+void KernelFunction_A(uint3 groupID : SV_GroupID,
+                      uint3 groupThreadID : SV_GroupThreadID)
+{
+    intBuffer[groupThreadID.x] = groupThreadID.x * intValue;
+}
+</pre>
+</div>
+<p>今回のサンプルはこのスレッドを、(1, 1, 1) のグループで実行します (後述するスクリプトから) 。すなわちグループを 1 つだけ実行し、そのグループには、4 * 1 * 1 のスレッドが含まれます。結果として<code class="inline-code tt">groupThreadID.x</code> には 0 ~ 3 の値が与えられることを確認してください。</p>
+<p>※この例では <code class="inline-code tt">groupID</code> を利用していませんが、スレッドと同様に、3次元で指定されるグループ数が与えられます。代入してみるなどして、コンピュートシェーダの動きを確認するために使ってみてください。</p>
+
+<h3><a id="h2-2-7"></a><span class="secno">2.2.7　</span>スクリプトからコンピュートシェーダを実行する</h3>
+<p>実装したコンピュートシェーダをスクリプトから実行します。スクリプト側で必要になるものは概ね次の通りです。</p>
+<ul>
+<li>コンピュートシェーダへの参照 | <code class="inline-code tt">comuteShader</code></li>
+<li>実行するカーネルのインデックス | <code class="inline-code tt">kernelIndex_KernelFunction_A, B</code></li>
+<li>コンピュートシェーダの実行結果を保存するバッファ | <code class="inline-code tt">intComputeBuffer</code></li>
+</ul>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.cs</p>
+<pre class="emlist">public ComputeShader computeShader;
+int kernelIndex_KernelFunction_A;
+int kernelIndex_KernelFunction_B;
+ComputeBuffer intComputeBuffer;
+
+void Start()
+{
+    this.kernelIndex_KernelFunction_A
+        = this.computeShader.FindKernel(&quot;KernelFunction_A&quot;);
+    this.kernelIndex_KernelFunction_B
+        = this.computeShader.FindKernel(&quot;KernelFunction_B&quot;);
+
+    this.intComputeBuffer = new ComputeBuffer(4, sizeof(int));
+    this.computeShader.SetBuffer
+        (this.kernelIndex_KernelFunction_A,
+         &quot;intBuffer&quot;, this.intComputeBuffer);
+
+    this.computeShader.SetInt(&quot;intValue&quot;, 1);
+    …
+</pre>
+</div>
+
+<h3><a id="h2-2-8"></a><span class="secno">2.2.8　</span>実行するカーネルのインデックスを取得する</h3>
+<p>あるカーネルを実行するためには、そのカーネルを指定するためのインデックス情報が必要です。インデックスは <code class="inline-code tt">#pragma kernel</code> で定義された順に、上から 0, 1 … と与えられますが、スクリプト側から <code class="inline-code tt">FindKernel</code> 関数を使うのが良いでしょう。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.cs</p>
+<pre class="emlist">this.kernelIndex_KernelFunction_A
+    = this.computeShader.FindKernel(&quot;KernelFunction_A&quot;);
+
+this.kernelIndex_KernelFunction_B
+    = this.computeShader.FindKernel(&quot;KernelFunction_B&quot;);
+</pre>
+</div>
+
+<h3><a id="h2-2-9"></a><span class="secno">2.2.9　</span>演算結果を保存するバッファの生成する</h3>
+<p>コンピュートシェーダ (GPU) による演算結果を CPU 側に保存するためのバッファ領域を用意します。Unity　では <code class="inline-code tt">ComputeBuffer</code> として定義されています。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.cs</p>
+<pre class="emlist">this.intComputeBuffer = new ComputeBuffer(4, sizeof(int));
+this.computeShader.SetBuffer
+    (this.kernelIndex_KernelFunction_A, &quot;intBuffer&quot;, this.intComputeBuffer);
+</pre>
+</div>
+<p><code class="inline-code tt">ComputeBuffer</code> を (1) 保存する領域のサイズ、(2) 保存するデータの単位当たりのサイズを指定して初期化します。ここでは int 型のサイズ 4 つ分の領域が用意されています。これはコンピュートシェーダの実行結果が int[4] として保存されるためです。必要に応じてサイズを変更します。</p>
+<p>次いで、コンピュートシェーダに実装された、(1) どのカーネルが実行するときに、(2) どの GPU 上のバッファを使うのかを指定し、(3) CPU 上のどのバッファに相当するのか、を指定します。</p>
+<p>この例では、(1) <code class="inline-code tt">KernelFunction_A</code> が実行されるときに参照される、(2) <code class="inline-code tt">intBuffer</code> なるバッファ領域は、(3) <code class="inline-code tt">intComputeBuffer</code> に相当する、と指定されます。</p>
+
+<h3><a id="h2-2-10"></a><span class="secno">2.2.10　</span>スクリプトからコンピュートシェーダに値を渡す</h3>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.cs</p>
+<pre class="emlist">this.computeShader.SetInt(&quot;intValue&quot;, 1);
+</pre>
+</div>
+<p>処理したい内容によってはスクリプト (CPU) 側からコンピュートシェーダ (GPU) 側に値を渡し、参照したい場合があると思います。ほとんどの型の値は <code class="inline-code tt">ComputeShader.Set~</code> を使って、コンピュートシェーダ内にある変数に設定することができます。このとき、引数に設定する引数の変数名と、コンピュートシェーダ内に定義された変数名は一致する必要があります。この例では <code class="inline-code tt">intValue</code> に 1 を渡しています。</p>
+
+<h3><a id="h2-2-11"></a><span class="secno">2.2.11　</span>コンピュートシェーダの実行</h3>
+<p>コンピュートシェーダに実装(定義)されたカーネルは、<code class="inline-code tt">ComputeShader.Dispatch</code> メソッドで実行します。指定したインデックスのカーネルを、指定したグループ数で実行します。グループ数は X * Y * Z で指定します。このサンプルでは 1 * 1 * 1 = 1 グループです。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.cs</p>
+<pre class="emlist">this.computeShader.Dispatch
+    (this.kernelIndex_KernelFunction_A, 1, 1, 1);
+
+int[] result = new int[4];
+
+this.intComputeBuffer.GetData(result);
+
+for (int i = 0; i &lt; 4; i++)
+{
+    Debug.Log(result[i]);
+}
+</pre>
+</div>
+<p>コンピュートシェーダ (カーネル) の実行結果は、<code class="inline-code tt">ComputeBuffer.GetData</code> で取得します。</p>
+
+<h3><a id="h2-2-12"></a><span class="secno">2.2.12　</span>実行結果の確認 (A)</h3>
+<p>あらためてコンピュートシェーダ側の実装を確認します。このサンプルでは次のカーネルを 1 * 1 * 1 = 1グループで実行しています。スレッドは、4 * 1 * 1 = 4 スレッドです。また <code class="inline-code tt">intValue</code> にはスクリプトから 1 を与えています。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.compute</p>
+<pre class="emlist">[numthreads(4, 1, 1)]
+void KernelFunction_A(uint3 groupID : SV_GroupID,
+                      uint3 groupThreadID : SV_GroupThreadID)
+{
+    intBuffer[groupThreadID.x] = groupThreadID.x * intValue;
+}
+</pre>
+</div>
+<p><code class="inline-code tt">groupThreadID(SV_GroupThreadID)</code> は、今このカーネルが、グループ内の何番目のスレッドで実行されているかを示す値が入るので、この例では (0 ~ 3, 0, 0) が入ります。したがって、<code class="inline-code tt">groupThreadID.x</code> は 0 ~ 3 です。つまり、<code class="inline-code tt">intBuffer[0] = 0</code>　～ <code class="inline-code tt">intBuffer[3] = 3</code> までが並列して実行されることになります。</p>
+
+<h3><a id="h2-2-13"></a><span class="secno">2.2.13　</span>異なるカーネル (B) を実行する</h3>
+<p>1 つのコンピュートシェーダに実装した異なるカーネルを実行するときは、別のカーネルのインデックスを指定します。この例では、<code class="inline-code tt">KernelFunction_A</code> を実行した後に <code class="inline-code tt">KernelFunction_B</code> を実行します。さらに <code class="inline-code tt">KernelFunction_A</code> で利用したバッファ領域を、<code class="inline-code tt">KernelFunction_B</code> でも使っています。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.cs</p>
+<pre class="emlist">this.computeShader.SetBuffer
+(this.kernelIndex_KernelFunction_B, &quot;intBuffer&quot;, this.intComputeBuffer);
+
+this.computeShader.Dispatch(this.kernelIndex_KernelFunction_B, 1, 1, 1);
+
+this.intComputeBuffer.GetData(result);
+
+for (int i = 0; i &lt; 4; i++)
+{
+    Debug.Log(result[i]);
+}
+</pre>
+</div>
+
+<h3><a id="h2-2-14"></a><span class="secno">2.2.14　</span>実行結果の確認 (B)</h3>
+<p><code class="inline-code tt">KernelFunction_B</code> は次のようなコードを実行します。このとき <code class="inline-code tt">intBuffer</code> は <code class="inline-code tt">KernelFunction_A</code> で使ったものを引き続き指定している点に注意してください。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.compute</p>
+<pre class="emlist">RWStructuredBuffer&lt;int&gt; intBuffer;
+
+[numthreads(4, 1, 1)]
+void KernelFunction_B
+(uint3 groupID : SV_GroupID, uint3 groupThreadID : SV_GroupThreadID)
+{
+    intBuffer[groupThreadID.x] += 1;
+}
+</pre>
+</div>
+<p>このサンプルでは、<code class="inline-code tt">KernelFunction_A</code> によって <code class="inline-code tt">intBuffer</code> に 0 ~ 3 が順に与えられています。したがって <code class="inline-code tt">KernelFunction_B</code> を実行した後は、値が 1 ~ 4 になることを確認します。</p>
+
+<h3><a id="h2-2-15"></a><span class="secno">2.2.15　</span>バッファの破棄</h3>
+<p>利用し終えた ComputeBuffer は、明示的に破棄する必要があります。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Array.cs</p>
+<pre class="emlist">this.intComputeBuffer.Release();
+</pre>
+</div>
+
+<h3><a id="h2-2-16"></a><span class="secno">2.2.16　</span>サンプル (1) で解決していない問題</h3>
+<p>多次元のスレッドまたはグループを指定する意図について、このサンプルでは解説していません。例えば、 (4, 1, 1) スレッドと、(2, 2, 1) スレッドは、どちらも 4 スレッド実行されますが、この 2 つは使い分ける意味があります。これについては後に続くサンプル (2) で解説します。</p>
+
+<h2><a id="h2-3"></a><span class="secno">2.3　</span>サンプル (2) : GPU の演算結果をテクスチャにする</h2>
+<p>サンプル (2) 「SampleScene_Texture」では、コンピュートシェーダの算出結果をテクスチャにして取得します。サンプルには次のような操作が含まれます。</p>
+<ul>
+<li>コンピュートシェーダを使って、テクスチャに情報を書き込む。</li>
+<li>多次元 (2次元) のスレッドを有効に活用する。</li>
+</ul>
+<p>サンプル (2) の実行結果は次の通りになります。横方向と縦方向にグラデーションするテクスチャを生成します。</p>
+<div id="primerofcomputeshader04" class="image">
+<img src="images/primerofcomputeshader04.png" alt="サンプル (2) の実行結果" class="width-100per" />
+<p class="caption">
+図2.3: サンプル (2) の実行結果
+</p>
+</div>
+
+<h3><a id="h2-3-1"></a><span class="secno">2.3.1　</span>カーネルの実装</h3>
+<p>全体の実装についてはサンプルを参照してください。このサンプルでは概ね次のようなコードをコンピュートシェーダで実行します。カーネルが多次元スレッドで実行される点に注目してください。(8, 8, 1) なので、1 グループあたり、8 * 8 * 1 = 64 スレッドで実行されます。また演算結果の保存先が <code class="inline-code tt">RWTexture2D&lt;float4&gt;</code> であることも大きな変更点です。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Texture.compute</p>
+<pre class="emlist">RWTexture2D&lt;float4&gt; textureBuffer;
+
+[numthreads(8, 8, 1)]
+void KernelFunction_A(uint3 dispatchThreadID : SV_DispatchThreadID)
+{
+    float width, height;
+    textureBuffer.GetDimensions(width, height);
+
+    textureBuffer[dispatchThreadID.xy]
+        = float4(dispatchThreadID.x / width,
+                 dispatchThreadID.x / width,
+                 dispatchThreadID.x / width,
+                 1);
+}
+</pre>
+</div>
+
+<h3><a id="h2-3-2"></a><span class="secno">2.3.2　</span>特殊な引数 SV_DispatchThreadID</h3>
+<p>サンプル (1) では <code class="inline-code tt">SV_DispatchThradID</code> セマンティクスは使いませんでした。少々複雑ですが、<b>「あるカーネルを実行するスレッドが、すべてのスレッドの中のどこに位置するか (x,y,z) 」</b>を示しています。</p>
+<p><code class="inline-code tt">SV_DispathThreadID</code> は、<code class="inline-code tt">SV_Group_ID * numthreads + SV_GroupThreadID</code> で算出される値です。<code class="inline-code tt">SV_Group_ID</code> はあるグループを (x, y, z) で示し、<code class="inline-code tt">SV_GroupThreadID</code> は、あるグループに含まれるスレッドを (x, y, z) で示します。</p>
+
+<h4><a id="h2-3-2-1"></a>具体的な計算例 (1)</h4>
+<p>例えば、(2, 2, 1) グループで、(4, 1, 1) スレッドで実行される、カーネルを実行するとします。その内の 1 つのカーネルは、(0, 1, 0) 番目のグループに含まれる、(2, 0, 0) 番目のスレッドで実行されます。このとき <code class="inline-code tt">SV_DispatchThreadID</code> は、(0, 1, 0) * (4, 1, 1) + (2, 0, 0) = (0, 1, 0) + (2, 0, 0) = (2, 1, 0) になります。</p>
+
+<h4><a id="h2-3-2-2"></a>具体的な計算例 (2)</h4>
+<p>今度は最大値を考えましょう。(2, 2, 1) グループで、(4, 1, 1) スレッドでカーネルが実行されるとき、(1, 1, 0) 番目のグループに含まれる、(3, 0, 0) 番目のスレッドが最後のスレッドです。このとき <code class="inline-code tt">SV_DispatchThreadID</code> は、(1, 1, 0) * (4, 1, 1) + (3, 0, 0) = (4, 1, 0) + (3, 0, 0) = (7, 1, 0) になります。</p>
+
+<h3><a id="h2-3-3"></a><span class="secno">2.3.3　</span>テクスチャ (ピクセル) に値を書き込む</h3>
+<p>以降は時系列順に解説するのが困難ですので、サンプル全体に目を通しながら確認してください。</p>
+<p>サンプル (2) の <code class="inline-code tt">dispatchThreadID.xy</code> は、テクスチャ上にあるすべてのピクセルを示すように、グループとスレッドを設定しています。グループを設定するのはスクリプト側なので、スクリプトとコンピュートシェーダを横断して確認する必要があります。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Texture.compute</p>
+<pre class="emlist">textureBuffer[dispatchThreadID.xy]
+    = float4(dispatchThreadID.x / width,
+             dispatchThreadID.x / width,
+             dispatchThreadID.x / width,
+             1);
+</pre>
+</div>
+<p>このサンプルでは仮に 512x512 のテクスチャを用意していますが、<code class="inline-code tt">dispatchThreadID.x</code> が 0 ~ 511 を示すとき、<code class="inline-code tt">dispatchThreadID / width</code> は、0 ~ 0.998… を示します。つまり <code class="inline-code tt">dispatchThreadID.xy</code> の値( = ピクセル座標)が大きくなるにつれて、黒から白に塗りつぶしていくことになります。</p>
+<div class="note">
+<p>テクスチャは、RGBA チャネルから構成され、それぞれ 0 ~ 1 で設定します。すべて 0 のとき、完全に黒くなり、すべて 1 のとき、完全に白くなります。</p>
+</div>
+
+<h3><a id="h2-3-4"></a><span class="secno">2.3.4　</span>テクスチャの用意</h3>
+<p>以降がスクリプト側の実装の解説です。サンプル (1) では、コンピュートシェーダの計算結果を保存するために配列のバッファを用意しました。サンプル (2) では、その代わりにテクスチャを用意します。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Texture.cs</p>
+<pre class="emlist">RenderTexture renderTexture_A;
+…
+void Start()
+{
+    this.renderTexture_A = new RenderTexture
+        (512, 512, 0, RenderTextureFormat.ARGB32);
+    this.renderTexture_A.enableRandomWrite = true;
+    this.renderTexture_A.Create();
+…
+</pre>
+</div>
+<p>解像度とフォーマットを指定して RenderTexture を初期化します。このとき <code class="inline-code tt">RenderTexture.enableRandomWrite</code> を有効にして、テクスチャへの書き込みを有効にしている点に注意します。</p>
+<ul>
+<li>RenderTexture.enableRandomWrite - Unity<ul>
+<li><a href="https://docs.unity3d.com/ScriptReference/RenderTexture-enableRandomWrite.html" class="link">https://docs.unity3d.com/ScriptReference/RenderTexture-enableRandomWrite.html</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a id="h2-3-5"></a><span class="secno">2.3.5　</span>スレッド数の取得</h3>
+<p>カーネルのインデックスが取得できるように、カーネルがどれくらいのスレッド数で実行できるかも取得できます(スレッドサイズ)。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Texture.cs</p>
+<pre class="emlist">void Start()
+{
+…
+    uint threadSizeX, threadSizeY, threadSizeZ;
+
+    this.computeShader.GetKernelThreadGroupSizes
+     (this.kernelIndex_KernelFunction_A,
+      out threadSizeX, out threadSizeY, out threadSizeZ);
+…
+</pre>
+</div>
+
+<h3><a id="h2-3-6"></a><span class="secno">2.3.6　</span>カーネルの実行</h3>
+<p><code class="inline-code tt">Dispath</code> メソッドで処理を実行します。このとき、グループ数の指定方法に注意します。この例では、グループ数は「テクスチャの水平(垂直)方向の解像度 / 水平(垂直)方向のスレッド数」で算出しています。</p>
+<p>水平方向について考えるとき、テクスチャの解像度は 512、スレッド数は 8 ですから、水平方向のグループ数は 512 / 8 = 64 になります。同様に垂直方向も 64 です。したがって、合計グループ数は 64 * 64 = 4096 になります。</p>
+<div class="emlist-code">
+<p class="caption">SimpleComputeShader_Texture.cs</p>
+<pre class="emlist">void Update()
+{
+    this.computeShader.Dispatch
+    (this.kernelIndex_KernelFunction_A,
+     this.renderTexture_A.width  / this.kernelThreadSize_KernelFunction_A.x,
+     this.renderTexture_A.height / this.kernelThreadSize_KernelFunction_A.y,
+     this.kernelThreadSize_KernelFunction_A.z);
+
+    plane_A.GetComponent&lt;Renderer&gt;()
+        .material.mainTexture = this.renderTexture_A;
+</pre>
+</div>
+<p>言い換えれば、各グループは 8 * 8 * 1 = 64 (= スレッド数) ピクセルずつ処理することになります。グループは 4096 あるので、4096 * 64 = 262,144 ピクセル処理します。画像は、512 * 512 = 262,144 ピクセルなので、ちょうどすべてのピクセルを並列に処理できたことになります。</p>
+
+<h4><a id="h2-3-6-1"></a>異なるカーネルの実行</h4>
+<p>もう一方のカーネルは、x ではなく、 y 座標を使って塗りつぶしていきます。このとき 0 に近い値、黒い色が下のほうに表れている点に注意します。テクスチャを操作するときは原点を考慮しなければならないこともあります。</p>
+
+<h3><a id="h2-3-7"></a><span class="secno">2.3.7　</span>多次元スレッド、グループの利点</h3>
+<p>サンプル (2) のように、多次元の結果が必要な場合、あるいは多次元の演算が必要な場合には、多次元のスレッドやグループが有効に働きます。もしサンプル (2) を 1 次元のスレッドで処理しようとすると、縦方向のピクセル座標を任意に算出する必要があります。</p>
+<div class="note">
+<p>実際に実装しようとすると確認できますが、画像処理でいうところのストライド、例えば 512x512 の画像があるとき、その 513 番目のピクセルは、(0, 1) 座標になる、といった算出が必要になります。</p>
+</div>
+<p>演算数は削減したほうが良いですし、高度な処理を行うにしたがって複雑さは増します。コンピュートシェーダを使った処理を設計するときは、上手く多次元を活用できないか検討するのが良いです。</p>
+
+<h2><a id="h2-4"></a><span class="secno">2.4　</span>さらなる学習のための補足情報</h2>
+<p>本章ではコンピュートシェーダについてサンプルを解説する形式で入門情報としましたが、これから先、学習を進める上で必要ないくつかの情報を補足します。</p>
+
+<h3><a id="h2-4-1"></a><span class="secno">2.4.1　</span>GPU アーキテクチャ・基本構造</h3>
+<div id="primerofcomputeshader02" class="image">
+<img src="images/primerofcomputeshader02.png" alt="GPU アーキテクチャのイメージ" class="width-100per" />
+<p class="caption">
+図2.4: GPU アーキテクチャのイメージ
+</p>
+</div>
+<p>GPU のアーキテクチャ・構造についての基本的な知識があれば、コンピュートシェーダを使った処理の実装の際、それを最適化するために役に立つので、少しだけここで紹介します。</p>
+<p>GPU は多数の <b>Streaming Multiprocessor(SM)</b> が搭載されていて、それらが分担・並列化して与えられた処理を実行します。</p>
+<p>SM には更に小さな <b>Streaming Processor(SP)</b> が複数搭載されていて、SM に割り当てられた処理を SP が計算する、といった形式です。</p>
+<p>SM には<b>レジスタ</b>と<b>シェアードメモリ</b>が搭載されていて、<b>グローバルメモリ(DRAM上のメモリ)</b>よりも高速に読み書きすることができます。レジスタは関数内でのみ参照されるローカル変数に使われ、シェアードメモリは同一 SM 内に所属するすべての SP から参照し書き込むことができます。</p>
+<p>つまり、各メモリの最大サイズやスコープを把握し、無駄なく高速にメモリを読み書きできる最適な実装を実現できるのが理想です。</p>
+<p>例えば最も考慮する必要があるであろうシェアードメモリは、クラス修飾子 (storage-class modifiers) <code class="inline-code tt">groupshared</code> を使って定義します。ここでは入門なので具体的な導入例を割愛しますが、最適化に必要な技術・用語として覚えておいて、以降の学習に役立ててください。</p>
+<ul>
+<li>Variable Syntax - Microsoft Developer Network<ul>
+<li><a href="https://msdn.microsoft.com/en-us/library/bb509706(v=vs.85).aspx" class="link">https://msdn.microsoft.com/en-us/library/bb509706(v=vs.85).aspx</a></li>
+</ul>
+</li>
+</ul>
+
+<h4><a id="h2-4-1-1"></a>レジスタ</h4>
+<p>SP に最も近い位置に置かれ、最も高速にアクセスできるメモリ領域です。4 byte 単位で構成され、カーネル(関数)スコープの変数が配置されます。スレッドごとに独立するため共有することができません。</p>
+
+<h4><a id="h2-4-1-2"></a>シェアードメモリ</h4>
+<p>SM に置かれるメモリ領域で、L1 キャッシュと合わせて管理されています。同じ SM 内にある SP(= スレッド) で共有することができ、かつ十分に高速にアクセスすることができます。</p>
+
+<h4><a id="h2-4-1-3"></a>グローバルメモリ</h4>
+<p>GPU 上ではなく DRAM 上のメモリ領域です。GPU 上にのプロセッサからは離れた位置にあるため参照は低速です。一方で、容量が大きく、すべてのスレッドからデータの読み書きが可能です。</p>
+
+<h4><a id="h2-4-1-4"></a>ローカルメモリ</h4>
+<p>GPU 上ではなく DRAM 上のメモリ領域で、レジスタに収まらないデータを格納します。GPU 上のプロセッサからは離れた位置にあるため参照は低速です。</p>
+
+<h4><a id="h2-4-1-5"></a>テクスチャメモリ</h4>
+<p>テクスチャデータ専用のメモリで、グローバルメモリをテクスチャ専用に扱います。</p>
+
+<h4><a id="h2-4-1-6"></a>コンスタントメモリ</h4>
+<p>読み込み専用のメモリで、カーネル(関数)の引数や定数を保存しておくためなどに使われます。専用のキャッシュを持っていて、グローバルメモリよりも高速に参照できます。</p>
+
+<h3><a id="h2-4-2"></a><span class="secno">2.4.2　</span>効率の良いスレッド数指定のヒント</h3>
+<p>総スレッド数が実際に処理したいデータ数よりも大きい場合は、無意味に実行される (あるいは処理されない) スレッドが生じることになり非効率です。総スレッド数は可能な限り処理したいデータ数と一致させるように設計します。</p>
+
+<h3><a id="h2-4-3"></a><span class="secno">2.4.3　</span>現行スペック上の限界</h3>
+<p>執筆時時点での現行スペックの上限を紹介します。最新版でない可能性があることに十分に注意してください。ただし、これらのような制限を考慮しつつ実装することが求められます。</p>
+<ul>
+<li>Compute Shader Overview - Microsoft Developer Network<ul>
+<li><a href="https://msdn.microsoft.com/en-us/library/ff476331(v=vs.85).aspx" class="link">https://msdn.microsoft.com/en-us/library/ff476331(v=vs.85).aspx</a></li>
+</ul>
+</li>
+</ul>
+
+<h4><a id="h2-4-3-1"></a>スレッドとグループ数</h4>
+<p>スレッド数やグループ数の限界については、解説中に言及しませんでした。これはシェーダモデル(バージョン)によって変更されるためです。今後も並列できる数は増えていくものと思われます。</p>
+<ul>
+<li>ShaderModel cs_4_x<ul>
+<li>Z の最大値が 1</li>
+<li>X * Y * Z の最大値が 768</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>ShaderModel cs_5_0<ul>
+<li>Z の最大値が 64</li>
+<li>X * Y * Z の最大値は 1024</li>
+</ul>
+</li>
+</ul>
+<p>またグループの限界は (x, y, z) でそれぞれ 65535 です。</p>
+
+<h4><a id="h2-4-3-2"></a>メモリ領域</h4>
+<p>シェアードメモリの上限は、単位グループあたり 16 KB,あるスレッドが書き込めるシェアードメモリのサイズは、単位あたり 256 byte までと制限されています。</p>
+
+<h2><a id="h2-5"></a><span class="secno">2.5　</span>参考</h2>
+<p>本章でのその他の参考は以下の通りです。</p>
+<ul>
+<li>第５回　GPUの構造 - 日本GPUコンピューティングパートナーシップ - <a href="http://www.gdep.jp/page/view/252" class="link">http://www.gdep.jp/page/view/252</a></li>
+<li>Windows で始める CUDA 入門 - エヌビディアジャパン - <a href="http://on-demand.gputechconf.com/gtc/2013/jp/sessions/8001.pdf" class="link">http://on-demand.gputechconf.com/gtc/2013/jp/sessions/8001.pdf</a></li>
+</ul>
+</body>
+</html>
