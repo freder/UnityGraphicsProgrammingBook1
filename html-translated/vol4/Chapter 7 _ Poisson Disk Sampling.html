@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://freder.io/files/unity4/aoyama.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 7 _ Poisson Disk Sampling_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Poisson Disk Sampling</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 7 _ Poisson Disk Sampling_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 7 _ Poisson Disk Sampling_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Poisson Disk Sampling_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Poisson Disk Sampling_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 7 _ Poisson Disk Sampling_files/saved_resource.html"></iframe></div>
+<h1><a id="h7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Poisson Disk Sampling</font></font></h1>
+
+<h2><a id="h7-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This chapter provides an overview of Poisson Disk Sampling (hereinafter referred to as "PDS") and an explanation of the CPU implementation algorithm.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fast Poisson Disk Sampling in Arbitary Dimensions (high-speed Poisson disk sampling in any dimension: hereinafter, "FPDS" is used) is adopted for the implementation in the CPU. </font><font style="vertical-align: inherit;">This algorithm was proposed by Robert Bridson of the University of British Columbia in a 2007 paper submitted to SIGGRAPH.</font></font></p>
+
+<h2><a id="h7-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Overview</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Some people may not know what PDS is in the first place, so this section will explain PDS.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, plot a large number of points in a suitable space. </font><font style="vertical-align: inherit;">Next, </font><font style="vertical-align: inherit;">consider a </font><font style="vertical-align: inherit;">distance </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">d</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> greater than 0 </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">At this time, as </font></font><span class="imgref"><a href="https://freder.io/files/unity4/aoyama.html#id_aoyama_2Frandom__point"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">shown</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in Fig </font><span class="imgref"><a href="https://freder.io/files/unity4/aoyama.html#id_aoyama_2Frandom__point"><font style="vertical-align: inherit;">. 7.1</font></a></span><font style="vertical-align: inherit;"> , the </font><font style="vertical-align: inherit;">distribution in which </font><font style="vertical-align: inherit;">all the points are at random positions but all the points are </font><font style="vertical-align: inherit;">separated by </font><font style="vertical-align: inherit;">at least </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">d</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> or more is called the Poisson-disk distribution. </font><font style="vertical-align: inherit;">In other words, </font><font style="vertical-align: inherit;">even if two points are randomly selected from </font></font><span class="imgref"><a href="https://freder.io/files/unity4/aoyama.html#id_aoyama_2Frandom__point"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Figure 7.1</font></font></a></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the distance between them </font><font style="vertical-align: inherit;">will not always be less than </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">d</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> in any combination </font><font style="vertical-align: inherit;">. </font><font style="vertical-align: inherit;">Sampling such a Poisson-disk distribution, in other words, generating a Poisson-disk distribution by calculation, is called PDS.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With this PDS, you can get a random point cloud with uniformity. </font><font style="vertical-align: inherit;">Therefore, it is used for sampling in filtering processing such as antialiasing, and sampling for determining composite pixels in texture composition processing.</font></font></p>
+<div id="id_aoyama_2Frandom__point" class="image">
+<img src="./Chapter 7 _ Poisson Disk Sampling_files/random_point.png" alt="Plot random points" class="width-050per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.1: Plot random points
+</font></font></p>
+</div>
+
+<h2><a id="h7-3"></a><span class="secno">7.3　</span>Fast Poisson Disk Sampling in Arbitary Dimensions （CPU実装）</h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The biggest feature of FPDS is that it is dimension-independent. </font><font style="vertical-align: inherit;">Most of the methods proposed so far are based on the assumption of two-dimensional calculation, and it has not been possible to efficiently perform three-dimensional sampling. </font><font style="vertical-align: inherit;">Therefore, FPDS was proposed to perform high-speed calculations in any dimension.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">FPDS can be calculated in O (N) and can be implemented based on the same algorithm in any dimension. </font><font style="vertical-align: inherit;">This section describes the FPDS process step by step.</font></font></p>
+
+<h3><a id="h7-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction of FPDS</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Three parameters are used in the calculation of FPDS.</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sampling space range: </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rn</font></font></span></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Minimum distance between points: </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">r</font></font></span></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sampling limit: </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">k</font></font></span></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">These parameters can be freely entered by the user. </font><font style="vertical-align: inherit;">The above parameters are also used in the following explanations.</font></font></p>
+
+<h3><a id="h7-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.3.2</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Divide the sampling space into </font><span class="secno"><font style="vertical-align: inherit;">Grids　</font></span></font></h3>
+<p>点同士の距離の計算を高速化するために、サンプリング空間をGridに分割します。ここで、サンプリング空間の次元数を<span class="equation">n</span>として、分割されてできた各分割空間（以下、「セル」とする）のサイズは<span class="equation">\frac{r}{\sqrt{n}}</span>とします。<span class="imgref"><a href="https://freder.io/files/unity4/aoyama.html#id_aoyama_2Feuclid">図7.2</a></span>に示すように<span class="equation">\sqrt{n}</span>は、<span class="equation">n</span>次元における各軸の長さが1のベクトルの絶対値を表しています。</p>
+<div id="id_aoyama_2Feuclid" class="image">
+<img src="./Chapter 7 _ Poisson Disk Sampling_files/euclid.png" alt="When n = 3" class="width-075per">
+<p class="caption">
+図7.2: n=3のとき
+</p>
+</div>
+<p>そして、サンプリングした点はその座標が含まれているセルに所属させます。各セルのサイズは<span class="equation">\frac{r}{\sqrt{n}}</span>となっているため、隣り合っているセル同士の中心距離も<span class="equation">\frac{r}{\sqrt{n}}</span>となります。つまり<span class="equation">\frac{r}{\sqrt{n}}</span>によって空間を分割することで、<span class="imgref"><a href="https://freder.io/files/unity4/aoyama.html#id_aoyama_2Fgrid">図7.3</a></span>から分かるように各セルには最大でも一点だけが所属することになります。さらに、あるセルの周辺を近傍探索するときは<span class="equation">\pm{n}</span>だけ周辺セルを探索することで、最小距離<span class="equation">r</span>以内の距離にある全てのセルを探索できることになります。</p>
+<div id="id_aoyama_2Fgrid" class="image">
+<img src="./Chapter 7 _ Poisson Disk Sampling_files/grid.png" alt="Partition of a set at n = 2" class="width-075per">
+<p class="caption">
+図7.3: n=2における平面分割
+</p>
+</div>
+<p>また、このGridはn次元の配列によって表現することが可能なため、とても実装が簡単です。サンプリングした点を、その座標に対応するセルに所属させることで、近くに存在する他点の探索を容易におこなえます。</p>
+<div class="emlist-code">
+<p class="caption"> </p>
+<pre class="emlist language-cs">// 3次元グリッドを表現する3次元配列を取得する<font></font>
+Vector3?[, ,] GetGrid(Vector3 bottomLeftBack, Vector3 topRightForward<font></font>
+    , float min, int iteration)<font></font>
+{<font></font>
+    // サンプリング空間<font></font>
+    var dimension = (topRightForward - bottomLeftBack);<font></font>
+    // 最小距離に√3の逆数をかける（割り算を避けたい）<font></font>
+    var cell = min * InvertRootTwo;<font></font>
+<font></font>
+    return new Vector3?[<font></font>
+        Mathf.CeilToInt(dimension.x / cell) + 1,<font></font>
+        Mathf.CeilToInt(dimension.y / cell) + 1,<font></font>
+        Mathf.CeilToInt(dimension.z / cell) + 1<font></font>
+    ];<font></font>
+}<font></font>
+<font></font>
+// 座標に対応するセルのIndexを取得する<font></font>
+Vector3Int GetGridIndex(Vector3 point, Settings set)<font></font>
+{<font></font>
+    // 基準点からの距離をセルサイズで割ってIndexを算出<font></font>
+    return new Vector3Int(<font></font>
+        Mathf.FloorToInt((point.x - set.BottomLeftBack.x) / set.CellSize),<font></font>
+        Mathf.FloorToInt((point.y - set.BottomLeftBack.y) / set.CellSize),<font></font>
+        Mathf.FloorToInt((point.z - set.BottomLeftBack.z) / set.CellSize)<font></font>
+    );<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h7-3-3"></a><span class="secno">7.3.3　</span>初期のサンプル点を計算する</h3>
+<p>計算の起点となる、最初のサンプル点を計算します。この時点では、どの座標にサンプリングをおこなっても距離<span class="equation">r</span>より近い他点は存在しないので、完全にランダムな座標を一点決めます。</p>
+<p>この計算したサンプル点の座標を元に、対応するセルに所属させ、さらにアクティブリストとサンプリングリストに追加します。このアクティブリストは、サンプリングをおこなう際に起点となる点を保存しておくリストです。このアクティブリストに保存されている点を基準に、順次サンプリングをおこなっていきます。</p>
+<div class="emlist-code">
+<p class="caption"> </p>
+<pre class="emlist language-cs">// ランダムな座標を一点求める<font></font>
+void GetFirstPoint(Settings set, Bags bags)<font></font>
+{<font></font>
+    var first = new Vector3(<font></font>
+        Random.Range(set.BottomLeftBack.x, set.TopRightForward.x),<font></font>
+        Random.Range(set.BottomLeftBack.y, set.TopRightForward.y),<font></font>
+        Random.Range(set.BottomLeftBack.z, set.TopRightForward.z)<font></font>
+    );<font></font>
+    var index = GetGridIndex(first, set);<font></font>
+<font></font>
+    bags.Grid[index.x, index.y, index.z] = first;<font></font>
+    // サンプリングリスト、最終的にはこのListを結果として返す<font></font>
+    bags.SamplePoints.Add(first);<font></font>
+    // アクティブリスト、このListを基準にサンプリングをまわす<font></font>
+    bags.ActivePoints.Add(first);<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h7-3-4"></a><span class="secno">7.3.4　</span>アクティブリストから基準となる点を選ぶ</h3>
+<p>アクティブリストからランダムにIndex<span class="equation">i</span>を選び、<span class="equation">i</span>に保存されている座標を<span class="equation">x_i</span>とします。（当然ですが一番最初のときは<a href="https://freder.io/files/unity4/aoyama.html#h7-3-3">「7.3.3 初期のサンプル点を計算する」</a>にて生成した点だけなので、<span class="equation">i</span>は0になります。）</p>
+<p>この<span class="equation">x_i</span>を中心に、付近の座標に対して他点をサンプリングしていくことになります。これを繰り返していくことで、空間全体をサンプリングすることができます。</p>
+<div id="id_aoyama_2Ffirst__darts" class="image">
+<img src="./Chapter 7 _ Poisson Disk Sampling_files/first_darts.png" alt="Select initial sampling point" class="width-050per">
+<p class="caption">
+図7.4: 初期のサンプリング点を選択
+</p>
+</div>
+<div class="emlist-code">
+<p class="caption"> </p>
+<pre class="emlist language-cs">// アクティブリストからランダムに点を選ぶ<font></font>
+var index = Random.Range(0, bags.ActivePoints.Count);<font></font>
+var point = bags.ActivePoints[index];<font></font>
+</pre>
+</div>
+
+<h3><a id="h7-3-5"></a><span class="secno">7.3.5　</span>サンプリングする</h3>
+<p><span class="equation">x_i</span> を中心として半径<span class="equation">r</span>以上、<span class="equation">2r</span>以下のn次元球面（2次元なら円、3次元なら球になります）内で、ランダムな座標<span class="equation">x^{\prime}_i</span>を計算します。次に、計算した<span class="equation">x^{\prime}_i</span>の周辺に距離が<span class="equation">r</span>より近い他点が存在するかを調べます。</p>
+<p>ここで、全ての他点について距離計算をおこなうのは、他点の数が多いほど負荷の高い処理となります。そこで、この問題を解決するために<a href="https://freder.io/files/unity4/aoyama.html#h7-3-2">「7.3.2 サンプリング空間をGridに分割する」</a>にて生成したGridを用い、<span class="equation">x^{\prime}_i</span> が所属するセルの周辺セルだけを調べることで、計算量を削減します。周辺セルに他点が存在するときは<span class="equation">x^{\prime}_i</span>を破棄し、他点が存在しなかったときは<span class="equation">x^{\prime}_i</span>を対応するセルに所属させ、アクティブリストとサンプリングリストに追加します。</p>
+<div id="id_aoyama_2Ffirst__sampling" class="image">
+<img src="./Chapter 7 _ Poisson Disk Sampling_files/first_sampling.png" alt="Sampling other points based on the initial sampling point" class="width-050per">
+<p class="caption">
+図7.5: 初期のサンプリング点を基準に他点をサンプリング
+</p>
+</div>
+<div class="emlist-code">
+<p class="caption"> </p>
+<pre class="emlist language-cs">// point座標を元に、次のサンプリング点を求める<font></font>
+private static bool GetNextPoint(Vector3 point, Settings set, Bags bags)<font></font>
+{<font></font>
+    // point座標を中心にr ~ 2rの範囲にあるランダムな点を一点求める<font></font>
+    var p = point +<font></font>
+        GetRandPosInSphere(set.MinimumDistance, 2f * set.MinimumDistance);<font></font>
+<font></font>
+    // サンプリング空間の範囲外だった場合はサンプリング失敗扱いにする<font></font>
+    if(set.Dimension.Contains(p) == false) { return false; }<font></font>
+<font></font>
+    var minimum = set.MinimumDistance * set.MinimumDistance;<font></font>
+    var index = GetGridIndex(p, set);<font></font>
+    var drop = false;<font></font>
+<font></font>
+    // 探索するGridの範囲を計算<font></font>
+    var around = 3;<font></font>
+    var fieldMin = new Vector3Int(<font></font>
+        Mathf.Max(0, index.x - around), Mathf.Max(0, index.y - around),<font></font>
+        Mathf.Max(0, index.z - around)<font></font>
+    );<font></font>
+    var fieldMax = new Vector3Int(<font></font>
+        Mathf.Min(set.GridWidth, index.x + around),<font></font>
+        Mathf.Min(set.GridHeight, index.y + around),<font></font>
+        Mathf.Min(set.GridDepth, index.z + around)<font></font>
+    );<font></font>
+<font></font>
+    // 周辺のGridに他点が存在しているかを確認<font></font>
+    for(var i = fieldMin.x; i &lt;= fieldMax.x &amp;&amp; drop == false; i++)<font></font>
+    {<font></font>
+        for(var j = fieldMin.y; j &lt;= fieldMax.y &amp;&amp; drop == false; j++)<font></font>
+        {<font></font>
+            for(var k = fieldMin.z; k &lt;= fieldMax.z &amp;&amp; drop == false; k++)<font></font>
+            {<font></font>
+                var q = bags.Grid[i, j, k];<font></font>
+                if(q.HasValue &amp;&amp; (q.Value - p).sqrMagnitude &lt;= minimum)<font></font>
+                {<font></font>
+                    drop = true;<font></font>
+                }<font></font>
+            }<font></font>
+        }<font></font>
+    }<font></font>
+<font></font>
+    if(drop == true) { return false; }<font></font>
+<font></font>
+    // 周辺に他点が存在していないので採用<font></font>
+    bags.SamplePoints.Add(p);<font></font>
+    bags.ActivePoints.Add(p);<font></font>
+    bags.Grid[index.x, index.y, index.z] = p;<font></font>
+    return true;<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h7-3-6"></a><span class="secno">7.3.6　</span>サンプリングを繰り返す</h3>
+<p><span class="equation">x_i</span>を中心に、<a href="https://freder.io/files/unity4/aoyama.html#h7-3-5">「7.3.5 サンプリングする」</a>にて一点だけ他点をサンプリングしましたが、これを<span class="equation">k</span>回繰り返します。もし<span class="equation">x_i</span>について<span class="equation">k</span>回繰り返して、一点もサンプリングすることができなかった場合は、<span class="equation">x_i</span>をアクティブリストから削除します。</p>
+<div id="id_aoyama_2Flooped__sampling" class="image">
+<img src="./Chapter 7 _ Poisson Disk Sampling_files/looped_sampling.png" alt="&lt;span class=&quot;equation&quot;&gt;k = 7&lt;/span&gt;のとき" class="width-050per">
+<p class="caption">
+図7.6: <span class="equation">k = 7</span>のとき
+</p>
+</div>
+<p>そして<span class="equation">k</span>の繰り返しが終わったら、また<a href="https://freder.io/files/unity4/aoyama.html#h7-3-4">「7.3.4 アクティブリストから基準となる点を選ぶ」</a>に戻ります。これをアクティブリストが0になるまで繰り返すことで、空間全体をサンプリングすることができます。</p>
+<div class="emlist-code">
+<p class="caption"> </p>
+<pre class="emlist language-cs">// サンプリングを繰り返す<font></font>
+public static List&lt;Vector3&gt; Sampling(Vector3 bottomLeft, Vector3 topRight,<font></font>
+    float minimumDistance, int iterationPerPoint)<font></font>
+{<font></font>
+    var settings = GetSettings(<font></font>
+        bottomLeft,<font></font>
+        topRight,<font></font>
+        minimumDistance,<font></font>
+        iterationPerPoint &lt;= 0 ?<font></font>
+            DefaultIterationPerPoint : iterationPerPoint<font></font>
+    );<font></font>
+    var bags = new Bags()<font></font>
+    {<font></font>
+        Grid = new Vector3?[<font></font>
+            settings.GridWidth + 1,<font></font>
+            settings.GridHeight + 1,<font></font>
+            settings.GridDepth + 1<font></font>
+        ],<font></font>
+        SamplePoints = new List&lt;Vector3&gt;(),<font></font>
+        ActivePoints = new List&lt;Vector3&gt;()<font></font>
+    };<font></font>
+    GetFirstPoint(settings, bags);<font></font>
+<font></font>
+    do<font></font>
+    {<font></font>
+        var index = Random.Range(0, bags.ActivePoints.Count);<font></font>
+        var point = bags.ActivePoints[index];<font></font>
+<font></font>
+        var found = false;<font></font>
+        for(var k = 0; k &lt; settings.IterationPerPoint; k++)<font></font>
+        {<font></font>
+            found = found | GetNextPoint(point, settings, bags);<font></font>
+        }<font></font>
+<font></font>
+        if(found == false) { bags.ActivePoints.RemoveAt(index); }<font></font>
+    }<font></font>
+    while(bags.ActivePoints.Count &gt; 0);<font></font>
+<font></font>
+    return bags.SamplePoints;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>つまり、簡単に全体の流れを説明すると</p>
+<ul>
+<li>空間を決めてグリッドに分割する</li>
+<li>適当に初期点を決める</li>
+<li>初期点の周辺にサンプリングする</li>
+<li>サンプリングした点についても、同様に周辺をサンプリングする</li>
+<li>すべての点について、周辺のサンプリングができたら終了</li>
+</ul>
+<p>ということになります。本アルゴリズムでは並列化の提案などはされていないため、サンプリング空間<span class="equation">Rn</span>が広かったり、最小距離<span class="equation">r</span>が小さかったりするとそれなりの計算時間が必要ですが、任意次元において簡単にサンプリングすることができるというのは、非常に魅力的な利点です。</p>
+
+<h2><a id="h7-4"></a><span class="secno">7.4　</span>まとめ</h2>
+<p>ここまでの処理によって<span class="imgref"><a href="https://freder.io/files/unity4/aoyama.html#id_aoyama_2Fresult">図7.7</a></span>のようにサンプリング結果を得ることができます。この画像は、サンプリングされた座標にGeometryShaderで円を生成し、配置した物です。円同士が重なることがなく、範囲いっぱいに埋め尽くされているのが分かります。</p>
+<div id="id_aoyama_2Fresult" class="image">
+<img src="./Chapter 7 _ Poisson Disk Sampling_files/result.png" alt="Visualization of sampling results" class="width-050per">
+<p class="caption">
+図7.7: サンプリング結果の可視化
+</p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As I mentioned at the beginning, Poisson disc sampling is used in a wide range of places, from antialiasing and image composition to image effects such as Blur and evenly spaced objects. </font><font style="vertical-align: inherit;">It doesn't give you a clear visual result on its own, but it's often used behind the high-quality visuals we usually see. </font><font style="vertical-align: inherit;">It can be said that it is one of the algorithms that is worth knowing when doing visual programming.</font></font></p>
+
+<h2><a id="h7-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
+<ul>
+<li>Fast Poisson Disk Sampling in Arbitrary Dimensions - <a href="https://www.cct.lsu.edu/~fharhad/ganbatte/siggraph2007/CD2/content/sketches/0250.pdf" class="link">https://www.cct.lsu.edu/~fharhad/ganbatte/siggraph2007/CD2/content/sketches/0250.pdf</a></li>
+</ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 7 _ Poisson Disk Sampling_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 7 _ Poisson Disk Sampling_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 7 _ Poisson Disk Sampling_files/saved_resource(2).html"></iframe></body></html>

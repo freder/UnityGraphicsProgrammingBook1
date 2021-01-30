@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://freder.io/files/unity4/fuqunaga.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 2 _ Limit sets of Kleinian groups_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Limit sets of Kleinian groups</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 2 _ Limit sets of Kleinian groups_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 2 _ Limit sets of Kleinian groups_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ Limit sets of Kleinian groups_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ Limit sets of Kleinian groups_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 2 _ Limit sets of Kleinian groups_files/saved_resource.html"></iframe></div>
+<h1><a id="h2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">Chapter 2　</font></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;"> Limit sets of Kleinian groups</font></font></h1>
+<div id="id_fuqunaga_2Fintro0" class="image">
+<img src="./Chapter 2 _ Limit sets of Kleinian groups_files/intro0.png" alt="">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.1: 
+</font></font></p>
+</div>
+<div id="id_fuqunaga_2Fintro2" class="image">
+<img src="./Chapter 2 _ Limit sets of Kleinian groups_files/intro2.png" alt="">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.2: 
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will introduce how to draw the limit set of Kleinian groups with a shader and animate the resulting fractal figure. </font><font style="vertical-align: inherit;">Speaking of fractal animation, it is interesting to see a self-similar figure by scaling it up or down, but with this method, you can see a characteristic movement in which straight lines and circumferences transition more smoothly.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample in this chapter is </font><font style="vertical-align: inherit;">"Kleinian Group" of </font></font><br><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming4" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming4</font></font></a><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+
+<h2><a id="h2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Yen reversal</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, I will introduce the inversion of figures. </font><font style="vertical-align: inherit;">I think it is familiar that a figure that is inverted like a mirror image with a straight line as a boundary is line-symmetrical, and if it is inverted around a point, it is point-symmetrical. </font><font style="vertical-align: inherit;">There is also a reversal of circles. </font><font style="vertical-align: inherit;">It is an operation to switch the inside and outside of the circle on the two-dimensional plane.</font></font></p>
+<div id="id_fuqunaga_2Fcircle__inverse0" class="image">
+<img src="./Chapter 2 _ Limit sets of Kleinian groups_files/circle_inverse0.png" alt="円反転&lt;span class=&quot;equation&quot;&gt;P \rightarrow P&#39;&lt;/span&gt;" class="width-050per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.3: Circle Inversion </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">P \ rightarrow P'</font></font></span>
+</p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The center of the circle </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">O</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , radius </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">r</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> inverted with respect to the circle of, </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\ Left | OP \ Right |</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> a </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">| '\ right | \ left OP</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is so as to satisfy the following equation remains the same direction </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">P</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> to </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">P'</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> to move to the operation Become.</font></font></p>
+<div class="equation">
+<pre>\left| OP\right| \cdot \left| OP'\right| =r^{2}
+</pre>
+</div>
+<p>円周付近では内側と外側が歪んだ線対称のように入れ替わっているように見え、円周から遥かに離れた無限遠と円の中心が入れ替わる形になります。面白いのは円の外側の直線を円反転した場合で、円に近い付近では円周を挟んだ内側に移りそこから離れていくと無限遠まで続く、つまり反転後は円の中心に繋がる形になります。</p>
+<div id="id_fuqunaga_2Fcircle__inverse1" class="image">
+<img src="./Chapter 2 _ Limit sets of Kleinian groups_files/circle_inverse1.png" alt="Straight line inversion" class="width-070per">
+<p class="caption">
+図2.4: 直線の円反転
+</p>
+</div>
+<p>これは円の内側に小さい円として現れます。直線も半径無限の円と捉えると、円反転は円の内側と外側の円同士を入れ替える操作と言えます。</p>
+
+<h3><a id="h2-1-1"></a><span class="secno">2.1.1　</span>数式で表す</h3>
+<p>複素平面上の単位円の円反転を式で表すと次のようになります。</p>
+<div class="equation">
+<pre>z\rightarrow\dfrac {1}{\overline {z}}
+</pre>
+</div>
+<p><span class="equation">z</span>は複素数で<span class="equation">\overline {z}</span>はその複素共益です。</p>
+<p>次のように式変形してみると<span class="equation">z</span>の長さの２乗分の１で<span class="equation">z</span>をスケールしている操作であることがわかります。</p>
+<div class="equation">
+<pre>z\rightarrow \dfrac {1}{\overline {z}}=\dfrac {1}{x-iy}=\dfrac {x+iy}{\left( x-iy\right) \left( x+iy\right) }=\dfrac {x+iy}{x^{2}+y^{2}}=\dfrac {z}{\left| z\right| ^{2}}
+</pre>
+</div>
+<p>複素平面での図形操作として、</p>
+<ul>
+<li>複素数の和：平行移動</li>
+<li>複素数の積：回転（と拡大縮小）</li>
+</ul>
+<p>と認識されている方も多いかと思いますが、ここに新しく割り算を含む操作が入ってきた形になります。</p>
+
+<h2><a id="h2-2"></a><span class="secno">2.2　</span>メビウス変換</h2>
+<p>複素平面における変換に割り算まで含めて一般化した形がメビウス変換<a id="fnb-mebius" href="https://freder.io/files/unity4/fuqunaga.html#fn-mebius" class="noteref" epub:type="noteref">*1</a>です。</p>
+<div class="footnote" epub:type="footnote" id="fn-mebius"><p class="footnote">[*1] メビウスの帯でおなじみに数学者アウグスト・フェルディナント・メビウスに由来します。</p></div>
+<div class="equation">
+<pre>z\rightarrow \dfrac {az+b}{cz+d}
+</pre>
+</div>
+<p><span class="equation">a,b,c,d</span>はすべて複素数です。</p>
+
+<h2><a id="h2-3"></a><span class="secno">2.3　</span>ショットキー群、クライン群</h2>
+<p>メビウス変換を繰り返し用いてフラクタル図形を作ることを考えます。</p>
+<p>互いに交わらない四組の円<span class="equation">D_A</span>,<span class="equation">D_a</span>,<span class="equation">D_B</span>,<span class="equation">D_b</span>を用意します。まずこのうち二組の円に注目し<span class="equation">D_A</span>の外部を<span class="equation">D_a</span>内部に、<span class="equation">D_A</span>の内部を<span class="equation">D_a</span>外部に移すメビウス変換<span class="equation">a</span>を作ります。同様に別の二組の円<span class="equation">D_B</span>、<span class="equation">D_b</span>からメビウス変換<span class="equation">b</span>を作ります。またそれぞれの逆変換<span class="equation">A</span>,<span class="equation">B</span>も用意します。</p>
+<div id="id_fuqunaga_2Fschottky" class="image">
+<img src="./Chapter 2 _ Limit sets of Kleinian groups_files/schottky.png" alt="">
+<p class="caption">
+図2.5: 
+</p>
+</div>
+<p>こうしてできた４つのメビウス変換<span class="equation">a</span>,<span class="equation">A</span>,<span class="equation">b</span>,<span class="equation">B</span>をどのような順番であれ合成した変換全体（たとえば<span class="equation">aaBAbbaB</span>）を、「<span class="equation">a</span>,<span class="equation">b</span>を元にした<strong>ショットキー群</strong><a id="fnb-Schottky" href="https://freder.io/files/unity4/fuqunaga.html#fn-Schottky" class="noteref" epub:type="noteref">*2</a>」と呼びます。</p>
+<div class="footnote" epub:type="footnote" id="fn-Schottky"><p class="footnote">[*2] このような群を最初に考案した数学者フリードリッヒ・ヘルマン・ショットキーに由来します。</p></div>
+<p>これをさらに一般化しメビウス変換からなる離散群のことを<strong>クライン群</strong>と呼びます。どうもこちらの呼び方のほうが広く使わている印象です。</p>
+
+<h2><a id="h2-4"></a><span class="secno">2.4　</span>極限集合</h2>
+<p>ショットキー群の像を表示していくと、円の内部に円がありその内部にも円があり、と無限に続く円が現れます。これらの集合を「<span class="equation">a</span>,<span class="equation">b</span>におけるショットキー群の<strong>極限集合</strong>」と呼びます。この<strong>極限集合</strong>を描くことが本章の目的になっています。</p>
+
+<h2><a id="h2-5"></a><span class="secno">2.5　</span>Jos Leys氏のアルゴリズム</h2>
+
+<h3><a id="h2-5-1"></a><span class="secno">2.5.1　</span>概要</h3>
+<p>シェーダーで極限集合を描画する方法について紹介していきます。変換の組み合わせが無限に続いてしまうので愚直に実装すると大変なのですが、Jos Lays氏がこのためのアルゴリズムを公開している<a id="fnb-josleys" href="https://freder.io/files/unity4/fuqunaga.html#fn-josleys" class="noteref" epub:type="noteref">*5</a>のでこれに沿ってやってみます。</p>
+<p>まず２つのメビウス変換を用意します。</p>
+<div class="equation">
+<pre>a: z\rightarrow \dfrac {tz-i}{-iz}
+</pre>
+</div>
+<div class="equation">
+<pre>b: z\rightarrow z+2
+</pre>
+</div>
+<p><span class="equation">t</span>は複素数<span class="equation">u+iv</span>です。この値をパラメータとして変化させることで図形の形状を変えることができます。</p>
+<p>変換<i>a</i>を詳しく見ていくと、</p>
+<div class="equation">
+<pre>a: z\rightarrow \dfrac {tz-i}{-iz}=\dfrac {t}{-i}+\dfrac {1}{z}=\dfrac{1}{z}+(-v+iu)
+</pre>
+</div>
+<div class="equation">
+<pre>\dfrac {1}{z}=\dfrac {1}{x+iy}=\dfrac {x-iy}{(x+iy)(x-iy)}=\dfrac {x-iy}{x^{2}+y^{2}}=\dfrac {x-iy}{\left|z\right|^{2}}
+</pre>
+</div>
+<p>したがって、</p>
+<div class="equation">
+<pre>a: z\rightarrow \dfrac {tz-i}{-iz}=\dfrac{x-iy}{\left|z\right|^{2}}+(-v+iu)
+</pre>
+</div>
+<p>なので、</p>
+<ol>
+<li>単位円における円反転し、</li>
+<li>ｙの符号を反転し、</li>
+<li><span class="equation">-v+iu</span>平行移動する</li>
+</ol>
+<p>という操作になっていることがわかります。</p>
+<p>変換<i>a</i>,<i>b</i>とその逆変換を用いた極限集合は大小の円がつながった次のような帯状の図形になります。</p>
+<div id="id_fuqunaga_2Flimit__set" class="image">
+<img src="./Chapter 2 _ Limit sets of Kleinian groups_files/limit_set.png" alt="Limit set">
+<p class="caption">
+図2.6: 極限集合
+</p>
+</div>
+<p>この図形の特徴について詳しく見ていきます。</p>
+<div id="id_fuqunaga_2Flimit__set__detail" class="image">
+<img src="./Chapter 2 _ Limit sets of Kleinian groups_files/limit_set_detail.png" alt="">
+<p class="caption">
+図2.7: 
+</p>
+</div>
+<p><span class="equation">0\leq y\leq u</span>の帯状になっており、左右方向にはLine1,2で区切られた平行四辺形が繰り返している形になっています。Line1は点<span class="equation">(1,0)</span>,点<span class="equation">(1-v,u)</span>を通る直線で、Line2は点<span class="equation">(-1,0)</span>,点<span class="equation">(-1-v,u)</span>を通る直線です。Line3は図形を上限に分ける線になり平行四辺形の中においてこの線で分けられた上下の図形は点<span class="equation">z= -\dfrac{v}{2}+\dfrac{iu}{2}</span> において点対称になっています。</p>
+
+<h3><a id="h2-5-2"></a><span class="secno">2.5.2　</span>アルゴリズム</h3>
+<p>任意の点が極限集合に含まれるかどうかを判定します。左右には平行四辺形領域が繰り返している、上下にはLine3を境界に点対称になっていることを利用し各点における判定を最終的には中心下半分の図形の判定に持っていきます。</p>
+<p>ある点について次のように処理していきます。</p>
+<ul>
+<li>もしLine1よりも右にあるなら平行四辺形範囲に収まるように左に移動</li>
+<li>もしLine2よりも左にあるなら同様に右に移動</li>
+<li>Line3よりも上にあるなら点対称であることを利用しLine3の下になるように対象点に移動</li>
+<li>Line3よりも下にある点には変換<i>a</i>を適用する</li>
+</ul>
+<p>直線<span class="equation">y=０</span>に接している一番大きい円は、直線<span class="equation">y=u</span>を単位円で反転したものになります。この中の点に変換<i>a</i>をかけると<span class="equation">y&lt;0</span>となり<span class="equation">0\leq y\leq u</span>の帯から外れます。したがって、</p>
+<blockquote><p>ある点に変換<i>a</i>をかけたら<span class="equation">y&lt;0</span>となった = ある点はこの一番大きな円に含まれる = 極限集合に含まれる</p></blockquote>
+<p>として判定を行います。</p>
+<p>逆に含まれない場合はどうでしょうか。上記手順を繰り返しても<span class="equation">0\leq y\leq u</span>の帯から出られず、最終的にはLine3を挟んだ２点の移動を繰り返す形になります。したがって２つ前と同じ点だった場合は極限集合には含まれない点であると判定できます。</p>
+<p>まとめると次のように処理していく形になります。</p>
+<ol>
+<li><span class="equation">y&lt;0</span>,<span class="equation">u&lt;y</span>であれば範囲外</li>
+<li>Line1より右、Line2より左にあれば中心の平行四辺形へ移動</li>
+<li>Line3より上にあれば中心点について反転</li>
+<li>変換<i>a</i>を適用</li>
+<li>もし<span class="equation">y&lt;0</span>なら極限集合と判定</li>
+<li>２つ前の点と同じなら極限集合ではないと判定</li>
+<li>どちらでもなければ2.に戻る</li>
+</ol>
+
+<h2><a id="h2-6"></a><span class="secno">2.6　</span>実装</h2>
+<p>それではコードを見ていきます。</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.cs</p>
+<pre class="emlist">private void OnRenderImage(RenderTexture source, RenderTexture destination)<font></font>
+{<font></font>
+    material.SetColor("_HitColor", hitColor);<font></font>
+    material.SetColor("_BackColor", backColor);<font></font>
+    material.SetInt("_Iteration", iteration);<font></font>
+    material.SetFloat("_Scale", scale);<font></font>
+    material.SetVector("_Offset", offset);<font></font>
+    material.SetVector("_Circle", circle);<font></font>
+<font></font>
+    Vector2 uv = kleinUV;<font></font>
+    if ( useUVAnimation)<font></font>
+    {<font></font>
+        uv = new Vector2(<font></font>
+            animKleinU.Evaluate(time),<font></font>
+            animKleinV.Evaluate(time)<font></font>
+            );<font></font>
+    }<font></font>
+    material.SetVector("_KleinUV", uv);<font></font>
+    Graphics.Blit(source, destination, material, pass);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>C#側はKleinianGroup.csでインスペクタで設定したパラメータを渡しつつマテリアルを描画する<code class="inline-code tt">OnRenderImage()</code>のみの処理になっています。</p>
+<p>シェーダーを見てきましょう。</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">#pragma vertex vert_img
+</pre>
+</div>
+<p>VertexシェーダーはUnity標準のvert_imgを使っています。メインはFragmentシェーダーです。Fragmentシェーダーは３つ用意してありそれぞれ別のパスになっています。１つ目が標準的なもの、２つ目がぼかし処理が入り少し見た目がきれいになったもの、３つ目が後述のさらに円反転を加えたものになっています。KleinianGroup.csでどのパスを使うか選択できるようになっています。ここでは１つ目のものを見ていきます。</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">fixed4 frag (v2f_img i) : SV_Target<font></font>
+{<font></font>
+    float2 pos = i.uv;<font></font>
+    float aspect = _ScreenParams.x / _ScreenParams.y;<font></font>
+    pos.x *= aspect;<font></font>
+    pos += _Offset;<font></font>
+    pos *= _Scale;<font></font>
+<font></font>
+    bool hit = josKleinian(pos, _KleinUV);<font></font>
+    return hit ? _HitColor : _BackColor;<font></font>
+}<font></font>
+</pre>
+</div>
+<p><code class="inline-code tt">_ScreenParams</code>からアスペクト比を求めてpos.xに乗算しています。これでposで表される画面上の領域は0≦y≦1で、xはアスペクト比に応じた範囲になります。さらにC#側から渡される<code class="inline-code tt">_Offset</code>,<code class="inline-code tt">_Scale</code>を適用することで表示する位置と範囲を調整できるようにしています。<code class="inline-code tt">josKleinian()</code>で極限集合の可否判定を行い出力する色を決定しています。</p>
+<p><code class="inline-code tt">josKleinian()</code>を詳しく見ていきます。</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">bool josKleinian(float2 z, float2 t)<font></font>
+{<font></font>
+    float u = t.x;<font></font>
+    float v = t.y;<font></font>
+<font></font>
+    float2 lz=z+(1).xx;<font></font>
+    float2 llz=z+(-1).xx;<font></font>
+<font></font>
+    for (uint i = 0; i &lt; _Iteration ; i++)<font></font>
+    {<font></font>
+        ～<font></font>
+</pre>
+</div>
+<p>点zとメビウス変換のパラメータtを受け取って、ｚが極限集合に含まれるかどうか判定する関数です。lz,llzは、集合の外部であることを示す「２つ前と同じ点」判定用の変数です。とりあえず開始時のzと異なりまたお互いも異なるように値を初期化しています。<code class="inline-code tt">_Iteration</code>は手順を繰り返す最大回数です。細部を拡大して見ていくのでなければそれほど大きな値でなくても十分だと思います。</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">// wrap if outside of Line1,2<font></font>
+float offset_x = abs(v) / u * z.y;<font></font>
+z.x += offset_x;<font></font>
+z.x = wrap(z.x, 2, -1);<font></font>
+z.x -= offset_x;<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">float wrap(float x, float width, float left_side){<font></font>
+    x -= left_side;<font></font>
+    return (x - width * floor(x/width)) + left_side;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>ここが</p>
+<blockquote><p>Line1より右、Line2より左にあれば中心の平行四辺形へ移動</p></blockquote>
+<p>の部分になります。</p>
+<p><code class="inline-code tt">wrap()</code>は点の位置、長方形の横幅、長方形の左端の座標を受け取り、左右にはみ出している点を収める関数です。offset_xで平行四辺形を長方形に変換し<code class="inline-code tt">wrap()</code>で範囲内に収め、再度offset_xで平行四辺形に戻す処理になっています。</p>
+<p>次にLine3の判定です。</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">//if above Line3, inverse at (-v/2, u/2)<font></font>
+float separate_line = u * 0.5<font></font>
+    + sign(v) *(2 * u - 1.95) / 4 * sign(z.x + v * 0.5)<font></font>
+    * (1 - exp(-(7.2 - (1.95 - u) * 15)* abs(z.x + v * 0.5)));<font></font>
+<font></font>
+if  (z.y &gt;= separate_line)<font></font>
+{<font></font>
+    z = float2(-v, u) - z;<font></font>
+}<font></font>
+</pre>
+</div>
+<p><code class="inline-code tt">separate_line</code>を求めている部分がLine3の条件式になります。この部分は導出がよくわからず図形の対称性からおおよそで求めているものかなと思います。複雑な図形になるように突き詰めたtの値によっては上下の図形がギザギザに噛み合うことがありちゃんと分割するにはこの条件式では不十分なこともありますが、おおよそ一般的な形では有効なので今回はこのまま使用します。</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">z = TransA(z, t);
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">float2 TransA(float2 z, float2 t){<font></font>
+    return float2(z.x, -z.y) / dot(z,z) + float2(-t.y, t.x);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>いよいよ点zにメビウス変換<i>a</i>を適用します。コーディングしやすいように前述の式変形を利用して、</p>
+<div class="equation">
+<pre>a: z\rightarrow \dfrac {tz-i}{-iz}=\dfrac{x-iy}{\left|z\right|^{2}}+(-v+iu)
+</pre>
+</div>
+<p>これを実装しています。</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">//hit!<font></font>
+if (z.y&lt;0) { return true; }<font></font>
+</pre>
+</div>
+<p>変換の結果、<span class="equation">y&lt;0</span>なら極限集合判定、</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">//2cycle<font></font>
+if(length(z-llz) &lt; 1e-6) {break;}<font></font>
+<font></font>
+llz=lz;<font></font>
+lz=z;<font></font>
+</pre>
+</div>
+<p>２つ前の点とほぼ同値なら極限集合ではないと判定します。また、<code class="inline-code tt">_Iteration</code>繰り返しても判定結果が出ない場合も極限集合ではないと判定しています。</p>
+<p>以上でシェーダーの実装は完了です。パラメータtは<span class="equation">(2,0)</span>が最も標準的な値で<span class="equation">(1.94,0.02)</span>付近で面白い形になりやすいです。サンプルプロジェクトではKleinianGroupDemo.csのインスペクタ上で編集できるのでぜひ遊んでみてください。</p>
+
+<h2><a id="h2-7"></a><span class="secno">2.7　</span>さらに円反転</h2>
+<p>極限集合の表示は以上なのですがアニメーションとして面白くするために最後に強力なトッピングを加えます。<code class="inline-code tt">josKleinian()</code>にわたす前にポジションを円反転します。円反転は、円の外側の無限に広がる領域と内側を入れかえ、しかも円は円として移されるのでした。そして極限集合は無数の円で構成されています。この反転円を動かしたり半径を変えたりすることで、フラクタルの面白さを活かしつつ予想もできないような不思議な見た目が出来上がります。</p>
+<div class="emlist-code">
+<p class="caption">KleinianGroup.shader</p>
+<pre class="emlist">float4 calc_color(float2 pos)<font></font>
+{<font></font>
+    bool hit = josKleinian(pos, _KleinUV);<font></font>
+    return hit ? _HitColor : _BackColor;<font></font>
+}<font></font>
+<font></font>
+～<font></font>
+float4 _Circle;<font></font>
+<font></font>
+float2 circleInverse(float2 pos, float2 center, float radius)<font></font>
+{<font></font>
+    float2 p = pos - center;<font></font>
+    p = (p * radius) / dot(p,p);<font></font>
+    p += center;<font></font>
+    return p;<font></font>
+}<font></font>
+<font></font>
+fixed4 frag_circle_inverse(v2f_img i) : SV_Target<font></font>
+{<font></font>
+    float2 pos = i.uv;<font></font>
+    float aspect = _ScreenParams.x / _ScreenParams.y;<font></font>
+    pos.x *= aspect;<font></font>
+    pos *= _Scale;<font></font>
+    pos += _Offset;<font></font>
+<font></font>
+    int sample_num = 10;<font></font>
+    float4 sum;<font></font>
+    for (int i = 0; i &lt; sample_num; ++i)<font></font>
+    {<font></font>
+        float2 offset = rand2n(pos, i) * (1/_ScreenParams.y) * 3;<font></font>
+        float2 p = circleInverse(pos + offset, _Circle.xy, _Circle.w);<font></font>
+        sum += calc_color(p);<font></font>
+    }<font></font>
+<font></font>
+    return sum / sample_num;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>これは３つ目のパスで定義されている円反転を加えたFragmentシェーダーです。<code class="inline-code tt">sample_num</code>のループは周辺のピクセルも計算して少しぼかすことで見た目を綺麗にする処理になります。<code class="inline-code tt">calc_color()</code>がいままでの色を計算する処理になりその前に<code class="inline-code tt">ciecleInverse()</code>で円反転しています。</p>
+<p>KleinianGroupCircleInverseシーンではこちらのシェーダーのパラメータをAnimatorで変化させることでフラクタルらしいアニメーションが動作するようになっています。</p>
+
+<h2><a id="h2-8"></a><span class="secno">2.8　</span>まとめ</h2>
+<p>本章ではクライン群の極限集合をシェーダーで描く方法とさらに円反転の用いることでより面白いフラクタル図形の作り方を紹介しました。フラクタルやメビウス変換は普段馴染みのない分野でとっつきにくい部分もあったのですが次々と予想もしないような模様が動いてく様はとても刺激的でした。よかったらみなさんもチャレンジしてみてください！</p>
+
+<h2><a id="h2-9"></a><span class="secno">2.9　</span>参考</h2>
+<ul>
+<li>インドラの真珠<a id="fnb-indra" href="https://freder.io/files/unity4/fuqunaga.html#fn-indra" class="noteref" epub:type="noteref">*3</a> <br>最強のバイブルです。ちょっと値が張り、内容も高度なので以下のところを見てより深く理解したくなったら手に取るのがおすすめです。</li>
+</ul>
+<ul>
+<li>Mathe Vital <a id="fnb-mathevital" href="https://freder.io/files/unity4/fuqunaga.html#fn-mathevital" class="noteref" epub:type="noteref">*4</a> <br>インドラの真珠のエッセンスを抜き出してわかりやすく紹介されています。まずここから見ていくと良いかと思います。</li>
+</ul>
+<ul>
+<li>今回紹介したJos Leys氏のアルゴリズム<a id="fnb-josleys" href="https://freder.io/files/unity4/fuqunaga.html#fn-josleys" class="noteref" epub:type="noteref">*5</a></li>
+</ul>
+<ul>
+<li>Jos Leys氏のShadertoy <a id="fnb-jos_shadertoy" href="https://freder.io/files/unity4/fuqunaga.html#fn-jos_shadertoy" class="noteref" epub:type="noteref">*6</a> <br>貴重なシェーダー実装の例です</li>
+</ul>
+<ul>
+<li>Morph <a id="fnb-morph" href="https://freder.io/files/unity4/fuqunaga.html#fn-morph" class="noteref" epub:type="noteref">*7</a> <br>@soma_arcさん<a id="fnb-soma" href="https://freder.io/files/unity4/fuqunaga.html#fn-soma" class="noteref" epub:type="noteref">*8</a>がTokyoDemoFest2018<a id="fnb-tdf" href="https://freder.io/files/unity4/fuqunaga.html#fn-tdf" class="noteref" epub:type="noteref">*9</a>で発表されていた作品です。今回私自身クライン群を学ぶきっかけになりました。こちらも貴重なシェーダー実装例。</li>
+</ul>
+<div class="footnote" epub:type="footnote" id="fn-indra"><p class="footnote">[*3] https://www.amazon.co.jp/dp/4535783616</p></div>
+<div class="footnote" epub:type="footnote" id="fn-mathevital"><p class="footnote">[*4] http://userweb.pep.ne.jp/hannyalab/MatheVital/IndrasPearls/IndrasPearlsindex.html</p></div>
+<div class="footnote" epub:type="footnote" id="fn-josleys"><p class="footnote">[*5] http://www.josleys.com/articles/Kleinian%20escape-time_3.pdf</p></div>
+<div class="footnote" epub:type="footnote" id="fn-jos_shadertoy"><p class="footnote">[*6] https://www.shadertoy.com/user/JosLeys</p></div>
+<div class="footnote" epub:type="footnote" id="fn-morph"><p class="footnote">[*7] https://www.shadertoy.com/view/MlGfDG</p></div>
+<div class="footnote" epub:type="footnote" id="fn-soma"><p class="footnote">[*8] https://twitter.com/soma_arc</p></div>
+<div class="footnote" epub:type="footnote" id="fn-tdf"><p class="footnote">[*9] http://tokyodemofest.jp/2018/</p></div><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 557px; top: 39.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 2 _ Limit sets of Kleinian groups_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第2章　Limit sets of Kleinian groups</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 2 _ Limit sets of Kleinian groups_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 2 _ Limit sets of Kleinian groups_files/saved_resource(2).html"></iframe></body></html>

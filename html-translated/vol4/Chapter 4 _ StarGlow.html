@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://freder.io/files/unity4/xjine.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 4 _ StarGlow_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>StarGlow</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 4 _ StarGlow_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 4 _ StarGlow_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ StarGlow_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 4 _ StarGlow_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 4 _ StarGlow_files/saved_resource.html"></iframe></div>
+<h1><a id="h4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">Chapter 4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class=""> StarGlow</font></font></h1>
+<div id="id_xjine_2FStarGlow01" class="image">
+<pre class="dummyimage"></pre>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.1: Rays extending from bright areas
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">LightLeak, LightStreak, or StarGlow, which stretches when a strong light is reflected, let's express this with a post effect. </font><font style="vertical-align: inherit;">Here, for convenience, it is called StarGlow.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This post-effect presented here was presented by Masaki Kawase at GDC 2003.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample in this chapter is </font><font style="vertical-align: inherit;">"Star Glow" from </font></font><br><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming4" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming4</font></font></a><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+
+<h2><a id="h4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> STEP 1: Generate a brightness image</font></font></h2>
+<div id="id_xjine_2FStarGlow02" class="image">
+<img src="./Chapter 4 _ StarGlow_files/StarGlow02.png" alt="Original image">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.2: Original image
+</font></font></p>
+</div>
+<div id="id_xjine_2FStarGlow03" class="image">
+<img src="./Chapter 4 _ StarGlow_files/StarGlow03.png" alt="Image in which only high-brightness pixels are detected">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 4.3: Image of detecting only high-brightness pixels
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, let's create an image (brightness image) that detects only bright areas. </font><font style="vertical-align: inherit;">The same process is required for general glow. </font><font style="vertical-align: inherit;">The source code of the shader and script for creating a luminance image is as follows. </font><font style="vertical-align: inherit;">Note that the shader path is 1.</font></font></p>
+<div class="emlist-code">
+<p class="caption">StarGlow.cs</p>
+<pre class="emlist">RenderTexture brightnessTex<font></font>
+= RenderTexture.GetTemporary(source.width  / this.divide,<font></font>
+                             source.height / this.divide,<font></font>
+                             source.depth,<font></font>
+                             source.format);<font></font>
+…<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+base.material.SetVector</font></font><font></font>
+(this.idParameter, new Vector3(threshold, intensity, attenuation));<font></font>
+<font></font>
+Graphics.Blit(source, brightnessTex, base.material, 1);<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">StarGlow.shader</p>
+<pre class="emlist">#define BRIGHTNESS_THRESHOLD _Parameter.x<font></font>
+#define INTENSITY            _Parameter.y<font></font>
+#define ATTENUATION          _Parameter.z<font></font>
+…<font></font>
+fixed4 frag(v2f_img input) : SV_Target<font></font>
+{<font></font>
+    float4 color = tex2D(_MainTex, input.uv);<font></font>
+    return max(color - BRIGHTNESS_THRESHOLD, 0) * INTENSITY;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>輝度の算出方法についてはさまざまな方法がありますが、古典的なグローの実装などでも使われている算出方式をそのまま活用しました。他に一度グレースケールにしてから輝度を比較するなどの処理を行っているシェーダも見かけます。</p>
+<p><code class="inline-code tt">BRIGHTNESS_THRESHOLD</code> は、輝度と判定する閾値、<code class="inline-code tt">INTENSITY</code> は輝度に乗算するバイアスです。<code class="inline-code tt">color</code> に与えられる値が大きいほど、つまり明るい色ほど、大きな値が返りやすいことを確認してください。閾値が大きいほど、0 より大きな値が返る確率は減りますね。またバイアスが大きいほど、より強い輝度画像が得られるようになっています。</p>
+<p><code class="inline-code tt">ATTENUATION</code> についてはこの時点では使いません。一度にパラメータとして渡した方が CPU → GPU 間での値のやり取りにかかるオーバーヘッドが小さくなるために、ここでは <code class="inline-code tt">Vector3</code> としてまとめて渡しています。</p>
+<p>この時点でもっとも重要なのは、輝度画像をサイズの小さい RenderTexture として取得している点です。</p>
+<p>一般に、ポストエフェクトは解像度が大きくなればなるほど、Fragment シェーダの呼び出し数、その算出回数が増えて負荷が大きくなります。さらにグロー効果については繰り返し処理が発生するために処理負荷はさらに大きくなるのです。スターグローもこの例に漏れません。したがって、効果の解像度を必要な分まで下げることによって、かかる負荷を軽減します。</p>
+<p>繰り返し処理については後述します。</p>
+
+<h2><a id="h4-2"></a><span class="secno">4.2　</span>STEP 2 : 輝度画像に指向性ブラーをかける</h2>
+<div id="id_xjine_2FStarGlow04" class="image">
+<img src="./Chapter 4 _ StarGlow_files/StarGlow04.png" alt="Luminance image stretched diagonally">
+<p class="caption">
+図4.4: 斜めに引き伸ばされた輝度画像
+</p>
+</div>
+<p>STEP1 で得られた輝度画像にブラーをかけて引き伸ばします。この引き伸ばし方を工夫することによって、一般的なグローとは異なる鋭く伸びる光線を表現します。</p>
+<p>一般的なグローの場合は全方向に向かってガウス関数による引き伸ばしをしますが、スターグローの場合は指向性のある引き伸ばしをする、ということです。</p>
+<div class="emlist-code">
+<p class="caption">StarGlow.cs</p>
+<pre class="emlist">Vector2 offset = new Vector2(-1, -1);<font></font>
+// (Quaternion.AngleAxis(angle * x + this.angleOfStreak,<font></font>
+//                       Vector3.forward) * Vector2.down).normalized;<font></font>
+<font></font>
+base.material.SetVector(this.idOffset, offset);<font></font>
+base.material.SetInt   (this.idIteration, 1);<font></font>
+<font></font>
+Graphics.Blit(brightnessTex, blurredTex1, base.material, 2);<font></font>
+<font></font>
+for (int i = 2; i &lt;= this.iteration; i++)<font></font>
+{<font></font>
+    繰り返し描画<font></font>
+}<font></font>
+</pre>
+</div>
+<p>実際の処理とは異なりますが、ここでは説明のために <code class="inline-code tt">offset = (1, 1)</code> としましょう。さらに、<code class="inline-code tt">offset</code> と <code class="inline-code tt">iteration</code> をシェーダに渡していることに注目してください。</p>
+<p>続いてスクリプト側ではシェーダパス 2 で繰り返し描画を実行していますが、簡単に考えるために、ここで一度シェーダの方に移りましょう。シェーダパス 2 で描画していることに注意してください。</p>
+<div class="emlist-code">
+<p class="caption">StarGlow.shader</p>
+<pre class="emlist">int    _Iteration;<font></font>
+float2 _Offset;<font></font>
+<font></font>
+struct v2f_starglow<font></font>
+{<font></font>
+    …<font></font>
+    half   power  : TEXCOORD1;<font></font>
+    half2  offset : TEXCOORD2;<font></font>
+};<font></font>
+<font></font>
+v2f_starglow vert(appdata_img v)<font></font>
+{<font></font>
+    v2f_starglow o;<font></font>
+    …<font></font>
+    o.power  = pow(4, _Iteration - 1);<font></font>
+    o.offset = _MainTex_TexelSize.xy * _Offset * o.power;<font></font>
+    return o;<font></font>
+}<font></font>
+<font></font>
+float4 frag(v2f_starglow input) : SV_Target<font></font>
+{<font></font>
+    half4 color = half4(0, 0, 0, 0);<font></font>
+    half2 uv    = input.uv;<font></font>
+<font></font>
+    for (int j = 0; j &lt; 4; j++)<font></font>
+    {<font></font>
+        color += saturate(tex2D(_MainTex, uv)<font></font>
+               * pow(ATTENUATION, input.power * j));<font></font>
+        uv += input.offset;<font></font>
+    }<font></font>
+<font></font>
+    return color;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>まずは Vertex シェーダから確認します。<code class="inline-code tt">power</code> は引き伸ばされるときに輝度が減衰する力、<code class="inline-code tt">offset</code> はブラーによって輝度を引き伸ばす方向を示します。後述する Fragment シェーダで参照します。</p>
+<p>Vertex シェーダ内でこれらを算出しているのは、Fragment シェーダ内において共通の値を参照するためです。Fragment シェーダ内で逐次算出するのは演算回数が増えるので良くありませんね。</p>
+<p>ここで <code class="inline-code tt">_Iteration = 1</code> です。したがって <code class="inline-code tt">power = 4^0 = 1</code> になります。そうると <code class="inline-code tt">offset = 画素の大きさ * (1, 1)</code> が得られます。</p>
+<p>これで、ちょうど 1 画素分だけオフセット方向にズレた画素をサンプリングするための準備が整いました。</p>
+<p>次に Fragment シェーダです。参照する <code class="inline-code tt">uv</code> を <code class="inline-code tt">offset</code> の分だけ 1 つずつ移動しながら 4 回参照し、その画素の値を合算しています。ただし画素の値には <code class="inline-code tt">pow(ATTENUATION, input.power * j)</code> が乗算されていますね。</p>
+<p><code class="inline-code tt">ATTENUATION</code> はその画素の値をどれくらい減衰するかを表す値です。引き伸ばしたときのボケ、減衰具合に影響します。</p>
+<p>仮に <code class="inline-code tt">ATTENUATION = 0.7</code> とすれば、最初にサンプリングする画素は * 0.7,次にサンプリングする画素は 0.7 ^ 2 = * 0.49 となりますね。図で見るとイメージが付きやすいです。</p>
+<div id="id_xjine_2FStarGlowBlur" class="image">
+<img src="./Chapter 4 _ StarGlow_files/StarGlowBlur.png" alt="Diagram showing the process of blurring">
+<p class="caption">
+図4.5: ブラーがかかる過程を表した図
+</p>
+</div>
+<p>左の図が減衰前のオリジナルの輝度画像です。<code class="inline-code tt">_MainTex</code> に相当します。今 Fragment シェーダに与えられる <code class="inline-code tt">uv</code> が参照する画素を左下の START としましょう。<code class="inline-code tt">offset = (1, 1)</code> ですから、4 回のイテレーションで参照する画素は右上の END までです。</p>
+<p>画素の中の値は、その画素のもつ輝度の値です。START から 3 つが 0 で、END だけが 1 です。先のソースコードはイテレーションするたびに減衰率が上がりますから、ちょうど真ん中の図のようなイメージになります。これを合算すると、START の画素が最終的に得られる値は <code class="inline-code tt">color = 0.34</code> になります。</p>
+<p>同じようにして Fragment シェーダが各画素を処理していけば、右の図のような結果が得られることが分かると思います。ブラーのようなグラデーションが得られていますね。また <code class="inline-code tt">offset</code> が引き伸ばす方向を示すパラメータであると先に説明していますが、見た目上の効果としては、指定した値と反対方向に伸びることになります。</p>
+
+<h3><a id="h4-2-1"></a><span class="secno">4.2.1　</span>繰り返してさらに引き伸ばす</h3>
+<div id="id_xjine_2FStarGlow05" class="image">
+<img src="./Chapter 4 _ StarGlow_files/StarGlow05.png" alt="Further stretched brightness image">
+<p class="caption">
+図4.6: さらに引き伸ばされた輝度画像
+</p>
+</div>
+<p>少しだけスクリプト側に話を戻しましょう。先までの説明は <code class="inline-code tt">this.iteration</code> ないし <code class="inline-code tt">_Iteration</code> が 1 であるとしていました。実際には RenderTexture を入れ替えながら、任意の回数だけ同じ処理を繰り返しています。</p>
+<div class="emlist-code">
+<p class="caption">StarGlow.cs</p>
+<pre class="emlist">Vector2 offset = new Vector2(-1, -1);<font></font>
+<font></font>
+base.material.SetVector(this.idOffset, offset);<font></font>
+base.material.SetInt   (this.idIteration, 1);<font></font>
+<font></font>
+Graphics.Blit(brightnessTex, blurredTex1, base.material, 2);<font></font>
+<font></font>
+== ここから上が先までの解説に相当する ==<font></font>
+<font></font>
+for (int i = 2; i &lt;= this.iteration; i++)<font></font>
+{<font></font>
+    base.material.SetInt(this.idIteration, i);<font></font>
+<font></font>
+    Graphics.Blit(blurredTex1, blurredTex2, base.material, 2);<font></font>
+<font></font>
+    RenderTexture temp = blurredTex1;<font></font>
+    blurredTex1 = blurredTex2;<font></font>
+    blurredTex2 = temp;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>同じパスを使って同じ処理を繰り返していますから、得られる効果は変わりません。ただし、シェーダパラメータの <code class="inline-code tt">_Iteration</code> の値が大きくなりますね、そうすると、先に説明したシェーダ内の減衰率が上がります。また、入力される画像はすでに引き伸ばされているブラー画像になります。</p>
+<p>端的にいえば、この繰り返し処理によって、1 回目よりもさらに伸びたブラー画像が <code class="inline-code tt">blurredTex1</code> に得られます。</p>
+<p>この処理はコストがかかるので、現実的には繰り返し回数は精々 3 回くらいとは思います。また、シェーダ内のイテレーションは 4 回ですが、この値は Kawase 氏の発表で提案されているものです。</p>
+
+<h2><a id="h4-3"></a><span class="secno">4.3　</span>STEP 2.5 : 複数方向に伸びるブラー画像を合成する</h2>
+<div id="id_xjine_2FStarGlow06" class="image">
+<img src="./Chapter 4 _ StarGlow_files/StarGlow06.png" alt="Luminance image stretched in another direction">
+<p class="caption">
+図4.7: 別の方向に引き伸ばされた輝度画像
+</p>
+</div>
+<p>ソースコード上では STEP2.5 はコメントしていないのですが、説明のために 2.5 としました。先の説明では <code class="inline-code tt">offset = (1, 1)</code> としていましたが、複数方向に伸びる光線を作るために、<code class="inline-code tt">offset</code> を回転してもう一度ブラーをかけましょう。</p>
+<p>仮に <code class="inline-code tt">offset = (1, 1)</code> と反対方向に伸びる光線を定義するとすれば、<code class="inline-code tt">offset = (-1, -1)</code> ですね。実際のソースコードでは光線の数だけ <code class="inline-code tt">offset</code> を回転していますが、説明の上では <code class="inline-code tt">offset = (-1, -1)</code> とします。</p>
+<div class="emlist-code">
+<p class="caption">StarGlow.cs</p>
+<pre class="emlist">for (int x = 1; x &lt;= this.numOfStreak; x++)<font></font>
+{<font></font>
+    Vector2 offset = Quaternion.AngleAxis(angle * x + this.angleOfStreak,<font></font>
+                                          Vector3.forward) * Vector2.down;<font></font>
+    offset = offset.normalized;<font></font>
+<font></font>
+    for (int i = 2; i &lt;= this.iteration; i++) {<font></font>
+        bluuredTex1 が繰り返し処理で伸ばされる<font></font>
+    }<font></font>
+<font></font>
+    Graphics.Blit(blurredTex1, compositeTex, base.material, 3);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>最終的に得られたブラー画像 <code class="inline-code tt">blurredTex1</code> を、合成用の画像 <code class="inline-code tt">compositeTex</code> に出力しています。<code class="inline-code tt">compositeTex</code> は複数方向に伸びるブラー画像がすべて合成された画像になりますね。</p>
+<p>このとき、ブラー画像を合成するために使うシェーダーパスは 3 です。</p>
+<div class="emlist-code">
+<p class="caption">StarGlow.shader</p>
+<pre class="emlist">Blend OneMinusDstColor One<font></font>
+…<font></font>
+fixed4 frag(v2f_img input) : SV_Target<font></font>
+{<font></font>
+    return tex2D(_MainTex, input.uv);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>このパスでは特別な処理は一切していませんが、<code class="inline-code tt">Blend</code> 構文を使って画像を合成しています。合成方法は演出によって作り替えてしまってよいと思いますが、ここでは <code class="inline-code tt">OneMinusDstColor One</code> としました。ソフトな合成方法です。</p>
+
+<h2><a id="h4-4"></a><span class="secno">4.4　</span>STEP 3 : ブラー画像を元画像に合成する</h2>
+<div id="id_xjine_2FStarGlow07" class="image">
+<img src="./Chapter 4 _ StarGlow_files/StarGlow07.png" alt="Blur image finally obtained">
+<p class="caption">
+図4.8: 最終的に得られたブラー画像
+</p>
+</div>
+<p>複数方向に延びるブラー画像が得られたら、あとは一般的なグローと同じように元画像にブラー画像を合成して出力します。先の STEP 2.5 と同じように <code class="inline-code tt">Blend</code> 構文を使って合成して出力する方法でもよいですが、ここでは <code class="inline-code tt">Blit</code> 回数の軽減と、合成方法の柔軟性のために合成用の <code class="inline-code tt">Pass 4</code> を使って合成するようにしています。</p>
+<div class="emlist-code">
+<p class="caption">StarGlow.cs</p>
+<pre class="emlist">base.material.EnableKeyword(StarGlow.CompositeTypes[this.compositeType]);<font></font>
+base.material.SetColor(this.idCompositeColor, this.color);<font></font>
+base.material.SetTexture(this.idCompositeTex, compositeTex);<font></font>
+<font></font>
+Graphics.Blit(source, destination, base.material, 4);<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">StarGlow.shader</p>
+<pre class="emlist">#pragma multi_compile _COMPOSITE_TYPE_ADDITIVE _COMPOSITE_TYPE_SCREEN …<font></font>
+…<font></font>
+fixed4 frag(v2f_img input) : SV_Target<font></font>
+{<font></font>
+    float4 mainColor      = tex2D(_MainTex,      input.uv);<font></font>
+    float4 compositeColor = tex2D(_CompositeTex, input.uv);<font></font>
+<font></font>
+    #if defined(_COMPOSITE_TYPE_COLORED_ADDITIVE)…<font></font>
+     || defined(_COMPOSITE_TYPE_COLORED_SCREEN)<font></font>
+<font></font>
+    compositeColor.rgb<font></font>
+        = (compositeColor.r + compositeColor.g + compositeColor.b)<font></font>
+        * 0.3333 * _CompositeColor;<font></font>
+<font></font>
+    #endif<font></font>
+<font></font>
+    #if defined(_COMPOSITE_TYPE_SCREEN)…<font></font>
+     || defined(_COMPOSITE_TYPE_COLORED_SCREEN)<font></font>
+<font></font>
+    return saturate(mainColor + compositeColor<font></font>
+                  - saturate(mainColor * compositeColor));<font></font>
+<font></font>
+    #elif defined(_COMPOSITE_TYPE_ADDITIVE)…<font></font>
+       || defined(_COMPOSITE_TYPE_COLORED_ADDITIVE)<font></font>
+<font></font>
+    return saturate(mainColor + compositeColor);<font></font>
+<font></font>
+    #else<font></font>
+<font></font>
+    return compositeColor;<font></font>
+<font></font>
+    #endif<font></font>
+}<font></font>
+</pre>
+</div>
+<p><code class="inline-code tt">Blend</code> 構文は使っていないものの、スクリーン合成、加算合成をそのまま再現しています。さらにここでは任意に乗算する色を追加することによって、色の強く付いたスターグローを表現できるようにしています。</p>
+
+<h2><a id="h4-5"></a><span class="secno">4.5　</span>STEP 4 : リソースの開放</h2>
+<p>使ったリソースはすべて開放しましょう。特別解説することもありませんが、ソースコード上のサンプルにも記載してるので念のため。実装環境などが限定的な場合は確保済みのリソースを使い回すなどの対応も可能でしょうが、ここではシンプルに Release します。</p>
+<div class="emlist-code">
+<p class="caption">StarGlow.cs</p>
+<pre class="emlist">base.material.DisableKeyword(StarGlow.CompositeTypes[this.compositeType]);<font></font>
+<font></font>
+RenderTexture.ReleaseTemporary(brightnessTex);<font></font>
+RenderTexture.ReleaseTemporary(blurredTex1);<font></font>
+RenderTexture.ReleaseTemporary(blurredTex2);<font></font>
+RenderTexture.ReleaseTemporary(compositeTex);<font></font>
+</pre>
+</div>
+
+<h2><a id="h4-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I explained the basic (as announced by Mr. Kawase) implementation method of Star Glow, but if you are not particular about real-time performance, you can express various rays by switching the calculation method and parameters of the brightness image multiple times. And so on.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Even within the range described here, if you change the parameters at the timing of the iteration, for example, you will be able to create heterogeneous, more "like" and "tasteful" rays. </font><font style="vertical-align: inherit;">Or you can use noise to change the parameters over time.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is not a physically correct ray, and if you need a more dramatic and advanced expression of rays, it will be realized by a method other than the post effect, but this effect that can be made gorgeous with a relatively simple structure is also available. It's very interesting so please give it a try.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">… It's a little heavy.</font></font></p>
+
+<h2><a id="h4-7"></a><span class="secno"><font style="vertical-align: inherit;"></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">See </font><span class="secno"><font style="vertical-align: inherit;">4.7　</font></span></font></h2>
+<ul>
+<li>Frame Buffer Postprocessing Effects in DOUBLE-S.T.E.A.L(Wreckless)<ul>
+<li>http://www.daionet.gr.jp/~masa/archives/GDC2003_DSTEAL.ppt</li>
+</ul>
+</li>
+</ul><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 321px; top: 26.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 4 _ StarGlow_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第4章　StarGlow</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 4 _ StarGlow_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 4 _ StarGlow_files/saved_resource(2).html"></iframe></body></html>

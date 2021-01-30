@@ -1,4 +1,4 @@
-# google-translated version of `Unity Graphics Programming vol.1` (by `IndieVisualLab`)
+# google-translated version of `Unity Graphics Programming` vol. 1-4 (by `IndieVisualLab`)
 
 https://freder.github.io/UnityGraphicsProgrammingBook1/html-translated/index.html
 

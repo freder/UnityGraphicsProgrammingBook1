@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://freder.io/files/unity4/nakamura.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>GPU-Based Space Colonization Algorithm</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/saved_resource.html"></iframe></div>
+<h1><a id="h1"></a><span class="secno">第1章　</span>GPU-Based Space Colonization Algorithm</h1>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This chapter introduces the GPU implementation of the Space Colonization Algorithm, an algorithm that generates a shape that blanchs along a point cloud, and its application examples.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample in this chapter is </font><font style="vertical-align: inherit;">"Space Colonization" at </font></font><br><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming4" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming4</font></font></a><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<div id="id_nakamura_2FSkinnedAnimationScene" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/SkinnedAnimationScene.png" alt="SkinnedAnimation.scene">
+<p class="caption">
+図1.1: SkinnedAnimation.scene
+</p>
+</div>
+
+<h2><a id="h1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Space Colonization Algorithm was </font><font style="vertical-align: inherit;">developed by </font><font style="vertical-align: inherit;">Adam et al. </font></font><a id="fnb-Adam" href="https://freder.io/files/unity4/nakamura.html#fn-Adam" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1 as</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> a tree modeling method.</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-Adam"><p class="footnote">[*1] http://algorithmicbotany.org/papers/colonization.egwnp2007.html</p></div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A method of generating a branching shape from a given point cloud,</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The branches do not stick together too much and can be blanched while being properly separated.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since the arrangement of branches is determined by the initial point cloud arrangement, it is easy to control the shape.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can control the density of branches with simple parameters</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It has the feature.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This chapter introduces the GPU implementation of this algorithm and application examples combined with skinning animation.</font></font></p>
+
+<h2><a id="h1-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Algorithm</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, I will explain the Space Colonization Algorithm. </font><font style="vertical-align: inherit;">The general steps of the algorithm are divided as follows.</font></font></p>
+<ol>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Setup-Initialization</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Search --Search for affected attractions</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Attract-Attracting branches</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Connect-Create a new node and connect to an existing node</font></font></li>
+<li>Remove - Attractionの削除</li>
+<li>Grow - Nodeの成長</li>
+</ol>
+
+<h3><a id="h1-2-1"></a><span class="secno">1.2.1　</span>Setup - 初期化</h3>
+<p>初期化フェーズでは、点群をAttraction（ブランチのシードとなる点）として用意します。そのAttractionが散りばめられた中に、Node（ブランチの分岐点）を1つ以上配置します。この最初に配置されたNodeがブランチの開始点となります。</p>
+<p>以下の図中では、Attractionを丸い点、Nodeを四角い点で表しています。</p>
+<div id="id_nakamura_2FStep1" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/Step1.png" alt="Setup --Attraction and Node initialization Round dots represent Attraction and square dots represent Node.">
+<p class="caption">
+図1.2: Setup - AttractionとNodeの初期化　丸い点がAttraction、四角い点がNodeを表している
+</p>
+</div>
+
+<h3><a id="h1-2-2"></a><span class="secno">1.2.2　</span>Search - 影響するAttractionの検索</h3>
+<p>それぞれのAttractionについて、影響範囲（influence distance）内で最も近傍にあるNodeを検索します。</p>
+<div id="id_nakamura_2FStep2-gpu" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/Step2-gpu.png" alt="Search --Search the nearest Node within the range of influence from each attraction">
+<p class="caption">
+図1.3: Search - それぞれのAttractionから影響範囲内で最も近傍のNodeを検索する
+</p>
+</div>
+
+<h3><a id="h1-2-3"></a><span class="secno">1.2.3　</span>Attract - ブランチの引き寄せ</h3>
+<p>それぞれのNodeについて、影響範囲内にあるAttractionを元にブランチを伸ばす方向を決め、成長の長さ（growth distance）分だけ伸ばした先の点を、新たにNodeを生成する点の候補点（Candidate）とします。</p>
+<div id="id_nakamura_2FStep3-gpu" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/Step3-gpu.png" alt="Attract-Extend a branch from each Node and decide a candidate point to generate a new Node">
+<p class="caption">
+図1.4: Attract - それぞれのNodeからブランチを伸ばして新たにNodeを生成する候補点を決める
+</p>
+</div>
+
+<h3><a id="h1-2-4"></a><span class="secno">1.2.4　</span>Connect - 新たなNodeと既存のNodeとの接続</h3>
+<p>Candidateの位置に新たなNodeを生成し、元のNodeとEdgeで繋いでブランチを拡張します。</p>
+<div id="id_nakamura_2FStep4" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/Step4.png" alt="Connect-Connect a new node to an existing node to extend a branch">
+<p class="caption">
+図1.5: Connect - 新たなNodeと既存Nodeとを接続してブランチを拡張する
+</p>
+</div>
+
+<h3><a id="h1-2-5"></a><span class="secno">1.2.5　</span>Remove - 削除範囲内にあるAttractionの削除</h3>
+<p>Nodeから削除範囲（kill distance）内にあるAttractionを削除します。</p>
+<div id="id_nakamura_2FStep5__1" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/Step5_1.png" alt="Remove --Search Node for Attractions within the removal range">
+<p class="caption">
+図1.6: Remove - Nodeから削除範囲内にあるAttractionを検索する
+</p>
+</div>
+<div id="id_nakamura_2FStep5__2" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/Step5_2.png" alt="Remove-Removes Attraction found within the removal range">
+<p class="caption">
+図1.7: Remove - 削除範囲内に見つかったAttractionを削除する
+</p>
+</div>
+
+<h3><a id="h1-2-6"></a><span class="secno">1.2.6　</span>Grow - Nodeの成長</h3>
+<p>Nodeを成長させ、Step.2に戻ります。</p>
+<p>アルゴリズム全体の大まかな流れは以下の図のようになります。</p>
+<div id="id_nakamura_2FFlow" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/Flow.png" alt="Rough flow of the algorithm">
+<p class="caption">
+図1.8: アルゴリズムの大まかな流れ
+</p>
+</div>
+
+<h2><a id="h1-3"></a><span class="secno">1.3　</span>実装</h2>
+<p>それではアルゴリズムの具体的な実装について解説していきます。</p>
+
+<h3><a id="h1-3-1"></a><span class="secno">1.3.1　</span>リソースの用意</h3>
+<p>Space Colonization Algorithmでは増減する要素として</p>
+<ul>
+<li>Attraction : ブランチのシードとなる点群</li>
+<li>Node : ブランチの分岐点（ノード）</li>
+<li>Candidate : 新たにノードを生成する候補となる点</li>
+<li>Edge : ブランチのノード間をつなぐエッジ</li>
+</ul>
+<p>が必要となりますが、これらをGPGPU上で表現するために、いくつかの要素にAppend/ConsumeStructuredBufferを利用します。</p>
+<p>Append/ConsumeStructuredBufferについてはUnity Graphics Programming vol.3「GPU-Based Cellular Growth Simulation」で解説しています。</p>
+
+<h4><a id="h1-3-1-1"></a>Attraction（ブランチのシードとなる点）</h4>
+<p>Attractionの構造は以下のように定義します。</p>
+<div class="emlist-code">
+<p class="caption">Attraction.cs</p>
+<pre class="emlist">public struct Attraction {<font></font>
+    public Vector3 position; // 位置<font></font>
+    public int nearest; // 最近傍Nodeのindex<font></font>
+    public uint found; // 近傍Nodeが見つかったかどうか<font></font>
+    public uint active; // 有効なAttractionかどうか(1なら有効、0なら削除済み)<font></font>
+}<font></font>
+</pre>
+</div>
+<p>activeフラグによって削除済みのAttractionかどうかを判別することで、Attractionの増減を表現します。</p>
+<p>Space ColonizationではAttractionの点群を初期化フェーズで用意する必要があります。サンプルのSpaceColonization.csでは球形の内部に点群をランダムに散りばめ、Attractionの位置として利用しています。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">    // 球形の内部にランダムに点を散りばめてAttractionを生成する<font></font>
+    var attractions = GenerateSphereAttractions();<font></font>
+    count = attractions.Length;<font></font>
+<font></font>
+    // Attractionバッファの初期化<font></font>
+    attractionBuffer = new ComputeBuffer(<font></font>
+        count,<font></font>
+        Marshal.SizeOf(typeof(Attraction)),<font></font>
+        ComputeBufferType.Default<font></font>
+    );<font></font>
+    attractionBuffer.SetData(attractions);<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-3-1-2"></a>Node（ブランチの分岐点）</h4>
+<p>Nodeの構造は以下のように定義します。</p>
+<div class="emlist-code">
+<p class="caption">Node.cs</p>
+<pre class="emlist">public struct Node {<font></font>
+    public Vector3 position; // 位置<font></font>
+    public float t; // 成長率(0.0 ~ 1.0)<font></font>
+    public float offset; // Rootからの距離(Nodeの深さ)<font></font>
+    public float mass; // 質量<font></font>
+    public int from; // 分岐元Nodeのindex<font></font>
+    public uint active; // 有効なNodeかどうか(1なら有効)<font></font>
+}<font></font>
+</pre>
+</div>
+<p>Nodeのリソースは</p>
+<ul>
+<li>Nodeの実データを表すバッファ</li>
+<li>オブジェクトプールとして利用する、activeでないNodeのindexを管理するバッファ</li>
+</ul>
+<p>の2つのバッファで管理します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">  // Nodeの実データ<font></font>
+  nodeBuffer = new ComputeBuffer(<font></font>
+    count,<font></font>
+    Marshal.SizeOf(typeof(Node)),<font></font>
+    ComputeBufferType.Default<font></font>
+  );<font></font>
+<font></font>
+  // オブジェクトプール<font></font>
+  nodePoolBuffer = new ComputeBuffer(<font></font>
+    count,<font></font>
+    Marshal.SizeOf(typeof(int)),<font></font>
+    ComputeBufferType.Append<font></font>
+  );<font></font>
+  nodePoolBuffer.SetCounterValue(0);<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-3-1-3"></a>Candidate（新たなNodeの候補点）</h4>
+<p>Candidateの構造は以下のように定義します。</p>
+<div class="emlist-code">
+<p class="caption">Candidate.cs</p>
+<pre class="emlist">public struct Candidate<font></font>
+{<font></font>
+    public Vector3 position; // 位置<font></font>
+    public int node; // 候補点の元Nodeのindex<font></font>
+}<font></font>
+</pre>
+</div>
+<p>CandidateはAppend/ConsumeStructuredBufferで表現します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">    candidateBuffer = new ComputeBuffer(<font></font>
+        count,<font></font>
+        Marshal.SizeOf(typeof(Candidate)),<font></font>
+        ComputeBufferType.Append<font></font>
+    );<font></font>
+    candidateBuffer.SetCounterValue(0);<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-3-1-4"></a>Edge（Node間をつなぐEdge）</h4>
+<p>Edgeの構造は以下のように定義します。</p>
+<div class="emlist-code">
+<p class="caption">Edge.cs</p>
+<pre class="emlist">public struct Edge {<font></font>
+    public int a, b; // Edgeが繋ぐ2つのNodeのindex<font></font>
+}<font></font>
+</pre>
+</div>
+<p>EdgeはCandidateと同様にAppend/ConsumeStructuredBufferで表現します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">    edgeBuffer = new ComputeBuffer(<font></font>
+        count * 2,<font></font>
+        Marshal.SizeOf(typeof(Edge)),<font></font>
+        ComputeBufferType.Append<font></font>
+    );<font></font>
+    edgeBuffer.SetCounterValue(0);<font></font>
+</pre>
+</div>
+
+<h3><a id="h1-3-2"></a><span class="secno">1.3.2　</span>ComputeShaderでのアルゴリズムの実装</h3>
+<p>これで必要なリソースがそろったので、アルゴリズムの各ステップをComputeShaderによるGPGPUで実装していきます。</p>
+
+<h4><a id="h1-3-2-1"></a>Setup</h4>
+<p>初期化フェーズでは、</p>
+<ul>
+<li>Nodeのオブジェクトプールの初期化</li>
+<li>初期Nodeをシードとして追加</li>
+</ul>
+<p>を行います。</p>
+<p>用意したAttractionからいくつかをピックアップし、その位置に初期Nodeを生成します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">    var seeds = Enumerable.Range(0, seedCount).Select((_) =&gt; {<font></font>
+        return attractions[Random.Range(0, count)].position;<font></font>
+    }).ToArray();<font></font>
+    Setup(seeds);<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">protected void Setup(Vector3[] seeds)<font></font>
+{<font></font>
+    var kernel = compute.FindKernel("Setup");<font></font>
+    compute.SetBuffer(kernel, "_NodesPoolAppend", nodePoolBuffer);<font></font>
+    compute.SetBuffer(kernel, "_Nodes", nodeBuffer);<font></font>
+    GPUHelper.Dispatch1D(compute, kernel, count);<font></font>
+<font></font>
+    ...<font></font>
+}<font></font>
+</pre>
+</div>
+<p>Setupカーネルではオブジェクトプールの初期化を行います。Nodeのオブジェクトプールにindexを格納し、該当するNodeのactiveフラグをオフにします。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.compute</p>
+<pre class="emlist">void Setup (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+  uint count, stride;<font></font>
+  _Nodes.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  _NodesPoolAppend.Append(idx);<font></font>
+<font></font>
+  Node n = _Nodes[idx];<font></font>
+  n.active = false;<font></font>
+  _Nodes[idx] = n;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>これですべてのNodeのactiveフラグがオフの状態となり、Nodeのindexを持ったオブジェクトプールが生成されます。</p>
+<p>オブジェクトプールの初期化が済んだので、次はシードとなる初期ノードを生成します。</p>
+<p>先ほど用意したシード位置（Vector3[]）を入力として、Seedカーネルを実行することで初期ノードを生成します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">...<font></font>
+<font></font>
+// seedBufferはスコープを抜けると自動的にDisposeされる<font></font>
+using(<font></font>
+    ComputeBuffer seedBuffer = new ComputeBuffer(<font></font>
+        seeds.Length,<font></font>
+        Marshal.SizeOf(typeof(Vector3))<font></font>
+    )<font></font>
+)<font></font>
+{<font></font>
+    seedBuffer.SetData(seeds);<font></font>
+    kernel = compute.FindKernel("Seed");<font></font>
+    compute.SetFloat("_MassMin", massMin);<font></font>
+    compute.SetFloat("_MassMax", massMax);<font></font>
+    compute.SetBuffer(kernel, "_Seeds", seedBuffer);<font></font>
+    compute.SetBuffer(kernel, "_NodesPoolConsume", nodePoolBuffer);<font></font>
+    compute.SetBuffer(kernel, "_Nodes", nodeBuffer);<font></font>
+    GPUHelper.Dispatch1D(compute, kernel, seedBuffer.count);<font></font>
+}<font></font>
+<font></font>
+// NodeとEdgeの数の初期化<font></font>
+nodesCount = nodePoolBuffer.count;<font></font>
+edgesCount = 0;<font></font>
+<font></font>
+...<font></font>
+</pre>
+</div>
+<p>Seedカーネルは、Seedsバッファから位置を取り出し、その位置にNodeを生成します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.compute</p>
+<pre class="emlist">void Seed (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+<font></font>
+  uint count, stride;<font></font>
+  _Seeds.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  Node n;<font></font>
+<font></font>
+  // 新たなNodeを生成(後述)<font></font>
+  uint i = CreateNode(n);<font></font>
+<font></font>
+  // Seedの位置をNodeのpositionに設定<font></font>
+  n.position = _Seeds[idx];<font></font>
+  n.t = 1;<font></font>
+  n.offset = 0;<font></font>
+  n.from = -1;<font></font>
+  n.mass = lerp(_MassMin, _MassMax, nrand(id.xy));<font></font>
+  _Nodes[i] = n;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>CreateNode関数で新たなNodeを生成します。オブジェクトプールであるConsumeStructuredBufferからindexを取り出し、初期化したNodeを返します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.compute</p>
+<pre class="emlist">uint CreateNode(out Node node)<font></font>
+{<font></font>
+  uint i = _NodesPoolConsume.Consume();<font></font>
+  node.position = float3(0, 0, 0);<font></font>
+  node.t = 0;<font></font>
+  node.offset = 0;<font></font>
+  node.from = -1;<font></font>
+  node.mass = 0;<font></font>
+  node.active = true;<font></font>
+  return i;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>これで初期化フェーズは終わりです。</p>
+<p><span class="imgref"><a href="https://freder.io/files/unity4/nakamura.html#id_nakamura_2FFlow">図1.8</a></span>で示しているループするアルゴリズムの各ステップはStep関数内で実行しています。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">protected void Step(float dt)<font></font>
+{<font></font>
+    // オブジェクトプールが空のときは実行しないようにする<font></font>
+    if (nodesCount &gt; 0)<font></font>
+    {<font></font>
+        Search();   // Step.2<font></font>
+        Attract();  // Step.3<font></font>
+        Connect();  // Step.4<font></font>
+        Remove();   // Step.5<font></font>
+<font></font>
+        // Append/ConsumeStructuredBufferが持つデータ数を取得<font></font>
+        CopyNodesCount();<font></font>
+        CopyEdgesCount();<font></font>
+    }<font></font>
+    Grow(dt);       // Step.6<font></font>
+}<font></font>
+<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-3-2-2"></a>Search</h4>
+<p>各Attractionから、影響範囲（influence distance)内で最も近傍にあるNodeを検索します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">protected void Search()<font></font>
+{<font></font>
+    var kernel = compute.FindKernel("Search");<font></font>
+    compute.SetBuffer(kernel, "_Attractions", attractionBuffer);<font></font>
+    compute.SetBuffer(kernel, "_Nodes", nodeBuffer);<font></font>
+    compute.SetFloat("_InfluenceDistance", unitDistance * influenceDistance);<font></font>
+    GPUHelper.Dispatch1D(compute, kernel, count);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>GPUカーネルの実装は以下の通りです。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.compute</p>
+<pre class="emlist">void Search (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+  uint count, stride;<font></font>
+  _Attractions.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  Attraction attr = _Attractions[idx];<font></font>
+<font></font>
+  attr.found = false;<font></font>
+  if (attr.active)<font></font>
+  {<font></font>
+    _Nodes.GetDimensions(count, stride);<font></font>
+<font></font>
+    // influence distanceよりも近傍のNodeを探索する<font></font>
+    float min_dist = _InfluenceDistance;<font></font>
+<font></font>
+    // 最も近傍のNodeのindex<font></font>
+    uint nearest = -1;<font></font>
+<font></font>
+    // すべてのNodeについてループを実行<font></font>
+    for (uint i = 0; i &lt; count; i++)<font></font>
+    {<font></font>
+      Node n = _Nodes[i];<font></font>
+<font></font>
+      if (n.active)<font></font>
+      {<font></font>
+        float3 dir = attr.position - n.position;<font></font>
+        float d = length(dir);<font></font>
+        if (d &lt; min_dist)<font></font>
+        {<font></font>
+          // 最も近傍のNodeを更新<font></font>
+          min_dist = d;<font></font>
+          nearest = i;<font></font>
+<font></font>
+          // 近傍Nodeのindexを設定する<font></font>
+          attr.found = true;<font></font>
+          attr.nearest = nearest;<font></font>
+        }<font></font>
+      }<font></font>
+    }<font></font>
+<font></font>
+    _Attractions[idx] = attr;<font></font>
+  }<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-3-2-3"></a>Attract</h4>
+<p>それぞれのNodeについて、影響範囲内にあるAttractionを元にブランチを伸ばす方向を決め、成長の長さ（growth distance）分だけ伸ばした先の点を、新たにNodeを生成する点の候補点（Candidate）とします。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">protected void Attract()<font></font>
+{<font></font>
+    var kernel = compute.FindKernel("Attract");<font></font>
+    compute.SetBuffer(kernel, "_Attractions", attractionBuffer);<font></font>
+    compute.SetBuffer(kernel, "_Nodes", nodeBuffer);<font></font>
+<font></font>
+    candidateBuffer.SetCounterValue(0); // 候補点を格納するバッファの初期化<font></font>
+    compute.SetBuffer(kernel, "_CandidatesAppend", candidateBuffer);<font></font>
+<font></font>
+    compute.SetFloat("_GrowthDistance", unitDistance * growthDistance);<font></font>
+<font></font>
+    GPUHelper.Dispatch1D(compute, kernel, count);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>GPUカーネルの実装は以下の通りです。候補点の位置の計算方法はAttractカーネルのコード内容とコメントを参照してください。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.compute</p>
+<pre class="emlist">void Attract (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+  uint count, stride;<font></font>
+  _Nodes.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  Node n = _Nodes[idx];<font></font>
+<font></font>
+  // Nodeが有効かつ、<font></font>
+  // 成長率(t)が閾値(1.0)以上あれば新たなNodeを生成する<font></font>
+  if (n.active &amp;&amp; n.t &gt;= 1.0)<font></font>
+  {<font></font>
+    // ブランチを伸ばす先の累算用変数<font></font>
+    float3 dir = (0.0).xxx;<font></font>
+    uint counter = 0;<font></font>
+<font></font>
+    // 全Attractionについてループを実行する<font></font>
+    _Attractions.GetDimensions(count, stride);<font></font>
+    for (uint i = 0; i &lt; count; i++)<font></font>
+    {<font></font>
+      Attraction attr = _Attractions[i];<font></font>
+      // 該当Nodeが最近傍であるAttractionを検索する<font></font>
+      if (attr.active &amp;&amp; attr.found &amp;&amp; attr.nearest == idx)<font></font>
+      {<font></font>
+        // NodeからAttractionへ向かうベクトルを正規化して累算用変数に加算する<font></font>
+        float3 dir2 = (attr.position - n.position);<font></font>
+        dir += normalize(dir2);<font></font>
+        counter++;<font></font>
+      }<font></font>
+    }<font></font>
+<font></font>
+    if (counter &gt; 0)<font></font>
+    {<font></font>
+      Candidate c;<font></font>
+<font></font>
+      // NodeからAttractionへ向かう単位ベクトルの平均を取り、<font></font>
+      // それをgrowth distance分、Nodeから伸ばした先を候補点の位置とする<font></font>
+      dir = dir / counter;<font></font>
+      c.position = n.position + (dir * _GrowthDistance);<font></font>
+<font></font>
+      // 候補点へ伸びる元Nodeのindexを設定する<font></font>
+      c.node = idx;<font></font>
+<font></font>
+      // 候補点バッファに加える<font></font>
+      _CandidatesAppend.Append(c);<font></font>
+    }<font></font>
+  }<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-3-2-4"></a>Connect</h4>
+<p>Attractカーネルで生成された候補点バッファを元に新たなNodeを生成し、Node同士をEdgeで繋げることでブランチを拡張します。</p>
+<p>Connect関数では、Nodeオブジェクトプール（nodePoolBuffer）が空の状態でデータの取り出し（Consume）が実行されないよう、オブジェクトプールの残り数（nodesCount）と候補点バッファのサイズを比較してカーネルの実行回数を決めています。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">protected void Connect()<font></font>
+{<font></font>
+    var kernel = compute.FindKernel("Connect");<font></font>
+    compute.SetFloat("_MassMin", massMin);<font></font>
+    compute.SetFloat("_MassMax", massMax);<font></font>
+    compute.SetBuffer(kernel, "_Nodes", nodeBuffer);<font></font>
+    compute.SetBuffer(kernel, "_NodesPoolConsume", nodePoolBuffer);<font></font>
+    compute.SetBuffer(kernel, "_EdgesAppend", edgeBuffer);<font></font>
+    compute.SetBuffer(kernel, "_CandidatesConsume", candidateBuffer);<font></font>
+<font></font>
+    // CopyNodeCountで取得したNodeオブジェクトプールの持つデータ数(nodeCount)を<font></font>
+    // 越えないように制限をかける<font></font>
+    var connectCount = Mathf.Min(nodesCount, CopyCount(candidateBuffer));<font></font>
+    if (connectCount &gt; 0)<font></font>
+    {<font></font>
+        compute.SetInt("_ConnectCount", connectCount);<font></font>
+        GPUHelper.Dispatch1D(compute, kernel, connectCount);<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>以下がGPUカーネルの実装になります。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.compute</p>
+<pre class="emlist">void Connect (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+  if (idx &gt;= _ConnectCount)<font></font>
+    return;<font></font>
+<font></font>
+  // 候補点バッファから候補点を取り出し<font></font>
+  Candidate c = _CandidatesConsume.Consume();<font></font>
+<font></font>
+  Node n1 = _Nodes[c.node];<font></font>
+  Node n2;<font></font>
+<font></font>
+  // 候補点の位置にNodeを生成<font></font>
+  uint idx2 = CreateNode(n2);<font></font>
+  n2.position = c.position;<font></font>
+  n2.offset = n1.offset + 1.0; // Rootからの距離を設定 (元Node + 1.0)<font></font>
+  n2.from = c.node; // 元Nodeのindexを設定<font></font>
+  n2.mass = lerp(_MassMin, _MassMax, nrand(float2(c.node, idx2)));<font></font>
+<font></font>
+  // Nodeバッファを更新<font></font>
+  _Nodes[c.node] = n1;<font></font>
+  _Nodes[idx2] = n2;<font></font>
+<font></font>
+  // 2つのNodeをEdgeで繋ぐ(後述)<font></font>
+  CreateEdge(c.node, idx2);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>CreateEdge関数は渡された2つのNodeのindexを元にEdgeを生成し、Edgeバッファに追加します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.compute</p>
+<pre class="emlist">void CreateEdge(int a, int b)<font></font>
+{<font></font>
+  Edge e;<font></font>
+  e.a = a;<font></font>
+  e.b = b;<font></font>
+  _EdgesAppend.Append(e);<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-3-2-5"></a>Remove</h4>
+<p>Nodeからkill distance内にあるAttractionを削除します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">protected void Remove()<font></font>
+{<font></font>
+    var kernel = compute.FindKernel("Remove");<font></font>
+    compute.SetBuffer(kernel, "_Attractions", attractionBuffer);<font></font>
+    compute.SetBuffer(kernel, "_Nodes", nodeBuffer);<font></font>
+    compute.SetFloat("_KillDistance", unitDistance * killDistance);<font></font>
+    GPUHelper.Dispatch1D(compute, kernel, count);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>GPUカーネルの実装は以下の通りです。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.compute</p>
+<pre class="emlist">void Remove(uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+  uint count, stride;<font></font>
+  _Attractions.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  Attraction attr = _Attractions[idx];<font></font>
+  // 削除済みのAttractionの場合は実行しない<font></font>
+  if (!attr.active)<font></font>
+    return;<font></font>
+<font></font>
+  // 全Nodeについてループを実行する<font></font>
+  _Nodes.GetDimensions(count, stride);<font></font>
+  for (uint i = 0; i &lt; count; i++)<font></font>
+  {<font></font>
+    Node n = _Nodes[i];<font></font>
+    if (n.active)<font></font>
+    {<font></font>
+      // 削除範囲内のNodeがあれば、Attractionのactiveフラグをオフにして削除<font></font>
+      float d = distance(attr.position, n.position);<font></font>
+      if (d &lt; _KillDistance)<font></font>
+      {<font></font>
+        attr.active = false;<font></font>
+        _Attractions[idx] = attr;<font></font>
+        return;<font></font>
+      }<font></font>
+    }<font></font>
+  }<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-3-2-6"></a>Grow</h4>
+<p>Nodeを成長させます。</p>
+<p>Attractカーネルで候補点を生成する際、Nodeの成長率（t）が閾値以上かどうかを条件に用いていますが（閾値以下の場合は候補点を生成しない）、成長率パラメータはこのGrowカーネルで増分させています。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">protected void Grow(float dt)<font></font>
+{<font></font>
+    var kernel = compute.FindKernel("Grow");<font></font>
+    compute.SetBuffer(kernel, "_Nodes", nodeBuffer);<font></font>
+<font></font>
+    var delta = dt * growthSpeed;<font></font>
+    compute.SetFloat("_DT", delta);<font></font>
+<font></font>
+    GPUHelper.Dispatch1D(compute, kernel, count);<font></font>
+}<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.compute</p>
+<pre class="emlist">void Grow (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+  uint count, stride;<font></font>
+  _Nodes.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  Node n = _Nodes[idx];<font></font>
+<font></font>
+  if (n.active)<font></font>
+  {<font></font>
+    // Nodeごとにランダムに設定されたmassパラメータで成長速度をバラバラにする<font></font>
+    n.t = saturate(n.t + _DT * n.mass);<font></font>
+    _Nodes[idx] = n;<font></font>
+  }<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h1-3-3"></a><span class="secno">1.3.3　</span>レンダリング</h3>
+<p>以上までの実装でブランチングする形状が得られたので、その形状をどうレンダリングするかについて解説します。</p>
+
+<h4><a id="h1-3-3-1"></a>Line Topologyによるレンダリング</h4>
+<p>まずはシンプルにLine Meshを用いてレンダリングします。</p>
+<p>1本のEdgeを表すLineを描画するために、シンプルなLine TopologyのMeshを生成します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">protected Mesh BuildSegment()<font></font>
+{<font></font>
+    var mesh = new Mesh();<font></font>
+    mesh.hideFlags = HideFlags.DontSave;<font></font>
+    mesh.vertices = new Vector3[2] { Vector3.zero, Vector3.up };<font></font>
+    mesh.uv = new Vector2[2] { new Vector2(0f, 0f), new Vector2(0f, 1f) };<font></font>
+    mesh.SetIndices(new int[2] { 0, 1 }, MeshTopology.Lines, 0);<font></font>
+    return mesh;<font></font>
+}<font></font>
+</pre>
+</div>
+<div id="id_nakamura_2FSegment" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/Segment.png" alt="Line Topology Mesh with only two simple vertices">
+<p class="caption">
+図1.9: シンプルな2頂点だけを持つLine TopologyのMesh
+</p>
+</div>
+<p>2つの頂点だけを持つSegment（線分）を、GPU instancingを用いてEdgeの数だけレンダリングすることで生成したブランチを表示します。</p>
+<div class="emlist-code">
+<p class="caption">SpaceColonization.cs</p>
+<pre class="emlist">// GPU instancingに必要な、レンダリングするMeshの数を決めるバッファを生成する<font></font>
+protected void SetupDrawArgumentsBuffers(int count)<font></font>
+{<font></font>
+    if (drawArgs[1] == (uint)count) return;<font></font>
+<font></font>
+    drawArgs[0] = segment.GetIndexCount(0);<font></font>
+    drawArgs[1] = (uint)count;<font></font>
+<font></font>
+    if (drawBuffer != null) drawBuffer.Dispose();<font></font>
+    drawBuffer = new ComputeBuffer(<font></font>
+        1,<font></font>
+        sizeof(uint) * drawArgs.Length,<font></font>
+        ComputeBufferType.IndirectArguments<font></font>
+    );<font></font>
+    drawBuffer.SetData(drawArgs);<font></font>
+}<font></font>
+<font></font>
+...<font></font>
+<font></font>
+// GPU instancingによるレンダリングを実行する<font></font>
+protected void Render(float extents = 100f)<font></font>
+{<font></font>
+    block.SetBuffer("_Nodes", nodeBuffer);<font></font>
+    block.SetBuffer("_Edges", edgeBuffer);<font></font>
+    block.SetInt("_EdgesCount", edgesCount);<font></font>
+    block.SetMatrix("_World2Local", transform.worldToLocalMatrix);<font></font>
+    block.SetMatrix("_Local2World", transform.localToWorldMatrix);<font></font>
+    Graphics.DrawMeshInstancedIndirect(<font></font>
+        segment, 0,<font></font>
+        material, new Bounds(Vector3.zero, Vector3.one * extents),<font></font>
+        drawBuffer, 0, block<font></font>
+    );<font></font>
+}<font></font>
+</pre>
+</div>
+<p>レンダリング用のシェーダ（Edge.shader）では、Nodeの成長率パラメータ（t）に応じてEdgeの長さを制御することで、分岐点から伸びていくブランチのアニメーションを生成しています。</p>
+<div class="emlist-code">
+<p class="caption">Edge.shader</p>
+<pre class="emlist">v2f vert(appdata IN, uint iid : SV_InstanceID)<font></font>
+{<font></font>
+  v2f OUT;<font></font>
+  UNITY_SETUP_INSTANCE_ID(IN);<font></font>
+  UNITY_TRANSFER_INSTANCE_ID(IN, OUT);<font></font>
+<font></font>
+  // インスタンスIDから該当するEdgeを取得<font></font>
+  Edge e = _Edges[iid];<font></font>
+<font></font>
+  // Edgeが持つindexから2つのNodeを取得<font></font>
+  Node a = _Nodes[e.a];<font></font>
+  Node b = _Nodes[e.b];<font></font>
+<font></font>
+  float3 ap = a.position;<font></font>
+  float3 bp = b.position;<font></font>
+  float3 dir = bp - ap;<font></font>
+<font></font>
+  // Node bの成長率(t)に応じて、aからbへのEdgeの長さを決める<font></font>
+  bp = ap + normalize(dir) * length(dir) * b.t;<font></font>
+<font></font>
+  // 頂点ID(IN.vid)は0か1なので、0の場合はaのNode、1の場合はbのNodeのpositionを参照する<font></font>
+  float3 position = lerp(ap, bp, IN.vid);<font></font>
+<font></font>
+  float4 vertex = float4(position, 1);<font></font>
+  OUT.position = UnityObjectToClipPos(vertex);<font></font>
+  OUT.uv = IN.uv;<font></font>
+<font></font>
+  // Nodeが不活性、またはインスタンスIDがEdgeの総数外であればalphaを0にして描画しない<font></font>
+  OUT.alpha = (a.active &amp;&amp; b.active) &amp;&amp; (iid &lt; _EdgesCount);<font></font>
+<font></font>
+  return OUT;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>これらの実装でSpace Colonization Algorithmで得られた形状をLine Topologyを用いてレンダリングすることができます。Line.sceneを実行すると以下のような絵を得ることができます。</p>
+<div id="id_nakamura_2FLineScene" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/LineScene.png" alt="Line.scene --Example of rendering by Edge.shader">
+<p class="caption">
+図1.10: Line.scene - Edge.shaderによるレンダリングの例
+</p>
+</div>
+
+<h4><a id="h1-3-3-2"></a>Geometry Shaderによるレンダリング</h4>
+<p>Line TopologyのSegmentをGeometry ShaderでCapsule形状に変換することで、厚みのある線を描けるようにします。</p>
+<div id="id_nakamura_2FSegmentToCapsule" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/SegmentToCapsule.png" alt="Convert Line Topology Segment to Capsule shape with Geometry Shader">
+<p class="caption">
+図1.11: Line TopologyのSegmentをGeometryShaderでCapsule形状に変換
+</p>
+</div>
+<p>頂点シェーダはEdge.shaderとほぼ変わらず、Geometry ShaderでCapsule形状を構築します。以下では重要なGeometry Shaderの実装のみ記載します。</p>
+<div class="emlist-code">
+<p class="caption">TubularEdge.shader</p>
+<pre class="emlist">...<font></font>
+[maxvertexcount(64)]<font></font>
+void geom(line v2g IN[2], inout TriangleStream&lt;g2f&gt; OUT) {<font></font>
+  v2g p0 = IN[0];<font></font>
+  v2g p1 = IN[1];<font></font>
+<font></font>
+  float alpha = p0.alpha;<font></font>
+<font></font>
+  float3 t = normalize(p1.position - p0.position);<font></font>
+  float3 n = normalize(p0.viewDir);<font></font>
+  float3 bn = cross(t, n);<font></font>
+  n = cross(t, bn);<font></font>
+<font></font>
+  float3 tp = lerp(p0.position, p1.position, alpha);<font></font>
+  float thickness = _Thickness * alpha;<font></font>
+<font></font>
+  // Capsuleメッシュの解像度の定義<font></font>
+  static const uint rows = 6, cols = 6;<font></font>
+  static const float rows_inv = 1.0 / rows, cols_inv = 1.0 / (cols - 1);<font></font>
+<font></font>
+  g2f o0, o1;<font></font>
+  o0.uv = p0.uv; o0.uv2 = p0.uv2;<font></font>
+  o1.uv = p1.uv; o1.uv2 = p1.uv2;<font></font>
+<font></font>
+  // Capsuleの側面の構築<font></font>
+  for (uint i = 0; i &lt; cols; i++) {<font></font>
+    float r = (i * cols_inv) * UNITY_TWO_PI;<font></font>
+<font></font>
+    float s, c;<font></font>
+    sincos(r, s, c);<font></font>
+    float3 normal = normalize(n * c + bn * s);<font></font>
+<font></font>
+    float3 w0 = p0.position + normal * thickness;<font></font>
+    float3 w1 = p1.position + normal * thickness;<font></font>
+    o0.normal = o1.normal = normal;<font></font>
+<font></font>
+    o0.position = UnityWorldToClipPos(w0);<font></font>
+    OUT.Append(o0);<font></font>
+<font></font>
+    o1.position = UnityWorldToClipPos(w1);<font></font>
+    OUT.Append(o1);<font></font>
+  }<font></font>
+  OUT.RestartStrip();<font></font>
+<font></font>
+  // Capsuleの先端(半球型)の構築<font></font>
+  uint row, col;<font></font>
+  for (row = 0; row &lt; rows; row++)<font></font>
+  {<font></font>
+    float s0 = sin((row * rows_inv) * UNITY_HALF_PI);<font></font>
+    float s1 = sin(((row + 1) * rows_inv) * UNITY_HALF_PI);<font></font>
+    for (col = 0; col &lt; cols; col++)<font></font>
+    {<font></font>
+      float r = (col * cols_inv) * UNITY_TWO_PI;<font></font>
+<font></font>
+      float s, c;<font></font>
+      sincos(r, s, c);<font></font>
+<font></font>
+      float3 n0 = normalize(n * c * (1.0 - s0) + bn * s * (1.0 - s0) + t * s0);<font></font>
+      float3 n1 = normalize(n * c * (1.0 - s1) + bn * s * (1.0 - s1) + t * s1);<font></font>
+<font></font>
+      o0.position = UnityWorldToClipPos(float4(tp + n0 * thickness, 1));<font></font>
+      o0.normal = n0;<font></font>
+      OUT.Append(o0);<font></font>
+<font></font>
+      o1.position = UnityWorldToClipPos(float4(tp + n1 * thickness, 1));<font></font>
+      o1.normal = n1;<font></font>
+      OUT.Append(o1);<font></font>
+    }<font></font>
+    OUT.RestartStrip();<font></font>
+  }<font></font>
+}<font></font>
+<font></font>
+...<font></font>
+</pre>
+</div>
+<p>結果は以下のようなものになります。（TubularEdge.scene）</p>
+<div id="id_nakamura_2FTubularEdgeScene" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/TubularEdgeScene.jpg" alt="TubularEdge.scene --Example of rendering by TubularEdge.shader">
+<p class="caption">
+図1.12: TubularEdge.scene - TubularEdge.shaderによるレンダリングの例
+</p>
+</div>
+<p>これでEdgeを厚みのあるMeshでレンダリングが可能になったので、ライティングなどを施すことができるようになります。</p>
+
+<h2><a id="h1-4"></a><span class="secno">1.4　</span>応用</h2>
+<p>以上まででSpace ColonizationのGPU実装を実現できました。本節では応用例として、スキニングアニメーションとの連携について紹介します。</p>
+<p>この応用により、アニメーションするモデル形状に沿ってブランチングする表現を実現することができます。</p>
+
+<h3><a id="h1-4-1"></a><span class="secno">1.4.1　</span>大まかな流れ</h3>
+<p>スキニングアニメーションとの連携は、以下のような流れで開発します。</p>
+<ol>
+<li>アニメーションモデルを用意する</li>
+<li>モデルのボリュームを充填する点群を用意する（Attractionとなる点群）</li>
+<li>AttractionやNodeにBone情報を持たせる</li>
+<li>NodeにBoneの変形を適用（スキニング）して位置を変化させる</li>
+</ol>
+
+<h3><a id="h1-4-2"></a><span class="secno">1.4.2　</span>リソースの用意</h3>
+<p>先の例の構造体</p>
+<ul>
+<li>Attraction</li>
+<li>Node</li>
+<li>Candidate</li>
+</ul>
+<p>にBoneのindexを持たせるように変更を加えます。</p>
+<div class="column">
+
+<h3><a id="column-1"></a>影響を受けるBoneの制限について</h3>
+<p>今回の応用では各Nodeについて影響するBoneの数を1つに制限しています。本来であれば、スキニングアニメーションでは各頂点について影響するBoneの数を複数持たせることができるのですが、この例ではシンプルに影響するBoneを1つだけに制限しています。</p>
+</div>
+<div class="emlist-code">
+<p class="caption">SkinnedAttraction.cs</p>
+<pre class="emlist">public struct SkinnedAttraction {<font></font>
+    public Vector3 position;<font></font>
+    public int bone; // boneのindex<font></font>
+    public int nearest;<font></font>
+    public uint found;<font></font>
+    public uint active;<font></font>
+}<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">SkinnedNode.cs</p>
+<pre class="emlist">public struct SkinnedNode {<font></font>
+    public Vector3 position;<font></font>
+    public Vector3 animated; // スキニングアニメーション後のNodeのposition<font></font>
+    public int index0; // boneのindex<font></font>
+    public float t;<font></font>
+    public float offset;<font></font>
+    public float mass;<font></font>
+    public int from;<font></font>
+    public uint active;<font></font>
+}<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">SkinnedCandidate.cs</p>
+<pre class="emlist">public struct SkinnedCandidate<font></font>
+{<font></font>
+    public Vector3 position;<font></font>
+    public int node;<font></font>
+    public int bone; // boneのindex<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-4-2-1"></a>アニメーションモデルとボリューム</h4>
+<p>連携させたいアニメーションモデルを用意します。</p>
+<p>今回の例ではClara.io<a id="fnb-Clara" href="https://freder.io/files/unity4/nakamura.html#fn-Clara" class="noteref" epub:type="noteref">*2</a>からダウンロードしたモデルを使い（MeshLab<a id="fnb-MeshLab" href="https://freder.io/files/unity4/nakamura.html#fn-MeshLab" class="noteref" epub:type="noteref">*3</a>でリダクションをかけてポリゴン数を減らしたもの）、アニメーションはmixamo<a id="fnb-mixamo" href="https://freder.io/files/unity4/nakamura.html#fn-mixamo" class="noteref" epub:type="noteref">*4</a>で生成したものを利用しています。</p>
+<div class="footnote" epub:type="footnote" id="fn-Clara"><p class="footnote">[*2] https://clara.io/view/d49ee603-8e6c-4720-bd20-9e3d7b13978a</p></div>
+<div class="footnote" epub:type="footnote" id="fn-MeshLab"><p class="footnote">[*3] http://www.meshlab.net/</p></div>
+<div class="footnote" epub:type="footnote" id="fn-mixamo"><p class="footnote">[*4] https://mixamo.com</p></div>
+<p>モデルのボリュームからAttractionの位置を取得するために、モデルのボリューム内の点群を生成するVolumeSampler<a id="fnb-VolumeSampler" href="https://freder.io/files/unity4/nakamura.html#fn-VolumeSampler" class="noteref" epub:type="noteref">*5</a>というパッケージを利用します。</p>
+<div class="footnote" epub:type="footnote" id="fn-VolumeSampler"><p class="footnote">[*5] https://github.com/mattatz/unity-volume-sampler</p></div>
+<div class="column">
+
+<h3><a id="column-2"></a>VolumeSampler</h3>
+<p>VolumeSamplerではUnity Graphics Programming vol.2「Real-Time GPU-Based Voxelizer」で解説しているテクニックを利用してモデルのボリュームを取得しています。まず、メッシュ内部のボリュームをVoxelとして取得し、それを元にPoisson Disk Samplingを実行することで、メッシュ内部を充填するような点群を生成しています。</p>
+<p>VolumeSamplerを使って点群アセットを生成する方法は、Unityツールバー内からWindow→VolumeSamplerをクリックしてWindowを表示し、以下の図のように、</p>
+<ul>
+<li>対象のMeshへの参照</li>
+<li>点群のサンプリング解像度</li>
+</ul>
+<p>を設定し、アセット生成ボタンをクリックすると、指定したパスにVolumeアセットが生成されます。</p>
+<div id="id_nakamura_2FVolumeSamplerWindow" class="image">
+<img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/VolumeSamplerWindow.png" alt="VolumeSamplerWindow">
+<p class="caption">
+図1.13: VolumeSamplerWindow
+</p>
+</div>
+</div>
+<p>VolumeSamplerから生成された点群アセット（Volumeクラス）からSkinnedAttraction配列を生成し、ComputeBufferに適用します。</p>
+<div class="emlist-code">
+<p class="caption">SkinnedSpaceColonization.cs</p>
+<pre class="emlist">protected void Start() {<font></font>
+    ...<font></font>
+    // Volumeが持つ点群からSkinnedAttraction配列を生成する<font></font>
+    attractions = GenerateAttractions(volume);<font></font>
+    count = attractions.Length;<font></font>
+    attractionBuffer = new ComputeBuffer(<font></font>
+        count,<font></font>
+        Marshal.SizeOf(typeof(SkinnedAttraction)),<font></font>
+        ComputeBufferType.Default<font></font>
+    );<font></font>
+    attractionBuffer.SetData(attractions);<font></font>
+    ...<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-4-2-2"></a>Bone情報の適用</h4>
+<p>Meshのボリュームから生成されたSkinnedAttractionには、各位置から最も近い頂点のBone情報を適用します。</p>
+<p>SetupSkin関数ではMeshの頂点とBoneバッファを用意し、GPU上ですべてのSkinnedAttractionにBoneのindexを割り振ります。</p>
+<div class="emlist-code">
+<p class="caption">SkinnedSpaceColonization.cs</p>
+<pre class="emlist">protected void Start() {<font></font>
+    ...<font></font>
+    SetupSkin();<font></font>
+    ...<font></font>
+}<font></font>
+<font></font>
+...<font></font>
+<font></font>
+protected void SetupSkin()<font></font>
+{<font></font>
+    var mesh = skinnedRenderer.sharedMesh;<font></font>
+    var vertices = mesh.vertices;<font></font>
+    var weights = mesh.boneWeights;<font></font>
+    var indices = new int[weights.Length];<font></font>
+    for(int i = 0, n = weights.Length; i &lt; n; i++)<font></font>
+        indices[i] = weights[i].boneIndex0;<font></font>
+<font></font>
+    using (<font></font>
+        ComputeBuffer<font></font>
+        vertBuffer = new ComputeBuffer(<font></font>
+            vertices.Length,<font></font>
+            Marshal.SizeOf(typeof(Vector3))<font></font>
+        ),<font></font>
+        boneBuffer = new ComputeBuffer(<font></font>
+            weights.Length,<font></font>
+            Marshal.SizeOf(typeof(uint))<font></font>
+        )<font></font>
+    )<font></font>
+    {<font></font>
+        vertBuffer.SetData(vertices);<font></font>
+        boneBuffer.SetData(indices);<font></font>
+<font></font>
+        var kernel = compute.FindKernel("SetupSkin");<font></font>
+        compute.SetBuffer(kernel, "_Vertices", vertBuffer);<font></font>
+        compute.SetBuffer(kernel, "_Bones", boneBuffer);<font></font>
+        compute.SetBuffer(kernel, "_Attractions", attractionBuffer);<font></font>
+        GPUHelper.Dispatch1D(compute, kernel, attractionBuffer.count);<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>以下がGPUカーネルの実装になります。</p>
+<div class="emlist-code">
+<p class="caption">SkinnedSpaceColonization.compute</p>
+<pre class="emlist">void SetupSkin (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+  uint count, stride;<font></font>
+  _Attractions.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  SkinnedAttraction attr = _Attractions[idx];<font></font>
+<font></font>
+  // SkinnedAttractionの位置から最も近い頂点のindexを取得する<font></font>
+  float3 p = attr.position;<font></font>
+  uint closest = -1;<font></font>
+  float dist = 1e8;<font></font>
+  _Vertices.GetDimensions(count, stride);<font></font>
+  for (uint i = 0; i &lt; count; i++)<font></font>
+  {<font></font>
+    float3 v = _Vertices[i];<font></font>
+    float l = distance(v, p);<font></font>
+    if (l &lt; dist)<font></font>
+    {<font></font>
+      dist = l;<font></font>
+      closest = i;<font></font>
+    }<font></font>
+  }<font></font>
+<font></font>
+  // 最も近い頂点のBone indexをSkinnedAttractionに設定する<font></font>
+  attr.bone = _Bones[closest];<font></font>
+  _Attractions[idx] = attr;<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h1-4-3"></a><span class="secno">1.4.3　</span>ComputeShaderでのアルゴリズムの実装</h3>
+<p>この応用例では、Space Colonization Algorithmにおける各ステップの中でスキニングアニメーションに必要なBone情報を取得するため、いくつかのGPUカーネルに修正を加えます。</p>
+<p>概ねGPUカーネルの中身は同じなのですが、生成されるSkinnedNodeについて、最も近傍のSkinnedAttractionからBone情報（Boneのindex）を得る必要があるため、</p>
+<ul>
+<li>Seed</li>
+<li>Attract</li>
+</ul>
+<p>の2つのGPUカーネルでは、近傍探索のロジックが追加されています。</p>
+<div class="emlist-code">
+<p class="caption">SkinnedSpaceColonization.compute</p>
+<pre class="emlist">void Seed (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+<font></font>
+  uint count, stride;<font></font>
+  _Seeds.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  SkinnedNode n;<font></font>
+  uint i = CreateNode(n);<font></font>
+  n.position = n.animated = _Seeds[idx];<font></font>
+  n.t = 1;<font></font>
+  n.offset = 0;<font></font>
+  n.from = -1;<font></font>
+  n.mass = lerp(_MassMin, _MassMax, nrand(id.xy));<font></font>
+<font></font>
+  // 最近傍のSkinnedAttractionを探索し、<font></font>
+  // Bone indexをコピーする<font></font>
+  uint nearest = -1;<font></font>
+  float dist = 1e8;<font></font>
+  _Attractions.GetDimensions(count, stride);<font></font>
+  for (uint j = 0; j &lt; count; j++)<font></font>
+  {<font></font>
+    SkinnedAttraction attr = _Attractions[j];<font></font>
+    float l = distance(attr.position, n.position);<font></font>
+    if (l &lt; dist)<font></font>
+    {<font></font>
+      nearest = j;<font></font>
+      dist = l;<font></font>
+    }<font></font>
+  }<font></font>
+  n.index0 = _Attractions[nearest].bone;<font></font>
+<font></font>
+  _Nodes[i] = n;<font></font>
+}<font></font>
+<font></font>
+...<font></font>
+<font></font>
+void Attract (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+  uint count, stride;<font></font>
+  _Nodes.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  SkinnedNode n = _Nodes[idx];<font></font>
+<font></font>
+  if (n.active &amp;&amp; n.t &gt;= 1.0)<font></font>
+  {<font></font>
+    float3 dir = (0.0).xxx;<font></font>
+    uint counter = 0;<font></font>
+<font></font>
+    float dist = 1e8;<font></font>
+    uint nearest = -1;<font></font>
+<font></font>
+    _Attractions.GetDimensions(count, stride);<font></font>
+    for (uint i = 0; i &lt; count; i++)<font></font>
+    {<font></font>
+      SkinnedAttraction attr = _Attractions[i];<font></font>
+      if (attr.active &amp;&amp; attr.found &amp;&amp; attr.nearest == idx)<font></font>
+      {<font></font>
+        float3 dir2 = (attr.position - n.position);<font></font>
+        dir += normalize(dir2);<font></font>
+        counter++;<font></font>
+<font></font>
+        // 最近傍のSkinnedAttractionを探索する<font></font>
+        float l2 = length(dir2);<font></font>
+        if (l2 &lt; dist)<font></font>
+        {<font></font>
+          dist = l2;<font></font>
+          nearest = i;<font></font>
+        }<font></font>
+      }<font></font>
+    }<font></font>
+<font></font>
+    if (counter &gt; 0)<font></font>
+    {<font></font>
+      SkinnedCandidate c;<font></font>
+      dir = dir / counter;<font></font>
+      c.position = n.position + (dir * _GrowthDistance);<font></font>
+      c.node = idx;<font></font>
+      // 最近傍のSkinnedAttractionの持つBone indexを設定する<font></font>
+      c.bone = _Attractions[nearest].bone;<font></font>
+      _CandidatesAppend.Append(c);<font></font>
+    }<font></font>
+  }<font></font>
+}<font></font>
+<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-4-3-1"></a>スキニングアニメーション</h4>
+<p>以上までの実装で、Nodeに対してBone情報を設定しながらSpace Colonization Algorithmを実行できるようになりました。</p>
+<p>あとは必要なBone行列をSkinnedMeshRendererから取得し、GPU上でSkinnedNodeの位置をBoneの変形に応じて動かすことで、Nodeに対してスキニングアニメーションを施すことができます。</p>
+<div class="emlist-code">
+<p class="caption">SkinnedSpaceColonization.cs</p>
+<pre class="emlist">protected void Start() {<font></font>
+    ...<font></font>
+    // bind pose行列のバッファを作成しておく<font></font>
+    var bindposes = skinnedRenderer.sharedMesh.bindposes;<font></font>
+    bindPoseBuffer = new ComputeBuffer(<font></font>
+        bindposes.Length,<font></font>
+        Marshal.SizeOf(typeof(Matrix4x4))<font></font>
+    );<font></font>
+    bindPoseBuffer.SetData(bindposes);<font></font>
+    ...<font></font>
+}<font></font>
+<font></font>
+protected void Animate()<font></font>
+{<font></font>
+    // アニメーションが再生されることで更新される、SkinnedMeshRendererのBone行列を表すバッファを作成する<font></font>
+    var bones = skinnedRenderer.bones.Select(bone =&gt; {<font></font>
+        return bone.localToWorldMatrix;<font></font>
+    }).ToArray();<font></font>
+    using (<font></font>
+        ComputeBuffer boneMatrixBuffer = new ComputeBuffer(<font></font>
+            bones.Length,<font></font>
+            Marshal.SizeOf(typeof(Matrix4x4))<font></font>
+        )<font></font>
+    )<font></font>
+    {<font></font>
+        boneMatrixBuffer.SetData(bones);<font></font>
+<font></font>
+        // BoneとNodeのバッファを渡し、GPUスキニングを実行する<font></font>
+        var kernel = compute.FindKernel("Animate");<font></font>
+        compute.SetBuffer(kernel, "_BindPoses", bindPoseBuffer);<font></font>
+        compute.SetBuffer(kernel, "_BoneMatrices", boneMatrixBuffer);<font></font>
+        compute.SetBuffer(kernel, "_Nodes", nodeBuffer);<font></font>
+        GPUHelper.Dispatch1D(compute, kernel, count);<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<p class="caption">SkinnedSpaceColonization.compute</p>
+<pre class="emlist">void Animate (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint idx = id.x;<font></font>
+  uint count, stride;<font></font>
+  _Nodes.GetDimensions(count, stride);<font></font>
+  if (idx &gt;= count)<font></font>
+    return;<font></font>
+<font></font>
+  SkinnedNode node = _Nodes[idx];<font></font>
+  if (node.active)<font></font>
+  {<font></font>
+    // スキニングの実行<font></font>
+    float4x4 bind = _BindPoses[node.index0];<font></font>
+    float4x4 m = _BoneMatrices[node.index0];<font></font>
+    node.animated = mul(mul(m, bind), float4(node.position, 1)).xyz;<font></font>
+    _Nodes[idx] = node;<font></font>
+  }<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h1-4-4"></a><span class="secno">1.4.4　</span>レンダリング</h3>
+<p>レンダリング用のシェーダはほぼ同じなのですが、SkinnedNodeの元の位置（position）ではなく、スキニングアニメーションを施した後の位置（animated）を参照してEdgeを描画する点だけが異なります。</p>
+<div class="emlist-code">
+<p class="caption">SkinnedTubularEdge.hlsl</p>
+<pre class="emlist">v2g vert(appdata IN, uint iid : SV_InstanceID)<font></font>
+{<font></font>
+  ...<font></font>
+  Edge e = _Edges[iid];<font></font>
+<font></font>
+  // スキニングアニメーションを施した後の位置を参照する<font></font>
+  SkinnedNode a = _Nodes[e.a], b = _Nodes[e.b];<font></font>
+  float3 ap = a.animated, bp = b.animated;<font></font>
+<font></font>
+  float3 dir = bp - ap;<font></font>
+  bp = ap + normalize(dir) * length(dir) * b.t;<font></font>
+  float3 position = lerp(ap, bp, IN.vid);<font></font>
+  OUT.position = mul(unity_ObjectToWorld, float4(position, 1)).xyz;<font></font>
+  ...<font></font>
+}<font></font>
+</pre>
+</div>
+<p>以上までの実装で冒頭に示したキャプチャの絵を得ることができます。（<span class="imgref"><a href="https://freder.io/files/unity4/nakamura.html#id_nakamura_2FSkinnedAnimationScene">図1.1</a></span> SkinnedAnimation.scene）</p>
+
+<h2><a id="h1-5"></a><span class="secno">1.5　</span>まとめ</h2>
+<p>本章では、点群に沿ってブランチング形状を生成するSpace Colonization AlgorithmのGPU実装と、スキニングアニメーションと組み合わせる応用例を紹介しました。</p>
+<p>この手法では、</p>
+<ul>
+<li>Attractionの影響範囲（influence distance）</li>
+<li>Nodeが伸びる長さ（growth distance）</li>
+<li>Attractionを削除する範囲（kill distance）</li>
+</ul>
+<p>という3つのパラメータで枝の粗密具合をコントロールできますが、さらにこれらのパラメータを局所的に変えたり、時間によって変化させたりすることで、より多彩なモデルを生成することができます。</p>
+<p>また、サンプルではAttractionは初期化の際に生成したものだけでアルゴリズムを実行していますが、Attractionを動的に増やすことでもより多くの異なるパターンを生成することができるはずです。</p>
+<p>興味のある方は本アルゴリズムの様々な応用を試して面白いパターンを探してみてください。</p>
+
+<h2><a id="h1-6"></a><span class="secno">1.6　</span>参考</h2>
+<ul>
+<li>Modeling Trees with a Space Colonization Algorithm - http://algorithmicbotany.org/papers/colonization.egwnp2007.large.pdf</li>
+<li>Algorithmic Design with Houdini - https://vimeo.com/305061631#t=1500s</li>
+</ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 1 _ GPU-Based Space Colonization Algorithm_files/saved_resource(2).html"></iframe></body></html>
