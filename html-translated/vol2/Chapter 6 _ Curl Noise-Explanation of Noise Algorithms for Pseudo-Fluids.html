@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://freder.io/files/unity2/sakota.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Curl Noise-Explanation of noise algorithms for pseudo-fluids</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/saved_resource.html"></iframe></div>
+<h1><a id="h6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids</font></font></h1>
+
+<h2><a id="h6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will explain the GPU implementation of Curl Noise, which is a pseudo-fluid algorithm. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample in this chapter is </font><font style="vertical-align: inherit;">"Curl Noise" from </font></font><br><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming2" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming2</font></font></a><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+
+<h3><a id="h6-1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1.1 What is　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Curl Noise?</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Curl Noise is a pseudo-fluid noise algorithm announced in 2007 by Professor Robert Bridson of the University of British Columbia, who is also known as a developer of fluid algorithms such as the FLIP method. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the previous work "Unity Graphics Programming vol.1", I explained the fluid simulation using the Navier-Stokes equation, but Curl Noise is a pseudo but light load compared to those fluid simulations. It is possible to express fluid. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In particular, with the recent advances in display and projector technology, there is an increasing need for real-time rendering at high resolutions such as 4K and 8K, so low-load algorithms such as Curl Noise can express fluids in high resolution and low resolution. It is a useful option for expressing with machine specifications.</font></font></p>
+
+<h2><a id="h6-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Curl Noise algorithm</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In fluid simulation, the first thing you need is a vector field called the "velocity field". </font><font style="vertical-align: inherit;">First, let's imagine what a velocity field is like. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Below is an image of the velocity field in two dimensions. </font><font style="vertical-align: inherit;">You can see that the vector is defined at each point on the plane.</font></font><br></p>
+<div id="VectorField2d" class="image">
+<img src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/VectorField2d.png" alt="Observation of velocity field in two dimensions" class="width-070per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.1: Two-dimensional velocity field observations
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As shown in the above figure, the state in which each vector is individually defined in each differential interval on the plane is called a vector field, and the one in which each vector is a velocity is called a velocity field. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Even if these are three-dimensional, it is easy to understand if you can imagine that the vector is defined in each differential block in the cube. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now let's see how Curl Noise derives this velocity field.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The interesting thing about Curl Noise is that it uses gradient noise such as Perlin Noise and Simplex Noise, which was explained in the previous chapter "Introduction to Procedural Noise", as a potential field, and derives the velocity field of the fluid from it. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will use 3D Simplex Noise as a potential field.</font></font><br></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Below, I would like to first unravel the algorithm from the Curl Noise formula.</font></font></p>
+<div class="equation">
+<pre>\overrightarrow{u} = \nabla \times \psi
+</pre>
+</div>
+<p>上記はCurl Noiseのアルゴリズムになります。<br>左辺<span class="equation">\overrightarrow{u}</span>は導出された速度ベクトル、右辺<span class="equation">\nabla</span>はベクトル微分演算子（ナブラと読み、偏微分の作用素として働きます）、<span class="equation">\psi</span>はポテンシャル場です。（本章では3次元Simplex Noise）<br>Curl Noiseはこの右辺二項の外積を取ったものとして表せます。<br></p>
+<p>つまり、Curl NoiseはSimplex Noiseとベクトル各要素の偏微分<span class="equation"> \left( \dfrac {\partial } {\partial x}_, \dfrac {\partial } {\partial y}_, \dfrac {\partial } {\partial z} \right) </span>の外積をとったものであり、過去にベクトル解析を学ばれた事がある方にとっては、rotA（回転）の形そのものである事が見て取れるかと思います。<br>それでは、3D Simplex Noiseと偏微分の外積を計算してみましょう</p>
+<div class="equation">
+<pre>\overrightarrow{u} = \left( \dfrac {\partial \psi _3} {\partial y} - \dfrac {\partial \psi _2} {\partial z}_, \dfrac {\partial \psi _1} {\partial z} - \dfrac {\partial \psi _3} {\partial x}_,  \dfrac {\partial \psi _2} {\partial x} - \dfrac {\partial \psi _1} {\partial y} \right)
+</pre>
+</div>
+<p>一般的に外積は、二つのベクトルのお互いにとっての垂直方向を向き、その長さは両ベクトルで張られる面の面積と同じになるという特徴を持ったものですが、ベクトル解析でのrotA（回転）での外積演算のイメージの掴み方は、「ねじれた各偏微分要素方向のポテンシャル場のベクトルをルックアップし、その項同士を引いているから回転が起きる」と、上記の計算式からシンプルに捉えた方がイメージを掴みやすいかもしれません。<br>実装自体はとても単純で、偏微分の各要素方向に微小にルックアップポイントをずらしながら、上記<span class="equation">\psi</span>の各点、つまり3次元SimplexNoiseからベクトルをルックアップし、上記の数式の様に、外積演算をするだけです。</p>
+
+<h3><a id="h6-2-1"></a><span class="secno">6.2.1　</span>質量保存則について</h3>
+<p>もし前作の「Unity Graphics Programming vol.1」の流体シミュレーションの章をお読みになられた方は、質量保存則はどうなっているのかと気になられた方もいらっしゃるかもしれません。<br>質量保存則とは、流体は速度場での各ポイントにおいて、必ず、流入と流出の均衡がとれ、流入した分流出し、流出した分は流入してきており、最終的には発散ゼロ（ダイバージェンスフリー）というルールでした。</p>
+<div class="equation">
+<pre>\nabla \cdot \overrightarrow{u} = 0
+</pre>
+</div>
+<p>この事については、論文でも述べられているのですが、そもそも勾配ノイズ自体がなだらかに変化している物ですので（2次元グラデーションでイメージするなら、左側のピクセルが薄ければ、右側は濃くなっている様に）、ダイバージェンスフリーはポテンシャル場の時点で保証されているという物でした。パーリンノイズの特徴から考えてみれば至極当然な事ですね。</p>
+
+<h3><a id="h6-2-2"></a><span class="secno">6.2.2　</span>Curl Noiseの実装</h3>
+<p>それでは、数式に基づいて、Compute shader、若しくはShaderでCurlNoise関数をGPU実装してみましょう。</p>
+<div class="emlist-code">
+<pre class="emlist">#define EPSILON 1e-3<font></font>
+<font></font>
+float3 CurlNoise(float3 coord)<font></font>
+{<font></font>
+    float3 dx = float3(EPSILON, 0.0, 0.0);<font></font>
+    float3 dy = float3(0.0, EPSILON, 0.0);<font></font>
+    float3 dz = float3(0.0, 0.0, EPSILON);<font></font>
+<font></font>
+    float3 dpdx0 = snoise(coord - dx);<font></font>
+    float3 dpdx1 = snoise(coord + dx);<font></font>
+    float3 dpdy0 = snoise(coord - dy);<font></font>
+    float3 dpdy1 = snoise(coord + dy);<font></font>
+    float3 dpdz0 = snoise(coord - dz);<font></font>
+    float3 dpdz1 = snoise(coord + dz);<font></font>
+<font></font>
+    float x = dpdy1.z - dpdy0.z + dpdz1.y - dpdz0.y;<font></font>
+    float y = dpdz1.x - dpdz0.x + dpdx1.z - dpdx0.z;<font></font>
+    float z = dpdx1.y - dpdx0.y + dpdy1.x - dpdy0.x;<font></font>
+<font></font>
+    return float3(x, y, z) / EPSILON * 2.0;<font></font>
+}<font></font>
+</pre>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As mentioned above, this algorithm can be reduced to a simple four arithmetic operation, so the implementation itself is very easy, and it can be implemented with just this number of lines. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Below is a sample of Curl Noise implemented in the compute shader this time. </font><font style="vertical-align: inherit;">It is possible to advect particles of particles, add a rising vector to make it look like a flame, and bring out various expressions depending on the idea.</font></font></p>
+<div id="CurlNoise1" class="image">
+<img src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/CurlNoise1.png" alt="" class="width-071per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.2: 
+</font></font></p>
+</div>
+<div id="CurlNoise2" class="image">
+<img src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/CurlNoise2.png" alt="" class="width-071per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.3: 
+</font></font></p>
+</div>
+<div id="CurlNoise3" class="image">
+<img src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/CurlNoise3.png" alt="" class="width-071per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.4: 
+</font></font></p>
+</div>
+
+<h2><a id="h6-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we explained the implementation of pseudo-fluid by Curl Noise. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since it is possible to reproduce a 3D pseudo-fluid with a small load and implementation, it is an algorithm that works especially useful for real-time rendering at high resolution.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In summary, I would like to conclude this chapter with the utmost thanks to Professor Robert Bridson, who is still discovering various techniques, including the Curl Noise algorithm. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I think there were some points that could not be explained and some parts were difficult to understand, but I hope that readers will enjoy graphics programming as well.</font></font></p>
+
+<h2><a id="h6-4"></a><span class="secno">6.4　</span>References</h2>
+<ul>
+<li>Robert Bridson, Jim Hourihan, Marcus Nordenstam. 2007, Curl-noise for procedural fluid flow. In proc, ACM SIGGRAPH 46.</li>
+</ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Curl Noise-Explanation of Noise Algorithms for Pseudo-Fluids_files/saved_resource(2).html"></iframe></body></html>

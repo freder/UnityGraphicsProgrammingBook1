@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://freder.io/files/unity2/takao.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Shape Matching-Application of Linear Algebra to CG</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/saved_resource.html"></iframe></div>
+<h1><a id="h7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Shape Matching-Application of Linear Algebra to CG</font></font></h1>
+
+<h2><a id="h7-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will introduce learning of singular value decomposition and applications using singular value decomposition from the basics and applications of linear algebra. Although I learned linear algebra in high school students and university students, I think that there are many people who do not know how it is used, so I wrote this time. In this chapter, in order to prioritize ease of understanding </font><font style="vertical-align: inherit;">, explanations </font><font style="vertical-align: inherit;">are given in </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">two dimensions and within the range of real numbers.</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Therefore, there are some differences from the actual definition of linear algebra, but we would appreciate it if you could read it as appropriate.</font></font></p>
+
+<h2><a id="h7-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> What is a matrix?</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Most readers may have heard the word matrix once (currently, they don't learn matrices in high school ...). Matrix is ​​a number like this: Refers to those arranged vertically and horizontally.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The horizontal direction is the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">row</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the vertical direction is the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">column</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , the diagonal direction is the </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">diagonal</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , and each number </font><font style="vertical-align: inherit;">is called a </font><font style="vertical-align: inherit;">matrix </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">element</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<div id="matrix" class="image">
+<img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/matrix.png" alt="Ranks" class="width-020per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 7.1: Matrix
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By the way, the matrix is ​​called Matrix in English.</font></font></p>
+
+<h2><a id="h7-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Review of matrix operations</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's take a quick look at the basics of matrix operations. If you are already familiar with it, you can skip this section.</font></font></p>
+
+<h3><a id="h7-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.3.1 Addition,　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> subtraction, multiplication and division</font></font></h3>
+<p>行列には, スカラーの四則演算と同様, 加減乗除算が存在します.簡単のために, 2次正方行列<a id="fnb-square" href="https://freder.io/files/unity2/takao.html#fn-square" class="noteref" epub:type="noteref">*1</a><span class="equation">\mbox{\boldmath $A$}</span>と<span class="equation">\mbox{\boldmath $B$}</span>, 2次元ベクトル<span class="equation">\mbox{\boldmath $c$}</span>を以下で定義しておきます.</p>
+<div class="footnote" epub:type="footnote" id="fn-square"><p class="footnote">[*1] 正方行列 <span class="equation">\cdots</span> 行と列の数が等しい行列のこと.</p></div>
+
+<h4><a id="h7-3-1-1"></a>加算</h4>
+<p>行列の加算は, 式(\ref{plus})のように, 要素ごとに和を計算します.</p>
+
+<h4><a id="h7-3-1-2"></a>減算</h4>
+<p>行列の減算は, 式(\ref{minus})のように, 要素ごとに差を計算します.</p>
+
+<h4><a id="h7-3-1-3"></a>乗算</h4>
+<p>行列の乗算は少し複雑で, 式(\ref{times})のようになります.</p>
+<p>掛ける順序を逆にすると, 計算結果も変化するので, 注意してください.</p>
+
+<h4><a id="h7-3-1-4"></a>除算(逆行列)</h4>
+<p>行列の除算は, スカラーにおける除算と少し異なる, <b>逆行列</b>と呼ばれる概念を使用します.まずはじめに, スカラーでは, 自分自身の逆数を掛けると, 必ず1になる性質を持っています.</p>
+<p>つまり, 除算という行為は, 「逆数を掛ける」という演算と等しくなります.</p>
+<p>これを行列に置き換えると, 行列にかけて単位行列を生み出すものが, 除算を表す行列であるということができます.行列において, スカラーの<span class="equation">1</span>に対応するものは単位行列と呼ばれ, 以下で定義されます.</p>
+<p>スカラーの<span class="equation">1</span>と同様, 単位行列をどのような行列にかけても, 値が変化しません.</p>
+<p>これらを踏まえて, 行列の除算について考えます.逆行列を<span class="equation">\mbox{\boldmath $M$}^{-1}</span>とすると, 逆行列の定義は以下となります.</p>
+<p>導出は省略しますが, 行列<span class="equation">\mbox{\boldmath $A$}</span>の逆行列の要素は, 以下で定義されます.</p>
+<p>この時の, <span class="equation">a_{00}a_{11} - a_{01}a_{10}</span>を行列式(Determinant)と呼び, <span class="equation">det(\mbox{\boldmath $A$})</span>と表します.</p>
+
+<h3><a id="h7-3-2"></a><span class="secno">7.3.2　</span>行列のベクトルへの作用</h3>
+<p>行列は, ベクトルと乗算することによってベクトルの指す座標を変換することができます.ご存知の通り, CGでは, 座標変換行列(ワールド, プロジェクション, ビュー変換行列)などとして用いられることがほとんどです.行列とベクトルの積は, 以下で定義されます.</p>
+
+<h2><a id="h7-4"></a><span class="secno">7.4　</span>行列演算の応用</h2>
+<p>本節からは, 大学で習う範囲の行列の概念を解説していきます.少々難しいと感じられる部分が多いかとは思いますが, Shape Matchingを理解するには, これだけの概念が必要ですので, 頑張って理解していきましょう.と言いつつ, 本節の話は行列演算ライブラリ内部で吸収される部分でもありますので, 第\ref{shapematching}節まで読み飛ばしていただいても実装に支障はありません.</p>
+
+<h3><a id="h7-4-1"></a><span class="secno">7.4.1　</span>転置行列</h3>
+<p>転置行列は, 要素の行と列を入れ替えたもので, 以下で定義されます.</p>
+
+<h3><a id="h7-4-2"></a><span class="secno">7.4.2　</span>対称行列</h3>
+<p><span class="equation">\mbox{\boldmath $A$}^{T} = \mbox{\boldmath $A$}</span>を満たす行列を, 対称行列と呼びます.</p>
+
+<h3><a id="h7-4-3"></a><span class="secno">7.4.3　</span>固有値と固有ベクトル</h3>
+<p>正方行列<span class="equation">\mbox{\boldmath $A$}</span>が与えられたとき,</p>
+<p>を満たす<span class="equation">\lambda</span>を, <span class="equation">\mbox{\boldmath $A$}</span>の<b>固有値</b>, <span class="equation">\mbox{\boldmath $v$}</span>を<b>固有ベクトル</b>と呼びます.</p>
+<p>固有値と固有ベクトルの算出方法を以下に示します.まず, 式(\ref{eigen})を変形して,</p>
+<p>とします.ここで, <span class="equation">\mbox{\boldmath $v$} \neq 0</span>という条件を用いると, 式(\ref{eigen2})は,</p>
+<p>となります.この式を展開すると, <span class="equation">\lambda</span>についての2次方程式になるため, これを解くことで<span class="equation">\lambda</span>を算出することができます.また, 算出されたそれぞれの<span class="equation">\lambda</span>を式(\ref{eigen2})に代入することで, 固有ベクトル<span class="equation">\mbox{\boldmath $v$}</span>を算出することができます.</p>
+<p>数式だけでは, 固有値・固有ベクトルの概念はわかりにくいので, @kenmatsu4氏による固有値の可視化が行われたQiita記事(章末に記載)を併せてご覧いただけるとよいかと思います.</p>
+
+<h3><a id="h7-4-4"></a><span class="secno">7.4.4　</span>固有値分解</h3>
+<p>正方行列<span class="equation">\mbox{\boldmath $A$}</span>における固有値と固有ベクトルを用いて, 行列<span class="equation">\mbox{\boldmath $A$}</span>を違う形で表すことができます.まず, 固有値<span class="equation">\lambda</span>を大きさ順に並べ替え, それを対角要素に持つ行列<span class="equation">\mbox{\boldmath $\Lambda$}</span>を作成します.次に, それぞれの固有値に対応する固有ベクトルを左から順に並べた行列<span class="equation">\mbox{\boldmath $V$}</span>を作成します.すると, 式(<span class="equation">\ref{eigen}</span>)を, これらの行列を用いて以下のように書き換えることができます.</p>
+<p>さらに, これを左辺に行列<span class="equation">\mbox{\boldmath $A$}</span>が残るよう, 両辺右から<span class="equation">\mbox{\boldmath $V$}^{-1}</span>を掛けると,</p>
+<p>となります.</p>
+<p>このように, 行列を式(\ref{eigendecomp})のような形式に分解することを, 行列の固有値分解と呼びます.</p>
+
+<h3><a id="h7-4-5"></a><span class="secno">7.4.5　</span>正規直交基底</h3>
+<p>互いに垂直であり, かつそれぞれが単位ベクトルであるベクトルの組を, 正規直交基底と呼びます.任意のベクトルは, 正規直交基底の組を用いて表すことができます<a id="fnb-ichi" href="https://freder.io/files/unity2/takao.html#fn-ichi" class="noteref" epub:type="noteref">*2</a>.2次元の場合, 正規直交基底となりうるベクトルは2つとなります.例えば, よく用いられるx軸とy軸は, <span class="equation">\mbox{\boldmath $x$} = (1, 0), \mbox{\boldmath $y$} = (0, 1)</span>の組で正規直交基底を成しているので,任意のベクトルをこの<span class="equation">\mbox{\boldmath $x$}, \mbox{\boldmath $y$}</span>で表すことができます.<span class="equation">\mbox{\boldmath $v$} = (4, 13)</span>を正規直交基底<span class="equation">\mbox{\boldmath $x$}, \mbox{\boldmath $y$}</span>を用いて表すと,<span class="equation">\mbox{\boldmath $v$} = 4\mbox{\boldmath $x$} + 13\mbox{\boldmath $y$}</span>となります.</p>
+<div class="footnote" epub:type="footnote" id="fn-ichi"><p class="footnote">[*2] 正式にはベクトルの一次結合と呼びます.</p></div>
+
+<h3><a id="h7-4-6"></a><span class="secno">7.4.6　</span>エルミート行列</h3>
+<p>エルミート行列が定義されるのは, 本来複素数の範囲であり本章の領域を超えますので, 実数の範囲で簡単に説明します.実数の範囲では, 行列<span class="equation">\mbox{\boldmath $A$}</span>のエルミート行列<span class="equation">\mbox{\boldmath $A$}^{*}</span>は, 単に対称行列であることを意味しており,</p>
+<p>となります.</p>
+
+<h3><a id="h7-4-7"></a><span class="secno">7.4.7　</span>直交行列</h3>
+<p>正方行列<span class="equation">\mbox{\boldmath $Q$}</span>を列ベクトル <span class="equation">Q = (\mbox{\boldmath $q$}_1, \mbox{\boldmath $q$}_2, \cdots, \mbox{\boldmath $q$}_n)</span>に分解したとき, これらのベクトルの組が正規直交系をなしている, つまり,</p>
+<p>が成り立つとき, <span class="equation">\mbox{\boldmath $Q$}</span>は直交行列であるといいます.また, 直交行列を行ベクトルに分解したとしても, 正規直交系をなしている特徴があります.</p>
+
+<h3><a id="h7-4-8"></a><span class="secno">7.4.8　</span>ユニタリ行列</h3>
+<p>を満たす行列を, ユニタリ行列と呼びます.ユニタリ行列<span class="equation">\mbox{\boldmath $U$}</span>の要素がすべて実数(実行列)の場合, <span class="equation">\mbox{\boldmath $U$}^{*} = \mbox{\boldmath $U$}^{T}</span>となるため, 実ユニタリ行列<span class="equation">\mbox{\boldmath $U$}</span>は直交行列であることがわかります.</p>
+
+<h2><a id="h7-5"></a><span class="secno">7.5　</span>特異値分解</h2>
+<p>任意の<span class="equation">m \times n</span>行列<span class="equation">\mbox{\boldmath $A$}</span>を, 以下の形に分解することを, 行列の特異値分解と呼びます.</p>
+<p>尚, <span class="equation">\mbox{\boldmath $U$}</span>と<span class="equation">\mbox{\boldmath $V$}^{T}</span>は, <span class="equation">m \times m</span>の直交行列,<span class="equation">\mbox{\boldmath $\Sigma$}</span>は, <span class="equation">m \times n</span>の対角行列(対角成分は非負で大きさの順に並んだ行列)となっています.</p>
+<p>「任意の」という言葉が肝で, 行列の固有値分解は正方行列に対してのみ定義されますが, 特異値分解は長方行列でも行うことができます.CGの世界では, 扱う行列が正方行列であることがほとんどですので, 固有値分解とさほど計算方法は変わりません.また, <span class="equation">\mbox{\boldmath $A$}</span>が対称行列のとき, <span class="equation">\mbox{\boldmath $A$}</span>の固有値と特異値は一致します.さらに, <span class="equation">\mbox{\boldmath $A$}^{T} \mbox{\boldmath $A$}</span>の<span class="equation">0</span>でない固有値の正の平方根は<span class="equation">\mbox{\boldmath $A$}</span>の特異値です.</p>
+
+<h3><a id="h7-5-1"></a><span class="secno">7.5.1　</span>特異値分解のアルゴリズム</h3>
+<p>固有値分解をプログラムに落とし込むには, 式(\ref{svd})を式変形するとわかりやすいです.行列<span class="equation">\mbox{\boldmath $A$}</span>の左からその行列の転置<span class="equation">\mbox{\boldmath $A$}^{T}</span>を掛けると, 以下のようになります.</p>
+<p>形が固有値分解と同じになっているのに気づくかと思います.実際, 特異値行列の自乗は固有値行列になることが知られています.よって, 特異値の算出は, 行列を固有値分解し, 固有値の2乗根を取ることで行うことが可能です.このことから, 固有値分解をアルゴリズム内に組み込むことになりますが, 固有値を求めるために2次方程式を解く必要が出てきます.幸い, 2次方程式は解の公式が単純ですので, プログラムに落とすのも簡単です<a id="fnb-kai" href="https://freder.io/files/unity2/takao.html#fn-kai" class="noteref" epub:type="noteref">*3</a>.</p>
+<div class="footnote" epub:type="footnote" id="fn-kai"><p class="footnote">[*3] 3次方程式や4次方程式にも解の公式は存在しますが, 一般的にニュートン法等を用いて計算を行います. </p></div>
+<p><span class="equation">\mbox{\boldmath $A$}^{T}\mbox{\boldmath $A$}</span>固有値分解することで, <span class="equation">\mbox{\boldmath $\Sigma$}</span>と<span class="equation">\mbox{\boldmath $V$}^{T}</span>が算出できましたので, 残りの<span class="equation">\mbox{\boldmath $U$}</span>は式(\ref{svd})を変形して以下で算出できます.</p>
+<p>尚, Vは直交行列なので, 転置と逆行列が一致します.</p>
+<p>これをプログラムで表すと, 以下のようになります.</p>
+<div id="render" class="code">
+<p class="caption">リスト7.1: 特異値分解のアルゴリズム(Matrix2x2.cs)</p>
+<pre class="list language-csharp"> 1: /// &lt;summary&gt;<font></font>
+ 2: /// 特異値分解<font></font>
+ 3: /// &lt;/summary&gt;<font></font>
+ 4: /// &lt;param name="u"&gt;Returns rotation matrix u&lt;/param&gt;<font></font>
+ 5: /// &lt;param name="s"&gt;Returns sigma matrix&lt;/param&gt;<font></font>
+ 6: /// &lt;param name="v"&gt;Returns rotation matrix v(not transposed)&lt;/param&gt;<font></font>
+ 7: public void SVD(ref Matrix2x2 u, ref Matrix2x2 s, ref Matrix2x2 v)<font></font>
+ 8: {<font></font>
+ 9:     // 対角行列であった場合、特異値分解は単純に以下で与えられる。<font></font>
+10:     if (Mathf.Abs(this[1, 0] - this[0, 1]) &lt; MATRIX_EPSILON<font></font>
+11:         &amp;&amp; Mathf.Abs(this[1, 0]) &lt; MATRIX_EPSILON)<font></font>
+12:     {<font></font>
+13:         u.SetValue(this[0, 0] &lt; 0 ? -1 : 1, 0,<font></font>
+14:                     0, this[1, 1] &lt; 0 ? -1 : 1);<font></font>
+15:         s.SetValue(Mathf.Abs(this[0, 0]), Mathf.Abs(this[1, 1]));<font></font>
+16:         v.LoadIdentity();<font></font>
+17:     }<font></font>
+18: <font></font>
+19:     // 対角行列でない場合、A^T*Aを計算する。<font></font>
+20:     else<font></font>
+21:     {<font></font>
+22:         // 0列ベクトルの長さ(非ルート)<font></font>
+23:         float i   = this[0, 0] * this[0, 0] + this[1, 0] * this[1, 0];<font></font>
+24:         // 1列ベクトルの長さ(非ルート)<font></font>
+25:         float j   = this[0, 1] * this[0, 1] + this[1, 1] * this[1, 1];<font></font>
+26:         // 列ベクトルの内積<font></font>
+27:         float i_dot_j = this[0, 0] * this[0, 1]<font></font>
+28:                           + this[1, 0] * this[1, 1];<font></font>
+29: <font></font>
+30:         // A^T*Aが直交行列であった場合<font></font>
+31:         if (Mathf.Abs(i_dot_j) &lt; MATRIX_EPSILON)<font></font>
+32:         {<font></font>
+33:             // 特異値行列の対角要素の計算<font></font>
+34:             float s1 = Mathf.Sqrt(i);<font></font>
+35:             float s2 = Mathf.Abs(i - j) &lt;<font></font>
+36:                         MATRIX_EPSILON ? s1 : Mathf.Sqrt(j);<font></font>
+37: <font></font>
+38:             u.SetValue(this[0, 0] / s1, this[0, 1] / s2,<font></font>
+39:                         this[1, 0] / s1, this[1, 1] / s2);<font></font>
+40:             s.SetValue(s1, s2);<font></font>
+41:             v.LoadIdentity();<font></font>
+42:         }<font></font>
+43:         // A^T*Aが直交行列でない場合、固有値を求めるために二次方程式を解く。<font></font>
+44:         else<font></font>
+45:         {<font></font>
+46:             // 固有値/固有ベクトルの算出<font></font>
+47:             float i_minus_j = i - j;    // 列ベクトルの長さの差<font></font>
+48:             float i_plus_j = i + j;     // 列ベクトルの長さの和<font></font>
+49: <font></font>
+50:             // 2次方程式の解の公式<font></font>
+51:             float root = Mathf.Sqrt(i_minus_j * i_minus_j<font></font>
+52:                                       + 4 * i_dot_j * i_dot_j);<font></font>
+53:             float eig = (i_plus_j + root) * 0.5f;<font></font>
+54:             float s1 = Mathf.Sqrt(eig);<font></font>
+55:             float s2 = Mathf.Abs(root) &lt;<font></font>
+56:                         MATRIX_EPSILON ? s1 :<font></font>
+57:                           Mathf.Sqrt((i_plus_j - root) / 2);<font></font>
+58: <font></font>
+59:             s.SetValue(s1, s2);<font></font>
+60: <font></font>
+61:             // A^T*Aの固有ベクトルをVとして用いる。<font></font>
+62:             float v_s = eig - i;<font></font>
+63:             float len = Mathf.Sqrt(v_s * v_s + i_dot_j * i_dot_j);<font></font>
+64:             i_dot_j /= len;<font></font>
+65:             v_s /= len;<font></font>
+66:             v.SetValue(i_dot_j, -v_s, v_s, i_dot_j);<font></font>
+67: <font></font>
+68:             // vとsが算出済みなので、回転行列uをAv/sで算出<font></font>
+69:             u.SetValue(<font></font>
+70:                 (this[0, 0] * i_dot_j + this[0, 1] * v_s) / s1,<font></font>
+71:                 (this[0, 1] * i_dot_j - this[0, 0] * v_s) / s2,<font></font>
+72:                 (this[1, 0] * i_dot_j + this[1, 1] * v_s) / s1,<font></font>
+73:                 (this[1, 1] * i_dot_j - this[1, 0] * v_s) / s2<font></font>
+74:             );<font></font>
+75:         }<font></font>
+76:     }<font></font>
+77: }<font></font>
+</pre>
+</div>
+
+<h2><a id="h7-6"></a><span class="secno">7.6　</span>特異値分解を用いるアルゴリズム</h2>
+<p>特異値分解は, 多種多様な分野で活躍しており, 主に統計学における主成分分析(PCA)で用いられることが多いようです.CGで利用される例も少なくはなく,</p>
+<ul>
+<li>Shape Matching<a id="fnb-sm" href="https://freder.io/files/unity2/takao.html#fn-sm" class="noteref" epub:type="noteref">*4</a></li>
+<li>Anisotropic Kernel<a id="fnb-ak" href="https://freder.io/files/unity2/takao.html#fn-ak" class="noteref" epub:type="noteref">*5</a></li>
+<li>Material Point Method<a id="fnb-mpm" href="https://freder.io/files/unity2/takao.html#fn-mpm" class="noteref" epub:type="noteref">*6</a></li>
+</ul>
+<p>などが挙げられます.</p>
+<p>今回は, Shape Matchingにフォーカスを当て, 基礎的な考え方について解説していきます.</p>
+<div class="footnote" epub:type="footnote" id="fn-sm"><p class="footnote">[*4] Meshless deformations based on shape matching, Matthias Muller et al., SIGGRAPH 2005 </p></div>
+<div class="footnote" epub:type="footnote" id="fn-ak"><p class="footnote">[*5] Reconstructing surfaces of particle-based fluids using anisotropic kernels, Jihun Yu et al., ACM Transaction on Graphics 2013</p></div>
+<div class="footnote" epub:type="footnote" id="fn-mpm"><p class="footnote">[*6] A material point method for snow simulation, Alexey Stomakhin et al., SIGGRAPH 2013</p></div>
+
+<h2><a id="h7-7"></a><span class="secno">7.7　</span>Shape Matching</h2>
+<p>\label{shapematching}</p>
+
+<h3><a id="h7-7-1"></a><span class="secno">7.7.1　</span>概要</h3>
+<p>Shape Matchingとは, 異なる2つの形状を, 極力誤差のない範囲で整列させる技術を指します.現在では, Shape Matchingを用いて, 弾性体を疑似的にシミュレートするような手法も開発されています.</p>
+<p>本節では, <span class="imgref"><a href="https://freder.io/files/unity2/takao.html#aim">図7.2</a></span>, <span class="imgref"><a href="https://freder.io/files/unity2/takao.html#result">図7.3</a></span>のように,ユニコーンのオブジェクトの配置を, ライオンのオブジェクトの配置へ整列するアルゴリズムを解説します.</p>
+<div id="aim" class="image">
+<img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/aim.png" alt="Two objects">
+<p class="caption">
+図7.2: 2つのオブジェクト
+</p>
+</div>
+<div id="result" class="image">
+<img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/result.png" alt="Aligned result" class="width-055per">
+<p class="caption">
+図7.3: 整列した結果
+</p>
+</div>
+
+<h3><a id="h7-7-2"></a><span class="secno">7.7.2　</span>アルゴリズム</h3>
+<p>初めに, それぞれの形状の上に同数の点の集合を定義します. (ライオンの点集合をP, ユニコーンの点集合をQとします.)</p>
+<p>このとき, 下添え字が同一のものは, <span class="imgref"><a href="https://freder.io/files/unity2/takao.html#point">図7.4</a></span>のように, 幾何学的に対応した位置にあることに注意してください.</p>
+<div id="point" class="image">
+<img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/point.png" alt="Correspondence of point set">
+<p class="caption">
+図7.4: 点集合の対応
+</p>
+</div>
+<p>次に, それぞれの点集合の重心を計算します.</p>
+<p>ユニコーンの点集合の重心が, ライオンの点集合の重心と同じ位置に来るとすると,ユニコーンの点集合に回転行列<span class="equation">\mbox{\boldmath $R$}</span>を作用させ, ベクトル<span class="equation">\mbox{\boldmath $t$}</span>平行移動させた結果が,ライオンの重心と等しくなることから, 以下の式が導出できます.</p>
+<p>これを変形すると,</p>
+<p>となり, さらに変形して,</p>
+<p>となります.</p>
+<p>よって, この式から, 回転行列<span class="equation">\mbox{\boldmath $R$}</span>が求まれば, 自動的に平行移動ベクトル<span class="equation">\mbox{\boldmath $t$}</span>が求まることがわかります.ここで, もともとの点の位置から, それぞれの重心を引いた点集合を定義します.</p>
+<p>これにより, それぞれの点集合の重心を原点としたローカル座標で計算を行うことができるようになります.</p>
+<p>次に, <span class="equation">\mbox{\boldmath $p$}_{i}^{\prime}, \mbox{\boldmath $q$}_{i}^{\prime}</span>の分散共分散行列<span class="equation">\mbox{\boldmath $H$}</span>を計算します.</p>
+<p>この分散共分散行列<span class="equation">\mbox{\boldmath $H$}</span>には, 2つの点集合のばらつき具合などの情報が格納されます.ここでのベクトルの積<span class="equation">\mbox{\boldmath $q$}_{i}^{\prime} {\mbox{\boldmath $p$}_{i}^{\prime}}^{T}</span>は, 通常のベクトルの内積演算とは異なり, 直積(outer product)と呼ばれる演算となります.ベクトル同士の直積をとると, 行列が生成されます.2次元ベクトルでの直積は, 以下で定義されています.</p>
+<p>さらに, 分散共分散行列<span class="equation">\mbox{\boldmath $H$}</span>を特異値分解します.</p>
+<p>特異値分解をした結果の中で, <span class="equation">\mbox{\boldmath $\sum$}</span>は伸縮を表す行列であるため,求める回転行列<span class="equation">\mbox{\boldmath $R$}</span>は,</p>
+<p>となります. (詳細な導出方法はやや高度となりますので, ここでは省略させていただきます.)</p>
+<p>最後に, 求めた回転行列と式(\ref{trans})から, 平行移動ベクトル<span class="equation">\mbox{\boldmath $t$}</span>を算出することができます.</p>
+
+<h3><a id="h7-7-3"></a><span class="secno">7.7.3　</span>実装</h3>
+<p>今回の実装は, 前節でのアルゴリズムをほぼそのままコードに落とすだけなので, 詳しい説明は省略させていただきます.尚, ShapeMaching.cs内のStart関数内ですべての処理を完結させています.</p>
+<div id="shapematching_impl" class="code">
+<p class="caption">リスト7.2: ShapeMatching(ShapeMaching.cs)</p>
+<pre class="list language-csharp"> 1: // Set p, q<font></font>
+ 2: p = new Vector2[n];<font></font>
+ 3: q = new Vector2[n];<font></font>
+ 4: centerP = Vector2.zero;<font></font>
+ 5: centerQ = Vector2.zero;<font></font>
+ 6: <font></font>
+ 7: for(int i = 0; i &lt; n; i++)<font></font>
+ 8: {<font></font>
+ 9:     Vector2 pos = _destination.transform.GetChild(i).position;<font></font>
+10:     p[i] = pos;<font></font>
+11:     centerP += pos;<font></font>
+12: <font></font>
+13:     pos = _target.transform.GetChild(i).position;<font></font>
+14:     q[i] = pos;<font></font>
+15:     centerQ += pos;<font></font>
+16: }<font></font>
+17: centerP /= n;<font></font>
+18: centerQ /= n;<font></font>
+19: <font></font>
+20: // Calc p', q'<font></font>
+21: Matrix2x2 H = new Matrix2x2(0, 0, 0, 0);<font></font>
+22: for (int i = 0; i &lt; n; i++)<font></font>
+23: {<font></font>
+24:     p[i] = p[i] - centerP;<font></font>
+25:     q[i] = q[i] - centerQ;<font></font>
+26: <font></font>
+27:     H += Matrix2x2.OuterProduct(q[i], p[i]);<font></font>
+28: }<font></font>
+29: <font></font>
+30: Matrix2x2 u = new Matrix2x2();<font></font>
+31: Matrix2x2 s = new Matrix2x2();<font></font>
+32: Matrix2x2 v = new Matrix2x2();<font></font>
+33: H.SVD(ref u, ref s, ref v);<font></font>
+34: <font></font>
+35: R = v * u.Transpose();<font></font>
+36: Debug.Log(Mathf.Rad2Deg * Mathf.Acos(R.m00));<font></font>
+37: t = centerP - R * centerQ;<font></font>
+</pre>
+</div>
+
+<h2><a id="h7-8"></a><span class="secno">7.8　</span>結果</h2>
+<p>無事, ユニコーンの形状をライオンの形状に整列することができました.</p>
+<div id="before" class="image">
+<img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/before.png" alt="Before execution" class="width-080per">
+<p class="caption">
+図7.5: 実行前
+</p>
+</div>
+<div id="res" class="image">
+<img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/res.png" alt="After execution" class="width-080per">
+<p class="caption">
+図7.6: 実行後
+</p>
+</div>
+
+<h2><a id="h7-9"></a><span class="secno">7.9　</span>まとめ</h2>
+<p>本節では, 特異値分解を使用したShape Matching法の実装について解説しました.今回は2次元での実装でしたが, 3次元での実装も同じアルゴリズムで行うことができます.説明が至らない部分も多々あったかと思いますが, これを機に, 行列演算のCG分野での応用方法に興味を持っていただき, 学習を深めていただければ幸いです.</p>
+
+<h2><a id="h7-10"></a><span class="secno">7.10　</span>References</h2>
+<ul>
+<li>3D Geometry for Computer Graphics (<a href="https://igl.ethz.ch/teaching/tau/cg/cg2005/svd.ppt" class="link">https://igl.ethz.ch/teaching/tau/cg/cg2005/svd.ppt</a>)</li>
+<li>理工系の数理 線形代数 (永井敏隆, 永井敦 著) 裳華房</li>
+<li>Singular Value Decomposition (the SVD) : MIT OpenCourseWare (<a href="https://www.youtube.com/watch?v=mBcLRGuAFUk" class="link">https://www.youtube.com/watch?v=mBcLRGuAFUk</a>)</li>
+<li>Lecture: The Singular Value Decomposition (SVD) : AMATH 301 (<a href="https://www.youtube.com/watch?v=EokL7E6o1AE" class="link">https://www.youtube.com/watch?v=EokL7E6o1AE</a>)</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Visualize what eigenvalues ​​and eigenvectors are @ kenmatsu4 ( </font></font><a href="https://qiita.com/kenmatsu4/items/2a8573e3c878fc2da306" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://qiita.com/kenmatsu4/items/2a8573e3c878fc2da306</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></li>
+</ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 7 _ Shape Matching-Application of Linear Algebra to CG_files/saved_resource(2).html"></iframe></body></html>

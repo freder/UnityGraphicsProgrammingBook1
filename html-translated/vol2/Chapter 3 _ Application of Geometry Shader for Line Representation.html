@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://freder.io/files/unity2/kaiware007.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>ライン表現のためのGeometryShaderの応用</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'auto';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/saved_resource.html"></iframe></div>
+<h1><a id="h3"></a><span class="secno"><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;">Chapter 3　</font></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;"> Application of Geometry Shader for Line Representation</font></font></h1>
+
+<h2><a id="h3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This year, </font><font style="vertical-align: inherit;">I participated in a hackathon called </font><font style="vertical-align: inherit;">Art Hack Day 2018 </font></font><a id="fnb-kaiware_arthackday" href="https://freder.io/files/unity2/kaiware007.html#fn-kaiware_arthackday" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> where I personally </font><font style="vertical-align: inherit;">created a visual work using Unity.</font></font></p>
+<div id="id_Kaiware_2Fkaiware__arthackday2018" class="image">
+<pre class="dummyimage"></pre>
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.1: Visual part of Already There
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In my work, I used the technique of drawing a wireframe polygon using the Geometry Shader. </font><font style="vertical-align: inherit;">In this chapter, we will explain the method. </font><font style="vertical-align: inherit;">The sample in this chapter is </font><font style="vertical-align: inherit;">"Geometry Wireframe" from </font></font><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming2" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-kaiware_arthackday"><p class="footnote">[*1] Art Hack Day 2018 http://arthackday.jp/</p></div>
+
+<h2><a id="h3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Try to draw a line for the time being</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I think that LineRenderer and GL are often used to draw lines in Unity, but this time I will use Graphics.DrawProcedural assuming that the amount of drawing will increase later. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First of all, let's draw a simple sine wave. </font><font style="vertical-align: inherit;">Take a </font></font><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">look at the</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> sample </font><b><font style="vertical-align: inherit;">SampleWaveLine scene</font></b><font style="vertical-align: inherit;"> .</font></font></p>
+<div id="id_Kaiware_2Fkaiware__project__sinwave001" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_project_sinwave001.png" alt="SampleWaveLine scene">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 3.2: SampleWaveLine scene
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For now, press the play button and run it, and you should see an orange sine wave in the Game view. </font><font style="vertical-align: inherit;">Select the WabeLine object in the Hierarchy window and move the Vertex Num slider on the RenderWaveLine component in the Inspector window to change the smoothness of the sine wave. </font><font style="vertical-align: inherit;">The implementation of the RenderWaveLine class looks like this:</font></font></p>
+<div id="kaiware_render_waveline_cs" class="caption-code">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Listing 3.1: RenderWaveLine.cs</font></font></p>
+<pre class="list">using UnityEngine;<font></font>
+<font></font>
+[ExecuteInEditMode]<font></font>
+public class RenderWaveLine : MonoBehaviour {<font></font>
+    [Range(2,50)]<font></font>
+    public int vertexNum = 4;<font></font>
+<font></font>
+    public Material material;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    private void OnRenderObject ()</font></font><font></font>
+    {<font></font>
+        material.SetInt("_VertexNum", vertexNum - 1);<font></font>
+        material.SetPass(0);<font></font>
+        Graphics.DrawProcedural(MeshTopology.LineStrip, vertexNum);<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>Graphics.DrawProceduralは呼び出し後すぐに実行されるので、OnRenderObjectの中で呼ばなければなりません。OnRenderObjectは、全てのカメラがシーンをレンダリングした後に呼び出されます。Graphics.DrawProceduralの第１引数は<b>MeshTopology</b>です。MeshTopologyはメッシュをどのように構成するかの指定です。指定できる構成は、Triangles（三角ポリゴン）,Quads（四角ポリゴン）,Lines（2点をつなぐ線）,LineStrip（全ての点を連続してつなぐ）,Points（独立した点）の６つです。第２引数は<b>頂点数</b>です。<br>今回は、Sin波の線上に頂点を配置して、線を結ぶようにしたいため、<b>MeshTopology.LineStrip</b>を使います。第２引数のvertexNumは、sin波を描画するのに使う頂点数を指定しています。ここでカンのよい方なら気づくかもしれませんが、どこにも頂点座標の配列をShaderに渡していません。頂点座標は次のShaderのVertex Shader（頂点シェーダ）の中で計算しています。次にWaveLine.shaderです。</p>
+<div id="kaiware_waveline_shader" class="caption-code">
+<p class="caption">リスト3.2: WaveLine.shader</p>
+<pre class="list">Shader "Custom/WaveLine"<font></font>
+{<font></font>
+  Properties<font></font>
+  {<font></font>
+    _Color ("Color", Color) = (1,1,1,1)<font></font>
+    _ScaleX ("Scale X", Float) = 1<font></font>
+    _ScaleY ("Scale Y", Float) = 1<font></font>
+    _Speed ("Speed",Float) = 1<font></font>
+  }<font></font>
+  SubShader<font></font>
+  {<font></font>
+    Tags { "RenderType"="Opaque" }<font></font>
+    LOD 100<font></font>
+<font></font>
+    Pass<font></font>
+    {<font></font>
+      CGPROGRAM<font></font>
+      #pragma vertex vert<font></font>
+      #pragma fragment frag<font></font>
+      #pragma target 3.5<font></font>
+<font></font>
+      #include "UnityCG.cginc"<font></font>
+<font></font>
+      #define PI  3.14159265359<font></font>
+<font></font>
+      struct v2f<font></font>
+      {<font></font>
+        float4 vertex : SV_POSITION;<font></font>
+      };<font></font>
+<font></font>
+      float4 _Color;<font></font>
+      int _VertexNum;<font></font>
+      float _ScaleX;<font></font>
+      float _ScaleY;<font></font>
+      float _Speed;<font></font>
+<font></font>
+      v2f vert (uint id : SV_VertexID)<font></font>
+      {<font></font>
+        float div = (float)id / _VertexNum;<font></font>
+        float4 pos = float4((div - 0.5) * _ScaleX,<font></font>
+          sin(div * 2 * PI + _Time.y * _Speed) * _ScaleY, 0, 1);<font></font>
+<font></font>
+        v2f o;<font></font>
+        o.vertex = UnityObjectToClipPos(pos);<font></font>
+        return o;<font></font>
+      }<font></font>
+<font></font>
+      fixed4 frag (v2f i) : SV_Target<font></font>
+      {<font></font>
+        return _Color;<font></font>
+      }<font></font>
+      ENDCG<font></font>
+    }<font></font>
+  }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>Vertex Shaderの関数vertの引数にSV_VertexID（頂点ID）が渡ってくるようになっています。頂点IDは、頂点固有の通し番号です。感覚的には、Graphics.DrawProceduralの第２引数に使用する頂点数を渡すと、Vertex Shaderが頂点数の回数分呼び出され、引数の頂点IDには0～頂点数-1までの値が入る感じです。<br>Vertex Shader内では、頂点IDを頂点数で割ることで0～1までの割合を計算しています。その求めた割合をもとに頂点座標（pos）を計算しています。Y座標の計算で先ほど求めた割合をsin関数に与えてsin波上の座標を求めています。ついでに_Time.yを足すことで時間の進行による高さの変化のアニメーションも行っています。Vertex Shader内で頂点座標を計算しているのでC#側から頂点座標を渡す必要がないのです。それから、UnityObjectToClipPosでオブジェクト空間からカメラのクリップ空間へ変換した座標をFragment Shaderに渡しています。</p>
+
+<h2><a id="h3-3"></a><span class="secno">3.3　</span>Geometry Shaderで動的に二次元の多角形を描く</h2>
+
+<h3><a id="h3-3-1"></a><span class="secno">3.3.1　</span>Geometry Shaderで頂点を増やす</h3>
+<p>次に多角形を描画してみます。多角形を描画するにはそれぞれの角の分だけ頂点が必要です。前項のように頂点をつないで閉じたらできてしまいますが、今回はGeometry Shaderを使って１個の頂点から多角形を描画してみます。Geometry Shaderの詳細は、UnityGraphicsProgramming vol.1<a id="fnb-kaiware_unitygraphicsprograming" href="https://freder.io/files/unity2/kaiware007.html#fn-kaiware_unitygraphicsprograming" class="noteref" epub:type="noteref">*2</a>の「第6章 ジオメトリシェーダーで草を生やす」を参照してください。ざっくり解説すると、Geometry Shaderは、Vertex ShaderとFragment Shaderの間に位置する、頂点を増やすことができるシェーダです。</p>
+<p>サンプルの<b>SamplePolygonLineシーン</b>を見てください。</p>
+<div id="id_Kaiware_2Fkaiware__project__polygonline001" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_project_polygonline001.png" alt="SamplePolygonLine scene">
+<p class="caption">
+図3.3: SamplePolygonLineシーン
+</p>
+</div>
+<p>再生ボタンを押して実行すると、Gameビュー上で三角形が回転が回転しているはずです。HierarchyウィンドウのPolygonLineオブジェクトを選択し、InspectorウィンドウでSinglePolygon2DコンポーネントのVertex Numのスライダーを動かすと、三角形の角数が増減できます。そのSimglePolygon2Dクラスの実装は次のようになっています。</p>
+<div id="kaiware_single_polygon_2d_cs" class="caption-code">
+<p class="caption">リスト3.3: SinglePolygon2D.cs</p>
+<pre class="list">  using UnityEngine;<font></font>
+<font></font>
+[ExecuteInEditMode]<font></font>
+public class SinglePolygon2D : MonoBehaviour {<font></font>
+<font></font>
+    [Range(2, 64)]<font></font>
+    public int vertexNum = 3;<font></font>
+<font></font>
+    public Material material;<font></font>
+<font></font>
+    private void OnRenderObject()<font></font>
+    {<font></font>
+        material.SetInt("_VertexNum", vertexNum);<font></font>
+        material.SetMatrix("_TRS", transform.localToWorldMatrix);<font></font>
+        material.SetPass(0);<font></font>
+        Graphics.DrawProcedural(MeshTopology.Points, 1);<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>RenderWaveLineクラスとほぼ同じ実装になっています。<br>大きく違う点が２つあります。ひとつ目は、Graphics.DrawProceduralの第１引数が<b>MeshTopology.LineStrip</b>から<b>MeshTopology.Points</b>になっている点です。もうひとつは、Graphics.DrawProceduralの第２引数が<b>１</b>固定になっている点です。前項のRenderWaveLineクラスは、頂点同士をつないで線を引いていたので、<b>MeshTopology.LineStrip</b>を指定していましたが、今回は１個の頂点だけ渡して多角形を描画したいので、<b>MeshTopology.Points</b>を指定しています。というのも、MeshTopologyの指定によって、描画に最低限必要な頂点数が変わり、それを下回っていると何も描画されません。MeshTopology.LinesとMeshTopology.LineStripは線なので２、MeshTopology.Trianglesは三角形なので3、MeshTopology.Pointsは点なので１です。ちなみに、material.SetMatrix("_TRS", transform.localToWorldMatrix); の部分ですが、SinglePolygon2Dコンポーネントを割り当てているGameObjectのローカル座標系からワールド座標系へ変換した行列をシェーダーに渡しています。これをシェーダー内で頂点座標に掛けることで、GameObjectのtransform、すなわち、座標（position）、向き（rotation）、大きさ（scale）が描画する図形に反映されます。</p>
+<p>続いてSinglePolygonLine.Shaderの実装を見てみましょう。</p>
+<div id="kaiware_single_polygon_line_shader" class="caption-code">
+<p class="caption">リスト3.4: SinglePolygonLine.shader</p>
+<pre class="list">Shader "Custom/Single Polygon Line"<font></font>
+{<font></font>
+  Properties<font></font>
+  {<font></font>
+    _Color ("Color", Color) = (1,1,1,1)<font></font>
+    _Scale ("Scale", Float) = 1<font></font>
+    _Speed ("Speed",Float) = 1<font></font>
+  }<font></font>
+  SubShader<font></font>
+  {<font></font>
+    Tags { "RenderType"="Opaque" }<font></font>
+    LOD 100<font></font>
+<font></font>
+    Pass<font></font>
+    {<font></font>
+      CGPROGRAM<font></font>
+      #pragma vertex vert<font></font>
+      #pragma geometry geom  // Geometry Shader の宣言<font></font>
+      #pragma fragment frag<font></font>
+      #pragma target 4.0<font></font>
+<font></font>
+      #include "UnityCG.cginc"<font></font>
+<font></font>
+      #define PI  3.14159265359<font></font>
+<font></font>
+      // 出力構造体<font></font>
+      struct Output<font></font>
+      {<font></font>
+        float4 pos : SV_POSITION;<font></font>
+      };<font></font>
+<font></font>
+      float4 _Color;<font></font>
+      int _VertexNum;<font></font>
+      float _Scale;<font></font>
+      float _Speed;<font></font>
+      float4x4 _TRS;<font></font>
+<font></font>
+      Output vert (uint id : SV_VertexID)<font></font>
+      {<font></font>
+        Output o;<font></font>
+        o.pos = mul(_TRS, float4(0, 0, 0, 1));<font></font>
+        return o;<font></font>
+      }<font></font>
+<font></font>
+      // ジオメトリシェーダ<font></font>
+      [maxvertexcount(65)]<font></font>
+      void geom(point Output input[1], inout LineStream&lt;Output&gt; outStream)<font></font>
+      {<font></font>
+        Output o;<font></font>
+        float rad = 2.0 * PI / (float)_VertexNum;<font></font>
+        float time = _Time.y * _Speed;<font></font>
+<font></font>
+        float4 pos;<font></font>
+<font></font>
+        for (int i = 0; i &lt;= _VertexNum; i++) {<font></font>
+          pos.x = cos(i * rad + time) * _Scale;<font></font>
+          pos.y = sin(i * rad + time) * _Scale;<font></font>
+          pos.z = 0;<font></font>
+          pos.w = 1;<font></font>
+          o.pos = UnityObjectToClipPos(pos);<font></font>
+<font></font>
+          outStream.Append(o);<font></font>
+        }<font></font>
+        outStream.RestartStrip();<font></font>
+      }<font></font>
+<font></font>
+      fixed4 frag (Output i) : SV_Target<font></font>
+      {<font></font>
+        return _Color;<font></font>
+      }<font></font>
+      ENDCG<font></font>
+    }<font></font>
+  }<font></font>
+}<font></font>
+</pre>
+</div>
+<p><b>#pragma vertex vert</b>と<b>#pragma fragment frag</b>の間に、新たに<b>#pragma geometry geom</b>の宣言が追加されています。これは、geomという名前のGeometry Shaderの関数を宣言するという意味です。Vertex Shaderのvertは、今回は頂点の座標をとりあえず原点（0,0,0,1）にして、それにC#から渡された_TRS行列（ローカル座標系からワールド座標系へ変換する行列）を掛けるようになっています。多角形の各頂点の座標計算は次のGeometry Shaderの中で行います。</p>
+<div class="emlist-code">
+<p class="caption">Geometry Shaderの定義</p>
+<pre class="emlist">  // ジオメトリシェーダ<font></font>
+  [maxvertexcount(65)]<font></font>
+  void geom(point Output input[1], inout LineStream&lt;Output&gt; outStream)<font></font>
+</pre>
+</div>
+
+<h4><a id="h3-3-1-1"></a>maxvertexcount</h4>
+<p>Geometry Shaderから出力する頂点の最大数です。今回は、SinglePolygonLineクラスのVertexNumで64頂点まで増やせるようにしていますが、64個目の頂点から0個目の頂点を結ぶ線が必要な為、65を指定しています。</p>
+
+<h4><a id="h3-3-1-2"></a>point Output input[1]</h4>
+<p>Vertex Shaderからの入力情報を表しています。pointはprimitiveTypeで頂点１個分受け取るという意味で、Outputは構造体名、input[1]は長さ１の配列を表しています。今回は１つの頂点しか使わないのでpointとinput[1]を指定しましたが、メッシュなど三角ポリゴンの頂点をいじりたい時はtriangleとinput[3]にしたりします。</p>
+
+<h4><a id="h3-3-1-3"></a>inout LineStream&lt;Output&gt; outStream</h4>
+<p>Geometry Shaderからの出力情報を表しています。LineStream&lt;Output&gt;は、Output構造体の線を出力するという意味です。他にもPointStream（点）、TriangleStream（三角ポリゴン）があります。次に関数内の説明です。</p>
+<div class="emlist-code">
+<p class="caption">関数内の実装</p>
+<pre class="emlist">Output o;<font></font>
+float rad = 2.0 * PI / (float)_VertexNum;<font></font>
+float time = _Time.y * _Speed;<font></font>
+<font></font>
+float4 pos;<font></font>
+<font></font>
+for (int i = 0; i &lt;= _VertexNum; i++) {<font></font>
+  pos.x = cos(i * rad + time) * _Scale;<font></font>
+  pos.y = sin(i * rad + time) * _Scale;<font></font>
+  pos.z = 0;<font></font>
+  pos.w = 1;<font></font>
+  o.pos = UnityObjectToClipPos(pos);<font></font>
+<font></font>
+  outStream.Append(o);<font></font>
+}<font></font>
+<font></font>
+outStream.RestartStrip();<font></font>
+</pre>
+</div>
+<p>多角形の各頂点の座標を計算するために、２π（360度）を頂点数で割って、一角の角度を求めています。それをループ内で三角関数（sin, cos）を使って頂点座標を計算しています。計算した座標をoutStream.Append(o)で頂点として出力します。_VertexNumの数だけループを回して頂点を出力したあと、outStream.RestartStrip()で現在のストリップを終了して次のストリップを開始します。Append()で追加していく限り、LineStreamとして線が繋がっていきます。RestartStrip()を実行することで一旦現在の線を終了します。次にAppend()が呼ばれると、前の線とは繋がらず、新しい線が始まります。</p>
+<div class="footnote" epub:type="footnote" id="fn-kaiware_unitygraphicsprograming"><p class="footnote">[*2] UnityGraphicsProgramming vol.1 https://indievisuallab.stores.jp/items/59edf11ac8f22c0152002588</p></div>
+
+<h2><a id="h3-4"></a><span class="secno">3.4　</span>Octahedron Sphereを作ってみる</h2>
+
+<h3><a id="h3-4-1"></a><span class="secno">3.4.1　</span>Octahedron Sphereとは？</h3>
+<p>正八面体（Regular octahedron）とは、<span class="imgref"><a href="https://freder.io/files/unity2/kaiware007.html#id_Kaiware_2Fkaiware__octahedron001">図3.4</a></span>にあるとおり、８つの正三角形で構成された多面体です。Octahedron Sphereとは、正八面体を構成する正三角形の３つの頂点を球面線形補間<a id="fnb-kaiware_slerp" href="https://freder.io/files/unity2/kaiware007.html#fn-kaiware_slerp" class="noteref" epub:type="noteref">*3</a>して分割していくことで作られる球体です。通常の線形補間が２点間を直線でつなぐように補間するのに対し、球面線形補間は、<span class="imgref"><a href="https://freder.io/files/unity2/kaiware007.html#id_Kaiware_2Fkaiware__slerp__001">図3.5</a></span>のように２点間を球面上を通るように補間します。</p>
+<div id="id_Kaiware_2Fkaiware__octahedron001" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_octahedron001.png" alt="Octahedron" class="width-100per">
+<p class="caption">
+図3.4: 正八面体
+</p>
+</div>
+<div id="id_Kaiware_2Fkaiware__slerp__001" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_slerp_001.png" alt="Octahedron" class="width-100per">
+<p class="caption">
+図3.5: 正八面体
+</p>
+</div>
+<p>サンプルの<b>SampleOctahedronSampleシーン</b>を見てください。</p>
+<div id="id_Kaiware_2Fkaiware__project__octahedronsphere001" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_project_octahedronsphere001.png" alt="SampleWaveLine scene" class="width-100per">
+<p class="caption">
+図3.6: SampleWaveLineシーン
+</p>
+</div>
+<p>実行ボタンを押すと、Gameビューの中央にゆっくり回転する正八面体が表示されているはずです。また、HierarchyウィンドウのSingleOctahedronSphereオブジェクトのGeometry Octahedron SphereコンポーネントのLevelのスライダーを変更すると、正八面体の辺が分割されて少しずつ球体に近づいていくと思います。</p>
+<div class="footnote" epub:type="footnote" id="fn-kaiware_slerp"><p class="footnote">[*3] spherical linear interpolation, 略してslerp</p></div>
+
+<h3><a id="h3-4-2"></a><span class="secno">3.4.2　</span>Geometry Shaderの中で正八面体を分割していく</h3>
+<p>次に、実装を見てみましょう。C#側の実装は、前項のSinplePolygon2D.csとほぼほぼ同じなので省略します。OctahedronSphere.shaderは、ソース全体は長いので、Geometry Shaderの中だけ解説していきます。</p>
+<div id="kaiware_octahedron_sphere_1" class="caption-code">
+<p class="caption">リスト3.5: OctahedronSphere.shaderのGometry Shaderの先頭部分</p>
+<pre class="list">// ジオメトリシェーダ<font></font>
+  float4 init_vectors[24];<font></font>
+  // 0 : the triangle vertical to (1,1,1)<font></font>
+  init_vectors[0] = float4(0, 1, 0, 0);<font></font>
+  init_vectors[1] = float4(0, 0, 1, 0);<font></font>
+  init_vectors[2] = float4(1, 0, 0, 0);<font></font>
+  // 1 : to (1,-1,1)<font></font>
+  init_vectors[3] = float4(0, -1, 0, 0);<font></font>
+  init_vectors[4] = float4(1, 0, 0, 0);<font></font>
+  init_vectors[5] = float4(0, 0, 1, 0);<font></font>
+  // 2 : to (-1,1,1)<font></font>
+  init_vectors[6] = float4(0, 1, 0, 0);<font></font>
+  init_vectors[7] = float4(-1, 0, 0, 0);<font></font>
+  init_vectors[8] = float4(0, 0, 1, 0);<font></font>
+  // 3 : to (-1,-1,1)<font></font>
+  init_vectors[9] = float4(0, -1, 0, 0);<font></font>
+  init_vectors[10] = float4(0, 0, 1, 0);<font></font>
+  init_vectors[11] = float4(-1, 0, 0, 0);<font></font>
+  // 4 : to (1,1,-1)<font></font>
+  init_vectors[12] = float4(0, 1, 0, 0);<font></font>
+  init_vectors[13] = float4(1, 0, 0, 0);<font></font>
+  init_vectors[14] = float4(0, 0, -1, 0);<font></font>
+  // 5 : to (-1,1,-1)<font></font>
+  init_vectors[15] = float4(0, 1, 0, 0);<font></font>
+  init_vectors[16] = float4(0, 0, -1, 0);<font></font>
+  init_vectors[17] = float4(-1, 0, 0, 0);<font></font>
+  // 6 : to (-1,-1,-1)<font></font>
+  init_vectors[18] = float4(0, -1, 0, 0);<font></font>
+  init_vectors[19] = float4(-1, 0, 0, 0);<font></font>
+  init_vectors[20] = float4(0, 0, -1, 0);<font></font>
+  // 7 : to (1,-1,-1)<font></font>
+  init_vectors[21] = float4(0, -1, 0, 0);<font></font>
+  init_vectors[22] = float4(0, 0, -1, 0);<font></font>
+  init_vectors[23] = float4(1, 0, 0, 0);<font></font>
+</pre>
+</div>
+<p>まず、<span class="imgref"><a href="https://freder.io/files/unity2/kaiware007.html#id_Kaiware_2Fkaiware__octahedron__triangle001">図3.7</a></span>のように初期値となる“正規化された”正八面体の三角系を定義しています。</p>
+<div id="id_Kaiware_2Fkaiware__octahedron__triangle001" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_octahedron_triangle001.png" alt="Vertex coordinates and triangle of octahedron" class="width-100per">
+<p class="caption">
+図3.7: 正八面体の頂点座標と三角形
+</p>
+</div>
+<p>float4で定義しているのは、クォータニオンとして定義しているためです。</p>
+<div id="kaiware_octahedron_sphere_2" class="caption-code">
+<p class="caption">リスト3.6: OctahedronSphere.shaderの三角形の球面線形補間分割処理部分</p>
+<pre class="list">for (int i = 0; i &lt; 24; i += 3)<font></font>
+{<font></font>
+  for (int p = 0; p &lt; n; p++)<font></font>
+  {<font></font>
+    // edge index 1<font></font>
+    float4 edge_p1 = qslerp(init_vectors[i],<font></font>
+      init_vectors[i + 2], (float)p / n);<font></font>
+    float4 edge_p2 = qslerp(init_vectors[i + 1],<font></font>
+      init_vectors[i + 2], (float)p / n);<font></font>
+    float4 edge_p3 = qslerp(init_vectors[i],<font></font>
+      init_vectors[i + 2], (float)(p + 1) / n);<font></font>
+    float4 edge_p4 = qslerp(init_vectors[i + 1],<font></font>
+      init_vectors[i + 2], (float)(p + 1) / n);<font></font>
+<font></font>
+    for (int q = 0; q &lt; (n - p); q++)<font></font>
+    {<font></font>
+      // edge index 2<font></font>
+      float4 a = qslerp(edge_p1, edge_p2, (float)q / (n - p));<font></font>
+      float4 b = qslerp(edge_p1, edge_p2, (float)(q + 1) / (n - p));<font></font>
+      float4 c, d;<font></font>
+<font></font>
+      if(distance(edge_p3, edge_p4) &lt; 0.00001)<font></font>
+      {<font></font>
+        c = edge_p3;<font></font>
+        d = edge_p3;<font></font>
+      }<font></font>
+      else {<font></font>
+        c = qslerp(edge_p3, edge_p4, (float)q / (n - p - 1));<font></font>
+        d = qslerp(edge_p3, edge_p4, (float)(q + 1) / (n - p - 1));<font></font>
+      }<font></font>
+<font></font>
+      output1.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, a));<font></font>
+      output2.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, b));<font></font>
+      output3.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, c));<font></font>
+<font></font>
+      outStream.Append(output1);<font></font>
+      outStream.Append(output2);<font></font>
+      outStream.Append(output3);<font></font>
+      outStream.RestartStrip();<font></font>
+<font></font>
+      if (q &lt; (n - p - 1))<font></font>
+      {<font></font>
+        output1.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, c));<font></font>
+        output2.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, b));<font></font>
+        output3.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, d));<font></font>
+<font></font>
+        outStream.Append(output1);<font></font>
+        outStream.Append(output2);<font></font>
+        outStream.Append(output3);<font></font>
+        outStream.RestartStrip();<font></font>
+      }<font></font>
+    }<font></font>
+  }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>三角形を球面線形補間で分割している部分です。ｎは三角形の分割数です。edge_p1とedge_p2は三角形の開始点を、edge_p3とege_p4は、分割した辺の中点を求めています。qslerp関数は、球面線形補間を求める関数です。qslerpの定義は次のとおりです。</p>
+<div id="kaiware_octahedron_sphere_3" class="caption-code">
+<p class="caption">リスト3.7: Quaternion.cgincのqslerpの定義</p>
+<pre class="list">// a:開始Quaternion b:目標Quaternion t:比率<font></font>
+float4 qslerp(float4 a, float4 b, float t)<font></font>
+{<font></font>
+  float4 r;<font></font>
+  float t_ = 1 - t;<font></font>
+  float wa, wb;<font></font>
+  float theta = acos(a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);<font></font>
+  float sn = sin(theta);<font></font>
+  wa = sin(t_ * theta) / sn;<font></font>
+  wb = sin(t * theta) / sn;<font></font>
+  r.x = wa * a.x + wb * b.x;<font></font>
+  r.y = wa * a.y + wb * b.y;<font></font>
+  r.z = wa * a.z + wb * b.z;<font></font>
+  r.w = wa * a.w + wb * b.w;<font></font>
+  normalize(r);<font></font>
+  return r;<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h3-4-2-1"></a>三角形分割の流れ１</h4>
+<p>続いて、三角形の分割処理の流れを説明します。例として、分割数２（n=2）の場合の流れです。</p>
+<div id="id_Kaiware_2Fkaiware__triangle__div__001" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_triangle_div_001.png" alt="Flow of triangle division process 1, calculation of edge_p1 to p4" class="width-100per">
+<p class="caption">
+図3.8: 三角形の分割処理の流れ１、edge_p1～p4の計算
+</p>
+</div>
+<p><span class="imgref"><a href="https://freder.io/files/unity2/kaiware007.html#id_Kaiware_2Fkaiware__triangle__div__001">図3.8</a></span>は、次のコードを表しています。</p>
+<div id="kaiware_octahedron_sphere_4" class="caption-code">
+<p class="caption">リスト3.8: edge_p1～p4の計算</p>
+<pre class="list">for (int p = 0; p &lt; n; p++)<font></font>
+{<font></font>
+  // edge index 1<font></font>
+  float4 edge_p1 = qslerp(init_vectors[i],<font></font>
+    init_vectors[i + 2], (float)p / n);<font></font>
+  float4 edge_p2 = qslerp(init_vectors[i + 1],<font></font>
+    init_vectors[i + 2], (float)p / n);<font></font>
+  float4 edge_p3 = qslerp(init_vectors[i],<font></font>
+    init_vectors[i + 2], (float)(p + 1) / n);<font></font>
+  float4 edge_p4 = qslerp(init_vectors[i + 1],<font></font>
+    init_vectors[i + 2], (float)(p + 1) / n);<font></font>
+</pre>
+</div>
+<p><b>init_vectors</b>配列の３点から、edge_p1～edge_p4の座標を求めています。p=0の時は、p/n = 0/2 = 0でedge_p1＝init_vectors[0]、edge_p2=init_vectors[1]になります。edge_p3とedge_p4は、(p+1)/n = (0+1)/2 = 0.5でそれぞれinit_vectors[0]とinit_vectors[2]の間、init_vectors[1]とinit_vectors[2]の間になります。主に三角形の右側を分割する流れです。</p>
+
+<h4><a id="h3-4-2-2"></a>三角形分割の流れ２</h4>
+<div id="id_Kaiware_2Fkaiware__triangle__div__002" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_triangle_div_002.png" alt="三角形の分割処理の流れ２、abcdの計算" class="width-100per">
+<p class="caption">
+図3.9: 三角形の分割処理の流れ２、abcdの計算
+</p>
+</div>
+<p><span class="imgref"><a href="https://freder.io/files/unity2/kaiware007.html#id_Kaiware_2Fkaiware__triangle__div__002">図3.9</a></span>は、次のコードを表しています。</p>
+<div id="kaiware_octahedron_sphere_5" class="caption-code">
+<p class="caption">リスト3.9: 座標a,b,c,dの計算</p>
+<pre class="list">for (int q = 0; q &lt; (n - p); q++)<font></font>
+{<font></font>
+  // edge index 2<font></font>
+  float4 a = qslerp(edge_p1, edge_p2, (float)q / (n - p));<font></font>
+  float4 b = qslerp(edge_p1, edge_p2, (float)(q + 1) / (n - p));<font></font>
+  float4 c, d;<font></font>
+<font></font>
+  if(distance(edge_p3, edge_p4) &lt; 0.00001)<font></font>
+  {<font></font>
+    c = edge_p3;<font></font>
+    d = edge_p3;<font></font>
+  }<font></font>
+  else {<font></font>
+    c = qslerp(edge_p3, edge_p4, (float)q / (n - p - 1));<font></font>
+    d = qslerp(edge_p3, edge_p4, (float)(q + 1) / (n - p - 1));<font></font>
+  }<font></font>
+</pre>
+</div>
+<p>前項で求めたedge_p1～p4を使って、頂点abcdの座標を求めています。主に三角形の左側を分割する流れです。条件によってはedge_p3とedge_p4の座標が同じになります。これは、三角形の右側がこれ以上分割できない段階になった時に発生します。その場合はc,dはどちらも三角形の右下の座標を取ります。</p>
+
+<h4><a id="h3-4-2-3"></a>三角形分割の流れ３</h4>
+<div id="id_Kaiware_2Fkaiware__triangle__div__003" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_triangle_div_003.png" alt="三角形の分割処理の流れ３、三角形abc,三角形cbdを出力" class="width-100per">
+<p class="caption">
+図3.10: 三角形の分割処理の流れ３、三角形abc,三角形cbdを出力
+</p>
+</div>
+<p><span class="imgref"><a href="https://freder.io/files/unity2/kaiware007.html#id_Kaiware_2Fkaiware__triangle__div__003">図3.10</a></span>は、次のコードを表しています。</p>
+<div id="kaiware_octahedron_sphere_6" class="caption-code">
+<p class="caption">リスト3.10: 座標a,b,cを結ぶ三角形＆座標c,b,dを結ぶ三角形を出力</p>
+<pre class="list">output1.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, a));<font></font>
+output2.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, b));<font></font>
+output3.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, c));<font></font>
+<font></font>
+outStream.Append(output1);<font></font>
+outStream.Append(output2);<font></font>
+outStream.Append(output3);<font></font>
+outStream.RestartStrip();<font></font>
+<font></font>
+if (q &lt; (n - p - 1))<font></font>
+{<font></font>
+  output1.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, c));<font></font>
+  output2.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, b));<font></font>
+  output3.pos = UnityObjectToClipPos(input[0].pos + mul(_TRS, d));<font></font>
+  outStream.Append(output1);<font></font>
+  outStream.Append(output2);<font></font>
+  outStream.Append(output3);<font></font>
+  outStream.RestartStrip();<font></font>
+}<font></font>
+</pre>
+</div>
+<p>計算したa,b,c,dの座標を、UnityObjectToClipPosやワールド座標変換行列を掛けてスクリーン用の座標に変換します。その後、outStream.AppendとoutStream.RestartStripで、a,b,cとc,b,dを結ぶ２つの三角形を出力します。</p>
+
+<h4><a id="h3-4-2-4"></a>三角形分割の流れ４</h4>
+<div id="id_Kaiware_2Fkaiware__triangle__div__004" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_triangle_div_004.png" alt="三角形の分割処理の流れ４、q=1の場合" class="width-100per">
+<p class="caption">
+図3.11: 三角形の分割処理の流れ４、q=1の場合
+</p>
+</div>
+<p>q=1の場合、aは1/2=0.5なのでedge_p1とedge_p2の中間に、bは1/1=1なのでedge_p2の位置になります。cは1/1=1なのでedge_p4に、dは一応計算してますが、if (q &lt; (n - p - 1))の条件に引っかからないので使われません。a,b,cを結ぶ三角形を出力します。</p>
+
+<h4><a id="h3-4-2-5"></a>三角形分割の流れ５</h4>
+<div id="id_Kaiware_2Fkaiware__triangle__div__005" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_triangle_div_005.png" alt="三角形の分割処理の流れ５、p=1の場合" class="width-100per">
+<p class="caption">
+図3.12: 三角形の分割処理の流れ５、p=1の場合
+</p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This is the flow when the for statement of q ends and p = 1. </font><font style="vertical-align: inherit;">Since p / n = 1/2 = 0.5, edge_p1 is between init_vectors [0] and init_vectors [2], and edge_p2 is between init_vectors [1] and init_vectors [2]. </font><font style="vertical-align: inherit;">The subsequent coordinate calculation of a, b, c, d and the output of the triangles a, b, c are the same as the above processing. </font><font style="vertical-align: inherit;">You have now divided one triangle into four. </font><font style="vertical-align: inherit;">All the triangles of the octahedron are processed up to the above.</font></font></p>
+
+<h3><a id="h3-4-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.4.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Bonus</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition to this, we have prepared three samples that cannot be introduced due to space limitations, so please take a look if you are interested.</font></font></p>
+<ul>
+<li>OctahedronSphereのGPUInstancing版（SampleOctahedronSphereInstancingシーン）</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OctahedronSphere standalone version that can be divided into 9 stages (SampleOctahedronSphereMultiVertex scene)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPU Instancing version of OctahedronSphere that can be divided up to 9 stages (SampleOctahedronSphereMultiVertexInstancing scene)</font></font></li>
+</ul>
+<div id="id_Kaiware_2Fkaiware__project__omake001" class="image">
+<img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/kaiware_project_omake001.png" alt="SampleOctahedronSphereMultiVertexInstancingシーン" class="width-080per">
+<p class="caption">
+図3.13: SampleOctahedronSphereMultiVertexInstancingシーン
+</p>
+</div>
+
+<h2><a id="h3-5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we explained the application of Geometry Shader for line representation. </font><font style="vertical-align: inherit;">Geometry Shader usually divides polygons and creates plate polygons of particles, but you should also try to find interesting expressions by using the property of dynamically increasing the number of vertices.</font></font></p><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 304px; top: 40.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第3章　ライン表現のためのGeometryShaderの応用</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 3 _ Application of Geometry Shader for Line Representation_files/saved_resource(2).html"></iframe></body></html>

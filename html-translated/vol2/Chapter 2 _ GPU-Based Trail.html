@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://freder.io/files/unity2/fuqunaga.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 2 _ GPU-Based Trail_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>GPU-Based Trail</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 2 _ GPU-Based Trail_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 2 _ GPU-Based Trail_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ GPU-Based Trail_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 2 _ GPU-Based Trail_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 2 _ GPU-Based Trail_files/saved_resource.html"></iframe></div>
+<h1><a id="h2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> GPU-Based Trail</font></font></h1>
+
+<h2><a id="h2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will show you how to use GPU to create a trail. </font><font style="vertical-align: inherit;">The sample in this chapter is </font><font style="vertical-align: inherit;">"GPU Based Trail" from </font></font><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming2" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+
+<h3><a id="h2-1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.1.1 What is　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Trail?</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The trajectory of a moving object is called a trail. </font><font style="vertical-align: inherit;">In a broad sense, it includes car ruts, ship tracks, ski spurs, etc., but what is impressive in CG is a light trail expression that draws a curve like a car tail lamp or a homing laser in a shooting game. ..</font></font></p>
+
+<h3><a id="h2-1-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.1.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Unity standard Trail</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Two types of trails are provided as standard in Unity.</font></font></p>
+<ul>
+<li><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TrailRenderer </font></font></b><a id="fnb-trailrenderer" href="https://freder.io/files/unity2/fuqunaga.html#fn-trailrenderer" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Used to draw the trajectory of GameObject</font></font></li>
+<li><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Trails module </font></font></b><a id="fnb-trailmodule" href="https://freder.io/files/unity2/fuqunaga.html#fn-trailmodule" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">   Used to draw the trajectory of Particles</font></font></li>
+</ul>
+<div class="footnote" epub:type="footnote" id="fn-trailrenderer"><p class="footnote">[*1] https://docs.unity3d.com/ja/current/Manual/class-TrailRenderer.html</p></div>
+<div class="footnote" epub:type="footnote" id="fn-trailmodule"><p class="footnote">[*2] https://docs.unity3d.com/Manual/PartSysTrailsModule.html</p></div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Since this chapter focuses on how to create the Trail itself, we will not use these functions, and by implementing it on the GPU, it will be possible to express more than the Trails module.</font></font></p>
+<div id="id_fuqunaga_2Fsample__image" class="image">
+<img src="./Chapter 2 _ GPU-Based Trail_files/sample_image.png" alt="Sample code execution screen.  Show 10000 Trails">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 2.1: Sample code execution screen. </font><font style="vertical-align: inherit;">Show 10000 Trails
+</font></font></p>
+</div>
+
+<h2><a id="h2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Creating data</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now let's create a Trail.</font></font></p>
+
+<h3><a id="h2-2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Data definition</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">There are three main structures used.</font></font></p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.cs</p>
+<pre class="emlist">public struct Trail<font></font>
+{<font></font>
+  public int currentNodeIdx;<font></font>
+}<font></font>
+</pre>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Each Trail structure corresponds to one Trail. </font><font style="vertical-align: inherit;">currentNodeIdx Stores the index of the last written Node buffer.</font></font></p>
+<div class="emlist-code">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.cs</font></font></p>
+<pre class="emlist">public struct Node<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font><font></font>
+  public float time;<font></font>
+  public Vector3 pos;<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
+</pre>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Node structures are control points in the Trail. </font><font style="vertical-align: inherit;">It stores the location of the Node and the time it was updated.</font></font></p>
+<div class="emlist-code">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.cs</font></font></p>
+<pre class="emlist">public struct Input<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+{</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  public Vector3 pos;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+}</font></font><font></font>
+</pre>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Input structure is the input for one frame from the emitter (the one that leaves the trajectory). </font><font style="vertical-align: inherit;">Here, it's just the position, but I think it would be interesting to add colors and so on.</font></font></p>
+
+<h3><a id="h2-2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Initialization</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Initialize the buffer used by GPUTrails.Start ()</font></font></p>
+<div class="emlist-code">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GPUTrails.cs</font></font></p>
+<pre class="emlist">trailBuffer = new ComputeBuffer(trailNum, Marshal.SizeOf(typeof(Trail)));<font></font>
+nodeBuffer = new ComputeBuffer(totalNodeNum, Marshal.SizeOf(typeof(Node)));<font></font>
+inputBuffer = new ComputeBuffer(trailNum, Marshal.SizeOf(typeof(Input)));<font></font>
+</pre>
+</div>
+<p>trailNum 個分の trailBufferを初期化しています。つまりこのプログラムでは複数本の Trail をまとめて処理しています。nodeBuffer ではすべての Trail 分の Node をまとめて１つのバッファで扱っています。インデックス０ ～ nodeNum-1 までが１本目、nodeNum ～ 2*nodeNum-1 までが２本目、といった具合です。inputBuffer も trailNum 個保持し、全 Trail の入力を管理します。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.cs</p>
+<pre class="emlist">var initTrail = new Trail() { currentNodeIdx = -1 };<font></font>
+var initNode = new Node() { time = -1 };<font></font>
+<font></font>
+trailBuffer.SetData(Enumerable.Repeat(initTrail, trailNum).ToArray());<font></font>
+nodeBuffer.SetData(Enumerable.Repeat(initNode, totalNodeNum).ToArray());<font></font>
+</pre>
+</div>
+<p>各バッファに初期値を入れています。Trail.currentNodeIdx、Node.time を負数にしておき、あとでこれらを未使用かどうかの判定に使います。inputBuffer は最初の更新ですべて値が書き込まれるので初期化の必要がなくノータッチです。</p>
+
+<h3><a id="h2-2-3"></a><span class="secno">2.2.3　</span>Node バッファの使い方</h3>
+<p>ここで Node バッファの使い方について解説します。</p>
+
+<h4><a id="h2-2-3-1"></a>初期状態</h4>
+<div id="id_fuqunaga_2Fnode0" class="image">
+<img src="./Chapter 2 _ GPU-Based Trail_files/node0.png" alt="initial state" class="width-050per">
+<p class="caption">
+図2.2: 初期状態
+</p>
+</div>
+<p>まだ何も入力されていない状態です。</p>
+
+<h4><a id="h2-2-3-2"></a>入力中</h4>
+<div id="id_fuqunaga_2Fnode__update" class="image">
+<img src="./Chapter 2 _ GPU-Based Trail_files/node_update.png" alt="Entering" class="width-050per">
+<p class="caption">
+図2.3: 入力中
+</p>
+</div>
+<p>１ノードづつ入力されて行きます。まだ未使用の Node があります。</p>
+
+<h4><a id="h2-2-3-3"></a>ループ</h4>
+<div id="id_fuqunaga_2Fnode__loop" class="image">
+<img src="./Chapter 2 _ GPU-Based Trail_files/node_loop.png" alt="loop" class="width-050per">
+<p class="caption">
+図2.4: ループ
+</p>
+</div>
+<p>すべての Node を使い尽くすと、はじめに戻りの Node を上書きして行きます。リングバッファ状に使用しています。</p>
+
+<h3><a id="h2-2-4"></a><span class="secno">2.2.4　</span>インプット</h3>
+<p>ここからは毎フレーム呼ばれる処理になります。エミッタの位置を入力して、Node を追加、更新していきます。</p>
+<p>まずは外部で inputBuffer を更新していきます。これはどんな処理でもかまいません。はじめは CPU で計算して <code class="inline-code tt">ComputeBuffer.SetData()</code> するのが簡単で良いかもしれません。サンプルコードでは簡単な GPU 実装のパーティクルを動かしこれらをエミッタとして扱っています。</p>
+<div class="column">
+
+<h3><a id="column-1"></a>Curl Noise</h3>
+<p>サンプルコードのパーティクルは、Curl Noise で受ける力を求めて移動する挙動にしています。このように Curl Noise は簡単に疑似流体っぽい動きを作れたりするのでとても便利です。本書の<a href="https://freder.io/files/unity2/sakota.html">第6章「Curl Noise - 疑似流体のためのノイズアルゴリズムの解説」</a>で<b>@sakope</b>さんが詳しく解説しているのでぜひ御覧ください。</p>
+</div>
+
+<h4><a id="h2-2-4-1"></a>エミッタの更新</h4>
+<div class="emlist-code">
+<p class="caption">GPUTrailParticles.cs</p>
+<pre class="emlist">void Update()<font></font>
+{<font></font>
+ cs.SetInt(CSPARAM.PARTICLE_NUM, particleNum);<font></font>
+ cs.SetFloat(CSPARAM.TIME, Time.time);<font></font>
+ cs.SetFloat(CSPARAM.TIME_SCALE, _timeScale);<font></font>
+ cs.SetFloat(CSPARAM.POSITION_SCALE, _positionScale);<font></font>
+ cs.SetFloat(CSPARAM.NOISE_SCALE, _noiseScale);<font></font>
+<font></font>
+ var kernelUpdate = cs.FindKernel(CSPARAM.UPDATE);<font></font>
+ cs.SetBuffer(kernelUpdate, CSPARAM.PARTICLE_BUFFER_WRITE, _particleBuffer);<font></font>
+<font></font>
+ var updateThureadNum = new Vector3(particleNum, 1f, 1f);<font></font>
+ ComputeShaderUtil.Dispatch(cs, kernelUpdate, updateThureadNum);<font></font>
+<font></font>
+<font></font>
+ var kernelInput = cs.FindKernel(CSPARAM.WRITE_TO_INPUT);<font></font>
+ cs.SetBuffer(kernelInput, CSPARAM.PARTICLE_BUFFER_READ, _particleBuffer);<font></font>
+ cs.SetBuffer(kernelInput, CSPARAM.INPUT_BUFFER, trails.inputBuffer);<font></font>
+<font></font>
+ var inputThreadNum = new Vector3(particleNum, 1f, 1f);<font></font>
+ ComputeShaderUtil.Dispatch(cs, kernelInput, inputThreadNum);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>２つのカーネルを実行しています。</p>
+<dl>
+<dt>CSPARAM.UPDATE</dt>
+<dd>エミッタとして使用するパーティクルを更新しています。</dd>
+<dt>CSPARAM.WRITE_TO_INPUT</dt>
+<dd>エミッタの現在の位置を inputBuffer に書き込んでいます。これを Trail の入力して使用します。</dd>
+</dl>
+
+<h4><a id="h2-2-4-2"></a>Trail への入力</h4>
+<p>さて、それでは inputBuffer を参照して、nodeBuffer を更新しましょう。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrailParticles.cs</p>
+<pre class="emlist">void LateUpdate()<font></font>
+{<font></font>
+  cs.SetFloat(CSPARAM.TIME, Time.time);<font></font>
+  cs.SetFloat(CSPARAM.UPDATE_DISTANCE_MIN, updateDistaceMin);<font></font>
+  cs.SetInt(CSPARAM.TRAIL_NUM, trailNum);<font></font>
+  cs.SetInt(CSPARAM.NODE_NUM_PER_TRAIL, nodeNum);<font></font>
+<font></font>
+  var kernel = cs.FindKernel(CSPARAM.CALC_INPUT);<font></font>
+  cs.SetBuffer(kernel, CSPARAM.TRAIL_BUFFER, trailBuffer);<font></font>
+  cs.SetBuffer(kernel, CSPARAM.NODE_BUFFER, nodeBuffer);<font></font>
+  cs.SetBuffer(kernel, CSPARAM.INPUT_BUFFER, inputBuffer);<font></font>
+<font></font>
+  ComputeShaderUtil.Dispatch(cs, kernel, new Vector3(trailNum, 1f, 1f));<font></font>
+}<font></font>
+</pre>
+</div>
+<p>CPU 側では必要なパラメータを渡してComputeShaderをDispatch()しているだけです。メインの ComputeShader 側の処理は次のようになっています。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrail.compute</p>
+<pre class="emlist">[numthreads(256,1,1)]<font></font>
+void CalcInput (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+  uint trailIdx = id.x;<font></font>
+  if ( trailIdx &lt; _TrailNum)<font></font>
+  {<font></font>
+        Trail trail = _TrailBuffer[trailIdx];<font></font>
+        Input input = _InputBuffer[trailIdx];<font></font>
+        int currentNodeIdx = trail.currentNodeIdx;<font></font>
+<font></font>
+        bool update = true;<font></font>
+        if ( trail.currentNodeIdx &gt;= 0 )<font></font>
+        {<font></font>
+          Node node = GetNode(trailIdx, currentNodeIdx);<font></font>
+          float dist = distance(input.position, node.position);<font></font>
+          update = dist &gt; _UpdateDistanceMin;<font></font>
+        }<font></font>
+<font></font>
+        if ( update )<font></font>
+        {<font></font>
+          Node node;<font></font>
+          node.time = _Time;<font></font>
+          node.position = input.position;<font></font>
+<font></font>
+          currentNodeIdx++;<font></font>
+          currentNodeIdx %= _NodeNumPerTrail;<font></font>
+<font></font>
+          // write new node<font></font>
+          SetNode(node, trailIdx, currentNodeIdx);<font></font>
+<font></font>
+          // update trail<font></font>
+          trail.currentNodeIdx = currentNodeIdx;<font></font>
+          _TrailBuffer[trailIdx] = trail;<font></font>
+        }<font></font>
+  }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>くわしく見ていきましょう。</p>
+<div class="emlist-code">
+<pre class="emlist">uint trailIdx = id.x;<font></font>
+if ( trailIdx &lt; _TrailNum)<font></font>
+</pre>
+</div>
+<p>まずは引数の id を Trail のインデックスとして使用しています。スレッド数の関係で Trail 数以上の id で呼ばれてしまうこともあるので範囲外のものを if 文で弾いています。</p>
+<div class="emlist-code">
+<pre class="emlist">int currentNodeIdx = trail.currentNodeIdx;<font></font>
+<font></font>
+bool update = true;<font></font>
+if ( trail.currentNodeIdx &gt;= 0 )<font></font>
+{<font></font>
+    Node node = GetNode(trailIdx, currentNodeIdx);<font></font>
+    update = distance(input.position, node.position) &gt; _UpdateDistanceMin;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>次に <code class="inline-code tt">Trail.currentNodeIdx</code> を確認しています。負数の場合は未使用の Trail です。</p>
+<p><code class="inline-code tt"> GetNode() </code>は、_NodeBuffer から指定の Node を取得する関数です。インデックスの計算が間違いの元なので関数化しています。</p>
+<p>すでに使用されている Trail では、最新の Node とインプット位置との距離を比較して、<code class="inline-code tt">_UpdateDistanceMin</code> より離れていれば更新、近ければ更新しない、としています。エミッタの挙動によりますが、前回の Node とほぼ同じ位置のインプットはたいていほぼ停止状態で微妙に誤差で移動している状態なので、これらを律儀に Node 化して Trail を生成しようとすると、連続する Node 間で方向が大きく異なりかなり汚くなることが多いです。したがってあまり近い距離ではあえて Node の追加をせずにスキップしています。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrail.compute</p>
+<pre class="emlist">if ( update )<font></font>
+{<font></font>
+  Node node;<font></font>
+  node.time = _Time;<font></font>
+  node.position = input.position;<font></font>
+<font></font>
+  currentNodeIdx++;<font></font>
+  currentNodeIdx %= _NodeNumPerTrail;<font></font>
+<font></font>
+  // write new node<font></font>
+  SetNode(node, trailIdx, currentNodeIdx);<font></font>
+<font></font>
+  // update trail<font></font>
+  trail.currentNodeIdx = currentNodeIdx;<font></font>
+  _TrailBuffer[trailIdx] = trail;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>最後に _NodeBuffer および _TrailBuffer を更新しています。Trail には入力した Node のインデックスを currentNodeIdx として保存します。Trail あたりの Node 数を超えたらリングバッファ状になるようゼロに戻しています。Node には入力の時間と位置を保存しています。</p>
+<p>さて、これで Trail の論理的な処理は完成です。次はこの情報から描画する処理について見ていきましょう。</p>
+
+<h2><a id="h2-3"></a><span class="secno">2.3　</span>描画</h2>
+<p>Trail の描画は基本的には Node 間をラインで繋いでいく処理になります。ここでは個々の Trail はできるだけ簡素にして物量を重視していこうと思います。そのためラインはできるだけポリゴン数を少なくしたいのでカメラと正対する板ポリゴンとして生成します。</p>
+
+<h3><a id="h2-3-1"></a><span class="secno">2.3.1　</span>カメラと正対する板ポリゴンの生成</h3>
+<p>カメラと正対する板ポリゴンを生成する方法は次のようになります。</p>
+<div id="id_fuqunaga_2Fpolygon0" class="image">
+<img src="./Chapter 2 _ GPU-Based Trail_files/polygon0.png" alt="Node column" class="width-070per">
+<p class="caption">
+図2.5: Node 列
+</p>
+</div>
+<p>このような Node 列から</p>
+<div id="id_fuqunaga_2Fpolygon1" class="image">
+<img src="./Chapter 2 _ GPU-Based Trail_files/polygon1.png" alt="Vertices generated from Node" class="width-070per">
+<p class="caption">
+図2.6: Node から生成した頂点
+</p>
+</div>
+<p>各 Node から視線方向と垂直な方向に指定の幅だけ移動した頂点を求めます。</p>
+<div id="id_fuqunaga_2Fpolygon2" class="image">
+<img src="./Chapter 2 _ GPU-Based Trail_files/polygon2.png" alt="Polygonization" class="width-070per">
+<p class="caption">
+図2.7: ポリゴン化
+</p>
+</div>
+<p>生成した頂点同士を繋いでポリゴンにします。それでは実際のコードを見ていきましょう。</p>
+
+<h3><a id="h2-3-2"></a><span class="secno">2.3.2　</span>CPU 側</h3>
+<p>CPU 側は単純にパラメータをマテリアルに渡して DrawProcedual() するだけの処理になっています。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrailRenderer.cs</p>
+<pre class="emlist">void OnRenderObject()<font></font>
+{<font></font>
+  _material.SetInt(GPUTrails.CSPARAM.NODE_NUM_PER_TRAIL, trails.nodeNum);<font></font>
+  _material.SetFloat(GPUTrails.CSPARAM.LIFE, trails._life);<font></font>
+  _material.SetBuffer(GPUTrails.CSPARAM.TRAIL_BUFFER, trails.trailBuffer);<font></font>
+  _material.SetBuffer(GPUTrails.CSPARAM.NODE_BUFFER, trails.nodeBuffer);<font></font>
+  _material.SetPass(0);<font></font>
+<font></font>
+  var nodeNum = trails.nodeNum;<font></font>
+  var trailNum = trails.trailNum;<font></font>
+  Graphics.DrawProcedural(MeshTopology.Points, nodeNum, trailNum);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>いままで出てこなかったパラメータ<code class="inline-code tt">trails._life</code>が登場しています。これは Node の生存時間で Node 自身が持っている生成時刻と照らし合わせて、これだけの時間が経つと透明にしていくような処理に使います。こうすることで Trail の末端がなめらかに消えていく表現ができます。</p>
+<p>特に入力すべきメッシュやポリゴンもないので、<code class="inline-code tt">Graphics.DrawProcedural()</code>で trails.nodeNum 個の頂点あるモデルを trails.trailNum 個のインスタンスまとめて描画する命令を発行しています。</p>
+
+<h3><a id="h2-3-3"></a><span class="secno">2.3.3　</span>GPU 側</h3>
+
+<h4><a id="h2-3-3-1"></a>vertex shader</h4>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">vs_out vert (uint id : SV_VertexID, uint instanceId : SV_InstanceID)<font></font>
+{<font></font>
+  vs_out Out;<font></font>
+  Trail trail = _TrailBuffer[instanceId];<font></font>
+  int currentNodeIdx = trail.currentNodeIdx;<font></font>
+<font></font>
+  Node node0 = GetNode(instanceId, id-1);<font></font>
+  Node node1 = GetNode(instanceId, id); // current<font></font>
+  Node node2 = GetNode(instanceId, id+1);<font></font>
+  Node node3 = GetNode(instanceId, id+2);<font></font>
+<font></font>
+  bool isLastNode = (currentNodeIdx == (int)id);<font></font>
+<font></font>
+  if ( isLastNode || !IsValid(node1))<font></font>
+  {<font></font>
+        node0 = node1 = node2 = node3 = GetNode(instanceId, currentNodeIdx);<font></font>
+  }<font></font>
+<font></font>
+  float3 pos1 = node1.position;<font></font>
+  float3 pos0 = IsValid(node0) ? node0.position : pos1;<font></font>
+  float3 pos2 = IsValid(node2) ? node2.position : pos1;<font></font>
+  float3 pos3 = IsValid(node3) ? node3.position : pos2;<font></font>
+<font></font>
+  Out.pos = float4(pos1, 1);<font></font>
+  Out.posNext = float4(pos2, 1);<font></font>
+<font></font>
+  Out.dir = normalize(pos2 - pos0);<font></font>
+  Out.dirNext = normalize(pos3 - pos1);<font></font>
+<font></font>
+  float ageRate = saturate((_Time.y - node1.time) / _Life);<font></font>
+  float ageRateNext = saturate((_Time.y - node2.time) / _Life);<font></font>
+  Out.col = lerp(_StartColor, _EndColor, ageRate);<font></font>
+  Out.colNext = lerp(_StartColor, _EndColor, ageRateNext);<font></font>
+<font></font>
+  return Out;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>まずは vertex shader の処理です。このスレッドに対応した現在の Node とその次の Node の情報を出力します。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">Node node0 = GetNode(instanceId, id-1);<font></font>
+Node node1 = GetNode(instanceId, id); // current<font></font>
+Node node2 = GetNode(instanceId, id+1);<font></font>
+Node node3 = GetNode(instanceId, id+2);<font></font>
+</pre>
+</div>
+<p>現在の Node を node1 として、１つ前の node0、１つ先の node2、２つ先の node3 と計４つの Node を参照しています。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">bool isLastNode = (currentNodeIdx == (int)id);<font></font>
+<font></font>
+if ( isLastNode || !IsValid(node1))<font></font>
+{<font></font>
+  node0 = node1 = node2 = node3 = GetNode(instanceId, currentNodeIdx);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>現在の Node が末端であるか、まだ未入力である場合、node0～3 を末端の Node のコピーとして扱います。つまり末端より先のまだ情報が無い Node をすべて末端に"折りたたんでいる"扱いにしています。こうすることでこのあとのポリゴン生成の処理にそのまま流すことができます。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">float3 pos1 = node1.position;<font></font>
+float3 pos0 = IsValid(node0) ? node0.position : pos1;<font></font>
+float3 pos2 = IsValid(node2) ? node2.position : pos1;<font></font>
+float3 pos3 = IsValid(node3) ? node3.position : pos2;<font></font>
+<font></font>
+Out.pos = float4(pos1, 1);<font></font>
+Out.posNext = float4(pos2, 1);<font></font>
+</pre>
+</div>
+<p>さて、４つの Node から位置情報を取り出します。現在の Node （node1)以外はすべて未入力である可能性があるので注意が必要です。node0 が未入力なケースがちょっと意外かもしれませんが、currentNodeIdx == 0 のときリングバッファを遡って node0 はバッファの一番最後の Node を指しているのでこのようなケースがありえます。この場合も node1 の位置をコピーすることで、同じ場所に折りたたみます。node2,3 も同様です。このうち、pos1、pos2 を geometry shader に向けて出力します。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">Out.dir = normalize(pos2 - pos0);<font></font>
+Out.dirNext = normalize(pos3 - pos1);<font></font>
+</pre>
+</div>
+<p>さらに pos0 → pos2 の方向ベクトルを pos1 における接線（tangent）、pos1 → pos3 の方向ベクトルを pos2 における tangent として出力します。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">float ageRate = saturate((_Time.y - node1.time) / _Life);<font></font>
+float ageRateNext = saturate((_Time.y - node2.time) / _Life);<font></font>
+Out.col = lerp(_StartColor, _EndColor, ageRate);<font></font>
+Out.colNext = lerp(_StartColor, _EndColor, ageRateNext);<font></font>
+</pre>
+</div>
+<p>最後に node1、node2 の書き込み時間と現在の時間を比較して色を求めています。</p>
+
+<h4><a id="h2-3-3-2"></a>geometry shader</h4>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">[maxvertexcount(4)]<font></font>
+void geom (point vs_out input[1], inout TriangleStream&lt;gs_out&gt; outStream)<font></font>
+{<font></font>
+  gs_out output0, output1, output2, output3;<font></font>
+  float3 pos = input[0].pos;<font></font>
+  float3 dir = input[0].dir;<font></font>
+  float3 posNext = input[0].posNext;<font></font>
+  float3 dirNext = input[0].dirNext;<font></font>
+<font></font>
+  float3 camPos = _WorldSpaceCameraPos;<font></font>
+  float3 toCamDir = normalize(camPos - pos);<font></font>
+  float3 sideDir = normalize(cross(toCamDir, dir));<font></font>
+<font></font>
+  float3 toCamDirNext = normalize(camPos - posNext);<font></font>
+  float3 sideDirNext = normalize(cross(toCamDirNext, dirNext));<font></font>
+  float width = _Width * 0.5;<font></font>
+<font></font>
+  output0.pos = UnityWorldToClipPos(pos + (sideDir * width));<font></font>
+  output1.pos = UnityWorldToClipPos(pos - (sideDir * width));<font></font>
+  output2.pos = UnityWorldToClipPos(posNext + (sideDirNext * width));<font></font>
+  output3.pos = UnityWorldToClipPos(posNext - (sideDirNext * width));<font></font>
+<font></font>
+  output0.col =<font></font>
+  output1.col = input[0].col;<font></font>
+  output2.col =<font></font>
+  output3.col = input[0].colNext;<font></font>
+<font></font>
+  outStream.Append (output0);<font></font>
+  outStream.Append (output1);<font></font>
+  outStream.Append (output2);<font></font>
+  outStream.Append (output3);<font></font>
+<font></font>
+  outStream.RestartStrip();<font></font>
+}<font></font>
+</pre>
+</div>
+<p>次に geometry shader の処理です。vertex shader から渡された Node ２つ分の情報からいよいよポリゴンを生成します。２つの pos と dir から、４つの位置＝４角形を求め TriangleStream として出力しています。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">float3 camPos = _WorldSpaceCameraPos;<font></font>
+float3 toCamDir = normalize(camPos - pos);<font></font>
+float3 sideDir = normalize(cross(toCamDir, dir));<font></font>
+</pre>
+</div>
+<p>pos からカメラへの方向ベクトル(toCameraDir)と、接線ベクトル(dir)の外積を求め、これをラインの幅として広げる方向(sideDir)にしています。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">output0.pos = UnityWorldToClipPos(pos + (sideDir * width));<font></font>
+output1.pos = UnityWorldToClipPos(pos - (sideDir * width));<font></font>
+</pre>
+</div>
+<p>正負の sideDir 方向に移動した頂点を求めます。ここで Clip 座標系にして fragment shader へ渡すための座標変換まで済ませておきます。posNext に関しても同じ処理をすることで計４つの頂点が求まりました。</p>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">output0.col =<font></font>
+output1.col = input[0].col;<font></font>
+output2.col =<font></font>
+output3.col = input[0].colNext;<font></font>
+</pre>
+</div>
+<p>各頂点に色を乗せて完成です。</p>
+
+<h4><a id="h2-3-3-3"></a>fragment shader</h4>
+<div class="emlist-code">
+<p class="caption">GPUTrails.shader</p>
+<pre class="emlist">fixed4 frag (gs_out In) : COLOR<font></font>
+{<font></font>
+  return In.col;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>最後に fragment shader です。これ以上無いくらい単純です。色を出力してるだけですね（笑</p>
+
+<h2><a id="h2-4"></a><span class="secno">2.4　</span>応用</h2>
+<p>以上で Trail の生成ができたかと思います。今回は色だけの処理でしたが、テクスチャをのせたり、幅を変えてみたりといろいろな応用ができると思います。また、GPUTrails.cs、GPUTRailsRenderer.cs とソースコードも別れているとおり、GPUTrails.shader 側は単なるバッファを見て描画するだけの処理なので_TrailBuffer、_NodeBuffer さえ用意すれば実は Trail に限らずライン状の表示に流用できます。今回は _NodeBuffer に追加するだけの Trail でしたが、毎フレーム全 Node を更新することで触手のようなウネウネしたものも表現したりできると思います。</p>
+
+<h2><a id="h2-5"></a><span class="secno">2.5　</span>まとめ</h2>
+<p>本章では Trail の GPU 実装のできるだけシンプルな例を紹介しました。GPU を使うとデバッグが大変になる反面、 CPU ではできないような圧倒的な物量表現が可能になります。その「うひょー！」感を本書を通して体験できる方が一人でも増えたらいいなと思います。また、Trail は「モデルを表示する」「スクリーンスペースでアルゴリズムで描画する」の間くらいの応用の幅が広く面白い領域の表現ではないかと思います。この過程で得る理解は Trail に限らずいろいろな映像表現をプログラミングするときに役立つのではないかと思います。</p><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 2 _ GPU-Based Trail_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 2 _ GPU-Based Trail_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 2 _ GPU-Based Trail_files/saved_resource(2).html"></iframe></body></html>

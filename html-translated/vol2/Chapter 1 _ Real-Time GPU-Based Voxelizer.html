@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://freder.io/files/unity2/Nakamura.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Real-Time GPU-Based Voxelizer</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/saved_resource.html"></iframe></div>
+<h1><a id="h1"></a><span class="secno">第1章　</span>Real-Time GPU-Based Voxelizer</h1>
+
+<h2><a id="h1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will develop GPU Voxelizer, a program that uses GPU to make voxels of meshes in real time.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample in this chapter is </font><font style="vertical-align: inherit;">"RealTime GPUBasedVoxelizer" from </font></font><br><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming2" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming2</font></font></a><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">First, after confirming the voxelization procedure and the obtained results based on the implementation on the CPU, we will explain the implementation method on the GPU and introduce an example of effects that apply high-speed voxelization.</font></font></p>
+
+<h3><a id="h1-1-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1.1 What is a　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> voxel?</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A voxel represents a basic unit in a three-dimensional reciprocal lattice space. </font><font style="vertical-align: inherit;">It can be imagined as an increase in the dimension of the pixel (Pixel) used as the basic unit of the two-dimensional normal lattice space, and it is named Voxel in the sense of Pixel with Volume. </font><font style="vertical-align: inherit;">Voxels can express volume, and each voxel may have a data format that stores values ​​such as concentration, which may be used for visualization and analysis of medical and scientific data.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Also, in the game, Minecraft </font></font><a id="fnb-minecraft" href="https://freder.io/files/unity2/Nakamura.html#fn-minecraft" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> is listed as using voxels.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It takes time to create a detailed model and stage, but if it is a voxel model, it can be created with relatively little effort, and even if it is free, there </font><font style="vertical-align: inherit;">are excellent editors such as </font><font style="vertical-align: inherit;">MagicaVoxel </font></font><a id="fnb-magicavoxel" href="https://freder.io/files/unity2/Nakamura.html#fn-magicavoxel" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 2,</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and the model looks like a 3D pixel art. Can be created.</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-minecraft"><p class="footnote">[*1] https://minecraft.net</p></div>
+<div class="footnote" epub:type="footnote" id="fn-magicavoxel"><p class="footnote">[*2] http://ephtracy.github.io/</p></div>
+
+<h2><a id="h1-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Voxelization algorithm</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I will explain the voxelization algorithm based on the implementation on the CPU. </font><font style="vertical-align: inherit;">The CPU implementation is described in CPUVoxelizer.cs.</font></font></p>
+
+<h3><a id="h1-2-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Rough flow of voxelization</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The general flow of voxelization is as follows.</font></font></p>
+<ol>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Set voxel resolution</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Set the range for voxelization</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Generate 3D array data to store voxel data</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Generate voxels located on the surface of the mesh</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fill the voxels located inside the mesh from the voxel data representing the surface of the mesh</font></font></li>
+</ol>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voxelization in CPU is a static function of CPUVoxelizer class</font></font></p>
+<div class="emlist-code">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></p>
+<pre class="emlist">public class CPUVoxelizer<font></font>
+{<font></font>
+    public static void Voxelize (<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Mesh mesh,</font></font><font></font>
+        int resolution,<font></font>
+        out List&lt;Vector3&gt; voxels,<font></font>
+        out float unit,<font></font>
+        bool surfaceOnly = false<font></font>
+    ) {<font></font>
+    ...<font></font>
+    }<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    ...</font></font><font></font>
+}<font></font>
+</pre>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Execute by calling. </font><font style="vertical-align: inherit;">If you specify the mesh and resolution you want to voxel in the argument and execute it, the voxel array voxels and the unit representing the size of one voxel are returned via the reference argument.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In the following, I will explain what is done inside the Voxelize function along the general flow.</font></font></p>
+
+<h3><a id="h1-2-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Set the voxel resolution</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To make voxels, first set the voxel resolution. </font><font style="vertical-align: inherit;">The finer the resolution, the smaller the cube will be built, so a detailed voxel model can be generated, but it requires more calculation time.</font></font></p>
+<div id="id_Nakamura_2FVoxelResolution" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelResolution.png" alt="Difference in voxel resolution">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.1: Differences in voxel resolution
+</font></font></p>
+</div>
+
+<h3><a id="h1-2-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2.3</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Set the range for </font><span class="secno"><font style="vertical-align: inherit;">voxelization　</font></span></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Specifies the range to voxelize the target mesh model. </font><font style="vertical-align: inherit;">If you specify the BoundingBox (the smallest rectangular parallelepiped that fits all the vertices of the model) of the mesh model as the voxelization range, you can voxelize the entire mesh model.</font></font></p>
+<div id="id_Nakamura_2FBoundingBox" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/BoundingBox.png" alt="Bounding Box of mesh">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 1.2: Mesh BoundingBox
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It should be noted here that if the BoundingBox of the mesh model is used as it is as the voxelization range, problems will occur when voxelizing a mesh that has a surface that exactly overlaps the BoundingBox, such as a Cube mesh. ..</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As will be described in detail later, when voxels are created, the intersection of the triangles and voxels that make up the mesh is determined. However, if the triangles and voxel surfaces overlap exactly, the intersection may not be determined correctly.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, the range in which the BoundingBox of the mesh model is expanded by "half the length of the unit length that constitutes one voxel" is specified as the voxelization range.</font></font></p>
+<div class="emlist-code">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CPUVoxelizer.cs</font></font></p>
+<pre class="emlist">mesh.RecalculateBounds();<font></font>
+var bounds = mesh.bounds;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Calculate the unit lengths that make up one voxel from the specified resolution</font></font><font></font>
+float maxLength = Mathf.Max(<font></font>
+    bounds.size.x,<font></font>
+    Mathf.Max(bounds.size.y, bounds.size.z)<font></font>
+);<font></font>
+unit = maxLength / resolution;<font></font>
+<font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+// Half the unit length</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+var hunit = unit * 0.5f;</font></font><font></font>
+<font></font>
+// 「一つのボクセルを構成する単位長の半分の長さ分」拡張した範囲を<font></font>
+// ボクセル化の範囲とする<font></font>
+<font></font>
+// ボクセル化するboundsの最小値<font></font>
+var start = bounds.min - new Vector3(hunit, hunit, hunit);<font></font>
+<font></font>
+// ボクセル化するboundsの最大値<font></font>
+var end = bounds.max + new Vector3(hunit, hunit, hunit);<font></font>
+<font></font>
+// ボクセル化するboundsのサイズ<font></font>
+var size = end - start;<font></font>
+</pre>
+</div>
+
+<h3><a id="h1-2-4"></a><span class="secno">1.2.4　</span>ボクセルデータを格納する3次元の配列データを生成する</h3>
+<p>ボクセルを表す構造体として、サンプルコードではVoxel_t構造体を用意しています。</p>
+<div class="emlist-code">
+<p class="caption">Voxel.cs</p>
+<pre class="emlist">[StructLayout(LayoutKind.Sequential)]<font></font>
+public struct Voxel_t {<font></font>
+    public Vector3 position;   // ボクセルの位置<font></font>
+    public uint fill;          // ボクセルを埋めるべきかどうかのフラグ<font></font>
+    public uint front;         // ボクセルと交差した3角形が決められた方向から見て前面かどうかのフラグ<font></font>
+    ...<font></font>
+}<font></font>
+</pre>
+</div>
+<p>このVoxel_tの三次元配列を生成し、そこにボクセルデータを格納していきます。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">// ボクセルの単位長さとボクセル化を行う範囲に基づいて、3次元ボクセルデータのサイズを決定する<font></font>
+var width = Mathf.CeilToInt(size.x / unit);<font></font>
+var height = Mathf.CeilToInt(size.y / unit);<font></font>
+var depth = Mathf.CeilToInt(size.z / unit);<font></font>
+var volume = new Voxel_t[width, height, depth];<font></font>
+</pre>
+</div>
+<p>また、後に続く処理の中で各ボクセルの位置やサイズを参照するため、事前に3次元ボクセルデータと一致するAABB配列を生成しておきます。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">var boxes = new Bounds[width, height, depth];<font></font>
+var voxelUnitSize = Vector3.one * unit;<font></font>
+for(int x = 0; x &lt; width; x++)<font></font>
+{<font></font>
+    for(int y = 0; y &lt; height; y++)<font></font>
+    {<font></font>
+        for(int z = 0; z &lt; depth; z++)<font></font>
+        {<font></font>
+            var p = new Vector3(x, y, z) * unit + start;<font></font>
+            var aabb = new Bounds(p, voxelUnitSize);<font></font>
+            boxes[x, y, z] = aabb;<font></font>
+        }<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<div class="column">
+
+<h3><a id="column-1"></a>AABB</h3>
+<p>AABB（Axis-Aligned Bounding Box、軸平行境界ボックス）とは、3次元空間のXYZ軸に対して各辺が平行な直方体の境界図形を指します。</p>
+<p>AABBは衝突判定に利用されることが多く、2つのメッシュ同士の衝突判定や、あるメッシュと光線との衝突判定を簡易的に行う際に使われたりするケースがあります。</p>
+<p>メッシュに対する衝突判定を厳密にやろうとすると、メッシュを構成する三角形全てに対して判定を行わなければなりませんが、メッシュを含むAABBのみであれば高速に計算することができ、便利です。</p>
+<div id="id_Nakamura_2FAABB" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/AABB.png" alt="Collision detection between AABBs of two polygonal objects">
+<p class="caption">
+図1.3: 2つの多角形オブジェクトのAABB同士の衝突判定
+</p>
+</div>
+</div>
+
+<h3><a id="h1-2-5"></a><span class="secno">1.2.5　</span>メッシュの表面に位置するボクセルを生成する</h3>
+<p>以下の図のように、メッシュの表面に位置するボクセルを生成します。</p>
+<div id="id_Nakamura_2FVoxelSurface2" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelSurface2.png" alt="First, generate voxels located on the surface of the mesh, and then generate voxels based on it so as to fill the contents of the mesh.">
+<p class="caption">
+図1.4: まずメッシュの表面に位置するボクセルを生成し、それを基にしてメッシュの中身を埋めていくようにボクセルを生成する
+</p>
+</div>
+<p>メッシュの表面に位置するボクセルを求めるには、メッシュを構成するそれぞれの3角形とボクセルとの交差判定を行う必要があります。</p>
+
+<h4><a id="h1-2-5-1"></a>3角形とボクセルの交差判定（SATを用いた交差判定アルゴリズム）</h4>
+<p>3角形とボクセルとの交差判定には、SAT（Separating Axis Theorem、分離軸定理）を用います。SATを用いた交差判定アルゴリズムは3角形とボクセル同士に限らず、凸面同士の交差判定として汎用的に用いることができます。</p>
+<p>SATは以下のことを証明しました。</p>
+<div class="column">
+
+<h3><a id="column-2"></a>SAT（Separating Axis Theorem、分離軸定理）の簡単な解説</h3>
+<p>一方にオブジェクトA全体、もう一方にオブジェクトB全体が存在するような直線が求められれば、オブジェクトAとオブジェクトBは交わりません。このような、2つのオブジェクトを分離する直線を分離直線と呼び、その分離直線は常に分離軸と直交します。</p>
+</div>
+<p>SATにより、2つの凸面同士の射影が重ならない軸（分離軸）が求められれば、その2つの凸面を分離する直線が存在するので、2つの凸面が交わらないということを導き出せます。逆に、分離軸が見つからなければ2つの凸面同士は交差していると判断できます。（形状が凹である場合、分離軸が見つからなくとも交差していない場合があります。）</p>
+<p>凸面形状は、ある軸に射影されると、その形状の影がその軸を表す線の上に投影されたように映ります。これは軸上の線分として表すことができ、範囲区間[min, max]で表わせます。</p>
+<div id="id_Nakamura_2FSAT1" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/SAT1.png" alt="The convex shape is projected onto a certain axis, and the range of the convex shape projected on the axis (min, max).">
+<p class="caption">
+図1.5: 凸面形状をある軸に射影し、軸上に映された凸面形状の範囲（min, max）
+</p>
+</div>
+<p>以下の図のように、2つの凸面形状の分離直線が存在する場合、その直線に直交する分離軸に対する凸面形状の射影区間同士は重なりません。</p>
+<div id="id_Nakamura_2FSAT2" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/SAT2.png" alt="If there is a straight line that separates the two convex shapes, the projection sections on the axis orthogonal to the straight line do not overlap.">
+<p class="caption">
+図1.6: ２つの凸面形状を分離する直線がある場合、その直線に直交する軸への射影区間同士は重ならない
+</p>
+</div>
+<p>しかし同じ2つの凸面であっても、以下の図のように、他の非分離軸への射影は重なることがあります。</p>
+<div id="id_Nakamura_2FSAT3" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/SAT3.png" alt="When projecting on an axis orthogonal to a straight line that does not separate the two convex shapes, the projections may overlap.">
+<p class="caption">
+図1.7: 2つの凸面形状を分離しない直線と直交する軸に射影した場合、射影同士が重なることがある
+</p>
+</div>
+<p>形状によっては、分離軸になる可能性のある軸が明白であるものがあり、そのような2つの形状AとBの間の交わりを判定するには、分離軸になり得る軸それぞれに2つの形状を射影し、2つの射影区間[Amin, Amax]と[Bmin, Bmax]が互いに重なっていないかどうかを調べていけば交差判定ができます。式で表すと、Amax &lt; Bmin または Bmax &lt; Amin であれば、2つの区間は重なっていません。</p>
+<p>凸面同士の分離軸になる可能性がある軸は</p>
+<ul>
+<li>凸面1の辺と凸面2の辺のクロス積</li>
+<li>凸面1の法線</li>
+<li>凸面2の法線</li>
+</ul>
+<p>であることが導かれており、このことから三角形とボクセル（AABB）同士では、分離軸になる可能性がある軸は</p>
+<ul>
+<li>三角形の3つの辺とAABBの直交する3つの辺同士の組み合わせから得られる9通りのクロス積</li>
+<li>AABBの3つの法線</li>
+<li>三角形の法線</li>
+</ul>
+<p>であるため、これら13通りの軸それぞれについて、射影が重なるかどうか判定していくことで、三角形とボクセルとの交差判定を行います。</p>
+<p>一つの3角形とすべてのボクセルデータとの交差判定を行うのは無駄な処理が多くなる可能性があるため、3角形を含むAABBを計算し、そこに含まれるボクセルとの交差判定を行います。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">// 三角形のAABBを計算<font></font>
+var min = tri.bounds.min - start;<font></font>
+var max = tri.bounds.max - start;<font></font>
+int iminX = Mathf.RoundToInt(min.x / unit);<font></font>
+int iminY = Mathf.RoundToInt(min.y / unit);<font></font>
+int iminZ = Mathf.RoundToInt(min.z / unit);<font></font>
+int imaxX = Mathf.RoundToInt(max.x / unit);<font></font>
+int imaxY = Mathf.RoundToInt(max.y / unit);<font></font>
+int imaxZ = Mathf.RoundToInt(max.z / unit);<font></font>
+iminX = Mathf.Clamp(iminX, 0, width - 1);<font></font>
+iminY = Mathf.Clamp(iminY, 0, height - 1);<font></font>
+iminZ = Mathf.Clamp(iminZ, 0, depth - 1);<font></font>
+imaxX = Mathf.Clamp(imaxX, 0, width - 1);<font></font>
+imaxY = Mathf.Clamp(imaxY, 0, height - 1);<font></font>
+imaxZ = Mathf.Clamp(imaxZ, 0, depth - 1);<font></font>
+<font></font>
+// 三角形のAABBの中でボクセルとの交差判定を行う<font></font>
+for(int x = iminX; x &lt;= imaxX; x++) {<font></font>
+    for(int y = iminY; y &lt;= imaxY; y++) {<font></font>
+        for(int z = iminZ; z &lt;= imaxZ; z++) {<font></font>
+            if(Intersects(tri, boxes[x, y, z])) {<font></font>
+                ...<font></font>
+            }<font></font>
+        }<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>三角形とボクセルとの交差判定はIntersects(Triangle, Bounds)関数で行います。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">public static bool Intersects(Triangle tri, Bounds aabb)<font></font>
+{<font></font>
+    ...<font></font>
+}<font></font>
+</pre>
+</div>
+<p>この関数内では、前述の13通りの軸について交差判定を行っていきますが、AABBの3つの法線が既知である（XYZ軸に沿った辺を持つので、単にX軸（1, 0, 0）、Y軸（0, 1, 0）、Z軸（0, 0, 1）の法線を持つ）ことを利用したり、AABBの中心が原点（0, 0, 0）に来るように三角形とAABBの座標を平行移動させることで、交差判定を最適化しています。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">// AABBの中心座標と各辺の半分の長さ(extents)を取得<font></font>
+Vector3 center = aabb.center, extents = aabb.max - center;<font></font>
+<font></font>
+// AABBの中心が原点(0, 0, 0)に来るように三角形の座標を平行移動<font></font>
+Vector3 v0 = tri.a - center,<font></font>
+        v1 = tri.b - center,<font></font>
+        v2 = tri.c - center;<font></font>
+<font></font>
+// 三角形の三辺を表すベクトルを取得<font></font>
+Vector3 f0 = v1 - v0,<font></font>
+        f1 = v2 - v1,<font></font>
+        f2 = v0 - v2;<font></font>
+<font></font>
+</pre>
+</div>
+<p>まずは、三角形の3つの辺とAABBの直交する3つの辺同士の組み合わせから得られる9通りのクロス積を軸とした交差判定を行っていきますが、AABBの3つの辺の方向がXYZ軸に平行であることを利用し、クロス積を得るための計算を省くことができます。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">// AABBの辺はそれぞれ方向ベクトルx(1, 0, 0)、y(0, 1, 0)、z(0, 0, 1)であるので、<font></font>
+// 計算を行わずに9通りのクロス積を得ることができる<font></font>
+Vector3<font></font>
+    a00 = new Vector3(0, -f0.z, f0.y), // X軸とf0とのクロス積<font></font>
+    a01 = new Vector3(0, -f1.z, f1.y), // Xとf1<font></font>
+    a02 = new Vector3(0, -f2.z, f2.y), // Xとf2<font></font>
+    a10 = new Vector3(f0.z, 0, -f0.x), // Yとf0<font></font>
+    a11 = new Vector3(f1.z, 0, -f1.x), // Yとf1<font></font>
+    a12 = new Vector3(f2.z, 0, -f2.x), // Yとf2<font></font>
+    a20 = new Vector3(-f0.y, f0.x, 0), // Zとf0<font></font>
+    a21 = new Vector3(-f1.y, f1.x, 0), // Zとf1<font></font>
+    a22 = new Vector3(-f2.y, f2.x, 0); // Zとf2<font></font>
+<font></font>
+// 9つの軸について交差判定を行う（後述）<font></font>
+// （どれか一つでも交差しない軸があれば、三角形とAABBは交差していないのでfalseを返す）<font></font>
+if (<font></font>
+    !Intersects(v0, v1, v2, extents, a00) ||<font></font>
+    !Intersects(v0, v1, v2, extents, a01) ||<font></font>
+    !Intersects(v0, v1, v2, extents, a02) ||<font></font>
+    !Intersects(v0, v1, v2, extents, a10) ||<font></font>
+    !Intersects(v0, v1, v2, extents, a11) ||<font></font>
+    !Intersects(v0, v1, v2, extents, a12) ||<font></font>
+    !Intersects(v0, v1, v2, extents, a20) ||<font></font>
+    !Intersects(v0, v1, v2, extents, a21) ||<font></font>
+    !Intersects(v0, v1, v2, extents, a22)<font></font>
+)<font></font>
+{<font></font>
+    return false;<font></font>
+}<font></font>
+<font></font>
+</pre>
+</div>
+<p>これらの軸上で三角形とAABBを射影して交差を判定するのが以下の関数です。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">protected static bool Intersects(<font></font>
+    Vector3 v0,<font></font>
+    Vector3 v1,<font></font>
+    Vector3 v2,<font></font>
+    Vector3 extents,<font></font>
+    Vector3 axis<font></font>
+)<font></font>
+{<font></font>
+    ...<font></font>
+}<font></font>
+</pre>
+</div>
+<p>ここで注意したいのが、AABBの中心を原点に持ってくることによる最適化を行っていることです。AABBの各頂点を全て軸に射影する必要はなく、AABBのXYZ軸について最大値を持つ頂点、つまり各辺の半分の長さ（extents）を射影するだけで軸上の区間を得ることができます。</p>
+<p>extentsを射影して得られた値rはAABBの射影軸上の区間[-r, r]を表すので、AABBについては射影の計算が一回で済む、ということです。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">// 三角形の頂点を軸上に射影する<font></font>
+float p0 = Vector3.Dot(v0, axis);<font></font>
+float p1 = Vector3.Dot(v1, axis);<font></font>
+float p2 = Vector3.Dot(v2, axis);<font></font>
+<font></font>
+// AABBのXYZ軸について最大値を持つ頂点（extents）を軸上に射影し、値rを得る<font></font>
+// AABBの区間は[-r, r]であるので、AABBについては全頂点を射影する必要はない<font></font>
+float r =<font></font>
+    extents.x * Mathf.Abs(axis.x) +<font></font>
+    extents.y * Mathf.Abs(axis.y) +<font></font>
+    extents.z * Mathf.Abs(axis.z);<font></font>
+<font></font>
+// 三角形の射影区間<font></font>
+float minP = Mathf.Min(p0, p1, p2);<font></font>
+float maxP = Mathf.Max(p0, p1, p2);<font></font>
+<font></font>
+// 三角形の区間とAABBの区間が重なっているかの判別<font></font>
+return !((maxP &lt; -r) || (r &lt; minP));<font></font>
+<font></font>
+</pre>
+</div>
+<p>9通りのクロス積を軸とした判別の次は、AABBの3つの法線を軸として判別を行います。</p>
+<p>AABBの法線がXYZ軸に平行であるという特性を利用し、AABBの中心を原点に持ってくるよう座標値を平行移動しているので、単に三角形の各頂点のXYZ成分についての最小値・最大値とextentsを比較するだけで交差判定が行えます。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">// X軸<font></font>
+if (<font></font>
+    Mathf.Max(v0.x, v1.x, v2.x) &lt; -extents.x ||<font></font>
+    Mathf.Min(v0.x, v1.x, v2.x) &gt; extents.x<font></font>
+)<font></font>
+{<font></font>
+    return false;<font></font>
+}<font></font>
+<font></font>
+// Y軸<font></font>
+if (<font></font>
+    Mathf.Max(v0.y, v1.y, v2.y) &lt; -extents.y ||<font></font>
+    Mathf.Min(v0.y, v1.y, v2.y) &gt; extents.y<font></font>
+)<font></font>
+{<font></font>
+    return false;<font></font>
+}<font></font>
+<font></font>
+// Z軸<font></font>
+if (<font></font>
+    Mathf.Max(v0.z, v1.z, v2.z) &lt; -extents.z ||<font></font>
+    Mathf.Min(v0.z, v1.z, v2.z) &gt; extents.z<font></font>
+)<font></font>
+{<font></font>
+    return false;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>最後は三角形の法線についてですが、三角形の法線を持つPlaneとAABBとの交差について判定を行っています。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">var normal = Vector3.Cross(f1, f0).normalized;<font></font>
+var pl = new Plane(normal, Vector3.Dot(normal, tri.a));<font></font>
+return Intersects(pl, aabb);<font></font>
+</pre>
+</div>
+<p>Intersects(Plane, Bounds)関数でPlaneとAABBとの交差を判定します。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">public static bool Intersects(Plane pl, Bounds aabb)<font></font>
+{<font></font>
+    Vector3 center = aabb.center;<font></font>
+    var extents = aabb.max - center;<font></font>
+<font></font>
+    // Planeのnormal上にextentsを射影<font></font>
+    var r =<font></font>
+        extents.x * Mathf.Abs(pl.normal.x) +<font></font>
+        extents.y * Mathf.Abs(pl.normal.y) +<font></font>
+        extents.z * Mathf.Abs(pl.normal.z);<font></font>
+<font></font>
+    // PlaneとAABBの中心との距離を計算<font></font>
+    var s = Vector3.Dot(pl.normal, center) - pl.distance;<font></font>
+<font></font>
+    // sが[-r, r]の範囲にあるかどうか判定<font></font>
+    return Mathf.Abs(s) &lt;= r;<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h1-2-5-2"></a>交差したボクセルを配列データに書き込む</h4>
+<p>一つの三角形について、交差するボクセルを判定できると、ボクセルデータのfillフラグを立て、その三角形が決められた方向から見て前面か背面かを示すfrontフラグを設定します。（frontフラグについては後述）</p>
+<p>ボクセルによっては前面を向いている三角形と背面を向いている三角形両方と交差している場合がありますが、その場合、frontフラグは背面を優先するようにします。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">if(Intersects(tri, boxes[x, y, z])) {<font></font>
+    // 交差した(x, y, z)にあるボクセルを取得する<font></font>
+    var voxel = volume[x, y, z];<font></font>
+<font></font>
+    // ボクセルの位置を設定する<font></font>
+    voxel.position = boxes[x, y, z].center;<font></font>
+<font></font>
+    if(voxel.fill &amp; 1 == 0) {<font></font>
+        // ボクセルがまだ埋まっていない場合<font></font>
+        // ボクセルと交差した三角形が前面かどうかのフラグを立てる<font></font>
+        voxel.front = front;<font></font>
+    } else {<font></font>
+        // ボクセルが既にほかの三角形で埋められている場合<font></font>
+        // 背面のフラグを優先する<font></font>
+        voxel.front = voxel.front &amp; front;<font></font>
+    }<font></font>
+<font></font>
+    // ボクセルを埋めるフラグを立てる<font></font>
+    voxel.fill = 1;<font></font>
+    volume[x, y, z] = voxel;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>frontフラグは後述の「メッシュの中身を埋める処理」に必要で、「中身を埋めていく方向」から見て前面か背面かを設定します。</p>
+<p>サンプルコードでは、forward(0, 0, 1)方向にメッシュの中身を埋めていくので、三角形がforward(0, 0, 1)から見て前面かどうかを判定します。</p>
+<p>3角形の法線とボクセルを埋める方向との内積が0以下であれば、3角形はその方向から見て前面であることがわかります。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">public class Triangle {<font></font>
+    public Vector3 a, b, c;     // 3角形を構成する3点<font></font>
+    public bool frontFacing;    // 3角形がボクセルを埋める方向から見て表面かどうかのフラグ<font></font>
+    public Bounds bounds;       // 3角形のAABB<font></font>
+<font></font>
+    public Triangle (Vector3 a, Vector3 b, Vector3 c, Vector3 dir) {<font></font>
+        this.a = a;<font></font>
+        this.b = b;<font></font>
+        this.c = c;<font></font>
+<font></font>
+        // 3角形がボクセルを埋める方向から見て前面かどうかを判定する<font></font>
+        var normal = Vector3.Cross(b - a, c - a);<font></font>
+        this.frontFacing = (Vector3.Dot(normal, dir) &lt;= 0f);<font></font>
+<font></font>
+        ...<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h1-2-6"></a><span class="secno">1.2.6　</span>メッシュの表面を表すボクセルデータから、メッシュ内部に位置するボクセルを埋める</h3>
+<p>メッシュ表面に位置するボクセルデータが計算できたので、次はその内部を埋めていきます。</p>
+<div id="id_Nakamura_2FVoxelFill" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill.png" alt="State after generating voxel data located on the mesh surface">
+<p class="caption">
+図1.8: メッシュ表面に位置するボクセルデータを生成した後の状態
+</p>
+</div>
+
+<h4><a id="h1-2-6-1"></a>ボクセルを埋める流れ</h4>
+<p>ボクセルを埋める方向からみて前面を向いているボクセルを探索します。</p>
+<p>以下の図のように空のボクセルは素通りします。</p>
+<div id="id_Nakamura_2FVoxelFill0" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill0.png" alt="Search for voxels that are facing forward when viewed from the direction of filling the voxels. Empty voxels pass through (the arrow indicates the direction of filling the voxels, and the frame indicates the voxel position being searched).">
+<p class="caption">
+図1.9: ボクセルを埋める方向からみて前面を向いているボクセルを探索する　空のボクセルは素通りする（矢印がボクセルを埋める方向で、枠が探索中のボクセル位置を表す）
+</p>
+</div>
+<p>前面を向いているボクセルを見つけたら、前面を向いているボクセルの中を進んでいきます。</p>
+<div id="id_Nakamura_2FVoxelFill1" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill1.png" alt="The state where the voxel facing the front is found (the line protruding from the mesh surface is the normal of the mesh, and in the figure, the normal of the mesh and the direction of filling the voxel are opposite, so the voxel at the frame position is You can see that it is located on the front)">
+<p class="caption">
+図1.10: 前面を向いているボクセルを見つけた状態（メッシュ表面から出ている線はメッシュの法線であり、図ではメッシュの法線とボクセルを埋める方向が向かいあっているので、枠の位置のボクセルは前面に位置していることがわかる）
+</p>
+</div>
+<div id="id_Nakamura_2FVoxelFill2" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill2.png" alt="Go through the voxels facing the front">
+<p class="caption">
+図1.11: 前面を向いているボクセルの中を進む
+</p>
+</div>
+<p>前面を向いているボクセルの中を抜けると、メッシュ内部に到達します。</p>
+<div id="id_Nakamura_2FVoxelFill3" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill3.png" alt="After passing through the voxels facing the front and reaching the inside of the mesh">
+<p class="caption">
+図1.12: 前面を向いているボクセルの中を抜け、メッシュ内部に到達した状態
+</p>
+</div>
+<p>メッシュ内部の中を進んでいき、到達したボクセルを埋めていきます。</p>
+<div id="id_Nakamura_2FVoxelFill4" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill4.png" alt="Fill the reached voxels as if filling the inside of the mesh">
+<p class="caption">
+図1.13: メッシュ内部を埋めていくように、到達したボクセルを埋めていく
+</p>
+</div>
+<p>そして、ボクセルを埋める方向からみて背面を向いているボクセルに到達すると、メッシュの内部を埋めきったことがわかります。背面を向いたボクセルの中を進んでいき、またメッシュの外に到達すると、また前面を向いているボクセルを探索しはじめます。</p>
+<div id="id_Nakamura_2FVoxelFill5" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/VoxelFill5.png" alt="Proceed through the voxel facing the back from the direction of filling the voxel, and reach the outside of the mesh again">
+<p class="caption">
+図1.14: ボクセルを埋める方向から背面を向いているボクセルの中を進んでいき、またメッシュの外に到達する
+</p>
+</div>
+
+<h4><a id="h1-2-6-2"></a>ボクセルを埋める実装</h4>
+<p>前項で決めたようにforward(0, 0, 1)方向に向かって内部を埋めていくので、3次元ボクセル配列ではz方向に向かって内部を埋めていくことになります。</p>
+<p>z方向の一番手前側、volume[x, y, 0]からはじめてvolume[x, y, depth - 1]まで中身を埋める処理を進めます。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">// メッシュの内部を埋める<font></font>
+for(int x = 0; x &lt; width; x++)<font></font>
+{<font></font>
+    for(int y = 0; y &lt; height; y++)<font></font>
+    {<font></font>
+        // z方向の手前側から奥に向かってメッシュ内部を埋めていく<font></font>
+        for(int z = 0; z &lt; depth; z++)<font></font>
+        {<font></font>
+            ...<font></font>
+        }<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>既にボクセルデータに書き込まれてあるfrontフラグ（z方向に向かって前面か背面か）を基に、前述のボクセルを埋める流れに沿って処理を進めます。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">...<font></font>
+// z方向の手前側から奥に向かってメッシュ内部を埋めていく<font></font>
+for(int z = 0; z &lt; depth; z++)<font></font>
+{<font></font>
+    // (x, y, z)が空の場合は無視<font></font>
+    if (volume[x, y, z].IsEmpty()) continue;<font></font>
+<font></font>
+    // 前面に位置するボクセルを進む<font></font>
+    int ifront = z;<font></font>
+    for(; ifront &lt; depth &amp;&amp; volume[x, y, ifront].IsFrontFace(); ifront++) {}<font></font>
+<font></font>
+    // 最後までいけば終わり<font></font>
+    if(ifront &gt;= depth) break;<font></font>
+<font></font>
+    // 背面に位置するボクセルを探す<font></font>
+    int iback = ifront;<font></font>
+<font></font>
+    // メッシュ内部を進んでいく<font></font>
+    for (; iback &lt; depth &amp;&amp; volume[x, y, iback].IsEmpty(); iback++) {}<font></font>
+<font></font>
+    // 最後までいけば終わり<font></font>
+    if (iback &gt;= depth) break;<font></font>
+<font></font>
+    // (x, y, iback)が背面かどうかを判定<font></font>
+    if(volume[x, y, iback].IsBackFace()) {<font></font>
+        // 背面に位置するボクセルを進む<font></font>
+        for (; iback &lt; depth &amp;&amp; volume[x, y, iback].IsBackFace(); iback++) {}<font></font>
+    }<font></font>
+<font></font>
+    // (x, y, ifront)から(x, y, iback)の位置までボクセルを埋める<font></font>
+    for(int z2 = ifront; z2 &lt; iback; z2++)<font></font>
+    {<font></font>
+        var p = boxes[x, y, z2].center;<font></font>
+        var voxel = volume[x, y, z2];<font></font>
+        voxel.position = p;<font></font>
+        voxel.fill = 1;<font></font>
+        volume[x, y, z2] = voxel;<font></font>
+    }<font></font>
+<font></font>
+    // 処理し終えた(x, y, iback)までループを進める<font></font>
+    z = iback;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>ここまででメッシュの中身を充填したボクセルデータを得ることができました。</p>
+<p>処理し終えた3次元のボクセルデータの中には、空のボクセルが含まれているため、CPUVoxelizer.Voxelizeではメッシュの表面と充填された中身を構成するボクセルのみを返すようにしています。</p>
+<div class="emlist-code">
+<p class="caption">CPUVoxelizer.cs</p>
+<pre class="emlist">// 空でないボクセルを取得する<font></font>
+voxels = new List&lt;Voxel_t&gt;();<font></font>
+for(int x = 0; x &lt; width; x++) {<font></font>
+    for(int y = 0; y &lt; height; y++) {<font></font>
+        for(int z = 0; z &lt; depth; z++) {<font></font>
+            if(!volume[x, y, z].IsEmpty())<font></font>
+            {<font></font>
+                voxels.Add(volume[x, y, z]);<font></font>
+            }<font></font>
+        }<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>CPUVoxelizerTest.csで、CPUVoxelizerで得たボクセルデータを用いてメッシュを構築し、ボクセルを可視化しています。</p>
+<div id="id_Nakamura_2FCPUVoxelizerTest" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/CPUVoxelizerTest.png" alt="CPUVoxelizer.Voxelizeで得たボクセルデータをMeshにして可視化したデモ（CPUVoxelizerTest.scene）">
+<p class="caption">
+図1.15: CPUVoxelizer.Voxelizeで得たボクセルデータをMeshにして可視化したデモ（CPUVoxelizerTest.scene）
+</p>
+</div>
+
+<h2><a id="h1-3"></a><span class="secno">1.3　</span>ボクセルのメッシュ表現</h2>
+<p>ボクセルデータの配列Voxel_t[]と、一つのボクセルの単位長さの情報を基にメッシュを構築する処理をVoxelMeshクラスに記述しています。</p>
+<p>前節のCPUVoxelizerTest.csではこのクラスを用いてボクセルメッシュの生成を行っています。</p>
+<div class="emlist-code">
+<p class="caption">VoxelMesh.cs</p>
+<pre class="emlist">public class VoxelMesh {<font></font>
+<font></font>
+    public static Mesh Build (Voxel_t[] voxels, float size)<font></font>
+    {<font></font>
+        var hsize = size * 0.5f;<font></font>
+        var forward = Vector3.forward * hsize;<font></font>
+        var back = -forward;<font></font>
+        var up = Vector3.up * hsize;<font></font>
+        var down = -up;<font></font>
+        var right = Vector3.right * hsize;<font></font>
+        var left = -right;<font></font>
+<font></font>
+        var vertices = new List&lt;Vector3&gt;();<font></font>
+        var normals = new List&lt;Vector3&gt;();<font></font>
+        var triangles = new List&lt;int&gt;();<font></font>
+<font></font>
+        for(int i = 0, n = voxels.Length; i &lt; n; i++)<font></font>
+        {<font></font>
+            if(voxel[i].fill == 0) continue;<font></font>
+<font></font>
+            var p = voxels[i].position;<font></font>
+<font></font>
+            // 一つのボクセルを表現するCubeを構成する8隅の頂点<font></font>
+            var corners = new Vector3[8] {<font></font>
+                p + forward + left + up,<font></font>
+                p + back + left + up,<font></font>
+                p + back + right + up,<font></font>
+                p + forward + right + up,<font></font>
+<font></font>
+                p + forward + left + down,<font></font>
+                p + back + left + down,<font></font>
+                p + back + right + down,<font></font>
+                p + forward + right + down,<font></font>
+            };<font></font>
+<font></font>
+            // Cubeを構成する6面を構築する<font></font>
+<font></font>
+            // up<font></font>
+            AddTriangle(<font></font>
+                corners[0], corners[3], corners[1],<font></font>
+                up, vertices, normals, triangles<font></font>
+            );<font></font>
+            AddTriangle(<font></font>
+                corners[2], corners[1], corners[3],<font></font>
+                up, vertices, normals, triangles<font></font>
+            );<font></font>
+<font></font>
+            // down<font></font>
+            AddTriangle(<font></font>
+                corners[4], corners[5], corners[7],<font></font>
+                down, vertices, normals, triangles<font></font>
+            );<font></font>
+            AddTriangle(<font></font>
+                corners[6], corners[7], corners[5],<font></font>
+                down, vertices, normals, triangles<font></font>
+            );<font></font>
+<font></font>
+            // right<font></font>
+            AddTriangle(<font></font>
+                corners[7], corners[6], corners[3],<font></font>
+                right, vertices, normals, triangles<font></font>
+            );<font></font>
+            AddTriangle(<font></font>
+                corners[2], corners[3], corners[6],<font></font>
+                right, vertices, normals, triangles<font></font>
+            );<font></font>
+<font></font>
+            // left<font></font>
+            AddTriangle(<font></font>
+                corners[5], corners[4], corners[1],<font></font>
+                left, vertices, normals, triangles<font></font>
+            );<font></font>
+            AddTriangle(<font></font>
+                corners[0], corners[1], corners[4],<font></font>
+                left, vertices, normals, triangles<font></font>
+            );<font></font>
+<font></font>
+            // forward<font></font>
+            AddTriangle(<font></font>
+                corners[4], corners[7], corners[0],<font></font>
+                forward, vertices, normals, triangles<font></font>
+            );<font></font>
+            AddTriangle(<font></font>
+                corners[3], corners[0], corners[7],<font></font>
+                forward, vertices, normals, triangles<font></font>
+            );<font></font>
+<font></font>
+            // back<font></font>
+            AddTriangle(<font></font>
+                corners[6], corners[5], corners[2],<font></font>
+                forward, vertices, normals, triangles<font></font>
+            );<font></font>
+            AddTriangle(<font></font>
+                corners[1], corners[2], corners[5],<font></font>
+                forward, vertices, normals, triangles<font></font>
+            );<font></font>
+        }<font></font>
+<font></font>
+        var mesh = new Mesh();<font></font>
+        mesh.SetVertices(vertices);<font></font>
+<font></font>
+        // 頂点数が16bitでサポートできる数を超えていたら32bit index formatを適用する<font></font>
+        mesh.indexFormat =<font></font>
+            (vertices.Count &lt;= 65535)<font></font>
+            ? IndexFormat.UInt16 : IndexFormat.UInt32;<font></font>
+        mesh.SetNormals(normals);<font></font>
+        mesh.SetIndices(triangles.ToArray(), MeshTopology.Triangles, 0);<font></font>
+        mesh.RecalculateBounds();<font></font>
+        return mesh;<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h2><a id="h1-4"></a><span class="secno">1.4　</span>GPUでの実装</h2>
+<p>ここからはGPUを用いてCPUVoxelizerで実装したボクセル化をより高速に実行する方法について解説します。</p>
+<p>CPUVoxelizerで実装したボクセル化のアルゴリズムは、XY平面上でボクセルの単位長さで区切られた格子空間上の各座標ごとに並列化することができます。</p>
+<div id="id_Nakamura_2FParallelization" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/Parallelization.png" alt="XY平面上でボクセルの単位長さで区切られた格子空間　ボクセル化はこの各格子ごとに並列化できるのでGPU実装が可能">
+<p class="caption">
+図1.16: XY平面上でボクセルの単位長さで区切られた格子空間　ボクセル化はこの各格子ごとに並列化できるのでGPU実装が可能
+</p>
+</div>
+<p>並列化できるそれぞれの処理をGPUスレッドに割り振れば、GPUの高速な並列計算の恩恵により、高速に処理が実行できます。</p>
+<p>GPUでのボクセル化の実装はGPUVoxelizer.csとVoxelizer.computeに記述しています。</p>
+<p>（本節から登場する、UnityでGPGPUプログラミングをする上で欠かせないComputeShaderの基本についてはUnity Graphics Programming vol.1「ComputeShader入門」で解説しています）</p>
+<p>GPUでのボクセル化は、GPUVoxelizerクラスのstatic関数</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">public class GPUVoxelizer<font></font>
+{<font></font>
+    public static GPUVoxelData Voxelize (<font></font>
+        ComputeShader voxelizer,<font></font>
+        Mesh mesh,<font></font>
+        int resolution<font></font>
+    ) {<font></font>
+    ...<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>をコールすることで実行します。引数にVoxelizer.compute、ボクセル化したいメッシュ、解像度を指定して実行すると、ボクセルデータを示すGPUVoxelDataを返します。</p>
+
+<h3><a id="h1-4-1"></a><span class="secno">1.4.1　</span>GPUでのボクセル生成に必要なデータのセットアップ</h3>
+<p>ボクセル化の大まかな流れ(1) ~ (3)と同じようにして、ボクセル生成に必要なデータのセットアップを行います。</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">public static GPUVoxelData Voxelize (<font></font>
+    ComputeShader voxelizer,<font></font>
+    Mesh mesh,<font></font>
+    int resolution<font></font>
+) {<font></font>
+    // CPUVoxelizer.Voxelizeと同じ処理 -------<font></font>
+    mesh.RecalculateBounds();<font></font>
+    var bounds = mesh.bounds;<font></font>
+<font></font>
+    float maxLength = Mathf.Max(<font></font>
+        bounds.size.x,<font></font>
+        Mathf.Max(bounds.size.y, bounds.size.z)<font></font>
+    );<font></font>
+    var unit = maxLength / resolution;<font></font>
+<font></font>
+    var hunit = unit * 0.5f;<font></font>
+<font></font>
+    var start = bounds.min - new Vector3(hunit, hunit, hunit);<font></font>
+    var end = bounds.max + new Vector3(hunit, hunit, hunit);<font></font>
+    var size = end - start;<font></font>
+<font></font>
+    int width = Mathf.CeilToInt(size.x / unit);<font></font>
+    int height = Mathf.CeilToInt(size.y / unit);<font></font>
+    int depth = Mathf.CeilToInt(size.z / unit);<font></font>
+    // ------- ここまでCPUVoxelizer.Voxelizeと同じ<font></font>
+    ...<font></font>
+}<font></font>
+</pre>
+</div>
+<p>Voxel_tの配列は、GPU上で扱えるようにするためにComputeBufferとして定義します。ここで注意したいのが、CPU実装だと3次元配列として生成したVoxel_t配列を1次元配列として定義していることです。</p>
+<p>これは、GPUでは多次元配列を扱うのが困難なためで、1次元配列として定義しておき、ComputeShader内では3次元上の位置(x, y, z)から1次元配列上のindexを取得することで、1次元配列を3次元配列のように処理しています。</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">// Voxel_t配列を表すComputeBufferを生成<font></font>
+var voxelBuffer = new ComputeBuffer(<font></font>
+    width * height * depth,<font></font>
+    Marshal.SizeOf(typeof(Voxel_t))<font></font>
+);<font></font>
+var voxels = new Voxel_t[voxelBuffer.count];<font></font>
+voxelBuffer.SetData(voxels); // 初期化<font></font>
+</pre>
+</div>
+<p>これらセットアップしたデータをGPU側に転送します。</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">// ボクセルデータをGPU側に転送<font></font>
+voxelizer.SetVector("_Start", start);<font></font>
+voxelizer.SetVector("_End", end);<font></font>
+voxelizer.SetVector("_Size", size);<font></font>
+<font></font>
+voxelizer.SetFloat("_Unit", unit);<font></font>
+voxelizer.SetFloat("_InvUnit", 1f / unit);<font></font>
+voxelizer.SetFloat("_HalfUnit", hunit);<font></font>
+voxelizer.SetInt("_Width", width);<font></font>
+voxelizer.SetInt("_Height", height);<font></font>
+voxelizer.SetInt("_Depth", depth);<font></font>
+</pre>
+</div>
+<p>メッシュを構成する三角形とボクセル同士の交差判定を行うため、メッシュを表すComputeBufferを生成します。</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">// メッシュの頂点配列を表すComputeBufferを生成<font></font>
+var vertices = mesh.vertices;<font></font>
+var vertBuffer = new ComputeBuffer(<font></font>
+    vertices.Length,<font></font>
+    Marshal.SizeOf(typeof(Vector3))<font></font>
+);<font></font>
+vertBuffer.SetData(vertices);<font></font>
+<font></font>
+// メッシュの三角形配列を表すComputeBufferを生成<font></font>
+var triangles = mesh.triangles;<font></font>
+var triBuffer = new ComputeBuffer(<font></font>
+    triangles.Length,<font></font>
+    Marshal.SizeOf(typeof(int))<font></font>
+);<font></font>
+triBuffer.SetData(triangles);<font></font>
+</pre>
+</div>
+
+<h3><a id="h1-4-2"></a><span class="secno">1.4.2　</span>GPUでメッシュの表面に位置するボクセルを生成する</h3>
+<p>GPUでメッシュの表面に位置するボクセルを生成する処理では、前面を向いている三角形と交差しているボクセルを生成した後で、背面を向いている三角形と交差しているボクセルを生成します。</p>
+<p>これは、同じ位置のボクセルに対して複数の三角形が交差している場合に、ボクセルに書き込まれるfrontフラグの値が一意に定まらない恐れがあるためです。</p>
+<p>GPUの並列計算で気をつけないといけないのは、同じデータに複数のスレッドが同時にアクセスしてしまうことによる、結果の不定性です。</p>
+<p>この表面を生成する処理においては、frontフラグの値が背面（false）であることを優先し、前面→背面という順でボクセル生成を実行することで結果の不定性を防いでいます。</p>
+<p>前面を向いている三角形と交差しているボクセルを生成するGPUカーネルSurfaceFrontに、先ほど生成したメッシュデータを転送します。</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">// GPUカーネルSurfaceFrontにメッシュデータを転送<font></font>
+var surfaceFrontKer = new Kernel(voxelizer, "SurfaceFront");<font></font>
+voxelizer.SetBuffer(surfaceFrontKer.Index, "_VoxelBuffer", voxelBuffer);<font></font>
+voxelizer.SetBuffer(surfaceFrontKer.Index, "_VertBuffer", vertBuffer);<font></font>
+voxelizer.SetBuffer(surfaceFrontKer.Index, "_TriBuffer", triBuffer);<font></font>
+<font></font>
+// メッシュを構成する三角形の数を設定<font></font>
+var triangleCount = triBuffer.count / 3; // (三角形を構成する頂点indexの数 / 3)が三角形の数<font></font>
+voxelizer.SetInt("_TriangleCount", triangleCount);<font></font>
+</pre>
+</div>
+<p>この処理はメッシュを構成する三角形ごとに並列に実行します。全ての三角形が処理されるように、カーネルのスレッドグループを(三角形の数triangleCount / カーネルのスレッド数 + 1, 1, 1)に設定し、カーネルを実行します。</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">// 前面を向いている三角形と交差するボクセルを構築<font></font>
+voxelizer.Dispatch(<font></font>
+    surfaceFrontKer.Index,<font></font>
+    triangleCount / (int)surfaceFrontKer.ThreadX + 1,<font></font>
+    (int)surfaceFrontKer.ThreadY,<font></font>
+    (int)surfaceFrontKer.ThreadZ<font></font>
+);<font></font>
+</pre>
+</div>
+<p>SurfaceFrontカーネルは前面を向いている三角形のみを処理するため、三角形の前面背面をチェックし、背面である場合はそのまま処理を終了するようにreturnし、前面である場合はメッシュ表面を構築するsurface関数を実行しています。</p>
+<div class="emlist-code">
+<p class="caption">Voxelizer.compute</p>
+<pre class="emlist">[numthreads(8, 1, 1)]<font></font>
+void SurfaceFront (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+    // 三角形の数を超えているとreturn<font></font>
+    int idx = (int)id.x;<font></font>
+    if(idx &gt;= _TriangleCount) return;<font></font>
+<font></font>
+    // 三角形の頂点位置と前面背面フラグを取得<font></font>
+    float3 va, vb, vc;<font></font>
+    bool front;<font></font>
+    get_triangle(idx, va, vb, vc, front);<font></font>
+<font></font>
+    // 背面である場合はreturn<font></font>
+    if (!front) return;<font></font>
+<font></font>
+    // メッシュ表面を構築<font></font>
+    surface(va, vb, vc, front);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>get_triangle関数は、CPUからGPU側に渡されたメッシュデータ（三角形を構成する頂点indexを表す_TriBufferと頂点を表す_VertBuffer）に基づいて、三角形の頂点位置と前面背面フラグを取得します。</p>
+<div class="emlist-code">
+<p class="caption">Voxelizer.compute</p>
+<pre class="emlist">void get_triangle(<font></font>
+    int idx,<font></font>
+    out float3 va, out float3 vb, out float3 vc,<font></font>
+    out bool front<font></font>
+)<font></font>
+{<font></font>
+    int ia = _TriBuffer[idx * 3];<font></font>
+    int ib = _TriBuffer[idx * 3 + 1];<font></font>
+    int ic = _TriBuffer[idx * 3 + 2];<font></font>
+<font></font>
+    va = _VertBuffer[ia];<font></font>
+    vb = _VertBuffer[ib];<font></font>
+    vc = _VertBuffer[ic];<font></font>
+<font></font>
+    // 三角形がforward(0, 0, 1)方向から見て前面か背面かを判断<font></font>
+    float3 normal = cross((vb - va), (vc - vb));<font></font>
+    front = dot(normal, float3(0, 0, 1)) &lt; 0;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>ボクセルと三角形との交差判定を行い、その結果をボクセルデータに書き込むsurface関数は、1次元配列として生成したボクセルデータのindexを取得する手間があれど、その処理の内容はCPUVoxelizer上に実装したものとほぼ同じものになります。</p>
+<div class="emlist-code">
+<p class="caption">Voxelizer.compute</p>
+<pre class="emlist">void surface (float3 va, float3 vb, float3 vc, bool front)<font></font>
+{<font></font>
+    // 三角形のAABBを計算<font></font>
+    float3 tbmin = min(min(va, vb), vc);<font></font>
+    float3 tbmax = max(max(va, vb), vc);<font></font>
+<font></font>
+    float3 bmin = tbmin - _Start;<font></font>
+    float3 bmax = tbmax - _Start;<font></font>
+    int iminX = round(bmin.x / _Unit);<font></font>
+    int iminY = round(bmin.y / _Unit);<font></font>
+    int iminZ = round(bmin.z / _Unit);<font></font>
+    int imaxX = round(bmax.x / _Unit);<font></font>
+    int imaxY = round(bmax.y / _Unit);<font></font>
+    int imaxZ = round(bmax.z / _Unit);<font></font>
+    iminX = clamp(iminX, 0, _Width - 1);<font></font>
+    iminY = clamp(iminY, 0, _Height - 1);<font></font>
+    iminZ = clamp(iminZ, 0, _Depth - 1);<font></font>
+    imaxX = clamp(imaxX, 0, _Width - 1);<font></font>
+    imaxY = clamp(imaxY, 0, _Height - 1);<font></font>
+    imaxZ = clamp(imaxZ, 0, _Depth - 1);<font></font>
+<font></font>
+    // 三角形のAABBの中でボクセルとの交差判定を行う<font></font>
+    for(int x = iminX; x &lt;= imaxX; x++) {<font></font>
+        for(int y = iminY; y &lt;= imaxY; y++) {<font></font>
+            for(int z = iminZ; z &lt;= imaxZ; z++) {<font></font>
+                // (x, y, z)に位置するボクセルのAABBを生成<font></font>
+                float3 center = float3(x, y, z) * _Unit + _Start;<font></font>
+                AABB aabb;<font></font>
+                aabb.min = center - _HalfUnit;<font></font>
+                aabb.center = center;<font></font>
+                aabb.max = center + _HalfUnit;<font></font>
+                if(intersects_tri_aabb(va, vb, vc, aabb))<font></font>
+                {<font></font>
+                    // (x, y, z)の位置から1次元のボクセル配列のindexを取得<font></font>
+                    uint vid = get_voxel_index(x, y, z);<font></font>
+                    Voxel voxel = _VoxelBuffer[vid];<font></font>
+                    voxel.position = get_voxel_position(x, y, z);<font></font>
+                    voxel.front = front;<font></font>
+                    voxel.fill = true;<font></font>
+                    _VoxelBuffer[vid] = voxel;<font></font>
+                }<font></font>
+            }<font></font>
+        }<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>これで前面を向いている三角形についてボクセルが生成できたので、次は背面を向いている三角形について処理していきます。</p>
+<p>背面を向いている三角形と交差するボクセルを生成するGPUカーネルSurfaceBackに先程と同じようにメッシュデータを転送し、実行します。</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">var surfaceBackKer = new Kernel(voxelizer, "SurfaceBack");<font></font>
+voxelizer.SetBuffer(surfaceBackKer.Index, "_VoxelBuffer", voxelBuffer);<font></font>
+voxelizer.SetBuffer(surfaceBackKer.Index, "_VertBuffer", vertBuffer);<font></font>
+voxelizer.SetBuffer(surfaceBackKer.Index, "_TriBuffer", triBuffer);<font></font>
+voxelizer.Dispatch(<font></font>
+    surfaceBackKer.Index,<font></font>
+    triangleCount / (int)surfaceBackKer.ThreadX + 1,<font></font>
+    (int)surfaceBackKer.ThreadY,<font></font>
+    (int)surfaceBackKer.ThreadZ<font></font>
+);<font></font>
+</pre>
+</div>
+<p>SurfaceBackの処理は、三角形が前面を向いている場合にreturnを返す以外はSurfaceFrontと同じです。SurfaceFrontの後にSurfaceBackを実行することによって、もし前面を向いている三角形と背面を向いている三角形両方と交差しているボクセルが存在していても、ボクセルのfrontフラグがSurfaceBackによって上書きされる形になり、背面を向いていることが優先されるようになります。</p>
+<div class="emlist-code">
+<p class="caption">Voxelizer.compute</p>
+<pre class="emlist">[numthreads(8, 1, 1)]<font></font>
+void SurfaceBack (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+    int idx = (int)id.x;<font></font>
+    if(idx &gt;= _TriangleCount) return;<font></font>
+<font></font>
+    float3 va, vb, vc;<font></font>
+    bool front;<font></font>
+    get_triangle(idx, va, vb, vc, front);<font></font>
+<font></font>
+    // 前面である場合はreturn<font></font>
+    if (front) return;<font></font>
+<font></font>
+    surface(va, vb, vc, front);<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h1-4-3"></a><span class="secno">1.4.3　</span>GPUでメッシュの表面を表すボクセルデータから、メッシュ内部に位置するボクセルを埋める</h3>
+<p>メッシュの内部を埋める処理はVolumeカーネルで行います。</p>
+<p>VolumeカーネルはXY平面上でボクセルの単位長さで区切られた格子空間上の各座標ごとにスレッドを用意して実行します。つまり、CPU実装だとXY座標について二重ループを実行していたところをGPUで並列化し、高速化しているということになります。</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">// Volumeカーネルにボクセルデータを転送<font></font>
+var volumeKer = new Kernel(voxelizer, "Volume");<font></font>
+voxelizer.SetBuffer(volumeKer.Index, "_VoxelBuffer", voxelBuffer);<font></font>
+<font></font>
+// メッシュ内部を埋める<font></font>
+voxelizer.Dispatch(<font></font>
+    volumeKer.Index,<font></font>
+    width / (int)volumeKer.ThreadX + 1,<font></font>
+    height / (int)volumeKer.ThreadY + 1,<font></font>
+    (int)volumeKer.ThreadZ<font></font>
+);<font></font>
+</pre>
+</div>
+<p>Volumeカーネルの実装はGPUVoxelizerに実装したものとほぼ同じものになります。</p>
+<div class="emlist-code">
+<p class="caption">Voxelizer.compute</p>
+<pre class="emlist">[numthreads(8, 8, 1)]<font></font>
+void Volume (uint3 id : SV_DispatchThreadID)<font></font>
+{<font></font>
+    int x = (int)id.x;<font></font>
+    int y = (int)id.y;<font></font>
+    if(x &gt;= _Width) return;<font></font>
+    if(y &gt;= _Height) return;<font></font>
+<font></font>
+    for (int z = 0; z &lt; _Depth; z++)<font></font>
+    {<font></font>
+        Voxel voxel = _VoxelBuffer[get_voxel_index(x, y, z)];<font></font>
+        // CPUVoxelizer.Voxelize内の処理とほぼ同じ処理が続く<font></font>
+        ...<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>このようにしてボクセルデータが得られると、不要になったメッシュデータを破棄し、ボクセルのビジュアル表現をつくる際に必要なデータを持ったGPUVoxelDataを生成します。</p>
+<div class="emlist-code">
+<p class="caption">GPUVoxelizer.cs</p>
+<pre class="emlist">// 不要になったメッシュデータを破棄<font></font>
+vertBuffer.Release();<font></font>
+triBuffer.Release();<font></font>
+<font></font>
+return new GPUVoxelData(voxelBuffer, width, height, depth, unit);<font></font>
+</pre>
+</div>
+<p>これでGPU実装によるボクセル化が完了しました。GPUVoxelizerTest.csで実際にGPUVoxelDataを用いてボクセルデータを可視化しています。</p>
+
+<h2><a id="h1-5"></a><span class="secno">1.5　</span>CPU実装とGPU実装の速度差</h2>
+<p>テスト用のSceneではPlay時にVoxelizerを実行しているので、CPU実装とGPU実装の速度差がわかりにくいですが、GPU実装でかなりの高速化を実現しています。</p>
+<p>実行環境と、ボクセル化する対象のメッシュのポリゴン数、ボクセル化の解像度にパフォーマンスは大きく依存しますが、</p>
+<ul>
+<li>実行環境 OS: Windows10、CPU: Core i7、メモリ: 32GB、GPU: GeForce GTX 980</li>
+<li>頂点数 5319、三角形数 9761のメッシュ</li>
+<li>ボクセル化の解像度 256</li>
+</ul>
+<p>という条件では、GPU実装はCPU実装の50倍以上高速に動作しています。</p>
+
+<h2><a id="h1-6"></a><span class="secno">1.6　</span>応用例</h2>
+<p>GPU実装のParticleSystemを利用した応用例（GPUVoxelParticleSystem）を紹介します。</p>
+<p>GPUVoxelParticleSystemはGPUVoxelizerから得られたボクセルデータを表すComputeBufferを、ComputeShaderでのパーティクルの位置計算に利用します。</p>
+<ol>
+<li>GPUVoxelizerでアニメーションモデルを毎フレームボクセル化</li>
+<li>GPUVoxelDataが持つComputeBufferを、パーティクルの位置計算を行うComputeShaderに渡す</li>
+<li>パーティクルをGPUインスタンシングで描画</li>
+</ol>
+<p>という流れでエフェクトを作成しています。</p>
+<div id="id_Nakamura_2FGPUVoxelParticleSystem3" class="image">
+<img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/GPUVoxelParticleSystem3.png" alt="GPU実装のParticleSystemを利用した応用例（GPUVoxelParticleSystem）">
+<p class="caption">
+図1.17: GPU実装のParticleSystemを利用した応用例（GPUVoxelParticleSystem）
+</p>
+</div>
+<p>大量のパーティクルをボクセルの位置から出現させることで、パーティクルで構成されるアニメーションモデルのようなビジュアルを実現しています。</p>
+<p>アニメーションモデルに対してフレーム毎にボクセル化を施せるのは、GPU実装による高速化があってこそで、リアルタイムで利用できるビジュアル表現の幅を広げるためにも、こうしたGPUでの高速化は欠かせないものになっています。</p>
+
+<h2><a id="h1-7"></a><span class="secno">1.7　</span>まとめ</h2>
+<p>本章では、メッシュモデルのボクセル化を行うアルゴリズムをCPU実装を例に紹介し、GPU実装によってボクセル化を高速化するところまで行いました。</p>
+<p>三角形とボクセルとの交差判定を用いてボクセルを生成するアプローチをとりましたが、平行投影によってモデルをXYZ方向から3Dテクスチャにレンダリングしていくことでボクセルデータを構築する方法もあります。</p>
+<p>本章で紹介した手法だと、ボクセル化後のモデルにどうテクスチャを貼るかといった点に課題がありますが、3Dテクスチャにモデルをレンダリングする手法であれば、ボクセルへの色付けはより手軽かつ正確に実現できるかもしれません。</p>
+
+<h2><a id="h1-8"></a><span class="secno">1.8　</span>参考</h2>
+<ul>
+<li>http://blog.wolfire.com/2009/11/Triangle-mesh-voxelization</li>
+<li>http://www.dyn4j.org/2010/01/sat/</li>
+<li>https://gdbooks.gitbooks.io/3dcollisions/content/Chapter4/aabb-triangle.html</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Game Engine Architecture 2nd Edition Chapter 12</font></font></li>
+<li>https://developer.nvidia.com/content/basics-gpu-voxelization</li>
+</ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 1 _ Real-Time GPU-Based Voxelizer_files/saved_resource(2).html"></iframe></body></html>

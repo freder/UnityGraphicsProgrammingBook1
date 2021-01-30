@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://freder.io/files/unity2/SimpleImageEffect.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 9 _ ImageEffect Getting Started_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Getting started with ImageEffect</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 9 _ ImageEffect Getting Started_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 9 _ ImageEffect Getting Started_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ ImageEffect Getting Started_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ ImageEffect Getting Started_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 9 _ ImageEffect Getting Started_files/saved_resource.html"></iframe></div>
+<h1><a id="h9"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 9　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ImageEffect Getting Started</font></font></h1>
+<div id="id_SimpleImageEffect_2F02mono" class="image">
+<img src="./Chapter 9 _ ImageEffect Getting Started_files/02mono.png" alt="Negative / positive inversion by ImageEffect">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.1: Negative-Positive Inversion with ImageEffect
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A simple explanation of how to implement ImageEffect, a technology that applies effects to the output video using a shader (GPU), in Unity. </font><font style="vertical-align: inherit;">The technology is also known as PostEffect.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ImageEffect is used for glow effects that express light, anti-aliasing that reduces jaggies, depth of field DOF, and much more. </font><font style="vertical-align: inherit;">The simplest example would be a color change or modification that also deals with the sample presented here.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This chapter is written on the assumption that you have some prerequisite knowledge about the basic knowledge and usage of Unlit shader and Surface shader, but since it is the shader with the simplest configuration, even if you do not have the prerequisite knowledge, I think you can read on and use it.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample in this chapter is </font><font style="vertical-align: inherit;">"Simple Image Effect" from </font></font><br><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming2" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/IndieVisualLab/UnityGraphicsProgramming2</font></font></a><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+
+<h2><a id="h9-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> How ImageEffect works</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The way ImageEffect achieves various effects is, in a nutshell, image processing, that is, by manipulating the screen pixel by pixel, various effects are achieved.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Speaking of processing pixels by shaders, it is a fragment shader. </font><font style="vertical-align: inherit;">In essence, implementing an ImageEffect is equivalent to implementing a fragment shader.</font></font></p>
+<div id="id_SimpleImageEffect_2F01" class="image">
+<img src="./Chapter 9 _ ImageEffect Getting Started_files/01.png" alt="ImageEffect implementation is fragment shader implementation">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.2: ImageEffect implementation implements fragment shader
+</font></font></p>
+</div>
+
+<h2><a id="h9-2"></a><span class="secno">9.2　</span>Unity における ImageEffect の簡単な流れ</h2>
+<p>Unity において、ImageEffect の処理順序は概ね次のようになります。</p>
+<ol>
+<li>カメラがシーンを描画する。</li>
+<li>カメラの描画内容が OnRenderImage メソッドに入力される。</li>
+<li>ImageEffect 用のシェーダで、入力された描画内容を修正する。</li>
+<li>OnRenderImage メソッドが修正された描画内容を出力する。</li>
+</ol>
+
+<h2><a id="h9-3"></a><span class="secno">9.3　</span>サンプルシーンから構成を確認する</h2>
+<p>もっとも簡単なサンプルシーンを用意しました。サンプルの "ImageEffectBase" シーンを開いて確認してください。関連するスクリプトなどのリソースは、それと同じ名前のものです。</p>
+<p>よく似たサンプルに ImageEffect シーンと、同じ名前のリソースがありますが、そちらは後で解説するので注意してください。</p>
+<p>サンプルを開くと、シーン中のカメラが映し出すイメージは、ImageEffect によって色がネガポジ反転します。これは Unity が標準で生成する ImageEffect 用のシェーダと同等の効果ですが、実際のソースコードはわずかに異なります。</p>
+<p>サンプルシーンの "Main Camera" に "ImageEffectBase" スクリプトがアタッチされていることを確認してください。さらに "ImageEffectBase" では同じ名前のマテリアルが参照され、そのマテリアルには同じ名前のシェーダが設定されています。</p>
+
+<h2><a id="h9-4"></a><span class="secno">9.4　</span>スクリプトの実装</h2>
+<p>まずは ImageEffect のシェーダをスクリプトから呼び出すまでの処理を先に解説しようと思います。</p>
+
+<h3><a id="h9-4-1"></a><span class="secno">9.4.1　</span>OnRenderImage メソッド</h3>
+<p>Unity が出力する映像に変更を加えたいとき、ほとんどの場合には OnRenderImage メソッドを実装する必要があります。OnRenderImage は Start や Update などと同じように Unity の標準のワークフローに定義されるメソッドです。</p>
+<div class="emlist-code">
+<p class="caption">ImageEffectBase.cs</p>
+<pre class="emlist">[ExecuteInEditMode]<font></font>
+[RequireComponent(typeof(Camera))]<font></font>
+public class ImageEffectBase : MonoBehaviour<font></font>
+{<font></font>
+…<font></font>
+protected virtual void OnRenderImage<font></font>
+    (RenderTexture source, RenderTexture destination)<font></font>
+{<font></font>
+    Graphics.Blit(source, destination, this.material);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>OnRenderImage は、Camera コンポーネントをもつ GameObject に追加されたときにだけ呼び出されます。したがって、ImageEffect クラスには、<code class="inline-code tt">[RequireComponent(typeof(Camera))]</code> を定義しています。</p>
+<p>また ImageEffect が適用された結果は、Scene を実行する前から見えていた方がよいので、<code class="inline-code tt">ExcludeInEditMode</code> 属性も定義されています。複数の ImageEffect を切り替えて確認するときや、無効にした状態を確認するときは、ImageEffect のスクリプトを disable にします。</p>
+
+<h4><a id="h9-4-1-1"></a>引数 source, destination について</h4>
+<p>OnRenderImage は引数の 1 つ目（source）に入力、2 つ目（destination）に出力先が与えられています。いずれも RenderTexture 型ですが、特別の設定がないとき、source にはカメラの描画結果が与えられ、destination には null が与えられています。</p>
+<p>ImageEffect は、source に入力された絵を変更して destination に書き込む処理を行いますが、destination が null のとき、変更された絵の出力先はフレームバッファ、すなわちディスプレイに見えている領域になります。</p>
+<p>また Camera の出力先に RenderTexture が設定されているとき、source はその RenderTexture と同等になります。</p>
+
+<h4><a id="h9-4-1-2"></a>Graphics.Blit</h4>
+<p><code class="inline-code tt">Graphics.Blit</code> メソッドは、指定したマテリアルとシェーダを使って、入力された RenderTexture を出力となる RenderTexture に描画する処理です。ここでの入力と出力は OnRenderImage の source および destination になります。また、マテリアルは ImageEffect のためのシェーダが設定されたものになります。</p>
+<p>原則として、 OnRenderImage メソッドでは、引数の destination に必ず何かしらのイメージデータを渡す必要があります。したがってほとんどの場合に OnRenderImage 内では Graphics.Blit が呼び出されます。</p>
+<p>応用的に、たとえば別のエフェクトに使うためのテクスチャを作るとき、テクスチャを複製するときなどにも <code class="inline-code tt">Graphics.Blit</code> を用いることがあります。あるいは、別の方法を用いて destination にデータを渡すことがありますが、ここでは入門のためにそれらの応用例については割愛します。</p>
+<p>次の項目は ImageEffect を適用する過程の話と少々異なるので、もし、はじめて読まれるときは、飛ばしてシェーダの解説に進むことを推奨します。</p>
+
+<h3><a id="h9-4-2"></a><span class="secno">9.4.2　</span>ImageEffect が利用可能か検証する</h3>
+<p>ImageEffect を解説するにあたり、この項目の実装および解説は不要と思うのですが、より実用的な実装がなされた資料を読むときに障害にならないよう、解説することにしました。Unity が用意する ImageEffect の資料にも同等の機能が実装されています。</p>
+<p>ImageEffect は画素毎に演算される処理です。したがって高度な GPU を持たない実行環境では、演算数の多さのために　ImageEffect が歓迎されないことがあります。そこで、ImageEffect が実行環境で利用できるかどうか、開始時に検証し、利用できなければ無効化するのが親切です。</p>
+<div class="emlist-code">
+<p class="caption">ImageEffectBase.cs</p>
+<pre class="emlist">protected virtual void Start()<font></font>
+{<font></font>
+    if (!SystemInfo.supportsImageEffects<font></font>
+     || !this.material<font></font>
+     || !this.material.shader.isSupported)<font></font>
+    {<font></font>
+        base.enabled = false;<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>検証は Unity が用意する <code class="inline-code tt">SystemInfo.supportsImageEffects</code> によって簡単に実現することができます。</p>
+<p>この実装はほとんどのケースで有用と思いますが、たとえばシェーダ側に実装されるfallback（フォールバック）機能を使う場合などのときは、異なる実装が必要になることがあります。あくまで参考にしてください。</p>
+<p>1 つだけ注意する必要があるとすれば、<code class="inline-code tt">this.material</code> の参照を検証するタイミングです。例では Start メソッドで検証していますが、これが Awake や OnEnable のとき、たとえば <code class="inline-code tt">this.material</code> に参照が与えられていたとしても、Unity は null を示します(そして <code class="inline-code tt">base.enabled = false</code> によってスクリプトが無効になります)。詳細は割愛しますが、<code class="inline-code tt">ExcludeInEditMode</code> の仕様に依存するものです（弊害とは言い難い）。</p>
+
+<h2><a id="h9-5"></a><span class="secno">9.5　</span>もっとも簡単な ImageEffect シェーダの実装</h2>
+<p>続いて ImageEffect のシェーダについて解説します。ここで紹介するもっとも基本的なサンプルは、Unity が標準的に作成するものと同様に、出力する色を反転するだけの効果を実装しています。</p>
+<div class="emlist-code">
+<p class="caption">ImageEffectBase.shader</p>
+<pre class="emlist">Shader "ImageEffectBase"<font></font>
+{<font></font>
+    Properties<font></font>
+    {<font></font>
+        _MainTex("Texture", 2D) = "white" {}<font></font>
+    }<font></font>
+    SubShader<font></font>
+    {<font></font>
+        Cull Off ZWrite Off ZTest Always<font></font>
+<font></font>
+        Pass<font></font>
+        {<font></font>
+            CGPROGRAM<font></font>
+<font></font>
+            #include "UnityCG.cginc"<font></font>
+            #pragma vertex vert_img<font></font>
+            #pragma fragment frag<font></font>
+<font></font>
+            sampler2D _MainTex;<font></font>
+<font></font>
+            fixed4 frag(v2f_img input) : SV_Target<font></font>
+            {<font></font>
+                float4 color = tex2D(_MainTex, input.uv);<font></font>
+                color.rgb = 1 - color.rgb;<font></font>
+<font></font>
+                return color;<font></font>
+            }<font></font>
+<font></font>
+            ENDCG<font></font>
+        }<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>大まかな処理の流れとして、<code class="inline-code tt">_MainTex</code> にカメラが描画するイメージが入力され、フラグメントシェーダで画素に最終的に表示する色を決定する、といったイメージです。</p>
+<p>ここで <code class="inline-code tt">_MainTex</code> に与えられるテクスチャ情報は <code class="inline-code tt">OnRenderImage</code> の <code class="inline-code tt">source</code>,<code class="inline-code tt">Graphics.Blit</code> の <code class="inline-code tt">source</code> に等しいです。</p>
+<p><code class="inline-code tt">_MainTex</code> は <code class="inline-code tt">Graphics.Blit</code> の入力のために Unity によって予約されている点に注意してください。異なる他の名前に変更すると、<code class="inline-code tt">Graphics.Blit</code> の <code class="inline-code tt">source</code> が正しくシェーダに入力されません。</p>
+
+<h3><a id="h9-5-1"></a><span class="secno">9.5.1　</span>Unity が標準で生成するシェーダとの差異</h3>
+<p>Unity が標準で生成する ImageEffect は次のように少々長く複雑です（抜粋しています）。ImageEffect もシェーダですから、標準的なレンダリングパイプラインを経て最終的な出力を得ます。したがって、ImageEffect が実現する効果には本質的に影響しないように見えるバーテックスシェーダも、ImageEffect のシェーダには定義されている必要があります。</p>
+<div class="emlist-code">
+<p class="caption">NewImageEffectShader.shader</p>
+<pre class="emlist">SubShader<font></font>
+{<font></font>
+    Cull Off ZWrite Off ZTest Always<font></font>
+<font></font>
+    Pass<font></font>
+    {<font></font>
+        CGPROGRAM<font></font>
+        #pragma vertex vert<font></font>
+        #pragma fragment frag<font></font>
+<font></font>
+        #include "UnityCG.cginc"<font></font>
+<font></font>
+        struct appdata<font></font>
+        {<font></font>
+            float4 vertex : POSITION;<font></font>
+            float2 uv : TEXCOORD0;<font></font>
+        };<font></font>
+<font></font>
+        struct v2f<font></font>
+        {<font></font>
+            float2 uv : TEXCOORD0;<font></font>
+            float4 vertex : SV_POSITION;<font></font>
+        };<font></font>
+<font></font>
+        v2f vert (appdata v)<font></font>
+        {<font></font>
+            v2f o;<font></font>
+            o.vertex = UnityObjectToClipPos(v.vertex);<font></font>
+            o.uv = v.uv;<font></font>
+            return o;<font></font>
+        }<font></font>
+<font></font>
+        sampler2D _MainTex;<font></font>
+<font></font>
+        fixed4 frag (v2f i) : SV_Target<font></font>
+        {<font></font>
+            fixed4 col = tex2D(_MainTex, i.uv);<font></font>
+            col.rgb = 1 - col.rgb;<font></font>
+            return col;<font></font>
+        }<font></font>
+        ENDCG<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>ImageEffect におけるバーテックスシェーダは、カメラに正面を向いて、その全面を埋めるような四角形のメッシュとその UV 座標を、フラグメントシェーダに渡しているだけです。このバーテックスシェーダに手を加えることで実現できる効果もありますが、ほとんどの ImageEffect では不要です。</p>
+<p>そのためか、Unity には標準的なバーテックスシェーダとその入力を定義するための構造体が用意されています。それらは "UnityCG.cginc" に定義されています。ここで用意した標準ではないシェーダのソースコードでは、UnityCg.cginc に定義された <code class="inline-code tt">vertex vert_img</code> や <code class="inline-code tt">appdata</code>、<code class="inline-code tt">v2f_img</code>を利用することによって、ソースコード全体を簡潔にしています。</p>
+
+<h3><a id="h9-5-2"></a><span class="secno">9.5.2　</span>Cull, ZWrite, ZTest</h3>
+<p>一見するとカリングと Zバッファの書き込み、参照については、標準の値で問題なさそうです。しかしながら Unity は不用意なＺバッファへの書き込みを防ぐために、<code class="inline-code tt">Cull Off ZWrite Off ZTest Always</code> の定義を推奨しています。</p>
+
+<h2><a id="h9-6"></a><span class="secno">9.6　</span>もっとも簡単な練習</h2>
+<p>ImageEffect を簡単に練習してみましょう。サンプルでは単純に全画面をネガポジ反転するようにしていますが、この章の初めに掲載した図のように、イメージ全体の "斜め半分にだけ" ネガポジ反転を適用するようにしてみます。</p>
+<p><code class="inline-code tt">input.uv</code> には、イメージ全体のうち 1 画素分を示す座標が与えられていますから、これを活用します。イメージ全体の各画素は 0 ~ 1 で正規化された x * y 座標で示されます。</p>
+<p>動作する一例のコードは、サンプルの "Prtactice" フォルダに含まれていますし、後に続いて解説しますが、もし初心者の方に目を通して頂けているのであれば、まずご自身で実装してみることをオススメします。</p>
+
+<h3><a id="h9-6-1"></a><span class="secno">9.6.1　</span>上下左右の半分は簡単</h3>
+<p>上下半分に色を変化させるのはすごく簡単です。これによって、ImageEffect の座標の原点を確認するのがよいと思います。たとえば次の 2 行のコードでは、それぞれ x 座標と y 座標が半分より小さいときに色を反転します。</p>
+<div class="emlist-code">
+<p class="caption">Practice/ImageEffectShader_01.shader</p>
+<pre class="emlist">color.rgb = input.uv.x &lt; 0.5 ? 1 - color.rgb : color.rgb;<font></font>
+color.rgb = input.uv.y &lt; 0.5 ? 1 - color.rgb : color.rgb;<font></font>
+</pre>
+</div>
+<p>色の変化から、ImageEffect に与えられる座標の原点は、左下であることが確認できたでしょうか。</p>
+
+<h3><a id="h9-6-2"></a><span class="secno">9.6.2　</span>斜め半分も簡単</h3>
+<p>上下左右の半分は簡単だと先にいっていますが、実際には斜め半分も簡単です。次のようなソースコードで斜め半分にエフェクトを適用する（色を反転する）ことができます。</p>
+<div class="emlist-code">
+<p class="caption">Practice/ImageEffectShader_02.shader</p>
+<pre class="emlist">color.rgb = input.uv.y &lt; input.uv.x ? 1 - color.rgb : color.rgb;
+</pre>
+</div>
+
+<h2><a id="h9-7"></a><span class="secno">9.7　</span>座標に関する便利な定義値</h2>
+<p>紹介したように UnityCg.cginc には <code class="inline-code tt">vertex vert_img</code> や<code class="inline-code tt">appdata</code> のような便利な関数や構造体が定義されていますが、これら以外にも ImageEffect を実装する上で便利な値が定義されています。</p>
+
+<h3><a id="h9-7-1"></a><span class="secno">9.7.1　</span>_ScreenParams</h3>
+<p><code class="inline-code tt">_ScreenParams</code> は、<code class="inline-code tt">float4</code> 型の値で、<code class="inline-code tt">x, y</code> にはそれぞれ出力するイメージのピクセル幅と高さが、<code class="inline-code tt">w, z</code> には <code class="inline-code tt">1 + 1 / x</code>, <code class="inline-code tt">1 + 1 / y</code> が与えられています。</p>
+<p>たとえば 640x480 サイズのレンダリングを実行するとき、<code class="inline-code tt">x = 640</code>, <code class="inline-code tt">y = 480</code>,<code class="inline-code tt">z = 1 + 1 / 640</code>, <code class="inline-code tt">z = 1 + 1 / 480</code> となります。実際のところ、<code class="inline-code tt">w</code> と <code class="inline-code tt">z</code> はそれほど使うことがないでしょう。</p>
+<p>一方で <code class="inline-code tt">x</code>、<code class="inline-code tt">y</code> の値はたとえばイメージ上の何ピクセルに相当するのか算出したり、あるいはアスペクト比を算出するために頻繁に用いられます。これらは凝ったエフェクトを作る上で重要ですが、わざわざスクリプトから値を与えずとも Unity 側が用意してくれるのは助かりますね。頭の片隅に入れておけば、他の方のシェーダを読むときの助けになることもあると思います。</p>
+
+<h3><a id="h9-7-2"></a><span class="secno">9.7.2　</span>_TexelSize</h3>
+<p>同じような定義値の 1 つに、<code class="inline-code tt">&lt;sampler2Dの変数名&gt;_TexelSize</code> という定義値があります。ここでは <code class="inline-code tt">_MainTex_TexelSize</code> になります。</p>
+<p><code class="inline-code tt">_ScreenParams</code> と同じく <code class="inline-code tt">float4</code> 型の値ですが、<code class="inline-code tt">x = 1 / width</code>, <code class="inline-code tt">y = 1 / height</code>, <code class="inline-code tt">z = width</code>, <code class="inline-code tt">y = height</code> と、各要素に与えられる値が異なります。また対応する <code class="inline-code tt">sampler2D</code> 型によって値が異なる点も特徴です。<code class="inline-code tt">_MainTex</code> にかかわらず、対応する <code class="inline-code tt">~_TexlSize</code> を定義すれば、Unity から値が与えられます。</p>
+<p><code class="inline-code tt">_ScreenParams</code> を使っている ImageEffect も沢山ありますが、どちらかというと <code class="inline-code tt">_MainTex_TexelSize</code> の方が使いやすいと思います。</p>
+
+<h3><a id="h9-7-3"></a><span class="secno">9.7.3　</span>1 つとなりの画素を参照する</h3>
+<p>たとえば 1 つ隣の画素の色（値）を参照したい、ということは画像処理などでは頻繁にありますが、次のようなコードによって、隣の画素の値を参照することができます。</p>
+<div class="emlist-code">
+<p class="caption">Practice/ImageEffectShader_03.shader</p>
+<pre class="emlist">sampler2D _MainTex;<font></font>
+float4    _MainTex_TexelSize;<font></font>
+<font></font>
+fixed4 frag(v2f_img input) : SV_Target<font></font>
+{<font></font>
+    float4 color = tex2D(_MainTex, input.uv);<font></font>
+<font></font>
+    color += tex2D(_MainTex, input.uv + float2(_MainTex_TexelSize.x, 0));<font></font>
+    color += tex2D(_MainTex, input.uv - float2(_MainTex_TexelSize.x, 0));<font></font>
+    color += tex2D(_MainTex, input.uv + float2(0, _MainTex_TexelSize.y));<font></font>
+    color += tex2D(_MainTex, input.uv - float2(0, _MainTex_TexelSize.y));<font></font>
+<font></font>
+    color = color / 5;<font></font>
+<font></font>
+    return color;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>このコードは周辺 4 つの画素を参照して平均の値を返すものです。画像処理では文字どおり平滑化フィルタなどと呼ばれます。他にもより高品質なノイズ軽減のためのフィルタが同じように周辺の画素を参照して実装されることもありますし、たとえばエッジ・輪郭線検出フィルタなどでも用いられています。</p>
+
+<h2><a id="h9-8"></a><span class="secno">9.8　</span>深度と法線の取得</h2>
+<div id="id_SimpleImageEffect_2F03mono" class="image">
+<img src="./Chapter 9 _ ImageEffect Getting Started_files/03mono.png" alt="Image of G-Buffer">
+<p class="caption">
+図9.3: G-Buffer のイメージ
+</p>
+</div>
+<p>モデルに適用するマテリアル（シェーダ）を実装するときは、その多くの場合にモデルの深度や法線情報を参照すると思います。2 次元のイメージ情報を操作する ImageEffect においては、深度や法線情報を取得できないように思われますが、イメージ上のある画素に映されるオブジェクトの深度や法線情報を取得する方法は用意されています。</p>
+<p>技術的な詳細を解説するにはレンダリングパイプラインの解説が必要になり、少々長くなるので割愛させてください。簡潔に説明すると、描画するイメージ上のある画素に対応する深度情報や法線情報はバッファしておくことができます。それらのバッファは G-Buffer と呼ばれます。G-Buffer には色を保存したり、深度を保存したりするものがあります。（ちなみに G-Buffer の読み方は「ゲーバッファー」であると原著論文には示されています。）</p>
+<p>オブジェクトの描画時に、深度や法線情報もバッファに書きこんでおき、描画の最後に実行される ImageEffect でそれを参照する、というイメージです。この技術は Deffered レンダリングでは重要な役割を持っていますが、Forward レンダリングでも使うことができます。</p>
+<p>これらの解説にはサンプルの "ImageEffect" シーンおよび、それと同名のリソースを使います。</p>
+
+<h3><a id="h9-8-1"></a><span class="secno">9.8.1　</span>深度と法線情報を取得するための設定</h3>
+<p>深度と法線情報を ImageEffect で参照するためには、少し設定が必要です。基本的な機能は共通なので、ここでは ImageEffectBase.cs を継承した ImageEffect.cs でその設定を行うようにします。</p>
+<div class="emlist-code">
+<p class="caption">ImageEffect.cs</p>
+<pre class="emlist">public class ImageEffect : ImageEffectBase<font></font>
+{<font></font>
+    protected new Camera camera;<font></font>
+    public DepthTextureMode depthTextureMode;<font></font>
+<font></font>
+    protected override void Start()<font></font>
+    {<font></font>
+        base.Start();<font></font>
+<font></font>
+        this.camera = base.GetComponent&lt;Camera&gt;();<font></font>
+        this.camera.depthTextureMode = this.depthTextureMode;<font></font>
+    }<font></font>
+<font></font>
+    protected virtual void OnValidate()<font></font>
+    {<font></font>
+        if (this.camera != null)<font></font>
+        {<font></font>
+            this.camera.depthTextureMode = this.depthTextureMode;<font></font>
+        }<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>深度と法線情報を取得するためには、カメラに <code class="inline-code tt">DepthTextureMode</code> を設定する必要があります。これは深度や法線などの情報を、どのように書き込むかを制御するための設定です。初期値は <code class="inline-code tt">None</code>です。</p>
+<p>残念ながら <code class="inline-code tt">DepthTextureMode</code> はカメラの Inspector に表示されないパラメータなので、スクリプトから任意にカメラの参照を取得して設定する必要があります。</p>
+<p><code class="inline-code tt">OnValidate</code> メソッドについて、あまり利用したことがない方のために説明しておくと、Inspector 上でパラメータが更新されたときに呼び出されるメソッドです。</p>
+
+<h3><a id="h9-8-2"></a><span class="secno">9.8.2　</span>DepthTextureMode の値</h3>
+<p>ここで紹介するコードを使って、<code class="inline-code tt">DepthTextureMode</code> の値を Inspector 上から変更します。いくつか値がありますが、ここでは <code class="inline-code tt">DepthNormals</code> を使う点に注意してください。</p>
+<p><code class="inline-code tt">Depth</code> を設定すれば深度情報のみを取得するための設定になります。ただし <code class="inline-code tt">Depth</code> と <code class="inline-code tt">DepthNormals</code> とでは、シェーダから深度情報を取得する手順が少々異なります。また <code class="inline-code tt">MotionVectors</code> を設定すれば、各画素に対応する動きの情報を取得することができ大変面白いのですが、すべて解説すると少々長くなるので、この場では割愛させてください。</p>
+
+<h2><a id="h9-9"></a><span class="secno">9.9　</span>シェーダ上での深度と法線の取得</h2>
+<p>カメラに <code class="inline-code tt">DepthTextureMode</code> を設定したとき、シェーダ上から深度情報と法線情報を取得する方法は次のとおりです。</p>
+<p><code class="inline-code tt">_CameraDepthNormalsTexture</code> は、<code class="inline-code tt">_MainTex</code> に描画するイメージが与えられるのと同様に、深度と法線の情報が与えられる <code class="inline-code tt">sampler2D</code> です。したがって <code class="inline-code tt">input.uv</code> を使って参照すれば、描画するイメージのある画素に対応する深度と法線情報を取得することができます。</p>
+<div class="emlist-code">
+<p class="caption">ImageEffect.shader</p>
+<pre class="emlist">sampler2D _MainTex;<font></font>
+sampler2D _CameraDepthNormalsTexture;<font></font>
+<font></font>
+fixed4 frag(v2f_img input) : SV_Target<font></font>
+{<font></font>
+    float4 color = tex2D(_MainTex, input.uv);<font></font>
+    float3 normal;<font></font>
+    float  depth;<font></font>
+<font></font>
+    DecodeDepthNormal<font></font>
+    (tex2D(_CameraDepthNormalsTexture, input.uv), depth, normal);<font></font>
+<font></font>
+    depth = Linear01Depth(depth);<font></font>
+    return fixed4(depth, depth, depth, 1);<font></font>
+<font></font>
+    return fixed4(normal.xyz, 1);<font></font>
+}<font></font>
+</pre>
+</div>
+<p><code class="inline-code tt">_CameraDepthNormalsTexture</code> から取得することができる値は深度と法線の値が合わさったものなので、これをそれぞれの値に分解する必要があります。分解するための関数は Unity が用意してくれているものを使います。<code class="inline-code tt">DecodeDepthNormal</code> 関数に、分解したい値とその結果を代入するための変数を与えます。</p>
+
+<h3><a id="h9-9-1"></a><span class="secno">9.9.1　</span>深度情報の取得と可視化</h3>
+<div id="id_SimpleImageEffect_2F04mono" class="image">
+<img src="./Chapter 9 _ ImageEffect Getting Started_files/04mono.png" alt="Depth visualization with ImageEffect">
+<p class="caption">
+図9.4: ImageEffect による深度の可視化
+</p>
+</div>
+<p>先に深度情報について説明します。深度情報は実はプラットフォームによって扱いが異なります。Unity ではその差を吸収するためのいくつかの仕組みが用意されていますが、ImageEffect の実装にあたっては、<code class="inline-code tt">Linear01Depth</code> 関数を使うのがよいと思います。<code class="inline-code tt">Linear01Depth</code> は、取得した深度の値を 0 ~ 1 に正規化するための関数です。</p>
+<p>サンプルでは取得した深度の値を R,G,B に与えることで、深度の値を可視化しています。シーン中のカメラを動かしたり、<code class="inline-code tt">Clipping Planes</code> の値を Inspector 上から変更するなどして、どのように変化するのかを確認することをオススメします。</p>
+
+<h3><a id="h9-9-2"></a><span class="secno">9.9.2　</span>法線情報の可視化</h3>
+<div id="id_SimpleImageEffect_2F05mono" class="image">
+<img src="./Chapter 9 _ ImageEffect Getting Started_files/05mono.png" alt="Visualization of normals with ImageEffect">
+<p class="caption">
+図9.5: ImageEffect による法線の可視化
+</p>
+</div>
+<p>法線情報の可視化については、深度情報ほどの複雑さはありません。法線の情報はスクリプトや一般的なシェーダから参照されるものと同等です。ある画素に映される面の方向を示す X,Y Z の情報が 0 ~ 1 に正規化された形式で与えられています。</p>
+<p>法線が正しく取得できているかどうかを確認するだけなら、X,Y,Z の値をそのまま R,G,B とみなして出力すればよいです。つまり右を向く面ほど X = R の値が大きくなり、より赤に、上を向く面ほど Y = G の値が大きくなり、より緑になります。</p>
+
+<h2><a id="h9-10"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.10　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The main references in this chapter are: </font><font style="vertical-align: inherit;">Both are official Unity.</font></font></p>
+<ul>
+<li>Writing Image Effects- <a href="https://docs.unity3d.com/540/Documentation/Manual/WritingImageEffects.html" class="link">https://docs.unity3d.com/540/Documentation/Manual/WritingImageEffects.html</a></li>
+<li>Accessing shader properties in Cg/HLSL - <a href="https://docs.unity3d.com/Manual/SL-PropertiesInPrograms.html" class="link">https://docs.unity3d.com/Manual/SL-PropertiesInPrograms.html</a></li>
+<li>Using Depth Textures - <a href="https://docs.unity3d.com/ja/current/Manual/SL-DepthTextures.html" class="link">https://docs.unity3d.com/ja/current/Manual/SL-DepthTextures.html</a></li>
+</ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 9 _ ImageEffect Getting Started_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 9 _ ImageEffect Getting Started_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 9 _ ImageEffect Getting Started_files/saved_resource(2).html"></iframe></body></html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://freder.io/files/unity2/oishi.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" class="translated-ltr" style="height: 100%;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 5 _ Introduction to Procedural Noise_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>プロシージャルノイズ入門</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 5 _ Introduction to Procedural Noise_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 5 _ Introduction to Procedural Noise_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Introduction to Procedural Noise_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 5 _ Introduction to Procedural Noise_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 5 _ Introduction to Procedural Noise_files/saved_resource.html"></iframe></div>
+<h1><a id="h5"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 5　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction to Procedural Noise</font></font></h1>
+
+<h2><a id="h5-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will explain the noise used in computer graphics. </font><font style="vertical-align: inherit;">Noise was developed in the 1980s as a new method of image generation for texture mapping. </font><font style="vertical-align: inherit;">Texture mapping, which attaches an image to an object to create its complexity, is a well-known technique in today's CG, but computers at that time had very limited storage space. Using image data for texture mapping was not compatible with the hardware. </font><font style="vertical-align: inherit;">Therefore, a method for procedurally generating this noise pattern was devised. </font><font style="vertical-align: inherit;">Naturally occurring substances and phenomena such as mountains, desert-like terrain, clouds, water surfaces, flames, marble, grain, rocks, crystals, and foam films have visual complexity and regular patterns. .. </font><font style="vertical-align: inherit;">Noise can generate the best texture patterns for expressing such naturally occurring substances and phenomena, and has become an indispensable technique when procedurally wanting to generate graphics. </font><font style="vertical-align: inherit;">Typical noise algorithms are </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ken Perlin</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 's achievements, </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> and </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Here, as a stepping stone to many applications of noise, I would like to explain mainly the algorithms of these noises and the implementation by shaders.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The sample data in this chapter is from the Common Unity Sample Project.</font></font></p>
+<p>Assets/<strong>TheStudyOfProceduralNoise</strong></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is in. </font><font style="vertical-align: inherit;">Please also refer to it.</font></font></p>
+
+<h2><a id="h5-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> What is noise?</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The word noise means a noisy sound that can be translated as noise in the field of audio, and also in the field of video, it usually refers to general unnecessary information for the content to be processed or to show image roughness. Also used. </font><font style="vertical-align: inherit;">Noise in computer graphics is a function that takes an N-dimensional vector as an input and returns a scalar value (one-dimensional value) of a random pattern with the following characteristics.</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Continuously changing with respect to adjacent areas</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Features are statistically invariant with respect to rotation (even if a specific area is cut out and rotated, the features do not change) (= isotropic)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Features are statistically invariant to movement (even if a specific area is cut out and moved, the features do not change)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When viewed as a signal, the frequency band is limited (most energy is concentrated in a particular frequency spectrum)</font></font></li>
+</ul>
+<div id="pn_noise_features" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_noise_features.png" alt="Noise characteristics">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.1: Noise characteristics
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Noise can be used for the following purposes by receiving an N-dimensional vector as an input.</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Animation ・ ・ ・ 1D (time)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Texture ・ ・ ・ 2D (UV coordinates of object)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Animated texture ・ ・ ・ 3D (UV coordinates of object + time)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Solid (3D) texture ・ ・ ・ 3D (local coordinates of object)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Animated solid texture ・ ・ ・ 4D (local coordinates of object + time)</font></font></li>
+</ul>
+<div id="pn_animation_examples" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_animation_examples.png" alt="Noise application example">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 5.2: Noise application
+</font></font></p>
+</div>
+
+<h2><a id="h5-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Explanation of noise algorithm</font></font></h2>
+<p><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">We will explain the algorithms for </font><strong><font style="vertical-align: inherit;">Value Noise</font></strong><font style="vertical-align: inherit;"> , </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Improved Perlin Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , and </font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplex Noise</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+
+<h3><a id="h5-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Value Noise</font></font></h3>
+<p>ノイズ関数としての条件や精度を厳密には満たしていませんが、最も実装が容易でノイズについての理解を助けるものとして、<strong>Value Noise</strong>というノイズアルゴリズムを紹介します。</p>
+
+<h4><a id="h5-3-1-1"></a>アルゴリズム</h4>
+<ol>
+<li>空間上のそれぞれの軸に一定の間隔で配置された格子点を定義する</li>
+<li>それぞれの格子点について、疑似乱数の値を求める</li>
+<li>それぞれの格子点と格子点の間の点の値を、補間によって求める</li>
+</ol>
+
+<h5><a id="h5-3-1-1-1"></a>格子を定義</h5>
+<p>2次元の場合、x、y軸それぞれに等間隔な格子を定義します。格子は正方形の形状をしており、このそれぞれの格子点において、格子点の座標値を参照した疑似乱数の値を計算します。3次元の場合は、x、y、z軸それぞれに等間隔な格子を定義し、格子の形状は立方体になります。</p>
+<div id="pn_2d_3d_grid" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_3d_grid.png" alt="格子（2次元）, 格子（3次元）">
+<p class="caption">
+図5.3: 格子（2次元）, 格子（3次元）
+</p>
+</div>
+
+<h5><a id="h5-3-1-1-2"></a>疑似乱数（Pseudo Random）の生成</h5>
+<p>乱数というのは、無秩序に、出現の確率が同じになるように並べられた数字の列を言います。乱数にも真の乱数と疑似乱数と呼ばれるものがあり、例えば、サイコロを振るとき、今まで出た目から次に出る目を予測することは不可能であり、このようなものを真の乱数と呼びます。これに対して、規則性と再現性があるものを、<strong>疑似乱数（Pseudo Random）</strong>と呼びます。（コンピュータで乱数列を生成する場合、確定的な計算で求めるので、生成された乱数はほとんどは疑似乱数ということができます。）ノイズの計算を行う場合、共通のパラメータさえ用いれば、同じ結果が得られる疑似乱数を使用します。</p>
+<div id="pn_pseudo_random_2d" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_pseudo_random_2d.png" alt="擬似乱数">
+<p class="caption">
+図5.4: 擬似乱数
+</p>
+</div>
+<p>この擬似乱数を生成する関数の引数に、それぞれの格子点の座標値を与えることで、格子点ごとに固有の擬似乱数の値を得ることができます。</p>
+<div id="pn_2d_3d_prand" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_3d_prand.png" alt="各格子点上の擬似乱数">
+<p class="caption">
+図5.5: 各格子点上の擬似乱数
+</p>
+</div>
+
+<h5><a id="h5-3-1-1-3"></a>補間（Interpolation）</h5>
+<p>AとBという値があり、その間のPの値が、AからBに直線的に変化するとして、その値を近似的に求めることを<strong>線形補間（Linear Interpolation）</strong>と言います。もっとも単純な補間方法ですが、これを使って、格子点の間の値を求めるとすると、補間の始点と終点（格子点付近）で、値の変化が鋭利になってしまいます。</p>
+<p>そこで、スムーズに値が変化するように、<strong>3次エルミート曲線</strong>を補間係数に使用します。</p>
+<div class="equation">
+<pre>f\left( t\right) =3t^{2}-2t^{3}
+</pre>
+</div>
+<p>これを<code class="tt">t=0</code>から<code class="tt">t=1</code>へ変化させたとき、値は右下図のようになります。</p>
+<div id="pn_lerp_and_3hermite" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_lerp_and_3hermite.png" alt="2次元平面での線形補間（左）, 3次エルミート曲線">
+<p class="caption">
+図5.6: 2次元平面での線形補間（左）, 3次エルミート曲線
+</p>
+</div>
+<p>※ 3次エルミート曲線は、GLSL、HLSLでは、<strong>smoothstep</strong>関数として実装されています。</p>
+<p>この補間関数を使って、それぞれの格子点で求めた値をそれぞれの軸で補間します。2次元の場合、まず格子の両端でxについての補間を行い、次にそれらの値をy軸についての補間し、合計3回の計算を行います。3次元の場合は、下の図のように、z軸について4つ、y軸について2つ、x軸について1つ、合計7回の補間を行います。</p>
+<div id="pn_2d_3d_interpolate" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_3d_interpolate.png" alt="補間（2次元空間）, 補間（3次元空間）">
+<p class="caption">
+図5.7: 補間（2次元空間）, 補間（3次元空間）
+</p>
+</div>
+
+<h4><a id="h5-3-1-2"></a>実装</h4>
+<p>2次元について説明いたします。各格子点の座標を求めます。</p>
+<div class="emlist-code">
+<pre class="emlist">floor()
+</pre>
+</div>
+<p>整数部については、<code class="tt">floor()</code>関数を使って求めます。<code class="tt">floor()</code>は、入力された実数に対してそれ以下の最小の整数を返す関数です。1.0以上の実数を入力値に与えた場合、1,2,3…という値が得られ等間隔に同じ値が得られるため、これを格子の座標値として用いることができます。</p>
+<p>小数部については、<code class="tt">frac()</code>関数を使って求めます。</p>
+<div class="emlist-code">
+<pre class="emlist">frac()
+</pre>
+</div>
+<p><code class="tt">frac()</code>は、与えられた実数値の、小数部の値を返し、0以上1未満の値をとります。これにより、それぞれの格子内部の座標値を得ることができます。</p>
+<div class="emlist-code">
+<pre class="emlist">// 格子点の座標値<font></font>
+float2 i00 = i;<font></font>
+float2 i10 = i + float2(1.0, 0.0);<font></font>
+float2 i01 = i + float2(0.0, 1.0);<font></font>
+float2 i11 = i + float2(1.0, 1.0);<font></font>
+</pre>
+</div>
+<p>上で求めた座標値を、フラグメントカラーのRとGに割り当てると以下のような画像が得られます。（整数部については、1以上の値を取り得るため、視覚化のため結果が1を超えないようにスケーリングを施しています）</p>
+<div id="pn_uv_floor_frac" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_uv_floor_frac.png" alt="整数部と少数部をRGとして描画したもの">
+<p class="caption">
+図5.8: 整数部と少数部をRGとして描画したもの
+</p>
+</div>
+
+<h5><a id="h5-3-1-2-1"></a>疑似乱数生成関数</h5>
+<p>random関数をインターネットで検索すると、よくこの関数が結果として返されます。</p>
+<div class="emlist-code">
+<pre class="emlist">float rand(float2 co)<font></font>
+{<font></font>
+    return frac(sin(dot(co.xy, float2(12.9898,78.233))) * 43758.5453);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>1つ1つ処理を見ていくと、まず入力された2次元のベクトルを内積で1次元に丸め扱いやすくし、それをsin関数の引数として与え、大きな数を掛け合わせ、その小数部を求めるというもので、これにより、規則性と再現性はあるが、無秩序に連続した値を得ることができます。</p>
+<p>この関数については、出自が定かではなく、</p>
+<p><a href="https://stackoverflow.com/questions/12964279/whats-the-origin-of-this-glsl-rand-one-liner" class="link">https://stackoverflow.com/questions/12964279/whats-the-origin-of-this-glsl-rand-one-liner</a></p>
+<p>によると、1998年に発表された <strong>"On generating random numbers, with help of y= [(a+x)sin(bx)] mod 1"</strong> という論文という論文が起源であると書かれています。</p>
+<p>シンプルで扱いやすい反面、同じ乱数列が出てきてしまう周期が短く、大きな解像度のテクスチャであると、視覚的に確認できてしまうパターンが発生し、あまり良い疑似乱数とは言えません。</p>
+<div class="emlist-code">
+<pre class="emlist">// 格子点の座標上での疑似乱数の値<font></font>
+float n00 = pseudoRandom(i00);<font></font>
+float n10 = pseudoRandom(i10);<font></font>
+float n01 = pseudoRandom(i01);<font></font>
+float n11 = pseudoRandom(i11);<font></font>
+</pre>
+</div>
+<p>それぞれの格子点の座標値（整数）を、疑似乱数の引数に与えることで、各格子点上でのノイズの値を求めます。</p>
+
+<h5><a id="h5-3-1-2-2"></a>補間（Interpolation）</h5>
+<div class="emlist-code">
+<pre class="emlist">// 補間関数（3次エルミート曲線）= smoothstep<font></font>
+float2 interpolate(float2 t)<font></font>
+{<font></font>
+    return t * t * (3.0 - 2.0 * t);<font></font>
+}<font></font>
+<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<pre class="emlist">// 補間係数を求める<font></font>
+float2 u = interpolate(f);<font></font>
+// 2次元格子の補間<font></font>
+return  lerp(lerp(n00, n10, u.x), lerp(n01, n11, u.x), u.y);<font></font>
+<font></font>
+</pre>
+</div>
+<p>事前に定義した<code class="tt">interpolate()</code>関数で補間係数を算出します。格子の小数部を引数とすることで、格子の始点と終点付近で滑らかに変化する曲線が得られます。</p>
+<p><code class="tt">lerp()</code>は 線形補間を行う関数で、<strong>Linear Interpolate</strong>の略です。第1引数と第2引数に与えた値の線形補間された値を計算することができ、第3引数に補間係数として求めた<strong>u</strong>を代入することで、格子間の値を滑らかにつなげます。</p>
+<div id="pn_2d_interpolate_prand" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_interpolate_prand.png" alt="格子点の補間（2次元空間）">
+<p class="caption">
+図5.9: 格子点の補間（2次元空間）
+</p>
+</div>
+
+<h4><a id="h5-3-1-3"></a>結果</h4>
+<p>サンプルプロジェクト内の</p>
+<p>TheStudyOfProceduralNoise/Scenes/<strong>ShaderExampleList</strong></p>
+<p>シーンを開くと、<strong>Value Noise</strong>の実装結果を見ることができます。コードについては、</p>
+<ul>
+<li>Shaders/ProceduralNoise/<strong>ValueNoise2D.cginc</strong></li>
+<li>Shaders/ProceduralNoise/<strong>ValueNoise3D.cginc</strong></li>
+<li>Shaders/ProceduralNoise/<strong>ValueNoise4D.cginc</strong></li>
+</ul>
+<p>に実装をしたものがあります。</p>
+<div id="pn_result_value_noise" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_value_noise.png" alt="Value Noise（2D, 3D, 4D） 描画結果">
+<p class="caption">
+図5.10: Value Noise（2D, 3D, 4D） 描画結果
+</p>
+</div>
+<p>結果画像を見てみると、ある程度格子の形状が見えてしまうことがわかります。このように<strong>Value Noise</strong>は、実装は容易ですが、ある領域を回転させたときに特徴が不変であるという等方性が保証されておらず、ノイズというには不十分です。しかし、<strong>Value Noise</strong>の実装で行った、<strong>「規則的に配置された格子点で求められた疑似乱数の値を補間して空間上のすべての点の連続的でスムースな値を求める」</strong>というプロセスは、ノイズ関数の基本的なアルゴリズムの構造をしています。</p>
+
+<h3><a id="h5-3-2"></a><span class="secno">5.3.2　</span>Perlin Noise (パーリンノイズ)</h3>
+<p><strong>Perlin Noise</strong> は、プロシージャルノイズの伝統的、代表的手法であり、その名の主である<strong>Ken Perlin</strong>によって開発されました。もともとは、世界で初めて全面的にコンピュータグラフィックスを導入した映画として知られる、1982年に製作されたアメリカのSF映画「Tron」の視覚表現ためのテクスチャ生成の実験の中で生み出され、その成果は、1985年のSIGGRAPHに <strong>"An Image Synthesizer"</strong> というタイトルの論文にまとめられ発表されました。</p>
+
+<h4><a id="h5-3-2-1"></a>アルゴリズム</h4>
+<ol>
+<li>格子（Lattice）の座標を求める</li>
+<li>格子点上の勾配（Gradient）を求める</li>
+<li>各格子点から、格子の中の点Pへのベクトルを求める</li>
+<li>2で求めた勾配と、3で求めたベクトルの内積を計算し、各格子点上のノイズの値を計算する</li>
+<li>3次エルミート曲線で、4で求めた各格子点のノイズの値を補間する</li>
+</ol>
+
+<h5><a id="h5-3-2-1-1"></a>勾配（Gradient）</h5>
+<p>Value Noiseと異なる点は、格子点のノイズの値を1次元の値で定義するのではなく、傾きを持った<strong>勾配（Gradient）</strong>として定義するところです。2次元であれば2次元の勾配、3次元であれば3次元の勾配を定義します。</p>
+<div id="pn_2d_gradient" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_gradient.png" alt="Perlin Noise 勾配ベクトル">
+<p class="caption">
+図5.11: Perlin Noise 勾配ベクトル
+</p>
+</div>
+
+<h5><a id="h5-3-2-1-2"></a>内積（Dot Product）</h5>
+<p>内積は、</p>
+<div class="equation">
+<pre>\overrightarrow {a}\cdot \overrightarrow {b}=\left| a\right| \left| b\right| \cos \theta<font></font>
+= \left( a.x\ast b.x\right) +\left( a.y\ast b.y\right)<font></font>
+</pre>
+</div>
+<p>で定義されるベクトルの演算で、幾何学的な意味は、2つのベクトルがどれぐらい同じ方向を向いているかを示す比であり、内積のとる値は、<strong>同じ方向→1</strong>、<strong>直交→0</strong>、<strong>逆向き→-1</strong>となります。つまり、勾配と、各格子点から格子内のノイズの値を求めたい点Pへ向かうベクトルの内積を求めるということは、それらのベクトルが同じ方向を向いていれば、高いノイズの値が、異なる方向を向いていれば小さい値が返されることになります。</p>
+<div id="pn_dot_and_gradient" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_dot_and_gradient.png" alt="内積（左） Perlin Noise 勾配と内挿ベクトル（右）">
+<p class="caption">
+図5.12: 内積（左） Perlin Noise 勾配と内挿ベクトル（右）
+</p>
+</div>
+
+<h5><a id="h5-3-2-1-3"></a>補間（Interpolation）</h5>
+<p>ここでは、3次エルミート曲線を補間のための関数として用いていますが、後に、Ken Perlinは、5次エルミート曲線に修正しています。それについては、<strong>Improved Perlin Noise（改良パーリンノイズ）</strong>の項で説明いたします。</p>
+
+<h4><a id="h5-3-2-2"></a>実装</h4>
+<p>サンプルプロジェクト内の</p>
+<p>TheStudyOfProceduralNoise/Scenes/<strong>ShaderExampleList</strong></p>
+<p>シーンを開くと、<strong>Perlin Noise</strong>の実装結果を見ることができます。コードについては、</p>
+<ul>
+<li>Shaders/ProceduralNoise/<strong>OriginalPerlinNoise2D.cginc</strong></li>
+<li>Shaders/ProceduralNoise/<strong>OriginalPerlinNoise3D.cginc</strong></li>
+<li>Shaders/ProceduralNoise/<strong>OriginalPerlinNoise4D.cginc</strong></li>
+</ul>
+<p>に実装をしたものがあります。</p>
+<p>2次元についての実装を掲載します。</p>
+<div class="emlist-code">
+<pre class="emlist">// Original Perlin Noise 2D<font></font>
+float originalPerlinNoise(float2 v)<font></font>
+{<font></font>
+    // 格子の整数部の座標<font></font>
+    float2 i = floor(v);<font></font>
+    // 格子の小数部の座標<font></font>
+    float2 f = frac(v);<font></font>
+<font></font>
+    // 格子の4つの角の座標値<font></font>
+    float2 i00 = i;<font></font>
+    float2 i10 = i + float2(1.0, 0.0);<font></font>
+    float2 i01 = i + float2(0.0, 1.0);<font></font>
+    float2 i11 = i + float2(1.0, 1.0);<font></font>
+<font></font>
+    // 格子内部のそれぞれの格子点からのベクトル<font></font>
+    float2 p00 = f;<font></font>
+    float2 p10 = f - float2(1.0, 0.0);<font></font>
+    float2 p01 = f - float2(0.0, 1.0);<font></font>
+    float2 p11 = f - float2(1.0, 1.0);<font></font>
+<font></font>
+    // 格子点それぞれの勾配<font></font>
+    float2 g00 = pseudoRandom(i00);<font></font>
+    float2 g10 = pseudoRandom(i10);<font></font>
+    float2 g01 = pseudoRandom(i01);<font></font>
+    float2 g11 = pseudoRandom(i11);<font></font>
+<font></font>
+    // 正規化（ベクトルの大きさを1にそろえる）<font></font>
+    g00 = normalize(g00);<font></font>
+    g10 = normalize(g10);<font></font>
+    g01 = normalize(g01);<font></font>
+    g11 = normalize(g11);<font></font>
+<font></font>
+    // 各格子点のノイズの値を計算<font></font>
+    float n00 = dot(g00, p00);<font></font>
+    float n10 = dot(g10, p10);<font></font>
+    float n01 = dot(g01, p01);<font></font>
+    float n11 = dot(g11, p11);<font></font>
+<font></font>
+    // 補間<font></font>
+    float2 u_xy = interpolate(f.xy);<font></font>
+    float2 n_x  = lerp(float2(n00, n01), float2(n10, n11), u_xy.x);<font></font>
+    float n_xy = lerp(n_x.x, n_x.y, u_xy.y);<font></font>
+    return n_xy;<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h4><a id="h5-3-2-3"></a>結果</h4>
+<p><strong>Value Noise</strong>で見られたような不自然な格子の形状はなく、等方性のあるノイズが得られます。<strong>Perlin Noise</strong>は、<strong>Value Noise</strong>に対して、勾配を用いることから<strong>Gradient Noise</strong>とも呼ばれます。</p>
+<div id="pn_result_original_perlin_noise" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_original_perlin_noise.png" alt="Perlin Noise（2D, 3D, 4D） 結果">
+<p class="caption">
+図5.13: Perlin Noise（2D, 3D, 4D） 結果
+</p>
+</div>
+
+<h3><a id="h5-3-3"></a><span class="secno">5.3.3　</span>Improved Perlin Noise (改良パーリンノイズ)</h3>
+<p><strong>Improved Perlin Noise（改良パーリンノイズ）</strong>は、Ken Perlin氏によって、<strong>Perlin Noise</strong>の欠点を改良するものとして2001年に発表されました。詳細については、ここで確認することができます。</p>
+<p><a href="http://mrl.nyu.edu/~perlin/paper445.pdf" class="link">http://mrl.nyu.edu/~perlin/paper445.pdf</a></p>
+<p>現在、<strong>Perlin Noise</strong>というと、この<strong>Improved Perlin Noise</strong>に基づいて実装されたものがほとんどです。</p>
+<p>Ken Perlinが行った改良とは、主に次の2点です。</p>
+<ol>
+<li>格子間の勾配の補間のための補間関数</li>
+<li>勾配の計算法</li>
+</ol>
+
+<h5><a id="h5-3-3-0-1"></a>格子間の勾配の補間のための補間関数</h5>
+<p>補間のエルミート曲線について、オリジナルの<strong>Perlin Noise</strong>では<strong>3次エルミート曲線</strong>を用いました。しかし、この3次の式であると、2階微分（微分して得られた結果がさらに微分可能なとき、これを微分する事）<code class="tt">6-12t</code>が<code class="tt">t=0</code>, <code class="tt">t=1</code>の時に<code class="tt">0</code>になりません。曲線を微分すると、接線の傾きが得られます。もう1回微分すると、その曲率が得られ、これがゼロでないということはわずかな変化があるということです。このため、バンプマッピングのための法線として用いる場合、隣接する格子と値が厳密に連続にならなず、視覚的なアーティファクトが発生します。</p>
+<p>比較した図です。</p>
+<div id="pn_compare_bumpmap" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_compare_bumpmap.png" alt="3次エルミート曲線による補間（左） 5次エルミート曲線による補間（右）">
+<p class="caption">
+図5.14: 3次エルミート曲線による補間（左） 5次エルミート曲線による補間（右）
+</p>
+</div>
+<p>サンプルプロジェクト</p>
+<p>TheStudyOfProceduralNoise/Scenes/<strong>CompareBumpmap</strong></p>
+<p>シーンを開くと、これを確認することができます。</p>
+<p>図を見てみると、左の<strong>3次エルミート曲線</strong>によって補間を行った方は、格子の境界で視覚的に不自然な法線の不連続が認められます。これを回避するために、次の<strong>5次エルミート曲線</strong>を用います。</p>
+<div class="equation">
+<pre>f\left( t\right) =6t^{5}-15t^{4}+10t^{3}
+</pre>
+</div>
+<p>それぞれの曲線図を示します。①は<strong>3次エルミート曲線</strong>、②は<strong>5次エルミート曲線</strong>です。</p>
+<div id="pn_3hermite_and_5hermite" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3hermite_and_5hermite.png" alt="3次と5次のエルミート曲線">
+<p class="caption">
+図5.15: 3次と5次のエルミート曲線
+</p>
+</div>
+<p><code class="tt">t=0</code>, <code class="tt">t=1</code>あたりでなめらな変化をしていることがわかります。1階微分、2階微分ともに<code class="tt">t=0</code>または<code class="tt">t=1</code>の時に<code class="tt">0</code>となるので、連続性が保たれます。</p>
+
+<h5><a id="h5-3-3-0-2"></a>勾配の計算</h5>
+<p>3次元について考えます。勾配Gは球状に均一に分布していますが、立方体格子はその軸に対しては短く、その対角線については長く、それ自体方向的な偏りを持っています。勾配が軸と平行に近い場合、それが近接するものと整列すると、距離が近いためそれらの領域では異常に高い値をとなり、斑点に見えるようなノイズの分布を生じさせることがあります。この勾配の偏りを取り除くために、座標軸に平行なものと、対角線上にあるものを取り除いた以下の12のベクトルに限定することを行います。</p>
+<div class="emlist-code">
+<pre class="emlist">(1,1,0),(-1,1,0),(1,-1,0),(-1,-1,0),<font></font>
+(1,0,1),(-1,0,1),(1,0,-1),(-1,0,-1),<font></font>
+(0,1,1),(0,-1,1),(0,1,-1),(0,-1,-1)<font></font>
+</pre>
+</div>
+<div id="pn_3d_improved_gradient" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3d_improved_gradient.png" alt="改良パーリンノイズの勾配（3次元）">
+<p class="caption">
+図5.16: 改良パーリンノイズの勾配（3次元）
+</p>
+</div>
+<p>認知心理学的な見地から、実際には、格子の中の点Pが十分なランダム性を与えてくれるのもあり、勾配Gが全方位にランダムである必要はないとKen Perlinは述べています。また、たとえば、<code class="tt">(1, 1, 0)</code>と<code class="tt">(x, y, z)</code>の内積は、単純に<code class="tt">x + y</code>として計算することができ、後に行う内積計算を単純化し、多くの乗算を避けることができます。これによって24個の乗算が計算から取り除かれ、計算コストを抑えることができます。</p>
+
+<h4><a id="h5-3-3-1"></a>実装と結果</h4>
+<p>サンプルプロジェクト内の</p>
+<p>TheStudyOfProceduralNoise/Scenes/<strong>ShaderExampleList</strong></p>
+<p>シーンを開くと、<strong>Improved Perlin Noise</strong>の実装結果を見ることができます。コードについては、</p>
+<ul>
+<li>Shaders/ProceduralNoise/<strong>ClassicPerlinNoise2D.cginc</strong></li>
+<li>Shaders/ProceduralNoise/<strong>ClassicPerlinNoise3D.cginc</strong></li>
+<li>Shaders/ProceduralNoise/<strong>ClassicPerlinNoise4D.cginc</strong></li>
+</ul>
+<p>この<strong>Improved Perlin Noise</strong>の実装は、次の<strong>Simplex Noise</strong>でも紹介する、論文<strong>"Effecient computational noise in GLSL"</strong> において発表されたものに基づいています。（ここでは、<strong>Classic Perlin Noise</strong>という名称で扱われています。そのため、少しややこしいですが、その名前を使用しています。）。この実装は、勾配計算について、Ken Perlinが論文で説明したものとは異なりますが、十分に類似した結果を得ることができます。</p>
+<p>下記のURLからKen Perlin のオリジナルの実装を確認することができます。</p>
+<p><a href="http://mrl.nyu.edu/~perlin/noise/" class="link">http://mrl.nyu.edu/~perlin/noise/</a></p>
+<div id="pn_result_classic_perlin_noise" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_classic_perlin_noise.png" alt="Improved Perlin Noise（2D, 3D, 4D） ">
+<p class="caption">
+図5.17: Improved Perlin Noise（2D, 3D, 4D） 
+</p>
+</div>
+<p>下の図は、ノイズの勾配と結果を比較したものです。左がオリジナルの<strong>Perlin Noise</strong>、右が<strong>Improved Perlin Noise</strong>です。</p>
+<div id="pn_result_perlin_and_improvedperlin" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_perlin_and_improvedperlin.png" alt="Perlin Noise, Improved Perlin Noise の勾配と結果の比較">
+<p class="caption">
+図5.18: Perlin Noise, Improved Perlin Noise の勾配と結果の比較
+</p>
+</div>
+
+<h3><a id="h5-3-4"></a><span class="secno">5.3.4　</span>Simplex Noise (シンプレックスノイズ)</h3>
+<p><strong>Simplex Noise</strong>は、Ken Perlinによって、従来の<strong>Perlin Noise</strong>よりも優れたアルゴリズムとして2001年に発表されました。</p>
+<p><strong>Simplex Noise</strong>は従来の<strong>Perlin Noise</strong>と比較して、以下のような優位性があります。</p>
+<ul>
+<li>計算の複雑性が低く、乗算の回数が少ない。</li>
+<li>ノイズの次元を4次元、5次元またはそれ以上と上げていったとき、計算負荷の増加が少なく、<strong>Perlin Noise</strong>が<span class="equation">O(2^{N})</span>の計算オーダーであるところ、<strong>Simplex Noise</strong>は<span class="equation">O(N^{2})</span>で済む</li>
+<li>勾配ベクトルの方向的な偏りが引き起こす視覚的なアーティファクトがない</li>
+<li>少ない計算負荷で、連続的な勾配がある</li>
+<li>ハードウェア（シェーダ）で実装しやすい</li>
+</ul>
+<p>ここでは、<strong>"Simplex Noise Demystify"</strong></p>
+<p><a href="http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf" class="link">http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf</a></p>
+<p>の内容をもとに解説いたします。</p>
+
+<h4><a id="h5-3-4-1"></a>アルゴリズム</h4>
+<ol>
+<li>単体（Simplex）による格子を定義する</li>
+<li>ノイズの値を求める点Pがどの単体にあるかを計算</li>
+<li>単体の角における勾配を計算</li>
+<li>それぞれの単体の周囲の角における勾配の値から、点Pにおけるノイズの値を計算</li>
+</ol>
+
+<h5><a id="h5-3-4-1-1"></a>単体(Simplex)による格子</h5>
+<p>シンプレックスとは、数学の位相幾何学においては、単体と呼ばれます。単体とは、図形を作る一番小さな単位のことです。0次元単体は<strong>点</strong>、1次元単体は<strong>線分</strong>、2次元単体は<strong>三角形</strong>、3次元単体は<strong>四面体</strong>、4次元単体は<strong>五胞体</strong>です。</p>
+<div id="pn_simplices" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_simplices.png" alt="それぞれの次元での単体">
+<p class="caption">
+図5.19: それぞれの次元での単体
+</p>
+</div>
+<p><strong>Perlin Noise</strong>では、2次元の時は正方形の格子、3次元の時は立方体の格子を用いていましたが、<strong>Simplex Noise</strong>ではこの単体を格子に使います。</p>
+<p>1次元の場合、空間を充てんする最も単純な形状は、等間隔に配置された線です。2次元の場合、空間を充てんする最も単純な形状は三角形となります。</p>
+<p>これらの三角形で構成されたタイルのうち二つは、その主対角線に沿って押しつぶされた正方形と考えることができます。</p>
+<div id="pn_2d_simplex_grid" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_simplex_grid.png" alt="2次元の単体格子">
+<p class="caption">
+図5.20: 2次元の単体格子
+</p>
+</div>
+<p>3次元では、単体形状はわずかに歪んだ四面体です。それら6つの四面体は主対角線に沿って押しつぶされた立方体を作ります。</p>
+<div id="pn_3d_simplex_skew" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3d_simplex_skew.png" alt="3次元の単体格子">
+<p class="caption">
+図5.21: 3次元の単体格子
+</p>
+</div>
+<p>4次元では、単体形状は非常に視覚化が困難です。その単体形状は5つの角を持っており、24個のこれらの形状が、主対角線に沿ってつぶれた4次元の超立方体を形成します。</p>
+<p>N次元の単体形状は、<strong>N+1</strong>個の角を持ち、<strong>N!（3!は3×2×1=6)</strong>個のそれらの形状は、主対角線に沿ってつぶれたN次元超立方体を満たす、と言えます。</p>
+<p>格子に単体形状を用いる利点は、次元に対して可能な限り少ない角をもつ格子を定義できるので、格子の内部の点の値を求めるとき、周囲の格子点の値から補間を行いますが、その計算回数を抑えることができるところにあります。N次元の超立方体は<span class="equation">2^{N}</span>個の角を持ちますが、N次元の単体形状は<span class="equation">N+1</span>個だけの角しか持ちません。</p>
+<p>より高い次元のノイズの値を求めようとするとき、従来の<strong>Perlin Noise</strong>では、超立方体のそれぞれの角における計算の複雑性や、それぞれの主軸についての補間の計算量は<span class="equation">O(2^{N})</span>問題であり、すぐに扱いにくいものになります。一方、<strong>Simplex Noise</strong>では、次元に対する単体形状の頂点数が少ないため、その計算量は<span class="equation">O(N^{2})</span>に抑えられます。</p>
+
+<h5><a id="h5-3-4-1-2"></a>ノイズの値を求める点Pが、どの単体にあるかの決定</h5>
+<p>Perlin Noiseでは、求めたい点Pが、どの格子にあるかの計算は、座標の整数部を<code class="tt">floor()</code>で求めることができました。Simplex Noiseでは、以下に示す2つの手順で行います。</p>
+<ol>
+<li>主対角線に沿って入力座標空間を歪曲させ、それぞれの軸の座標の整数部を見ることで、どの単体のユニットに属するかを判断する</li>
+<li>単体のユニットの原点から、点Pへのそれぞれの次元での距離の大きさを比較することで、単体のユニットのどの単体に属するかを判断する</li>
+</ol>
+<p>視覚的な理解のために、2次元の場合についての図を見ていきましょう。</p>
+<div id="pn_2d_simpex_grid_skew" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_simpex_grid_skew.png" alt="2次元の場合の単体格子の変形の様子">
+<p class="caption">
+図5.22: 2次元の場合の単体格子の変形の様子
+</p>
+</div>
+<p>2次元の三角形の単体格子は、スケーリングによって二等辺三角形の格子にゆがめることができます。二等辺三角形は2つで辺の長さが1の四角形（単体のユニットというのはこの四角形を指します）を形成します。移動後の座標<code class="tt">(x, y)</code>の整数部を見ることによって、ノイズの値を求めたい点Pがどの単体のユニットの四角形にあるかを判断することができます。また、単体のユニットの原点からのx、yの大きさを比較することによって、点Pを含む単体がユニットのどちらであるかがわかり、点Pを囲む単体の3点の座標が決まります。</p>
+<p>3次元の場合、2次元の正三角形の単体格子を二等辺三角形の格子へと変形させることができるように、3次元の単体格子は、その主対角線に沿ってスケーリングすることで、規則正しく並んだ立方体の格子に変形させることができます。2次元の場合と同様、移動した点Pの座標の整数部を見ることで、どの6個からなる単体のユニットに属するかを判定できます。そしてさらに、そのユニットのどの単体に属するかは、ユニットの原点からの各軸の相対的な大きさ比較で判定することができます。</p>
+<div id="pn_3d_simplex_rankorder" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_3d_simplex_rankorder.png" alt="3次元の場合の単体のユニットのうちどの単体に点Pが属するかを決定するルール">
+<p class="caption">
+図5.23: 3次元の場合の単体のユニットのうちどの単体に点Pが属するかを決定するルール
+</p>
+</div>
+<p>この上の図は、3次元の単体のユニットが作る立方体を主対角線に沿って見たものであり、点Pの座標値のx、y、z軸についてのそれぞれの大きさによってどの単体に属するのかのルールを示したものです。</p>
+<p>4次元の場合、視覚化は困難ですが、2次元と3次元の規則と同様に考えることができます。空間を満たす4次元の超立方体の座標<code class="tt">(x, y, z, w)</code>それぞれの軸についての大きさの組み合わせは、4!=24通りとなり、超立方体内の24個の単体それぞれに固有のものとなり、点Pがどの単体に属するかを判定することができます。</p>
+<p>下の図は、2次元における単体格子をフラグメントカラーで可視化したものです。</p>
+<div id="pn_uv_simplex_2d" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_uv_simplex_2d.png" alt="単体（2D）の整数部と少数部">
+<p class="caption">
+図5.24: 単体（2D）の整数部と少数部
+</p>
+</div>
+
+<h5><a id="h5-3-4-1-3"></a>補間から総和への移行</h5>
+<p>従来の<strong>Perlin Noise</strong>では、格子内部の点の値を周囲の格子点の値から補間によって求めていました。しかし、<strong>Simplex Noise</strong>では、代わりに、それぞれの単体形状の頂点の値の影響度合いを、単純な総和計算で求めます。具体的には、単体それぞれの角の<strong>勾配の外挿</strong>と、<strong>各頂点からの距離によって放射円状に減衰する関数</strong>の積の足しあわせを行います。</p>
+<p>2次元について考えます。</p>
+<div id="pn_2d_sum_simplex_corners" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_2d_sum_simplex_corners.png" alt="放射円状減衰関数とその影響範囲">
+<p class="caption">
+図5.25: 放射円状減衰関数とその影響範囲
+</p>
+</div>
+<p>単体の内部の点Pの値は、それを囲んでいる単体の3つの各頂点からの値のみ影響します。離れた位置にある頂点の値は、点Pを含んだ単体の境界を越える前に0に減衰するので、影響を及ぼしません。このように、点Pのノイズの値は、3つの頂点の値とその影響度合いの合計として計算することができます。</p>
+<div id="pn_sum_simplex_corner_contribution" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_sum_simplex_corner_contribution.png" alt="各頂点の寄与率と総和">
+<p class="caption">
+図5.26: 各頂点の寄与率と総和
+</p>
+</div>
+
+<h4><a id="h5-3-4-2"></a>実装</h4>
+<p>実装については、2012年に、Ian McEwan、David Sheets、 Stefan Gustavson、Mark Richardsonによって発表された <strong>"Effecient computational noise in GLSL"</strong></p>
+<p><a href="https://pdfs.semanticscholar.org/8e58/ad9f2cc98d87d978f2bd85713d6c909c8a85.pdf" class="link">https://pdfs.semanticscholar.org/8e58/ad9f2cc98d87d978f2bd85713d6c909c8a85.pdf</a></p>
+<p>に従った方法で示します。</p>
+<p>現状、シェーダによるノイズの実装を行いたい場合、ハードウェア依存が少なく、計算も効率的で、テクスチャを参照するなどの必要がなく扱いやすいアルゴリズムです。（おそらく）</p>
+<p>ソースコードは2018年4月現在、<a href="https://github.com/stegu/webgl-noise/" class="link">https://github.com/stegu/webgl-noise/</a>で管理されています。オリジナルはこちら(<a href="https://github.com/ashima/webgl-noise" class="link">https://github.com/ashima/webgl-noise</a>)でしたが、現在これを管理していた Ashima Arts は会社として機能していないようなので、Stefan Gustavsonによってクローンされました。</p>
+<p>実装の特徴としては、以下の3つが挙げられます。</p>
+<ul>
+<li>勾配ベクトル計算のためのランダムに並んだインデックスを、テーブルを参照するのではなく、多項式による計算で求める</li>
+<li>正軸体（Cross Polytope）の幾何学形状を勾配ベクトル計算に用いる</li>
+<li>単体選択の条件を順序付け（Rank Ordering）と置き換える</li>
+</ul>
+
+<h5><a id="h5-3-4-2-1"></a>勾配のインデックス並べ換えのための多項式</h5>
+<p>過去に発表されたノイズの実装では、勾配計算時のインデックス生成のために、事前に計算されたインデックスの値を格納したテーブルやビット入れ替えによるハッシュを使っていたりしましたが、どちらのアプローチもシェーダによる実装には向いているとは言えません。そこで、インデックス並べ替えのために、</p>
+<div class="equation">
+<pre>\left( Ax^{2}+Bx\right) mod\ M
+</pre>
+</div>
+<p>というシンプルな形をした多項式を使用する方法を提案しています。（mod=modulo ある数を割った時の余りの数（剰余））例えば、<span class="equation">\left(6x^{2}+x\right)mod\ 9</span>は <code class="tt">（0 1 2 3 4 5 6 7 8)</code> を <code class="tt">(0 7 8 3 1 2 6 4 5)</code> というように、0~8の入力に対して重複のない0~8の9つの数字を返します。</p>
+<p>勾配を十分に良く分散するためのインデックス生成には、少なくとも数百の数字を並べ替える必要があり、<span class="equation">\left(34x^{2}+x\right)mod\ 289</span>を選択することとします。</p>
+<p>この置換多項式は、シェーダ言語の変数の精度の問題で、整数領域で、<span class="equation">34x^{2}+x &gt; 2^{24}</span>, または、<span class="equation">|x| &gt; 702</span> の時に、切り捨てが発生してしまいます。そこで、オーバーフローのリスクなしに並べ替えのための多項式を計算するために、多項式の計算を行う前に、xの289の剰余計算を行って、xを0~288の範囲に制限します。</p>
+<p>具体的には、以下のように実装されます。</p>
+<div class="emlist-code">
+<pre class="emlist">// 289の剰余を求める<font></font>
+float3 mod289(float3 x)<font></font>
+{<font></font>
+    return x - floor(x * (1.0 / 289.0)) * 289.0;<font></font>
+}<font></font>
+<font></font>
+// 置換多項式による並べ替え<font></font>
+float3 permute(float3 x)<font></font>
+{<font></font>
+    return fmod(((x * 34.0) + 1.0) * x, 289.0);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>論文では、2、3次元のときは問題ないが、4次元の場合は、この多項式では視覚的なアーティファクトが発生してしまっていることを認めています。4次元の場合、289のインデックスでは不十分であるようです。</p>
+
+<h5><a id="h5-3-4-2-2"></a>正軸体（Cross Polytope）の幾何学形状を勾配ベクトル計算に用いる</h5>
+<p>従来の実装では、勾配計算に疑似乱数を使用し、事前に計算した勾配のインデックスの計算のために、インデックスを格納したテーブルを参照したり、ビット操作を行ったりしました。ここでは、よりシェーダによる実装に最適で、さまざまな次元で効率よく分散した勾配を得るために、<strong>正軸体（Cross Polytope)</strong>を勾配計算に使用します。正軸体とは、2次元の<strong>正方形</strong>、3次元の<strong>正八面体</strong>、4次元の<strong>正十六胞体</strong>を各次元に一般化した形状の事を指します。各次元下図のような幾何学的形状をとります。</p>
+<div id="pn_cross-polytopes" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_cross-polytopes.png" alt="各次元における正軸体">
+<p class="caption">
+図5.27: 各次元における正軸体
+</p>
+</div>
+<p>勾配ベクトルは、それぞれの次元で、2次元であれば<strong>正方形</strong>、3次元であれば<strong>正八面体</strong>、4次元であれば（一部切り詰められた）<strong>正十六胞体</strong>の<strong>表面上</strong>に分散します。</p>
+<p>各次元、方程式は以下の通りです。</p>
+<div class="emlist-code">
+<pre class="emlist">2-D: x0 ∈ [−2, 2], y = 1 − |x0|<font></font>
+if y &gt; 0 then x = x0 else x = x0 − sign(x0)<font></font>
+<font></font>
+3-D: x0, y0 ∈ [−1, 1], z = 1 − |x0| − |y0|<font></font>
+if z &gt; 0 then x = x0, y = y0<font></font>
+else x = x0 − sign(x0), y = y0 − sign(y0)<font></font>
+<font></font>
+4-D: x0, y0, z0 ∈ [−1, 1], w = 1.5 − |x0| − |y0| − |z0|<font></font>
+if w &gt; 0 then x = x0, y = y0, z = z0<font></font>
+else x = x0 − sign(x0), y = y0 − sign(y0), z = z0 − sign(z0)<font></font>
+</pre>
+</div>
+
+<h5><a id="h5-3-4-2-3"></a>勾配の正規化</h5>
+<p>ほとんどの<strong>Perlin Noise</strong>の実装では大きさが等しい勾配ベクトルを使っていました。しかし、N次元の正軸体の表面のベクトルの最短のものと最長のものでは、<span class="equation">\sqrt {N}</span>の因数分、長さに差があります。これは強いアーティファクトを引き起こしませんが、次元が高くなると、このベクトルを明示的に正規化しなければノイズパターンの等方性が低くなってしまいます。正規化とは、ベクトルをそのベクトルの大きさで割ることにより、大きさを1にそろえる処理です。勾配ベクトルの大きさをrとすると、勾配ベクトルにrの逆平方根 <span class="equation">\dfrac {1}{\sqrt {r}}</span> を掛け合わせることで、正規化が実現できます。ここでは、パフォーマンス向上のため、この逆平方根をテイラー展開を用いて近似的に計算しています。テイラー展開とは、無限に微分可能な関数において、xがaの近辺であるなら、以下の式で近似的に計算できる、というものです。</p>
+<div class="equation">
+<pre>\sum ^{\infty }_{n=0}\dfrac {f^{\left( n\right) }\left( a\right) }{n!}\left( x-a\right) ^{n}
+</pre>
+</div>
+<p><span class="equation">\dfrac {1}{\sqrt {a}}</span> の1階微分を求めると、</p>
+<div class="equation">
+<pre>\begin{array}{l}<font></font>
+f\left( a\right) =\dfrac {1}{\sqrt {a}}=a^{-\frac{1}{2}}\\<font></font>
+f'\left( a\right) =-\dfrac {1}{2}a^{-\frac{3}{2}}\\<font></font>
+\end{array}<font></font>
+</pre>
+</div>
+<p>となり、テイラー展開によるa近辺での近似式は以下のようになります。</p>
+<div class="equation">
+<pre>\sum ^{\infty }_{n=0}\dfrac {f^{\left( n\right) }\left( a\right) }{n!}\left( x-a\right) ^{n}
+</pre>
+</div>
+<div class="equation">
+<pre>\begin{array}{l}<font></font>
+=a^{-\frac{1}{2}}-\frac{1}{2}a^{-\frac{3}{2}}\left( x-a\right)\\<font></font>
+=\frac{3}{2}a^{-\frac{1}{2}}-\frac{1}{2}a^{-\frac{3}{2}}x\\<font></font>
+\end{array}<font></font>
+</pre>
+</div>
+<p>ここで、a=0.7(勾配ベクトルの長さの範囲が0.5～1.0であるからなんだろうと思います)とすると、<span class="equation">1.79284291400159 - 0.85373472095314 * x</span> が得られます。</p>
+<p>実装ではこのようになっています。</p>
+<div class="emlist-code">
+<pre class="emlist">float3 taylorInvSqrt(float3 r)<font></font>
+{<font></font>
+    return 1.79284291400159 - 0.85373472095314 * r;<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h3><a id="h5-3-5"></a><span class="secno">5.3.5　</span>実装と結果</h3>
+<p>サンプルプロジェクト内の</p>
+<p>TheStudyOfProceduralNoise/Scenes/<strong>ShaderExampleList</strong></p>
+<p>シーンを開くと、<strong>Simplex Noise</strong>の実装結果を見ることができます。実装したコードは、</p>
+<ul>
+<li>Shaders/ProceduralNoise/<strong>SimplexNoise2D.cginc</strong></li>
+<li>Shaders/ProceduralNoise/<strong>SimplexNoise3D.cginc</strong></li>
+<li>Shaders/ProceduralNoise/<strong>SimplexNoise4D.cginc</strong></li>
+</ul>
+<p>にあります。</p>
+<div id="pn_result_simplex_noise" class="image">
+<img src="./Chapter 5 _ Introduction to Procedural Noise_files/pn_result_simplex_noise.png" alt="Simplex Noise（2D, 3D, 4D）結果">
+<p class="caption">
+図5.28: Simplex Noise（2D, 3D, 4D）結果
+</p>
+</div>
+<p><strong>Simplex Noise</strong>は、<strong>Perlin Noise</strong>と比較すると、少し粒感のある結果が得られます。</p>
+
+<h2><a id="h5-4"></a><span class="secno">5.4　</span>まとめ</h2>
+<p>プロシージャルノイズの代表的手法のアルゴリズムと実装について詳細に見てきましたが、それぞれ得られるノイズパターンの特徴や、計算コストに違いがあることが確認できたと思います。リアルタイムアプリケーションにおいてノイズを用いる場合、それが高解像度となるときは、画素一つ一つに対して計算を行うため、この計算負荷については無視することはできず、どのような計算がなされているかは、ある程度留意しておく必要があります。最近では、ノイズ関数がはじめから開発環境に組み込まれているものも多いですが、それを十分に使いこなすためにも、ノイズのアルゴリズムを理解しておくことは重要です。ここではその応用については解説できませんでしたが、グラフィックス生成において、ノイズの応用は極めて多岐にわたり多大な効果をもたらします。（次章ではその例の一つを示します。）この記事が、数え切れないほどの応用への足がかりとなれば幸いです。最後に、先人たちが積み上げてきた知恵と、主にKen Perlinの素晴らしい業績について敬意を表したいと思います。</p>
+
+<h2><a id="h5-5"></a><span class="secno">5.5　</span>参照</h2>
+<ul>
+<li>[1] An Image Synthesizer, Ken Perlin, SIGGRAPH 1985</li>
+<li>[2] Improving Noise, Ken Perlin ―<a href="http://mrl.nyu.edu/~perlin/paper445.pdf" class="link">http://mrl.nyu.edu/~perlin/paper445.pdf</a></li>
+<li>[3] Noise hardware. In Real-Time Shading SIGGRAPH Course Notes, Ken Perlin, 2001 ― <a href="https://www.csee.umbc.edu/~olano/s2002c36/ch02.pdf" class="link">https://www.csee.umbc.edu/~olano/s2002c36/ch02.pdf</a></li>
+<li>[4] Improved Noise reference implementation, Ken Perlin, SIGGRAPH 2002<a href="http://mrl.nyu.edu/~perlin/noise/" class="link">http://mrl.nyu.edu/~perlin/noise/</a></li>
+<li>[5] GPU Gems Chapter 5. Implementing Improved Perlin Noise, Ken Perlin ―<a href="http://developer.download.nvidia.com/books/HTML/gpugems/gpugems_ch05.html" class="link">http://developer.download.nvidia.com/books/HTML/gpugems/gpugems_ch05.html</a></li>
+<li>[6] Simplex noise demystified. Technical Report, Stefan Gustavson, 2005 ―<a href="http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf" class="link">http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf</a></li>
+<li>[7] Efficient computational noise in GLSL, Ian McEwan, David Sheets, Stefan Gustavson and Mark Richardson, 6 Apr 2012 ―<a href="http://webstaff.itn.liu.se/~stegu/jgt2012/article.pdf" class="link">http://webstaff.itn.liu.se/~stegu/jgt2012/article.pdf</a></li>
+<li>[8] Direct computational noise in GLSL Supplementary material, Ian McEwan, David Sheets, Stefan Gustavson and Mark Richardson, 2012 ― <a href="http://weber.itn.liu.se/~stegu/jgt2011/supplement.pdf" class="link">http://weber.itn.liu.se/~stegu/jgt2011/supplement.pdf</a></li>
+<li>[9] Texturing and Modeling; A Procedural Approach, Second Edition ―</li>
+<li>[10] The Book of Shaers  Noise, Patricio Gonzalez Vivo &amp; Jen Lowe ― <a href="https://thebookofshaders.com/11/" class="link">https://thebookofshaders.com/11/</a></li>
+<li>[11] Building Up Perlin Noise ー <a href="http://eastfarthing.com/blog/2015-04-21-noise/" class="link">http://eastfarthing.com/blog/2015-04-21-noise/</a></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[12] Let's go with Z! </font><font style="vertical-align: inherit;">I checked Extension for 3ds Max 2015 Part 24 3dsmax 2015 ー</font></font><a href="http://blog.livedoor.jp/take_z_ultima/archives/2015-05.html" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">http://blog.livedoor.jp/takezultima/archives/2015-05.html</font></font></a></li>
+</ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 5 _ Introduction to Procedural Noise_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 5 _ Introduction to Procedural Noise_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 5 _ Introduction to Procedural Noise_files/saved_resource(2).html"></iframe></body></html>
