@@ -10,18 +10,24 @@ coudn't get `npm run pdf` to work, so I'm rolling my own conversion to epub, usi
 # install dependencies
 chmod +x setup.sh ; ./setup.sh
 
-# convert to 
+# convert to html
 REVIEW_PREFIX='/usr/local/lib/ruby/gems/2.7.0/bin/' npx grunt html \
-    && node make-epub.js
 
+# creates articles/index.html
+node process.js
+
+# collect files
 mkdir html ; \
     mv articles/*.html html/ ; \
     cp -R articles/images html/images
 ```
 
-this creates:
-- `UnityGraphicsProgrammingBook1.epub`
-- `articles/index.html`
+- saved google-translated files
+- "baked" translation:
+    - example: `node ../../bake-translation.js "http://localhost:5000/Preface.html" "Preface.html"`
+- [removed a bunch of google translate artifacts](https://github.com/freder/UnityGraphicsProgrammingBook1/commit/9e0f9e753a5d68ee27f41a2ae44918e5911c4c68).
+- `make-epubs.sh`
+- convert to pdf, using `calibre`
 
 ---
 

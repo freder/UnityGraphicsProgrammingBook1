@@ -10,9 +10,9 @@ const files = lines
 console.log(files);
 
 // generate an epub file
-const cmd = `pandoc -s ${files.join(' ')} -t epub -o ../UnityGraphicsProgrammingBook1.epub`;
-console.log(cmd);
-execSync(cmd, { cwd: './articles' });
+// const cmd = `pandoc -s ${files.join(' ')} -t epub -o ../UnityGraphicsProgrammingBook1.epub`;
+// console.log(cmd);
+// execSync(cmd, { cwd: './articles' });
 
 // also create an html index page
 const html = files.map((f) => `<a href="${f}">${f}</a><br>`).join('\n');
