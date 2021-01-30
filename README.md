@@ -1,3 +1,20 @@
+# notes
+
+```
+# install dependencies
+./setup.sh
+
+# convert to 
+REVIEW_PREFIX='/usr/local/lib/ruby/gems/2.7.0/bin/' npx grunt html \
+    && node make-epub.js
+```
+
+- coudn't get `npm run pdf` to work, so I'm rolling my own conversion to epub, using `pandoc`
+
+---
+
+↓ original readme:
+
 # Unity Graphics Programming vol.1
 
 ![Cover](https://raw.githubusercontent.com/IndieVisualLab/UnityGraphicsProgrammingBook1/master/images/cover.png)
