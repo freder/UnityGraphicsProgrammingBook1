@@ -1,4 +1,10 @@
-# notes
+# rudimentary way to get an english translation
+
+https://freder.github.io/UnityGraphicsProgrammingBook1/articles/index.html + google translate browser extension.
+
+## build
+
+coudn't get `npm run pdf` to work, so I'm rolling my own conversion to epub, using `pandoc`.
 
 ```
 # install dependencies
@@ -9,7 +15,9 @@ REVIEW_PREFIX='/usr/local/lib/ruby/gems/2.7.0/bin/' npx grunt html \
     && node make-epub.js
 ```
 
-- coudn't get `npm run pdf` to work, so I'm rolling my own conversion to epub, using `pandoc`
+this creates:
+- `UnityGraphicsProgrammingBook1.epub`
+- `articles/index.html`
 
 ---
 
