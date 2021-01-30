@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/komietty.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>3D spatial sampling performed by MCMC</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/saved_resource.html"></iframe></div>
+<h1><a id="h8"></a><span class="secno"><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;">Chapter 8　</font></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;"> 3D Spatial Sampling with MCMC</font></font></h1>
+
+<h2><a id="h8-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will explain the sampling method. </font><font style="vertical-align: inherit;">This time, we will focus on a sampling method called MCMC (Markov Chain Monte Carlo), which samples multiple appropriate values ​​from a certain probability distribution.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The simplest method for sampling from a certain probability distribution is the rejection method, but sampling in a three-dimensional space has a large rejected area and cannot withstand actual operation. </font><font style="vertical-align: inherit;">Therefore, the content of this chapter is that by using MCMC, sampling can be performed efficiently even in high dimensions.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As for the information about MCMC, on the one hand, systematic information such as books is for statisticians, and there is no guide to implementation for programmers, although it is redundant, and on the other hand, the information on the net has more than 10 lines of sample code. The reality is that there is no content that allows you to quickly and comprehensively understand the theory and implementation, as it is only described and there is no care for the theoretical background. </font><font style="vertical-align: inherit;">I tried to make the concrete explanations in the following sections as such as possible.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The explanation of the probability that is the background of MCMC is enough to write one book if it is strictly speaking. </font><font style="vertical-align: inherit;">This time, with the motto of explaining the minimum theoretical background that can be implemented with peace of mind, we aimed for an intuitive expression with moderate strictness of definition. </font><font style="vertical-align: inherit;">I think that if you have used mathematics in the first year of university or even a little at work, you can read the program without difficulty.</font></font></p>
+
+<h2><a id="h8-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sample repository</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, the Unity project of Unity Graphics Programming https://github.com/IndieVisualLab/Assets/ProceduralModeling in UnityGraphicsProgramming is prepared as a sample program.</font></font></p>
+
+<h2><a id="h8-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Basic knowledge about probability</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">To understand the theory of MCMC, we first need to understand the basics of probability. </font><font style="vertical-align: inherit;">However, there are few concepts to keep in mind in order to understand MCMC this time, only the following four. </font><font style="vertical-align: inherit;">No likelihood or probability density function required!</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Random variable</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Probability distribution</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Stochastic process</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Stationary distribution</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Let's look at them in order.</font></font></p>
+
+<h3><a id="h8-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Random variables</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">When an event occurs at establishment P (X), this real number X is called a random variable. </font><font style="vertical-align: inherit;">For example, when "the probability of getting a 5 on a dice is 1/6", "5" is a random variable and "1/6" is a probability. </font><font style="vertical-align: inherit;">In general, the previous sentence can be rephrased as "the probability that an X on the dice will appear is P (X)".</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By the way, if you write it a little like a definition, the random variable X is a mapping X that returns a real number X for the element ω (= one event that happened) selected from the sample space Ω (= all the events that can occur). You can write = X (ω).</font></font></p>
+
+<h3><a id="h8-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Stochastic process</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I added a slightly confusing definition in the latter half of the random variable because it makes it easier to understand the stochastic process on the assumption that the random variable X is represented by the notation X = X (ω). </font><font style="vertical-align: inherit;">The stochastic process is the one that can be expressed as X = X (ω, t) by adding the time condition to X. </font><font style="vertical-align: inherit;">In other words, the stochastic process can be thought of as a kind of random variable with a time condition.</font></font></p>
+
+<h3><a id="h8-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Probability distribution</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The probability distribution shows the correspondence between the random variable X and the probability P (X). </font><font style="vertical-align: inherit;">It is often represented by a graph with probability P (X) on the vertical axis and X on the horizontal axis.</font></font></p>
+
+<h3><a id="h8-3-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.3.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Stationary distribution</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Each point is a distribution in which the overall distribution does not change even if it transitions. </font><font style="vertical-align: inherit;">For a transition matrix π with a distribution P, P that satisfies πP = P is called a stationary distribution. </font><font style="vertical-align: inherit;">This definition alone is confusing, but it is clear from the figure below.</font></font></p>
+<div id="komiettyfig04" class="image">
+<img src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/komiettyfig04.png" alt="stationaryDistribution">
+<p class="caption">
+図8.1: stationaryDistribution
+</p>
+</div>
+
+<h2><a id="h8-4"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> MCMC concept</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Now, in this section, we will touch on the concepts that make up MCMC. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">As mentioned at the beginning, MCMC is a method of sampling an appropriate value from a certain probability distribution, but more specifically, the Monte Carlo method under the condition that the given distribution is a steady distribution. (Monte Carlo) and Markov chain (Markov chain) sampling method. </font><font style="vertical-align: inherit;">Below, we will explain the Monte Carlo method, Markov chain, and stationary distribution in that order.</font></font></p>
+
+<h3><a id="h8-4-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Monte Carlo method</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Monte Carlo method is a general term for numerical calculations and simulations that use pseudo-random numbers. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">An example that is often used to introduce numerical calculations using the Monte Carlo method is the following calculation of pi.</font></font></p>
+<div class="emlist-code">
+<pre class="emlist">float pi;<font></font>
+float trial = 10000;<font></font>
+float count = 0;<font></font>
+<font></font>
+for(int i=0; i&lt;trial; i++){<font></font>
+    float x = Random.value;<font></font>
+    float y = Random.value;<font></font>
+    if(x*x+y*y &lt;= 1) count++;<font></font>
+}<font></font>
+<font></font>
+pi = 4 * count / trial;<font></font>
+</pre>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In short, the ratio of the number of trials in a fan-shaped circle in a 1 x 1 square to the total number of trials is the area ratio, so the pi can be calculated from that. </font><font style="vertical-align: inherit;">As a simple example, this is also the Monte Carlo method.</font></font></p>
+
+<h3><a id="h8-4-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Markov chain</font></font></h3>
+<p>マルコフ連鎖は、マルコフ性を満たす確率過程のうち、状態が離散的に記述できるものを指します。<br>マルコフ性とは、ある確率過程の将来状態の確率分布が現在状態のみに依存し、過去の状態に依存しない性質のことです。</p>
+<div id="komiettyfig01" class="image">
+<img src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/komiettyfig01.png" alt="MarkovChain">
+<p class="caption">
+図8.2: MarkovChain
+</p>
+</div>
+<p>上図のようにマルコフ連鎖では将来の状態は現在の状態のみに依存して、過去の状態には直接的には影響しません。</p>
+
+<h3><a id="h8-4-3"></a><span class="secno">8.4.3　</span>定常分布</h3>
+<p>MCMCでは擬似乱数を使ってある任意の分布から与えられた定常分布へと収束していく必要があります。というのも、与えられた分布に収束しないと毎回違う分布からサンプリングしてしまうし、定常分布でないと上手く連鎖的にサンプリングできません。任意の分布が与えられた分布へと収束するには、以下の二つの条件を満たす必要があります。</p>
+<ul>
+<li>既約性・・・分布が複数の部分に別れていてはいけないという条件。確率分布上のある点から遷移を繰り返していく際に、到達できない点が存在してはならない</li>
+</ul>
+<div id="komiettyfig02" class="image">
+<img src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/komiettyfig02.png" alt="Irreducibility">
+<p class="caption">
+図8.3: Irreducibility
+</p>
+</div>
+<ul>
+<li>非周期性・・・どんなｎに対してもｎ回で元いた場所に戻ってこれるという条件。例えば円周上に並んだ分布の中で、一つ飛ばしにしか遷移できないとった条件が存在してはならない。</li>
+</ul>
+<div id="komiettyfig03" class="image">
+<img src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/komiettyfig03.png" alt="Aperiodicity">
+<p class="caption">
+図8.4: Aperiodicity
+</p>
+</div>
+<p>この２つの条件を満たしていればある任意の分布は与えられた定常分布に収束することができます。これをマルコフ過程のエルゴード性といいます。</p>
+
+<h3><a id="h8-4-4"></a><span class="secno">8.4.4　</span>メトロポリス法</h3>
+<p>さて与えられた分布が先程のエルゴート性を満たす分布かどうかをいちいち調べるのは骨が折れることなので、多くの場合には条件を強めにとって「詳細釣り合い」という条件を満たす範囲で調べていきます。詳細釣り合いをみたすマルコフ連鎖の手法の一つがメトロポリス法と呼ばれるものです。</p>
+<p>メトロポリス法は以下の２ステップを踏むことでサンプリングを行います</p>
+<ol>
+<li>擬似乱数で遷移先の候補 x を選ぶ。x は Q(x|x') = Q(x'|x) を満たすような分布 Q に従って生成され、この分布 Q を提案分布と呼ぶ。提案分布としてガウス分布が選ばれることが多い。</li>
+<li>1 と独立な乱数を発生させて、その乱数を使ってある基準が満たされれば遷移先候補を採用する。  具体的には、一様乱数 0 &lt;= r &lt; 1 に対して目標分布上の確率値 P(x) と遷移候補先の確率値 P(x') の比P(x')/P(x) が、 P(x')/P(x) &gt; r を満たせば遷移候補先へ遷移する。</li>
+</ol>
+<p>メトロポリス法のメリットは、確率分布の極大値に遷移しきった後も r の値が小さければ確率値の小さい方に遷移するので、極大値周辺で確率値に比例したサンプリングができることです。</p>
+<p>ちなみにメトロポリス法はメトロポリス・ヘイスティング法（MH法）の一種です。メトロポリス法は提案分布に左右対称な分布を使いますが、MH法ではこの限りではありません。</p>
+
+<h2><a id="h8-5"></a><span class="secno">8.5　</span>３次元サンプリング</h2>
+<p>では実際にコードの抜粋を見ながら、どのようにMCMCを実装するかを見ていきましょう。</p>
+<p>先ず３次元の確率分布を用意します。これを目標分布と呼びます。実際にサンプリングしたい分布なので「目標」分布です。</p>
+<div class="emlist-code">
+<pre class="emlist">void Prepare()<font></font>
+{<font></font>
+    var sn = new SimplexNoiseGenerator();<font></font>
+    for (int x = 0; x &lt; lEdge; x++)<font></font>
+        for (int y = 0; y &lt; lEdge; y++)<font></font>
+            for (int z = 0; z &lt; lEdge; z++)<font></font>
+            {<font></font>
+                var i = x + lEdge * y + lEdge * lEdge * z;<font></font>
+                var val = sn.noise(x, y, z);<font></font>
+                data[i] = new Vector4(x, y, z, val);<font></font>
+            }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>今回はシンプレックスノイズを目標分布として採用しました。</p>
+<p>次に実際にMCMCを走らせます。</p>
+<div class="emlist-code">
+<pre class="emlist">public IEnumerable&lt;Vector3&gt; Sequence(int nInit, int limit, float th)<font></font>
+{<font></font>
+    Reset();<font></font>
+<font></font>
+    for (var i = 0; i &lt; nInit; i++)<font></font>
+        Next(th);<font></font>
+<font></font>
+    for (var i = 0; i &lt; limit; i++)<font></font>
+    {<font></font>
+        yield return _curr;<font></font>
+        Next(th);<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<pre class="emlist">public void Reset()<font></font>
+{<font></font>
+     for (var i = 0; _currDensity &lt;= 0f &amp;&amp; i &lt; limitResetLoopCount; i++)<font></font>
+     {<font></font>
+             _curr = new Vector3(<font></font>
+               Scale.x * Random.value,<font></font>
+               Scale.y * Random.value,<font></font>
+               Scale.z * Random.value<font></font>
+               );<font></font>
+             _currDensity = Density(_curr);<font></font>
+     }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>コルーチンを使って処理を走らせます。MCMCは一つのマルコフ連鎖が終わると全く別のところから処理が始まるため、概念的には並列処理と考えることができます。今回はReset関数を使って、一連の処理が終わった後に別の処理を走らせるようにしています。この作業を行うことで、確率分布の極大値が多数存在する場合にも上手くサンプリングができるようになります。</p>
+<p>遷移を始めて最初の方は目標分布から離れた点である可能性が高いので、この区間はサンプリングを行わず捨ててしまします（burn-in）。十分目標分布に近づいたらサンプリングと遷移のセットを一定回数行い、終わったらまた別の一連の処理に入ります。</p>
+<p>最後に遷移を決定する処理です。<br>３次元ですので、提案分布は以下のように三変量の標準正規分布を用います。</p>
+<div class="emlist-code">
+<pre class="emlist">public static Vector3 GenerateRandomPointStandard()<font></font>
+{<font></font>
+        var x = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
+        var y = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
+        var z = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
+        return new Vector3(x, y, z);<font></font>
+}<font></font>
+</pre>
+</div>
+<div class="emlist-code">
+<pre class="emlist">public static float rand_gaussian(float mu, float sigma)<font></font>
+{<font></font>
+     float z = Mathf.Sqrt(-2.0f * Mathf.Log(Random.value))<font></font>
+              * Mathf.Sin(2.0f * Mathf.PI * Random.value);<font></font>
+     return mu + sigma * z;<font></font>
+}<font></font>
+</pre>
+</div>
+<p>メトロポリス法では左右対称な分布である必要があるので、平均値を０以外に設定することは無いですが、分散を１以外にする場合は、コレスキー分解を使って以下のように導出します。</p>
+<div class="emlist-code">
+<pre class="emlist">public static Vector3 GenerateRandomPoint(Matrix4x4 sigma)<font></font>
+{<font></font>
+    var c00 = sigma.m00 / Mathf.Sqrt(sigma.m00);<font></font>
+    var c10 = sigma.m10 / Mathf.Sqrt(sigma.m00);<font></font>
+    var c20 = sigma.m21 / Mathf.Sqrt(sigma.m00);<font></font>
+    var c11 = Mathf.Sqrt(sigma.m11 - c10 * c10);<font></font>
+    var c21 = (sigma.m21 - c20 * c10) / c11;<font></font>
+    var c22 = Mathf.Sqrt(sigma.m22 - (c20 * c20 + c21 * c21));<font></font>
+    var r1 = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
+    var r2 = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
+    var r3 = RandomGenerator.rand_gaussian(0f, 1f);<font></font>
+    var x = c00 * r1;<font></font>
+    var y = c10 * r1 + c11 * r2;<font></font>
+    var z = c20 * r1 + c21 * r2 + c22 * r3;<font></font>
+    return new Vector3(x, y, z);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>遷移先の決定は、提案分布（上の一点である）nextと直前の点_currそれぞれの、目標分布上における確率の比を取り一様乱数より大きければ遷移、そうでなければ遷移しない、とします。<br>確率値は、遷移先の座標に対応する確立値を見つける処理が重いため(O(n^3)の処理量)、近似計算を行っています。今回は目標分布が連続的に変化する分布を用いているので、距離に反比例する加重平均を行うことで近似的に確立値を導出しています。</p>
+<div class="emlist-code">
+<pre class="emlist">void Next(float threshold)<font></font>
+{<font></font>
+        Vector3 next =<font></font>
+          GaussianDistributionCubic.GenerateRandomPointStandard()<font></font>
+          + _curr;<font></font>
+<font></font>
+        var densityNext = Density(next);<font></font>
+        bool flag1 =<font></font>
+          _currDensity &lt;= 0f ||<font></font>
+          Mathf.Min(1f, densityNext / _currDensity) &gt;= Random.value;<font></font>
+        bool flag2 = densityNext &gt; threshold;<font></font>
+        if (flag1 &amp;&amp; flag2)<font></font>
+        {<font></font>
+                _curr = next;<font></font>
+                _currDensity = densityNext;<font></font>
+        }<font></font>
+}<font></font>
+<font></font>
+float Density(Vector3 pos)<font></font>
+{<font></font>
+        float weight = 0f;<font></font>
+        for (int i = 0; i &lt; weightReferenceloopCount; i++)<font></font>
+        {<font></font>
+                int id = (int)Mathf.Floor(Random.value * (Data.Length - 1));<font></font>
+                Vector3 posi = Data[id];<font></font>
+                float mag = Vector3.SqrMagnitude(pos - posi);<font></font>
+                weight += Mathf.Exp(-mag) * Data[id].w;<font></font>
+        }<font></font>
+        return weight;<font></font>
+}<font></font>
+</pre>
+</div>
+
+<h2><a id="h8-6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Other</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This time, the repository also contains a sample of the 3D rejection method (a simple Monte Carlo method as shown in the circle example), so it is a good idea to compare them. </font><font style="vertical-align: inherit;">With the rejection method, sampling cannot be done well if the rejection standard value is set stronger, whereas with MCMC, similar sampling results can be presented more smoothly. </font><font style="vertical-align: inherit;">Also, in MCMC, if the width of the random walk for each step is reduced, sampling is performed from a close space in a series of chains, so it is possible to easily reproduce a cluster of plants and flowers.</font></font></p>
+
+<h2><a id="h8-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> References</font></font></h2>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Takuya Kubo (2012) Introduction to Statistical Modeling for Data Analysis: Generalized Linear Model, Hierarchical Bayes Model, MCMC (Science of Probability and Information) Iwanami Shoten</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Olle Haggstrom, Kentaro Nomaguchi (2017) Introduction to Easy MCMC: Limited Markov Chain and Algorithm Kyoritsu Shuppan</font></font></li>
+</ul><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 53px; top: 30.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第8章　MCMCで行う３次元空間サンプリング</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 8 _ 3D Spatial Sampling with MCMC_files/saved_resource(2).html"></iframe></body></html>

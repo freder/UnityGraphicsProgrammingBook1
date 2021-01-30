@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<!-- saved from url=(0075)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/aoyama.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 6 _ Growing grass with geometry shaders_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Grow grass with geometry shaders</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 6 _ Growing grass with geometry shaders_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 6 _ Growing grass with geometry shaders_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Growing grass with geometry shaders_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 6 _ Growing grass with geometry shaders_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 6 _ Growing grass with geometry shaders_files/saved_resource.html"></iframe></div>
+<h1><a id="h6"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 6　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Growing grass with geometry shaders</font></font></h1>
+
+<h2><a id="h6-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This chapter mainly describes Geometry Shader, which is one of the stages of the rendering pipeline, and explains the dynamic grass-generating shader (commonly known as Grass Shader) using Geometry Shader.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I've used some technical terms to describe the Geometry Shader, but if you're just trying to use the Geometry Shader, it's a good idea to take a look at the sample code.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The Unity project in this chapter has been uploaded to the following Github repository.</font></font></p>
+<p><a href="https://github.com/IndieVisualLab/UnityGraphicsProgramming/" class="link">https://github.com/IndieVisualLab/UnityGraphicsProgramming/</a></p>
+
+<h2><a id="h6-2"></a><span class="secno">6.2　</span>Geometry Shaderとは？</h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Geometry Shader is one of the programmable shaders that can dynamically convert, generate, and delete primitives (basic shapes that make up a mesh) on the GPU.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Until now, if you try to change the mesh shape dynamically, such as by converting primitives, you need to take measures such as processing on the CPU or giving meta information to the vertices in advance and converting with Vertex Shader. did. </font><font style="vertical-align: inherit;">However, Vertex Shader cannot acquire information about adjacent vertices, and there are strong restrictions such as not being able to create new vertices based on the vertices being processed and vice versa. .. </font><font style="vertical-align: inherit;">However, processing with a CPU would take an unrealistically huge amount of time from the perspective of real-time processing. </font><font style="vertical-align: inherit;">As you can see, there have been some problems with changing the shape of the mesh in real time.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Therefore, Geometry Shader is installed as standard in DirectX 10 and OpenGL 3.2 as a function to solve these problems and enable free conversion processing within weak constraints. </font><font style="vertical-align: inherit;">In OpenGL, it is also called Primitive Shader.</font></font></p>
+
+<h2><a id="h6-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Features of Geometry Shader</font></font></h2>
+
+<h3><a id="h6-3-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Rendering pipeline</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">It is located on the rendering pipeline after Vertex Shader and before Fragment Shader and rasterization. </font><font style="vertical-align: inherit;">In other words, within the Fragment Shader, the vertices dynamically generated by the Geometry Shader and the original vertices passed to the Vertex Shader are processed without distinction.</font></font></p>
+
+<h3><a id="h6-3-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Input to Geometry Shader</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Normally, the input information to Vertex Shader is in units of vertices, and conversion processing is performed for those vertices. </font><font style="vertical-align: inherit;">However, the input information to the Geometry Shader is a user-defined input primitive unit.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The actual program will be described later, but the vertex information group processed by Vertex Shader will be divided and input based on the input primitive type. </font><font style="vertical-align: inherit;">For example, if the input primitive type is triangle, three vertex information will be passed, if line, two vertex information will be passed, and if point, one vertex information will be passed. </font><font style="vertical-align: inherit;">This makes it possible to perform processing while referring to other vertex information, which was not possible with vertex shader, and enables a wide range of calculations.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">One thing to note is that Vertex Shader processes on a vertex-by-vertex basis and passes information about the vertices it processes, but Geometry Shader is a primitive assembly topology regardless of the input primitive type. Processing is performed in units of primitives determined by. </font><font style="vertical-align: inherit;">In other words, if you run the Geometry Shader on a Quad mesh with a topology of Triangles, as shown in Figure 6.1, the Geometry Shader will be run twice for triangles ① and ②. </font><font style="vertical-align: inherit;">At this time, when the primitive type for input is Line, the information passed to the input is the vertices of two vertices 0,1,2 in the case of triangle ①, and the vertices 0,2,3 in the case of ②. It will be the apex of the two points.</font></font></p>
+<div id="id_aoyama_2Fimg0" class="image">
+<img src="./Chapter 6 _ Growing grass with geometry shaders_files/img0.png" alt="Quad mesh" class="width-040per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 6.1: Quad mesh
+</font></font></p>
+</div>
+
+<h3><a id="h6-3-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Output from Geometry Shader</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The output of Geometry Shader is a set of vertex information for user-defined output primitive types. </font><font style="vertical-align: inherit;">In Vertex Shader, it was 1 input and 1 output, but Geometry Shader will output multiple information, and there is no problem even if there is one or more primitives generated by the output information.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">For example, if the output primitive type is defined as triangle and a total of 9 vertices newly calculated are output, 3 triangles are generated by Geometry Shader. </font><font style="vertical-align: inherit;">Since this process is performed in primitive units as described above, it is possible that the number of triangles that were originally one has increased to three.</font></font></p>
+<p>また、Geometry ShaderにはMaxVertexCountという、一回の処理で最大何点の頂点を出力するかを事前に設定しておく必要があります。例えばMaxVertexCountを9と設定した場合は、Geometry Shaderは0点 ~ 9点までの頂点数を出力することが出来るようになります。この数値は後述する『Geometry Shaderの制限』によって、一般的には1024が一応の最大値となります。</p>
+<p>なお、頂点情報を出力する上で気を付けなければならない点として、元々のメッシュの形状を維持した状態で新しく頂点を追加する場合は、Vertex Shaderから送られてきた頂点情報についてもGeometry Shaderにて出力する必要があります。Geometry ShaderはVertex Shaderの出力に追加していくという挙動ではなく、Geometry Shaderの出力がラスタライズ処理が行われ、Fragment Shaderに渡されます。逆説的に言えば、Geometry Shaderの出力を0にすることによって、動的に頂点数を減らすことも出来ます。</p>
+
+<h3><a id="h6-3-4"></a><span class="secno">6.3.4　</span>Geometry Shaderの制限</h3>
+<p>Geometry Shaderには1回の出力に関して、最大出力頂点数と最大出力要素数という制限があります。最大出力頂点数は文字通り頂点数の限界値であり、GPUに依存した数値ではありますが1024などが一般的なので、1つの三角形から最大で1024点までしか頂点を増やすことが出来ます。最大出力要素数における要素とは座標や色などの頂点が持っている情報の事であり、一般的には(x, y, z, w)の位置要素と(r, g, b, a)の色要素の計8要素となります。この要素の最大出力数もGPUに依存しますが同じく1024が一般的なので、出力は最大でも128(1024/8)に制限される事になります。</p>
+<p>この二つの制限は両方を満たす必要があるため、頂点数的には1024点の出力が可能でも、要素数側の制約によって、実際のGeometry Shaderの出力は128点までは限界となります。ですので、例えばプリミティブ数が2のメッシュ(Quadメッシュなど)に対してGeometry Shaderを利用した場合は、最大でも256点(128点 * 2プリミティブ)の頂点数までしか頂点を扱うことは出来ません。</p>
+<p>この128点という数字が、前項のMaxVertexCountに設定できる数値の限界値となります。</p>
+
+<h2><a id="h6-4"></a><span class="secno">6.4　</span>簡単なGeometry Shader</h2>
+<p>以下にシンプルな挙動のGeometry Shaderのプログラムが記載してあります。前項までの説明について実際のプログラムと照らし合わせながら改めて説明していきます。</p>
+<p>なお、Geometry Shader以外について、Unityでシェーダーを記述する際に必要なShaderLabのシンタックスなどに関する説明は本章では省略しますので、もし分からない部分がありましたら下記の公式ドキュメントを参照してみてください。</p>
+<p><a href="https://docs.unity3d.com/ja/current/Manual/SL-Reference.html" class="link">https://docs.unity3d.com/ja/current/Manual/SL-Reference.html</a></p>
+<div class="emlist-code">
+<pre class="emlist language-cs">Shader "Custom/SimpleGeometryShader"<font></font>
+{<font></font>
+    Properties<font></font>
+    {<font></font>
+        _Height("Height", float) = 5.0<font></font>
+        _TopColor("Top Color", Color) = (0.0, 0.0, 1.0, 1.0)<font></font>
+        _BottomColor("Bottom Color", Color) = (1.0, 0.0, 0.0, 1.0)<font></font>
+    }<font></font>
+    SubShader<font></font>
+    {<font></font>
+        Tags { "RenderType" = "Opaque"}<font></font>
+        LOD 100<font></font>
+<font></font>
+        Cull Off<font></font>
+        Lighting Off<font></font>
+<font></font>
+        Pass<font></font>
+        {<font></font>
+            CGPROGRAM<font></font>
+            #pragma target 5.0<font></font>
+            #pragma vertex vert<font></font>
+            #pragma geometry geom<font></font>
+            #pragma fragment frag<font></font>
+            #include "UnityCG.cginc"<font></font>
+<font></font>
+            uniform float _Height;<font></font>
+            uniform float4 _TopColor, _BottomColor;<font></font>
+<font></font>
+            struct v2g<font></font>
+            {<font></font>
+                float4 pos : SV_POSITION;<font></font>
+            };<font></font>
+<font></font>
+            struct g2f<font></font>
+            {<font></font>
+                float4 pos : SV_POSITION;<font></font>
+                float4 col : COLOR;<font></font>
+            };<font></font>
+<font></font>
+            v2g vert(appdata_full v)<font></font>
+            {<font></font>
+                v2g o;<font></font>
+                o.pos = v.vertex;<font></font>
+<font></font>
+                return o;<font></font>
+            }<font></font>
+<font></font>
+            [maxvertexcount(12)]<font></font>
+            void geom(triangle v2g input[3],<font></font>
+                      inout TriangleStream&lt;g2f&gt; outStream)<font></font>
+            {<font></font>
+                float4 p0 = input[0].pos;<font></font>
+                float4 p1 = input[1].pos;<font></font>
+                float4 p2 = input[2].pos;<font></font>
+<font></font>
+                float4 c = float4(0.0f, 0.0f, -_Height, 1.0f)<font></font>
+                            + (p0 + p1 + p2) * 0.33333f;<font></font>
+<font></font>
+                g2f out0;<font></font>
+                out0.pos = UnityObjectToClipPos(p0);<font></font>
+                out0.col = _BottomColor;<font></font>
+<font></font>
+                g2f out1;<font></font>
+                out1.pos = UnityObjectToClipPos(p1);<font></font>
+                out1.col = _BottomColor;<font></font>
+<font></font>
+                g2f out2;<font></font>
+                out2.pos = UnityObjectToClipPos(p2);<font></font>
+                out2.col = _BottomColor;<font></font>
+<font></font>
+                g2f o;<font></font>
+                o.pos = UnityObjectToClipPos(c);<font></font>
+                o.col = _TopColor;<font></font>
+<font></font>
+                // bottom<font></font>
+                outStream.Append(out0);<font></font>
+                outStream.Append(out1);<font></font>
+                outStream.Append(out2);<font></font>
+                outStream.RestartStrip();<font></font>
+<font></font>
+                // sides<font></font>
+                outStream.Append(out0);<font></font>
+                outStream.Append(out1);<font></font>
+                outStream.Append(o);<font></font>
+                outStream.RestartStrip();<font></font>
+<font></font>
+                outStream.Append(out1);<font></font>
+                outStream.Append(out2);<font></font>
+                outStream.Append(o);<font></font>
+                outStream.RestartStrip();<font></font>
+<font></font>
+                outStream.Append(out2);<font></font>
+                outStream.Append(out0);<font></font>
+                outStream.Append(o);<font></font>
+                outStream.RestartStrip();<font></font>
+            }<font></font>
+<font></font>
+            float4 frag(g2f i) : COLOR<font></font>
+            {<font></font>
+                return i.col;<font></font>
+            }<font></font>
+            ENDCG<font></font>
+        }<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>このシェーダーでは、渡された三角形の中心座標を計算してさらに上方向に移動させ、渡されてきた三角形の各頂点と計算して求めた新しい座標を接続させています。つまり、平面的な三角形から簡単な三角錐を生成していることになります。</p>
+<p>なので、このシェーダーをQuadメッシュ(2つの三角形から構成されている)に適用すると、図6.2から図6.3のようになります。</p>
+<div id="id_aoyama_2Fimg1" class="image">
+<img src="./Chapter 6 _ Growing grass with geometry shaders_files/img1.png" alt="From a flat plate like this" class="width-040per">
+<p class="caption">
+図6.2: この様な平たい板から
+</p>
+</div>
+<div id="id_aoyama_2Fimg2" class="image">
+<img src="./Chapter 6 _ Growing grass with geometry shaders_files/img2.png" alt="Two three-dimensional triangular pyramids will be displayed" class="width-040per">
+<p class="caption">
+図6.3: 立体的な二つの三角錐が表示されるようになります
+</p>
+</div>
+<p>このシェーダーの中で、特にGeometry Shaderに関する部分だけを抜き出して説明していきます。</p>
+<div class="emlist-code">
+<pre class="emlist language-cs">#pragma target 5.0<font></font>
+#pragma vertex vert<font></font>
+<font></font>
+// Geometry Shaderの利用を宣言<font></font>
+#pragma geometry geom<font></font>
+<font></font>
+#pragma fragment frag<font></font>
+#include "UnityCG.cginc"<font></font>
+</pre>
+</div>
+<p>上記の宣言部分にて、<code class="tt">geom</code>という名前の関数がGeometry Shader用関数であることを宣言しています。これによってGeometry Shaderステージになった時に<code class="tt">geom</code>関数が呼び出されるようになります。</p>
+<div class="emlist-code">
+<pre class="emlist language-cs">[maxvertexcount(12)]<font></font>
+void geom(triangle v2g input[3], inout TriangleStream&lt;g2f&gt; outStream)<font></font>
+</pre>
+</div>
+<p>これがGeometry Shader用の関数宣言です。</p>
+
+<h3><a id="h6-4-1"></a><span class="secno">6.4.1　</span>入力</h3>
+<div class="emlist-code">
+<pre class="emlist language-cs">triangle v2f input[3]
+</pre>
+</div>
+<p>ここが入力に関する部分です。</p>
+<p>今回は三角形を元に三角錐を生成したいので、入力は<code class="tt">triangle</code>としています。これにより、単位プリミティブである三角形の各頂点情報が入力されるうになり、三角形は3点の頂点から構成されますので、受け取っている仮引数は長さ3の配列となります。なので、もし入力を<code class="tt">triangle</code>ではなく<code class="tt">point</code>にした場合は構成する頂点は1点のみなので、<code class="tt">geom(point v2f input[1])</code>の様に長さ1の配列で受け取ることになります。</p>
+
+<h3><a id="h6-4-2"></a><span class="secno">6.4.2　</span>出力</h3>
+<div class="emlist-code">
+<pre class="emlist language-cs">inout TriangleStream&lt;g2f&gt; outStream
+</pre>
+</div>
+<p>ここが出力に関する部分です。</p>
+<p>今回生成するメッシュのプリミティブは三角形としたいため、<code class="tt">TriangleStream</code>型で宣言しています。<code class="tt">TriangleStrema</code>型は出力が三角形ストリップである事を意味しているため、出力した各頂点情報を元に三角形を生成してくれるようになります。他にも<code class="tt">PointStream</code>型や<code class="tt">LineStream</code>型などがありますので、目的に応じて出力のプリミティブ型を選択する必要があります。</p>
+<p>また、<code class="tt">[maxvertexcount(12)]</code>の部分にて最大出力数を12に設定してあります。これは三角錐を構成する三角形の数は底辺の1つと側面の3つで計4つであり、一つの三角形に付き頂点数が3点必要なので、3 * 4で12点の頂点を出力することになるため12と設定してあります。</p>
+
+<h3><a id="h6-4-3"></a><span class="secno">6.4.3　</span>処理</h3>
+<div class="emlist-code">
+<pre class="emlist language-cs">g2f out0;<font></font>
+out0.pos = UnityObjectToClipPos(p0);<font></font>
+out0.col = _BottomColor;<font></font>
+<font></font>
+g2f out1;<font></font>
+out1.pos = UnityObjectToClipPos(p1);<font></font>
+out1.col = _BottomColor;<font></font>
+<font></font>
+g2f out2;<font></font>
+out2.pos = UnityObjectToClipPos(p2);<font></font>
+out2.col = _BottomColor;<font></font>
+<font></font>
+g2f o;<font></font>
+o.pos = UnityObjectToClipPos(c);<font></font>
+o.col = _TopColor;<font></font>
+<font></font>
+// bottom<font></font>
+outStream.Append(out0);<font></font>
+outStream.Append(out1);<font></font>
+outStream.Append(out2);<font></font>
+outStream.RestartStrip();<font></font>
+<font></font>
+// sides<font></font>
+outStream.Append(out0);<font></font>
+outStream.Append(out1);<font></font>
+outStream.Append(o);<font></font>
+outStream.RestartStrip();<font></font>
+<font></font>
+outStream.Append(out1);<font></font>
+outStream.Append(out2);<font></font>
+outStream.Append(o);<font></font>
+outStream.RestartStrip();<font></font>
+<font></font>
+outStream.Append(out2);<font></font>
+outStream.Append(out0);<font></font>
+outStream.Append(o);<font></font>
+outStream.RestartStrip();<font></font>
+</pre>
+</div>
+<p>ここが実際の頂点を出力している処理の部分です。</p>
+<p>まず最初に出力用のg2f型の変数を宣言し、頂点座標と色情報を格納しています。この時Vertex Shaderと同じようにオブジェクト空間からカメラのクリップ空間への変換をしておく必要があります。</p>
+<p>その後に、メッシュを構成する頂点の順序を意識しながら、頂点情報を出力しています。<code class="tt">outStream</code>変数の<code class="tt">Append</code>関数に出力用変数を渡すことで現在のストリームに追加されていき、<code class="tt">RestartStrip</code>関数を呼び出す事によって現在のプリミティブストリップを終了し、新しいストリームを開始しています。</p>
+<p>これは、<code class="tt">TriangleStream</code>は三角形ストリップなので、<code class="tt">Append</code>関数で頂点を追加していくほどそのストリームに追加されている全ての頂点を元に、接続された複数の三角形を生成していくことになります。なので、今回の様に三角形同士が<code class="tt">Append</code>された順序を元に接続されると困る時は、一旦<code class="tt">RestartStrip</code>を呼び出して新しいストリームを開始する必要があります。もちろん<code class="tt">Append</code>順を工夫することで<code class="tt">RestartStrip</code>関数の呼び出しを減らすことは可能です。</p>
+
+<h2><a id="h6-5"></a><span class="secno">6.5　</span>Grass Shader</h2>
+<p>本項では、前項の『簡単なGeometry Shader』から少し発展させて、Geometry Shaderを使ってリアルタイムに草を生成するGrass Shaderについて説明します。</p>
+<p>以下は説明するGrass Shaderのプログラムです。</p>
+<div class="emlist-code">
+<pre class="emlist language-cs">Shader "Custom/Grass" {<font></font>
+    Properties<font></font>
+    {<font></font>
+        // 草の高さ<font></font>
+        _Height("Height", float) = 80<font></font>
+        // 草の幅<font></font>
+        _Width("Width", float) = 2.5<font></font>
+<font></font>
+        // 草の下部の高さ<font></font>
+        _BottomHeight("Bottom Height", float) = 0.3<font></font>
+        // 草の中間部の高さ<font></font>
+        _MiddleHeight("Middle Height", float) = 0.4<font></font>
+        // 草の上部の高さ<font></font>
+        _TopHeight("Top Height", float) = 0.5<font></font>
+<font></font>
+        // 草の下部の幅<font></font>
+        _BottomWidth("Bottom Width", float) = 0.5<font></font>
+        // 草の中間部の幅<font></font>
+        _MiddleWidth("Middle Width", float) = 0.4<font></font>
+        // 草の上部の幅<font></font>
+        _TopWidth("Top Width", float) = 0.2<font></font>
+<font></font>
+        // 草の下部の曲がり具合<font></font>
+        _BottomBend("Bottom Bend", float) = 1.0<font></font>
+        // 草の中間部の曲がり具合<font></font>
+        _MiddleBend("Middle Bend", float) = 1.0<font></font>
+        // 草の上部の曲がり具合<font></font>
+        _TopBend("Top Bend", float) = 2.0<font></font>
+<font></font>
+        // 風の強さ<font></font>
+        _WindPower("Wind Power", float) = 1.0<font></font>
+<font></font>
+        // 草の上部の色<font></font>
+        _TopColor("Top Color", Color) = (1.0, 1.0, 1.0, 1.0)<font></font>
+        // 草の下部の色<font></font>
+        _BottomColor("Bottom Color", Color) = (0.0, 0.0, 0.0, 1.0)<font></font>
+<font></font>
+        // 草の高さにランダム性を与えるノイズテクスチャ<font></font>
+        _HeightMap("Height Map", 2D) = "white"<font></font>
+        // 草の向きにランダム性を与えるノイズテクスチャ<font></font>
+        _RotationMap("Rotation Map", 2D) = "black"<font></font>
+        // 風の強さにランダム性を与えるノイズテクスチャ<font></font>
+        _WindMap("Wind Map", 2D) = "black"<font></font>
+    }<font></font>
+    SubShader<font></font>
+    {<font></font>
+        Tags{ "RenderType" = "Opaque" }<font></font>
+<font></font>
+        LOD 100<font></font>
+        Cull Off<font></font>
+<font></font>
+        Pass<font></font>
+        {<font></font>
+            CGPROGRAM<font></font>
+            #pragma target 5.0<font></font>
+            #include "UnityCG.cginc"<font></font>
+<font></font>
+            #pragma vertex vert<font></font>
+            #pragma geometry geom<font></font>
+            #pragma fragment frag<font></font>
+<font></font>
+            float _Height, _Width;<font></font>
+            float _BottomHeight, _MiddleHeight, _TopHeight;<font></font>
+            float _BottomWidth, _MiddleWidth, _TopWidth;<font></font>
+            float _BottomBend, _MiddleBend, _TopBend;<font></font>
+<font></font>
+            float _WindPower;<font></font>
+            float4 _TopColor, _BottomColor;<font></font>
+            sampler2D _HeightMap, _RotationMap, _WindMap;<font></font>
+<font></font>
+            struct v2g<font></font>
+            {<font></font>
+                float4 pos : SV_POSITION;<font></font>
+                float3 nor : NORMAL;<font></font>
+                float4 hei : TEXCOORD0;<font></font>
+                float4 rot : TEXCOORD1;<font></font>
+                float4 wind : TEXCOORD2;<font></font>
+            };<font></font>
+<font></font>
+            struct g2f<font></font>
+            {<font></font>
+                float4 pos : SV_POSITION;<font></font>
+                float4 color : COLOR;<font></font>
+            };<font></font>
+<font></font>
+            v2g vert(appdata_full v)<font></font>
+            {<font></font>
+                v2g o;<font></font>
+                float4 uv = float4(v.texcoord.xy, 0.0f, 0.0f);<font></font>
+<font></font>
+                o.pos = v.vertex;<font></font>
+                o.nor = v.normal;<font></font>
+                o.hei = tex2Dlod(_HeightMap, uv);<font></font>
+                o.rot = tex2Dlod(_RotationMap, uv);<font></font>
+                o.wind = tex2Dlod(_WindMap, uv);<font></font>
+<font></font>
+                return o;<font></font>
+            }<font></font>
+<font></font>
+            [maxvertexcount(7)]<font></font>
+            void geom(triangle v2g i[3], inout TriangleStream&lt;g2f&gt; stream)<font></font>
+            {<font></font>
+                float4 p0 = i[0].pos;<font></font>
+                float4 p1 = i[1].pos;<font></font>
+                float4 p2 = i[2].pos;<font></font>
+<font></font>
+                float3 n0 = i[0].nor;<font></font>
+                float3 n1 = i[1].nor;<font></font>
+                float3 n2 = i[2].nor;<font></font>
+<font></font>
+                float height = (i[0].hei.r + i[1].hei.r + i[2].hei.r) / 3.0f;<font></font>
+                float rot = (i[0].rot.r + i[1].rot.r + i[2].rot.r) / 3.0f;<font></font>
+                float wind = (i[0].wind.r + i[1].wind.r + i[2].wind.r) / 3.0f;<font></font>
+<font></font>
+                float4 center = ((p0 + p1 + p2) / 3.0f);<font></font>
+                float4 normal = float4(((n0 + n1 + n2) / 3.0f).xyz, 1.0f);<font></font>
+<font></font>
+                float bottomHeight = height * _Height * _BottomHeight;<font></font>
+                float middleHeight = height * _Height * _MiddleHeight;<font></font>
+                float topHeight = height * _Height * _TopHeight;<font></font>
+<font></font>
+                float bottomWidth = _Width * _BottomWidth;<font></font>
+                float middleWidth = _Width * _MiddleWidth;<font></font>
+                float topWidth = _Width * _TopWidth;<font></font>
+<font></font>
+                rot = rot - 0.5f;<font></font>
+                float4 dir = float4(normalize((p2 - p0) * rot).xyz, 1.0f);<font></font>
+<font></font>
+                g2f o[7];<font></font>
+<font></font>
+                // Bottom.<font></font>
+                o[0].pos = center - dir * bottomWidth;<font></font>
+                o[0].color = _BottomColor;<font></font>
+<font></font>
+                o[1].pos = center + dir * bottomWidth;<font></font>
+                o[1].color = _BottomColor;<font></font>
+<font></font>
+                // Bottom to Middle.<font></font>
+                o[2].pos = center - dir * middleWidth + normal * bottomHeight;<font></font>
+                o[2].color = lerp(_BottomColor, _TopColor, 0.33333f);<font></font>
+<font></font>
+                o[3].pos = center + dir * middleWidth + normal * bottomHeight;<font></font>
+                o[3].color = lerp(_BottomColor, _TopColor, 0.33333f);<font></font>
+<font></font>
+                // Middle to Top.<font></font>
+                o[4].pos = o[3].pos - dir * topWidth + normal * middleHeight;<font></font>
+                o[4].color = lerp(_BottomColor, _TopColor, 0.66666f);<font></font>
+<font></font>
+                o[5].pos = o[3].pos + dir * topWidth + normal * middleHeight;<font></font>
+                o[5].color = lerp(_BottomColor, _TopColor, 0.66666f);<font></font>
+<font></font>
+                // Top.<font></font>
+                o[6].pos = o[5].pos + dir * topWidth + normal * topHeight;<font></font>
+                o[6].color = _TopColor;<font></font>
+<font></font>
+                // Bend.<font></font>
+                dir = float4(1.0f, 0.0f, 0.0f, 1.0f);<font></font>
+<font></font>
+                o[2].pos += dir<font></font>
+                            * (_WindPower * wind * _BottomBend)<font></font>
+                            * sin(_Time);<font></font>
+                o[3].pos += dir<font></font>
+                            * (_WindPower * wind * _BottomBend)<font></font>
+                            * sin(_Time);<font></font>
+                o[4].pos += dir<font></font>
+                            * (_WindPower * wind * _MiddleBend)<font></font>
+                            * sin(_Time);<font></font>
+                o[5].pos += dir<font></font>
+                            * (_WindPower * wind * _MiddleBend)<font></font>
+                            * sin(_Time);<font></font>
+                o[6].pos += dir<font></font>
+                            * (_WindPower * wind * _TopBend)<font></font>
+                            * sin(_Time);<font></font>
+<font></font>
+                [unroll]<font></font>
+                for (int i = 0; i &lt; 7; i++) {<font></font>
+                    o[i].pos = UnityObjectToClipPos(o[i].pos);<font></font>
+                    stream.Append(o[i]);<font></font>
+                }<font></font>
+            }<font></font>
+<font></font>
+            float4 frag(g2f i) : COLOR<font></font>
+            {<font></font>
+                return i.color;<font></font>
+            }<font></font>
+            ENDCG<font></font>
+        }<font></font>
+    }<font></font>
+}<font></font>
+</pre>
+</div>
+<p>このシェーダーを縦横に複数並べたPlaneメッシュに適用すると、図6.4のようになります。</p>
+<div id="id_aoyama_2Fimg3" class="image">
+<img src="./Chapter 6 _ Growing grass with geometry shaders_files/img3.png" alt="Grass Shader results" class="width-060per">
+<p class="caption">
+図6.4: Grass Shaderの結果
+</p>
+</div>
+<p>この中から草を生成する処理についての説明をします。</p>
+
+<h3><a id="h6-5-1"></a><span class="secno">6.5.1　</span>基本方針</h3>
+<p>今回は一つのプリミティブにつき1本の草を生成することにします。草の形状の生成については図6.5のように下部・中間部・上部に分けて頂点を合計7点生成し、上に行くほど斜めにしていくことで、草の斜め具合を簡易的に表現します。</p>
+<div id="id_aoyama_2Fimg4" class="image">
+<img src="./Chapter 6 _ Growing grass with geometry shaders_files/img4.png" alt="How to make a grass shape" class="width-040per">
+<p class="caption">
+図6.5: 草の形の作り方
+</p>
+</div>
+
+<h3><a id="h6-5-2"></a><span class="secno">6.5.2　</span>パラメーター</h3>
+<p>詳細はコメントにて記載してありますが、一本の草の中の各部分(下部・中間部・上部)の横幅と高さをコントロールする係数、草全体の横幅と高さをコントロールする係数を主なパラメーターとして用意しています。また一本一本の草が同じ形になるのは見栄えが悪いので、ランダム性を持たせるためのノイズテクスチャを使います。</p>
+
+<h3><a id="h6-5-3"></a><span class="secno">6.5.3　</span>処理</h3>
+<div class="emlist-code">
+<pre class="emlist language-cs">float height = (i[0].hei.r + i[1].hei.r + i[2].hei.r) / 3.0f;<font></font>
+float rot = (i[0].rot.r + i[1].rot.r + i[2].rot.r) / 3.0f;<font></font>
+float wind = (i[0].wind.r + i[1].wind.r + i[2].wind.r) / 3.0f;<font></font>
+<font></font>
+float4 center = ((p0 + p1 + p2) / 3.0f);<font></font>
+float4 normal = float4(((n0 + n1 + n2) / 3.0f).xyz, 1.0f);<font></font>
+</pre>
+</div>
+<p>この部分では草の高さと向き、風の強弱の基準となる数値を計算しています。Geometry Shader内で計算しても良いのですが、頂点に対してメタ情報的に持たせた方がGeometry Shader上で計算を行なう上での初期値の様な扱いが出来るのでVertex Shaderで計算しています。</p>
+<div class="emlist-code">
+<pre class="emlist language-cs">float4 center = ((p0 + p1 + p2) / 3.0f);<font></font>
+float4 normal = float4(((n0 + n1 + n2) / 3.0f).xyz, 1.0f);<font></font>
+</pre>
+</div>
+<p>ここでは草の中心部分と、草を生やしていく方向を計算しています。ここの部分をノイズテクスチャなどで決定するようにすると、草が生える方向にランダム性を持たせることが出来ます。</p>
+<div class="emlist-code">
+<pre class="emlist language-cs">float bottomHeight = height * _Height * _BottomHeight;<font></font>
+<font></font>
+...<font></font>
+<font></font>
+o[6].pos += dir * (_WindPower * wind * _TopBend) * sin(_Time);<font></font>
+</pre>
+</div>
+<p>長いのでプログラムは略記してあります。この部分では下部・中間部・上部についての高さと幅をそれぞれ計算し、それを元に座標を求めています。</p>
+<div class="emlist-code">
+<pre class="emlist language-cs">[unroll]<font></font>
+for (int i = 0; i &lt; 7; i++) {<font></font>
+    o[i].pos = UnityObjectToClipPos(o[i].pos);<font></font>
+    stream.Append(o[i]);<font></font>
+}<font></font>
+</pre>
+</div>
+<p>この部分にて計算した7点の頂点を<code class="tt">Append</code>しています。今回は三角形が繋がりながら生成されていっても問題ないため、<code class="tt">RestartStrip</code>はしていません。</p>
+<p>なお、<code class="tt">for</code>ステートメントに対して<code class="tt">[unroll]</code>というアトリビュートを適用しています。これはコンパイル時に、ループの回数分ループ内の処理を展開するというアトリビュートで、メモリサイズが大きくなるというデメリットはあるのですが、高速に動作するという利点があります。</p>
+
+<h2><a id="h6-6"></a><span class="secno">6.6　</span>まとめ</h2>
+<p>ここまでGeometry Shaderについての説明から、基本と応用のプログラムまでを説明してきました。CPU上で動くプログラムを書くのとは多少なりとも特徴が異なる所がありますが、基本的な部分を抑えさせすれば活用できるはずです。</p>
+<p>実は通説としてGeometry Shaderは遅いと言われているそうです。筆者自身はあまり感じたことはないのですが、利用範囲が大規模になると大変なのかもしれません。もしGeometry Shaderを大規模に使うということになりそうでしたら、ぜひ一度ベンチマークなどを取ってみてください。</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Still, being able to dynamically and freely create and delete new meshes on the GPU will greatly expand the range of ideas. </font><font style="vertical-align: inherit;">Personally, I think the most important thing is not what technology was used, but what is created and expressed by it. </font><font style="vertical-align: inherit;">We hope that you will learn about and learn about one tool called Geometry Shader in this chapter, and feel some new possibilities.</font></font></p>
+
+<h2><a id="h6-7"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.7　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Reference</font></font></h2>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tutorial 13: Geometry Shader-https: </font></font><a href="https://msdn.microsoft.com/ja-jp/library/bb172497" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//msdn.microsoft.com/en-us/library/bb172497</font></font></a></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Geometry shader object in MSDN-https: </font></font><a href="https://msdn.microsoft.com/ja-jp/library/ee418313" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//msdn.microsoft.com/en-us/library/ee418313</font></font></a></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rendering technique for transparent geometry by cutting geometry in geometry shader-http: </font></font><a href="http://t-pot.com/program/147_CGGONG2008/index.html" class="link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//t-pot.com/program/147_CGGONG2008/index.html</font></font></a></li>
+</ul><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 6 _ Growing grass with geometry shaders_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 6 _ Growing grass with geometry shaders_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 6 _ Growing grass with geometry shaders_files/saved_resource(2).html"></iframe></body></html>

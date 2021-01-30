@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- saved from url=(0075)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/sugino.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 10 _ Introduction to Projection Spray_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>Introducing Projection Spray</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 10 _ Introduction to Projection Spray_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 10 _ Introduction to Projection Spray_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 10 _ Introduction to Projection Spray_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 10 _ Introduction to Projection Spray_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 10 _ Introduction to Projection Spray_files/saved_resource.html"></iframe></div>
+<h1><a id="h10"></a><span class="secno"><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;">Chapter 10 Introduction to　</font></font></span><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;"> Projection Spray</font></font></h1>
+
+<h2><a id="h10-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Introduction</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hello! </font><font style="vertical-align: inherit;">It's Sugihiro Nori! </font><font style="vertical-align: inherit;">Unfortunately not.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">One day when the deadline was approaching, when I asked "Are you writing an article too much?", He just said "Ah!", And apparently he was completely forgotten. </font><font style="vertical-align: inherit;">I've been busy lately, but I'd like to take this opportunity to introduce his achievements, so I'll send you a ghostwriter here.</font></font></p>
+
+<h3><a id="h10-1-1"></a><span class="secno">10.1.1　</span>ProjectionSpray</h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sugicho is actively publishing his work on Github, and I personally found it interesting.</font></font></p>
+<p><a href="https://github.com/sugi-cho/ProjectionSpray" class="link">https://github.com/sugi-cho/ProjectionSpray</a></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">You can color the 3D model by spraying it.</font></font></p>
+
+<h4><a id="h10-1-1-1"></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Demo image</font></font></h4>
+<div id="projectionspray-001" class="image">
+<img src="./Chapter 10 _ Introduction to Projection Spray_files/projectionspray-001.png" alt="Demo image 1">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.1: Demo image 1
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A spray is ejected from the spray device to color the surface of the body.</font></font></p>
+<div id="projectionspray-002" class="image">
+<img src="./Chapter 10 _ Introduction to Projection Spray_files/projectionspray-002.png" alt="Demo image 2">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.2: Demo image 2
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I feel a mysterious fetishism.</font></font></p>
+<div id="projectionspray-003" class="image">
+<img src="./Chapter 10 _ Introduction to Projection Spray_files/projectionspray-003.png" alt="Demo image 3">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.3: Demo image 3
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Something like a stencil!</font></font></p>
+<div id="projectionspray-004" class="image">
+<img src="./Chapter 10 _ Introduction to Projection Spray_files/projectionspray-004.png" alt="Demo image 4">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 10.4: Demo image 4
+</font></font></p>
+</div>
+<p>Unity！</p>
+
+<h2><a id="h10-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Summary</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If there is next time, I would like to ask for a detailed explanation.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I also recommend the repository of my colleague Nakata-san, who said that Sugicho feels something similar to himself at the time of the interview, because he has a lot of useful and excellent code for Unity.</font></font></p>
+<p><a href="https://github.com/nobnak" class="link">https://github.com/nobnak</a></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">excuse me.</font></font></p>
+<p>(｡･ˇ_ˇ･｡)</p><div id="goog-gt-tt" class="goog-tooltip skiptranslate" dir="ltr" style="visibility: hidden; left: 583px; top: 9.125px; display: none;"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 10 _ Introduction to Projection Spray_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text">第10章　ProjectionSprayの紹介</div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none; opacity: 0;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 10 _ Introduction to Projection Spray_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 10 _ Introduction to Projection Spray_files/saved_resource(2).html"></iframe></body></html>

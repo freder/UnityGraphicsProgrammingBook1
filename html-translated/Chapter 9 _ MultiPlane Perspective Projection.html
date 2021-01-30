@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:ops="http://www.idpf.org/2007/ops" xml:lang="en" style="height: 100%;" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="stylesheet" type="text/css" href="./Chapter 9 _ MultiPlane Perspective Projection_files/style.scss">
+  <meta name="generator" content="Re:VIEW">
+  <title>MultiPlane PerspectiveProjection</title>
+
+			<style>
+				img {
+					max-width: 80vw;
+					max-height: 80vh;
+				}
+			</style>
+			<script>(function(){(function injection() {
+  var pageLang = 'ja';
+  var userLang = 'en';
+
+  var uid = '1E07F158C6FA4460B352973E9693B329';
+  var teId = 'TE_' + uid;
+  var cbId = 'TECB_' + uid;
+
+  function show() {
+    window.setTimeout(function() {
+      window[teId].showBanner(true);
+    }, 10);
+  }
+
+  function newElem() {
+    var elem = new google.translate.TranslateElement({
+      autoDisplay: false,
+      floatPosition: 0,
+      multilanguagePage: true,
+      pageLanguage: pageLang
+    });
+    return elem;
+  }
+
+  if (window[teId]) {
+    show();
+  } else {
+    if (!window.google || !google.translate ||
+        !google.translate.TranslateElement) {
+      if (!window[cbId]) {
+        window[cbId] = function() {
+          window[teId] = newElem();
+          show();
+        };
+      }
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=' +
+              encodeURIComponent(cbId) + '&client=tee&hl=' + userLang;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  }
+})();})();</script><script src="./Chapter 9 _ MultiPlane Perspective Projection_files/f.txt"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Chapter 9 _ MultiPlane Perspective Projection_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ MultiPlane Perspective Projection_files/main.js"></script><script type="text/javascript" charset="UTF-8" src="./Chapter 9 _ MultiPlane Perspective Projection_files/element_main.js"></script></head>
+		
+<body style="position: relative; min-height: 100%; top: 40px;"><div class="skiptranslate" style=""><iframe id=":0.container" class="goog-te-banner-frame skiptranslate" frameborder="0" src="javascript:&#39;&#39;" style="visibility:visible" src="./Chapter 9 _ MultiPlane Perspective Projection_files/saved_resource.html"></iframe></div>
+<h1><a id="h9"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chapter 9　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> MultiPlane Perspective Projection</font></font></h1>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In this chapter, we will introduce a video projection method that allows you to experience the experience of being in the CG world by projecting images on multiple surfaces such as the walls and floor of a rectangular parallelepiped room. </font><font style="vertical-align: inherit;">In addition, as the background, we will explain camera processing in CG and its application examples. </font><font style="vertical-align: inherit;">The sample project can be found </font><font style="vertical-align: inherit;">in Assets / Room </font><font style="vertical-align: inherit;">Projection in Unity Project </font></font><a id="fnb-project" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-project" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 1</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> of Unity </font><font style="vertical-align: inherit;">Graphics Programming, so please have a look. </font><font style="vertical-align: inherit;">In addition, this content has </font><font style="vertical-align: inherit;">been significantly revised and revised based on the content contributed to the </font><font style="vertical-align: inherit;">"Mathematics Seminar December 2016" </font></font><a id="fnb-susemi" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-susemi" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-project"><p class="footnote"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[* 1] Sample project https://github.com/IndieVisualLab/UnityGraphicsProgramming</font></font></p></div>
+<div class="footnote" epub:type="footnote" id="fn-susemi"><p class="footnote">[*2] https://www.nippyo.co.jp/shop/magazine/7292.html</p></div>
+
+<h2><a id="h9-1"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.1　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> How the camera works in CG</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Camera processing in general CG is processing that projects a 3D model of the visible range onto a 2D image using perspective projection conversion. </font><font style="vertical-align: inherit;">The perspective projection conversion is a local coordinate system with the center of each model as the origin, a world coordinate system with the origin at a uniquely determined location in the CG world, a view coordinate system centered on the camera, and a clip coordinate system for clipping (this). Is a 4-dimensional coordinate system in which w also has meaning, and the 3-dimensional version is called </font></font><b class="kw"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">NDC (Normalized Device Coordinates</font></font></b><!-- IDX:NDC --><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ), which is a screen coordinate system that represents the 2-dimensional position of the output screen. The coordinates of the vertices are projected in order.</font></font></p>
+<div id="spaces" class="image">
+<img src="./Chapter 9 _ MultiPlane Perspective Projection_files/spaces.png" alt="Flow of coordinate conversion">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.1: Flow of coordinate transformation
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In addition, since each of these transformations can be represented by one matrix, it is common practice to multiply the matrices in advance so that some coordinate transformations can be done by multiplying the matrix and the vector once.</font></font></p>
+
+<h2><a id="h9-2"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.2　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Perspective consistency across multiple cameras</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">In a camera in CG, a quadrangular pyramid with the apex at the camera position and the bottom surface at the camera orientation is called the viewing frustum, and can be illustrated as a 3D volume that represents the projection of the camera.</font></font></p>
+<div id="frustum" class="image">
+<img src="./Chapter 9 _ MultiPlane Perspective Projection_files/frustum.png" alt="Frustum" class="width-050per">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.2: Frustum
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">If the viewing frustums of the two cameras share the apex and the sides are in contact, they will be connected visually even if the projection surfaces are facing different directions, and the perspectives when viewed from the apex will be the same. I will.</font></font></p>
+<div id="frustum2" class="image">
+<img src="./Chapter 9 _ MultiPlane Perspective Projection_files/frustum2.png" alt="Touching frustum (placed a little apart for clarity)">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.3: Touching frustum (placed slightly apart for clarity)
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">This can be understood by considering the view frustum as a set of innumerable lines of sight and thinking that the lines of sight are continuous (= images that are consistent in perspective can be projected). </font><font style="vertical-align: inherit;">This idea was extended to five cameras, and the angle of view was adjusted so that the five view frustums shared the apex and were in contact with the adjacent view frustums, thereby corresponding to each surface of the room. You can generate a video. </font><font style="vertical-align: inherit;">Theoretically, 6 faces including the ceiling are possible, but this time we consider it as a projector installation space and assume 5 faces excluding the ceiling.</font></font></p>
+<div id="frustum5" class="image">
+<img src="./Chapter 9 _ MultiPlane Perspective Projection_files/frustum5.png" alt="5 view frustums corresponding to the room">
+<p class="caption"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+Figure 9.4: Five viewing frustums corresponding to the room
+</font></font></p>
+</div>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">By viewing from this apex, that is, the location corresponding to all camera positions, you can view images that are consistent in perspective regardless of the direction of the room.</font></font></p>
+
+<h2><a id="h9-3"></a><span class="secno"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.3　</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Derivation of projection matrix</font></font></h2>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The projection matrix (hereinafter referred to as </font></font><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Proj</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) is a matrix that transforms from the view coordinate system to the clip coordinate system.</font></font></p>
+<ul>
+<li><span class="equation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> : Position vector in the clip coordinate system</font></font></li>
+<li><span class="equation">V</span>: をビュー座標系における位置ベクトル</li>
+</ul>
+<p>として式で表すと以下のようになります。</p>
+<div class="equation">
+<pre>C = Proj * V
+</pre>
+</div>
+<p>さらに<span class="equation">C</span>の各要素を<span class="equation">C_{w}</span>で除算することでNDCでの位置座標となります。</p>
+<div class="equation">
+<pre>NDC = (\frac{C_{x}}{C_{w}},\frac{C_{y}}{C_{w}},\frac{C_{z}}{C_{w}})
+</pre>
+</div>
+<p>なお、<span class="equation">C_{w}=-V_{z}</span>とな（るように<span class="equation">Proj</span>を作）ります。ビュー座標系の正面方向がZマイナス方向なのでマイナスがかかっています。NDCでは表示範囲を<span class="equation">-1\leq x,y,z\leq 1</span>とし、この変換で<span class="equation">V_{z}</span>に応じて<span class="equation">V_{x,y}</span>が拡大縮小することにより遠近法の表現が得られます。</p>
+<p>それでは、<span class="equation">Proj</span>をどのように作ればよいか考えてみましょう。ビュー座標系におけるnearClipPlaneの右上の点の座標を<span class="equation">N</span>、farClipPlaneの右上の点の座標を<span class="equation">F</span>としておきます。</p>
+<div id="NF" class="image">
+<img src="./Chapter 9 _ MultiPlane Perspective Projection_files/NF.png" alt="N,F" class="width-050per">
+<p class="caption">
+図9.5: N,F
+</p>
+</div>
+<p>まずは<span class="equation">x</span>に注目してみると、</p>
+<ul>
+<li>投影範囲が<span class="equation">-1\leq x\leq 1</span>になること</li>
+<li>あとで<span class="equation">C_{w}(=-V_{z})</span>で除算されること</li>
+</ul>
+<p>を考慮すると</p>
+<div class="equation">
+<pre>Proj[0,0] = \frac{N_{z}}{N_{x}}
+</pre>
+</div>
+<p>とすれば良さそうです。x,zの比率は変わらないので<span class="equation">Proj[0][0] = \frac{F_{z}}{F_{x}}</span>など視錐台の右端ならどのx,zでも構いません。</p>
+<p>同様に</p>
+<div class="equation">
+<pre>Proj[1,1] = \frac{N_{z}}{N_{y}}
+</pre>
+</div>
+<p>も求まります。</p>
+<p><span class="equation">z</span>については少し工夫が必要です。<span class="equation">Proj * V</span>でｚに関わる計算は以下ようになります。</p>
+<div class="equation">
+<pre>C_{z} = Proj[2,2]*V_{z} + Proj[2,3]*V_{w}　(ただし、V_{w} = 1)
+</pre>
+</div>
+<div class="equation">
+<pre>NDC_{z} = \frac{C_{z}}{C_{w}}（ただし、C_{w} = -V_{z}）
+</pre>
+</div>
+<p>ここで、<span class="equation">N_{z} → -1, F_{z} → 1</span>と変換したいので、<span class="equation">a = Proj[2,2], b = Proj[2,3]</span> と置いて</p>
+<div class="equation">
+<pre>-1 = \frac{1}{N_{z}} (aN_{z} +b),　<font></font>
+1 = \frac{1}{F_{z}} (aF_{z} +b)<font></font>
+</pre>
+</div>
+<p>この連立方程式から解が得られます。</p>
+<div class="equation">
+<pre>Proj[2,2] = a = \frac{F_{z}+N_{z}}{F_{z}-N_{z}},　<font></font>
+Proj[2,3] = b = \frac{-2F_{z}N_{z}}{F_{z}-N_{z}}<font></font>
+</pre>
+</div>
+<p>また、<span class="equation">C_{w} = -V_{w}</span>となるようにしたいので</p>
+<div class="equation">
+<pre>Proj[3,2] = -1
+</pre>
+</div>
+<p>とします。</p>
+<p>したがって求める<span class="equation">Proj</span>は以下の形になります。</p>
+<div class="equation">
+<pre>Proj = \left(<font></font>
+\begin{array}{cccc}<font></font>
+    \frac{N_{z}}{N_{x}} &amp;   0 &amp; 0 &amp; 0\\<font></font>
+    0   &amp; \frac{N_{z}}{N_{y}} &amp; 0 &amp; 0\\<font></font>
+    0   &amp;   0 &amp; \frac{F_{z}+N_{z}}{F_{z}-N_{z}} &amp; \frac{-2F_{z}N_{z}}{F_{z}-N_{z}} \\<font></font>
+    0   &amp;   0 &amp; -1 &amp; 0<font></font>
+\end{array}<font></font>
+\right)<font></font>
+</pre>
+</div>
+
+<h3><a id="h9-3-1"></a><span class="secno">9.3.1　</span>Camera.projectionMatrix の罠</h3>
+<p>シェーダー内などでプロジェクション行列を扱ったことがある方の中にはもしかしたらここまでの内容に違和感を持つ方もいらっしゃるかもしれません。実はUnityのプロジェクション行列の扱いはややこしく、ここまでの内容はCamera.projectionMatrixについての解説になります。この値はプラットフォームによらずOpenGLに準拠しています<a id="fnb-opengl_projection" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-opengl_projection" class="noteref" epub:type="noteref">*3</a>。<span class="equation">-1\leq NDC_{z}\leq 1</span>や <span class="equation">C_{w} = -V_{w}</span>となるのもこのためです。</p>
+<div class="footnote" epub:type="footnote" id="fn-opengl_projection"><p class="footnote">[*3] https://docs.unity3d.com/ScriptReference/GL.GetGPUProjectionMatrix.html</p></div>
+<p>しかしUnity内でシェーダーに渡す際にプラットフォームに依存した形に変換するため、Camera.projectionMatrixをそのまま透視投影変換に使っているとは限りません。とくに<span class="equation">NDC_{z}</span>の範囲や向き（つまりZバッファの扱い）は多様でひっかかりやすいポイントになっています<a id="fnb-zbuff" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-zbuff" class="noteref" epub:type="noteref">*4</a>。</p>
+<div class="footnote" epub:type="footnote" id="fn-zbuff"><p class="footnote">[*4] https://docs.unity3d.com/Manual/SL-PlatformDifferences.html</p></div>
+
+<h2><a id="h9-4"></a><span class="secno">9.4　</span>視錐台の操作</h2>
+
+<h3><a id="h9-4-1"></a><span class="secno">9.4.1　</span>投影面のサイズ合わせ</h3>
+<p>視錐台の底面つまり投影面の形はカメラの<b class="kw">fov (fieldOfView,画角)</b><!-- IDX:fov -->と<b class="kw">aspect (アスペクト比)</b><!-- IDX:aspect -->に依存しています。Unityのカメラでは画角はInspectorで公開されているものの、アスペクト比は公開されていないのでコードから編集する必要があります。<b class="kw">faceSize (部屋の面のサイズ)</b><!-- IDX:faceSize -->、<b class="kw">distance (視点から面までの距離)</b><!-- IDX:distance -->から画角とアスペクト比を求めるコードは以下のようになります。</p>
+<div id="fov_aspect" class="caption-code">
+<p class="caption">リスト9.1: 画角とアスペクト比を求める</p>
+<pre class="list language-csharp">camera.aspect = faceSize.x / faceSize.y;<font></font>
+camera.fieldOfView = 2f * Mathf.Atan2(faceSize.y * 0.5f, distance)<font></font>
+                     * Mathf.Rad2Deg;<font></font>
+</pre>
+</div>
+<p>Mathf.Atan2() でfovの半分の角度をradianで求め、２倍し、Camera.fieldOfViewに代入するためdegreeに直している点に注意して下さい。</p>
+
+<h3><a id="h9-4-2"></a><span class="secno">9.4.2　</span>投影面の移動（レンズシフト）</h3>
+<p>視点が部屋の中心にない場合も考慮してみましょう。視点に対して投影面が上下左右に平行移動することができれば、投影面に対して視点が移動したことと同じ効果が得られます。これは現実世界ではプロジェクターなどで映像の投影位置を調整する<b class="kw">レンズシフト</b><!-- IDX:レンズシフト -->という機能に相当します。</p>
+<div id="lensshift" class="image">
+<img src="./Chapter 9 _ MultiPlane Perspective Projection_files/lensshift.png" alt="Lens shift">
+<p class="caption">
+図9.6: レンズシフト
+</p>
+</div>
+<p>あらためてカメラが透視投影する仕組みに立ち返ってみるとレンズシフトはどの部分で行う処理になるでしょうか？プロジェクション行列でNDCに射影する際に、x,yをずらせば良さそうですもう一度Projection行列を見てみましょう。</p>
+<div class="equation">
+<pre>Proj = \left(<font></font>
+\begin{array}{cccc}<font></font>
+    \frac{N_{z}}{N_{x}} &amp;   0 &amp; 0 &amp; 0\\<font></font>
+    0   &amp; \frac{N_{z}}{N_{y}} &amp; 0 &amp; 0\\<font></font>
+    0   &amp;   0 &amp; \frac{F_{z}+N_{z}}{F_{z}-N_{z}} &amp; \frac{-2F_{z}N_{z}}{F_{z}-N_{z}} \\<font></font>
+    0   &amp;   0 &amp; -1 &amp; 0<font></font>
+\end{array}<font></font>
+\right)<font></font>
+</pre>
+</div>
+<p><span class="equation">C_{x},C_{y}</span>がずれればいいので、行列の平行移動成分である<span class="equation">Proj[0,3],Pro[1,3]</span>になにか入れたくなりますが、あとで<span class="equation">C_{w}</span>で除算されることを考慮すると、<span class="equation">Proj[0,2],Pro[1,2]</span>に入れるのが正解です。</p>
+<div class="equation">
+<pre>Proj = \left(<font></font>
+\begin{array}{cccc}<font></font>
+    \frac{N_{z}}{N_{x}} &amp;   0 &amp; LensShift_{x} &amp; 0\\<font></font>
+    0   &amp; \frac{N_{z}}{N_{y}} &amp; LensShift_{y} &amp; 0\\<font></font>
+    0   &amp;   0 &amp; \frac{F_{z}+N_{z}}{F_{z}-N_{z}} &amp; \frac{-2F_{z}N_{z}}{F_{z}-N_{z}} \\<font></font>
+    0   &amp;   0 &amp; -1 &amp; 0<font></font>
+\end{array}<font></font>
+\right)<font></font>
+</pre>
+</div>
+<p>LensShiftの単位はNDCですので投影面のサイズを-1〜1に正規化したものになります。コードにすると以下のようになります。</p>
+<div id="Lensshift" class="caption-code">
+<p class="caption">リスト9.2: レンズシフトをプロジェクション行列に反映</p>
+<pre class="list language-csharp">var shift = new Vector2(<font></font>
+    positionOffset.x / faceSize.x,<font></font>
+    positionOffset.y / faceSize.y<font></font>
+) * 2f;<font></font>
+var projectionMatrix = camera.projectionMatrix;<font></font>
+projectionMatrix[0,2] = shift.x;<font></font>
+projectionMatrix[1,2] = shift.y;<font></font>
+camera.projectionMatrix = projectionMatrix;<font></font>
+</pre>
+</div>
+<p>一度Camera.projectionMatrixにsetするとCamera.ResetProjectionMatrix()を呼ばない限りその後のCamera.fieldOfViewの変更が反映されなくなる点に注意が必要です。<a id="fnb-resetProjectionMatrix" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-resetProjectionMatrix" class="noteref" epub:type="noteref">*5</a></p>
+<div class="footnote" epub:type="footnote" id="fn-resetProjectionMatrix"><p class="footnote">[*5] https://docs.unity3d.com/ScriptReference/Camera-projectionMatrix.html</p></div>
+
+<h2><a id="h9-5"></a><span class="secno">9.5　</span>部屋プロジェクション</h2>
+<p>直方体の部屋で、鑑賞者の視点位置をトラッキングできているものとします。前節の方法で視錐台の投影面のサイズと平行移動ができるので、視点位置を視錐台の頭頂点、壁面や床面を投影面としたときその形状に合うような視錐台を動的に求める事ができます。各カメラをこのような視錐台にすることによって各投影面用の映像を作ることができます。この映像を実際の部屋に投影すれは鑑賞者からはパースのあったCG世界が見えるようになります。</p>
+<div id="projection_room" class="image">
+<img src="./Chapter 9 _ MultiPlane Perspective Projection_files/projection_room.png" alt="Room simulation (overhead view)">
+<p class="caption">
+図9.7: 部屋のシミュレーション（俯瞰視点）
+</p>
+</div>
+<div id="projection_firstperson" class="image">
+<img src="./Chapter 9 _ MultiPlane Perspective Projection_files/projection_firstperson.png" alt="Room simulation (first person view)">
+<p class="caption">
+図9.8: 部屋のシミュレーション（一人称視点）
+</p>
+</div>
+
+<h2><a id="h9-6"></a><span class="secno">9.6　</span>まとめ</h2>
+<p>本章ではプロジェクション行列を応用することで複数の投影面でパースを合わせる投影方法を紹介しました。目の前にディスプレイを置くのではなく視界の広い範囲を動的に反応する映像にしてしまう点で、昨今のHMD型と似て非なるアプローチのVRと言えるのではないかと思います。また、この方法では両眼視差や目のフォーカスを騙せるわけではないのでそのままでは立体視できずに「壁に投影された動く絵」に見えてしまう可能性があります。没入感を高めるためにはもう少し工夫する必要がありそうです。</p>
+<ul>
+<li>両眼視差が小さくなるように部屋を大きくして鑑賞者から投影面までの距離を遠くする</li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Prevents the plane of the projection surface from being conscious of reflected light as much as possible</font></font><ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Make a dark image</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Make walls and floors as non-specular as possible</font></font></li>
+</ul>
+</li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A mechanism called </font><font style="vertical-align: inherit;">"CAVE" </font></font><a id="fnb-cave" href="https://freder.github.io/UnityGraphicsProgrammingBook1/articles/RoomProjection.html#fn-cave" class="noteref" epub:type="noteref"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">* 6</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> that </font><font style="vertical-align: inherit;">combines the same method with stereoscopic vision </font><font style="vertical-align: inherit;">is known.</font></font></p>
+<div class="footnote" epub:type="footnote" id="fn-cave"><p class="footnote">[*6] https://en.wikipedia.org/wiki/Cave_automatic_virtual_environment</p></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Chapter 9 _ MultiPlane Perspective Projection_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 1001px; height: 263px; display: none;" src="./Chapter 9 _ MultiPlane Perspective Projection_files/saved_resource(1).html"></iframe><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Chapter 9 _ MultiPlane Perspective Projection_files/saved_resource(2).html"></iframe></body></html>
